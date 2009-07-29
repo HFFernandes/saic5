@@ -1,0 +1,81 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FEFC3B57-E062-47F0-9256-07F938C0B436}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BSD.C4.Tlaxcala.Sai.Dal.Rules</RootNamespace>
+    <AssemblyName>BSD.C4.Tlaxcala.Sai.Dal.Rules</AssemblyName>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\BSD.C4.Tlaxcala.Sai.Dal.Rules.XML</DocumentationFile>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\BSD.C4.Tlaxcala.Sai.Dal.Rules.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Cooperator.Framework.Core, Version=1.3.2.0, Culture=neutral, PublicKeyToken=8f7f403e20325116, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CooperatorAssemblies\\Cooperator.Framework.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Cooperator.Framework.Data, Version=1.3.2.0, Culture=neutral, PublicKeyToken=8f7f403e20325116, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CooperatorAssemblies\\Cooperator.Framework.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Cooperator.Framework.Library, Version=1.3.2.0, Culture=neutral, PublicKeyToken=8f7f403e20325116, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CooperatorAssemblies\\Cooperator.Framework.Library.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="RuleExample.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BSD.C4.Tlaxcala.Sai.Dal.Entities\BSD.C4.Tlaxcala.Sai.Dal.Entities.csproj">
+      <Project>{9716832d-4a55-419a-9a48-95462175af66}</Project>
+      <Name>
+        BSD.C4.Tlaxcala.Sai.Dal.Entities
+      </Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BSD.C4.Tlaxcala.Sai.Dal.Data\BSD.C4.Tlaxcala.Sai.Dal.Data.csproj">
+      <Project>{be8abd41-5009-4c17-95b7-898591cd5e8d}</Project>
+      <Name>
+        BSD.C4.Tlaxcala.Sai.Dal.Data
+      </Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
