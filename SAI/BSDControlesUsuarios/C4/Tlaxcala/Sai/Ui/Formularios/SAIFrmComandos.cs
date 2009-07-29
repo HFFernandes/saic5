@@ -48,10 +48,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             //se dio click
             switch (e.control.Id)
             {
-                case ID.CMD_NI:
+                case ID.CMD_IP:
                     //Nueva Incidencia
-                    var activas = new SAIFrmIncidenciasActivas();
-                    MostrarEnSegundoMonitorSiEsPosible(activas);
+                    var pendientes = new SAIFrmIncidenciasPendientes();
+                    MostrarEnSegundoMonitorSiEsPosible(pendientes);
                     break;
             }
         }
