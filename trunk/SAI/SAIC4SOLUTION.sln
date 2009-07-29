@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSD.C4.Tlaxcala.Sai.Dal.Ent
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAIC4", "BSDControlesUsuarios\SAIC4.csproj", "{FF9562EF-1FA0-49B7-B8B6-80D41CEBAC19}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSD.C4.Tlaxcala.Sai.SAIAdministrator", "BSD.C4.Tlaxcala.Sai.SAIAdministrator\BSD.C4.Tlaxcala.Sai.SAIAdministrator.csproj", "{73364485-D778-4C10-A08C-FFFAEAB00D38}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{FF9562EF-1FA0-49B7-B8B6-80D41CEBAC19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF9562EF-1FA0-49B7-B8B6-80D41CEBAC19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF9562EF-1FA0-49B7-B8B6-80D41CEBAC19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73364485-D778-4C10-A08C-FFFAEAB00D38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73364485-D778-4C10-A08C-FFFAEAB00D38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73364485-D778-4C10-A08C-FFFAEAB00D38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73364485-D778-4C10-A08C-FFFAEAB00D38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
