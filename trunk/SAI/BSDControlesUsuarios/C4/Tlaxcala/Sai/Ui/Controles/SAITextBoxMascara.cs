@@ -26,7 +26,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         /// <summary>
         /// Obtiene o establece el color de fondo que toma el control cuando obtiene el foco
         /// </summary>
-        [Category("Appearance"), Description("Obtiene o establece el color que toma el control al tener el foco."), DefaultValue(typeof(Color), "Yellow")]
+        [Category("Appearance"), Description("Obtiene o establece el color que toma el control al tener el foco.")]
         public Color ClrBackColorFoco
         {
             get
