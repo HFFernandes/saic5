@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FF9562EF-1FA0-49B7-B8B6-80D41CEBAC19}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BSD</RootNamespace>
+    <AssemblyName>SAIC4</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <StartupObject>BSD.C4.Entrada</StartupObject>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ExceptionMessageBox, Version=9.0.242.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Recursos Externos\ExceptionMessageBox.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="C4\Entrada.cs" />
+    <Compile Include="C4\Tlaxcala\Sai\Comando.cs" />
+    <Compile Include="C4\Tlaxcala\Sai\ComandosColeccion.cs" />
+    <Compile Include="C4\Tlaxcala\Sai\ID.cs" />
+    <Compile Include="C4\Tlaxcala\Sai\Interfaces\IEventosFormulario.cs" />
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAIComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAIComboBox.Designer.cs">
+      <DependentUpon>SAIComboBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAIDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAIDataGridView.Designer.cs">
+      <DependentUpon>SAIDataGridView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAILogoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAILogoControl.Designer.cs">
+      <DependentUpon>SAILogoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAIProveedorValidacion.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAIProveedorValidacion.Designer.cs">
+      <DependentUpon>SAIProveedorValidacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAIReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAIReport.Designer.cs">
+      <DependentUpon>SAIReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAISpinnerBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAISpinnerBox.Designer.cs">
+      <DependentUpon>SAISpinnerBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAITextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAITextBox.Designer.cs">
+      <DependentUpon>SAITextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAITextBoxMascara.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAITextBoxMascara.Designer.cs">
+      <DependentUpon>SAITextBoxMascara.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\FrmPruebas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\FrmPruebas.Designer.cs">
+      <DependentUpon>FrmPruebas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAICamposReportControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAICamposReportControl.Designer.cs">
+      <DependentUpon>SAICamposReportControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmBase.Designer.cs">
+      <DependentUpon>SAIFrmBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmComandos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmComandos.Designer.cs">
+      <DependentUpon>SAIFrmComandos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidenciasActivas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidenciasActivas.Designer.cs">
+      <DependentUpon>SAIFrmIncidenciasActivas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidenciasPendientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidenciasPendientes.Designer.cs">
+      <DependentUpon>SAIFrmIncidenciasPendientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Controles\SAIComboBox.resx">
+      <DependentUpon>SAIComboBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Controles\SAIDataGridView.resx">
+      <DependentUpon>SAIDataGridView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Controles\SAILogoControl.resx">
+      <DependentUpon>SAILogoControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Controles\SAIReport.resx">
+      <DependentUpon>SAIReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Controles\SAISpinnerBox.resx">
+      <DependentUpon>SAISpinnerBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Controles\SAITextBox.resx">
+      <DependentUpon>SAITextBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Controles\SAITextBoxMascara.resx">
+      <DependentUpon>SAITextBoxMascara.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\FrmPruebas.resx">
+      <DependentUpon>FrmPruebas.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAICamposReportControl.resx">
+      <DependentUpon>SAICamposReportControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmBase.resx">
+      <DependentUpon>SAIFrmBase.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmComandos.resx">
+      <DependentUpon>SAIFrmComandos.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidenciasActivas.resx">
+      <DependentUpon>SAIFrmIncidenciasActivas.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidenciasPendientes.resx">
+      <DependentUpon>SAIFrmIncidenciasPendientes.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxXtremeCommandBars">
+      <Guid>{555E8FCC-830E-45CC-AF00-A012D5AE7451}</Guid>
+      <VersionMajor>13</VersionMajor>
+      <VersionMinor>1</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="AxXtremeReportControl">
+      <Guid>{7CAC59E5-B703-4CCF-B326-8B956D962F27}</Guid>
+      <VersionMajor>13</VersionMajor>
+      <VersionMinor>1</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="XtremeCommandBars">
+      <Guid>{555E8FCC-830E-45CC-AF00-A012D5AE7451}</Guid>
+      <VersionMajor>13</VersionMajor>
+      <VersionMinor>1</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="XtremeReportControl">
+      <Guid>{7CAC59E5-B703-4CCF-B326-8B956D962F27}</Guid>
+      <VersionMajor>13</VersionMajor>
+      <VersionMinor>1</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Recursos Externos\Codejock.CommandBars.v13.1.0.ocx" />
+    <Content Include="Recursos Externos\Codejock.ReportControl.v13.1.0.ocx" />
+    <Content Include="Recursos Externos\Connection_band.bmp" />
+    <Content Include="Recursos Externos\Cooperator.Framework.Core.dll" />
+    <Content Include="Recursos Externos\Cooperator.Framework.Data.dll" />
+    <Content Include="Recursos Externos\Cooperator.Framework.Library.dll" />
+    <Content Include="Recursos Externos\ExceptionMessageBox.dll" />
+    <Content Include="Recursos Externos\Folder Options.gif" />
+    <Content Include="Recursos Externos\Registrator.exe" />
+    <Content Include="Recursos Externos\Server_Connection2.bmp" />
+    <Content Include="Recursos Externos\SuitePro.ResourceEs.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="C4\Tlaxcala\Sai\Dal\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
