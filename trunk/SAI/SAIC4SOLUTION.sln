@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSD.C4.Tlaxcala.Sai.Dal.Data", "BSD.C4.Tlaxcala.Sai.Dal.Data\BSD.C4.Tlaxcala.Sai.Dal.Data.csproj", "{BE8ABD41-5009-4C17-95B7-898591CD5E8D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSD.C4.Tlaxcala.Sai.Dal.Entities", "BSD.C4.Tlaxcala.Sai.Dal.Entities\BSD.C4.Tlaxcala.Sai.Dal.Entities.csproj", "{9716832D-4A55-419A-9A48-95462175AF66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSD.C4.Tlaxcala.Sai.Dal.Incidencias", "BSD.C4.Tlaxcala.Sai.Dal.Incidencias\BSD.C4.Tlaxcala.Sai.Dal.Incidencias.csproj", "{D7563525-54A5-4EE0-9420-AA22C2DB2D1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSD.C4.Tlaxcala.Sai.Dal.Rules", "BSD.C4.Tlaxcala.Sai.Dal.Rules\BSD.C4.Tlaxcala.Sai.Dal.Rules.csproj", "{FEFC3B57-E062-47F0-9256-07F938C0B436}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAIC4", "BSDControlesUsuarios\SAIC4.csproj", "{FF9562EF-1FA0-49B7-B8B6-80D41CEBAC19}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE8ABD41-5009-4C17-95B7-898591CD5E8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE8ABD41-5009-4C17-95B7-898591CD5E8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE8ABD41-5009-4C17-95B7-898591CD5E8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE8ABD41-5009-4C17-95B7-898591CD5E8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9716832D-4A55-419A-9A48-95462175AF66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9716832D-4A55-419A-9A48-95462175AF66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9716832D-4A55-419A-9A48-95462175AF66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9716832D-4A55-419A-9A48-95462175AF66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7563525-54A5-4EE0-9420-AA22C2DB2D1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7563525-54A5-4EE0-9420-AA22C2DB2D1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7563525-54A5-4EE0-9420-AA22C2DB2D1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7563525-54A5-4EE0-9420-AA22C2DB2D1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEFC3B57-E062-47F0-9256-07F938C0B436}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEFC3B57-E062-47F0-9256-07F938C0B436}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEFC3B57-E062-47F0-9256-07F938C0B436}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEFC3B57-E062-47F0-9256-07F938C0B436}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF9562EF-1FA0-49B7-B8B6-80D41CEBAC19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF9562EF-1FA0-49B7-B8B6-80D41CEBAC19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF9562EF-1FA0-49B7-B8B6-80D41CEBAC19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF9562EF-1FA0-49B7-B8B6-80D41CEBAC19}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = .
+	EndGlobalSection
+EndGlobal
