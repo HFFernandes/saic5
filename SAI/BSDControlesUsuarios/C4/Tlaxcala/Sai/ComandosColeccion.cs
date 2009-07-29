@@ -13,9 +13,9 @@ namespace BSD.C4.Tlaxcala.Sai
             //retorna la nueva colección definida
             return new List<Comando>
                                 {
-                                    new Comando(ID.CMD_NI, "NI", "Nueva Incidencia", 'N'),
-                                    new Comando(ID.CMD_IA,"IA","Incidencias Activas",'A'),
-                                    new Comando(ID.CMD_IP,"IP","Incidencias Pendientes",'P')
+                                    new Comando(ID.CMD_NI, "NI", "Nueva Incidencia", 'N',false,true),
+                                    new Comando(ID.CMD_IA,"IA","Incidencias Activas",'A',false,true),
+                                    new Comando(ID.CMD_IP,"IP","Incidencias Pendientes",'P',false,true)
                                 };
         }
     }

@@ -17,7 +17,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void SAIFrmIncidenciasPendientes_Load(object sender, EventArgs e)
         {
-            saiReport1.AgregarColumna(0,"Tipo",150,false);
         }
     }
 }

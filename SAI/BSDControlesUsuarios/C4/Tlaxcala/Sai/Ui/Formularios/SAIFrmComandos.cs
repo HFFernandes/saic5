@@ -72,7 +72,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <returns>Instancia generada</returns>
         public CommandBarControl AgregarBoton(CommandBarControls Controles, XTPControlType TipoControl, int Identificador, string Caption)
         {
-            return AgregarBoton(Controles, TipoControl, Identificador, Caption, false, "");
+            return AgregarBoton(Controles, TipoControl, Identificador, Caption, false, "",true);
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <returns>Instancia generada</returns>
         public CommandBarControl AgregarBoton(CommandBarControls Controles, XTPControlType TipoControl, int Identificador, string Caption, bool IniciarGrupo)
         {
-            return AgregarBoton(Controles, TipoControl, Identificador, Caption, IniciarGrupo, "");
+            return AgregarBoton(Controles, TipoControl, Identificador, Caption, IniciarGrupo, "",true);
         }
 
         /// <summary>
@@ -99,9 +99,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="IniciarGrupo">Propiedad que indica si el control iniciará un grupo y contendrá un separador</param>
         /// <param name="Descripcion">Propiedad que describe al usuario la función del comando</param>
         /// <returns>Instancia generada</returns>
-        public CommandBarControl AgregarBoton(CommandBarControls Controles, XTPControlType TipoControl, int Identificador, string Caption, bool IniciarGrupo, string Descripcion)
+        public CommandBarControl AgregarBoton(CommandBarControls Controles, XTPControlType TipoControl, int Identificador, string Caption, bool IniciarGrupo, string Descripcion,bool EsVisible)
         {
             var controlBarra = Controles.Add(TipoControl, Identificador, Caption, -1, false);
+            controlBarra.Visible = EsVisible;
             controlBarra.BeginGroup = IniciarGrupo;
             controlBarra.DescriptionText = Descripcion;
             controlBarra.TooltipText = Descripcion;
@@ -121,10 +122,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             foreach (var comando in coleccionComandos)
             {
                 AgregarBoton(barra.Controls, XTPControlType.xtpControlButton, comando.Identificador, comando.Caption,
-                             false, comando.Descripcion);
+                             comando.IniciaGrupo, comando.Descripcion,comando.EsVisible);
                 SAIBarraComandos.KeyBindings.Add(ID.FCONTROL,comando.TeclaAccesoRapido,comando.Identificador);
-
-                //TODO: Se deberá definir alguna propiedad para comandos definidos pero que no son visibles
             }
         }
 
