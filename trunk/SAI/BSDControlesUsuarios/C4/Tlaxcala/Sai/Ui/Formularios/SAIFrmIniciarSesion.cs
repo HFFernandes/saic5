@@ -5,6 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using BSD.C4.Tlaxcala.Sai.Interfaces;
+using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
+using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
