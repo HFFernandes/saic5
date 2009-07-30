@@ -37,5 +37,7 @@ namespace BSD.C4.Tlaxcala.Sai.Dal
                 tr.Dispose();
             }
         }
+
+
     }
 }
