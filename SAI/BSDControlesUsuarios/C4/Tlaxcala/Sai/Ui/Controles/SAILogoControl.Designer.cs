@@ -56,7 +56,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             // 
             this.logoPicture.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.logoPicture.Image = (Image)resources.GetObject("Server_Connection2");
+            this.logoPicture.Image = (Image)resources.GetObject("tlaxcala_logotipo");
             this.logoPicture.Location = new System.Drawing.Point(0, 0);
             this.logoPicture.Name = "logoPicture";
             this.logoPicture.Size = new System.Drawing.Size(410, 67);

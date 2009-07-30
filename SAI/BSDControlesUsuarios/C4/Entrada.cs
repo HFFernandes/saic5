@@ -19,7 +19,7 @@ namespace BSD.C4
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-            Application.Run(new SAIFrmComandos());
+            Application.Run(new SAIFrmIniciarSesion());
         }
 
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
