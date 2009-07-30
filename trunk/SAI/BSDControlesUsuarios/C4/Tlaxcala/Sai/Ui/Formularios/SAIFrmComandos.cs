@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
 using System.Windows.Forms;
 using XtremeCommandBars;
 
@@ -20,6 +18,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             //en su ejecución
             SAIBarraComandos.Customization += SAIBarraComandos_Customization;
             SAIBarraComandos.Execute += SAIBarraComandos_Execute;
+            SAIBarraComandos.GlobalSettings.ResourceFile = Environment.CurrentDirectory + "\\SuitePro.ResourceES.xml";
 
             //try
             //{
