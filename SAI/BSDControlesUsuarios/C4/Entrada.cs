@@ -14,14 +14,13 @@ namespace BSD.C4
         [STAThread]
         public static void Main()
         {
-            //TODO: Crear un dominio de aplicación
             //TODO: Implementar exclusión mutua
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             
-            Application.Run(new SAIFrmIniciarSesion());
+            Application.Run(new SAIFrmComandos());
         }
 
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
@@ -41,7 +40,7 @@ namespace BSD.C4
                                                 {
                                                     HelpLink = "http://www.infinitysoft.com.mx",
                                                     Symbol = ExceptionMessageBoxSymbol.Error,
-                                                    Beep = false
+                                                    Beep = true
                                                 };
 
                     exceptionMessageBox.Show(null);
