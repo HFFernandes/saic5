@@ -35,8 +35,67 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             //se dio click
             switch (e.control.Id)
             {
+                case ID.CMD_A:
+                    break;
+                case ID.CMD_AU:
+                    break;
+                case ID.CMD_BSC:
+                    break;
+                case ID.CMD_CAN:
+                    break;
+                case ID.CMD_DT:
+                    break;
+                case ID.CMD_FIN:
+                    break;
+                case ID.CMD_HI:
+                    break;
+                case ID.CMD_INF:
+                    break;
+                case ID.CMD_LAC:
+                    break;
+                case ID.CMD_MAP:
+                    break;
+                case ID.CMD_MIA:
+                    break;
+                case ID.CMD_MIP:
+                    break;
+                case ID.CMD_MN:
+                    break;
+                case ID.CMD_MUS:
+                    break;
+                case ID.CMD_N:
+                    break;
                 case ID.CMD_NI:
-                    MessageBox.Show("Nueva incidencias");
+                    break;
+                case ID.CMD_P:
+                    break;
+                case ID.CMD_PH:
+                    break;
+                case ID.CMD_RNC:
+                    break;
+                case ID.CMD_RPH:
+                    break;
+                case ID.CMD_S:
+                    break;
+                case ID.CMD_SDT:
+                    break;
+                case ID.CMD_SIF:
+                    break;
+                case ID.CMD_SLC:
+                    break;
+                case ID.CMD_SS:
+                    break;
+                case ID.CMD_TEL:
+                    break;
+                case ID.CMD_U:
+                    break;
+                case ID.CMD_UA:
+                    break;
+                case ID.CMD_UB:
+                    break;
+                case ID.CMD_V:
+                    break;
+                default:
                     break;
             }
         }
