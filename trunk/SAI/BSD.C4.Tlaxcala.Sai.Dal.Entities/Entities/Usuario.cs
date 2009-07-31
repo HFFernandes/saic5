@@ -15,6 +15,7 @@ namespace BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities
     /// This class represents the Usuario entity.
     /// </summary>
     [Serializable]
+
     public partial class Usuario
         // : IValidable
     {
