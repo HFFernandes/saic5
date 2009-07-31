@@ -108,6 +108,18 @@
     <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAITextBoxMascara.Designer.cs">
       <DependentUpon>SAITextBoxMascara.cs</DependentUpon>
     </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAIWinSwitchLabel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAIWinSwitchLabel.Designer.cs">
+      <DependentUpon>SAIWinSwitchLabel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAISwitch.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAISwitch.designer.cs">
+      <DependentUpon>SAISwitch.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
@@ -143,6 +155,9 @@
     <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Controles\SAITextBoxMascara.resx">
       <DependentUpon>SAITextBoxMascara.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Controles\SAIWinSwitchLabel.resx">
+      <DependentUpon>SAIWinSwitchLabel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
