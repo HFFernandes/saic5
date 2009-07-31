@@ -20,6 +20,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             SAIBarraComandos.Customization += SAIBarraComandos_Customization;
             SAIBarraComandos.Execute += SAIBarraComandos_Execute;
             SAIBarraComandos.GlobalSettings.ResourceFile = Environment.CurrentDirectory + "\\SuitePro.ResourceES.xml";
+            SAIBarraComandos.KeyBindings.AllowDoubleKeyShortcuts = true;
 
             //Se establece el ancho,posición superior e izquierda en base a la definición
             //de la pantalla primaria
@@ -34,7 +35,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             //se dio click
             switch (e.control.Id)
             {
-                case ID.CMD_BSC:
+                case ID.CMD_NI:
+                    MessageBox.Show("Nueva incidencias");
                     break;
             }
         }
@@ -88,7 +90,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             var controlBarra = Controles.Add(TipoControl, Identificador, Caption, -1, false);
             controlBarra.Visible = EsVisible;
             controlBarra.BeginGroup = IniciarGrupo;
-            controlBarra.DescriptionText = Descripcion;
+            //controlBarra.DescriptionText = Descripcion;
             controlBarra.TooltipText = Descripcion;
             return controlBarra;
         }
@@ -107,6 +109,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 AgregarBoton(barra.Controls, XTPControlType.xtpControlButton, comando.Identificador, comando.Caption,
                              comando.IniciaGrupo, comando.Descripcion, comando.EsVisible);
+
                 SAIBarraComandos.KeyBindings.Add(ID.FCONTROL, comando.TeclaAccesoRapido, comando.Identificador);
             }
         }
@@ -146,7 +149,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void SAIFrmComandos_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(e.CloseReason==CloseReason.UserClosing)
+            if (e.CloseReason == CloseReason.UserClosing)
             {
                 var confirmarSalida = new ExceptionMessageBox("¿Está usted seguro de querer salir del aplicativo?", "Salir",
                                                           ExceptionMessageBoxButtons.YesNo,

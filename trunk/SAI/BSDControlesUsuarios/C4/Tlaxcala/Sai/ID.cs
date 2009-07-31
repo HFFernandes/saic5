@@ -7,18 +7,36 @@
     public class ID
     {
         //Definición de comandos
-        public const int CMD_BSC = 100; //Muestra incidentes guardados con F9
-        public const int CMD_CAN = 200; //Cancelar incidencia
-        public const int CMD_DT = 300;  //Dividir incidente
-        public const int CMD_FIN = 400; //Cerrar el programa HIWIN
-        public const int CMD_INF = 500; //Capturar información en ventana
-        public const int CMD_LAC = 600; //Ventana que nos permite ligar incidentes
-        public const int CMD_MN = 700;  //Mostrar notas
-        public const int CMD_N = 800;   //Capturar notas
-        public const int CMD_NI = 900;  //Nuevo incidente
-        public const int CMD_P = 1000;  //Pendientes
-        public const int CMD_SDT = 1100;    //Seleccionar división de ticket
-        public const int CMD_SIF = 1200;    //Seleccion de incidentes por fecha
+        public const int CMD_BSC = 100; //Muestra incidentes guardados con F9 (089)
+        public const int CMD_CAN = 200; //Cancelar incidencia (089)
+        public const int CMD_DT = 300;  //Dividir incidente (089)
+        public const int CMD_FIN = 400; //Cerrar el programa SafetyNet CAD (089)
+        public const int CMD_INF = 500; //Capturar información en ventana (089)
+        public const int CMD_LAC = 600; //Ventana que nos permite ligar incidentes (089)
+        public const int CMD_MN = 700;  //Mostrar notas (089)
+        public const int CMD_N = 800;   //Capturar notas (089)
+        public const int CMD_NI = 900;  //Nuevo incidente (089)
+        public const int CMD_P = 1000;  //Pendientes (089)
+        public const int CMD_SDT = 1100;    //Seleccionar división de ticket (089)
+        public const int CMD_SIF = 1200;    //Seleccion de incidentes por fecha (089)
+        public const int CMD_A = 1300;  //Incidentes Activos (066)
+        public const int CMD_AU = 1400; //Unidades Activas (066)
+        public const int CMD_HI = 1500; //Historial de un incidente (066)
+        public const int CMD_MAP = 1600;    //Localización de la llamada activa (066)
+        public const int CMD_MIA = 1700;    //Localización de un incidente activo (066)
+        public const int CMD_MIP = 1800;    //Localización de incidentes pendientes (066)
+        public const int CMD_MUS = 1900;    //Localización de unidades activas (066)
+        public const int CMD_PH = 2000; //Historial de dirección (066)
+        public const int CMD_RNC = 2100;    //Generar consecutivo por corporación (066)
+        public const int CMD_RPH = 2200;    //Historial telefónico (066)
+        public const int CMD_S = 2300;  //Introducción de datos de persona sospechosa (066)
+        public const int CMD_SS = 2400; //Cambiar o seleccionar corporación (066)
+        public const int CMD_SLC = 2500;    //Consulta de incidentes ligados (066)
+        public const int CMD_TEL = 2600;    //Agenda telefónica (066)
+        public const int CMD_U = 2700;  //Unidades (066)
+        public const int CMD_UA = 2800; //Dar de alta unidades (066)
+        public const int CMD_UB = 2900; //Dar de baja unidades (066)
+        public const int CMD_V = 3000;  //Introducción de datos de vehiculo sospechoso (066)
 
         #region Teclas de función
 
