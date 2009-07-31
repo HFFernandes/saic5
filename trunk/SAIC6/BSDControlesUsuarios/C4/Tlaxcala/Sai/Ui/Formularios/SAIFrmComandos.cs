@@ -10,23 +10,33 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
     {
         public SAIFrmComandos()
         {
-            InitializeComponent();
+            SAIFrmIniciarSesion sesion = new SAIFrmIniciarSesion();
+            if (sesion.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                InitializeComponent();
 
-            SAIBarraComandos.DeleteAll();   //Se limpia la barra de comandos por si existiera alguno
-            SAIBarraComandos.EnableCustomization(true);
+                SAIBarraComandos.DeleteAll(); //Se limpia la barra de comandos por si existiera alguno
+                SAIBarraComandos.EnableCustomization(true);
 
-            //Se crean los eventos de reacción para la personalización de los comandos y la funcionalidad
-            //en su ejecución
-            SAIBarraComandos.Customization += SAIBarraComandos_Customization;
-            SAIBarraComandos.Execute += SAIBarraComandos_Execute;
-            SAIBarraComandos.GlobalSettings.ResourceFile = Environment.CurrentDirectory + "\\SuitePro.ResourceES.xml";
-            SAIBarraComandos.KeyBindings.AllowDoubleKeyShortcuts = true;
+                //Se crean los eventos de reacción para la personalización de los comandos y la funcionalidad
+                //en su ejecución
+                SAIBarraComandos.Customization += SAIBarraComandos_Customization;
+                SAIBarraComandos.Execute += SAIBarraComandos_Execute;
+                SAIBarraComandos.GlobalSettings.ResourceFile = Environment.CurrentDirectory +
+                                                               "\\SuitePro.ResourceES.xml";
+                SAIBarraComandos.KeyBindings.AllowDoubleKeyShortcuts = true;
 
-            //Se establece el ancho,posición superior e izquierda en base a la definición
-            //de la pantalla primaria
-            Width = Screen.PrimaryScreen.WorkingArea.Width;
-            Top = (Screen.PrimaryScreen.WorkingArea.Height - Height);
-            Left = (Screen.PrimaryScreen.WorkingArea.Right - Width);
+                //Se establece el ancho,posición superior e izquierda en base a la definición
+                //de la pantalla primaria
+                Width = Screen.PrimaryScreen.WorkingArea.Width;
+                Top = (Screen.PrimaryScreen.WorkingArea.Height - Height);
+                Left = (Screen.PrimaryScreen.WorkingArea.Right - Width);
+
+            }
+            else
+            {
+                Application.Exit();
+            }
         }
 
         void SAIBarraComandos_Execute(object sender, AxXtremeCommandBars._DCommandBarsEvents_ExecuteEvent e)
@@ -44,6 +54,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 case ID.CMD_BSC:
                     break;
                 case ID.CMD_CAN:
+                    throw new NotImplementedException("El método de cancelación no está implementado.");
                     break;
                 case ID.CMD_DT:
                     break;
