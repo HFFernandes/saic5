@@ -3,7 +3,7 @@
     /// <summary>
     /// Interfaz para la definición de eventos para los formularios de la aplicación
     /// </summary>
-    interface IEventosFormulario<T, U>
+    interface IReacciones<T, U>
         where T : class
         where U : class
     {
