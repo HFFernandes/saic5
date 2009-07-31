@@ -22,6 +22,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             saiReport1.AgregarColumna(5, "Dividido En", 80, true);
             saiReport1.AgregarColumna(6, "Pendiente Desde", 150, true);
             saiReport1.AgregarColumna(7, "Nombre del Operador", 300, true);
+
+            saiReport1.AgregarRegistro("1","15:30 hrs","Heroico Cuerpo de Bomberos","Fuego","23","",DateTime.Now.ToString(),"rcontreras");
+            saiReport1.AgregarRegistro("2", "15:35 hrs", "Policia Municipal", "Choque", "20", "1", DateTime.Now.ToString(), "rcontreras");
+            saiReport1.AgregarRegistro("3", "15:36 hrs", "Cruz Roja", "Atropellado", "18", "", DateTime.Now.ToString(), "sbarba");
         }
     }
 }
