@@ -3,13 +3,29 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Microsoft.NetEnterpriseServers;
 using XtremeCommandBars;
+using BSD.C4.Tlaxcala.Sai.Ui.Controles;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
     public partial class SAIFrmComandos : Form
     {
+        /// <summary>
+        /// Indica si se ha presionado la tecla control
+        /// </summary>
+        private bool bCtrPresionado = false;
+
+        /// <summary>
+        /// Lista de elementos que tienen la referencia hacia los formularios que se van abriendo
+        /// <remarks>Cada ventana Incidencia que se levente tiene que incluirse en esta lista</remarks>
+        /// </summary>
+        List<SAIWinSwitchItem> Elementos = new List<SAIWinSwitchItem>();
+
         public SAIFrmComandos()
         {
+
+            
+           
+
             SAIFrmIniciarSesion sesion = new SAIFrmIniciarSesion();
             if (sesion.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -234,6 +250,53 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     Application.Exit();
                 else
                     e.Cancel = true;
+            }
+        }
+
+
+        /// <summary>
+        /// Para indicar si se ha presionado la tecla control
+        /// </summary>
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+
+
+            if (keyData == (Keys.ControlKey | Keys.Control))
+            {
+                this.bCtrPresionado = true;
+            }
+
+            return false;
+
+        }
+
+
+        /// <summary>
+        /// Si se ha presionado control tab, se muestra la ventana de swicheo
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnKeyUp(KeyEventArgs e)
+        {
+
+            if (e.KeyCode == Keys.Tab && this.bCtrPresionado)
+            {
+                this.MuestraSwitch();
+            }
+            this.bCtrPresionado = false;
+        }
+
+
+        /// <summary>
+        /// Esta función se manda a llamar desde los demás formularios para mostrar la ventana del switch
+        /// </summary>
+        public void MuestraSwitch()
+        {
+            if (this.Elementos.Count > 0)
+            {
+                SAIFrmVentana objVentana = new SAIFrmVentana(Elementos, this);
+                objVentana.Left = 200;
+                objVentana.Top = 200;
+                objVentana.Show(this);
             }
         }
 
