@@ -36,19 +36,21 @@
             this.saiReport1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.saiReport1.Location = new System.Drawing.Point(0, 0);
             this.saiReport1.Name = "saiReport1";
-            this.saiReport1.Size = new System.Drawing.Size(638, 263);
+            this.saiReport1.Size = new System.Drawing.Size(647, 296);
             this.saiReport1.TabIndex = 0;
             // 
             // SAIFrmIncidenciasPendientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(638, 263);
+            this.ClientSize = new System.Drawing.Size(647, 296);
             this.Controls.Add(this.saiReport1);
             this.Name = "SAIFrmIncidenciasPendientes";
             this.Text = "SAI - Incidencias Pendientes";
             this.Load += new System.EventHandler(this.SAIFrmIncidenciasPendientes_Load);
+            this.Controls.SetChildIndex(this.saiReport1, 0);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

@@ -36,14 +36,14 @@
             this.saiReport1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.saiReport1.Location = new System.Drawing.Point(0, 0);
             this.saiReport1.Name = "saiReport1";
-            this.saiReport1.Size = new System.Drawing.Size(646, 275);
+            this.saiReport1.Size = new System.Drawing.Size(647, 274);
             this.saiReport1.TabIndex = 0;
             // 
             // SAIFrmIncidenciasActivas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(646, 297);
+            this.ClientSize = new System.Drawing.Size(647, 296);
             this.Controls.Add(this.saiReport1);
             this.Name = "SAIFrmIncidenciasActivas";
             this.Text = "SAI - Incidencias Activas";
