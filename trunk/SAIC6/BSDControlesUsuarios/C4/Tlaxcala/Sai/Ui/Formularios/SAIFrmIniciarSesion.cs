@@ -12,7 +12,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void cmdAceptar_Click(object sender, EventArgs e)
         {
             this.saiLogoControl.IniciarAnimacion();
-            base.DialogResult = System.Windows.Forms.DialogResult.OK;
+            if (base.SAIProveedorValidacion.ValidarCamposRequeridos(this))
+            {
+                base.DialogResult = System.Windows.Forms.DialogResult.OK;    
+            }
+            else
+            {
+                base.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            }
         }
 
         private void cmdCancelar_Click(object sender, EventArgs e)
