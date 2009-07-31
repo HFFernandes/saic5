@@ -150,9 +150,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 
         protected override void NotifyInvalidate(Rectangle invalidatedArea)
         {
-            base.NotifyInvalidate(invalidatedArea);
             if (BlnEsRequerido)
                 Validador.SetError(this, StrMensajeCampoRequerido);
+            base.NotifyInvalidate(invalidatedArea);
         }
         #endregion
 

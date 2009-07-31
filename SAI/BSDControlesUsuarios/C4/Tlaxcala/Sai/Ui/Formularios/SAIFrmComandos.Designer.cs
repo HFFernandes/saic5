@@ -56,6 +56,7 @@
             this.Text = "SAI - Comandos";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.SAIFrmComandos_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SAIFrmComandos_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.SAIBarraComandos)).EndInit();
             this.ResumeLayout(false);
 

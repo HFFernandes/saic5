@@ -6,13 +6,6 @@
     /// </summary>
     public class Comando
     {
-        public int Identificador { get; set; }
-        public string Caption { get; set; }
-        public string Descripcion { get; set; }
-        public char TeclaAccesoRapido { get; set; }
-        public bool IniciaGrupo { get; set; }
-        public bool EsVisible { get; set; }
-
         /// <summary>
         /// Constructor con parametros
         /// </summary>
@@ -20,14 +13,24 @@
         /// <param name="caption">Texto para el comando</param>
         /// <param name="descripcion">Descripción tooltip</param>
         /// <param name="teclaaccesorapido">Combinación de tecla de acceso rápido</param>
-        public Comando(int identificador, string caption, string descripcion, char teclaaccesorapido,bool iniciagrupo,bool esvisible)
+        /// <param name="iniciagrupo">Propiedad que indica si el comando definido iniciará un grupo</param>
+        /// <param name="esvisible">Propiedad que indica si el comando será o no visible</param>
+        public Comando(int identificador, string caption, string descripcion, char teclaaccesorapido, bool iniciagrupo,
+                       bool esvisible)
         {
-            this.Identificador = identificador;
-            this.Caption = caption;
-            this.Descripcion = descripcion;
-            this.TeclaAccesoRapido = teclaaccesorapido;
-            this.IniciaGrupo = iniciagrupo;
-            this.EsVisible = esvisible;
+            Identificador = identificador;
+            Caption = caption;
+            Descripcion = descripcion;
+            TeclaAccesoRapido = teclaaccesorapido;
+            IniciaGrupo = iniciagrupo;
+            EsVisible = esvisible;
         }
+
+        public int Identificador { get; set; }
+        public string Caption { get; set; }
+        public string Descripcion { get; set; }
+        public char TeclaAccesoRapido { get; set; }
+        public bool IniciaGrupo { get; set; }
+        public bool EsVisible { get; set; }
     }
 }
