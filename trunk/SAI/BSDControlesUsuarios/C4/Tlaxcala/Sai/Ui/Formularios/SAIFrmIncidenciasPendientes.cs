@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
@@ -14,7 +9,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             InitializeComponent();
 
-            base.Width = Screen.GetWorkingArea(this).Width;
+            Width = Screen.GetWorkingArea(this).Width;
         }
 
         private void SAIFrmIncidenciasPendientes_Load(object sender, EventArgs e)

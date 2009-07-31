@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Common;
-using System.Text;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 
@@ -28,9 +26,10 @@ namespace BSD.C4.Tlaxcala.Sai.Dal
                 CorporacionMapper.Instance().Insert(tr, corporacion);
                 tr.Commit();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 tr.Rollback();
+                throw;
             }finally
             {
                 con.Close();

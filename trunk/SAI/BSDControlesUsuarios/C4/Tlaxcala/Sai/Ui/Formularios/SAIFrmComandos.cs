@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using XtremeCommandBars;
+using Microsoft.NetEnterpriseServers;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -20,25 +21,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             SAIBarraComandos.Execute += SAIBarraComandos_Execute;
             SAIBarraComandos.GlobalSettings.ResourceFile = Environment.CurrentDirectory + "\\SuitePro.ResourceES.xml";
 
-            //try
-            //{
-            //    var archivoTemporal = Path.GetTempFileName();
-            //    archivoTemporal = Path.ChangeExtension(archivoTemporal, "xml");
-            //    var recursos = new ComponentResourceManager(typeof(SAIFrmComandos));
-            //    var fl = File.Open(archivoTemporal, FileMode.Create, FileAccess.ReadWrite);
-            //    var bt = System.Text.Encoding.ASCII.GetBytes(recursos.GetString("strComandos"));
-            //    fl.Write(bt, 0, bt.Length);
-            //    fl.Close();
-
-            //    SAIBarraComandos.GlobalSettings.ResourceFile = archivoTemporal;
-            //}
-            //catch (Exception) { }
-
             //Se establece el ancho,posición superior e izquierda en base a la definición
             //de la pantalla primaria
-            base.Width = Screen.PrimaryScreen.WorkingArea.Width;
-            base.Top = (Screen.PrimaryScreen.WorkingArea.Height - base.Height);
-            base.Left = (Screen.PrimaryScreen.WorkingArea.Right - base.Width);
+            Width = Screen.PrimaryScreen.WorkingArea.Width;
+            Top = (Screen.PrimaryScreen.WorkingArea.Height - Height);
+            Left = (Screen.PrimaryScreen.WorkingArea.Right - Width);
         }
 
         void SAIBarraComandos_Execute(object sender, AxXtremeCommandBars._DCommandBarsEvents_ExecuteEvent e)
@@ -47,10 +34,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             //se dio click
             switch (e.control.Id)
             {
-                case ID.CMD_IP:
-                    //Nueva Incidencia
-                    var pendientes = new SAIFrmIncidenciasPendientes();
-                    MostrarEnSegundoMonitorSiEsPosible(pendientes);
+                case ID.CMD_BSC:
                     break;
             }
         }
@@ -71,7 +55,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <returns>Instancia generada</returns>
         public CommandBarControl AgregarBoton(CommandBarControls Controles, XTPControlType TipoControl, int Identificador, string Caption)
         {
-            return AgregarBoton(Controles, TipoControl, Identificador, Caption, false, "",true);
+            return AgregarBoton(Controles, TipoControl, Identificador, Caption, false, "", true);
         }
 
         /// <summary>
@@ -85,7 +69,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <returns>Instancia generada</returns>
         public CommandBarControl AgregarBoton(CommandBarControls Controles, XTPControlType TipoControl, int Identificador, string Caption, bool IniciarGrupo)
         {
-            return AgregarBoton(Controles, TipoControl, Identificador, Caption, IniciarGrupo, "",true);
+            return AgregarBoton(Controles, TipoControl, Identificador, Caption, IniciarGrupo, "", true);
         }
 
         /// <summary>
@@ -97,8 +81,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="Caption">Texto que se mostrará identificando al control</param>
         /// <param name="IniciarGrupo">Propiedad que indica si el control iniciará un grupo y contendrá un separador</param>
         /// <param name="Descripcion">Propiedad que describe al usuario la función del comando</param>
+        /// <param name="EsVisible">Propiedad que indica si el control definido será o no visible para el usuario</param>
         /// <returns>Instancia generada</returns>
-        public CommandBarControl AgregarBoton(CommandBarControls Controles, XTPControlType TipoControl, int Identificador, string Caption, bool IniciarGrupo, string Descripcion,bool EsVisible)
+        public CommandBarControl AgregarBoton(CommandBarControls Controles, XTPControlType TipoControl, int Identificador, string Caption, bool IniciarGrupo, string Descripcion, bool EsVisible)
         {
             var controlBarra = Controles.Add(TipoControl, Identificador, Caption, -1, false);
             controlBarra.Visible = EsVisible;
@@ -121,8 +106,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             foreach (var comando in coleccionComandos)
             {
                 AgregarBoton(barra.Controls, XTPControlType.xtpControlButton, comando.Identificador, comando.Caption,
-                             comando.IniciaGrupo, comando.Descripcion,comando.EsVisible);
-                SAIBarraComandos.KeyBindings.Add(ID.FCONTROL,comando.TeclaAccesoRapido,comando.Identificador);
+                             comando.IniciaGrupo, comando.Descripcion, comando.EsVisible);
+                SAIBarraComandos.KeyBindings.Add(ID.FCONTROL, comando.TeclaAccesoRapido, comando.Identificador);
             }
         }
 
@@ -157,6 +142,22 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
             //Mostramos el formulario que ya fue ubicado
             form.Show();
+        }
+
+        private void SAIFrmComandos_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(e.CloseReason==CloseReason.UserClosing)
+            {
+                var confirmarSalida = new ExceptionMessageBox("¿Está usted seguro de querer salir del aplicativo?", "Salir",
+                                                          ExceptionMessageBoxButtons.YesNo,
+                                                          ExceptionMessageBoxSymbol.Question,
+                                                          ExceptionMessageBoxDefaultButton.Button2);
+
+                if (DialogResult.Yes == confirmarSalida.Show(this))
+                    Application.Exit();
+                else
+                    e.Cancel = true;
+            }
         }
 
     }
