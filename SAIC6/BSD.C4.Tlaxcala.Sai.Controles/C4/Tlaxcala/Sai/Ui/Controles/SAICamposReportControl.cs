@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using BSD.C4.Tlaxcala.Sai.Ui.Controles;
 
-namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
+namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 {
     /// <summary>
     /// Formulario que mostrará aquellos campos adicionales que pueden ser insertados en un control <see cref="SAIReport">SAIReport</see>

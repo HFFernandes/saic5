@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using XtremeCommandBars;
 using Microsoft.NetEnterpriseServers;
+using XtremeCommandBars;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {

@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using BSD.C4.Tlaxcala.Sai.Ui.Formularios;
 using XtremeReportControl;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Controles

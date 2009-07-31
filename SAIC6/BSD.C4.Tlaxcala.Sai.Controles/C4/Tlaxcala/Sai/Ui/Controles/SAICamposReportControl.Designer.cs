@@ -1,6 +1,6 @@
 ﻿using XtremeReportControl;
 
-namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
+namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 {
     partial class SAICamposReportControl
     {
