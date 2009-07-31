@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CC0ED921-3DD7-4BFC-8137-032BB72D7ECC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BSD</RootNamespace>
+    <AssemblyName>BSD.C4.Tlaxcala.Sai.Controles</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AxInterop.XtremeCommandBars, Version=13.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BSDControlesUsuarios\Recursos Externos\AxInterop.XtremeCommandBars.dll</HintPath>
+    </Reference>
+    <Reference Include="AxInterop.XtremeReportControl, Version=13.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BSDControlesUsuarios\Recursos Externos\AxInterop.XtremeReportControl.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.XtremeCommandBars, Version=13.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BSDControlesUsuarios\Recursos Externos\Interop.XtremeCommandBars.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.XtremeReportControl, Version=13.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BSDControlesUsuarios\Recursos Externos\Interop.XtremeReportControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAICamposReportControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAICamposReportControl.Designer.cs">
+      <DependentUpon>SAICamposReportControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAIComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAIComboBox.Designer.cs">
+      <DependentUpon>SAIComboBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAIDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAIDataGridView.Designer.cs">
+      <DependentUpon>SAIDataGridView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAILogoControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAILogoControl.Designer.cs">
+      <DependentUpon>SAILogoControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAIProveedorValidacion.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAIProveedorValidacion.Designer.cs">
+      <DependentUpon>SAIProveedorValidacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAIReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAIReport.Designer.cs">
+      <DependentUpon>SAIReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAISpinnerBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAISpinnerBox.Designer.cs">
+      <DependentUpon>SAISpinnerBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAITextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAITextBox.Designer.cs">
+      <DependentUpon>SAITextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAITextBoxMascara.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAITextBoxMascara.Designer.cs">
+      <DependentUpon>SAITextBoxMascara.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Controles\SAICamposReportControl.resx">
+      <DependentUpon>SAICamposReportControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Controles\SAIComboBox.resx">
+      <DependentUpon>SAIComboBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Controles\SAIDataGridView.resx">
+      <DependentUpon>SAIDataGridView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Controles\SAILogoControl.resx">
+      <DependentUpon>SAILogoControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Controles\SAIReport.resx">
+      <DependentUpon>SAIReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Controles\SAISpinnerBox.resx">
+      <DependentUpon>SAISpinnerBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Controles\SAITextBox.resx">
+      <DependentUpon>SAITextBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Controles\SAITextBoxMascara.resx">
+      <DependentUpon>SAITextBoxMascara.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
