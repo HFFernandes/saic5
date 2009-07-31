@@ -10,8 +10,24 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BSD.C4.Tlaxcala.Sai.SAIAdmin</RootNamespace>
     <AssemblyName>BSD.C4.Tlaxcala.Sai.SAIAdmin</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <StartupObject>BSD.C4.Tlaxcala.Sai.SAIAdmin.Program</StartupObject>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,15 +48,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -54,15 +61,30 @@
     <Compile Include="frmTipoIncidencia.Designer.cs">
       <DependentUpon>frmTipoIncidencia.cs</DependentUpon>
     </Compile>
+    <Compile Include="MDIAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MDIAdmin.Designer.cs">
+      <DependentUpon>MDIAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmTipoIncidencia.resx">
       <DependentUpon>frmTipoIncidencia.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="MDIAdmin.resx">
+      <DependentUpon>MDIAdmin.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resource1.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -78,6 +100,81 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Resource1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource1.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cerrar_Roja.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Eliminar_Azul.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Espacio.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FlechaDer_Azul.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FlechaDerFin_Azul.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FlechaIzq_Azul.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FlechaIzqFin_Azul.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Guardar_Azul.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Imprimir_Azul.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Modificar_Azul.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Paloma_Azul.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Actualizar_Azul.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Alta_Azul.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Buscar_Azul.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BSDControlesUsuarios\SAIC4.csproj">
+      <Project>{FF9562EF-1FA0-49B7-B8B6-80D41CEBAC19}</Project>
+      <Name>SAIC4</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
