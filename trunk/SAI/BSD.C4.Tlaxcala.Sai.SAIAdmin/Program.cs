@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+//using System.Linq;
 using System.Windows.Forms;
 
 namespace BSD.C4.Tlaxcala.Sai.SAIAdmin
@@ -15,7 +15,10 @@ namespace BSD.C4.Tlaxcala.Sai.SAIAdmin
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmTipoIncidencia());
+            Application.Run(new MDIAdmin());
+//            Application.Run(new frmTipoIncidencia());
+
+
         }
     }
 }
