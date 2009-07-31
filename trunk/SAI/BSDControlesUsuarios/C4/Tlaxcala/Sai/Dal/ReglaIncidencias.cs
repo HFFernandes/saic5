@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
-using System.Data.Common;
 
 namespace BSD.C4.Tlaxcala.Sai.Dal
 {
-    public class ReglaIncidencias : Cooperator.Framework.Data.BaseRule, BSD.C4.Tlaxcala.Sai.Interfaces.IReacciones<Incidencia, IncidenciaMapper>
+    public class ReglaIncidencias : Cooperator.Framework.Data.BaseRule, Interfaces.IReacciones<Incidencia, IncidenciaMapper>
     {
         public void Guardar(Incidencia entidad, IncidenciaMapper mapper)
         {
