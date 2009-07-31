@@ -36,6 +36,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             switch (e.control.Id)
             {
                 case ID.CMD_A:
+                    var activas = new SAIFrmIncidenciasActivas();
+                    MostrarEnSegundoMonitorSiEsPosible(activas);
                     break;
                 case ID.CMD_AU:
                     break;
@@ -68,6 +70,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 case ID.CMD_NI:
                     break;
                 case ID.CMD_P:
+                    var pendientes = new SAIFrmIncidenciasPendientes();
+                    MostrarEnSegundoMonitorSiEsPosible(pendientes);
                     break;
                 case ID.CMD_PH:
                     break;
