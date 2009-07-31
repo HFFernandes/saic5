@@ -105,6 +105,12 @@
     <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmEstadoUnidades.Designer.cs">
       <DependentUpon>SAIFrmEstadoUnidades.cs</DependentUpon>
     </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidencia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidencia.Designer.cs">
+      <DependentUpon>SAIFrmIncidencia.cs</DependentUpon>
+    </Compile>
     <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidenciasActivas.cs">
       <SubType>Form</SubType>
     </Compile>
