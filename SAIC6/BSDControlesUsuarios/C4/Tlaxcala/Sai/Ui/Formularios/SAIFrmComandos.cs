@@ -95,6 +95,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 case ID.CMD_N:
                     break;
                 case ID.CMD_NI:
+                    SAIFrmIncidencia frmIncidencia = new SAIFrmIncidencia();
+
+                    Elementos.Add(new SAIWinSwitchItem("0000" + Elementos.Count.ToString(), "Ventana No.", frmIncidencia));
+
+                    frmIncidencia.Show();
+            
                     break;
                 case ID.CMD_P:
                     var pendientes = new SAIFrmIncidenciasPendientes();
