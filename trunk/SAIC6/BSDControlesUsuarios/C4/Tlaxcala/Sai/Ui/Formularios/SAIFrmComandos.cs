@@ -99,7 +99,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                     Elementos.Add(new SAIWinSwitchItem("0000" + Elementos.Count.ToString(), "Ventana No.", frmIncidencia));
 
-                    frmIncidencia.Show();
+                    frmIncidencia.Show(this);
             
                     break;
                 case ID.CMD_P:
