@@ -6,7 +6,7 @@ namespace BSD.C4.Tlaxcala.Sai.Dal
 {
     public class ReglaIncidencias : Cooperator.Framework.Data.BaseRule, Interfaces.IReacciones<Incidencia, IncidenciaMapper>
     {
-        public void Guardar(Incidencia entidad, IncidenciaMapper mapper)
+        public void GuardarEntidad(Incidencia entidad, IncidenciaMapper mapper)
         {
             var transaccion = (new ReglaIncidencias()).DataBaseHelper.GetAndBeginTransaction();
             var conexion = transaccion.Connection;
@@ -28,6 +28,11 @@ namespace BSD.C4.Tlaxcala.Sai.Dal
 
                 transaccion.Dispose();
             }
+        }
+
+        public Incidencia ObtenerEntidad(IncidenciaMapper mapper, object identificadorEntidad)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

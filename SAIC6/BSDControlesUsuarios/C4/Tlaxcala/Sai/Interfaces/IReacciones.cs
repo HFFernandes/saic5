@@ -19,6 +19,8 @@
         /// </code>
         /// </example>
         /// </summary>
-        void Guardar(T entidad, U mapper);
+        void GuardarEntidad(T entidad, U mapper);
+
+        T ObtenerEntidad(U mapper,object identificadorEntidad);
     }
 }
