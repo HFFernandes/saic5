@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using BSD.C4.Tlaxcala.Sai.Dal;
-using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -24,9 +22,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             saiReport1.AgregarColumna(5, "Dividido En", 80, true);
             saiReport1.AgregarColumna(6, "Pendiente Desde", 150, true);
             saiReport1.AgregarColumna(7, "Nombre del Operador", 300, true);
-
-            var usuario=new ReglaUsuarios();
-            var entidad = usuario.ObtenerEntidad(UsuarioMapper.Instance(), 1);
         }
     }
 }
