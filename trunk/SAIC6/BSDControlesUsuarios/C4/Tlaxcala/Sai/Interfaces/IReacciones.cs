@@ -21,6 +21,12 @@
         /// </summary>
         void GuardarEntidad(T entidad, U mapper);
 
+        /// <summary>
+        /// Método para la obtención de una entidad especifica mediante su identificador
+        /// </summary>
+        /// <param name="mapper">Objeto mapper del cual depende la entidad</param>
+        /// <param name="identificadorEntidad">Identificador único del registro</param>
+        /// <returns>Una instancia del tipo especificado</returns>
         T ObtenerEntidad(U mapper,object identificadorEntidad);
     }
 }

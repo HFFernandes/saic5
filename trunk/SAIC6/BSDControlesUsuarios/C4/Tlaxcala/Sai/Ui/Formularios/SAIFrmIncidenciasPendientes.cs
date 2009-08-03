@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
+using BSD.C4.Tlaxcala.Sai.Dal;
+using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -14,7 +16,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void SAIFrmIncidenciasPendientes_Load(object sender, EventArgs e)
         {
-            saiReport1.AgregarColumna(0,"Número de Incidente",200,true);
+            saiReport1.AgregarColumna(0, "Número de Incidente", 200, true);
             saiReport1.AgregarColumna(1, "Hora de Incidente", 200, true);
             saiReport1.AgregarColumna(2, "Corporación", 300, true);
             saiReport1.AgregarColumna(3, "Tipo de Incidente", 100, true);
@@ -23,9 +25,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             saiReport1.AgregarColumna(6, "Pendiente Desde", 150, true);
             saiReport1.AgregarColumna(7, "Nombre del Operador", 300, true);
 
-            saiReport1.AgregarRegistro("1","15:30 hrs","Heroico Cuerpo de Bomberos","Fuego","23","",DateTime.Now.ToString(),"rcontreras");
-            saiReport1.AgregarRegistro("2", "15:35 hrs", "Policia Municipal", "Choque", "20", "1", DateTime.Now.ToString(), "rcontreras");
-            saiReport1.AgregarRegistro("3", "15:36 hrs", "Cruz Roja", "Atropellado", "18", "", DateTime.Now.ToString(), "sbarba");
+            var usuario=new ReglaUsuarios();
+            var entidad = usuario.ObtenerEntidad(UsuarioMapper.Instance(), 1);
         }
     }
 }

@@ -22,37 +22,24 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         public SAIFrmComandos()
         {
+            InitializeComponent();
 
-            
-           
+            SAIBarraComandos.DeleteAll(); //Se limpia la barra de comandos por si existiera alguno
+            SAIBarraComandos.EnableCustomization(true);
 
-            SAIFrmIniciarSesion sesion = new SAIFrmIniciarSesion();
-            if (sesion.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                InitializeComponent();
+            //Se crean los eventos de reacción para la personalización de los comandos y la funcionalidad
+            //en su ejecución
+            SAIBarraComandos.Customization += SAIBarraComandos_Customization;
+            SAIBarraComandos.Execute += SAIBarraComandos_Execute;
+            SAIBarraComandos.GlobalSettings.ResourceFile = Environment.CurrentDirectory +
+                                                           "\\SuitePro.ResourceES.xml";
+            SAIBarraComandos.KeyBindings.AllowDoubleKeyShortcuts = true;
 
-                SAIBarraComandos.DeleteAll(); //Se limpia la barra de comandos por si existiera alguno
-                SAIBarraComandos.EnableCustomization(true);
-
-                //Se crean los eventos de reacción para la personalización de los comandos y la funcionalidad
-                //en su ejecución
-                SAIBarraComandos.Customization += SAIBarraComandos_Customization;
-                SAIBarraComandos.Execute += SAIBarraComandos_Execute;
-                SAIBarraComandos.GlobalSettings.ResourceFile = Environment.CurrentDirectory +
-                                                               "\\SuitePro.ResourceES.xml";
-                SAIBarraComandos.KeyBindings.AllowDoubleKeyShortcuts = true;
-
-                //Se establece el ancho,posición superior e izquierda en base a la definición
-                //de la pantalla primaria
-                Width = Screen.PrimaryScreen.WorkingArea.Width;
-                Top = (Screen.PrimaryScreen.WorkingArea.Height - Height);
-                Left = (Screen.PrimaryScreen.WorkingArea.Right - Width);
-
-            }
-            else
-            {
-                Application.Exit();
-            }
+            //Se establece el ancho,posición superior e izquierda en base a la definición
+            //de la pantalla primaria
+            Width = Screen.PrimaryScreen.WorkingArea.Width;
+            Top = (Screen.PrimaryScreen.WorkingArea.Height - Height);
+            Left = (Screen.PrimaryScreen.WorkingArea.Right - Width);
         }
 
         void SAIBarraComandos_Execute(object sender, AxXtremeCommandBars._DCommandBarsEvents_ExecuteEvent e)
@@ -100,7 +87,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     Elementos.Add(new SAIWinSwitchItem("0000" + Elementos.Count.ToString(), "Ventana No.", frmIncidencia));
 
                     frmIncidencia.Show(this);
-            
+
                     break;
                 case ID.CMD_P:
                     var pendientes = new SAIFrmIncidenciasPendientes();
