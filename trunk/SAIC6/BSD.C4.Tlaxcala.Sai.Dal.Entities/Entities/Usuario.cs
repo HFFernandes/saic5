@@ -7,7 +7,6 @@
 //------------------------------------------------------------------------------
 
 using System;
-using Cooperator.Framework.Core.Exceptions;
 
 namespace BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities
 {
