@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
+using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 
 namespace BSD.C4.Tlaxcala.Sai.Dal
 {
@@ -17,7 +18,7 @@ namespace BSD.C4.Tlaxcala.Sai.Dal
         public static List<string> ObtenerSistemas(string strNombreUsuario, string strContraseña)
         {
             var sistemas = new List<string>();
-            var usuario = UsuarioMapper.Instance().GetOneBySQLQuery(string.Format(SQL_OBTENERUSUARIO, strNombreUsuario, strContraseña));
+            var usuario = UsuarioMapper.Instance().GetOneBySQLQuery(string.Format(SQL_OBTENERUSUARIO, strNombreUsuario));
 
             if (usuario != null)
             {
@@ -33,10 +34,15 @@ namespace BSD.C4.Tlaxcala.Sai.Dal
             return sistemas;
         }
 
+        public static Usuario AutenticarUsuario(string strNombreUsuario, string strContraseña)
+        {
+            return UsuarioMapper.Instance().GetOneBySQLQuery(string.Format(SQL_AUTENTICARUSUARIO,strNombreUsuario,strContraseña));
+        }
+
         //Definición de constantes para consultas definidas por el desarrollador
-        private const string SQL_OBTENERUSUARIO = "SELECT * FROM [Usuario] WHERE (NombreUsuario='{0}' AND Contraseña='{1}')";
+        private const string SQL_OBTENERUSUARIO = "SELECT * FROM [Usuario] WHERE (NombreUsuario='{0}')";
         private const string SQL_OBTENERSISTEMA = "SELECT Sistema.* FROM PermisoUsuario INNER JOIN Submodulo ON PermisoUsuario.ClaveSubmodulo = Submodulo.Clave INNER JOIN Sistema ON Submodulo.ClaveSistema = Sistema.Clave INNER JOIN Usuario ON PermisoUsuario.ClaveUsuario = Usuario.Clave WHERE Usuario.Clave = {0}";
+        private const string SQL_AUTENTICARUSUARIO =
+            "SELECT * FROM [Usuario] WHERE (NombreUsuario='{0}' AND Contraseña='{1}')";
     }
-
-
 }

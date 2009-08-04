@@ -18,21 +18,21 @@ namespace BSD.C4
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            //AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
             Application.Run(new SAIFrmComandos());
         }
 
-        static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
-            if (e.ExceptionObject is Exception)
-            {
-                var objetoExcepcion = (Exception)e.ExceptionObject;
-                if (e.IsTerminating)
-                {
-                    throw new SAIExcepcion(objetoExcepcion.Message);
-                }
-            }
-        }
+        //static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        //{
+        //    if (e.ExceptionObject is Exception)
+        //    {
+        //        var objetoExcepcion = (Exception)e.ExceptionObject;
+        //        if (e.IsTerminating)
+        //        {
+        //            throw new SAIExcepcion(objetoExcepcion.Message);
+        //        }
+        //    }
+        //}
     }
 }
