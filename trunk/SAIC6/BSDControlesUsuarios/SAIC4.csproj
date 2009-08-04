@@ -86,6 +86,7 @@
     <Compile Include="C4\Tlaxcala\Sai\ComandosColeccion.cs" />
     <Compile Include="C4\Tlaxcala\Sai\Dal\ReglaIncidencias.cs" />
     <Compile Include="C4\Tlaxcala\Sai\Dal\ReglaUsuarios.cs" />
+    <Compile Include="C4\Tlaxcala\Sai\Excepciones\SAIExcepcion.cs" />
     <Compile Include="C4\Tlaxcala\Sai\ID.cs" />
     <Compile Include="C4\Tlaxcala\Sai\Interfaces\IReacciones.cs" />
     <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmBase.cs">
