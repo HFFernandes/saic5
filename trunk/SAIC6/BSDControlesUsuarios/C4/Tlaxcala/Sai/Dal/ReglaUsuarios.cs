@@ -8,6 +8,12 @@ namespace BSD.C4.Tlaxcala.Sai.Dal
     /// </summary>
     public static class ReglaUsuarios
     {
+        /// <summary>
+        /// Método para la obtención del catálogo de sistemas a los cuales un usuario tiene permisos de acceso
+        /// </summary>
+        /// <param name="strNombreUsuario">Nombre de usuario</param>
+        /// <param name="strContraseña">Contraseña de acceso</param>
+        /// <returns>Un arreglo de tipo cadena con los sistemas a los cuales tienen acceso</returns>
         public static List<string> ObtenerSistemas(string strNombreUsuario, string strContraseña)
         {
             var sistemas = new List<string>();
@@ -27,6 +33,7 @@ namespace BSD.C4.Tlaxcala.Sai.Dal
             return sistemas;
         }
 
+        //Definición de constantes para consultas definidas por el desarrollador
         private const string SQL_OBTENERUSUARIO = "SELECT * FROM [Usuario] WHERE (NombreUsuario='{0}' AND Contraseña='{1}')";
         private const string SQL_OBTENERSISTEMA = "SELECT Sistema.* FROM PermisoUsuario INNER JOIN Submodulo ON PermisoUsuario.ClaveSubmodulo = Submodulo.Clave INNER JOIN Sistema ON Submodulo.ClaveSistema = Sistema.Clave INNER JOIN Usuario ON PermisoUsuario.ClaveUsuario = Usuario.Clave WHERE Usuario.Clave = {0}";
     }

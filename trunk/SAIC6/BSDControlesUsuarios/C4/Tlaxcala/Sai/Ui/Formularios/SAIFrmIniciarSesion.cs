@@ -25,7 +25,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void cmdCancelar_Click(object sender, EventArgs e)
         {
-            //DialogResult = System.Windows.Forms.DialogResult.Cancel;
             Application.Exit();
         }
 

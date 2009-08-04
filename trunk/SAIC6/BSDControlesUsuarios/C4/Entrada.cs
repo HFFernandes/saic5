@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
+using BSD.C4.Tlaxcala.Sai.Excepciones;
 using BSD.C4.Tlaxcala.Sai.Ui.Formularios;
-using Microsoft.NetEnterpriseServers;
 
 namespace BSD.C4
 {
@@ -30,20 +30,7 @@ namespace BSD.C4
                 var objetoExcepcion = (Exception)e.ExceptionObject;
                 if (e.IsTerminating)
                 {
-                    //Mostrar formulario de error con strMensajeError
-                    var excepcion = new ApplicationException("Error General", objetoExcepcion)
-                                      {
-                                          Source = "Sistema de Administración de Incidencias"
-                                      };
-
-                    var exceptionMessageBox = new ExceptionMessageBox(excepcion)
-                                                {
-                                                    HelpLink = "http://www.infinitysoft.com.mx",
-                                                    Symbol = ExceptionMessageBoxSymbol.Error,
-                                                    Beep = true
-                                                };
-
-                    exceptionMessageBox.Show(null);
+                    throw new SAIExcepcion(objetoExcepcion.Message);
                 }
             }
         }

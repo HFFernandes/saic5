@@ -1,11 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using Microsoft.NetEnterpriseServers;
 
 namespace BSD.C4.Tlaxcala.Sai.Excepciones
 {
     public class SAIExcepcion : Exception
     {
-        //TODO: Implementar el control de excepciones
+        public SAIExcepcion(string message)
+            : base(message)
+        {
+            var excepcion = new ApplicationException("Error en la aplicación", this)
+            {
+                Source = "Sistema de Administración de Incidencias"
+            };
+
+            var exceptionMessageBox = new ExceptionMessageBox(excepcion)
+            {
+                HelpLink = "http://www.infinitysoft.com.mx",
+                Symbol = ExceptionMessageBoxSymbol.Error,
+                Beep = true
+            };
+
+            exceptionMessageBox.Show(null);
+        }
     }
 }
