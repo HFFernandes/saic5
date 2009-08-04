@@ -10,7 +10,7 @@ namespace BSD.C4.Tlaxcala.Sai.Dal
     /// </summary>
     public static class ReglaUsuarios
     {
-        public static List<string> AutenticaUsuario(string strNombreUsuario, string strContraseña)
+        public static List<string> ObtenerSistemas(string strNombreUsuario, string strContraseña)
         {
             var sistemas = new List<string>();
             var usuario = UsuarioMapper.Instance().GetOneBySQLQuery(string.Format(SQL_OBTENERUSUARIO, strNombreUsuario, strContraseña));
@@ -29,8 +29,8 @@ namespace BSD.C4.Tlaxcala.Sai.Dal
             return sistemas;
         }
 
-        public const string SQL_OBTENERUSUARIO = "SELECT * FROM [Usuario] WHERE (NombreUsuario='{0}' AND Contraseña='{1}')";
-        public const string SQL_OBTENERSISTEMA = "SELECT Sistema.* FROM PermisoUsuario INNER JOIN Submodulo ON PermisoUsuario.ClaveSubmodulo = Submodulo.Clave INNER JOIN Sistema ON Submodulo.ClaveSistema = Sistema.Clave INNER JOIN Usuario ON PermisoUsuario.ClaveUsuario = Usuario.Clave WHERE Usuario.Clave = {0}";
+        private const string SQL_OBTENERUSUARIO = "SELECT * FROM [Usuario] WHERE (NombreUsuario='{0}' AND Contraseña='{1}')";
+        private const string SQL_OBTENERSISTEMA = "SELECT Sistema.* FROM PermisoUsuario INNER JOIN Submodulo ON PermisoUsuario.ClaveSubmodulo = Submodulo.Clave INNER JOIN Sistema ON Submodulo.ClaveSistema = Sistema.Clave INNER JOIN Usuario ON PermisoUsuario.ClaveUsuario = Usuario.Clave WHERE Usuario.Clave = {0}";
     }
 
 
