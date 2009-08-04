@@ -13,8 +13,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 
     public delegate void dCerrar();
 
-
-
     public partial class SAIWinSwitch : UserControl
     {
 
@@ -47,14 +45,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
                 wstEtiqueta.Height = 15;
                 this._etiquetas.Add(wstEtiqueta);
                 this.pnlIzquierda.Controls.Add(this._etiquetas[i]);
-                this._etiquetas[i].Location = new System.Drawing.Point(5, (i*this._etiquetas[i].Height));
+                this._etiquetas[i].Location = new System.Drawing.Point(5, (i * this._etiquetas[i].Height));
 
-                
+
             }
             this.pnlIzquierda.ResumeLayout();
             this.ResumeLayout();
 
-          
+
         }
 
         public SAIWinSwitch()
@@ -72,7 +70,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 
         private void wnsEtiqueta_onSelected(String strSelected)
         {
-            for (int i=0; i< this._elementos.Count; i++)
+            for (int i = 0; i < this._elementos.Count; i++)
             {
                 if (this._elementos[i].Folio == strSelected)
                 {
@@ -115,7 +113,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 
         private void wstEtiqueta_OnKeyUp(KeyEventArgs e)
         {
-           if (e.KeyCode == Keys.ControlKey)
+            if (e.KeyCode == Keys.ControlKey)
             {
                 if (this.onClose != null)
                 {
@@ -127,9 +125,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
                         this._elementos[this.Indice].Ventana.Visible = false;
                         this._elementos[this.Indice].Ventana.Show(this._oWner);
                         this._elementos[this.Indice].Ventana.Focus();
-                        
+
                     }
-                   
+
                     finally
                     {
                         this.onClose();
@@ -149,7 +147,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         }
 
 
-        
+
 
     }
 

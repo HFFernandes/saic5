@@ -255,7 +255,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             if (keyData == (Keys.ControlKey | Keys.Control))
             {
-                this.bCtrPresionado = true;
+                bCtrPresionado = true;
             }
 
             return false;
@@ -267,22 +267,21 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="e"></param>
         protected override void OnKeyUp(KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Tab && this.bCtrPresionado)
+            if (e.KeyCode == Keys.Tab && bCtrPresionado)
             {
-                this.MuestraSwitch();
+                MuestraSwitch();
             }
-            this.bCtrPresionado = false;
+            bCtrPresionado = false;
         }
-
 
         /// <summary>
         /// Esta función se manda a llamar desde los demás formularios para mostrar la ventana del switch
         /// </summary>
         public void MuestraSwitch()
         {
-            if (this.Elementos.Count > 0)
+            if (Elementos.Count > 0)
             {
-                SAIFrmVentana objVentana = new SAIFrmVentana(Elementos, this);
+                var objVentana = new SAIFrmVentana(Elementos, this);
                 objVentana.Left = 200;
                 objVentana.Top = 200;
                 objVentana.Show(this);

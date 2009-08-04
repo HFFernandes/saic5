@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
@@ -41,7 +37,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             this.label1.Width = this.Width - 1;
             this.label1.Height = this.Height - 1;
 
-            this.label1.BackColor = Color.FromArgb(255,255,192);
+            this.label1.BackColor = Color.FromArgb(255, 255, 192);
             this.label1.ForeColor = Color.Black;
 
             this.label1.MouseEnter += new EventHandler(label1_MouseEnter);
@@ -51,8 +47,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         /// <summary>
         /// Obtiene el valor que se muestra en la etiqueta
         /// </summary>
-        public String Valor 
-        { 
+        public String Valor
+        {
             set
             {
                 this.label1.Text = value;
