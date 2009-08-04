@@ -87,7 +87,6 @@
             this.saiTxtContraseña.StrMensajeCampoRequerido = "El campo es requerido.";
             this.saiTxtContraseña.TabIndex = 4;
             this.saiTxtContraseña.UseSystemPasswordChar = true;
-            this.saiTxtContraseña.KeyUp += new System.Windows.Forms.KeyEventHandler(this.saiTxtContraseña_KeyUp);
             // 
             // saiCmbSistema
             // 

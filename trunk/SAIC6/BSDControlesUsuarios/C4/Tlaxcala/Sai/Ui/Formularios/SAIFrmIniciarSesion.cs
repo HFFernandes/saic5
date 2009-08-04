@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 using BSD.C4.Tlaxcala.Sai.Dal;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
 using BSD.C4.Tlaxcala.Sai.Ui.Controles;
@@ -23,13 +22,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             try
             {
-                if (base.SAIProveedorValidacion.ValidarCamposRequeridos(this))
+                if (SAIProveedorValidacion.ValidarCamposRequeridos(this))
                 {
                     var usuario = ReglaUsuarios.AutenticarUsuario(saiTxtUsuario.Text.Trim(), saiTxtContraseña.Text.Trim());
                     if (usuario != null)
                     {
                         DialogResult = DialogResult.OK;
-                        base.Close();
+                        Close();
                     }
                     else
                         throw new SAIExcepcion("Las credenciales de autenticación no son válidas.");
@@ -45,7 +44,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void cmdCancelar_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
-            base.Close();
+            Application.Exit();
         }
 
         private void ObtenerSistemas(SAITextBox sender)
@@ -63,7 +62,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
 
                     saiCmbSistema.Enabled = true;
-                    //cmdAceptar.Enabled = true;
                     saiCmbSistema.SelectedIndex = 0;
                 }
             }
@@ -71,16 +69,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void saiTxtUsuario_KeyUp(object sender, KeyEventArgs e)
         {
-            //cmdAceptar.Enabled = false;
             saiCmbSistema.Enabled = false;
             ObtenerSistemas(saiTxtUsuario);
-        }
-
-        private void saiTxtContraseña_KeyUp(object sender, KeyEventArgs e)
-        {
-            //cmdAceptar.Enabled = false;
-            //saiCmbSistema.Enabled = false;
-            //ObtenerSistemas(saiTxtContraseña);
         }
     }
 }

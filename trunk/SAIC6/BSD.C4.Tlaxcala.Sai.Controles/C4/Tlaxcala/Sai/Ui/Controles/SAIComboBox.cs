@@ -136,20 +136,20 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         {
             base.OnLostFocus(e);
             this.BackColor = this._crlBackColor;
-
-            //Verificar si el campo está marcado como requerido
-            if (BlnEsRequerido && this.Text == string.Empty)
-                BlnFueValido = false;
-            else
-                BlnFueValido = true;
         }
 
         protected override void NotifyInvalidate(Rectangle invalidatedArea)
         {
+            //Verificar si el campo está marcado como requerido
+            if (BlnEsRequerido && this.SelectedIndex < 0)
+                BlnFueValido = false;
+            else
+                BlnFueValido = true;
+
             if (BlnEsRequerido)
                 Validador.SetError(this, StrMensajeCampoRequerido);
-            base.NotifyInvalidate(invalidatedArea);
 
+            base.NotifyInvalidate(invalidatedArea);
         }
         #endregion
 
