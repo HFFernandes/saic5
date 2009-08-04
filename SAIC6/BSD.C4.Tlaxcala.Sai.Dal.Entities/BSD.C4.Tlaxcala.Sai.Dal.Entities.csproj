@@ -53,10 +53,14 @@
     <Compile Include="Entities\Auto\RoboVehiculoAccesorios.Auto.cs" />
     <Compile Include="Entities\PersonaExtraviada.cs" />
     <Compile Include="Entities\RoboVehiculoAccesorios.cs" />
+    <Compile Include="Objects\Auto\PermisoUsuarioObject.Auto.cs" />
     <Compile Include="Objects\Auto\PersonaExtraviadaObject.Auto.cs" />
     <Compile Include="Objects\Auto\PropietarioVehiculoObject.Auto.cs" />
     <Compile Include="Objects\Auto\RoboVehiculoAccesoriosObject.Auto.cs" />
+    <Compile Include="Objects\Auto\RoboVehiculoAccesoriosVehiculoInvolucradoObject.Auto.cs" />
+    <Compile Include="Objects\Auto\UsuarioCorporacionObject.Auto.cs" />
     <Compile Include="Objects\Auto\VehiculoObject.Auto.cs" />
+    <Compile Include="Objects\Auto\VehiculoRobadoObject.Auto.cs" />
     <Compile Include="Objects\CodigoPostalObject.cs" />
     <Compile Include="Objects\Auto\CodigoPostalObject.Auto.cs" />
     <Compile Include="Entities\CodigoPostalColonia.cs" />
@@ -105,9 +109,11 @@
     <Compile Include="Objects\Auto\MunicipioObject.Auto.cs" />
     <Compile Include="Objects\PermisoObject.cs" />
     <Compile Include="Objects\Auto\PermisoObject.Auto.cs" />
+    <Compile Include="Objects\PermisoUsuarioObject.cs" />
     <Compile Include="Objects\PersonaExtraviadaObject.cs" />
     <Compile Include="Objects\PropietarioVehiculoObject.cs" />
     <Compile Include="Objects\RoboVehiculoAccesoriosObject.cs" />
+    <Compile Include="Objects\RoboVehiculoAccesoriosVehiculoInvolucradoObject.cs" />
     <Compile Include="Objects\SistemaObject.cs" />
     <Compile Include="Objects\Auto\SistemaObject.Auto.cs" />
     <Compile Include="Entities\Submodulo.cs" />
@@ -124,9 +130,11 @@
     <Compile Include="Objects\Auto\ListaUnidadesObject.Auto.cs" />
     <Compile Include="Entities\Usuario.cs" />
     <Compile Include="Entities\Auto\Usuario.Auto.cs" />
+    <Compile Include="Objects\UsuarioCorporacionObject.cs" />
     <Compile Include="Objects\UsuarioObject.cs" />
     <Compile Include="Objects\Auto\UsuarioObject.Auto.cs" />
     <Compile Include="Objects\VehiculoObject.cs" />
+    <Compile Include="Objects\VehiculoRobadoObject.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
