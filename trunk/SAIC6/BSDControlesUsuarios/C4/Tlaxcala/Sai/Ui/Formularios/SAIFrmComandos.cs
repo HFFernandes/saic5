@@ -46,7 +46,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 Top = (Screen.PrimaryScreen.WorkingArea.Height - Height);
                 Left = (Screen.PrimaryScreen.WorkingArea.Right - Width);
             }
-
         }
 
         void SAIBarraComandos_Execute(object sender, AxXtremeCommandBars._DCommandBarsEvents_ExecuteEvent e)
