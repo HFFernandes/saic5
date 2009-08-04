@@ -79,7 +79,6 @@ namespace PruebasUnit
             List<string> actual;
             actual = ReglaUsuarios.AutenticaUsuario(strNombreUsuario, strContraseña);
             Assert.AreEqual(expected, actual);
-            Assert.Inconclusive("Verify the correctness of this test method.");
         }
     }
 }
