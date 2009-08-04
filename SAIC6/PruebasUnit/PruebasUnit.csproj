@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReglaUsuariosPruebasUnitarias.cs" />
+    <Compile Include="SAIExcepcionPruebasUnitarias.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BSD.C4.Tlaxcala.Sai.Controles\BSD.C4.Tlaxcala.Sai.Controles.csproj">
