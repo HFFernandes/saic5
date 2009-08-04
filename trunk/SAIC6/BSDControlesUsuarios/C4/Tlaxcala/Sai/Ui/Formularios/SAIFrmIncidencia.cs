@@ -14,5 +14,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             InitializeComponent();
         }
+
+        
     }
 }
