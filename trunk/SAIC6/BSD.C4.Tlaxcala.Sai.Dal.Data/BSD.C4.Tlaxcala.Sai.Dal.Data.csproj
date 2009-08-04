@@ -58,7 +58,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gateways\Auto\PersonaExtraviadaGateway.Auto.cs" />
+    <Compile Include="Gateways\Auto\PropietarioVehiculoGateway.Auto.cs" />
+    <Compile Include="Gateways\Auto\RoboVehiculoAccesoriosGateway.Auto.cs" />
+    <Compile Include="Gateways\Auto\VehiculoGateway.Auto.cs" />
+    <Compile Include="Gateways\PersonaExtraviadaGateway.cs" />
+    <Compile Include="Gateways\PropietarioVehiculoGateway.cs" />
+    <Compile Include="Gateways\RoboVehiculoAccesoriosGateway.cs" />
+    <Compile Include="Gateways\VehiculoGateway.cs" />
     <Compile Include="LazyProviders\DefaultLazyProvider.cs" />
+    <Compile Include="Mappers\Auto\PersonaExtraviadaMapper.Auto.cs" />
+    <Compile Include="Mappers\Auto\PropietarioVehiculoMapper.Auto.cs" />
+    <Compile Include="Mappers\Auto\RoboVehiculoAccesoriosMapper.Auto.cs" />
+    <Compile Include="Mappers\Auto\VehiculoMapper.Auto.cs" />
     <Compile Include="Mappers\CodigoPostalMapper.cs" />
     <Compile Include="Mappers\Auto\CodigoPostalMapper.Auto.cs" />
     <Compile Include="Gateways\CodigoPostalGateway.cs" />
@@ -115,6 +127,9 @@
     <Compile Include="Mappers\Auto\PermisoMapper.Auto.cs" />
     <Compile Include="Gateways\PermisoGateway.cs" />
     <Compile Include="Gateways\Auto\PermisoGateway.Auto.cs" />
+    <Compile Include="Mappers\PersonaExtraviadaMapper.cs" />
+    <Compile Include="Mappers\PropietarioVehiculoMapper.cs" />
+    <Compile Include="Mappers\RoboVehiculoAccesoriosMapper.cs" />
     <Compile Include="Mappers\SistemaMapper.cs" />
     <Compile Include="Mappers\Auto\SistemaMapper.Auto.cs" />
     <Compile Include="Gateways\SistemaGateway.cs" />
@@ -135,6 +150,7 @@
     <Compile Include="Mappers\Auto\UsuarioMapper.Auto.cs" />
     <Compile Include="Gateways\UsuarioGateway.cs" />
     <Compile Include="Gateways\Auto\UsuarioGateway.Auto.cs" />
+    <Compile Include="Mappers\VehiculoMapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BSD.C4.Tlaxcala.Sai.Dal.Entities\BSD.C4.Tlaxcala.Sai.Dal.Entities.csproj">
