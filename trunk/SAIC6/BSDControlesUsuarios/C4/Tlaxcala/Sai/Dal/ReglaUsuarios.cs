@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
-using BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects;
 
 namespace BSD.C4.Tlaxcala.Sai.Dal
 {
