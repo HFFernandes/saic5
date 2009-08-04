@@ -91,6 +91,7 @@
             // 
             // saiCmbSistema
             // 
+            this.saiCmbSistema.BlnEsRequerido = true;
             this.saiCmbSistema.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.saiCmbSistema.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.saiCmbSistema.Enabled = false;
@@ -103,7 +104,6 @@
             // 
             // cmdCancelar
             // 
-            this.cmdCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cmdCancelar.Location = new System.Drawing.Point(288, 217);
             this.cmdCancelar.Name = "cmdCancelar";
             this.cmdCancelar.Size = new System.Drawing.Size(75, 23);
@@ -114,8 +114,6 @@
             // 
             // cmdAceptar
             // 
-            this.cmdAceptar.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.cmdAceptar.Enabled = false;
             this.cmdAceptar.Location = new System.Drawing.Point(207, 217);
             this.cmdAceptar.Name = "cmdAceptar";
             this.cmdAceptar.Size = new System.Drawing.Size(75, 23);
