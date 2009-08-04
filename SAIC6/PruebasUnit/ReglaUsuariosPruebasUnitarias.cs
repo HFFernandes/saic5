@@ -1,12 +1,9 @@
 ﻿using BSD.C4.Tlaxcala.Sai.Dal;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using System.Collections;
 
 namespace PruebasUnit
 {
-    
-    
     /// <summary>
     ///This is a test class for ReglaUsuariosPruebasUnitarias and is intended
     ///to contain all ReglaUsuariosPruebasUnitarias Unit Tests
@@ -14,8 +11,6 @@ namespace PruebasUnit
     [TestClass()]
     public class ReglaUsuariosPruebasUnitarias
     {
-
-
         private TestContext testContextInstance;
 
         /// <summary>
@@ -64,14 +59,13 @@ namespace PruebasUnit
         //
         #endregion
 
-
         /// <summary>
         ///A test for AutenticaUsuario
         ///</summary>
         [TestMethod()]
         public void AutenticaUsuarioPruebasUnitarias()
         {
-            var st=new List<string> {"089", "066"};
+            var st = new List<string> { "089", "066" };
 
             string strNombreUsuario = "jbaez";
             string strContraseña = "nikita";

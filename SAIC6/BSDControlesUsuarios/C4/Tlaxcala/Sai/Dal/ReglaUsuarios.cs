@@ -12,15 +12,14 @@ namespace BSD.C4.Tlaxcala.Sai.Dal
     {
         public static List<string> AutenticaUsuario(string strNombreUsuario, string strContraseña)
         {
-            List<string> sistemas = new List<string>();
+            var sistemas = new List<string>();
+            var usuario = UsuarioMapper.Instance().GetOneBySQLQuery(string.Format(SQL_OBTENERUSUARIO, strNombreUsuario, strContraseña));
 
-            Usuario usuario = UsuarioMapper.Instance().GetOneBySQLQuery(string.Format("SELECT * FROM [Usuario] WHERE (NombreUsuario='{0}' AND Contraseña='{1}')", strNombreUsuario, strContraseña));
-            
             if (usuario != null)
             {
                 //Existe un usuario con las credenciales proporcionadas
                 //Luego entonces, obtengo y presento los sistemas a los cuales puede accesar
-                SistemaObjectList sistema = SistemaMapper.Instance().GetBySQLQuery("SELECT Sistema.* FROM PermisoUsuario INNER JOIN Submodulo ON PermisoUsuario.ClaveSubmodulo = Submodulo.Clave INNER JOIN Sistema ON Submodulo.ClaveSistema = Sistema.Clave INNER JOIN Usuario ON PermisoUsuario.ClaveUsuario = Usuario.Clave WHERE Usuario.Clave = 1");
+                var sistema = SistemaMapper.Instance().GetBySQLQuery(string.Format(SQL_OBTENERSISTEMA, usuario.Clave));
                 foreach (var s in sistema)
                 {
                     sistemas.Add(s.Descripcion);
@@ -29,6 +28,9 @@ namespace BSD.C4.Tlaxcala.Sai.Dal
 
             return sistemas;
         }
+
+        public const string SQL_OBTENERUSUARIO = "SELECT * FROM [Usuario] WHERE (NombreUsuario='{0}' AND Contraseña='{1}')";
+        public const string SQL_OBTENERSISTEMA = "SELECT Sistema.* FROM PermisoUsuario INNER JOIN Submodulo ON PermisoUsuario.ClaveSubmodulo = Submodulo.Clave INNER JOIN Sistema ON Submodulo.ClaveSistema = Sistema.Clave INNER JOIN Usuario ON PermisoUsuario.ClaveUsuario = Usuario.Clave WHERE Usuario.Clave = {0}";
     }
 
 
