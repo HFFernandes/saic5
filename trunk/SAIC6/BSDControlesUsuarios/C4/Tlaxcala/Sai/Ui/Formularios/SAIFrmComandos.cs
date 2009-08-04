@@ -92,6 +92,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 case ID.CMD_P:
                     var pendientes = new SAIFrmIncidenciasPendientes();
                     MostrarEnSegundoMonitorSiEsPosible(pendientes);
+
                     break;
                 case ID.CMD_PH:
                     break;
