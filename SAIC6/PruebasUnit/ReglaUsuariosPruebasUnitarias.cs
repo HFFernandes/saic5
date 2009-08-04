@@ -71,7 +71,7 @@ namespace PruebasUnit
             string strContraseña = "nikita";
             List<string> expected = st;
             List<string> actual;
-            actual = ReglaUsuarios.AutenticaUsuario(strNombreUsuario, strContraseña);
+            actual = ReglaUsuarios.ObtenerSistemas(strNombreUsuario, strContraseña);
             Assert.AreEqual(expected, actual);
         }
     }
