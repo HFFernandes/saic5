@@ -87,11 +87,13 @@
             this.saiTxtContraseña.StrMensajeCampoRequerido = "El campo es requerido.";
             this.saiTxtContraseña.TabIndex = 4;
             this.saiTxtContraseña.UseSystemPasswordChar = true;
+            this.saiTxtContraseña.KeyUp += new System.Windows.Forms.KeyEventHandler(this.saiTxtContraseña_KeyUp);
             // 
             // saiCmbSistema
             // 
             this.saiCmbSistema.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.saiCmbSistema.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.saiCmbSistema.Enabled = false;
             this.saiCmbSistema.FormattingEnabled = true;
             this.saiCmbSistema.Location = new System.Drawing.Point(130, 170);
             this.saiCmbSistema.Name = "saiCmbSistema";
@@ -113,6 +115,7 @@
             // cmdAceptar
             // 
             this.cmdAceptar.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.cmdAceptar.Enabled = false;
             this.cmdAceptar.Location = new System.Drawing.Point(207, 217);
             this.cmdAceptar.Name = "cmdAceptar";
             this.cmdAceptar.Size = new System.Drawing.Size(75, 23);
@@ -130,6 +133,7 @@
             this.saiTxtUsuario.Size = new System.Drawing.Size(233, 20);
             this.saiTxtUsuario.StrMensajeCampoRequerido = "El campo es requerido.";
             this.saiTxtUsuario.TabIndex = 2;
+            this.saiTxtUsuario.KeyUp += new System.Windows.Forms.KeyEventHandler(this.saiTxtUsuario_KeyUp);
             // 
             // SAIFrmIniciarSesion
             // 

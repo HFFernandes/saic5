@@ -11,10 +11,25 @@
         /// Método para la implementación de guardar el registro
         /// <example>
         /// <code>
-        /// try{
-        ///     mapper.Insert(entidad);
-        /// }catch(Exception){
+        /// var transaccion = (new ReglaIncidencias()).DataBaseHelper.GetAndBeginTransaction();
+        /// var conexion = transaccion.Connection;
+        ///
+        /// try
+        /// {
+        ///     mapper.Insert(transaccion, entidad);
+        ///     transaccion.Commit();
+        /// }
+        /// catch (Exception)
+        /// {
+        ///     transaccion.Rollback();
         ///     throw;
+        /// }
+        /// finally
+        /// {
+        ///     if (conexion != null)
+        ///         conexion.Close();
+        ///
+        ///     transaccion.Dispose();
         /// }
         /// </code>
         /// </example>
@@ -27,6 +42,6 @@
         /// <param name="mapper">Objeto mapper del cual depende la entidad</param>
         /// <param name="identificadorEntidad">Identificador único del registro</param>
         /// <returns>Una instancia del tipo especificado</returns>
-        T ObtenerEntidad(U mapper,object identificadorEntidad);
+        T ObtenerEntidad(U mapper, object identificadorEntidad);
     }
 }
