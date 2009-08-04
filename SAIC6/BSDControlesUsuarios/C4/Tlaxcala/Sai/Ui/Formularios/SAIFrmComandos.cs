@@ -12,7 +12,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <summary>
         /// Indica si se ha presionado la tecla control
         /// </summary>
-        private bool bCtrPresionado = false;
+        private bool bCtrPresionado;
 
         /// <summary>
         /// Lista de elementos que tienen la referencia hacia los formularios que se van abriendo
@@ -22,24 +22,31 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         public SAIFrmComandos()
         {
-            InitializeComponent();
+            var iniciarSesion = new SAIFrmIniciarSesion();
+            var dialogResult = iniciarSesion.ShowDialog();
 
-            SAIBarraComandos.DeleteAll(); //Se limpia la barra de comandos por si existiera alguno
-            SAIBarraComandos.EnableCustomization(true);
+            if (dialogResult == DialogResult.OK)
+            {
+                InitializeComponent();
 
-            //Se crean los eventos de reacción para la personalización de los comandos y la funcionalidad
-            //en su ejecución
-            SAIBarraComandos.Customization += SAIBarraComandos_Customization;
-            SAIBarraComandos.Execute += SAIBarraComandos_Execute;
-            SAIBarraComandos.GlobalSettings.ResourceFile = Environment.CurrentDirectory +
-                                                           "\\SuitePro.ResourceES.xml";
-            SAIBarraComandos.KeyBindings.AllowDoubleKeyShortcuts = true;
+                SAIBarraComandos.DeleteAll(); //Se limpia la barra de comandos por si existiera alguno
+                SAIBarraComandos.EnableCustomization(true);
 
-            //Se establece el ancho,posición superior e izquierda en base a la definición
-            //de la pantalla primaria
-            Width = Screen.PrimaryScreen.WorkingArea.Width;
-            Top = (Screen.PrimaryScreen.WorkingArea.Height - Height);
-            Left = (Screen.PrimaryScreen.WorkingArea.Right - Width);
+                //Se crean los eventos de reacción para la personalización de los comandos y la funcionalidad
+                //en su ejecución
+                SAIBarraComandos.Customization += SAIBarraComandos_Customization;
+                SAIBarraComandos.Execute += SAIBarraComandos_Execute;
+                SAIBarraComandos.GlobalSettings.ResourceFile = Environment.CurrentDirectory +
+                                                               "\\SuitePro.ResourceES.xml";
+                SAIBarraComandos.KeyBindings.AllowDoubleKeyShortcuts = true;
+
+                //Se establece el ancho,posición superior e izquierda en base a la definición
+                //de la pantalla primaria
+                Width = Screen.PrimaryScreen.WorkingArea.Width;
+                Top = (Screen.PrimaryScreen.WorkingArea.Height - Height);
+                Left = (Screen.PrimaryScreen.WorkingArea.Right - Width);
+            }
+
         }
 
         void SAIBarraComandos_Execute(object sender, AxXtremeCommandBars._DCommandBarsEvents_ExecuteEvent e)
@@ -57,7 +64,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 case ID.CMD_BSC:
                     break;
                 case ID.CMD_CAN:
-                    throw new NotImplementedException("El método de cancelación no está implementado.");
                     break;
                 case ID.CMD_DT:
                     break;
@@ -83,16 +89,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     break;
                 case ID.CMD_NI:
                     SAIFrmIncidencia frmIncidencia = new SAIFrmIncidencia();
-
-                    Elementos.Add(new SAIWinSwitchItem("0000" + Elementos.Count.ToString(), "Ventana No.", frmIncidencia));
-
+                    Elementos.Add(new SAIWinSwitchItem("0000" + Elementos.Count, "Ventana No.", frmIncidencia));
                     frmIncidencia.Show(this);
-
                     break;
                 case ID.CMD_P:
                     var pendientes = new SAIFrmIncidenciasPendientes();
                     MostrarEnSegundoMonitorSiEsPosible(pendientes);
-
                     break;
                 case ID.CMD_PH:
                     break;
@@ -247,23 +249,18 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
-
         /// <summary>
         /// Para indicar si se ha presionado la tecla control
         /// </summary>
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-
-
             if (keyData == (Keys.ControlKey | Keys.Control))
             {
                 this.bCtrPresionado = true;
             }
 
             return false;
-
         }
-
 
         /// <summary>
         /// Si se ha presionado control tab, se muestra la ventana de swicheo
@@ -271,7 +268,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="e"></param>
         protected override void OnKeyUp(KeyEventArgs e)
         {
-
             if (e.KeyCode == Keys.Tab && this.bCtrPresionado)
             {
                 this.MuestraSwitch();

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using BSD.C4.Tlaxcala.Sai.Dal;
 using BSD.C4.Tlaxcala.Sai.Ui.Controles;
+using System.Windows.Forms;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -18,12 +19,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void cmdAceptar_Click(object sender, EventArgs e)
         {
-            DialogResult = System.Windows.Forms.DialogResult.OK;
+            DialogResult = DialogResult.OK;
+            base.Close();
         }
 
         private void cmdCancelar_Click(object sender, EventArgs e)
         {
-            DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            //DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            Application.Exit();
         }
 
         private void ObtenerSistemas(SAITextBox sender)
@@ -47,14 +50,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
-        private void saiTxtUsuario_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
+        private void saiTxtUsuario_KeyUp(object sender, KeyEventArgs e)
         {
             cmdAceptar.Enabled = false;
             saiCmbSistema.Enabled = false;
             ObtenerSistemas(saiTxtUsuario);
         }
 
-        private void saiTxtContraseña_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
+        private void saiTxtContraseña_KeyUp(object sender, KeyEventArgs e)
         {
             cmdAceptar.Enabled = false;
             saiCmbSistema.Enabled = false;
