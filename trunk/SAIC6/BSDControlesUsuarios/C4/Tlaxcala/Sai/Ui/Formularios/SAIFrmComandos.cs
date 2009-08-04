@@ -4,6 +4,9 @@ using System.Windows.Forms;
 using Microsoft.NetEnterpriseServers;
 using XtremeCommandBars;
 using BSD.C4.Tlaxcala.Sai.Ui.Controles;
+using System.Security.Permissions;
+using System.Diagnostics;
+using System.Threading;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -50,79 +53,92 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void SAIBarraComandos_Execute(object sender, AxXtremeCommandBars._DCommandBarsEvents_ExecuteEvent e)
         {
-            //Switch a partir del identificador del control en el cual
-            //se dio click
-            switch (e.control.Id)
+            PrincipalPermission permisos;
+
+            try
             {
-                case ID.CMD_A:
-                    var activas = new SAIFrmIncidenciasActivas();
-                    MostrarEnSegundoMonitorSiEsPosible(activas);
-                    break;
-                case ID.CMD_AU:
-                    break;
-                case ID.CMD_BSC:
-                    break;
-                case ID.CMD_CAN:
-                    break;
-                case ID.CMD_DT:
-                    break;
-                case ID.CMD_FIN:
-                    break;
-                case ID.CMD_HI:
-                    break;
-                case ID.CMD_INF:
-                    break;
-                case ID.CMD_LAC:
-                    break;
-                case ID.CMD_MAP:
-                    break;
-                case ID.CMD_MIA:
-                    break;
-                case ID.CMD_MIP:
-                    break;
-                case ID.CMD_MN:
-                    break;
-                case ID.CMD_MUS:
-                    break;
-                case ID.CMD_N:
-                    break;
-                case ID.CMD_NI:
-                    SAIFrmIncidencia frmIncidencia = new SAIFrmIncidencia();
-                    Elementos.Add(new SAIWinSwitchItem("0000" + Elementos.Count, "Ventana No.", frmIncidencia));
-                    frmIncidencia.Show(this);
-                    break;
-                case ID.CMD_P:
-                    var pendientes = new SAIFrmIncidenciasPendientes();
-                    MostrarEnSegundoMonitorSiEsPosible(pendientes);
-                    break;
-                case ID.CMD_PH:
-                    break;
-                case ID.CMD_RNC:
-                    break;
-                case ID.CMD_RPH:
-                    break;
-                case ID.CMD_S:
-                    break;
-                case ID.CMD_SDT:
-                    break;
-                case ID.CMD_SIF:
-                    break;
-                case ID.CMD_SLC:
-                    break;
-                case ID.CMD_SS:
-                    break;
-                case ID.CMD_TEL:
-                    break;
-                case ID.CMD_U:
-                    break;
-                case ID.CMD_UA:
-                    break;
-                case ID.CMD_UB:
-                    break;
-                case ID.CMD_V:
-                    break;
-                default:
-                    break;
+                //Switch a partir del identificador del control en el cual
+                //se dio click
+                switch (e.control.Id)
+                {
+                    case ID.CMD_A:
+                        permisos=new PrincipalPermission("cbaez",null);
+                        permisos.Demand();
+
+                        Debug.WriteLine(string.Format("El usuario {0} puede hacer esto",Thread.CurrentPrincipal.Identity.Name));
+                        var activas = new SAIFrmIncidenciasActivas();
+                        MostrarEnSegundoMonitorSiEsPosible(activas);
+                        break;
+                    case ID.CMD_AU:
+                        break;
+                    case ID.CMD_BSC:
+                        break;
+                    case ID.CMD_CAN:
+                        break;
+                    case ID.CMD_DT:
+                        break;
+                    case ID.CMD_FIN:
+                        break;
+                    case ID.CMD_HI:
+                        break;
+                    case ID.CMD_INF:
+                        break;
+                    case ID.CMD_LAC:
+                        break;
+                    case ID.CMD_MAP:
+                        break;
+                    case ID.CMD_MIA:
+                        break;
+                    case ID.CMD_MIP:
+                        break;
+                    case ID.CMD_MN:
+                        break;
+                    case ID.CMD_MUS:
+                        break;
+                    case ID.CMD_N:
+                        break;
+                    case ID.CMD_NI:
+                        SAIFrmIncidencia frmIncidencia = new SAIFrmIncidencia();
+                        Elementos.Add(new SAIWinSwitchItem("0000" + Elementos.Count, "Ventana No.", frmIncidencia));
+                        frmIncidencia.Show(this);
+                        break;
+                    case ID.CMD_P:
+                        var pendientes = new SAIFrmIncidenciasPendientes();
+                        MostrarEnSegundoMonitorSiEsPosible(pendientes);
+                        break;
+                    case ID.CMD_PH:
+                        break;
+                    case ID.CMD_RNC:
+                        break;
+                    case ID.CMD_RPH:
+                        break;
+                    case ID.CMD_S:
+                        break;
+                    case ID.CMD_SDT:
+                        break;
+                    case ID.CMD_SIF:
+                        break;
+                    case ID.CMD_SLC:
+                        break;
+                    case ID.CMD_SS:
+                        break;
+                    case ID.CMD_TEL:
+                        break;
+                    case ID.CMD_U:
+                        break;
+                    case ID.CMD_UA:
+                        break;
+                    case ID.CMD_UB:
+                        break;
+                    case ID.CMD_V:
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("El usuario {0} no tiene permisos para realizar esta acción.",Thread.CurrentPrincipal.Identity.Name);
             }
         }
 

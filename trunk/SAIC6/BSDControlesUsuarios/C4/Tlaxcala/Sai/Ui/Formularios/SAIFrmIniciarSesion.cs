@@ -4,6 +4,8 @@ using BSD.C4.Tlaxcala.Sai.Dal;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
 using BSD.C4.Tlaxcala.Sai.Ui.Controles;
 using System.Windows.Forms;
+using System.Security.Principal;
+using System.Threading;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -27,6 +29,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     var usuario = ReglaUsuarios.AutenticarUsuario(saiTxtUsuario.Text.Trim(), saiTxtContraseña.Text.Trim());
                     if (usuario != null)
                     {
+                        //TODO: Clonar la entidad usuario y pasarla al siguiente nivel
+
+                        //Se genera una identidad y se aplica al hilo del aplicativo
+                        var miIdentidad = new GenericIdentity(saiTxtUsuario.Text);
+                        var miPrincipal = new GenericPrincipal(miIdentidad, new[] {"Usuario"});
+                        Thread.CurrentPrincipal = miPrincipal;
+
                         DialogResult = DialogResult.OK;
                         Close();
                     }
