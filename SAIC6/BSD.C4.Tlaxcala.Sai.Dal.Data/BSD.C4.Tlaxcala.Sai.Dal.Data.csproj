@@ -58,6 +58,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gateways\Auto\CodigoPostalGateway.Auto.cs" />
+    <Compile Include="Gateways\Auto\ColoniaGateway.Auto.cs" />
+    <Compile Include="Gateways\Auto\EstadoGateway.Auto.cs" />
+    <Compile Include="Gateways\Auto\LocalidadGateway.Auto.cs" />
+    <Compile Include="Gateways\Auto\MunicipioGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\PermisoUsuarioGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\PersonaExtraviadaGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\PropietarioVehiculoGateway.Auto.cs" />
@@ -66,6 +71,11 @@
     <Compile Include="Gateways\Auto\UsuarioCorporacionGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\VehiculoGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\VehiculoRobadoGateway.Auto.cs" />
+    <Compile Include="Gateways\CodigoPostalGateway.cs" />
+    <Compile Include="Gateways\ColoniaGateway.cs" />
+    <Compile Include="Gateways\EstadoGateway.cs" />
+    <Compile Include="Gateways\LocalidadGateway.cs" />
+    <Compile Include="Gateways\MunicipioGateway.cs" />
     <Compile Include="Gateways\PermisoUsuarioGateway.cs" />
     <Compile Include="Gateways\PersonaExtraviadaGateway.cs" />
     <Compile Include="Gateways\PropietarioVehiculoGateway.cs" />
@@ -75,6 +85,11 @@
     <Compile Include="Gateways\VehiculoGateway.cs" />
     <Compile Include="Gateways\VehiculoRobadoGateway.cs" />
     <Compile Include="LazyProviders\DefaultLazyProvider.cs" />
+    <Compile Include="Mappers\Auto\CodigoPostalMapper.Auto.cs" />
+    <Compile Include="Mappers\Auto\ColoniaMapper.Auto.cs" />
+    <Compile Include="Mappers\Auto\EstadoMapper.Auto.cs" />
+    <Compile Include="Mappers\Auto\LocalidadMapper.Auto.cs" />
+    <Compile Include="Mappers\Auto\MunicipioMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\PermisoUsuarioMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\PersonaExtraviadaMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\PropietarioVehiculoMapper.Auto.cs" />
@@ -84,17 +99,7 @@
     <Compile Include="Mappers\Auto\VehiculoMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\VehiculoRobadoMapper.Auto.cs" />
     <Compile Include="Mappers\CodigoPostalMapper.cs" />
-    <Compile Include="Mappers\Auto\CodigoPostalMapper.Auto.cs" />
-    <Compile Include="Gateways\CodigoPostalGateway.cs" />
-    <Compile Include="Gateways\Auto\CodigoPostalGateway.Auto.cs" />
-    <Compile Include="Mappers\CodigoPostalColoniaMapper.cs" />
-    <Compile Include="Mappers\Auto\CodigoPostalColoniaMapper.Auto.cs" />
-    <Compile Include="Gateways\CodigoPostalColoniaGateway.cs" />
-    <Compile Include="Gateways\Auto\CodigoPostalColoniaGateway.Auto.cs" />
     <Compile Include="Mappers\ColoniaMapper.cs" />
-    <Compile Include="Mappers\Auto\ColoniaMapper.Auto.cs" />
-    <Compile Include="Gateways\ColoniaGateway.cs" />
-    <Compile Include="Gateways\Auto\ColoniaGateway.Auto.cs" />
     <Compile Include="Mappers\CorporacionMapper.cs" />
     <Compile Include="Mappers\Auto\CorporacionMapper.Auto.cs" />
     <Compile Include="Gateways\CorporacionGateway.cs" />
@@ -116,9 +121,6 @@
     <Compile Include="Gateways\DetalleDespachoIncidenciaGateway.cs" />
     <Compile Include="Gateways\Auto\DetalleDespachoIncidenciaGateway.Auto.cs" />
     <Compile Include="Mappers\EstadoMapper.cs" />
-    <Compile Include="Mappers\Auto\EstadoMapper.Auto.cs" />
-    <Compile Include="Gateways\EstadoGateway.cs" />
-    <Compile Include="Gateways\Auto\EstadoGateway.Auto.cs" />
     <Compile Include="Mappers\EstatusIncidenciaMapper.cs" />
     <Compile Include="Mappers\Auto\EstatusIncidenciaMapper.Auto.cs" />
     <Compile Include="Gateways\EstatusIncidenciaGateway.cs" />
@@ -128,13 +130,7 @@
     <Compile Include="Gateways\IncidenciaGateway.cs" />
     <Compile Include="Gateways\Auto\IncidenciaGateway.Auto.cs" />
     <Compile Include="Mappers\LocalidadMapper.cs" />
-    <Compile Include="Mappers\Auto\LocalidadMapper.Auto.cs" />
-    <Compile Include="Gateways\LocalidadGateway.cs" />
-    <Compile Include="Gateways\Auto\LocalidadGateway.Auto.cs" />
     <Compile Include="Mappers\MunicipioMapper.cs" />
-    <Compile Include="Mappers\Auto\MunicipioMapper.Auto.cs" />
-    <Compile Include="Gateways\MunicipioGateway.cs" />
-    <Compile Include="Gateways\Auto\MunicipioGateway.Auto.cs" />
     <Compile Include="Mappers\PermisoMapper.cs" />
     <Compile Include="Mappers\Auto\PermisoMapper.Auto.cs" />
     <Compile Include="Gateways\PermisoGateway.cs" />
