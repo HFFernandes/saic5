@@ -24,6 +24,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 if (SAIProveedorValidacion.ValidarCamposRequeridos(this))
                 {
+                    SAIEtiquetaEstado.Text = "Autenticando al usuario...";
                     var usuario = ReglaUsuarios.AutenticarUsuario(saiTxtUsuario.Text.Trim(), saiTxtContraseña.Text.Trim());
                     if (usuario != null)
                     {
@@ -44,6 +45,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (SAIExcepcion)
             {
             }
+            finally
+            {
+                SAIEtiquetaEstado.Text = "Listo.";
+            }
         }
 
         private void cmdCancelar_Click(object sender, EventArgs e)
@@ -54,6 +59,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void ObtenerSistemas(SAITextBox sender)
         {
+            SAIEtiquetaEstado.Text = "Obteniendo sistemas...";
+
             saiCmbSistema.Items.Clear();
             if (sender.Text.Length >= 5)
             {
@@ -71,6 +78,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     saiCmbSistema.SelectedIndex = 0;
                 }
             }
+
+            SAIEtiquetaEstado.Text = "Listo.";
         }
 
         private void saiTxtUsuario_KeyUp(object sender, KeyEventArgs e)
