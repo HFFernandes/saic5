@@ -38,6 +38,9 @@
         public const int CMD_UB = 2900; //Dar de baja unidades (066)
         public const int CMD_V = 3000;  //Introducción de datos de vehiculo sospechoso (066)
 
+        //Definición de identificadores de pantalla
+        public const int PNT_IA = 1;    //Pantalla incidencias activas
+
         #region Teclas de función
 
         public const int FALT = 16;
