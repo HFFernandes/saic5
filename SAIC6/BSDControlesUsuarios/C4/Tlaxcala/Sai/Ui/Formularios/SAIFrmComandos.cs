@@ -4,10 +4,8 @@ using System.Windows.Forms;
 using Microsoft.NetEnterpriseServers;
 using XtremeCommandBars;
 using BSD.C4.Tlaxcala.Sai.Ui.Controles;
-using System.Security.Permissions;
 using System.Diagnostics;
 using System.Threading;
-using BSD.C4.Tlaxcala.Sai.Dal;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -24,8 +22,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         List<SAIWinSwitchItem> Elementos = new List<SAIWinSwitchItem>();
 
-        //private PrincipalPermission permisos;
-
         public SAIFrmComandos()
         {
             var iniciarSesion = new SAIFrmIniciarSesion();
@@ -34,8 +30,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             if (dialogResult == DialogResult.OK)
             {
                 InitializeComponent();
-                //permisos= new PrincipalPermission(BSD.C4.Tlaxcala.Sai.Aplicacion.UsuarioPersistencia.strNombreUsuario, null);
-
                 SAIBarraComandos.DeleteAll(); //Se limpia la barra de comandos por si existiera alguno
                 SAIBarraComandos.EnableCustomization(true);
 
@@ -64,12 +58,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 switch (e.control.Id)
                 {
                     case ID.CMD_A:
-                        //permisos = new PrincipalPermission("cbaez", null);
-                        //permisos.Demand();
-
-                        //Debug.WriteLine(string.Format("El usuario {0} puede hacer esto",Thread.CurrentPrincipal.Identity.Name));
                         var activas = new SAIFrmIncidenciasActivas();
-                        MostrarEnSegundoMonitorSiEsPosible(activas);
+                        if (Aplicacion.UsuarioPersistencia.blnPuedeLeer(activas.intSubModulo))
+                            MostrarEnSegundoMonitorSiEsPosible(activas);
                         break;
                     case ID.CMD_AU:
                         break;
@@ -138,9 +129,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         break;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                Debug.WriteLine(string.Format("El usuario {0} no tiene permisos para realizar esta acción.",Thread.CurrentPrincipal.Identity.Name));
+                Debug.WriteLine(string.Format("El usuario {0} no tiene permisos para realizar esta acción.", Thread.CurrentPrincipal.Identity.Name));
             }
         }
 
