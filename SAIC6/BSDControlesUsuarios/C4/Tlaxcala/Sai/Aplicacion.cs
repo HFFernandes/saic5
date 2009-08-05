@@ -21,7 +21,6 @@ namespace BSD.C4.Tlaxcala.Sai
         /// </summary>
         public static List<SAIWinSwitchItem> Elementos = new List<SAIWinSwitchItem>();
 
-        public static Usuario U
-
+        
     }
 }
