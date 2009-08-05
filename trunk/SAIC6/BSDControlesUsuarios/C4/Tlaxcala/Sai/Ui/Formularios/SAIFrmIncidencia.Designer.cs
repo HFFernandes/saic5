@@ -65,7 +65,7 @@
             // lblFechaHora
             // 
             this.lblFechaHora.AutoSize = true;
-            this.lblFechaHora.Location = new System.Drawing.Point(78, 14);
+            this.lblFechaHora.Location = new System.Drawing.Point(78, 15);
             this.lblFechaHora.Name = "lblFechaHora";
             this.lblFechaHora.Size = new System.Drawing.Size(0, 13);
             this.lblFechaHora.TabIndex = 2;
@@ -95,7 +95,7 @@
             // lblOperador
             // 
             this.lblOperador.AutoSize = true;
-            this.lblOperador.Location = new System.Drawing.Point(361, 16);
+            this.lblOperador.Location = new System.Drawing.Point(361, 15);
             this.lblOperador.Name = "lblOperador";
             this.lblOperador.Size = new System.Drawing.Size(0, 13);
             this.lblOperador.TabIndex = 4;
@@ -117,6 +117,7 @@
             this.txtTelefono.Size = new System.Drawing.Size(203, 20);
             this.txtTelefono.StrMensajeCampoRequerido = "El campo es requerido.";
             this.txtTelefono.TabIndex = 6;
+            this.txtTelefono.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtTelefono_KeyUp);
             // 
             // label4
             // 
@@ -144,6 +145,7 @@
             this.txtDireccion.Size = new System.Drawing.Size(517, 20);
             this.txtDireccion.StrMensajeCampoRequerido = "El campo es requerido.";
             this.txtDireccion.TabIndex = 10;
+            this.txtDireccion.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDireccion_KeyUp);
             // 
             // label6
             // 
@@ -199,6 +201,7 @@
             this.txtDescripcion.Size = new System.Drawing.Size(488, 90);
             this.txtDescripcion.StrMensajeCampoRequerido = "El campo es requerido.";
             this.txtDescripcion.TabIndex = 20;
+            this.txtDescripcion.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDescripcion_KeyUp);
             // 
             // cmbTipoIncidencia
             // 
@@ -212,6 +215,7 @@
             this.cmbTipoIncidencia.Size = new System.Drawing.Size(205, 21);
             this.cmbTipoIncidencia.StrMensajeCampoRequerido = "El campo es requerido.";
             this.cmbTipoIncidencia.TabIndex = 8;
+            this.cmbTipoIncidencia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbTipoIncidencia_KeyUp);
             // 
             // cmbLocalidad
             // 
@@ -226,6 +230,7 @@
             this.cmbLocalidad.TabIndex = 14;
             this.cmbLocalidad.SelectedIndexChanged += new System.EventHandler(this.cmbLocalidad_SelectedIndexChanged);
             this.cmbLocalidad.Leave += new System.EventHandler(this.cmbLocalidad_Leave);
+            this.cmbLocalidad.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbLocalidad_KeyUp);
             // 
             // cmbMunicipio
             // 
@@ -240,6 +245,7 @@
             this.cmbMunicipio.TabIndex = 12;
             this.cmbMunicipio.SelectedIndexChanged += new System.EventHandler(this.cmbMunicipio_SelectedIndexChanged);
             this.cmbMunicipio.Leave += new System.EventHandler(this.cmbMunicipio_Leave);
+            this.cmbMunicipio.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbMunicipio_KeyUp);
             // 
             // cmbCP
             // 
@@ -252,6 +258,7 @@
             this.cmbCP.Size = new System.Drawing.Size(205, 21);
             this.cmbCP.StrMensajeCampoRequerido = "El campo es requerido.";
             this.cmbCP.TabIndex = 16;
+            this.cmbCP.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbCP_KeyUp);
             // 
             // cmbColonia
             // 
@@ -265,6 +272,7 @@
             this.cmbColonia.StrMensajeCampoRequerido = "El campo es requerido.";
             this.cmbColonia.TabIndex = 18;
             this.cmbColonia.Leave += new System.EventHandler(this.cmbColonia_Leave);
+            this.cmbColonia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbColonia_KeyUp);
             // 
             // SAIFrmIncidencia
             // 
@@ -289,7 +297,10 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtTelefono);
             this.Controls.Add(this.label3);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "SAIFrmIncidencia";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "SAIFrmIncidencia";
             this.Load += new System.EventHandler(this.SAIFrmIncidencia_Load);
             this.Controls.SetChildIndex(this.label3, 0);

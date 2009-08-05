@@ -45,10 +45,7 @@ namespace BSD.C4.Tlaxcala.Sai.Dal.Rules.LazyProviders
                         
                         DefaultLazyProvider._mappersCache.Add("BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects.CodigoPostalObject", BSD.C4.Tlaxcala.Sai.Dal.Rules.Gateways.CodigoPostalGateway.Instance());
                     
-                        DefaultLazyProvider._mappersCache.Add("BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.CodigoPostalColonia", BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers.CodigoPostalColoniaMapper.Instance());
-                        
-                        DefaultLazyProvider._mappersCache.Add("BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects.CodigoPostalColoniaObject", BSD.C4.Tlaxcala.Sai.Dal.Rules.Gateways.CodigoPostalColoniaGateway.Instance());
-                    
+                   
                         DefaultLazyProvider._mappersCache.Add("BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Colonia", BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers.ColoniaMapper.Instance());
                         
                         DefaultLazyProvider._mappersCache.Add("BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects.ColoniaObject", BSD.C4.Tlaxcala.Sai.Dal.Rules.Gateways.ColoniaGateway.Instance());
