@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using BSD.C4.Tlaxcala.Sai.Ui.Controles;
-using System.Threading;
+using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 
 namespace BSD.C4.Tlaxcala.Sai
 {
@@ -23,29 +23,39 @@ namespace BSD.C4.Tlaxcala.Sai
             public static int intClaveUsuario { get; set; }
             public static string strNombreUsuario { get; set; }
             public static string[] strSistemas { get; set; }
-            public static bool blnPuedeLeer
+            public static bool? blnEsDespachador { get; set; }
+
+            public static bool blnPuedeLeer(int intSubModulo)
             {
-                get
+                var permisoObjectList = PermisoMapper.Instance().GetBySQLQuery(string.Format(SQL_OBTENERPERMISOS, intClaveUsuario, intSubModulo));
+                foreach (var o in permisoObjectList)
                 {
-                    return Thread.CurrentPrincipal.IsInRole("Lectura");
+                    if (o.Valor == 2)
+                        return true;
                 }
+
+                return false;
             }
 
-            public static bool blnPuedeEscribir
+            public static bool blnPuedeEscribir(int intSubModulo)
             {
-                get
+                var permisoObjectList = PermisoMapper.Instance().GetBySQLQuery(string.Format(SQL_OBTENERPERMISOS, intClaveUsuario, intSubModulo));
+                foreach (var o in permisoObjectList)
                 {
-                    return Thread.CurrentPrincipal.IsInRole("Escritura");
+                    if (o.Valor == 6)
+                        return true;
                 }
+
+                return false;
             }
 
-            public static bool blnPuedeLeeryEscribir
+            public static bool blnPuedeLeeryEscribir(int intSubModulo)
             {
-                get
-                {
-                    return blnPuedeLeer && blnPuedeEscribir;
-                }
+                return blnPuedeLeer(intSubModulo) && blnPuedeEscribir(intSubModulo);
             }
+
+            private const string SQL_OBTENERPERMISOS =
+                "SELECT Permiso.* FROM PermisoUsuario INNER JOIN Permiso ON PermisoUsuario.ClavePermiso = Permiso.Clave WHERE (PermisoUsuario.ClaveUsuario = {0}) AND (PermisoUsuario.ClaveSubmodulo = {1})";
         }
     }
 }

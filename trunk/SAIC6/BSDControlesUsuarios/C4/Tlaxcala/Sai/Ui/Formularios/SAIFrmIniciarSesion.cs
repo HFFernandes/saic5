@@ -4,8 +4,6 @@ using BSD.C4.Tlaxcala.Sai.Dal;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
 using BSD.C4.Tlaxcala.Sai.Ui.Controles;
 using System.Windows.Forms;
-using System.Security.Principal;
-using System.Threading;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -29,15 +27,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     var usuario = ReglaUsuarios.AutenticarUsuario(saiTxtUsuario.Text.Trim(), saiTxtContraseña.Text.Trim());
                     if (usuario != null)
                     {
-                        //TODO: Clonar la entidad usuario y pasarla al siguiente nivel
-                        BSD.C4.Tlaxcala.Sai.Aplicacion.UsuarioPersistencia.intClaveUsuario = usuario.Clave;
-                        BSD.C4.Tlaxcala.Sai.Aplicacion.UsuarioPersistencia.strNombreUsuario = usuario.NombreUsuario;
+                        Aplicacion.UsuarioPersistencia.intClaveUsuario = usuario.Clave;
+                        Aplicacion.UsuarioPersistencia.strNombreUsuario = usuario.NombreUsuario;
+                        Aplicacion.UsuarioPersistencia.blnEsDespachador = usuario.Despachador ?? false; //si es nulo asignamos falso
 
                         //Se genera una identidad y se aplica al hilo del aplicativo
-                        var miIdentidad = new GenericIdentity(BSD.C4.Tlaxcala.Sai.Aplicacion.UsuarioPersistencia.strNombreUsuario);
-                        //var miPrincipal = new GenericPrincipal(miIdentidad, new[] {"Usuario"});
-                        var miPrincipal = new GenericPrincipal(miIdentidad, new[]{"Lectura","Escritura"});
-                        Thread.CurrentPrincipal = miPrincipal;
+                        //var miIdentidad = new GenericIdentity(Aplicacion.UsuarioPersistencia.strNombreUsuario);
+                        //var miPrincipal = new GenericPrincipal(miIdentidad, new[]{"Lectura","Escritura"});
+                        //Thread.CurrentPrincipal = miPrincipal;
 
                         DialogResult = DialogResult.OK;
                         Close();
@@ -72,7 +69,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     {
                         saiCmbSistema.Items.Add(s);
                     }
-                    BSD.C4.Tlaxcala.Sai.Aplicacion.UsuarioPersistencia.strSistemas = sistemas.ToArray();
+                    Aplicacion.UsuarioPersistencia.strSistemas = sistemas.ToArray();
 
                     saiCmbSistema.Enabled = true;
                     saiCmbSistema.SelectedIndex = 0;
