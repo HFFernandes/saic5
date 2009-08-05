@@ -23,6 +23,7 @@ namespace BSD.C4.Tlaxcala.Sai
             public static int intClaveUsuario { get; set; }
             public static string strNombreUsuario { get; set; }
             public static string[] strSistemas { get; set; }
+            public static string strSistemaActual { get; set; }
             public static bool? blnEsDespachador { get; set; }
 
             public static bool blnPuedeLeer(int intSubModulo)

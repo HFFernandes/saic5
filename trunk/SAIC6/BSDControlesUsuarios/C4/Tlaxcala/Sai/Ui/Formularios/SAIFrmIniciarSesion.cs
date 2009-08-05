@@ -30,11 +30,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         Aplicacion.UsuarioPersistencia.intClaveUsuario = usuario.Clave;
                         Aplicacion.UsuarioPersistencia.strNombreUsuario = usuario.NombreUsuario;
                         Aplicacion.UsuarioPersistencia.blnEsDespachador = usuario.Despachador ?? false; //si es nulo asignamos falso
-
-                        //Se genera una identidad y se aplica al hilo del aplicativo
-                        //var miIdentidad = new GenericIdentity(Aplicacion.UsuarioPersistencia.strNombreUsuario);
-                        //var miPrincipal = new GenericPrincipal(miIdentidad, new[]{"Lectura","Escritura"});
-                        //Thread.CurrentPrincipal = miPrincipal;
+                        Aplicacion.UsuarioPersistencia.strSistemaActual = saiCmbSistema.SelectedItem.ToString();
 
                         DialogResult = DialogResult.OK;
                         Close();

@@ -21,6 +21,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void SAIFrmIncidenciasPendientes_Load(object sender, EventArgs e)
         {
+            saiReport1.btnLigarIncidencias.Enabled = Aplicacion.UsuarioPersistencia.blnPuedeEscribir(intSubModulo);
+
             saiReport1.AgregarColumna(0, "Número de Incidente", 200, true);
             saiReport1.AgregarColumna(1, "Hora de Incidente", 200, true);
             saiReport1.AgregarColumna(2, "Corporación", 300, true);
