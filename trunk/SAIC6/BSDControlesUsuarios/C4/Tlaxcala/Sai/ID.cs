@@ -39,7 +39,8 @@
         public const int CMD_V = 3000;  //Introducción de datos de vehiculo sospechoso (066)
 
         //Definición de identificadores de pantalla
-        public const int PNT_IA = 1;    //Pantalla incidencias activas
+        public const int PNT_IA = 13;    //Pantalla incidencias activas
+        public const int PNT_IP = 14;   //Pantalla de incidencias pendientes
 
         #region Teclas de función
 

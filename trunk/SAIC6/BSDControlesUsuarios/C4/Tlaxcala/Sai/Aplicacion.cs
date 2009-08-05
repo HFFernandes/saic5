@@ -42,7 +42,7 @@ namespace BSD.C4.Tlaxcala.Sai
                 var permisoObjectList = PermisoMapper.Instance().GetBySQLQuery(string.Format(SQL_OBTENERPERMISOS, intClaveUsuario, intSubModulo));
                 foreach (var o in permisoObjectList)
                 {
-                    if (o.Valor == 6)
+                    if (o.Valor == 4)
                         return true;
                 }
 
@@ -52,6 +52,11 @@ namespace BSD.C4.Tlaxcala.Sai
             public static bool blnPuedeLeeryEscribir(int intSubModulo)
             {
                 return blnPuedeLeer(intSubModulo) && blnPuedeEscribir(intSubModulo);
+            }
+
+            public static bool blnPuedeLeeroEscribir(int intSubModulo)
+            {
+                return blnPuedeLeer(intSubModulo) || blnPuedeEscribir(intSubModulo);
             }
 
             private const string SQL_OBTENERPERMISOS =
