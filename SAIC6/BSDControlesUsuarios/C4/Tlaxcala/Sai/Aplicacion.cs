@@ -5,10 +5,8 @@ using BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using BSD.C4.Tlaxcala.Sai.Ui.Controles;
 
-
 namespace BSD.C4.Tlaxcala.Sai
 {
-
     /// <summary>
     /// Clase que maneja los objetos globales a nivel de la aplicación
     /// </summary>
@@ -21,6 +19,11 @@ namespace BSD.C4.Tlaxcala.Sai
         /// </summary>
         public static List<SAIWinSwitchItem> Elementos = new List<SAIWinSwitchItem>();
 
-        
+        public static class UsuarioPersistencia
+        {
+            public static int intClaveUsuario { get; set; }
+            public static string strNombreUsuario { get; set; }
+            public static string[] strSistemas { get; set; }
+        }
     }
 }
