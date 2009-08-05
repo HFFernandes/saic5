@@ -21,7 +21,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         public SAIReport()
         {
             InitializeComponent();
-            
+
             SAIInstancia = this;
         }
 
@@ -35,6 +35,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         public void AgregarColumna(int intIndice, string strCaption, int intTamaño, bool blnCambiaTamaño)
         {
             reportControl.Columns.Add(intIndice, strCaption, intTamaño, blnCambiaTamaño);
+        }
+
+        /// <summary>
+        /// Método para limpiar el control
+        /// </summary>
+        public void LimpiarListado()
+        {
+            reportControl.Records.DeleteAll();
         }
 
         /// <summary>

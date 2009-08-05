@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Text;
+using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
+using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -15,11 +18,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
+        private List<int> lstIncidenciasRegistradas;
+
         public SAIFrmIncidenciasActivas()
         {
             InitializeComponent();
+
             Width = Screen.GetWorkingArea(this).Width;
             saiReport1.btnLigarIncidencias.Click += btnLigarIncidencias_Click;
+            lstIncidenciasRegistradas = new List<int>();
         }
 
         void btnLigarIncidencias_Click(object sender, EventArgs e)
@@ -41,6 +48,23 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void tmrRegistros_Tick(object sender, EventArgs e)
         {
+            //saiReport1.LimpiarListado();
+
+            IncidenciaList incidenciaList = IncidenciaMapper.Instance().GetByEstatusIncidencia(1);
+            foreach (var incidencia in incidenciaList)
+            {
+                //falta revisar estado...switch(estatus)1->agregar2->eliminar (ejemplo)
+                if (!lstIncidenciasRegistradas.Contains(incidencia.Folio))
+                {
+                    lstIncidenciasRegistradas.Add(incidencia.Folio);
+                    saiReport1.AgregarRegistro(incidencia.Telefono,
+                        incidencia.ClaveEstatus.ToString(),
+                        incidencia.HoraRecepcion.ToString(),
+                        incidencia.Direccion,
+                        incidencia.ClaveTipo.ToString(), "",
+                        incidencia.Folio.ToString());
+                }
+            }
         }
     }
 }
