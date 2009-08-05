@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Windows.Forms;
+using System.Text;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -22,7 +24,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void btnLigarIncidencias_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Ligar incidencias activas");
         }
 
         void SAIFrmIncidenciasActivas_Load(object sender, EventArgs e)
@@ -36,6 +37,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             saiReport1.AgregarColumna(4, "Tipo de Incidencia", 200, true);
             saiReport1.AgregarColumna(5, "Dividido En", 200, true);
             saiReport1.AgregarColumna(6, "Folio", 200, true);
+        }
+
+        private void tmrRegistros_Tick(object sender, EventArgs e)
+        {
         }
     }
 }
