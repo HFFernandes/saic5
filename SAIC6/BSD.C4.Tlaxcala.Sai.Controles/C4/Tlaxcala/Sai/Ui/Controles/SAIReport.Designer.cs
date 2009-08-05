@@ -34,6 +34,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             this.reportControl = new AxXtremeReportControl.AxReportControl();
             this.barraHerramientas = new System.Windows.Forms.ToolStrip();
             this.btnCampos = new System.Windows.Forms.ToolStripButton();
+            this.btnLigarIncidencias = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.lblFiltroRegistros = new System.Windows.Forms.ToolStripLabel();
             this.txtFiltroRegistros = new System.Windows.Forms.ToolStripTextBox();
@@ -56,6 +57,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             // 
             this.barraHerramientas.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnCampos,
+            this.btnLigarIncidencias,
             this.toolStripSeparator1,
             this.lblFiltroRegistros,
             this.txtFiltroRegistros});
@@ -68,12 +70,21 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             // btnCampos
             // 
             this.btnCampos.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnCampos.Image = (Image)resources.GetObject("Folder Options");
+            this.btnCampos.Image = ((System.Drawing.Image)(resources.GetObject("btnCampos.Image")));
             this.btnCampos.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnCampos.Name = "btnCampos";
             this.btnCampos.Size = new System.Drawing.Size(23, 22);
-            this.btnCampos.Text = "Ocultar o Mostrar Campos";
+            this.btnCampos.ToolTipText = "Mostrar u ocultar campos";
             this.btnCampos.Click += new System.EventHandler(this.btnCampos_Click);
+            // 
+            // btnLigarIncidencias
+            // 
+            this.btnLigarIncidencias.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLigarIncidencias.Image = ((System.Drawing.Image)(resources.GetObject("btnLigarIncidencias.Image")));
+            this.btnLigarIncidencias.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLigarIncidencias.Name = "btnLigarIncidencias";
+            this.btnLigarIncidencias.Size = new System.Drawing.Size(23, 22);
+            this.btnLigarIncidencias.ToolTipText = "Ligar incidencias";
             // 
             // toolStripSeparator1
             // 
@@ -128,6 +139,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         private System.Windows.Forms.ToolStripLabel lblFiltroRegistros;
         private System.Windows.Forms.ToolStripTextBox txtFiltroRegistros;
         public System.Windows.Forms.ToolStripButton btnCampos;
+        public System.Windows.Forms.ToolStripButton btnLigarIncidencias;
 
     }
 }

@@ -52,7 +52,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 switch (e.control.Id)
                 {
                     case ID.CMD_A:
-                        if (Aplicacion.UsuarioPersistencia.blnPuedeLeer(SAIFrmIncidenciasActivas.intSubModulo))
+                        if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(SAIFrmIncidenciasActivas.intSubModulo))
                         {
                             var activas = new SAIFrmIncidenciasActivas();
                             MostrarEnSegundoMonitorSiEsPosible(activas);
@@ -92,7 +92,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         frmIncidencia.Show(this);
                         break;
                     case ID.CMD_P:
-                        if (Aplicacion.UsuarioPersistencia.blnPuedeLeer(SAIFrmIncidenciasPendientes.intSubModulo))
+                        if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(SAIFrmIncidenciasPendientes.intSubModulo))
                         {
                             var pendientes = new SAIFrmIncidenciasPendientes();
                             MostrarEnSegundoMonitorSiEsPosible(pendientes);
