@@ -7,6 +7,7 @@ using BSD.C4.Tlaxcala.Sai.Ui.Controles;
 using System.Security.Permissions;
 using System.Diagnostics;
 using System.Threading;
+using BSD.C4.Tlaxcala.Sai.Dal;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -23,6 +24,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         List<SAIWinSwitchItem> Elementos = new List<SAIWinSwitchItem>();
 
+        private PrincipalPermission permisos;
+
         public SAIFrmComandos()
         {
             var iniciarSesion = new SAIFrmIniciarSesion();
@@ -31,6 +34,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             if (dialogResult == DialogResult.OK)
             {
                 InitializeComponent();
+                permisos= new PrincipalPermission(UsuarioPersistencia.strNombreUsuario, null);
 
                 SAIBarraComandos.DeleteAll(); //Se limpia la barra de comandos por si existiera alguno
                 SAIBarraComandos.EnableCustomization(true);
@@ -53,8 +57,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void SAIBarraComandos_Execute(object sender, AxXtremeCommandBars._DCommandBarsEvents_ExecuteEvent e)
         {
-            PrincipalPermission permisos;
-
             try
             {
                 //Switch a partir del identificador del control en el cual
@@ -62,10 +64,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 switch (e.control.Id)
                 {
                     case ID.CMD_A:
-                        permisos=new PrincipalPermission("cbaez",null);
-                        permisos.Demand();
+                        //permisos = new PrincipalPermission("cbaez", null);
+                        //permisos.Demand();
 
-                        Debug.WriteLine(string.Format("El usuario {0} puede hacer esto",Thread.CurrentPrincipal.Identity.Name));
+                        //Debug.WriteLine(string.Format("El usuario {0} puede hacer esto",Thread.CurrentPrincipal.Identity.Name));
                         var activas = new SAIFrmIncidenciasActivas();
                         MostrarEnSegundoMonitorSiEsPosible(activas);
                         break;
