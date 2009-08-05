@@ -5,7 +5,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
     public partial class SAIFrmIncidenciasActivas : SAIFrmBase
     {
-        private int intSubModulo
+        public int intSubModulo
         {
             get
             {
@@ -21,6 +21,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void SAIFrmIncidenciasActivas_Load(object sender, EventArgs e)
         {
+            saiReport1.Enabled = Aplicacion.UsuarioPersistencia.blnPuedeEscribir(intSubModulo);
         }
     }
 }
