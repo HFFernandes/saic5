@@ -30,10 +30,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     if (usuario != null)
                     {
                         //TODO: Clonar la entidad usuario y pasarla al siguiente nivel
+                        UsuarioPersistencia.intClaveUsuario = usuario.Clave;
+                        UsuarioPersistencia.strNombreUsuario = usuario.NombreUsuario;
 
                         //Se genera una identidad y se aplica al hilo del aplicativo
-                        var miIdentidad = new GenericIdentity(saiTxtUsuario.Text);
-                        var miPrincipal = new GenericPrincipal(miIdentidad, new[] {"Usuario"});
+                        var miIdentidad = new GenericIdentity(UsuarioPersistencia.strNombreUsuario);
+                        //var miPrincipal = new GenericPrincipal(miIdentidad, new[] {"Usuario"});
+                        var miPrincipal = new GenericPrincipal(miIdentidad, null);
                         Thread.CurrentPrincipal = miPrincipal;
 
                         DialogResult = DialogResult.OK;
@@ -69,6 +72,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     {
                         saiCmbSistema.Items.Add(s);
                     }
+                    UsuarioPersistencia.strSistemas = sistemas.ToArray();
 
                     saiCmbSistema.Enabled = true;
                     saiCmbSistema.SelectedIndex = 0;
