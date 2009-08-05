@@ -5,7 +5,7 @@ using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 namespace BSD.C4.Tlaxcala.Sai.Dal
 {
     /// <summary>
-    /// Clase donde persiste los permisos y configuraciones de un usuario especifico
+    /// Clase que maneja las reglas de negocio para la entidad de usuarios
     /// </summary>
     public static class ReglaUsuarios
     {

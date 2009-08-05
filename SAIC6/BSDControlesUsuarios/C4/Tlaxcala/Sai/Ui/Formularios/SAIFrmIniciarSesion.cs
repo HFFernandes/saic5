@@ -36,7 +36,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         //Se genera una identidad y se aplica al hilo del aplicativo
                         var miIdentidad = new GenericIdentity(BSD.C4.Tlaxcala.Sai.Aplicacion.UsuarioPersistencia.strNombreUsuario);
                         //var miPrincipal = new GenericPrincipal(miIdentidad, new[] {"Usuario"});
-                        var miPrincipal = new GenericPrincipal(miIdentidad, new[]{"Escritura"});
+                        var miPrincipal = new GenericPrincipal(miIdentidad, new[]{"Lectura","Escritura"});
                         Thread.CurrentPrincipal = miPrincipal;
 
                         DialogResult = DialogResult.OK;
