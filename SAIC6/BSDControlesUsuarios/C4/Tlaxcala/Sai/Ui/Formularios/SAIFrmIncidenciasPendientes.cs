@@ -5,10 +5,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
     public partial class SAIFrmIncidenciasPendientes : SAIFrmBase
     {
+        public static int intSubModulo
+        {
+            get
+            {
+                return ID.PNT_IP;
+            }
+        }
+
         public SAIFrmIncidenciasPendientes()
         {
             InitializeComponent();
-
             Width = Screen.GetWorkingArea(this).Width;
         }
 

@@ -16,7 +16,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         private bool bCtrPresionado;
 
-       
         public SAIFrmComandos()
         {
             var iniciarSesion = new SAIFrmIniciarSesion();
@@ -53,9 +52,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 switch (e.control.Id)
                 {
                     case ID.CMD_A:
-                        var activas = new SAIFrmIncidenciasActivas();
-                        if (Aplicacion.UsuarioPersistencia.blnPuedeLeer(activas.intSubModulo))
+                        if (Aplicacion.UsuarioPersistencia.blnPuedeLeer(SAIFrmIncidenciasActivas.intSubModulo))
+                        {
+                            var activas = new SAIFrmIncidenciasActivas();
                             MostrarEnSegundoMonitorSiEsPosible(activas);
+                        }
                         break;
                     case ID.CMD_AU:
                         break;
@@ -91,8 +92,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         frmIncidencia.Show(this);
                         break;
                     case ID.CMD_P:
-                        var pendientes = new SAIFrmIncidenciasPendientes();
-                        MostrarEnSegundoMonitorSiEsPosible(pendientes);
+                        if (Aplicacion.UsuarioPersistencia.blnPuedeLeer(SAIFrmIncidenciasPendientes.intSubModulo))
+                        {
+                            var pendientes = new SAIFrmIncidenciasPendientes();
+                            MostrarEnSegundoMonitorSiEsPosible(pendientes);
+                        }
                         break;
                     case ID.CMD_PH:
                         break;
