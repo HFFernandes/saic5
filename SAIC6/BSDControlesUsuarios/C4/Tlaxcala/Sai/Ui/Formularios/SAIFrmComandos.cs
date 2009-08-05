@@ -24,7 +24,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         List<SAIWinSwitchItem> Elementos = new List<SAIWinSwitchItem>();
 
-        private PrincipalPermission permisos;
+        //private PrincipalPermission permisos;
 
         public SAIFrmComandos()
         {
@@ -34,7 +34,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             if (dialogResult == DialogResult.OK)
             {
                 InitializeComponent();
-                permisos= new PrincipalPermission(UsuarioPersistencia.strNombreUsuario, null);
+                //permisos= new PrincipalPermission(BSD.C4.Tlaxcala.Sai.Aplicacion.UsuarioPersistencia.strNombreUsuario, null);
 
                 SAIBarraComandos.DeleteAll(); //Se limpia la barra de comandos por si existiera alguno
                 SAIBarraComandos.EnableCustomization(true);
@@ -138,9 +138,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         break;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Debug.WriteLine("El usuario {0} no tiene permisos para realizar esta acción.",Thread.CurrentPrincipal.Identity.Name);
+                Debug.WriteLine(string.Format("El usuario {0} no tiene permisos para realizar esta acción.",Thread.CurrentPrincipal.Identity.Name));
             }
         }
 
