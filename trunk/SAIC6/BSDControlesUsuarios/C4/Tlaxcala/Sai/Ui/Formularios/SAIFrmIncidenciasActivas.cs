@@ -5,7 +5,7 @@ using System.Security.Principal;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
-    [PrincipalPermissionAttribute(SecurityAction.Demand,Name = "jbaez")]
+    [PrincipalPermissionAttribute(SecurityAction.Demand,Role = "Lectura")]
     public partial class SAIFrmIncidenciasActivas : SAIFrmBase
     {
         public SAIFrmIncidenciasActivas()

@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="C4\Entrada.cs" />
+    <Compile Include="C4\Tlaxcala\Sai\Aplicacion.cs" />
     <Compile Include="C4\Tlaxcala\Sai\Comando.cs" />
     <Compile Include="C4\Tlaxcala\Sai\ComandosColeccion.cs" />
     <Compile Include="C4\Tlaxcala\Sai\Dal\ReglaUsuarios.cs" />

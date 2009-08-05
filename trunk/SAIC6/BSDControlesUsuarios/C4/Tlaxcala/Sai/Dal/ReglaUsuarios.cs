@@ -41,15 +41,8 @@ namespace BSD.C4.Tlaxcala.Sai.Dal
 
         //Definición de constantes para consultas definidas por el desarrollador
         private const string SQL_OBTENERUSUARIO = "SELECT * FROM [Usuario] WHERE (NombreUsuario='{0}')";
-        private const string SQL_OBTENERSISTEMAS = "SELECT Sistema.* FROM PermisoUsuario INNER JOIN Submodulo ON PermisoUsuario.ClaveSubmodulo = Submodulo.Clave INNER JOIN Sistema ON Submodulo.ClaveSistema = Sistema.Clave INNER JOIN Usuario ON PermisoUsuario.ClaveUsuario = Usuario.Clave WHERE Usuario.Clave = {0}";
+        private const string SQL_OBTENERSISTEMAS = "SELECT DISTINCT Sistema.* FROM PermisoUsuario INNER JOIN Submodulo ON PermisoUsuario.ClaveSubmodulo = Submodulo.Clave INNER JOIN Sistema ON Submodulo.ClaveSistema = Sistema.Clave INNER JOIN Usuario ON PermisoUsuario.ClaveUsuario = Usuario.Clave WHERE Usuario.Clave = {0}";
         private const string SQL_AUTENTICARUSUARIO =
             "SELECT * FROM [Usuario] WHERE (NombreUsuario='{0}' AND Contraseña='{1}')";
-    }
-
-    public static class UsuarioPersistencia
-    {
-        public static int intClaveUsuario{ get; set; }
-        public static string strNombreUsuario { get; set; }
-        public static string[] strSistemas { get; set; }
     }
 }
