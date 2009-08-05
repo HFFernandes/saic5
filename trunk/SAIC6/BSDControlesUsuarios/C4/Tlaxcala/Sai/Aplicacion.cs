@@ -13,7 +13,7 @@ namespace BSD.C4.Tlaxcala.Sai
         /// Lista de elementos que tienen la referencia hacia los formularios que se van abriendo
         /// <remarks>Cada ventana Incidencia que se levente tiene que incluirse en esta lista</remarks>
         /// </summary>
-        public static List<SAIWinSwitchItem> Elementos = new List<SAIWinSwitchItem>();
+        public static List<SAIWinSwitchItem> VentanasIncidencias = new List<SAIWinSwitchItem>();
 
         /// <summary>
         /// Clase donde persisten los permisos y configuraciones de un usuario especifico
