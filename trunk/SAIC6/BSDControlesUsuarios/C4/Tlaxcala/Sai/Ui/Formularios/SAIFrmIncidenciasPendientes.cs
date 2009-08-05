@@ -17,7 +17,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             InitializeComponent();
             Width = Screen.GetWorkingArea(this).Width;
-            saiReport1.btnLigarIncidencias.Click += new EventHandler(btnLigarIncidencias_Click);
+            saiReport1.btnLigarIncidencias.Click += btnLigarIncidencias_Click;
         }
 
         void btnLigarIncidencias_Click(object sender, EventArgs e)
