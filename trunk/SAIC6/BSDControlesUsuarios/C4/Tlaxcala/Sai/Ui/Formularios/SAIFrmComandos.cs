@@ -16,12 +16,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         private bool bCtrPresionado;
 
-        /// <summary>
-        /// Lista de elementos que tienen la referencia hacia los formularios que se van abriendo
-        /// <remarks>Cada ventana Incidencia que se levente tiene que incluirse en esta lista</remarks>
-        /// </summary>
-        List<SAIWinSwitchItem> Elementos = new List<SAIWinSwitchItem>();
-
+       
         public SAIFrmComandos()
         {
             var iniciarSesion = new SAIFrmIniciarSesion();
@@ -92,7 +87,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         break;
                     case ID.CMD_NI:
                         SAIFrmIncidencia frmIncidencia = new SAIFrmIncidencia();
-                        Elementos.Add(new SAIWinSwitchItem("0000" + Elementos.Count, "Ventana No.", frmIncidencia));
+                        Aplicacion.VentanasIncidencias.Add(new SAIWinSwitchItem("Nueva " + Aplicacion.VentanasIncidencias.Count, "Sin descripcion", frmIncidencia));
                         frmIncidencia.Show(this);
                         break;
                     case ID.CMD_P:
@@ -288,9 +283,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         public void MuestraSwitch()
         {
-            if (Elementos.Count > 0)
+            if (Aplicacion.VentanasIncidencias.Count > 0)
             {
-                var objVentana = new SAIFrmVentana(Elementos, this);
+                var objVentana = new SAIFrmVentana(Aplicacion.VentanasIncidencias, this);
                 objVentana.Left = 200;
                 objVentana.Top = 200;
                 objVentana.Show(this);
