@@ -574,7 +574,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
-
+        protected override void OnClosing(CancelEventArgs e)
+        {
+                        
+            if (!base.SAIProveedorValidacion.ValidarCamposRequeridos(this))
+            {
+                e.Cancel = true;
+            }
+        }
 
 
        

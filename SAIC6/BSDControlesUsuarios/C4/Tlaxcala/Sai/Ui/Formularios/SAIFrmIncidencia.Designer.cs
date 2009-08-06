@@ -297,7 +297,6 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtTelefono);
             this.Controls.Add(this.label3);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "SAIFrmIncidencia";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
