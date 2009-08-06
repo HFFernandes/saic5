@@ -138,9 +138,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             this.BackColor = this._crlBackColor;
         }
 
-        protected override void NotifyInvalidate(Rectangle invalidatedArea)
+        protected override void OnTextChanged(EventArgs e)
         {
-            //Verificar si el campo está marcado como requerido
             if (BlnEsRequerido && this.SelectedIndex < 0)
                 BlnFueValido = false;
             else
@@ -149,7 +148,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             if (BlnEsRequerido)
                 Validador.SetError(this, StrMensajeCampoRequerido);
 
-            base.NotifyInvalidate(invalidatedArea);
+            base.OnTextChanged(e);
         }
         #endregion
 
