@@ -72,6 +72,12 @@
     <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAIDataGridView.Designer.cs">
       <DependentUpon>SAIDataGridView.cs</DependentUpon>
     </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAIDatePicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAIDatePicker.Designer.cs">
+      <DependentUpon>SAIDatePicker.cs</DependentUpon>
+    </Compile>
     <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAILogoControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -108,6 +114,12 @@
     <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAITextBoxMascara.Designer.cs">
       <DependentUpon>SAITextBoxMascara.cs</DependentUpon>
     </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAITimePicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAITimePicker.Designer.cs">
+      <DependentUpon>SAITimePicker.cs</DependentUpon>
+    </Compile>
     <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAIWinSwitchLabel.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -136,6 +148,10 @@
       <DependentUpon>SAIDataGridView.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Controles\SAIDatePicker.resx">
+      <DependentUpon>SAIDatePicker.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Controles\SAILogoControl.resx">
       <DependentUpon>SAILogoControl.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -154,6 +170,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Controles\SAITextBoxMascara.resx">
       <DependentUpon>SAITextBoxMascara.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Controles\SAITimePicker.resx">
+      <DependentUpon>SAITimePicker.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Controles\SAIWinSwitchLabel.resx">
