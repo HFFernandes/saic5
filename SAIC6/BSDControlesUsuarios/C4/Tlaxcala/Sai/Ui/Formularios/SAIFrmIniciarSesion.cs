@@ -92,7 +92,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             Application.Exit();
         }
 
-        private void ObtenerSistemas(SAITextBox sender)
+        private void ObtenerSistemas()
         {
             //Ejecutamos en segundo plano la consulta de los sistemas a los cuales tiene
             //acceso para no trabar la UI mediante la invocación de los delegados, ya que no
@@ -116,13 +116,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                              }
                                          }
                                      });
+            tr.IsBackground = true;
             tr.Start();
         }
 
         private void saiTxtUsuario_KeyUp(object sender, KeyEventArgs e)
         {
             saiCmbSistema.Enabled = false;
-            ObtenerSistemas(saiTxtUsuario);
+            ObtenerSistemas();
         }
     }
 }
