@@ -140,7 +140,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 
         protected override void OnTextChanged(EventArgs e)
         {
-            if (BlnEsRequerido && this.SelectedIndex < 0)
+
+            if (BlnEsRequerido && (this.SelectedIndex < 0 || this.Text.Trim() == string.Empty))
                 BlnFueValido = false;
             else
                 BlnFueValido = true;
