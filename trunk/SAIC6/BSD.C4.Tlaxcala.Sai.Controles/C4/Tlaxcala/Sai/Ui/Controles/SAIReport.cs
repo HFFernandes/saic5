@@ -34,7 +34,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         /// <param name="blnCambiaTamaño">Propiedad que establece si el usuario podrá cambiar de tamaño la columna</param>
         public void AgregarColumna(int intIndice, string strCaption, int intTamaño, bool blnCambiaTamaño)
         {
-            reportControl.Columns.Add(intIndice, strCaption, intTamaño, blnCambiaTamaño);
+            ReportColumn columna= reportControl.Columns.Add(intIndice, strCaption, intTamaño, blnCambiaTamaño);
+            columna.AutoSize = true;
         }
 
         /// <summary>
@@ -64,6 +65,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
                         registro.AddItem("(desconocido)");
                 }
 
+            reportControl.Populate();
+        }
+
+        public void QuitarRegistro(int Indice)
+        {
+            reportControl.Records.RemoveAt(Indice);
             reportControl.Populate();
         }
 

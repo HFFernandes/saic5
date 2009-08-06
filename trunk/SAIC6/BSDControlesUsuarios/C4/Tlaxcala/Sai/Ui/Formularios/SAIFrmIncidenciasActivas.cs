@@ -5,6 +5,8 @@ using System.Windows.Forms;
 using System.Text;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
+using System.Diagnostics;
+using BSD.C4.Tlaxcala.Sai.Excepciones;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -18,7 +20,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
-        private List<int> lstIncidenciasRegistradas;
+        private List<Incidencia> lstIncidenciasRegistradas;
+        private List<Incidencia> lstIncidenciasTemporal;
+        private List<Incidencia> lstIncidenciasRemover;
 
         public SAIFrmIncidenciasActivas()
         {
@@ -26,7 +30,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
             Width = Screen.GetWorkingArea(this).Width;
             saiReport1.btnLigarIncidencias.Click += btnLigarIncidencias_Click;
-            lstIncidenciasRegistradas = new List<int>();
+            lstIncidenciasRegistradas = new List<Incidencia>();
+            lstIncidenciasTemporal = new List<Incidencia>();
+            lstIncidenciasRemover=new List<Incidencia>();
         }
 
         void btnLigarIncidencias_Click(object sender, EventArgs e)
@@ -48,22 +54,41 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void tmrRegistros_Tick(object sender, EventArgs e)
         {
-            //saiReport1.LimpiarListado();
-
-            IncidenciaList incidenciaList = IncidenciaMapper.Instance().GetByEstatusIncidencia(1);
-            foreach (var incidencia in incidenciaList)
+            try
             {
-                //falta revisar estado...switch(estatus)1->agregar2->eliminar (ejemplo)
-                if (!lstIncidenciasRegistradas.Contains(incidencia.Folio))
+                IncidenciaList incidenciaList = IncidenciaMapper.Instance().GetByEstatusIncidencia(1);
+
+                lstIncidenciasTemporal.Clear();
+                foreach (var incidencia in incidenciaList)
                 {
-                    lstIncidenciasRegistradas.Add(incidencia.Folio);
-                    saiReport1.AgregarRegistro(incidencia.Telefono,
-                        incidencia.ClaveEstatus.ToString(),
-                        incidencia.HoraRecepcion.ToString(),
-                        incidencia.Direccion,
-                        incidencia.ClaveTipo.ToString(), "",
-                        incidencia.Folio.ToString());
+                    lstIncidenciasTemporal.Add(incidencia);
+
+                    if (!lstIncidenciasRegistradas.Contains(incidencia))
+                        lstIncidenciasRegistradas.Add(incidencia);
                 }
+
+                foreach (var i in lstIncidenciasRegistradas)
+                {
+                    //comprobar si la incidencia registrada existe en la incidencia temporal
+                    if (lstIncidenciasTemporal.Contains(i))
+                        Debug.WriteLine("no hacer nada");
+                    else
+                    {
+                        //lstIncidenciasRegistradas.Remove(i); //no se puede eliminar de la colleccion mientras enumeramos sobre ella
+                        lstIncidenciasRemover.Add(i);
+                    }
+                }
+
+                foreach (var incidencia in lstIncidenciasRemover)
+                {
+                    lstIncidenciasRegistradas.Remove(incidencia);
+                }
+                lstIncidenciasRemover.Clear();
+            }
+            catch (Exception ex)
+            {
+                tmrRegistros.Enabled = false;
+                throw new SAIExcepcion(ex.Message);
             }
         }
     }

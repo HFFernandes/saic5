@@ -22,7 +22,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void btnLigarIncidencias_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Ligar incidencias pendientes");
+            //MessageBox.Show("Ligar incidencias pendientes");
+            saiReport1.QuitarRegistro(0);
         }
 
         private void SAIFrmIncidenciasPendientes_Load(object sender, EventArgs e)
@@ -37,6 +38,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             saiReport1.AgregarColumna(5, "Dividido En", 80, true);
             saiReport1.AgregarColumna(6, "Pendiente Desde", 150, true);
             saiReport1.AgregarColumna(7, "Nombre del Operador", 300, true);
+
+            saiReport1.AgregarRegistro("1","","b","","","","","");
+            saiReport1.AgregarRegistro("2", "", "b", "", "", "", "", "");
+            saiReport1.AgregarRegistro("3", "", "b", "", "", "", "", "");
         }
     }
 }
