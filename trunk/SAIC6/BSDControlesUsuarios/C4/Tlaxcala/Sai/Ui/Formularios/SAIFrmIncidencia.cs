@@ -26,6 +26,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         Incidencia _entIncidencia = new Incidencia();
         public event txtDescripcionOnKeyEnterUp txtDescripcion_OnKeyEnterUp;
+        private Boolean _blnLimpiarColonias = false;
 
         /// <summary>
         /// Constructor del formulario SIAFrmIncidencia, se ejecuta cuando se registra una incidencia nueva
@@ -104,6 +105,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 this.cmbMunicipio.DataSource = lstMunicipios;
                 this.cmbMunicipio.DisplayMember = "Nombre";
                 this.cmbMunicipio.ValueMember = "Clave";
+
+                this.cmbMunicipio.SelectedIndex = -1;
+                this.cmbMunicipio.Text = string.Empty;
 
          
 
@@ -206,6 +210,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             ColoniaList objListaColonias;
             CodigoPostalList objListaCodigosPostales = new CodigoPostalList();
             CodigoPostal entCodigoPostal;
+            Boolean blnExisteCodigoPostal;
 
             try
             {
@@ -230,6 +235,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.cmbLocalidad.DataSource = objListaLocalidades;
                     this.cmbLocalidad.DisplayMember = "Nombre";
                     this.cmbLocalidad.ValueMember = "Clave";
+                    this.cmbLocalidad.SelectedIndex = -1;
+                    this.cmbLocalidad.Text  = string.Empty;
 
                     //Se recuperan los códigos postales del municipio
                     for (int i = 0; i < objListaLocalidades.Count; i++)
@@ -240,7 +247,21 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             if (objListaColonias[j].ClaveCodigoPostal.HasValue)
                             {
                                 entCodigoPostal = CodigoPostalMapper.Instance().GetOne(objListaColonias[j].ClaveCodigoPostal.Value );
-                                objListaCodigosPostales.Add(entCodigoPostal);
+                                blnExisteCodigoPostal = false;
+                                //Se revisa que el código postal no exista en la lista
+                                for (int k = 0; k < objListaCodigosPostales.Count; k++)
+                                {
+                                    if (objListaCodigosPostales[k].Valor == entCodigoPostal.Valor)
+                                    {
+                                        blnExisteCodigoPostal = true;
+                                        break;
+                                    }
+                                }
+
+                                if (!blnExisteCodigoPostal)
+                                {
+                                    objListaCodigosPostales.Add(entCodigoPostal);
+                                }
                             }
                         }
                         
@@ -249,8 +270,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     if (objListaCodigosPostales.Count > 0)
                     {
                         this.cmbCP.DataSource = objListaCodigosPostales;
-                        this.cmbCP.DisplayMember = "Nombre";
-                        this.cmbCP.ValueMember = "Valor";
+                        this.cmbCP.DisplayMember = "Valor";
+                        this.cmbCP.ValueMember = "Clave";
+                        this.cmbCP.SelectedIndex = -1;
+                        this.cmbCP.Text = string.Empty;
                     }
 
                 }
@@ -320,8 +343,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
          
                 if (this.cmbLocalidad.SelectedIndex == -1)
                 {
-                    this.cmbLocalidad.DataSource = null;
-                    this.cmbLocalidad.Items.Clear();
+                   
+                    this.cmbColonia.DataSource = null;
+                    this.cmbColonia.Items.Clear();
                     return;
                 }
                 entLocalidad = (Localidad)this.cmbLocalidad.SelectedItem;
@@ -332,6 +356,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.cmbColonia.DataSource = lstColonias;
                     this.cmbColonia.DisplayMember = "Nombre";
                     this.cmbColonia.ValueMember = "Clave";
+                    this.cmbColonia.Text = String.Empty;
+                    this.cmbCP.Text = string.Empty;
                 }
                 else
                 {
@@ -372,7 +398,52 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
           
         }
 
-       
+
+        /// <summary>
+        /// Selecciona el código postal del combo de códigos postales según la colonia seleccionada
+        /// </summary>
+        /// <param name="sender">Objeto que ocasionó el evento</param>
+        /// <param name="e">Parámetros del evento</param>
+        private void cmbColonia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Colonia entColonia = null;
+
+            if (this.cmbColonia.SelectedIndex != -1 && this.cmbColonia.Text.Trim() != string.Empty)
+            {
+                entColonia = (Colonia)this.cmbColonia.SelectedItem;
+
+                if (entColonia.ClaveCodigoPostal.HasValue)
+                {
+
+                    foreach (var objElemento in this.cmbCP.Items)
+                    {
+                        if ((objElemento as CodigoPostal).Clave == entColonia.ClaveCodigoPostal)
+                        {
+                            this._blnLimpiarColonias = false;
+                            this.cmbCP.SelectedIndex = -1;
+                            this.cmbCP.SelectedItem = objElemento;
+                            break;
+                        }
+                    }
+                }
+            }
+          
+        }
+
+        /// <summary>
+        /// Quita la selección de la colonia
+        /// </summary>
+        /// <param name="sender">Objeto que ocasionó el evento</param>
+        /// <param name="e">Parámetros del evento</param>
+        private void cmbCP_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this._blnLimpiarColonias)
+            {
+                this.cmbColonia.SelectedIndex = -1;
+                this.cmbColonia.Text = string.Empty;
+            }
+        }
+
         /// <summary>
         /// Guarda la incidencia con la colonia seleccionada y guarda la colonia en caso de ser una colonia nueva
         /// </summary>
@@ -437,6 +508,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         else
                         {
                             this._entIncidencia.ClaveColonia = null;
+                            this.cmbColonia.Text = string.Empty;
                         }
                     }
                     else if (entColonia != null)
@@ -445,6 +517,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         if (entColonia.ClaveCodigoPostal.HasValue)
                         {
                             this._entIncidencia.ClaveCodigoPostal = entColonia.ClaveCodigoPostal.Value;
+
+                            foreach (var objElemento in this.cmbCP.Items)
+                            {
+                                if ((objElemento as CodigoPostal).Clave == entColonia.ClaveCodigoPostal)
+                                {
+                                    this.cmbCP.SelectedIndex = -1;
+                                    this.cmbCP.SelectedItem = objElemento;
+                                    break;
+                                }
+                            }
                         }
                     }
 
@@ -452,7 +534,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     IncidenciaMapper.Instance().Save(this._entIncidencia);
 
                 }
-                else
+                else if (this.cmbColonia.Text.Trim() != string.Empty)
                 {
                     entColonia = (Colonia)this.cmbColonia.SelectedItem;
 
@@ -460,9 +542,54 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     if (entColonia.ClaveCodigoPostal.HasValue)
                     {
                         this._entIncidencia.ClaveCodigoPostal = entColonia.ClaveCodigoPostal.Value;
+                        foreach (var objElemento in this.cmbCP.Items)
+                        {
+                            if ((objElemento as CodigoPostal).Clave == entColonia.ClaveCodigoPostal)
+                            {
+                                this.cmbCP.SelectedIndex = -1;
+                                this.cmbCP.SelectedItem = objElemento;
+                                break;
+                            }
+                        }
                     }
+                    IncidenciaMapper.Instance().Save(this._entIncidencia);
+                }
+                else
+                {
+                    this._entIncidencia.ClaveColonia = null;
+                    IncidenciaMapper.Instance().Save(this._entIncidencia);
                 }
            
+        }
+
+
+        /// <summary>
+        /// Guarda la incidencia con el código postal seleccionado
+        /// </summary>
+        /// <param name="sender">Objeto que ocasionó el evento</param>
+        /// <param name="e">Parámetros del evento</param>
+        private void cmbCP_Leave(object sender, EventArgs e)
+        {
+            CodigoPostal entCodigoPostal = null;
+
+            if (this.cmbCP.SelectedIndex != -1 && this.cmbCP.Text != string.Empty)
+            {
+                entCodigoPostal = (CodigoPostal)this.cmbCP.SelectedItem;
+                if (entCodigoPostal != null)
+                {
+                    this._entIncidencia.ClaveCodigoPostal = entCodigoPostal.Clave;
+                }
+                else
+                {
+                    this._entIncidencia.ClaveCodigoPostal = null;
+                }
+            }
+            else
+            {
+                this._entIncidencia.ClaveCodigoPostal = null;
+            }
+
+            IncidenciaMapper.Instance().Save(this._entIncidencia);
         }
 
         /// <summary>
@@ -564,8 +691,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <summary>
         /// Lanza el evento txtDescripcion_OnKeyEnterUp cuando se presona y suelta la tecla intro en el campo descripcion
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Objeto que ocasionó el evento</param>
+        /// <param name="e">Parámetros del evento</param>
         private void txtDescripcion_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter && txtDescripcion_OnKeyEnterUp != null)
@@ -582,6 +709,21 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 e.Cancel = true;
             }
         }
+
+
+        /// <summary>
+        /// Prende la bandera que indica que se puede limpiar el texto de la lista de colonias
+        /// </summary>
+        /// <param name="sender">Objeto que ocasionó el evento</param>
+        /// <param name="e">Parámetros del evento</param>
+        private void cmbCP_Enter(object sender, EventArgs e)
+        {
+            this._blnLimpiarColonias = true;
+        }
+
+      
+
+       
 
 
        
