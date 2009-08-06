@@ -9,6 +9,7 @@ using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
+using Mapa = BSD.C4.Tlaxcala.Sai.Mapa;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -75,11 +76,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 this.InicializaCampos();
             
             
-
-        }
-
-        private void SAIFrmIncidencia_Load(object sender, EventArgs e)
-        {
 
         }
 
@@ -701,15 +697,70 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
+
+        /// <summary>
+        /// Se ejecuta cuando se cierra el formulario
+        /// </summary>
+        /// <param name="e">Parámetros del evento</param>
         protected override void OnClosing(CancelEventArgs e)
         {
                         
             if (!base.SAIProveedorValidacion.ValidarCamposRequeridos(this))
             {
                 e.Cancel = true;
+                return;
+            }
+
+            Mapa.Controlador.RevisaInstancias(this);
+        }
+
+        private void TomaDatosUbicacion(Mapa.EstructuraUbicacion objUbicacion)
+        {
+            if (this._entIncidencia != null)
+            {
+                if (this._entIncidencia.ClaveCodigoPostal.HasValue)
+                {
+                    objUbicacion.IdCodigoPostal = this._entIncidencia.ClaveCodigoPostal.Value;
+                }
+                else
+                {
+                    objUbicacion.IdCodigoPostal = null;
+                }
+                if (this._entIncidencia.ClaveColonia.HasValue)
+                {
+                    objUbicacion.IdColonia = this._entIncidencia.ClaveColonia.Value;
+                }
+                else
+                {
+                    objUbicacion.IdColonia = null;
+                }
+                if (this._entIncidencia.ClaveLocalidad.HasValue)
+                {
+                    objUbicacion.IdLocalidad = this._entIncidencia.ClaveLocalidad.Value;
+                }
+                else
+                {
+                    objUbicacion.IdLocalidad = null;
+                }
+                if (this._entIncidencia.ClaveMunicipio.HasValue)
+                {
+                    objUbicacion.IdMunicipio = this._entIncidencia.ClaveMunicipio.Value;
+                }
+                else
+                {
+                    objUbicacion.IdMunicipio = null;
+                }
+
             }
         }
 
+        protected override void OnLoad(EventArgs e)
+        {
+           Mapa.EstructuraUbicacion objUbicacion = new Mapa.EstructuraUbicacion();
+           this.TomaDatosUbicacion(objUbicacion);
+           Mapa.Controlador.MuestraMapa(objUbicacion, this);
+           base.OnLoad(e);
+        }
 
         /// <summary>
         /// Prende la bandera que indica que se puede limpiar el texto de la lista de colonias
