@@ -258,6 +258,9 @@
             this.cmbCP.Size = new System.Drawing.Size(205, 21);
             this.cmbCP.StrMensajeCampoRequerido = "El campo es requerido.";
             this.cmbCP.TabIndex = 16;
+            this.cmbCP.SelectedIndexChanged += new System.EventHandler(this.cmbCP_SelectedIndexChanged);
+            this.cmbCP.Leave += new System.EventHandler(this.cmbCP_Leave);
+            this.cmbCP.Enter += new System.EventHandler(this.cmbCP_Enter);
             this.cmbCP.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbCP_KeyUp);
             // 
             // cmbColonia
@@ -271,6 +274,7 @@
             this.cmbColonia.Size = new System.Drawing.Size(205, 21);
             this.cmbColonia.StrMensajeCampoRequerido = "El campo es requerido.";
             this.cmbColonia.TabIndex = 18;
+            this.cmbColonia.SelectedIndexChanged += new System.EventHandler(this.cmbColonia_SelectedIndexChanged);
             this.cmbColonia.Leave += new System.EventHandler(this.cmbColonia_Leave);
             this.cmbColonia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbColonia_KeyUp);
             // 
