@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using XtremeReportControl;
+using System.Runtime.InteropServices;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 {
@@ -32,10 +33,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         /// <param name="strCaption">Texto que representa el encabezado de la columna</param>
         /// <param name="intTamaño">Tamaño en pixeles que ocupará la columna</param>
         /// <param name="blnCambiaTamaño">Propiedad que establece si el usuario podrá cambiar de tamaño la columna</param>
-        public void AgregarColumna(int intIndice, string strCaption, int intTamaño, bool blnCambiaTamaño)
+        /// <param name="blnVisible">Propiedad que establece si la columna sera o no visible</param>
+        public void AgregarColumna(int intIndice, string strCaption, int intTamaño, bool blnCambiaTamaño, [Optional, DefaultParameterValue(true)] bool blnVisible)
         {
-            ReportColumn columna= reportControl.Columns.Add(intIndice, strCaption, intTamaño, blnCambiaTamaño);
-            columna.AutoSize = true;
+            ReportColumn columna = reportControl.Columns.Add(intIndice, strCaption, intTamaño, blnCambiaTamaño);
+            columna.Visible = blnVisible;
         }
 
         /// <summary>
@@ -49,12 +51,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         /// <summary>
         /// Método para la creación de un nuevo registro en base a los parametros
         /// </summary>
-        /// <param name="strItem">Elemento principal</param>
+        /// <param name="intID">Identificador</param>
         /// <param name="strSubItems">Colección de sub-elementos para el registro</param>
-        public void AgregarRegistro(string strItem, params string[] strSubItems)
+        public ReportRecord AgregarRegistro(int intID, params string[] strSubItems)
         {
             var registro = reportControl.Records.Add();
-            var elemento = registro.AddItem(strItem);
+            var elemento = registro.AddItem(intID);
 
             if (strSubItems.Length > 0)
                 foreach (var s in strSubItems)
@@ -65,13 +67,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
                         registro.AddItem("(desconocido)");
                 }
 
+            registro.Tag = intID;
             reportControl.Populate();
+
+            return registro;
         }
 
-        public void QuitarRegistro(int Indice)
+        public void QuitarRegistro(ReportRecord record)
         {
-            reportControl.Records.RemoveAt(Indice);
-            reportControl.Populate();
+            reportControl.RemoveRecordEx(record);
         }
 
         /// <summary>

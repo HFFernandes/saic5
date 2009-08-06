@@ -134,12 +134,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 
         private System.Windows.Forms.ToolStrip barraHerramientas;
         private System.Windows.Forms.Panel reportContenedor;
-        private AxXtremeReportControl.AxReportControl reportControl;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripLabel lblFiltroRegistros;
         private System.Windows.Forms.ToolStripTextBox txtFiltroRegistros;
         public System.Windows.Forms.ToolStripButton btnCampos;
         public System.Windows.Forms.ToolStripButton btnLigarIncidencias;
+        private AxXtremeReportControl.AxReportControl reportControl;
 
     }
 }
