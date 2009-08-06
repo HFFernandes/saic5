@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows.Forms;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
 using BSD.C4.Tlaxcala.Sai.Ui.Formularios;
+using System.Threading;
 
 namespace BSD.C4
 {
@@ -16,10 +18,10 @@ namespace BSD.C4
         {
             //TODO: Implementar exclusión mutua
 
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-
             Application.Run(new SAIFrmComandos());
         }
 
