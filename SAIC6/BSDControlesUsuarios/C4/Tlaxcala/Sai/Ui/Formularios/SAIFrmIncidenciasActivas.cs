@@ -57,8 +57,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             try
             {
-                //IncidenciaList incidenciaList = IncidenciaMapper.Instance().GetByEstatusIncidencia(1);
-
                 lstIncidenciasTemporal.Clear();
                 foreach (var incidencia in (IncidenciaMapper.Instance().GetByEstatusIncidencia(1)))
                 {
@@ -66,8 +64,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     if (!lstIncidenciasRegistradas.Contains(incidencia))
                     {
                         lstIncidenciasRegistradas.Add(incidencia);
-
-                        //agregar record
                         lstReportRecord.Add(saiReport1.AgregarRegistro(incidencia.Folio,
                             incidencia.Telefono,
                             incidencia.ClaveEstatus.ToString(),
