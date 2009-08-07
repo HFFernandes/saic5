@@ -35,7 +35,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         /// <param name="blnCambiaTamaño">Propiedad que establece si el usuario podrá cambiar de tamaño la columna</param>
         /// <param name="blnVisible">Propiedad que establece si la columna sera o no visible</param>
         /// <param name="blnMostrarEnChooser">Propiedad que establece si la columna aparece o no en el selector de campos cuando esta oculta o agrupada</param>
-        public void AgregarColumna(int intIndice, string strCaption, int intTamaño, bool blnCambiaTamaño, [Optional, DefaultParameterValue(true)] bool blnVisible,[Optional,DefaultParameterValue(true)] bool blnMostrarEnChooser)
+        public void AgregarColumna(int intIndice, string strCaption, int intTamaño, bool blnCambiaTamaño, [Optional, DefaultParameterValue(true)] bool blnVisible, [Optional, DefaultParameterValue(true)] bool blnMostrarEnChooser)
         {
             ReportColumn columna = reportControl.Columns.Add(intIndice, strCaption, intTamaño, blnCambiaTamaño);
             columna.Visible = blnVisible;
