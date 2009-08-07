@@ -64,6 +64,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Recursos Externos\Cooperator.Framework.Library.dll</HintPath>
     </Reference>
+    <Reference Include="CPw, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Recursos Externos\CPw.dll</HintPath>
+    </Reference>
     <Reference Include="ExceptionMessageBox, Version=9.0.242.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Recursos Externos\ExceptionMessageBox.dll</HintPath>

@@ -2,7 +2,7 @@
 <map>
     <layer>
             <file>ESTADO.SHP</file>
-            <layername>Municipio</layername>
+            <layername>Estado</layername>
             <labelfield>NOMBRE</labelfield>
             <labelsize>10</labelsize>
             <showlabel>true</showlabel>
@@ -30,7 +30,7 @@
     </layer>
     <layer>
             <file>LOCALIDAD.SHP</file>
-            <layername>Municipio</layername>
+            <layername>Localidad</layername>
             <labelfield>NOMBRE</labelfield>
             <labelsize>10</labelsize>
             <showlabel>true</showlabel>
