@@ -1,6 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Drawing;
 using System.Windows.Forms;
 using XtremeReportControl;
 using System.Runtime.InteropServices;
@@ -89,7 +87,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         /// </summary>
         /// <param name="sender">Enviador del método</param>
         /// <param name="e">Argumentos del evento</param>
-        private void btnCampos_Click(object sender, System.EventArgs e)
+        private void btnCampos_Click(object sender, EventArgs e)
         {
             //Generamos una instancia del selector de campos
             //e indicamos su pertenencia a la instancia del reportControl activa
