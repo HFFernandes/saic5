@@ -50,6 +50,7 @@
             this.cmbMunicipio = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox(this.components);
             this.cmbCP = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox(this.components);
             this.cmbColonia = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox(this.components);
+            this.saiLogoControl = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAILogoControl();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,10 +86,9 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.lblFechaHora);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(0, 0);
+            this.groupBox1.Location = new System.Drawing.Point(0, 65);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(596, 38);
+            this.groupBox1.Size = new System.Drawing.Size(596, 45);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -103,7 +103,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 59);
+            this.label3.Location = new System.Drawing.Point(6, 119);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(52, 13);
             this.label3.TabIndex = 5;
@@ -112,17 +112,18 @@
             // txtTelefono
             // 
             this.txtTelefono.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.txtTelefono.Location = new System.Drawing.Point(67, 57);
+            this.txtTelefono.Location = new System.Drawing.Point(67, 117);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(203, 20);
             this.txtTelefono.StrMensajeCampoRequerido = "El campo es requerido.";
             this.txtTelefono.TabIndex = 6;
+            this.txtTelefono.Leave += new System.EventHandler(this.txtTelefono_Leave);
             this.txtTelefono.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtTelefono_KeyUp);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(275, 59);
+            this.label4.Location = new System.Drawing.Point(275, 119);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(98, 13);
             this.label4.TabIndex = 7;
@@ -131,7 +132,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 93);
+            this.label5.Location = new System.Drawing.Point(6, 153);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(55, 13);
             this.label5.TabIndex = 9;
@@ -140,7 +141,7 @@
             // txtDireccion
             // 
             this.txtDireccion.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.txtDireccion.Location = new System.Drawing.Point(67, 90);
+            this.txtDireccion.Location = new System.Drawing.Point(67, 150);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(517, 20);
             this.txtDireccion.StrMensajeCampoRequerido = "El campo es requerido.";
@@ -150,7 +151,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 127);
+            this.label6.Location = new System.Drawing.Point(6, 187);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(55, 13);
             this.label6.TabIndex = 11;
@@ -159,7 +160,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(315, 125);
+            this.label7.Location = new System.Drawing.Point(315, 185);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(56, 13);
             this.label7.TabIndex = 13;
@@ -168,7 +169,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(29, 159);
+            this.label8.Location = new System.Drawing.Point(29, 219);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(30, 13);
             this.label8.TabIndex = 15;
@@ -177,7 +178,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(326, 163);
+            this.label9.Location = new System.Drawing.Point(326, 223);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(47, 13);
             this.label9.TabIndex = 17;
@@ -186,7 +187,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(1, 191);
+            this.label10.Location = new System.Drawing.Point(1, 251);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(85, 26);
             this.label10.TabIndex = 19;
@@ -195,7 +196,7 @@
             // txtDescripcion
             // 
             this.txtDescripcion.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.txtDescripcion.Location = new System.Drawing.Point(96, 197);
+            this.txtDescripcion.Location = new System.Drawing.Point(96, 257);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(488, 90);
@@ -210,11 +211,12 @@
             this.cmbTipoIncidencia.BlnEsRequerido = true;
             this.cmbTipoIncidencia.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.cmbTipoIncidencia.FormattingEnabled = true;
-            this.cmbTipoIncidencia.Location = new System.Drawing.Point(377, 56);
+            this.cmbTipoIncidencia.Location = new System.Drawing.Point(377, 116);
             this.cmbTipoIncidencia.Name = "cmbTipoIncidencia";
             this.cmbTipoIncidencia.Size = new System.Drawing.Size(205, 21);
             this.cmbTipoIncidencia.StrMensajeCampoRequerido = "El campo es requerido.";
             this.cmbTipoIncidencia.TabIndex = 8;
+            this.cmbTipoIncidencia.Leave += new System.EventHandler(this.cmbTipoIncidencia_Leave);
             this.cmbTipoIncidencia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbTipoIncidencia_KeyUp);
             // 
             // cmbLocalidad
@@ -223,7 +225,7 @@
             this.cmbLocalidad.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbLocalidad.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.cmbLocalidad.FormattingEnabled = true;
-            this.cmbLocalidad.Location = new System.Drawing.Point(377, 122);
+            this.cmbLocalidad.Location = new System.Drawing.Point(377, 177);
             this.cmbLocalidad.Name = "cmbLocalidad";
             this.cmbLocalidad.Size = new System.Drawing.Size(205, 21);
             this.cmbLocalidad.StrMensajeCampoRequerido = "El campo es requerido.";
@@ -239,7 +241,7 @@
             this.cmbMunicipio.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbMunicipio.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.cmbMunicipio.FormattingEnabled = true;
-            this.cmbMunicipio.Location = new System.Drawing.Point(67, 119);
+            this.cmbMunicipio.Location = new System.Drawing.Point(67, 179);
             this.cmbMunicipio.Name = "cmbMunicipio";
             this.cmbMunicipio.Size = new System.Drawing.Size(205, 21);
             this.cmbMunicipio.StrMensajeCampoRequerido = "El campo es requerido.";
@@ -255,7 +257,7 @@
             this.cmbCP.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbCP.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.cmbCP.FormattingEnabled = true;
-            this.cmbCP.Location = new System.Drawing.Point(67, 155);
+            this.cmbCP.Location = new System.Drawing.Point(67, 215);
             this.cmbCP.Name = "cmbCP";
             this.cmbCP.Size = new System.Drawing.Size(205, 21);
             this.cmbCP.StrMensajeCampoRequerido = "El campo es requerido.";
@@ -272,7 +274,7 @@
             this.cmbColonia.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbColonia.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.cmbColonia.FormattingEnabled = true;
-            this.cmbColonia.Location = new System.Drawing.Point(377, 157);
+            this.cmbColonia.Location = new System.Drawing.Point(377, 217);
             this.cmbColonia.Name = "cmbColonia";
             this.cmbColonia.Size = new System.Drawing.Size(205, 21);
             this.cmbColonia.StrMensajeCampoRequerido = "El campo es requerido.";
@@ -282,12 +284,23 @@
             this.cmbColonia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbColonia_KeyUp);
             this.cmbColonia.TextUpdate += new System.EventHandler(this.cmbColonia_TextUpdate);
             // 
+            // saiLogoControl
+            // 
+            this.saiLogoControl.BackColor = System.Drawing.Color.White;
+            this.saiLogoControl.Dock = System.Windows.Forms.DockStyle.Top;
+            this.saiLogoControl.Location = new System.Drawing.Point(0, 0);
+            this.saiLogoControl.Name = "saiLogoControl";
+            this.saiLogoControl.Size = new System.Drawing.Size(596, 70);
+            this.saiLogoControl.TabIndex = 21;
+            this.saiLogoControl.VelocidadAnimacion = 8;
+            // 
             // SAIFrmIncidencia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(596, 568);
+            this.Controls.Add(this.saiLogoControl);
             this.Controls.Add(this.cmbColonia);
             this.Controls.Add(this.cmbCP);
             this.Controls.Add(this.cmbMunicipio);
@@ -326,6 +339,7 @@
             this.Controls.SetChildIndex(this.cmbMunicipio, 0);
             this.Controls.SetChildIndex(this.cmbCP, 0);
             this.Controls.SetChildIndex(this.cmbColonia, 0);
+            this.Controls.SetChildIndex(this.saiLogoControl, 0);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -356,5 +370,6 @@
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox cmbMunicipio;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox cmbCP;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox cmbColonia;
+        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAILogoControl saiLogoControl;
     }
 }

@@ -9,6 +9,8 @@ using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
+using BSD.C4.Tlaxcala.Sai.Ui.Controles;
+
 using Mapa = BSD.C4.Tlaxcala.Sai.Mapa;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
@@ -29,7 +31,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         public event txtDescripcionOnKeyEnterUp txtDescripcion_OnKeyEnterUp;
         private Boolean _blnLimpiarColonias = false;
         private Mapa.EstructuraUbicacion _objUbicacion = new Mapa.EstructuraUbicacion();
-        private Boolean _blnCargando;
+        private Boolean _blnBloqueaEventos;
+        
 
         /// <summary>
         /// Constructor del formulario SIAFrmIncidencia, se ejecuta cuando se registra una incidencia nueva
@@ -38,7 +41,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         public SAIFrmIncidencia()
         {
 
-            this._blnCargando = true;            
+            this._blnBloqueaEventos = true;            
             InitializeComponent();
             this.InicializaListas();
             //****Crea una nueva incidencia, el formulario se abrió para insertar*******
@@ -54,9 +57,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.ActualizaVentanaIncidencias();
             //Se muestra la información de la incidencia en el formulario:
             this.InicializaCampos();
-            //Se actualiza el mapa:
-            //this.actualizaMapaUbicacion();
-            this._blnCargando = false;     
+            
+            this._blnBloqueaEventos = false;     
                
         }
 
@@ -66,7 +68,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="entIncidencia">Entidad incidencia que contiene los valores para mostrar</param>
         public SAIFrmIncidencia(Incidencia  entIncidencia)
         {
-            this._blnCargando = true;
+            this._blnBloqueaEventos = true;
             InitializeComponent();
             this.InicializaListas();
             this._entIncidencia = entIncidencia;
@@ -74,10 +76,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.ActualizaVentanaIncidencias();
             //Se muestra la información de la incidencia en el formulario:
             this.InicializaCampos();
+            
+            this._blnBloqueaEventos = false;
+
+        }
+
+        protected override void OnActivated(EventArgs e)
+        {
+            base.OnActivated(e);
             //Se actualiza el mapa:
             this.actualizaMapaUbicacion();
-            this._blnCargando = false;
-
         }
 
         /// <summary>
@@ -210,22 +218,19 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             CodigoPostal entCodigoPostal;
             Boolean blnExisteCodigoPostal;
 
-            if (this._blnCargando == true)
+            if (this._blnBloqueaEventos == true)
             {
                 return;
             }
 
-            if (this.cmbMunicipio.SelectedIndex == -1 || this.cmbMunicipio.Text.Trim() == string.Empty)
-            {
-                    this.cmbLocalidad.DataSource = null;
-                    this.cmbLocalidad.Items.Clear();
-                    this.cmbColonia.DataSource = null;
-                    this.cmbColonia.Items.Clear();
-                    this.cmbCP.DataSource = null;
-                    this.cmbCP.Items.Clear();
-                    this.actualizaMapaUbicacion();
-                    return;
-            }
+            this._blnBloqueaEventos = true;
+
+            this.cmbLocalidad.DataSource = null;
+            this.cmbLocalidad.Items.Clear();
+            this.cmbColonia.DataSource = null;
+            this.cmbColonia.Items.Clear();
+            this.cmbCP.DataSource = null;
+            this.cmbCP.Items.Clear();
 
             objListaLocalidades = LocalidadMapper.Instance().GetByMunicipio((this.cmbMunicipio.SelectedItem as Municipio).Clave);
             if (objListaLocalidades.Count > 0)
@@ -275,16 +280,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
 
                 }
-                else
-                {
-                    this.cmbLocalidad.DataSource = null;
-                    this.cmbLocalidad.Items.Clear();
-                    this.cmbColonia.DataSource = null;
-                    this.cmbColonia.Items.Clear();
-                    this.cmbCP.DataSource = null;
-                    this.cmbCP.Items.Clear();
-                }
-                this.actualizaMapaUbicacion();
+              
+
+            this._blnBloqueaEventos = false;
+            this.actualizaMapaUbicacion();
         }
 
         /// <summary>
@@ -303,7 +302,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                this.cmbColonia.DataSource = null;
                this.cmbColonia.Items.Clear();
             }
+            
             this.actualizaMapaUbicacion();
+            
             IncidenciaMapper.Instance().Save(this._entIncidencia);
         }
 
@@ -342,19 +343,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
            
             ColoniaList lstColonias;
 
-            if (this._blnCargando == true)
+            if (this._blnBloqueaEventos == true)
             {
                 return;
             }
 
-            if (this.cmbLocalidad.SelectedIndex == -1 || this.cmbLocalidad.Text.Trim() == string.Empty)
-            {
-                   
-                    this.cmbColonia.DataSource = null;
-                    this.cmbColonia.Items.Clear();
-                    this.actualizaMapaUbicacion();
-                    return;
-            }
+            this._blnBloqueaEventos = true;
+            
+            this.cmbColonia.DataSource = null;
+            this.cmbColonia.Items.Clear();
+            
             lstColonias = ColoniaMapper.Instance().GetByLocalidad((this.cmbLocalidad.SelectedItem as Localidad).Clave);
             
             if (lstColonias.Count > 0)
@@ -365,11 +363,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                  this.cmbColonia.Text = String.Empty;
                  this.cmbCP.Text = string.Empty;
             }
-            else
-            {
-                 this.cmbColonia.DataSource = null;
-                 this.cmbColonia.Items.Clear();
-            }
+            
+
+            this._blnBloqueaEventos = false;
             this.actualizaMapaUbicacion();
            
         }
@@ -405,8 +401,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="e">Parámetros del evento</param>
         private void cmbLocalidad_Leave(object sender, EventArgs e)
         {
-           
-            
             if (this.cmbLocalidad.SelectedIndex == -1 || this.cmbLocalidad.Text.Trim() == string.Empty)
             {
                 this.cmbColonia.DataSource = null;
@@ -428,11 +422,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             Colonia entColonia = null;
 
-            if (this._blnCargando == true)
+            if (this._blnBloqueaEventos == true)
             {
                 return;
             }
 
+            this._blnBloqueaEventos = true;
             if (this.cmbColonia.SelectedIndex != -1 && this.cmbColonia.Text.Trim() != string.Empty)
             {
                 entColonia = (Colonia)this.cmbColonia.SelectedItem;
@@ -452,6 +447,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
                 }
             }
+            this._blnBloqueaEventos = false;
             this.actualizaMapaUbicacion();
           
         }
@@ -585,16 +581,18 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="e">Parámetros del evento</param>
         private void cmbCP_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this._blnCargando == true)
+            if (this._blnBloqueaEventos == true)
             {
                 return;
             }
 
+            this._blnBloqueaEventos = true;
             if (this._blnLimpiarColonias)
             {
                 this.cmbColonia.SelectedIndex = -1;
                 this.cmbColonia.Text = string.Empty;
             }
+            this._blnBloqueaEventos = false;
             this.actualizaMapaUbicacion();
         }
 
@@ -716,7 +714,22 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             Mapa.Controlador.RevisaInstancias(this);
         }
 
-       
+        /// <summary>
+        /// Quita el elemento de la lista de ventanas cuando la ventana ya se ha cerrado
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            foreach(SAIWinSwitchItem objVentanaSwitch in Aplicacion.VentanasIncidencias)
+            {
+                if (this == objVentanaSwitch.Ventana)
+                {
+                    Aplicacion.VentanasIncidencias.Remove(objVentanaSwitch);
+                    break;
+                }
+            }
+        }
 
         /// <summary>
         /// Prende la bandera que indica que se puede limpiar el texto de la lista de colonias
@@ -822,18 +835,29 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             Mapa.Controlador.MuestraMapa(this._objUbicacion, this);
         }
 
-      
+        /// <summary>
+        /// Guarda la incidencia con el teléfono actualizado
+        /// </summary>
+        /// <param name="sender">Objeto que ocasionó el evento</param>
+        /// <param name="e">Parámetros del evento</param>
+        private void txtTelefono_Leave(object sender, EventArgs e)
+        {
+            this._entIncidencia.Telefono  = this.txtTelefono.Text;
+            IncidenciaMapper.Instance().Save(this._entIncidencia);
+        }
 
-        
+        /// <summary>
+        /// Guarda la incidencia con el tipo de incidencia actualizado
+        /// </summary>
+        /// <param name="sender">Objeto que ocasionó el evento</param>
+        /// <param name="e">Parámetros del evento</param>
+        private void cmbTipoIncidencia_Leave(object sender, EventArgs e)
+        {
+            if (this.cmbTipoIncidencia.SelectedIndex != -1 && this.cmbTipoIncidencia.Text.Trim() != string.Empty)
+            {
 
-        
+            }
+        }
 
-
-      
-
-       
-
-
-       
     }
 }

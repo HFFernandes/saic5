@@ -214,7 +214,9 @@
             this.ClientSize = new System.Drawing.Size(632, 446);
             this.Controls.Add(this.contenedorMapa);
             this.Controls.Add(this.toolStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SAIFrmMapa";
             this.Text = "CMapa";
             this.Deactivate += new System.EventHandler(this.CMapa_Deactivate);
