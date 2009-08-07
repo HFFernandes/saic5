@@ -34,14 +34,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         /// <param name="intTamaño">Tamaño en pixeles que ocupará la columna</param>
         /// <param name="blnCambiaTamaño">Propiedad que establece si el usuario podrá cambiar de tamaño la columna</param>
         /// <param name="blnVisible">Propiedad que establece si la columna sera o no visible</param>
-        public void AgregarColumna(int intIndice, string strCaption, int intTamaño, bool blnCambiaTamaño, [Optional, DefaultParameterValue(true)] bool blnVisible)
+        /// <param name="blnMostrarEnChooser">Propiedad que establece si la columna aparece o no en el selector de campos cuando esta oculta o agrupada</param>
+        public void AgregarColumna(int intIndice, string strCaption, int intTamaño, bool blnCambiaTamaño, [Optional, DefaultParameterValue(true)] bool blnVisible,[Optional,DefaultParameterValue(true)] bool blnMostrarEnChooser)
         {
             ReportColumn columna = reportControl.Columns.Add(intIndice, strCaption, intTamaño, blnCambiaTamaño);
             columna.Visible = blnVisible;
+            columna.ShowInFieldChooser = blnMostrarEnChooser;
         }
 
         /// <summary>
-        /// Método para limpiar el control
+        /// Método para limpiar todos los registros del control
         /// </summary>
         public void LimpiarListado()
         {
@@ -73,6 +75,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             return registro;
         }
 
+        /// <summary>
+        /// Método para eliminar un registro especifico dentro del listado
+        /// </summary>
+        /// <param name="record">Registro a eliminar</param>
         public void QuitarRegistro(ReportRecord record)
         {
             reportControl.RemoveRecordEx(record);
