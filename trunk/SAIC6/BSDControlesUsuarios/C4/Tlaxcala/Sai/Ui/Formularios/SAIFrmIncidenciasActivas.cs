@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows.Forms;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
@@ -37,6 +38,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void btnLigarIncidencias_Click(object sender, EventArgs e)
         {
+            //int iCols = saiReport1.reportControl.Columns.Count;
+            //int iRows = saiReport1.reportControl.Rows.Count;
+
+            //ReportRecordItem itm = saiReport1.reportControl.Records.FindRecordItem(1, iRows, 1, iCols, 1, 1, "666666",XTPReportTextSearchParms.xtpReportTextSearchExactPhrase);
+            saiReport1.reportControl.Records[0][2].Value = "jaja";
         }
 
         void SAIFrmIncidenciasActivas_Load(object sender, EventArgs e)
@@ -79,7 +85,23 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                                                        "",
                                                                        incidencia.Folio.ToString()));
                     }
-                    //hacer un else aqui y verificar si cambio
+                    else
+                    {
+                        //hacer un else aqui y verificar si cambio
+                        var incidenciaTemp = lstIncidenciasRegistradas.Find(inc => inc.Folio == incidencia.Folio);
+                        if (incidenciaTemp != null)
+                        {
+                            
+                            //se encontró la incidencia
+                            //comparar incidenciaTemp contra incidencia
+                            if (!incidenciaTemp.Telefono.Equals(incidencia.Telefono))
+                            {
+                                Debug.WriteLine(string.Format("viejo tel: {0}", incidenciaTemp.Telefono));
+                                Debug.WriteLine(string.Format("nuevo tel: {0}", incidencia.Telefono));
+                            }
+                        }
+                    }
+
                 }
 
                 foreach (var incidencia in lstIncidenciasRegistradas)
