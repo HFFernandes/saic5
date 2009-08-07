@@ -125,6 +125,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         protected override void OnGotFocus(EventArgs e)
         {
             base.OnGotFocus(e);
+            //Parche para arreglar el problema cuando desde un formulario se actualizan datos de otro:
+            if (this.BackColor == ClrBackColorFoco)
+            {
+                return;
+            }
             this._crlBackColor = this.BackColor;
             this.BackColor = ClrBackColorFoco;
         }
@@ -139,7 +144,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         protected override void OnLostFocus(EventArgs e)
         {
             base.OnLostFocus(e);
+           
+
             this.BackColor = this._crlBackColor;
+
+
 
             //Verificar si el campo está marcado como requerido
             if (BlnEsRequerido && this.Text.Trim() == string.Empty)

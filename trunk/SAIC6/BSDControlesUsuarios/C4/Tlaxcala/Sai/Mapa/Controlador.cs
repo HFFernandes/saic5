@@ -24,14 +24,16 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
         /// <param name="frmIncidencia">Referencia del formulario que manda a llamar el método</param>
         public static void MuestraMapa(EstructuraUbicacion objDatosUbicacion, SAIFrmIncidencia frmIncidencia)
         {
-            Boolean blnPrimeraVez = false;
+            
 
             if (_frmMapa == null)
             {
-                blnPrimeraVez = true;
                 _frmMapa = new SAIFrmMapa(ConfigurationSettings.AppSettings["XmlCartografia"], Application.StartupPath + @"\");
+                _frmMapa.Show();
             }
 
+            
+            
             if (objDatosUbicacion.IdCodigoPostal.HasValue)
             {
                 _frmMapa.CP(objDatosUbicacion.IdCodigoPostal.Value);
@@ -54,11 +56,9 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
                 _frmMapa.CentrarEstado();
             }
 
-            if (blnPrimeraVez)
-            {
-                _frmMapa.Show();
-                frmIncidencia.Focus();
-            }
+           
+           frmIncidencia.Focus();
+           
 
         }
 
@@ -73,6 +73,7 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
             if (Aplicacion.VentanasIncidencias.Count == 0)
             {
                 _frmMapa.Close();
+                _frmMapa.Dispose();
                 _frmMapa = null;
             }
         }
@@ -88,6 +89,7 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
             if (Aplicacion.VentanasIncidencias.Count == 0 || (Aplicacion.VentanasIncidencias.Count == 1 && Aplicacion.VentanasIncidencias[0].Ventana  == (frmIncidencia as Form)))
             {
                 _frmMapa.Close();
+                _frmMapa.Dispose();
                 _frmMapa = null;
             }
           

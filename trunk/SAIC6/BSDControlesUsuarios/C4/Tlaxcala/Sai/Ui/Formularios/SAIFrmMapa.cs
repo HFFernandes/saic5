@@ -381,5 +381,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             return new Ccpd().getPd();
         }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            if (Aplicacion.VentanasIncidencias.Count > 0)
+            {
+                e.Cancel = true;
+                return;
+            }
+            base.OnClosing(e);
+        }
     }
 }
