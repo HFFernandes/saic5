@@ -29,7 +29,7 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
             if (_frmMapa == null)
             {
                 blnPrimeraVez = true;
-                _frmMapa = new SAIFrmMapa(ConfigurationSettings.AppSettings["XmlCartografia"], Application.StartupPath);
+                _frmMapa = new SAIFrmMapa(ConfigurationSettings.AppSettings["XmlCartografia"], Application.StartupPath + @"\");
             }
 
             if (objDatosUbicacion.IdCodigoPostal.HasValue)

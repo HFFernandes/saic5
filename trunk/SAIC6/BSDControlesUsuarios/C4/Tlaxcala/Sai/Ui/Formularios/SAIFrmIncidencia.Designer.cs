@@ -231,6 +231,7 @@
             this.cmbLocalidad.SelectedIndexChanged += new System.EventHandler(this.cmbLocalidad_SelectedIndexChanged);
             this.cmbLocalidad.Leave += new System.EventHandler(this.cmbLocalidad_Leave);
             this.cmbLocalidad.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbLocalidad_KeyUp);
+            this.cmbLocalidad.TextUpdate += new System.EventHandler(this.cmbLocalidad_TextUpdate);
             // 
             // cmbMunicipio
             // 
@@ -246,6 +247,7 @@
             this.cmbMunicipio.SelectedIndexChanged += new System.EventHandler(this.cmbMunicipio_SelectedIndexChanged);
             this.cmbMunicipio.Leave += new System.EventHandler(this.cmbMunicipio_Leave);
             this.cmbMunicipio.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbMunicipio_KeyUp);
+            this.cmbMunicipio.TextUpdate += new System.EventHandler(this.cmbMunicipio_TextUpdate);
             // 
             // cmbCP
             // 
@@ -262,6 +264,7 @@
             this.cmbCP.Leave += new System.EventHandler(this.cmbCP_Leave);
             this.cmbCP.Enter += new System.EventHandler(this.cmbCP_Enter);
             this.cmbCP.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbCP_KeyUp);
+            this.cmbCP.TextUpdate += new System.EventHandler(this.cmbCP_TextUpdate);
             // 
             // cmbColonia
             // 
@@ -277,6 +280,7 @@
             this.cmbColonia.SelectedIndexChanged += new System.EventHandler(this.cmbColonia_SelectedIndexChanged);
             this.cmbColonia.Leave += new System.EventHandler(this.cmbColonia_Leave);
             this.cmbColonia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbColonia_KeyUp);
+            this.cmbColonia.TextUpdate += new System.EventHandler(this.cmbColonia_TextUpdate);
             // 
             // SAIFrmIncidencia
             // 

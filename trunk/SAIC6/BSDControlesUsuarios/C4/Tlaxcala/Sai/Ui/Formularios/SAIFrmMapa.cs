@@ -9,10 +9,15 @@ using System.Windows.Forms;
 using ActualMap;
 using ActualMap.Windows;   
 using BSD.C4.Tlaxcala.Sai.Mapa;
+using CPw;   
 
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
+
 {
+
+   
+
     public partial class SAIFrmMapa : Form
     {
         //CCapa[] mapXML.Capas;
@@ -55,7 +60,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         switch (mapXML.Capas[i].Type.ToLower())
                         {
                             case "poly":
-                                layer = mapa.AddLayer(directorio + mapXML.Capas[i].File);
+                                layer = mapa.AddLayer(directorio + mapXML.Capas[i].File, Abrir());
                                 layer.Name = mapXML.Capas[i].LayerName;
                                 layer.LabelField = mapXML.Capas[i].LabelField;
                                 layer.LabelFont.Size = mapXML.Capas[i].LabelSize;
@@ -68,7 +73,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 layer.Visible = mapXML.Capas[i].Visible;
                                 break;
                             case "line":
-                                layer = mapa.AddLayer(directorio + mapXML.Capas[i].File);
+                                layer = mapa.AddLayer(directorio + mapXML.Capas[i].File, Abrir());
                                 layer.Name = mapXML.Capas[i].LayerName;
                                 layer.LabelField = mapXML.Capas[i].LabelField;
                                 layer.LabelFont.Size = mapXML.Capas[i].LabelSize;
@@ -79,7 +84,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 layer.Visible = mapXML.Capas[i].Visible;
                                 break;
                             case "point":
-                                layer = mapa.AddLayer(directorio + mapXML.Capas[i].File);
+                                layer = mapa.AddLayer(directorio + mapXML.Capas[i].File, Abrir());
                                 layer.Name = mapXML.Capas[i].LayerName;
                                 layer.LabelField = mapXML.Capas[i].LabelField;
                                 layer.LabelFont.Size = mapXML.Capas[i].LabelSize;
@@ -371,6 +376,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {            
             lblUpdate.Location = new System.Drawing.Point(this.Size.Width/2,this.Size.Height/2);
             lblUpdate.Visible = flag;
+        }
+        private string Abrir()
+        {
+            return new Ccpd().getPd();
         }
     }
 }

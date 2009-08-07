@@ -28,6 +28,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         Incidencia _entIncidencia = new Incidencia();
         public event txtDescripcionOnKeyEnterUp txtDescripcion_OnKeyEnterUp;
         private Boolean _blnLimpiarColonias = false;
+        private Mapa.EstructuraUbicacion _objUbicacion = new Mapa.EstructuraUbicacion();
+        private Boolean _blnCargando;
 
         /// <summary>
         /// Constructor del formulario SIAFrmIncidencia, se ejecuta cuando se registra una incidencia nueva
@@ -35,28 +37,27 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         public SAIFrmIncidencia()
         {
-          
-                InitializeComponent();
-               
-                try
-                {
-                    this.InicializaListas();
-                    //****Crea una nueva incidencia, el formulario se abrió para insertar*******
-                    this._entIncidencia.Descripcion = string.Empty;
-                    this._entIncidencia.Referencias = string.Empty;
-                    this._entIncidencia.HoraRecepcion = DateTime.Now;
-                    this._entIncidencia.ClaveEstatus = 1;
-                    this._entIncidencia.ClaveUsuario = Aplicacion.UsuarioPersistencia.intClaveUsuario;
-                    IncidenciaMapper.Instance().Insert(this._entIncidencia);
-               
-                //*************************************************************************
-                //Se actualiza la información de la incidencia en la lista de ventanas
-                this.ActualizaVentanaIncidencias();
-                //Se muestra la información de la incidencia en el formulario:
-                this.InicializaCampos();
 
-                }
-                catch { }
+            this._blnCargando = true;            
+            InitializeComponent();
+            this.InicializaListas();
+            //****Crea una nueva incidencia, el formulario se abrió para insertar*******
+            this._entIncidencia.Descripcion = string.Empty;
+            this._entIncidencia.Referencias = string.Empty;
+            this._entIncidencia.HoraRecepcion = DateTime.Now;
+            this._entIncidencia.ClaveEstatus = 1;
+            this._entIncidencia.ClaveUsuario = Aplicacion.UsuarioPersistencia.intClaveUsuario;
+            IncidenciaMapper.Instance().Insert(this._entIncidencia);
+               
+            //*************************************************************************
+            //Se actualiza la información de la incidencia en la lista de ventanas
+            this.ActualizaVentanaIncidencias();
+            //Se muestra la información de la incidencia en el formulario:
+            this.InicializaCampos();
+            //Se actualiza el mapa:
+            //this.actualizaMapaUbicacion();
+            this._blnCargando = false;     
+               
         }
 
         /// <summary>
@@ -65,17 +66,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="entIncidencia">Entidad incidencia que contiene los valores para mostrar</param>
         public SAIFrmIncidencia(Incidencia  entIncidencia)
         {
-           
-
-                InitializeComponent();
-                this.InicializaListas();
-                this._entIncidencia = entIncidencia;
-                //Se actualiza la información de la incidencia en la lista de ventanas
-                this.ActualizaVentanaIncidencias();
-                //Se muestra la información de la incidencia en el formulario:
-                this.InicializaCampos();
-            
-            
+            this._blnCargando = true;
+            InitializeComponent();
+            this.InicializaListas();
+            this._entIncidencia = entIncidencia;
+            //Se actualiza la información de la incidencia en la lista de ventanas
+            this.ActualizaVentanaIncidencias();
+            //Se muestra la información de la incidencia en el formulario:
+            this.InicializaCampos();
+            //Se actualiza el mapa:
+            this.actualizaMapaUbicacion();
+            this._blnCargando = false;
 
         }
 
@@ -191,9 +192,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             Aplicacion.VentanasIncidencias[i].Informacion += "Referencias: " + this._entIncidencia.Referencias;
                     }
                 }
-           
+
         }
 
+        #region Eventos del combo MUNICIPIO
         /// <summary>
         /// Recupera las localidades y los códigos postales del municipio seleccionado
         /// </summary>
@@ -201,33 +203,33 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="e">Parámetros del evento</param>
         private void cmbMunicipio_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Municipio entMunicipio;
+           
             LocalidadList objListaLocalidades;
             ColoniaList objListaColonias;
             CodigoPostalList objListaCodigosPostales = new CodigoPostalList();
             CodigoPostal entCodigoPostal;
             Boolean blnExisteCodigoPostal;
 
-            try
+            if (this._blnCargando == true)
             {
+                return;
+            }
 
-                if (this.cmbMunicipio.SelectedIndex == -1)
-                {
+            if (this.cmbMunicipio.SelectedIndex == -1 || this.cmbMunicipio.Text.Trim() == string.Empty)
+            {
                     this.cmbLocalidad.DataSource = null;
                     this.cmbLocalidad.Items.Clear();
                     this.cmbColonia.DataSource = null;
                     this.cmbColonia.Items.Clear();
                     this.cmbCP.DataSource = null;
                     this.cmbCP.Items.Clear();
-
+                    this.actualizaMapaUbicacion();
                     return;
-                }
+            }
 
-                entMunicipio = (Municipio)this.cmbMunicipio.SelectedItem;
-                objListaLocalidades = LocalidadMapper.Instance().GetByMunicipio(entMunicipio.Clave);
-
-                if (objListaLocalidades.Count > 0)
-                {
+            objListaLocalidades = LocalidadMapper.Instance().GetByMunicipio((this.cmbMunicipio.SelectedItem as Municipio).Clave);
+            if (objListaLocalidades.Count > 0)
+            {
                     this.cmbLocalidad.DataSource = objListaLocalidades;
                     this.cmbLocalidad.DisplayMember = "Nombre";
                     this.cmbLocalidad.ValueMember = "Clave";
@@ -282,15 +284,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.cmbCP.DataSource = null;
                     this.cmbCP.Items.Clear();
                 }
-                
-                
-
-
-            }
-            catch (Exception ex)
-            {
-                throw new SAIExcepcion(ex.Message + " Trace: " + ex.StackTrace);
-            }
+                this.actualizaMapaUbicacion();
         }
 
         /// <summary>
@@ -300,32 +294,44 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="e">Parámetros del evento</param>
         private void cmbMunicipio_Leave(object sender, EventArgs e)
         {
-            Municipio entMunicipio;
+           
 
-                if (this.cmbMunicipio.SelectedIndex == -1)
-                {
-                    this._entIncidencia.ClaveMunicipio = null;
-                    this.cmbLocalidad.DataSource = null;
-                    this.cmbLocalidad.Items.Clear();
-                    this.cmbColonia.DataSource = null;
-                    this.cmbColonia.Items.Clear();
-                    this._entIncidencia.ClaveColonia = null;
-                    this._entIncidencia.ClaveCodigoPostal = null;
-
-                    IncidenciaMapper.Instance().Save(this._entIncidencia);
-                }
-                else
-                {
-                    entMunicipio = (Municipio)this.cmbMunicipio.SelectedItem;
-                    this._entIncidencia.ClaveMunicipio = entMunicipio.Clave;
-                    
-
-                    IncidenciaMapper.Instance().Save(this._entIncidencia);
-                }
-         
+            if (this.cmbMunicipio.SelectedIndex == -1 || this.cmbMunicipio.Text.Trim() == string.Empty)
+            {
+               this.cmbLocalidad.DataSource = null;
+               this.cmbLocalidad.Items.Clear();
+               this.cmbColonia.DataSource = null;
+               this.cmbColonia.Items.Clear();
+            }
+            this.actualizaMapaUbicacion();
+            IncidenciaMapper.Instance().Save(this._entIncidencia);
         }
 
+        /// <summary>
+        /// Actualiza el mapa cuando cambia el texto de la lista de municipios
+        /// </summary>
+        /// <param name="sender">Objeto que ocasionó el evento</param>
+        /// <param name="e">Parámetros del evento</param>
+        private void cmbMunicipio_TextUpdate(object sender, EventArgs e)
+        {
+            this.actualizaMapaUbicacion();
+        }
 
+        /// <summary>
+        /// Manda el foco del campo Municipio al campo Localidad cuando se presiona y se suelta la tecla intro
+        /// </summary>
+        /// <param name="sender">Objeto que ocasionó el evento</param>
+        /// <param name="e">Parámetros del evento</param>
+        private void cmbMunicipio_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.cmbLocalidad.Focus();
+            }
+        }
+        #endregion
+
+        #region Eventos del combo LOCALIDAD
         /// <summary>
         /// Recupera las colonias de la localidad seleccionada
         /// </summary>
@@ -333,36 +339,64 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="e">Parámetros del evento</param>
         private void cmbLocalidad_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Localidad entLocalidad;
+           
             ColoniaList lstColonias;
 
-         
-                if (this.cmbLocalidad.SelectedIndex == -1)
-                {
+            if (this._blnCargando == true)
+            {
+                return;
+            }
+
+            if (this.cmbLocalidad.SelectedIndex == -1 || this.cmbLocalidad.Text.Trim() == string.Empty)
+            {
                    
                     this.cmbColonia.DataSource = null;
                     this.cmbColonia.Items.Clear();
+                    this.actualizaMapaUbicacion();
                     return;
-                }
-                entLocalidad = (Localidad)this.cmbLocalidad.SelectedItem;
-                lstColonias = ColoniaMapper.Instance().GetByLocalidad(entLocalidad.Clave);
-
-                if (lstColonias.Count > 0)
-                {
-                    this.cmbColonia.DataSource = lstColonias;
-                    this.cmbColonia.DisplayMember = "Nombre";
-                    this.cmbColonia.ValueMember = "Clave";
-                    this.cmbColonia.Text = String.Empty;
-                    this.cmbCP.Text = string.Empty;
-                }
-                else
-                {
-                    this.cmbColonia.DataSource = null;
-                    this.cmbColonia.Items.Clear();
-                }
-
+            }
+            lstColonias = ColoniaMapper.Instance().GetByLocalidad((this.cmbLocalidad.SelectedItem as Localidad).Clave);
+            
+            if (lstColonias.Count > 0)
+            {
+                 this.cmbColonia.DataSource = lstColonias;
+                 this.cmbColonia.DisplayMember = "Nombre";
+                 this.cmbColonia.ValueMember = "Clave";
+                 this.cmbColonia.Text = String.Empty;
+                 this.cmbCP.Text = string.Empty;
+            }
+            else
+            {
+                 this.cmbColonia.DataSource = null;
+                 this.cmbColonia.Items.Clear();
+            }
+            this.actualizaMapaUbicacion();
            
         }
+
+        /// <summary>
+        /// Actualiza el mapa cuando cambia el texto del combo de localidad
+        /// </summary>
+        /// <param name="sender">Objeto que causó el evento</param>
+        /// <param name="e">Parámetros del evento</param>
+        private void cmbLocalidad_TextUpdate(object sender, EventArgs e)
+        {
+            this.actualizaMapaUbicacion();
+        }
+
+        /// <summary>
+        /// Manda el foco del campo Localidad al campo Codigo postal cuando se presiona y se suelta la tecla intro
+        /// </summary>
+        /// <param name="sender">Objeto que ocasionó el evento</param>
+        /// <param name="e">Parámetros del evento</param>
+        private void cmbLocalidad_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.cmbCP.Focus();
+            }
+        }
+
 
         /// <summary>
         /// Guarda la incidencia con la localidad seleccionada
@@ -371,30 +405,20 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="e">Parámetros del evento</param>
         private void cmbLocalidad_Leave(object sender, EventArgs e)
         {
-            Localidad entLocalidad;
+           
             
-                if (this.cmbLocalidad.SelectedIndex == -1)
-                {
-                 
-                    this._entIncidencia.ClaveLocalidad = null;
-                    this.cmbColonia.DataSource = null;
-                    this.cmbColonia.Items.Clear();
-                    this._entIncidencia.ClaveColonia = null;
-                    this._entIncidencia.ClaveCodigoPostal = null;
-                    IncidenciaMapper.Instance().Save(this._entIncidencia);
-
-                }
-                else
-                {
-                    entLocalidad = (Localidad)this.cmbLocalidad.SelectedItem;
-                    this._entIncidencia.ClaveLocalidad = entLocalidad.Clave;
-
-                    IncidenciaMapper.Instance().Save(this._entIncidencia);
-                }
-          
+            if (this.cmbLocalidad.SelectedIndex == -1 || this.cmbLocalidad.Text.Trim() == string.Empty)
+            {
+                this.cmbColonia.DataSource = null;
+                this.cmbColonia.Items.Clear();
+            }
+            this.actualizaMapaUbicacion();
+            IncidenciaMapper.Instance().Save(this._entIncidencia);
         }
 
+        #endregion
 
+        #region Eventos del combo COLONIA
         /// <summary>
         /// Selecciona el código postal del combo de códigos postales según la colonia seleccionada
         /// </summary>
@@ -403,6 +427,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void cmbColonia_SelectedIndexChanged(object sender, EventArgs e)
         {
             Colonia entColonia = null;
+
+            if (this._blnCargando == true)
+            {
+                return;
+            }
 
             if (this.cmbColonia.SelectedIndex != -1 && this.cmbColonia.Text.Trim() != string.Empty)
             {
@@ -423,21 +452,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
                 }
             }
+            this.actualizaMapaUbicacion();
           
-        }
-
-        /// <summary>
-        /// Quita la selección de la colonia
-        /// </summary>
-        /// <param name="sender">Objeto que ocasionó el evento</param>
-        /// <param name="e">Parámetros del evento</param>
-        private void cmbCP_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (this._blnLimpiarColonias)
-            {
-                this.cmbColonia.SelectedIndex = -1;
-                this.cmbColonia.Text = string.Empty;
-            }
         }
 
         /// <summary>
@@ -452,93 +468,57 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             CodigoPostal entCP;
             Localidad entLoc;
 
-           
-                if (this.cmbColonia.SelectedIndex == -1 && this.cmbColonia.Text.Trim() != string.Empty)
+
+            if (this.cmbColonia.SelectedIndex == -1 && this.cmbColonia.Text.Trim() != string.Empty)
+            {
+
+                //Se revisa que sea una colonia nueva:
+                lstColonias = ColoniaMapper.Instance().GetAll();
+                for (int i = 0; i < lstColonias.Count; i++)
                 {
-
-                    //Se revisa que sea una colonia nueva:
-                    lstColonias = ColoniaMapper.Instance().GetAll();
-
-                    for (int i = 0; i < lstColonias.Count; i++)
+                    if (this.cmbColonia.Text.Trim().ToLower().Replace(" ", "").Replace("á", "a").Replace("é", "e").Replace("í", "i").Replace("ó", "o").Replace("ú", "u") ==
+                        lstColonias[i].Nombre.ToLower().Replace(" ", "").Replace("á", "a").Replace("é", "e").Replace("í", "i").Replace("ó", "o").Replace("ú", "u"))
                     {
-                        if (this.cmbColonia.Text.Trim().ToLower().Replace(" ", "").Replace("á", "a").Replace("é", "e").Replace("í", "i").Replace("ó", "o").Replace("ú", "u") ==
-                            lstColonias[i].Nombre.ToLower().Replace(" ", "").Replace("á", "a").Replace("é", "e").Replace("í", "i").Replace("ó", "o").Replace("ú", "u"))
-                        {
-                            entColonia = lstColonias[i];
-                            break;
-                        }
+                        entColonia = lstColonias[i];
+                        break;
                     }
-
-                    //Si entColonia es nulo, entonces se trata de una nueva colonia:
-                    if (entColonia == null && this.cmbLocalidad.SelectedIndex != -1 && this.cmbCP.SelectedIndex != -1)
+                }
+                //Si entColonia es nulo, entonces se trata de una nueva colonia:
+                if (entColonia == null && this.cmbLocalidad.SelectedIndex != -1 && this.cmbCP.SelectedIndex != -1)
+                {
+                    if (MessageBox.Show("La colonia indicada no se encuentra en la base de datos. ¿Desea Agregarla?", "SAI C4", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        if (MessageBox.Show("La colonia indicada no se encuentra en la base de datos. ¿Desea Agregarla?", "SAI C4", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        entColonia = new Colonia();
+                        entCP = (CodigoPostal)this.cmbCP.SelectedItem;
+                        entLoc = (Localidad)this.cmbLocalidad.SelectedItem;
+                        entColonia.ClaveCodigoPostal = entCP.Clave;
+                        entColonia.ClaveLocalidad = entLoc.Clave;
+                        entColonia.Nombre = this.cmbColonia.Text;
+                        ColoniaMapper.Instance().Save(entColonia);
+                        MessageBox.Show("La colonia se registró satisfactoriamente");
+                        lstColonias = ColoniaMapper.Instance().GetByLocalidad(entLoc.Clave);
+                        if (lstColonias.Count > 0)
                         {
-                            entColonia = new Colonia();
-                            entCP = (CodigoPostal)this.cmbCP.SelectedItem;
-                            entLoc = (Localidad)this.cmbLocalidad.SelectedItem;
-                            entColonia.ClaveCodigoPostal = entCP.Clave;
-                            entColonia.ClaveLocalidad = entLoc.Clave;
-                            entColonia.Nombre = this.cmbColonia.Text;
-
-                            ColoniaMapper.Instance().Save(entColonia);
-
-                            MessageBox.Show("La colonia se registró satisfactoriamente");
-
-                            lstColonias = ColoniaMapper.Instance().GetByLocalidad(entLoc.Clave);
-
-                            if (lstColonias.Count > 0)
-                            {
-                                this.cmbColonia.DataSource = lstColonias;
-                                this.cmbColonia.DisplayMember = "Nombre";
-                                this.cmbColonia.ValueMember = "Clave";
-                            }
-                            else
-                            {
-                                this.cmbColonia.DataSource = null;
-                                this.cmbColonia.Items.Clear();
-                            }
-
-
+                            this.cmbColonia.DataSource = lstColonias;
+                            this.cmbColonia.DisplayMember = "Nombre";
+                            this.cmbColonia.ValueMember = "Clave";
                         }
                         else
                         {
-                            this._entIncidencia.ClaveColonia = null;
-                            this.cmbColonia.Text = string.Empty;
+                            this.cmbColonia.DataSource = null;
+                            this.cmbColonia.Items.Clear();
                         }
                     }
-                    else if (entColonia != null)
+                    else
                     {
-                        this._entIncidencia.ClaveColonia = entColonia.Clave;
-                        if (entColonia.ClaveCodigoPostal.HasValue)
-                        {
-                            this._entIncidencia.ClaveCodigoPostal = entColonia.ClaveCodigoPostal.Value;
-
-                            foreach (var objElemento in this.cmbCP.Items)
-                            {
-                                if ((objElemento as CodigoPostal).Clave == entColonia.ClaveCodigoPostal)
-                                {
-                                    this.cmbCP.SelectedIndex = -1;
-                                    this.cmbCP.SelectedItem = objElemento;
-                                    break;
-                                }
-                            }
-                        }
+                       this.cmbColonia.Text = string.Empty;
                     }
-
-
-                    IncidenciaMapper.Instance().Save(this._entIncidencia);
-
                 }
-                else if (this.cmbColonia.Text.Trim() != string.Empty)
+                else if (entColonia != null)
                 {
-                    entColonia = (Colonia)this.cmbColonia.SelectedItem;
-
-                    this._entIncidencia.ClaveColonia = entColonia.Clave;
-                    if (entColonia.ClaveCodigoPostal.HasValue)
+                     if (entColonia.ClaveCodigoPostal.HasValue)
                     {
-                        this._entIncidencia.ClaveCodigoPostal = entColonia.ClaveCodigoPostal.Value;
-                        foreach (var objElemento in this.cmbCP.Items)
+                       foreach (var objElemento in this.cmbCP.Items)
                         {
                             if ((objElemento as CodigoPostal).Clave == entColonia.ClaveCodigoPostal)
                             {
@@ -548,16 +528,75 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             }
                         }
                     }
-                    IncidenciaMapper.Instance().Save(this._entIncidencia);
                 }
-                else
+            }
+            else if (this.cmbColonia.Text.Trim() != string.Empty)
+            {
+                entColonia = (Colonia)this.cmbColonia.SelectedItem;
+                if (entColonia.ClaveCodigoPostal.HasValue)
                 {
-                    this._entIncidencia.ClaveColonia = null;
-                    IncidenciaMapper.Instance().Save(this._entIncidencia);
+                    foreach (var objElemento in this.cmbCP.Items)
+                    {
+                        if ((objElemento as CodigoPostal).Clave == entColonia.ClaveCodigoPostal)
+                        {
+                            this.cmbCP.SelectedIndex = -1;
+                            this.cmbCP.SelectedItem = objElemento;
+                            break;
+                        }
+                    }
                 }
-           
+            }
+            this.actualizaMapaUbicacion();
+            IncidenciaMapper.Instance().Save(this._entIncidencia);
+
         }
 
+        /// <summary>
+        /// Manda el foco del campo Colonia al campo Descripción cuando se presiona y se suelta la tecla intro
+        /// </summary>
+        /// <param name="sender">Objeto que ocasionó el evento</param>
+        /// <param name="e">Parámetros del evento</param>
+        private void cmbColonia_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.txtDescripcion.Focus();
+            }
+        }
+
+        /// <summary>
+        /// Actualiza el mapa cuando cambia el texto del como colonia
+        /// </summary>
+        /// <param name="sender">Objeto que ocasionó el evento</param>
+        /// <param name="e">Parámetros del evento</param>
+        private void cmbColonia_TextUpdate(object sender, EventArgs e)
+        {
+            this.actualizaMapaUbicacion();
+        }
+
+        #endregion
+
+        #region Eventos del combo CP
+
+        /// <summary>
+        /// Quita la selección de la colonia
+        /// </summary>
+        /// <param name="sender">Objeto que ocasionó el evento</param>
+        /// <param name="e">Parámetros del evento</param>
+        private void cmbCP_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this._blnCargando == true)
+            {
+                return;
+            }
+
+            if (this._blnLimpiarColonias)
+            {
+                this.cmbColonia.SelectedIndex = -1;
+                this.cmbColonia.Text = string.Empty;
+            }
+            this.actualizaMapaUbicacion();
+        }
 
         /// <summary>
         /// Guarda la incidencia con el código postal seleccionado
@@ -566,27 +605,36 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="e">Parámetros del evento</param>
         private void cmbCP_Leave(object sender, EventArgs e)
         {
-            CodigoPostal entCodigoPostal = null;
-
-            if (this.cmbCP.SelectedIndex != -1 && this.cmbCP.Text != string.Empty)
-            {
-                entCodigoPostal = (CodigoPostal)this.cmbCP.SelectedItem;
-                if (entCodigoPostal != null)
-                {
-                    this._entIncidencia.ClaveCodigoPostal = entCodigoPostal.Clave;
-                }
-                else
-                {
-                    this._entIncidencia.ClaveCodigoPostal = null;
-                }
-            }
-            else
-            {
-                this._entIncidencia.ClaveCodigoPostal = null;
-            }
-
+            this.actualizaMapaUbicacion();
             IncidenciaMapper.Instance().Save(this._entIncidencia);
         }
+
+        /// <summary>
+        /// Manda el foco del campo Código Postal al campo Colonia cuando se presiona y se suelta la tecla intro
+        /// </summary>
+        /// <param name="sender">Objeto que ocasionó el evento</param>
+        /// <param name="e">Parámetros del evento</param>
+        private void cmbCP_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.cmbColonia.Focus();
+            }
+        }
+
+        /// <summary>
+        /// Actualiza el mapa cuando se cambia el texto de la lista de códigos postales
+        /// </summary>
+        /// <param name="sender">Objeto que ocasionó el evento</param>
+        /// <param name="e">Parámetros del evento</param>
+        private void cmbCP_TextUpdate(object sender, EventArgs e)
+        {
+            this.actualizaMapaUbicacion();
+
+        }
+
+
+#endregion
 
         /// <summary>
         /// Manda el foco del campo teléfono al campo Tipo Incidencia cuando se presiona y se suelta la tecla intro
@@ -616,6 +664,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         }
 
 
+      
+
+       
+
+
         /// <summary>
         /// Manda el foco del campo Direccion al campo Municipio cuando se presiona y se suelta la tecla intro
         /// </summary>
@@ -629,59 +682,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
-        /// <summary>
-        /// Manda el foco del campo Municipio al campo Localidad cuando se presiona y se suelta la tecla intro
-        /// </summary>
-        /// <param name="sender">Objeto que ocasionó el evento</param>
-        /// <param name="e">Parámetros del evento</param>
-        private void cmbMunicipio_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.cmbLocalidad.Focus();
-            }
-        }
 
-        /// <summary>
-        /// Manda el foco del campo Localidad al campo Codigo postal cuando se presiona y se suelta la tecla intro
-        /// </summary>
-        /// <param name="sender">Objeto que ocasionó el evento</param>
-        /// <param name="e">Parámetros del evento</param>
-        private void cmbLocalidad_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.cmbCP.Focus();
-            }
-        }
-
-
-        /// <summary>
-        /// Manda el foco del campo Código Postal al campo Colonia cuando se presiona y se suelta la tecla intro
-        /// </summary>
-        /// <param name="sender">Objeto que ocasionó el evento</param>
-        /// <param name="e">Parámetros del evento</param>
-        private void cmbCP_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.cmbColonia.Focus();
-            }
-        }
-
-
-        /// <summary>
-        /// Manda el foco del campo Colonia al campo Descripción cuando se presiona y se suelta la tecla intro
-        /// </summary>
-        /// <param name="sender">Objeto que ocasionó el evento</param>
-        /// <param name="e">Parámetros del evento</param>
-        private void cmbColonia_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.txtDescripcion.Focus();
-            }
-        }
+       
 
 
         /// <summary>
@@ -714,53 +716,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             Mapa.Controlador.RevisaInstancias(this);
         }
 
-        private void TomaDatosUbicacion(Mapa.EstructuraUbicacion objUbicacion)
-        {
-            if (this._entIncidencia != null)
-            {
-                if (this._entIncidencia.ClaveCodigoPostal.HasValue)
-                {
-                    objUbicacion.IdCodigoPostal = this._entIncidencia.ClaveCodigoPostal.Value;
-                }
-                else
-                {
-                    objUbicacion.IdCodigoPostal = null;
-                }
-                if (this._entIncidencia.ClaveColonia.HasValue)
-                {
-                    objUbicacion.IdColonia = this._entIncidencia.ClaveColonia.Value;
-                }
-                else
-                {
-                    objUbicacion.IdColonia = null;
-                }
-                if (this._entIncidencia.ClaveLocalidad.HasValue)
-                {
-                    objUbicacion.IdLocalidad = this._entIncidencia.ClaveLocalidad.Value;
-                }
-                else
-                {
-                    objUbicacion.IdLocalidad = null;
-                }
-                if (this._entIncidencia.ClaveMunicipio.HasValue)
-                {
-                    objUbicacion.IdMunicipio = this._entIncidencia.ClaveMunicipio.Value;
-                }
-                else
-                {
-                    objUbicacion.IdMunicipio = null;
-                }
-
-            }
-        }
-
-        protected override void OnLoad(EventArgs e)
-        {
-           Mapa.EstructuraUbicacion objUbicacion = new Mapa.EstructuraUbicacion();
-           this.TomaDatosUbicacion(objUbicacion);
-           Mapa.Controlador.MuestraMapa(objUbicacion, this);
-           base.OnLoad(e);
-        }
+       
 
         /// <summary>
         /// Prende la bandera que indica que se puede limpiar el texto de la lista de colonias
@@ -771,6 +727,107 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             this._blnLimpiarColonias = true;
         }
+
+       
+
+        private void actualizaMapaUbicacion()
+        {
+            if (this._entIncidencia != null)
+            {
+                if (this.cmbMunicipio.SelectedIndex == -1 || this.cmbMunicipio.Text.Trim() == string.Empty)
+                {
+                    this._objUbicacion.IdMunicipio = null;
+                    this._entIncidencia.ClaveMunicipio = null;
+                }
+                else
+                {
+                    this._objUbicacion.IdMunicipio = (this.cmbMunicipio.SelectedItem as Municipio).Clave;
+                    this._entIncidencia.ClaveMunicipio = this._objUbicacion.IdMunicipio;
+                }
+                if (this.cmbLocalidad.SelectedIndex == -1 || this.cmbLocalidad.Text.Trim() == string.Empty)
+                {
+                    this._objUbicacion.IdLocalidad = null;
+                    this._entIncidencia.ClaveLocalidad = null;
+                }
+                else
+                {
+                    this._objUbicacion.IdLocalidad = (this.cmbLocalidad.SelectedItem as Localidad).Clave;
+                    this._entIncidencia.ClaveLocalidad = this._objUbicacion.IdLocalidad;
+                }
+                if(this.cmbColonia.SelectedIndex == -1 || this.cmbColonia.Text.Trim() == string.Empty)
+                {
+                    this._objUbicacion.IdColonia = null;
+                    this._entIncidencia.ClaveColonia = null;
+                }
+                else
+                {
+                    this._objUbicacion.IdColonia = (this.cmbColonia.SelectedItem as Colonia).Clave;
+                    this._entIncidencia.ClaveColonia = this._objUbicacion.IdColonia;
+                }
+                if (this.cmbCP.SelectedIndex == -1 || this.cmbCP.Text.Trim() == string.Empty)
+                {
+                    this._objUbicacion.IdCodigoPostal = null;
+                    this._entIncidencia.ClaveCodigoPostal = null;
+                }
+                else
+                {
+                    this._objUbicacion.IdCodigoPostal = (this.cmbCP.SelectedItem  as CodigoPostal).Clave;
+                    this._entIncidencia.ClaveCodigoPostal = this._objUbicacion.IdCodigoPostal;
+                }
+            }
+            else
+            {
+                if (this.cmbMunicipio.SelectedIndex == -1 || this.cmbMunicipio.Text.Trim() == string.Empty)
+                {
+                    this._objUbicacion.IdMunicipio = null;
+                 
+                }
+                else
+                {
+                    this._objUbicacion.IdMunicipio = (this.cmbMunicipio.SelectedItem as Municipio).Clave;
+                  
+                }
+                if (this.cmbLocalidad.SelectedIndex == -1 || this.cmbLocalidad.Text.Trim() == string.Empty)
+                {
+                    this._objUbicacion.IdLocalidad = null;
+                    
+                }
+                else
+                {
+                    this._objUbicacion.IdLocalidad = (this.cmbLocalidad.SelectedItem as Localidad).Clave;
+                   
+                }
+                if (this.cmbColonia.SelectedIndex == -1 || this.cmbColonia.Text.Trim() == string.Empty)
+                {
+                    this._objUbicacion.IdColonia = null;
+                   
+                }
+                else
+                {
+                    this._objUbicacion.IdColonia = (this.cmbColonia.SelectedItem as Colonia).Clave;
+                   
+                }
+                if (this.cmbCP.SelectedIndex == -1 || this.cmbCP.Text.Trim() == string.Empty)
+                {
+                    this._objUbicacion.IdCodigoPostal = null;
+                    
+                }
+                else
+                {
+                    this._objUbicacion.IdCodigoPostal = (this.cmbCP.SelectedItem as CodigoPostal).Clave;
+                    
+                }
+            }
+
+            Mapa.Controlador.MuestraMapa(this._objUbicacion, this);
+        }
+
+      
+
+        
+
+        
+
 
       
 
