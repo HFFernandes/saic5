@@ -19,9 +19,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         }
 
         private List<Incidencia> lstIncidenciasRegistradas;
-        private List<Incidencia> lstIncidenciasTemporal;
-        private List<Incidencia> lstIncidenciasRemover;
-        private List<ReportRecord> lstReportRecord;
+        private List<Incidencia> lstIncidenciasTemporales;
+        private List<Incidencia> lstIncidenciasPorRemover;
+        private List<ReportRecord> lstRegistrosReporte;
 
         public SAIFrmIncidenciasActivas()
         {
@@ -30,9 +30,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             Width = Screen.GetWorkingArea(this).Width;
             saiReport1.btnLigarIncidencias.Click += btnLigarIncidencias_Click;
             lstIncidenciasRegistradas = new List<Incidencia>();
-            lstIncidenciasTemporal = new List<Incidencia>();
-            lstIncidenciasRemover = new List<Incidencia>();
-            lstReportRecord = new List<ReportRecord>();
+            lstIncidenciasTemporales = new List<Incidencia>();
+            lstIncidenciasPorRemover = new List<Incidencia>();
+            lstRegistrosReporte = new List<ReportRecord>();
         }
 
         void btnLigarIncidencias_Click(object sender, EventArgs e)
@@ -43,59 +43,66 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             saiReport1.btnLigarIncidencias.Enabled = Aplicacion.UsuarioPersistencia.blnPuedeEscribir(intSubModulo);
 
-            saiReport1.AgregarColumna(0, "ID", 20, false, false,false);
-            saiReport1.AgregarColumna(1, "No de Teléfono", 200, true, true,true);
-            saiReport1.AgregarColumna(2, "Status", 200, true, true,true);
-            saiReport1.AgregarColumna(3, "Hora de Entrada", 200, true, true,true);
-            saiReport1.AgregarColumna(4, "Ubicación", 200, true, true,true);
-            saiReport1.AgregarColumna(5, "Tipo de Incidencia", 200, true, true,true);
-            saiReport1.AgregarColumna(6, "Dividido En", 200, true, true,true);
-            saiReport1.AgregarColumna(7, "Folio", 200, true, true,true);
+            saiReport1.AgregarColumna(0, "ID", 20, false, false, false);
+            saiReport1.AgregarColumna(1, "No de Teléfono", 200, true, true, true);
+            saiReport1.AgregarColumna(2, "Status", 200, true, true, true);
+            saiReport1.AgregarColumna(3, "Hora de Entrada", 200, true, true, true);
+            saiReport1.AgregarColumna(4, "Ubicación", 200, true, true, true);
+            saiReport1.AgregarColumna(5, "Tipo de Incidencia", 200, true, true, true);
+            saiReport1.AgregarColumna(6, "Dividido En", 200, true, true, true);
+            saiReport1.AgregarColumna(7, "Folio", 200, true, true, true);
+            ObtenerRegistros();
         }
 
         private void tmrRegistros_Tick(object sender, EventArgs e)
         {
+            ObtenerRegistros();
+        }
+
+        private void ObtenerRegistros()
+        {
             try
             {
-                lstIncidenciasTemporal.Clear();
+                lstIncidenciasTemporales.Clear();
                 foreach (var incidencia in (IncidenciaMapper.Instance().GetByEstatusIncidencia(1)))
                 {
-                    lstIncidenciasTemporal.Add(incidencia);
+                    lstIncidenciasTemporales.Add(incidencia);
                     if (!lstIncidenciasRegistradas.Contains(incidencia))
                     {
                         lstIncidenciasRegistradas.Add(incidencia);
-                        lstReportRecord.Add(saiReport1.AgregarRegistro(incidencia.Folio,
-                            incidencia.Telefono,
-                            incidencia.ClaveEstatus.ToString(),
-                            incidencia.HoraRecepcion.ToString(),
-                            incidencia.Direccion,
-                            incidencia.ClaveTipo.ToString(),
-                            "",
-                            incidencia.Folio.ToString()));
+                        lstRegistrosReporte.Add(saiReport1.AgregarRegistro(incidencia.Folio,
+                                                                       incidencia.Telefono,
+                                                                       incidencia.ClaveEstatus.ToString(),
+                                                                       incidencia.HoraRecepcion.ToString(),
+                                                                       incidencia.Direccion,
+                                                                       incidencia.ClaveTipo.ToString(),
+                                                                       "",
+                                                                       incidencia.Folio.ToString()));
                     }
+                    //hacer un else aqui y verificar si cambio
                 }
 
-                foreach (var i in lstIncidenciasRegistradas)
+                foreach (var incidencia in lstIncidenciasRegistradas)
                 {
                     //comprobar si la incidencia registrada existe en la incidencia temporal
-                    if (!lstIncidenciasTemporal.Contains(i))
+                    if (!lstIncidenciasTemporales.Contains(incidencia))
                     {
-                        lstIncidenciasRemover.Add(i);
+                        lstIncidenciasPorRemover.Add(incidencia);
                     }
                 }
 
-                foreach (var incidencia in lstIncidenciasRemover)
+                foreach (var incidencia in lstIncidenciasPorRemover)
                 {
-                    foreach (var record in lstReportRecord)
+                    foreach (var registro in lstRegistrosReporte)
                     {
-                        if (Convert.ToInt32(record.Tag) == incidencia.Folio)
+                        if (Convert.ToInt32(registro.Tag) == incidencia.Folio)
                         {
-                            saiReport1.QuitarRegistro(record);
+                            saiReport1.QuitarRegistro(registro);
                         }
                     }
                     lstIncidenciasRegistradas.Remove(incidencia);
                 }
-                lstIncidenciasRemover.Clear();
+                lstIncidenciasPorRemover.Clear();
             }
             catch (Exception ex)
             {

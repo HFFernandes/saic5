@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using BSD.C4.Tlaxcala.Sai.Ui.Controles;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 
@@ -14,6 +15,36 @@ namespace BSD.C4.Tlaxcala.Sai
         /// <remarks>Cada ventana Incidencia que se levente tiene que incluirse en esta lista</remarks>
         /// </summary>
         public static List<SAIWinSwitchItem> VentanasIncidencias = new List<SAIWinSwitchItem>();
+
+        /// <summary>
+        /// Método para la conversion de hexadecimal a decimal para los colores
+        /// </summary>
+        /// <param name="strHex">Codigo hexadecimal a convertir</param>
+        /// <returns>Valor decimal correspondiente</returns>
+        public static int HexadecimalADecimal(string strHex)
+        {
+            var ColorHex = strHex.ToCharArray();
+            var ColorDecimal = 0;
+            var iLength = ColorHex.Length - 1;
+            int NumeroDecimal;
+
+            foreach (var ValorHex in ColorHex)
+            {
+                if (char.IsNumber(ValorHex))
+                {
+                    NumeroDecimal = int.Parse(ValorHex.ToString());
+                }
+                else
+                {
+                    NumeroDecimal = Convert.ToInt32(ValorHex) - 55;
+                }
+
+                ColorDecimal += NumeroDecimal * (Convert.ToInt32(Math.Pow(16, iLength)));
+                iLength--;
+            }
+
+            return ColorDecimal;
+        }
 
         /// <summary>
         /// Clase donde persisten los permisos y configuraciones de un usuario especifico
