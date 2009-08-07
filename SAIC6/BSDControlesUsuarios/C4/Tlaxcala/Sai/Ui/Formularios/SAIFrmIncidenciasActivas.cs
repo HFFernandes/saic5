@@ -43,14 +43,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             saiReport1.btnLigarIncidencias.Enabled = Aplicacion.UsuarioPersistencia.blnPuedeEscribir(intSubModulo);
 
-            saiReport1.AgregarColumna(0, "ID", 20, false, false);
-            saiReport1.AgregarColumna(1, "No de Teléfono", 200, true, true);
-            saiReport1.AgregarColumna(2, "Status", 200, true, true);
-            saiReport1.AgregarColumna(3, "Hora de Entrada", 200, true, true);
-            saiReport1.AgregarColumna(4, "Ubicación", 200, true, true);
-            saiReport1.AgregarColumna(5, "Tipo de Incidencia", 200, true, true);
-            saiReport1.AgregarColumna(6, "Dividido En", 200, true, true);
-            saiReport1.AgregarColumna(7, "Folio", 200, true, true);
+            saiReport1.AgregarColumna(0, "ID", 20, false, false,false);
+            saiReport1.AgregarColumna(1, "No de Teléfono", 200, true, true,true);
+            saiReport1.AgregarColumna(2, "Status", 200, true, true,true);
+            saiReport1.AgregarColumna(3, "Hora de Entrada", 200, true, true,true);
+            saiReport1.AgregarColumna(4, "Ubicación", 200, true, true,true);
+            saiReport1.AgregarColumna(5, "Tipo de Incidencia", 200, true, true,true);
+            saiReport1.AgregarColumna(6, "Dividido En", 200, true, true,true);
+            saiReport1.AgregarColumna(7, "Folio", 200, true, true,true);
         }
 
         private void tmrRegistros_Tick(object sender, EventArgs e)
