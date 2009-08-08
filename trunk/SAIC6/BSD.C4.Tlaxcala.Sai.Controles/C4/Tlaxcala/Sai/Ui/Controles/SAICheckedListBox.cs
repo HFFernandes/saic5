@@ -1,14 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Windows.Forms;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 {
-    /// <summary>
-    /// Combobox que implementa propiedades,metodos y funciones rutinarios durante el desarrollo
-    /// </summary>
-    public partial class SAIComboBox : ComboBox
+    public partial class SAICheckedListBox : CheckedListBox
     {
         #region Campos
 
@@ -90,21 +87,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 
         #endregion
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        public SAIComboBox()
+        public SAICheckedListBox()
         {
             InitializeComponent();
         }
 
-        /// <summary>
-        /// Constructor con parametro
-        /// </summary>
-        /// <param name="components">Contenedor en el cual estará embebido</param>
-        public SAIComboBox(IContainer components)
+        public SAICheckedListBox(IContainer container)
         {
-            components.Add(this);
+            container.Add(this);
 
             InitializeComponent();
         }
@@ -158,6 +148,5 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 
         #region Funciones
         #endregion
-
     }
 }
