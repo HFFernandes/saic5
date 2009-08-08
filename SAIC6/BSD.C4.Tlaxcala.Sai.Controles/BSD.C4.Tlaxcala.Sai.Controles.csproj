@@ -60,6 +60,12 @@
     <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAICamposReportControl.Designer.cs">
       <DependentUpon>SAICamposReportControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAICheckedListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAICheckedListBox.Designer.cs">
+      <DependentUpon>SAICheckedListBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="C4\Tlaxcala\Sai\Ui\Controles\SAIComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -138,6 +144,10 @@
   <ItemGroup>
     <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Controles\SAICamposReportControl.resx">
       <DependentUpon>SAICamposReportControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Controles\SAICheckedListBox.resx">
+      <DependentUpon>SAICheckedListBox.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Controles\SAIComboBox.resx">
