@@ -58,6 +58,8 @@
     <Compile Include="Entities\Auto\RoboVehiculoAccesorios.Auto.cs" />
     <Compile Include="Entities\CodigoPostal.cs" />
     <Compile Include="Entities\Colonia.cs" />
+    <Compile Include="Entities\Auto\Corporacion.Auto.cs" />
+    <Compile Include="Entities\Corporacion.cs" />
     <Compile Include="Entities\Estado.cs" />
     <Compile Include="Entities\Localidad.cs" />
     <Compile Include="Entities\Municipio.cs" />
@@ -65,6 +67,7 @@
     <Compile Include="Entities\RoboVehiculoAccesorios.cs" />
     <Compile Include="Objects\Auto\CodigoPostalObject.Auto.cs" />
     <Compile Include="Objects\Auto\ColoniaObject.Auto.cs" />
+    <Compile Include="Objects\Auto\CorporacionObject.Auto.cs" />
     <Compile Include="Objects\Auto\EstadoObject.Auto.cs" />
     <Compile Include="Objects\Auto\LocalidadObject.Auto.cs" />
     <Compile Include="Objects\Auto\MunicipioObject.Auto.cs" />
@@ -76,16 +79,13 @@
     <Compile Include="Objects\Auto\UsuarioCorporacionObject.Auto.cs" />
     <Compile Include="Objects\Auto\VehiculoObject.Auto.cs" />
     <Compile Include="Objects\Auto\VehiculoRobadoObject.Auto.cs" />
-    <Compile Include="Entities\Corporacion.cs" />
-    <Compile Include="Entities\Auto\Corporacion.Auto.cs" />
     <Compile Include="Objects\CodigoPostalObject.cs" />
     <Compile Include="Objects\ColoniaObject.cs" />
-    <Compile Include="Objects\CorporacionObject.cs" />
-    <Compile Include="Objects\Auto\CorporacionObject.Auto.cs" />
     <Compile Include="Entities\CorporacionIncidencia.cs" />
     <Compile Include="Entities\Auto\CorporacionIncidencia.Auto.cs" />
     <Compile Include="Objects\CorporacionIncidenciaObject.cs" />
     <Compile Include="Objects\Auto\CorporacionIncidenciaObject.Auto.cs" />
+    <Compile Include="Objects\CorporacionObject.cs" />
     <Compile Include="Objects\DenuncianteObject.cs" />
     <Compile Include="Objects\Auto\DenuncianteObject.Auto.cs" />
     <Compile Include="Entities\DespachoIncidencia.cs" />
