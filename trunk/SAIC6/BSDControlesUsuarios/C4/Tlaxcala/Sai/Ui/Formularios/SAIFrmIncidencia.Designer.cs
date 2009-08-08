@@ -146,6 +146,7 @@
             this.txtDireccion.Size = new System.Drawing.Size(517, 20);
             this.txtDireccion.StrMensajeCampoRequerido = "El campo es requerido.";
             this.txtDireccion.TabIndex = 10;
+            this.txtDireccion.Leave += new System.EventHandler(this.txtDireccion_Leave);
             this.txtDireccion.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDireccion_KeyUp);
             // 
             // label6
@@ -202,6 +203,7 @@
             this.txtDescripcion.Size = new System.Drawing.Size(488, 90);
             this.txtDescripcion.StrMensajeCampoRequerido = "El campo es requerido.";
             this.txtDescripcion.TabIndex = 20;
+            this.txtDescripcion.Leave += new System.EventHandler(this.txtDescripcion_Leave);
             this.txtDescripcion.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDescripcion_KeyUp);
             // 
             // cmbTipoIncidencia

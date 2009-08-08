@@ -45,8 +45,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             InitializeComponent();
             this.InicializaListas();
             //****Crea una nueva incidencia, el formulario se abrió para insertar*******
-            this._entIncidencia.Descripcion = string.Empty;
             this._entIncidencia.Referencias = string.Empty;
+            this._entIncidencia.Descripcion = string.Empty;
+            this._entIncidencia.Activo = true;
             this._entIncidencia.HoraRecepcion = DateTime.Now;
             this._entIncidencia.ClaveEstatus = 1;
             this._entIncidencia.ClaveUsuario = Aplicacion.UsuarioPersistencia.intClaveUsuario;
@@ -714,6 +715,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             Mapa.Controlador.RevisaInstancias(this);
         }
 
+        protected override void OnDeactivate(EventArgs e)
+        {
+            if (this._entIncidencia != null)
+            {
+                IncidenciaMapper.Instance().Save(this._entIncidencia);
+            }
+            base.OnDeactivate(e);
+        }
+
         /// <summary>
         /// Quita el elemento de la lista de ventanas cuando la ventana ya se ha cerrado
         /// </summary>
@@ -855,9 +865,48 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             if (this.cmbTipoIncidencia.SelectedIndex != -1 && this.cmbTipoIncidencia.Text.Trim() != string.Empty)
             {
-
+                this._entIncidencia.ClaveTipo = (this.cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave; 
             }
+            else
+            {
+                this._entIncidencia.ClaveTipo = null;
+            }
+            IncidenciaMapper.Instance().Save(this._entIncidencia);
         }
+
+        /// <summary>
+        /// Guarda la incidencia con la descripción de la incidencia actualizada
+        /// </summary>
+        /// <param name="sender">Objeto que ocasionó el evento</param>
+        /// <param name="e">Parámetros del evento</param>
+        private void txtDescripcion_Leave(object sender, EventArgs e)
+        {
+            this._entIncidencia.Descripcion = this.txtDescripcion.Text;
+            IncidenciaMapper.Instance().Save(this._entIncidencia);
+        }
+
+        /// <summary>
+        /// Guarda la incidencia con la dirección de la incidencia actualizada
+        /// </summary>
+        /// <param name="sender">Objeto que ocasionó el evento</param>
+        /// <param name="e">Parámetros del evento</param>
+        private void txtDireccion_Leave(object sender, EventArgs e)
+        {
+            this._entIncidencia.Direccion  = this.txtDireccion.Text;
+            IncidenciaMapper.Instance().Save(this._entIncidencia);
+        }
+
+        protected override void OnValidating(CancelEventArgs e)
+        {
+            string texto = this.txtDescripcion.Text;
+            base.OnValidating(e);
+        }
+
+        public override bool ValidateChildren()
+        {
+            return base.ValidateChildren();
+        }
+
 
     }
 }
