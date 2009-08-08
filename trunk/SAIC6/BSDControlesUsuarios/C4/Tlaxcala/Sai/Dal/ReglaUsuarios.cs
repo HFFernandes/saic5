@@ -34,6 +34,12 @@ namespace BSD.C4.Tlaxcala.Sai.Dal
             return sistemas;
         }
 
+        /// <summary>
+        /// Método para la autenticación del usuario
+        /// </summary>
+        /// <param name="strNombreUsuario">nombre de usuario</param>
+        /// <param name="strContraseña">contraseña de acceso</param>
+        /// <returns>Una instancia de la entidad usuario pasada, pudiendo ser nula</returns>
         public static Usuario AutenticarUsuario(string strNombreUsuario, string strContraseña)
         {
             return UsuarioMapper.Instance().GetOneBySQLQuery(string.Format(SQL_AUTENTICARUSUARIO,strNombreUsuario,strContraseña));

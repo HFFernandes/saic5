@@ -144,17 +144,24 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         protected override void OnLostFocus(EventArgs e)
         {
             base.OnLostFocus(e);
-           
-
             this.BackColor = this._crlBackColor;
-
-
 
             //Verificar si el campo está marcado como requerido
             if (BlnEsRequerido && this.Text.Trim() == string.Empty)
                 BlnFueValido = false;
             else
                 BlnFueValido = true;
+        }
+
+        protected override void OnTextChanged(EventArgs e)
+        {
+            //Verificar si el campo está marcado como requerido
+            if (BlnEsRequerido && this.Text.Trim() == string.Empty)
+                BlnFueValido = false;
+            else
+                BlnFueValido = true;
+
+            base.OnTextChanged(e);
         }
 
         protected override void NotifyInvalidate(Rectangle invalidatedArea)

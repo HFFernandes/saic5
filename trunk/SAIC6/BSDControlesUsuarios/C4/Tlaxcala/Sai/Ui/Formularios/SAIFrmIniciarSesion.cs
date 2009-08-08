@@ -115,8 +115,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                                  Aplicacion.UsuarioPersistencia.strSistemas = sistemas.ToArray();
                                              }
                                          }
-                                     });
-            tr.IsBackground = true;
+                                     }) { IsBackground = true };
             tr.Start();
         }
 
