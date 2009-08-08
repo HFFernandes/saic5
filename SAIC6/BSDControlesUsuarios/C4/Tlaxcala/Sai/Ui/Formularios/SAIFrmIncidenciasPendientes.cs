@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
-using XtremeReportControl;
-using System.Reflection;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {

@@ -16,13 +16,24 @@ namespace BSD.C4
         [STAThread]
         public static void Main()
         {
-            //TODO: Implementar exclusión mutua
+            bool blnMutex;
+            using (var mutex = new Mutex(true, "SAICC4", out blnMutex))
+            {
+                if (blnMutex)
+                {
+                    Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
 
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-            Application.Run(new SAIFrmComandos());
+                    Application.EnableVisualStyles();
+                    Application.SetCompatibleTextRenderingDefault(false);
+                    AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+                    Application.Run(new SAIFrmComandos());
+
+                    mutex.ReleaseMutex();
+                }
+                else
+                    MessageBox.Show("Ya esta ejecutandose otra instancia del aplicativo.", "SAI", MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
+            }
         }
 
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)

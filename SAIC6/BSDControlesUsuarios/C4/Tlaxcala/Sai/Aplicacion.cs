@@ -57,6 +57,11 @@ namespace BSD.C4.Tlaxcala.Sai
             public static string strSistemaActual { get; set; }
             public static bool? blnEsDespachador { get; set; }
 
+            /// <summary>
+            /// Función que determina si el usuario actual tiene permisos de LECTURA sobre el modulo specificado
+            /// </summary>
+            /// <param name="intSubModulo">Módulo sobre el cual se consultan los permisos</param>
+            /// <returns>verdadero o falso</returns>
             public static bool blnPuedeLeer(int intSubModulo)
             {
                 var permisoObjectList = PermisoMapper.Instance().GetBySQLQuery(string.Format(SQL_OBTENERPERMISOS, intClaveUsuario, intSubModulo));
@@ -69,6 +74,11 @@ namespace BSD.C4.Tlaxcala.Sai
                 return false;
             }
 
+            /// <summary>
+            /// Función que determina si el usuario actual tiene permisos de ESCRIBIR sobre el modulo specificado
+            /// </summary>
+            /// <param name="intSubModulo">Módulo sobre el cual se consultan los permisos</param>
+            /// <returns>verdadero o falso</returns>
             public static bool blnPuedeEscribir(int intSubModulo)
             {
                 var permisoObjectList = PermisoMapper.Instance().GetBySQLQuery(string.Format(SQL_OBTENERPERMISOS, intClaveUsuario, intSubModulo));

@@ -16,7 +16,7 @@ namespace BSD.C4.Tlaxcala.Sai.Excepciones
             var exceptionMessageBox = new ExceptionMessageBox(excepcion)
             {
                 HelpLink = "http://www.infinitysoft.com.mx",
-                Symbol = ExceptionMessageBoxSymbol.Error,
+                Symbol = ExceptionMessageBoxSymbol.Information,
                 Beep = true
             };
 
