@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.saiReport1 = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIReport();
+            this.tmrRegistros = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // saiReport1
@@ -36,8 +38,14 @@
             this.saiReport1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.saiReport1.Location = new System.Drawing.Point(0, 0);
             this.saiReport1.Name = "saiReport1";
-            this.saiReport1.Size = new System.Drawing.Size(647, 296);
+            this.saiReport1.Size = new System.Drawing.Size(647, 274);
             this.saiReport1.TabIndex = 0;
+            // 
+            // tmrRegistros
+            // 
+            this.tmrRegistros.Enabled = true;
+            this.tmrRegistros.Interval = 1500;
+            this.tmrRegistros.Tick += new System.EventHandler(this.tmrRegistros_Tick);
             // 
             // SAIFrmIncidenciasPendientes
             // 
@@ -57,5 +65,6 @@
         #endregion
 
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIReport saiReport1;
+        private System.Windows.Forms.Timer tmrRegistros;
     }
 }
