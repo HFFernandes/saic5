@@ -43,13 +43,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\BSDControlesUsuarios\Recursos Externos\Cooperator.Framework.Library.dll</HintPath>
     </Reference>
+    <Reference Include="ExceptionMessageBox, Version=9.0.242.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BSDControlesUsuarios\Recursos Externos\ExceptionMessageBox.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -156,6 +154,9 @@
       <Project>{FF9562EF-1FA0-49B7-B8B6-80D41CEBAC19}</Project>
       <Name>SAIC4</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btnModificar.Image.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

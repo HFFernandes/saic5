@@ -113,6 +113,7 @@
             this.catalogoDeUnidadesToolStripMenuItem.Name = "catalogoDeUnidadesToolStripMenuItem";
             this.catalogoDeUnidadesToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
             this.catalogoDeUnidadesToolStripMenuItem.Text = "Catalogo de Unidades";
+            this.catalogoDeUnidadesToolStripMenuItem.Click += new System.EventHandler(this.catalogoDeUnidadesToolStripMenuItem_Click);
             // 
             // catalogoDeCorporacionesToolStripMenuItem
             // 

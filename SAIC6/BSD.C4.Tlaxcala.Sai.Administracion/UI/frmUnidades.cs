@@ -146,15 +146,17 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            this.Eliminar();
-            this.LlenarGrid();
-            this.Limpiar();
+            if (MessageBox.Show("¿Desea eliminar la Unidad?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                this.Eliminar();
+                this.LlenarGrid();
+                this.Limpiar();
+            }
         }
 
         private void bnCancelar_Click(object sender, EventArgs e)
-        {            
-            this.LlenarGrid();
-            this.Limpiar();
+        {
+            this.Close();
         }
 
         private void gvUnidades_SelectionChanged(object sender, EventArgs e)
@@ -171,6 +173,11 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             }
             catch (Exception ex)
             { this.SAIEtiquetaEstado.Text = ex.Message; }
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            this.Limpiar();
         }
     }
 }
