@@ -49,5 +49,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             frm_Corporaciones.Show();
         }
 
+        private void catalogoDeUnidadesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmUnidades frm_Unidades = new frmUnidades();
+            frm_Unidades.MdiParent = this;
+            frm_Unidades.Show();
+
+        }
+
     }
 }
