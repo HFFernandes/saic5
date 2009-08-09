@@ -13,6 +13,27 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         public SAIFrmIncidencia089()
         {
             InitializeComponent();
+
+            if (this._entIncidencia != null)
+            {
+                this.Text = this._entIncidencia.Folio.ToString();
+            }
         }
+
+        private void chkFechaEnvio_CheckedChanged(object sender, EventArgs e)
+        {
+            this.dtmFechaEnvioDependencia.Enabled = !this.dtmFechaEnvioDependencia.Enabled;
+        }
+
+        private void chkFechaDocumento_CheckedChanged(object sender, EventArgs e)
+        {
+            this.dtmFechaDocumento.Enabled = !this.dtmFechaDocumento.Enabled;
+        }
+
+        private void chkFechaNotificacion_CheckedChanged(object sender, EventArgs e)
+        {
+            this.dtmFechaNotificacion.Enabled = !this.dtmFechaNotificacion.Enabled;
+        }
+
     }
 }
