@@ -33,12 +33,20 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         private void catalogoDeTiposDeIncidenciasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmTipoIncidencias frm_TiposIncidencias = new frmTipoIncidencias();
-            frm_TiposIncidencias.ShowDialog();
+            frm_TiposIncidencias.MdiParent = this;
+            frm_TiposIncidencias.Show();
         }
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void catalogoDeCorporacionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCorporaciones frm_Corporaciones = new frmCorporaciones();
+            frm_Corporaciones.MdiParent = this;
+            frm_Corporaciones.Show();
         }
 
     }
