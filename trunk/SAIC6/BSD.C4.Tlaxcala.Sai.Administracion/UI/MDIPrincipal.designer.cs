@@ -71,7 +71,7 @@
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
             this.salirToolStripMenuItem.Text = "&Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
@@ -119,6 +119,7 @@
             this.catalogoDeCorporacionesToolStripMenuItem.Name = "catalogoDeCorporacionesToolStripMenuItem";
             this.catalogoDeCorporacionesToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
             this.catalogoDeCorporacionesToolStripMenuItem.Text = "Catalogo de Corporaciones";
+            this.catalogoDeCorporacionesToolStripMenuItem.Click += new System.EventHandler(this.catalogoDeCorporacionesToolStripMenuItem_Click);
             // 
             // MDIPrincipal
             // 

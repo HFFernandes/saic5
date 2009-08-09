@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using BSD.C4.Tlaxcala.Sai.Ui.Formularios;
 using Entidades = BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using Mappers = BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
+using Objetos = BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects;
 
 
 namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
@@ -32,26 +33,57 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             this.Limpiar();
         }
 
+        /// <summary>
+        /// Llenar el DtataGrid con el catalogo de Corporaciones
+        /// </summary>
         private void LlenarGrid()
         {
-            try 
+            DataTable catCorporaciones = new DataTable("CatCorporaciones");
+
+            try
             {
-                this.gvCorporaciones.DataSource = Mappers.CorporacionMapper.Instance().GetAll();
+                catCorporaciones.Columns.Add(new DataColumn("Clave", Type.GetType("System.Int32")));
+                catCorporaciones.Columns.Add(new DataColumn("Descripcion", Type.GetType("System.String")));
+                catCorporaciones.Columns.Add(new DataColumn("ClaveSistema", Type.GetType("System.Int32")));
+                catCorporaciones.Columns.Add(new DataColumn("Sistema", Type.GetType("System.String")));
+                catCorporaciones.Columns.Add(new DataColumn("UnidadesVirtuales", Type.GetType("System.Boolean")));
+                catCorporaciones.Columns.Add(new DataColumn("Activo", Type.GetType("System.Boolean")));
+                catCorporaciones.Columns.Add(new DataColumn("Zn", Type.GetType("System.String")));
+
+
+                Entidades.CorporacionList lstCorporaciones = Mappers.CorporacionMapper.Instance().GetAll();
+                foreach (Entidades.Corporacion corporacion in lstCorporaciones)
+                {
+                    object[] registro = new object[] { corporacion.Clave, corporacion.Descripcion, corporacion.ClaveSistema, 
+                        Mappers.SistemaMapper.Instance().GetOne(corporacion.ClaveSistema.Value).Descripcion, corporacion.UnidadesVirtuales, corporacion.Activo, corporacion.Zn };
+                    catCorporaciones.Rows.Add(registro);
+                }
+
+                this.gvCorporaciones.DataSource = catCorporaciones.DefaultView; //Mappers.CorporacionMapper.Instance().GetAll();
+                this.gvCorporaciones.Columns["ClaveSistema"].Visible = false;
             }
             catch (Exception ex)
-            { this.SAIEtiquetaEstado.Text = ex.Message; }
+            { MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias"); }
         }
 
         private void Limpiar()
-        {            
-            foreach (DataGridViewRow row in this.gvCorporaciones.Rows)
+        {
+            try
             {
-                row.Selected = false;
+                foreach (DataGridViewRow row in this.gvCorporaciones.Rows)
+                {
+                    row.Selected = false;
+                }
+                this.ddlSistema.SelectedIndex = -1;
+                this.saiTxtDescripcion.Text = "";
+                this.chkUnidadVirtual.Checked = false;
+                this.chkActivo.Checked = false;
+                this.btnEliminar.Visible = false;
+                this.btnModificar.Enabled = false;
+                this.btnLimpiar.Enabled = false;
             }
-            this.ddlSistema.SelectedIndex = -1;
-            this.saiTxtDescripcion.Text = "";
-            this.chkUnidadVirtual.Checked = false;
-            this.chkActivo.Checked = false;
+            catch (Exception ex)
+            { MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias"); }
         }
 
         private void LlenarSistemas()
@@ -63,7 +95,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 this.ddlSistema.ValueMember = "Clave";
             }
             catch (Exception ex)
-            { this.SAIEtiquetaEstado.Text = ex.Message; }
+            { MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias"); }
         }
 
         #region ABC
@@ -86,7 +118,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 }
             }
             catch (Exception ex)
-            { this.SAIEtiquetaEstado.Text = ex.Message; }
+            { MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias"); }
         }
 
         /// <summary>
@@ -94,7 +126,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// </summary>
         private void Modificar()
         {
-            try 
+            try
             {
                 int rowSelected = this.gvCorporaciones.CurrentCellAddress.Y;
                 if (rowSelected > -1)
@@ -109,9 +141,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 }
             }
             catch (Exception ex)
-            {
-                this.SAIEtiquetaEstado.Text = ex.Message;
-            }
+            { MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias"); }
         }
 
         /// <summary>
@@ -128,21 +158,28 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 }
             }
             catch (Exception ex)
-            { this.SAIEtiquetaEstado.Text = ex.Message; }
+            { MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias"); }
         }
         #endregion
 
         private void gvCorporaciones_SelectionChanged(object sender, EventArgs e)
         {
-            int selectedRow = this.gvCorporaciones.CurrentCellAddress.Y;
-            if (selectedRow > -1)
+            try
             {
-                this.saiTxtDescripcion.Text = Convert.ToString(this.gvCorporaciones.Rows[selectedRow].Cells["Descripcion"].Value);
-                this.ddlSistema.SelectedValue = this.gvCorporaciones.Rows[selectedRow].Cells["ClaveSistema"].Value;
-                this.chkActivo.Checked = Convert.ToBoolean(this.gvCorporaciones.Rows[selectedRow].Cells["Activo"].Value);
-                this.chkUnidadVirtual.Checked = Convert.ToBoolean(this.gvCorporaciones.Rows[selectedRow].Cells["UnidadesVirtuales"].Value);
-                this.btnEliminar.Visible = true;
+                int selectedRow = this.gvCorporaciones.CurrentCellAddress.Y;
+                if (selectedRow > -1)
+                {
+                    this.saiTxtDescripcion.Text = Convert.ToString(this.gvCorporaciones.Rows[selectedRow].Cells["Descripcion"].Value);
+                    this.ddlSistema.SelectedValue = this.gvCorporaciones.Rows[selectedRow].Cells["ClaveSistema"].Value;
+                    this.chkActivo.Checked = Convert.ToBoolean(this.gvCorporaciones.Rows[selectedRow].Cells["Activo"].Value);
+                    this.chkUnidadVirtual.Checked = Convert.ToBoolean(this.gvCorporaciones.Rows[selectedRow].Cells["UnidadesVirtuales"].Value);
+                    this.btnEliminar.Visible = true;
+                    this.btnModificar.Enabled = true;
+                    this.btnLimpiar.Enabled = true;
+                }
             }
+            catch (Exception ex)
+            { MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias"); }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -161,14 +198,22 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            this.Eliminar();
-            this.LlenarGrid();
-            this.Limpiar();
+            if (MessageBox.Show("¿Desea Eliminar la corporaciòn?", "Sistema de Administracion de Incidencias", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                this.Eliminar();
+                this.LlenarGrid();
+                this.Limpiar();
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.Limpiar();
+            this.Close();
         }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            this.Limpiar();
+        }        
     }
 }

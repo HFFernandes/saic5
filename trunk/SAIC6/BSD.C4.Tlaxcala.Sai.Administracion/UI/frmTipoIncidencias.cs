@@ -28,12 +28,15 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
         private void LlenarGrid()
         {
+            DataTable catTipoIncidencia = new DataTable();
+
             try 
             {
+
                 this.gvTipoIncidencias.DataSource = Mappers.TipoIncidenciaMapper.Instance().GetAll();
             }
             catch(Exception ex)
-            { this.lblError.Text = ex.Message; }
+            { MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias"); }
         }
 
         private void LlenarSistemas()
@@ -44,7 +47,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 this.ddlSistema.ValueMember = "Clave";
             }
             catch (Exception ex)
-            { this.lblError.Text = ex.Message; }
+            { MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias"); }
         }
 
         private void gvTipoIncidencias_Click(object sender, EventArgs e)
@@ -78,7 +81,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 }                
             }
             catch (Exception ex)
-            { this.lblError.Text = ex.Message; }
+            { MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias"); }
         }
 
         /// <summary>
@@ -118,7 +121,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 //this.gvTipoIncidencias.CurrentRow.Selected = false;
             }
             catch (Exception ex)
-            { this.lblError.Text = ex.Message; }
+            { MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias"); }
         }
 
         /// <summary>
@@ -138,7 +141,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 Mappers.TipoIncidenciaMapper.Instance().Save(updTipoIncidencia);
             }
             catch (Exception ex)
-            { this.lblError.Text = ex.Message; }
+            { MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias"); }
         }
 
         /// <summary>
@@ -155,7 +158,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 }
             }
             catch (Exception ex)
-            { this.lblError.Text = ex.Message; }
+            { MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias"); }
         }
         #endregion
 
@@ -182,15 +185,23 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.Limpiar();
+            this.Close();
             //this.btnModificar.Enabled = false;
             //this.btnAgregar.Enabled = true;
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            this.Eliminar();
-            this.LlenarGrid();
+            if (MessageBox.Show("Desea eliminar el Tipo de Incidencia?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                this.Eliminar();
+                this.LlenarGrid();
+                this.Limpiar();
+            }
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
             this.Limpiar();
         }
     }
