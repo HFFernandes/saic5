@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows.Forms;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
@@ -96,13 +97,21 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     if (!lstIncidenciasRegistradas.Contains(incidencia))
                     {
                         lstIncidenciasRegistradas.Add(incidencia);
+                        var corporaciones = new StringBuilder();
+
+                        CorporacionMapper.Instance().GetBySQLQuery(string.Format(SQL_CORPORACIONES, incidencia.Folio)).ForEach(delegate(Corporacion c)
+                        {
+                            corporaciones.Append(c.Descripcion);
+                            corporaciones.Append(",");
+                        });
+
                         lstRegistrosReporte.Add(saiReport1.AgregarRegistro(incidencia.Folio,
                                                                        incidencia.Telefono,
                                                                        EstatusIncidenciaMapper.Instance().GetOne(incidencia.ClaveEstatus).Descripcion,
-                                                                       incidencia.HoraRecepcion.ToString(),
+                                                                       incidencia.HoraRecepcion.ToShortTimeString(),
                                                                        incidencia.Direccion,
                                                                        TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? 1).Descripcion,
-                                                                       "",
+                                                                       corporaciones.ToString().Trim().Length > 0 ? corporaciones.ToString().Trim().Remove(corporaciones.Length - 1) : string.Empty,
                                                                        incidencia.Folio.ToString()));
                     }
                     else
@@ -131,7 +140,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                                 if (!incidenciaTemp.HoraRecepcion.Equals(incidencia.HoraRecepcion))
                                     saiReport1.reportControl.Records[itm.Record.Index][3].Value =
-                                        incidencia.HoraRecepcion.ToString();
+                                        incidencia.HoraRecepcion.ToShortTimeString();
 
                                 if (!incidenciaTemp.Direccion.Equals(incidencia.Direccion))
                                     saiReport1.reportControl.Records[itm.Record.Index][4].Value = incidencia.Direccion;
@@ -176,5 +185,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 throw new SAIExcepcion(ex.Message);
             }
         }
+
+        private const string SQL_CORPORACIONES =
+            "SELECT Corporacion.* FROM Corporacion INNER JOIN CorporacionIncidencia ON Corporacion.Clave = CorporacionIncidencia.ClaveCorporacion INNER JOIN Incidencia ON CorporacionIncidencia.Folio = Incidencia.Folio WHERE (Incidencia.Folio = {0})";
     }
 }
