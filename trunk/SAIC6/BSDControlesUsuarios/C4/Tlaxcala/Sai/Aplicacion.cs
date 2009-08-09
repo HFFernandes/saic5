@@ -105,4 +105,13 @@ namespace BSD.C4.Tlaxcala.Sai
                 "SELECT Permiso.* FROM PermisoUsuario INNER JOIN Permiso ON PermisoUsuario.ClavePermiso = Permiso.Clave WHERE (PermisoUsuario.ClaveUsuario = {0}) AND (PermisoUsuario.ClaveSubmodulo = {1})";
         }
     }
+
+    public enum ESTATUSINCIDENCIAS
+    {
+        NUEVA=1,
+        PENDIENTE=2,
+        ACTIVA=3,
+        CERRADA=4,
+        CANCELADA=5
+    }
 }

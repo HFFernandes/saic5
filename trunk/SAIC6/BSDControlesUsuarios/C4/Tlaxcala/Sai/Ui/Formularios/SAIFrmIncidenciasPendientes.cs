@@ -6,7 +6,6 @@ using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
 using XtremeReportControl;
 using System.Text;
-using System.Diagnostics;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -69,7 +68,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 //Limpiamos el listado donde se almacenan las incidencias cuyo estado sea activo
                 //para iniciar nuevamente el ciclo
                 lstIncidenciasTemporales.Clear();
-                foreach (var incidencia in (IncidenciaMapper.Instance().GetByEstatusIncidencia(2))) //vamos a la base para obtener los registros de estado pendiente
+                foreach (var incidencia in (IncidenciaMapper.Instance().GetByEstatusIncidencia((int)ESTATUSINCIDENCIAS.PENDIENTE))) //vamos a la base para obtener los registros de estado pendiente
                 {
                     lstIncidenciasTemporales.Add(incidencia);
                     //verificamos que la incidencia no esté ya en la lista de incidencias registradas
@@ -78,10 +77,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     {
                         lstIncidenciasRegistradas.Add(incidencia);
                         var corporaciones = new StringBuilder();
+                        var zonas = new StringBuilder();
+
                         CorporacionMapper.Instance().GetBySQLQuery(string.Format(SQL_CORPORACIONES, incidencia.Folio)).ForEach(delegate(Corporacion c)
                         {
                             corporaciones.Append(c.Descripcion);
                             corporaciones.Append(",");
+                            
+                            zonas.Append(c.Zn);
+                            zonas.Append(",");
                         });
 
                         lstRegistrosReporte.Add(saiReport1.AgregarRegistro(incidencia.Folio,
@@ -89,7 +93,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                                                        incidencia.HoraRecepcion.ToString(),
                                                                        corporaciones.ToString().Trim().Length > 0 ? corporaciones.ToString().Trim().Remove(corporaciones.Length - 1) : string.Empty,
                                                                        TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? 1).Descripcion,
-                                                                       "zona",
+                                                                       zonas.ToString().Trim().Length > 0 ? zonas.ToString().Trim().Remove(zonas.Length-1) : string.Empty,
                                                                        "dividido en",
                                                                        "pendiente desde",
                                                                        UsuarioMapper.Instance().GetOne(incidencia.ClaveUsuario).NombreUsuario));
