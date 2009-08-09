@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Microsoft.NetEnterpriseServers;
 using XtremeCommandBars;
-using BSD.C4.Tlaxcala.Sai.Ui.Controles;
-using System.Diagnostics;
-using System.Threading;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -86,7 +83,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     break;
                 case ID.CMD_NI:
 
-                   
+
 
                     //Se pregunta qué es el usuario y a qué sistema entró:
                     if (Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
@@ -94,23 +91,23 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     {
                         SAIFrmIncidencia066Despacho frmIncidencia066Despacho = new SAIFrmIncidencia066Despacho();
                         frmIncidencia066Despacho.Show(this);
-                        
+
                     }
                     else if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
                         Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
                     {
                         SAIFrmIncidencia066 frmIncidencia066 = new SAIFrmIncidencia066();
                         frmIncidencia066.Show(this);
-                       
+
                     }
                     else if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
                         Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                     {
                         SAIFrmIncidencia089 frmIncidencia089 = new SAIFrmIncidencia089();
                         frmIncidencia089.Show(this);
-                       
+
                     }
-                    
+
 
                     break;
                 case ID.CMD_P:
@@ -154,7 +151,18 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         void SAIBarraComandos_Customization(object sender, AxXtremeCommandBars._DCommandBarsEvents_CustomizationEvent e)
         {
             //No se mostrará la página correspondiente a menús ya que no existe alguno
-            e.options.ShowMenusPage = false;
+            //e.options.ShowMenusPage = false;
+
+            var controls = SAIBarraComandos.DesignerControls;
+            if (controls.Count == 0)
+            {
+                var coleccionComandos = ComandosColeccion.ColeccionComandos();
+                foreach (var comando in coleccionComandos)
+                {
+                    AgregarBoton(controls, XTPControlType.xtpControlButton, comando.Identificador, comando.Caption,
+                                 comando.IniciaGrupo, comando.Descripcion, comando.EsVisible);
+                }
+            }
         }
 
         /// <summary>
@@ -200,27 +208,35 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             var controlBarra = Controles.Add(TipoControl, Identificador, Caption, -1, false);
             controlBarra.Visible = EsVisible;
             controlBarra.BeginGroup = IniciarGrupo;
-            //controlBarra.DescriptionText = Descripcion;
+            controlBarra.DescriptionText = Descripcion;
             controlBarra.TooltipText = Descripcion;
+            controlBarra.Category = "Comandos SAI";
+            controlBarra.Style = XTPButtonStyle.xtpButtonAutomatic;
             return controlBarra;
         }
 
         private void SAIFrmComandos_Load(object sender, EventArgs e)
         {
-            var barra = SAIBarraComandos.Add("Comandos", XTPBarPosition.xtpBarTop);
-            barra.SetIconSize(32, 32);  //Tamaño predeterminado para el item
-            barra.Closeable = false;    //Indicamos que no es posible cerrar la colección de items en la barra para evitar la lógica requerida
-            barra.EnableAnimation = true;   //Indicamos que mostraremos efectos de desvanecimiento
-            barra.ShowGripper = false;  //Indicamos que ocultaremos el gripper para evitar que pueda moverse de su ubicación predeterminada
-
-            //Agregamos los comandos predeterminados que manejará el sistema y sus accesos rápidos
-            var coleccionComandos = ComandosColeccion.ColeccionComandos();
-            foreach (var comando in coleccionComandos)
+            SAIBarraComandos.LoadCommandBars("SAIC4", "Sistema de Administracion de Incidencias", "BarraComandos");
+            if (SAIBarraComandos.Count == 0)
             {
-                AgregarBoton(barra.Controls, XTPControlType.xtpControlButton, comando.Identificador, comando.Caption,
-                             comando.IniciaGrupo, comando.Descripcion, comando.EsVisible);
+                var barra = SAIBarraComandos.Add("Comandos", XTPBarPosition.xtpBarTop);
+                barra.SetIconSize(32, 32); //Tamaño predeterminado para el item
+                barra.Closeable = false;
+                //Indicamos que no es posible cerrar la colección de items en la barra para evitar la lógica requerida
+                barra.EnableAnimation = true; //Indicamos que mostraremos efectos de desvanecimiento
+                barra.ShowGripper = false;
+                //Indicamos que ocultaremos el gripper para evitar que pueda moverse de su ubicación predeterminada
 
-                SAIBarraComandos.KeyBindings.Add(ID.FCONTROL, comando.TeclaAccesoRapido, comando.Identificador);
+                //Agregamos los comandos predeterminados que manejará el sistema y sus accesos rápidos
+                var coleccionComandos = ComandosColeccion.ColeccionComandos();
+                foreach (var comando in coleccionComandos)
+                {
+                    AgregarBoton(barra.Controls, XTPControlType.xtpControlButton, comando.Identificador, comando.Caption,
+                                 comando.IniciaGrupo, comando.Descripcion, comando.EsVisible);
+
+                    SAIBarraComandos.KeyBindings.Add(ID.FCONTROL, comando.TeclaAccesoRapido, comando.Identificador);
+                }
             }
         }
 
@@ -311,6 +327,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 objVentana.Top = 200;
                 objVentana.Show(this);
             }
+        }
+
+        private void SAIFrmComandos_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            SAIBarraComandos.SaveCommandBars("SAIC4", "Sistema de Administracion de Incidencias", "BarraComandos");
         }
 
     }
