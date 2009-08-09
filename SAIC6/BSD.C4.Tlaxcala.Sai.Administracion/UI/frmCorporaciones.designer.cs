@@ -101,6 +101,8 @@
             this.gvCorporaciones.MultiSelect = false;
             this.gvCorporaciones.Name = "gvCorporaciones";
             this.gvCorporaciones.ReadOnly = true;
+            this.gvCorporaciones.RowHeadersVisible = false;
+            this.gvCorporaciones.ShowEditingIcon = false;
             this.gvCorporaciones.Size = new System.Drawing.Size(544, 141);
             this.gvCorporaciones.TabIndex = 0;
             this.gvCorporaciones.SelectionChanged += new System.EventHandler(this.gvCorporaciones_SelectionChanged);
