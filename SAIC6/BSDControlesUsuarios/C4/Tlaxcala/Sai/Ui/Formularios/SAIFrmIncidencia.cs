@@ -999,6 +999,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
+        private void SAIFrmIncidencia_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
+
        
        
 
