@@ -122,9 +122,31 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     saiReport1.reportControl.Records[itm.Record.Index][2].Value =
                                         incidencia.HoraRecepcion.ToShortTimeString();
 
+                                var corporaciones = new StringBuilder();
+                                var zonas = new StringBuilder();
+
+                                CorporacionMapper.Instance().GetBySQLQuery(string.Format(SQL_CORPORACIONES, incidencia.Folio)).ForEach(delegate(Corporacion c)
+                                {
+                                    corporaciones.Append(c.Descripcion);
+                                    corporaciones.Append(",");
+
+                                    zonas.Append(c.Zn);
+                                    zonas.Append(",");
+                                });
+
+                                saiReport1.reportControl.Records[itm.Record.Index][3].Value =
+                                    corporaciones.ToString().Trim().Length > 0
+                                        ? corporaciones.ToString().Trim().Remove(corporaciones.Length - 1)
+                                        : string.Empty;
+
                                 if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
                                     saiReport1.reportControl.Records[itm.Record.Index][4].Value =
                                         TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? 1).Descripcion;
+
+                                saiReport1.reportControl.Records[itm.Record.Index][5].Value =
+                                    zonas.ToString().Trim().Length > 0
+                                        ? zonas.ToString().Trim().Remove(zonas.Length - 1)
+                                        : string.Empty;
 
                                 saiReport1.reportControl.Records[itm.Record.Index][7].Value = ObtenerLapso(incidencia.HoraRecepcion);
                             }
