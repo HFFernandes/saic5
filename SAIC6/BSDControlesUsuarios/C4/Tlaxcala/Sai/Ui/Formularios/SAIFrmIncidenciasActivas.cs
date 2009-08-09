@@ -88,7 +88,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 //Limpiamos el listado donde se almacenan las incidencias cuyo estado sea activo
                 //para iniciar nuevamente el ciclo
                 lstIncidenciasTemporales.Clear();
-                foreach (var incidencia in (IncidenciaMapper.Instance().GetByEstatusIncidencia(1))) //vamos a la base para obtener los registros de estado activo
+                foreach (var incidencia in (IncidenciaMapper.Instance().GetByEstatusIncidencia((int)ESTATUSINCIDENCIAS.ACTIVA))) //vamos a la base para obtener los registros de estado activo
                 {
                     lstIncidenciasTemporales.Add(incidencia);
                     //verificamos que la incidencia no esté ya en la lista de incidencias registradas
