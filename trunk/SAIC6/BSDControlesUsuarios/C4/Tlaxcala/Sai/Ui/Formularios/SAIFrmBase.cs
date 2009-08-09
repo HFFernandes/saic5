@@ -27,23 +27,23 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             InitializeComponent();
         }
 
-        /// <summary>
-        /// Hace la llamada a la función de la ventana Owner para mostrar el control switch
-        /// </summary>
-        /// <param name="e"></param>
-        protected override void OnKeyUp(KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Tab && this.bCtrPresionado)
-            {
-                if (this.Owner != null)
-                {
-                    SAIFrmComandos frmPrincipal = (SAIFrmComandos)this.Owner;
-                    frmPrincipal.MuestraSwitch();
-                }
+        ///// <summary>
+        ///// Hace la llamada a la función de la ventana Owner para mostrar el control switch
+        ///// </summary>
+        ///// <param name="e"></param>
+        //protected override void OnKeyUp(KeyEventArgs e)
+        //{
+        //    if (e.KeyCode == Keys.Tab && this.bCtrPresionado)
+        //    {
+        //        if (this.Owner != null)
+        //        {
+        //            SAIFrmComandos frmPrincipal = (SAIFrmComandos)this.Owner;
+        //            frmPrincipal.MuestraSwitch();
+        //        }
 
-            }
-            this.bCtrPresionado = false;
-        }
+        //    }
+        //    this.bCtrPresionado = false;
+        //}
 
         /// <summary>
         /// Detecta cuando se presionó la tecla control
