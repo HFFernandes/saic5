@@ -159,10 +159,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 var coleccionComandos = ComandosColeccion.ColeccionComandos();
                 foreach (var comando in coleccionComandos)
                 {
+                    //verificar el boton y si el usuario actual tiene permisos
                     AgregarBoton(controls, XTPControlType.xtpControlButton, comando.Identificador, comando.Caption,
                                  comando.IniciaGrupo, comando.Descripcion, comando.EsVisible);
                 }
             }
+
+            e.options.AllowNewToolbars = false;
+            e.options.ShowToolbarsPage = false;
+            e.options.ShowMenusPage = false;
         }
 
         /// <summary>
