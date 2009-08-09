@@ -148,6 +148,18 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
                                     saiReport1.reportControl.Records[itm.Record.Index][5].Value =
                                         TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? 1).Descripcion;
+
+                                var corporaciones = new StringBuilder();
+                                CorporacionMapper.Instance().GetBySQLQuery(string.Format(SQL_CORPORACIONES, incidencia.Folio)).ForEach(delegate(Corporacion c)
+                                {
+                                    corporaciones.Append(c.Descripcion);
+                                    corporaciones.Append(",");
+                                });
+
+                                saiReport1.reportControl.Records[itm.Record.Index][6].Value =
+                                    corporaciones.ToString().Trim().Length > 0
+                                        ? corporaciones.ToString().Trim().Remove(corporaciones.Length - 1)
+                                        : "(desconocido)";
                             }
                         }
                     }

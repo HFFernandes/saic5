@@ -137,7 +137,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 saiReport1.reportControl.Records[itm.Record.Index][3].Value =
                                     corporaciones.ToString().Trim().Length > 0
                                         ? corporaciones.ToString().Trim().Remove(corporaciones.Length - 1)
-                                        : string.Empty;
+                                        : "(desconocido)";
 
                                 if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
                                     saiReport1.reportControl.Records[itm.Record.Index][4].Value =
@@ -146,7 +146,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 saiReport1.reportControl.Records[itm.Record.Index][5].Value =
                                     zonas.ToString().Trim().Length > 0
                                         ? zonas.ToString().Trim().Remove(zonas.Length - 1)
-                                        : string.Empty;
+                                        : "(desconocido)";
 
                                 saiReport1.reportControl.Records[itm.Record.Index][7].Value = ObtenerLapso(incidencia.HoraRecepcion);
                             }

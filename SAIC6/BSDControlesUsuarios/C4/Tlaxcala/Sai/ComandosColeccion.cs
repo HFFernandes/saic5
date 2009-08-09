@@ -16,7 +16,7 @@ namespace BSD.C4.Tlaxcala.Sai
                        {                           
                            new Comando(ID.CMD_NI,"NI","Nuevo incidente",'I',false,true),
                            new Comando(ID.CMD_A,"A","Mostrar incidentes activos.",'A',false,true),
-                           new Comando(ID.CMD_P,"P","Mostrar incidencias pendientes.",'P',true,true),
+                           new Comando(ID.CMD_P,"P","Mostrar incidencias pendientes.",'P',false,true),
                            new Comando(ID.CMD_AU,"AU","Mostrar unidades disponibles.",'U',false,true)                         
                        };
         }

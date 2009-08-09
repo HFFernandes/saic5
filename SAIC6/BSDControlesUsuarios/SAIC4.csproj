@@ -108,7 +108,6 @@
     <Compile Include="C4\Tlaxcala\Sai\Mapa\Controlador.cs" />
     <Compile Include="C4\Tlaxcala\Sai\Mapa\CXML.cs" />
     <Compile Include="C4\Tlaxcala\Sai\Mapa\EstructuraUbicacion.cs" />
-    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\DatabaseSetup.cs" />
     <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidencia066.cs">
       <SubType>Form</SubType>
     </Compile>
