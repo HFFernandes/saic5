@@ -22,9 +22,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             InitializeComponent();
 
             SAIInstancia = this;
-            int intReg = reportControl.EnableDragDrop("SAIC4:DragDrop",
-                                                      XTPReportDragDrop.xtpReportAllowDrag |
-                                                      XTPReportDragDrop.xtpReportAllowDrop);
         }
 
         /// <summary>
