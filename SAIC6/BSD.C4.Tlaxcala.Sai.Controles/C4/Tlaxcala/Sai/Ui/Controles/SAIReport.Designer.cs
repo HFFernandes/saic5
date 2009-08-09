@@ -39,6 +39,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             this.lblFiltroRegistros = new System.Windows.Forms.ToolStripLabel();
             this.txtFiltroRegistros = new System.Windows.Forms.ToolStripTextBox();
             this.reportContenedor = new System.Windows.Forms.Panel();
+            this.btnDespacharIncidencias = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.reportControl)).BeginInit();
             this.barraHerramientas.SuspendLayout();
             this.reportContenedor.SuspendLayout();
@@ -58,6 +59,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             this.barraHerramientas.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnCampos,
             this.btnLigarIncidencias,
+            this.btnDespacharIncidencias,
             this.toolStripSeparator1,
             this.lblFiltroRegistros,
             this.txtFiltroRegistros});
@@ -113,6 +115,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             this.reportContenedor.Size = new System.Drawing.Size(446, 173);
             this.reportContenedor.TabIndex = 2;
             // 
+            // btnDespacharIncidencias
+            // 
+            this.btnDespacharIncidencias.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnDespacharIncidencias.Image = ((System.Drawing.Image)(resources.GetObject("btnDespacharIncidencias.Image")));
+            this.btnDespacharIncidencias.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDespacharIncidencias.Name = "btnDespacharIncidencias";
+            this.btnDespacharIncidencias.Size = new System.Drawing.Size(23, 22);
+            this.btnDespacharIncidencias.ToolTipText = "Despachar incidencia(s)";
+            // 
             // SAIReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -140,6 +151,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         public System.Windows.Forms.ToolStripButton btnCampos;
         public System.Windows.Forms.ToolStripButton btnLigarIncidencias;
         public AxXtremeReportControl.AxReportControl reportControl;
+        public System.Windows.Forms.ToolStripButton btnDespacharIncidencias;
 
     }
 }
