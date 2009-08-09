@@ -14,7 +14,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <summary>
         /// Indica si se ha presionado la tecla control
         /// </summary>
-        private bool bCtrPresionado;
+        private bool _blnCtrPresionado;
 
         public SAIFrmComandos()
         {
@@ -85,9 +85,33 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 case ID.CMD_N:
                     break;
                 case ID.CMD_NI:
-                    SAIFrmIncidencia frmIncidencia = new SAIFrmIncidencia();
-                    Aplicacion.VentanasIncidencias.Add(new SAIWinSwitchItem("Nueva " + Aplicacion.VentanasIncidencias.Count, "Sin descripcion", frmIncidencia));
-                    frmIncidencia.Show(this);
+
+                   
+
+                    //Se pregunta qué es el usuario y a qué sistema entró:
+                    if (Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
+                        Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
+                    {
+                        SAIFrmIncidencia066Despacho frmIncidencia066Despacho = new SAIFrmIncidencia066Despacho();
+                        frmIncidencia066Despacho.Show(this);
+                        
+                    }
+                    else if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
+                        Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
+                    {
+                        SAIFrmIncidencia066 frmIncidencia066 = new SAIFrmIncidencia066();
+                        frmIncidencia066.Show(this);
+                       
+                    }
+                    else if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
+                        Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+                    {
+                        SAIFrmIncidencia089 frmIncidencia089 = new SAIFrmIncidencia089();
+                        frmIncidencia089.Show(this);
+                       
+                    }
+                    
+
                     break;
                 case ID.CMD_P:
                     if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(SAIFrmIncidenciasPendientes.intSubModulo))
@@ -256,7 +280,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             if (keyData == (Keys.ControlKey | Keys.Control))
             {
-                bCtrPresionado = true;
+                _blnCtrPresionado = true;
             }
 
             return false;
@@ -268,11 +292,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="e"></param>
         protected override void OnKeyUp(KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Tab && bCtrPresionado)
+            if (e.KeyCode == Keys.Tab && _blnCtrPresionado)
             {
                 MuestraSwitch();
             }
-            bCtrPresionado = false;
+            _blnCtrPresionado = false;
         }
 
         /// <summary>

@@ -27,11 +27,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
     public partial class SAIFrmIncidencia : SAIFrmBase
     {
 
-        Incidencia _entIncidencia = new Incidencia();
+        protected Incidencia _entIncidencia = new Incidencia();
         public event txtDescripcionOnKeyEnterUp txtDescripcion_OnKeyEnterUp;
         private Boolean _blnLimpiarColonias = false;
         private Mapa.EstructuraUbicacion _objUbicacion = new Mapa.EstructuraUbicacion();
         private Boolean _blnBloqueaEventos;
+        private Boolean _blnSeActivoClosed = false;
+        /// <summary>
+        /// Lleva el estado del caso de la tecla control presionada.
+        /// </summary>
+        private bool _blnCtrPresionado = false;
         
 
         /// <summary>
@@ -40,27 +45,66 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         public SAIFrmIncidencia()
         {
+            //El try se puso porque en tiempo de diseño se genera una excepción cuando se abren los formularios hijos
+            try
+            {
+                this._blnBloqueaEventos = true;
+                InitializeComponent();
+                this.InicializaListas();
+                //****Crea una nueva incidencia, el formulario se abrió para insertar*******
+                this._entIncidencia.Referencias = string.Empty;
+                this._entIncidencia.Descripcion = string.Empty;
+                this._entIncidencia.Activo = true;
+                this._entIncidencia.HoraRecepcion = DateTime.Now;
+                this._entIncidencia.ClaveEstatus = 1;
+                this._entIncidencia.ClaveUsuario = Aplicacion.UsuarioPersistencia.intClaveUsuario;
+                IncidenciaMapper.Instance().Insert(this._entIncidencia);
 
-            this._blnBloqueaEventos = true;            
-            InitializeComponent();
-            this.InicializaListas();
-            //****Crea una nueva incidencia, el formulario se abrió para insertar*******
-            this._entIncidencia.Referencias = string.Empty;
-            this._entIncidencia.Descripcion = string.Empty;
-            this._entIncidencia.Activo = true;
-            this._entIncidencia.HoraRecepcion = DateTime.Now;
-            this._entIncidencia.ClaveEstatus = 1;
-            this._entIncidencia.ClaveUsuario = Aplicacion.UsuarioPersistencia.intClaveUsuario;
-            IncidenciaMapper.Instance().Insert(this._entIncidencia);
+                //*************************************************************************
+                //Se actualiza la información de la incidencia en la lista de ventanas
+                this.ActualizaVentanaIncidencias();
+                //Se muestra la información de la incidencia en el formulario:
+                this.InicializaCampos();
+
+                this._blnBloqueaEventos = false;
+
+                Aplicacion.VentanasIncidencias.Add(new SAIWinSwitchItem(this._entIncidencia.Folio.ToString(),"",(this as Form)));
+
+            }
+            catch { }
                
-            //*************************************************************************
-            //Se actualiza la información de la incidencia en la lista de ventanas
-            this.ActualizaVentanaIncidencias();
-            //Se muestra la información de la incidencia en el formulario:
-            this.InicializaCampos();
-            
-            this._blnBloqueaEventos = false;     
-               
+        }
+
+        /// <summary>
+        /// Hace la llamada a la función de la ventana Owner para mostrar el control switch
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnKeyUp(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Tab && this._blnCtrPresionado)
+            {
+                if (this.Owner != null)
+                {
+                    SAIFrmComandos frmPrincipal = (SAIFrmComandos)this.Owner;
+                    frmPrincipal.MuestraSwitch();
+                }
+
+            }
+            this._blnCtrPresionado = false;
+            base.OnKeyUp(e);
+        }
+
+        /// <summary>
+        /// Detecta cuando se presionó la tecla control
+        /// </summary>
+        /// <returns></returns>
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.ControlKey | Keys.Control))
+            {
+                this._blnCtrPresionado = true;
+            }
+            return false;
         }
 
         /// <summary>
@@ -80,6 +124,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             
             this._blnBloqueaEventos = false;
 
+            Aplicacion.VentanasIncidencias.Add(new SAIWinSwitchItem(this._entIncidencia.Folio.ToString(), "", (this as Form)));
+
+
         }
 
         protected override void OnActivated(EventArgs e)
@@ -87,6 +134,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             base.OnActivated(e);
             //Se actualiza el mapa:
             this.actualizaMapaUbicacion();
+            this._blnSeActivoClosed = false;
         }
 
         /// <summary>
@@ -305,8 +353,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
             
             this.actualizaMapaUbicacion();
-            
-            IncidenciaMapper.Instance().Save(this._entIncidencia);
+            if (!this._blnSeActivoClosed)
+            {
+                this.GuardaIncidencia();
+            }
         }
 
         /// <summary>
@@ -408,7 +458,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 this.cmbColonia.Items.Clear();
             }
             this.actualizaMapaUbicacion();
-            IncidenciaMapper.Instance().Save(this._entIncidencia);
+            if (!this._blnSeActivoClosed)
+            {
+                this.GuardaIncidencia();
+            }
         }
 
         #endregion
@@ -544,8 +597,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
             }
             this.actualizaMapaUbicacion();
-            IncidenciaMapper.Instance().Save(this._entIncidencia);
-
+            if (!this._blnSeActivoClosed)
+            {
+                this.GuardaIncidencia();
+            }
         }
 
         /// <summary>
@@ -605,7 +660,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void cmbCP_Leave(object sender, EventArgs e)
         {
             this.actualizaMapaUbicacion();
-            IncidenciaMapper.Instance().Save(this._entIncidencia);
+            if (!this._blnSeActivoClosed)
+            {
+                this.GuardaIncidencia();
+            }
         }
 
         /// <summary>
@@ -715,14 +773,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             Mapa.Controlador.RevisaInstancias(this);
         }
 
-        protected override void OnDeactivate(EventArgs e)
-        {
-            if (this._entIncidencia != null)
-            {
-                IncidenciaMapper.Instance().Save(this._entIncidencia);
-            }
-            base.OnDeactivate(e);
-        }
+       
+
+        
 
         /// <summary>
         /// Quita el elemento de la lista de ventanas cuando la ventana ya se ha cerrado
@@ -730,6 +783,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="e"></param>
         protected override void OnClosed(EventArgs e)
         {
+            this._blnSeActivoClosed = true;
+            try
+            {
+                this.GuardaIncidencia();
+            }
+            catch { }
+           
             base.OnClosed(e);
             foreach(SAIWinSwitchItem objVentanaSwitch in Aplicacion.VentanasIncidencias)
             {
@@ -751,79 +811,99 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this._blnLimpiarColonias = true;
         }
 
-       
+        /// <summary>
+        /// Recupera los datos de la incidencia que están en el formulario y los guarda en la BD.
+        /// </summary>
+        protected  void GuardaIncidencia()
+        {
+            if (this._entIncidencia != null)
+            {
+                this.RecuperaDatosEnIncidencia();
+                IncidenciaMapper.Instance().Save(this._entIncidencia);
+            }
+        }
 
-        private void actualizaMapaUbicacion()
+        /// <summary>
+        /// Recupera los datos del formulario en el objeto de incidencia
+        /// </summary>
+        protected void RecuperaDatosEnIncidencia()
         {
             if (this._entIncidencia != null)
             {
                 if (this.cmbMunicipio.SelectedIndex == -1 || this.cmbMunicipio.Text.Trim() == string.Empty)
                 {
-                    this._objUbicacion.IdMunicipio = null;
                     this._entIncidencia.ClaveMunicipio = null;
                 }
                 else
                 {
-                    this._objUbicacion.IdMunicipio = (this.cmbMunicipio.SelectedItem as Municipio).Clave;
                     this._entIncidencia.ClaveMunicipio = this._objUbicacion.IdMunicipio;
                 }
                 if (this.cmbLocalidad.SelectedIndex == -1 || this.cmbLocalidad.Text.Trim() == string.Empty)
                 {
-                    this._objUbicacion.IdLocalidad = null;
                     this._entIncidencia.ClaveLocalidad = null;
                 }
                 else
                 {
-                    this._objUbicacion.IdLocalidad = (this.cmbLocalidad.SelectedItem as Localidad).Clave;
                     this._entIncidencia.ClaveLocalidad = this._objUbicacion.IdLocalidad;
                 }
-                if(this.cmbColonia.SelectedIndex == -1 || this.cmbColonia.Text.Trim() == string.Empty)
+                if (this.cmbColonia.SelectedIndex == -1 || this.cmbColonia.Text.Trim() == string.Empty)
                 {
-                    this._objUbicacion.IdColonia = null;
                     this._entIncidencia.ClaveColonia = null;
                 }
                 else
                 {
-                    this._objUbicacion.IdColonia = (this.cmbColonia.SelectedItem as Colonia).Clave;
                     this._entIncidencia.ClaveColonia = this._objUbicacion.IdColonia;
                 }
                 if (this.cmbCP.SelectedIndex == -1 || this.cmbCP.Text.Trim() == string.Empty)
                 {
-                    this._objUbicacion.IdCodigoPostal = null;
                     this._entIncidencia.ClaveCodigoPostal = null;
                 }
                 else
                 {
-                    this._objUbicacion.IdCodigoPostal = (this.cmbCP.SelectedItem  as CodigoPostal).Clave;
                     this._entIncidencia.ClaveCodigoPostal = this._objUbicacion.IdCodigoPostal;
                 }
+                this._entIncidencia.Telefono = this.txtTelefono.Text;
+                if (this.cmbTipoIncidencia.SelectedIndex != -1 && this.cmbTipoIncidencia.Text.Trim() != string.Empty)
+                {
+                    this._entIncidencia.ClaveTipo = (this.cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave;
+
+                }
+                else
+                {
+                    this._entIncidencia.ClaveTipo = null;
+                }
+                this._entIncidencia.Descripcion = this.txtDescripcion.Text;
+                this._entIncidencia.Direccion = this.txtDireccion.Text;
             }
-            else
-            {
-                if (this.cmbMunicipio.SelectedIndex == -1 || this.cmbMunicipio.Text.Trim() == string.Empty)
+           
+        }
+
+
+        /// <summary>
+        /// Actualiza el mapa con los datos de la ubicación del formulario actuales
+        /// </summary>
+        private void actualizaMapaUbicacion()
+        {
+            
+               if (this.cmbMunicipio.SelectedIndex == -1 || this.cmbMunicipio.Text.Trim() == string.Empty)
                 {
                     this._objUbicacion.IdMunicipio = null;
-                 
                 }
                 else
                 {
                     this._objUbicacion.IdMunicipio = (this.cmbMunicipio.SelectedItem as Municipio).Clave;
-                  
                 }
                 if (this.cmbLocalidad.SelectedIndex == -1 || this.cmbLocalidad.Text.Trim() == string.Empty)
                 {
                     this._objUbicacion.IdLocalidad = null;
-                    
                 }
                 else
                 {
                     this._objUbicacion.IdLocalidad = (this.cmbLocalidad.SelectedItem as Localidad).Clave;
-                   
                 }
                 if (this.cmbColonia.SelectedIndex == -1 || this.cmbColonia.Text.Trim() == string.Empty)
                 {
                     this._objUbicacion.IdColonia = null;
-                   
                 }
                 else
                 {
@@ -833,14 +913,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 if (this.cmbCP.SelectedIndex == -1 || this.cmbCP.Text.Trim() == string.Empty)
                 {
                     this._objUbicacion.IdCodigoPostal = null;
-                    
                 }
                 else
                 {
                     this._objUbicacion.IdCodigoPostal = (this.cmbCP.SelectedItem as CodigoPostal).Clave;
                     
                 }
-            }
+            
 
             Mapa.Controlador.MuestraMapa(this._objUbicacion, this);
         }
@@ -853,7 +932,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void txtTelefono_Leave(object sender, EventArgs e)
         {
             this._entIncidencia.Telefono  = this.txtTelefono.Text;
-            IncidenciaMapper.Instance().Save(this._entIncidencia);
+            if (!this._blnSeActivoClosed)
+            {
+                this.GuardaIncidencia();
+            }
         }
 
         /// <summary>
@@ -871,7 +953,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 this._entIncidencia.ClaveTipo = null;
             }
-            IncidenciaMapper.Instance().Save(this._entIncidencia);
+            if (!this._blnSeActivoClosed)
+            {
+                this.GuardaIncidencia();
+            }
         }
 
         /// <summary>
@@ -882,7 +967,22 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void txtDescripcion_Leave(object sender, EventArgs e)
         {
             this._entIncidencia.Descripcion = this.txtDescripcion.Text;
-            IncidenciaMapper.Instance().Save(this._entIncidencia);
+            if (!this._blnSeActivoClosed)
+            {
+                this.GuardaIncidencia();
+
+                //Se actualiza la información de la incidencia en la ventana switch
+
+                foreach (SAIWinSwitchItem objSwitch in Aplicacion.VentanasIncidencias)
+                {
+                    if ((this as Form) == objSwitch.Ventana)
+                    {
+                        objSwitch.Informacion = this.txtDescripcion.Text;
+                        break;
+                    }
+                }
+
+            }
         }
 
         /// <summary>
@@ -893,20 +993,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void txtDireccion_Leave(object sender, EventArgs e)
         {
             this._entIncidencia.Direccion  = this.txtDireccion.Text;
-            IncidenciaMapper.Instance().Save(this._entIncidencia);
+            if (!this._blnSeActivoClosed)
+            {
+                this.GuardaIncidencia();
+            }
         }
 
-        protected override void OnValidating(CancelEventArgs e)
-        {
-            string texto = this.txtDescripcion.Text;
-            base.OnValidating(e);
-        }
-
-        public override bool ValidateChildren()
-        {
-            return base.ValidateChildren();
-        }
-
+       
+       
 
     }
 }
