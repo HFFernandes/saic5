@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using BSD.C4.Tlaxcala.Sai.Ui.Formularios;
 using Entidades = BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using Mappers = BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
+using BSD.C4.Tlaxcala.Sai.Excepciones;
 
 namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 {
@@ -28,40 +29,51 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
         private void LlenarGrid()
         {
-            DataTable catTipoIncidencia = new DataTable();
-
-            try 
+            try
             {
-                catTipoIncidencia.Columns.Add(new DataColumn("Clave", Type.GetType("System.Int32")));
-                catTipoIncidencia.Columns.Add(new DataColumn("Descripcion", Type.GetType("System.String")));
-                catTipoIncidencia.Columns.Add(new DataColumn("ClaveSistema", Type.GetType("System.Int32")));
-                catTipoIncidencia.Columns.Add(new DataColumn("Sistema", Type.GetType("System.String")));
-                Entidades.TipoIncidenciaList lstTipoIns = Mappers.TipoIncidenciaMapper.Instance().GetAll();
+                DataTable catTipoIncidencia = new DataTable();
 
-                foreach (Entidades.TipoIncidencia tipoIncidencia in lstTipoIns)
+                try
                 {
-                    object[] registro = new object[] { tipoIncidencia.Clave, tipoIncidencia.Descripcion, tipoIncidencia.ClaveSistema,
-                        Mappers.SistemaMapper.Instance().GetOne(tipoIncidencia.ClaveSistema).Descripcion};
-                    catTipoIncidencia.Rows.Add(registro);
-                }
+                    catTipoIncidencia.Columns.Add(new DataColumn("Clave", Type.GetType("System.Int32")));
+                    catTipoIncidencia.Columns.Add(new DataColumn("Descripcion", Type.GetType("System.String")));
+                    catTipoIncidencia.Columns.Add(new DataColumn("ClaveSistema", Type.GetType("System.Int32")));
+                    catTipoIncidencia.Columns.Add(new DataColumn("Sistema", Type.GetType("System.String")));
+                    Entidades.TipoIncidenciaList lstTipoIns = Mappers.TipoIncidenciaMapper.Instance().GetAll();
 
-                this.gvTipoIncidencias.DataSource = catTipoIncidencia;
-                this.gvTipoIncidencias.Columns["Clave"].Visible = false;
-                this.gvTipoIncidencias.Columns["ClaveSistema"].Visible = false;
+                    foreach (Entidades.TipoIncidencia tipoIncidencia in lstTipoIns)
+                    {
+                        object[] registro = new object[] { tipoIncidencia.Clave, tipoIncidencia.Descripcion, tipoIncidencia.ClaveSistema,
+                        Mappers.SistemaMapper.Instance().GetOne(tipoIncidencia.ClaveSistema).Descripcion};
+                        catTipoIncidencia.Rows.Add(registro);
+                    }
+
+                    this.gvTipoIncidencias.DataSource = catTipoIncidencia;
+                    this.gvTipoIncidencias.Columns["Clave"].Visible = false;
+                    this.gvTipoIncidencias.Columns["ClaveSistema"].Visible = false;
+                }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
             }
-            catch(Exception ex)
-            { MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias"); }
+            catch(SAIExcepcion)
+            { }
         }
 
         private void LlenarSistemas()
         {
-            try {
-                this.ddlSistema.DataSource = Mappers.SistemaMapper.Instance().GetAll();
-                this.ddlSistema.DisplayMember = "Descripcion";
-                this.ddlSistema.ValueMember = "Clave";
+            try
+            {
+                try
+                {
+                    this.ddlSistema.DataSource = Mappers.SistemaMapper.Instance().GetAll();
+                    this.ddlSistema.DisplayMember = "Descripcion";
+                    this.ddlSistema.ValueMember = "Clave";
+                }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
             }
-            catch (Exception ex)
-            { MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias"); }
+            catch (SAIExcepcion)
+            { }
         }
 
         private void gvTipoIncidencias_Click(object sender, EventArgs e)
@@ -83,19 +95,24 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             try
             {
-                //int selectedRow = this.gvTipoIncidencias.CurrentRow.Index;
-                int selectedRow = this.gvTipoIncidencias.CurrentCellAddress.Y;
-                if (selectedRow > -1)
+                try
                 {
-                    this.btnModificar.Enabled = true;
-                    this.saiTxtDescripcion.Text = Convert.ToString(this.gvTipoIncidencias.CurrentRow.Cells["Descripcion"].Value);
-                    this.ddlSistema.SelectedValue = this.gvTipoIncidencias.CurrentRow.Cells["ClaveSistema"].Value;
-                    this.btnAgregar.Enabled = false;
-                    this.btnEliminar.Visible = true;
-                }                
+                    //int selectedRow = this.gvTipoIncidencias.CurrentRow.Index;
+                    int selectedRow = this.gvTipoIncidencias.CurrentCellAddress.Y;
+                    if (selectedRow > -1)
+                    {
+                        this.btnModificar.Enabled = true;
+                        this.saiTxtDescripcion.Text = Convert.ToString(this.gvTipoIncidencias.CurrentRow.Cells["Descripcion"].Value);
+                        this.ddlSistema.SelectedValue = this.gvTipoIncidencias.CurrentRow.Cells["ClaveSistema"].Value;
+                        this.btnAgregar.Enabled = false;
+                        this.btnEliminar.Visible = true;
+                    }
+                }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
             }
-            catch (Exception ex)
-            { MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias"); }
+            catch (SAIExcepcion)
+            { }
         }
 
         /// <summary>
@@ -127,16 +144,21 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// </summary>
         private void Agregar()
         {
-            try 
+            try
             {
-                Entidades.TipoIncidencia newTipoIncidencia = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.TipoIncidencia();
-                newTipoIncidencia.ClaveSistema = Convert.ToInt32(this.ddlSistema.SelectedValue);
-                newTipoIncidencia.Descripcion = this.saiTxtDescripcion.Text;
-                Mappers.TipoIncidenciaMapper.Instance().Insert(newTipoIncidencia);
-                //this.gvTipoIncidencias.CurrentRow.Selected = false;
+                try
+                {
+                    Entidades.TipoIncidencia newTipoIncidencia = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.TipoIncidencia();
+                    newTipoIncidencia.ClaveSistema = Convert.ToInt32(this.ddlSistema.SelectedValue);
+                    newTipoIncidencia.Descripcion = this.saiTxtDescripcion.Text;
+                    Mappers.TipoIncidenciaMapper.Instance().Insert(newTipoIncidencia);
+                    //this.gvTipoIncidencias.CurrentRow.Selected = false;
+                }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
             }
-            catch (Exception ex)
-            { MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias"); }
+            catch (SAIExcepcion)
+            { }
         }
 
         /// <summary>
@@ -144,19 +166,24 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// </summary>
         private void Modificar()
         {
-            try 
+            try
             {
-                int rowSelected = this.gvTipoIncidencias.CurrentCellAddress.Y;
-                
-                int clave = Convert.ToInt32(this.gvTipoIncidencias.Rows[rowSelected].Cells["Clave"].Value);
-                Entidades.TipoIncidencia updTipoIncidencia = new Entidades.TipoIncidencia(clave);
-                updTipoIncidencia.ClaveSistema = Convert.ToInt32(this.ddlSistema.SelectedValue);
-                updTipoIncidencia.Descripcion = Convert.ToString(this.saiTxtDescripcion.Text);
+                try
+                {
+                    int rowSelected = this.gvTipoIncidencias.CurrentCellAddress.Y;
 
-                Mappers.TipoIncidenciaMapper.Instance().Save(updTipoIncidencia);
+                    int clave = Convert.ToInt32(this.gvTipoIncidencias.Rows[rowSelected].Cells["Clave"].Value);
+                    Entidades.TipoIncidencia updTipoIncidencia = new Entidades.TipoIncidencia(clave);
+                    updTipoIncidencia.ClaveSistema = Convert.ToInt32(this.ddlSistema.SelectedValue);
+                    updTipoIncidencia.Descripcion = Convert.ToString(this.saiTxtDescripcion.Text);
+
+                    Mappers.TipoIncidenciaMapper.Instance().Save(updTipoIncidencia);
+                }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
             }
-            catch (Exception ex)
-            { MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias"); }
+            catch (SAIExcepcion)
+            { }
         }
 
         /// <summary>
@@ -164,16 +191,21 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// </summary>
         private void Eliminar()
         {
-            try 
+            try
             {
-                int rowSelected = this.gvTipoIncidencias.CurrentCellAddress.Y;
-                if (rowSelected > -1)
+                try
                 {
-                    Mappers.TipoIncidenciaMapper.Instance().Delete(Convert.ToInt32(this.gvTipoIncidencias.Rows[rowSelected].Cells["Clave"].Value));
+                    int rowSelected = this.gvTipoIncidencias.CurrentCellAddress.Y;
+                    if (rowSelected > -1)
+                    {
+                        Mappers.TipoIncidenciaMapper.Instance().Delete(Convert.ToInt32(this.gvTipoIncidencias.Rows[rowSelected].Cells["Clave"].Value));
+                    }
                 }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
             }
-            catch (Exception ex)
-            { MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias"); }
+            catch (SAIExcepcion)
+            { }
         }
         #endregion
 

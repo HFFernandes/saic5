@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using BSD.C4.Tlaxcala.Sai.Ui.Formularios;
 using Entidades = BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
+using Objetos = BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects;
 using Mappers = BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
 
@@ -35,37 +36,42 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             //Se crea un DataTable con las columnas correspondientes
             DataTable catUsuarios = new DataTable("CatUsuarios");
             try
-            {
-                //Esta columna no se mostrara
-                catUsuarios.Columns.Add(new DataColumn("Clave", Type.GetType("System.Int32")));
-                catUsuarios.Columns.Add(new DataColumn("NombreUsuario", Type.GetType("System.String")));
-                catUsuarios.Columns.Add(new DataColumn("NombrePropio", Type.GetType("System.String")));
-                catUsuarios.Columns.Add(new DataColumn("Activo", Type.GetType("System.Boolean")));
-                catUsuarios.Columns.Add(new DataColumn("Contraseña", Type.GetType("System.String")));
-                catUsuarios.Columns.Add(new DataColumn("Desp", Type.GetType("System.Boolean")));
-                //Columna para mostarse "SI" o "NO"
-                catUsuarios.Columns.Add(new DataColumn("Despachador", Type.GetType("System.String")));
-
-                Entidades.UsuarioList lstUsuarios = Mappers.UsuarioMapper.Instance().GetAll();
-
-                //Se llena el datatable
-                foreach (Entidades.Usuario usr in lstUsuarios)
+            {                
+                try
                 {
-                    object[] usuario = new object[] { usr.Clave, usr.NombreUsuario, usr.NombrePropio,
-                        usr.Activo, usr.Contraseña, usr.Despachador.Value, usr.Despachador.Value?"SI":"NO"};
-                    catUsuarios.Rows.Add(usuario);
-                }
+                    //Esta columna no se mostrara
+                    catUsuarios.Columns.Add(new DataColumn("Clave", Type.GetType("System.Int32")));
+                    catUsuarios.Columns.Add(new DataColumn("NombreUsuario", Type.GetType("System.String")));
+                    catUsuarios.Columns.Add(new DataColumn("NombrePropio", Type.GetType("System.String")));
+                    catUsuarios.Columns.Add(new DataColumn("Activo", Type.GetType("System.Boolean")));
+                    catUsuarios.Columns.Add(new DataColumn("Contraseña", Type.GetType("System.String")));
+                    catUsuarios.Columns.Add(new DataColumn("Desp", Type.GetType("System.Boolean")));
+                    //Columna para mostarse "SI" o "NO"
+                    catUsuarios.Columns.Add(new DataColumn("Despachador", Type.GetType("System.String")));
 
-                this.gvUsuarios.DataSource = catUsuarios;
-                //se ocultan columnas al usuario
-                this.gvUsuarios.Columns["Clave"].Visible = false;
-                this.gvUsuarios.Columns["Desp"].Visible = false;
+                    Entidades.UsuarioList lstUsuarios = Mappers.UsuarioMapper.Instance().GetAll();
+
+                    //Se llena el datatable
+                    foreach (Entidades.Usuario usr in lstUsuarios)
+                    {
+                        object[] usuario = new object[] { usr.Clave, usr.NombreUsuario, usr.NombrePropio,
+                        usr.Activo, usr.Contraseña, usr.Despachador.Value, usr.Despachador.Value?"SI":"NO"};
+                        catUsuarios.Rows.Add(usuario);
+                    }
+
+                    this.gvUsuarios.DataSource = catUsuarios;
+                    //se ocultan columnas al usuario
+                    this.gvUsuarios.Columns["Clave"].Visible = false;
+                    this.gvUsuarios.Columns["Desp"].Visible = false;
+                }
+                catch (Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias");
-            }
-                finally { catUsuarios = null; }
+            catch (SAIExcepcion)
+            { }
+            finally { catUsuarios = null; }
         }
 
         private void Limpiar()
@@ -87,6 +93,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 //Se ocultan los botones de eliminar y modificar
                 this.btnEliminar.Visible = false;
                 this.btnModificar.Enabled = false;
+                this.btnAgregar.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -193,11 +200,29 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         private void btnEliminar_Click(object sender, EventArgs e)
         {
 
-            if (MessageBox.Show("Desea Eliminar el usuario", "Sistema de Administracion de Incidencias", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Desea Eliminar el usuario", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                this.Eliminar();
-                this.LlenarGrid();
-                this.Limpiar();
+                int usrSelected = Convert.ToInt32(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Clave"].Value);
+                Objetos.PermisoUsuarioObjectList lstPermisos = Mappers.PermisoUsuarioMapper.Instance().GetByUsuario(usrSelected);
+                if (lstPermisos.Count > 0)
+                {
+                    if (MessageBox.Show("El usuario tiene permisos asignados, ¿Desea borrar de todas formas?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        foreach (Objetos.PermisoUsuarioObject permiso in lstPermisos)
+                        {
+                            Mappers.PermisoUsuarioMapper.Instance().Delete(permiso.ClaveUsuario, permiso.ClaveSubmodulo, permiso.ClavePermiso);
+                        }
+                        this.Eliminar();
+                        this.LlenarGrid();
+                        this.Limpiar();
+                    }
+                }
+                else
+                {
+                    this.Eliminar();
+                    this.LlenarGrid();
+                    this.Limpiar();
+                }                
             }
             else { this.Limpiar(); }
         }
@@ -228,6 +253,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         //Se muestran los botones de Eliminar y Modificar
                         this.btnEliminar.Visible = true;
                         this.btnModificar.Enabled = true;
+                        this.btnAgregar.Enabled = false;
                     }
                 }
                 catch (Exception ex)

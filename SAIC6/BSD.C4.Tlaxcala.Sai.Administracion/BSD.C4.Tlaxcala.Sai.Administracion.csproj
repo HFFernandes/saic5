@@ -136,6 +136,7 @@
     <Compile Include="UI\MDIPrincipal.designer.cs">
       <DependentUpon>MDIPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utilerias\ComboItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BSD.C4.Tlaxcala.Sai.Controles\BSD.C4.Tlaxcala.Sai.Controles.csproj">
