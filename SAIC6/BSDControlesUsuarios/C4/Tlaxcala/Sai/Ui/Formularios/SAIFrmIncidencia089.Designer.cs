@@ -86,6 +86,7 @@
             this.txtNumeroOficio.Size = new System.Drawing.Size(205, 20);
             this.txtNumeroOficio.StrMensajeCampoRequerido = "El campo es requerido.";
             this.txtNumeroOficio.TabIndex = 28;
+            this.txtNumeroOficio.Leave += new System.EventHandler(this.txtNumeroOficio_Leave);
             // 
             // dtmFechaEnvioDependencia
             // 
@@ -95,6 +96,8 @@
             this.dtmFechaEnvioDependencia.Name = "dtmFechaEnvioDependencia";
             this.dtmFechaEnvioDependencia.Size = new System.Drawing.Size(110, 20);
             this.dtmFechaEnvioDependencia.TabIndex = 22;
+            this.dtmFechaEnvioDependencia.Leave += new System.EventHandler(this.dtmFechaEnvioDependencia_Leave);
+            this.dtmFechaEnvioDependencia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dtmFechaEnvioDependencia_KeyUp);
             // 
             // dtmFechaDocumento
             // 
@@ -105,6 +108,8 @@
             this.dtmFechaDocumento.Size = new System.Drawing.Size(110, 20);
             this.dtmFechaDocumento.TabIndex = 24;
             this.dtmFechaDocumento.Value = new System.DateTime(2009, 8, 8, 0, 0, 0, 0);
+            this.dtmFechaDocumento.Leave += new System.EventHandler(this.dtmFechaDocumento_Leave);
+            this.dtmFechaDocumento.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dtmFechaDocumento_KeyUp);
             // 
             // dtmFechaNotificacion
             // 
@@ -114,6 +119,8 @@
             this.dtmFechaNotificacion.Name = "dtmFechaNotificacion";
             this.dtmFechaNotificacion.Size = new System.Drawing.Size(110, 20);
             this.dtmFechaNotificacion.TabIndex = 26;
+            this.dtmFechaNotificacion.Leave += new System.EventHandler(this.dtmFechaNotificacion_Leave);
+            this.dtmFechaNotificacion.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dtmFechaNotificacion_KeyUp);
             // 
             // chkFechaEnvio
             // 
@@ -121,7 +128,7 @@
             this.chkFechaEnvio.Location = new System.Drawing.Point(212, 369);
             this.chkFechaEnvio.Name = "chkFechaEnvio";
             this.chkFechaEnvio.Size = new System.Drawing.Size(15, 14);
-            this.chkFechaEnvio.TabIndex = 29;
+            this.chkFechaEnvio.TabIndex = 23;
             this.chkFechaEnvio.UseVisualStyleBackColor = true;
             this.chkFechaEnvio.CheckedChanged += new System.EventHandler(this.chkFechaEnvio_CheckedChanged);
             // 
@@ -131,7 +138,7 @@
             this.chkFechaDocumento.Location = new System.Drawing.Point(491, 368);
             this.chkFechaDocumento.Name = "chkFechaDocumento";
             this.chkFechaDocumento.Size = new System.Drawing.Size(15, 14);
-            this.chkFechaDocumento.TabIndex = 30;
+            this.chkFechaDocumento.TabIndex = 25;
             this.chkFechaDocumento.UseVisualStyleBackColor = true;
             this.chkFechaDocumento.CheckedChanged += new System.EventHandler(this.chkFechaDocumento_CheckedChanged);
             // 
@@ -141,7 +148,7 @@
             this.chkFechaNotificacion.Location = new System.Drawing.Point(212, 420);
             this.chkFechaNotificacion.Name = "chkFechaNotificacion";
             this.chkFechaNotificacion.Size = new System.Drawing.Size(15, 14);
-            this.chkFechaNotificacion.TabIndex = 31;
+            this.chkFechaNotificacion.TabIndex = 27;
             this.chkFechaNotificacion.UseVisualStyleBackColor = true;
             this.chkFechaNotificacion.CheckedChanged += new System.EventHandler(this.chkFechaNotificacion_CheckedChanged);
             // 
