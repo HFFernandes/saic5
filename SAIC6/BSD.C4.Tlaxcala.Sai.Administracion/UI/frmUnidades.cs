@@ -8,6 +8,8 @@ using System.Windows.Forms;
 using BSD.C4.Tlaxcala.Sai.Ui.Formularios;
 using Entidades = BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using Mappers = BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
+using BSD.C4.Tlaxcala.Sai.Excepciones;
+using System.Data.SqlClient;
 
 
 namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
@@ -45,18 +47,28 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
         private void LlenarGrid()
         {
+            DataTable catUbicacion = new DataTable("CatUbicaciones");
             try
             {
-            /*    DataTable catUbicacion = new DataTable("CatUbicaciones");
                 catUbicacion.Columns.Add(new DataColumn("Clave", Type.GetType("System.Int32")));
                 catUbicacion.Columns.Add(new DataColumn("Codigo", Type.GetType("System.String")));
-                catUbicacion.Columns.Add(new DataColumn("ClaveCorporacion", Type.GetType("System.String")));
+                catUbicacion.Columns.Add(new DataColumn("ClaveCorporacion", Type.GetType("System.Int32")));
+                catUbicacion.Columns.Add(new DataColumn("Corporacion", Type.GetType("System.String")));
                 catUbicacion.Columns.Add(new DataColumn("Activo", Type.GetType("System.Boolean")));
 
-                catUbicacion.Rows.Add(new object[] { 1, "COD456", "ClaveCorporacion", true });
+                Entidades.ListaUnidadesList lstUnidades = Mappers.ListaUnidadesMapper.Instance().GetAll();
 
-                this.gvUnidades.DataSource = catUbicacion;*/
-                this.gvUnidades.DataSource = Mappers.ListaUnidadesMapper.Instance().GetAll();
+                foreach (Entidades.ListaUnidades unidad in lstUnidades)
+                {
+                    object[] registro = new object[] { unidad.Clave, unidad.Codigo, unidad.ClaveCorporacion,
+                       Mappers.CorporacionMapper.Instance().GetOne(unidad.ClaveCorporacion).Descripcion, unidad.Activo};
+                    catUbicacion.Rows.Add(registro);
+                }
+                
+
+                this.gvUnidades.DataSource = catUbicacion;
+                this.gvUnidades.Columns["Clave"].Visible = false;
+                this.gvUnidades.Columns["ClaveCorporacion"].Visible = false;
             }
             catch(Exception ex)
             { this.SAIEtiquetaEstado.Text = ex.Message; }
@@ -74,6 +86,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             this.ddlCorporacion.SelectedIndex = -1;
             this.saiTxtCodigo.Text = "";
             this.chkActivo.Checked = false;
+            this.btnEliminar.Visible = false;
+            this.btnModificar.Enabled = false;
         }
         #region ABC
         /// <summary>
@@ -81,17 +95,25 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// </summary>
         private void Agregar()
         {
-            try 
+            try
             {
-                Entidades.ListaUnidades newUnidad = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.ListaUnidades();
-                newUnidad.ClaveCorporacion = Convert.ToInt32(this.ddlCorporacion.SelectedValue);
-                newUnidad.Codigo = saiTxtCodigo.Text;
-                newUnidad.Activo = this.chkActivo.Checked;
+                try
+                {
 
-                Mappers.ListaUnidadesMapper.Instance().Insert(newUnidad);
+                    Entidades.ListaUnidades newUnidad = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.ListaUnidades();
+                    newUnidad.ClaveCorporacion = Convert.ToInt32(this.ddlCorporacion.SelectedValue);
+                    newUnidad.Codigo = saiTxtCodigo.Text;
+                    newUnidad.Activo = this.chkActivo.Checked;
+
+                    Mappers.ListaUnidadesMapper.Instance().Insert(newUnidad);
+                }
+                catch (Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
-            catch (Exception ex)
-            { this.SAIEtiquetaEstado.Text = ex.Message; }
+            catch (SAIExcepcion) //Exception ex)
+            { }//this.SAIEtiquetaEstado.Text = ex.Message; }
         }
         /// <summary>
         /// Modifica lo datos de una Unidad existente
@@ -169,10 +191,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     this.saiTxtCodigo.Text = Convert.ToString(this.gvUnidades.Rows[selectedRow].Cells["Codigo"].Value);
                     this.ddlCorporacion.SelectedValue = this.gvUnidades.Rows[selectedRow].Cells["ClaveCorporacion"].Value;
                     this.chkActivo.Checked = Convert.ToBoolean(this.gvUnidades.Rows[selectedRow].Cells["Activo"].Value);
+                    this.btnEliminar.Visible = true;
+                    this.btnModificar.Enabled = true;
                 }
+                //else { throw new SAIExcepcion("Seleccione una Unidad del Catalogo."); }
             }
-            catch (Exception ex)
-            { this.SAIEtiquetaEstado.Text = ex.Message; }
+            catch //(Exception ex)
+            { } //this.SAIEtiquetaEstado.Text = ex.Message; }
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)

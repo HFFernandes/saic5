@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MDIPrincipal));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.mnuStripPrincipal = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,8 +71,9 @@
             // 
             // salirToolStripMenuItem
             // 
+            this.salirToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("salirToolStripMenuItem.Image")));
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.salirToolStripMenuItem.Text = "&Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
@@ -89,6 +91,7 @@
             // 
             // catalogoDeUsuariosToolStripMenuItem
             // 
+            this.catalogoDeUsuariosToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("catalogoDeUsuariosToolStripMenuItem.Image")));
             this.catalogoDeUsuariosToolStripMenuItem.Name = "catalogoDeUsuariosToolStripMenuItem";
             this.catalogoDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
             this.catalogoDeUsuariosToolStripMenuItem.Text = "Catalogo de Usuarios";
@@ -96,6 +99,7 @@
             // 
             // catalogoDePermisosToolStripMenuItem
             // 
+            this.catalogoDePermisosToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("catalogoDePermisosToolStripMenuItem.Image")));
             this.catalogoDePermisosToolStripMenuItem.Name = "catalogoDePermisosToolStripMenuItem";
             this.catalogoDePermisosToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
             this.catalogoDePermisosToolStripMenuItem.Text = "Catalogo de Permisos";
@@ -103,6 +107,7 @@
             // 
             // catalogoDeTiposDeIncidenciasToolStripMenuItem
             // 
+            this.catalogoDeTiposDeIncidenciasToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("catalogoDeTiposDeIncidenciasToolStripMenuItem.Image")));
             this.catalogoDeTiposDeIncidenciasToolStripMenuItem.Name = "catalogoDeTiposDeIncidenciasToolStripMenuItem";
             this.catalogoDeTiposDeIncidenciasToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
             this.catalogoDeTiposDeIncidenciasToolStripMenuItem.Text = "Catalogo de Tipos de Incidencias";
@@ -110,6 +115,7 @@
             // 
             // catalogoDeUnidadesToolStripMenuItem
             // 
+            this.catalogoDeUnidadesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("catalogoDeUnidadesToolStripMenuItem.Image")));
             this.catalogoDeUnidadesToolStripMenuItem.Name = "catalogoDeUnidadesToolStripMenuItem";
             this.catalogoDeUnidadesToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
             this.catalogoDeUnidadesToolStripMenuItem.Text = "Catalogo de Unidades";
@@ -117,6 +123,7 @@
             // 
             // catalogoDeCorporacionesToolStripMenuItem
             // 
+            this.catalogoDeCorporacionesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("catalogoDeCorporacionesToolStripMenuItem.Image")));
             this.catalogoDeCorporacionesToolStripMenuItem.Name = "catalogoDeCorporacionesToolStripMenuItem";
             this.catalogoDeCorporacionesToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
             this.catalogoDeCorporacionesToolStripMenuItem.Text = "Catalogo de Corporaciones";
@@ -129,6 +136,7 @@
             this.ClientSize = new System.Drawing.Size(940, 484);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.mnuStripPrincipal);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.mnuStripPrincipal;
             this.Name = "MDIPrincipal";

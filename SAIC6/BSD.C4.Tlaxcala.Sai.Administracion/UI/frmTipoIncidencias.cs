@@ -32,8 +32,22 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
             try 
             {
+                catTipoIncidencia.Columns.Add(new DataColumn("Clave", Type.GetType("System.Int32")));
+                catTipoIncidencia.Columns.Add(new DataColumn("Descripcion", Type.GetType("System.String")));
+                catTipoIncidencia.Columns.Add(new DataColumn("ClaveSistema", Type.GetType("System.Int32")));
+                catTipoIncidencia.Columns.Add(new DataColumn("Sistema", Type.GetType("System.String")));
+                Entidades.TipoIncidenciaList lstTipoIns = Mappers.TipoIncidenciaMapper.Instance().GetAll();
 
-                this.gvTipoIncidencias.DataSource = Mappers.TipoIncidenciaMapper.Instance().GetAll();
+                foreach (Entidades.TipoIncidencia tipoIncidencia in lstTipoIns)
+                {
+                    object[] registro = new object[] { tipoIncidencia.Clave, tipoIncidencia.Descripcion, tipoIncidencia.ClaveSistema,
+                        Mappers.SistemaMapper.Instance().GetOne(tipoIncidencia.ClaveSistema).Descripcion};
+                    catTipoIncidencia.Rows.Add(registro);
+                }
+
+                this.gvTipoIncidencias.DataSource = catTipoIncidencia;
+                this.gvTipoIncidencias.Columns["Clave"].Visible = false;
+                this.gvTipoIncidencias.Columns["ClaveSistema"].Visible = false;
             }
             catch(Exception ex)
             { MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias"); }
@@ -98,6 +112,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             this.btnModificar.Enabled = false;
             this.btnAgregar.Enabled = true;
             this.btnEliminar.Visible = false;
+            this.ddlSistema.SelectedIndex = -1;
         }
 
         private void gvTipoIncidencias_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
