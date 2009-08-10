@@ -10,7 +10,7 @@ using Entidades = BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using Mappers = BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
 using System.Data.SqlClient;
-
+using BSD.C4.Tlaxcala.Sai.Excepciones;
 
 namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 {
@@ -164,7 +164,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     else { throw new SAIExcepcion("Seleccione la unidad que desea eliminar."); }
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                { throw new SAIExcepcion("No puede eliminar la Unidad porque esta Asociada."); }
             }
             catch (SAIExcepcion)
             { }
