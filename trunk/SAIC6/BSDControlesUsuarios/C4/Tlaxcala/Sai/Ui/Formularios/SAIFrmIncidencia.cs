@@ -32,7 +32,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private Boolean _blnLimpiarColonias = false;
         private Mapa.EstructuraUbicacion _objUbicacion = new Mapa.EstructuraUbicacion();
         private Boolean _blnBloqueaEventos;
-        private Boolean _blnSeActivoClosed = false;
+        protected Boolean _blnSeActivoClosed = false;
         /// <summary>
         /// Lleva el estado del caso de la tecla control presionada.
         /// </summary>
@@ -146,10 +146,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             TipoIncidenciaList lstTipoIncidencias;
             MunicipioList lstMunicipios;
 
-
-
-           
-                lstTipoIncidencias = TipoIncidenciaMapper.Instance().GetAll();
+            if (Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
+            {
+                lstTipoIncidencias = TipoIncidenciaMapper.Instance().GetBySistema(2);
+            }
+            else
+            {
+                lstTipoIncidencias = TipoIncidenciaMapper.Instance().GetBySistema(1);
+            }
+                
                 lstMunicipios = MunicipioMapper.Instance().GetAll();
 
                 this.cmbTipoIncidencia.DataSource = lstTipoIncidencias;
@@ -355,6 +360,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.actualizaMapaUbicacion();
             if (!this._blnSeActivoClosed)
             {
+                this.RecuperaDatosEnIncidencia();
                 this.GuardaIncidencia();
             }
         }
@@ -380,6 +386,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 this.cmbLocalidad.Focus();
             }
+            this.SAIFrmIncidenciaKeyUp(e);
+
         }
         #endregion
 
@@ -442,6 +450,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 this.cmbCP.Focus();
             }
+            this.SAIFrmIncidenciaKeyUp(e);
+
         }
 
 
@@ -460,6 +470,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.actualizaMapaUbicacion();
             if (!this._blnSeActivoClosed)
             {
+                this.RecuperaDatosEnIncidencia();
                 this.GuardaIncidencia();
             }
         }
@@ -599,6 +610,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.actualizaMapaUbicacion();
             if (!this._blnSeActivoClosed)
             {
+                this.RecuperaDatosEnIncidencia();
                 this.GuardaIncidencia();
             }
         }
@@ -614,6 +626,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 this.txtDescripcion.Focus();
             }
+            this.SAIFrmIncidenciaKeyUp(e);
+
         }
 
         /// <summary>
@@ -662,6 +676,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.actualizaMapaUbicacion();
             if (!this._blnSeActivoClosed)
             {
+                this.RecuperaDatosEnIncidencia();
                 this.GuardaIncidencia();
             }
         }
@@ -677,6 +692,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 this.cmbColonia.Focus();
             }
+            this.SAIFrmIncidenciaKeyUp(e);
+
         }
 
         /// <summary>
@@ -704,6 +721,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 this.cmbTipoIncidencia.Focus();
             }
+            this.SAIFrmIncidenciaKeyUp(e);
+
         }
 
 
@@ -718,6 +737,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 this.txtDireccion.Focus();
             }
+            this.SAIFrmIncidenciaKeyUp(e);
+
         }
 
 
@@ -737,6 +758,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 this.cmbMunicipio.Focus();
             }
+            this.SAIFrmIncidenciaKeyUp(e);
+
         }
 
 
@@ -754,6 +777,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 txtDescripcion_OnKeyEnterUp(this, e); 
             }
+            this.SAIFrmIncidenciaKeyUp(e);
+
         }
 
 
@@ -786,6 +811,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this._blnSeActivoClosed = true;
             try
             {
+                this.RecuperaDatosEnIncidencia();
                 this.GuardaIncidencia();
             }
             catch { }
@@ -818,7 +844,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             if (this._entIncidencia != null)
             {
-                this.RecuperaDatosEnIncidencia();
+               
                 IncidenciaMapper.Instance().Save(this._entIncidencia);
             }
         }
@@ -999,9 +1025,18 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
-        private void SAIFrmIncidencia_KeyUp(object sender, KeyEventArgs e)
+        protected void SAIFrmIncidenciaKeyUp(KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.Tab && this._blnCtrPresionado)
+            {
+                if (this.Owner != null)
+                {
+                    SAIFrmComandos frmPrincipal = (SAIFrmComandos)this.Owner;
+                    frmPrincipal.MuestraSwitch();
+                }
 
+            }
+            this._blnCtrPresionado = false;
         }
 
        

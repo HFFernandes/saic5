@@ -328,7 +328,6 @@
             this.Name = "SAIFrmIncidencia";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "SAIFrmIncidencia";
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SAIFrmIncidencia_KeyUp);
             this.Controls.SetChildIndex(this.label3, 0);
             this.Controls.SetChildIndex(this.txtTelefono, 0);
             this.Controls.SetChildIndex(this.groupBox1, 0);
