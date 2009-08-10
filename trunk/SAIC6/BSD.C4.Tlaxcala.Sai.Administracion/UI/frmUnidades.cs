@@ -10,7 +10,7 @@ using Entidades = BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using Mappers = BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
 using System.Data.SqlClient;
-using BSD.C4.Tlaxcala.Sai.Excepciones;
+using BSD.C4.Tlaxcala.Sai.Administracion.Utilerias;
 
 namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 {
@@ -35,14 +35,51 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
         private void LlenarCorporaciones()
         {
-            try 
+            try
             {
-                this.ddlCorporacion.DataSource = Mappers.CorporacionMapper.Instance().GetAll();
-                this.ddlCorporacion.DisplayMember = "Descripcion";
-                this.ddlCorporacion.ValueMember = "Clave";
+                try
+                {
+                    Entidades.CorporacionList lstCorporaciones = Mappers.CorporacionMapper.Instance().GetAll();
+
+                    foreach (Entidades.Corporacion corporacion in lstCorporaciones)
+                    {
+                        if (!corporacion.UnidadesVirtuales)
+                        {
+                            this.ddlCorporacion.Items.Add(new ComboItem(corporacion.Clave, corporacion.Descripcion));
+                            this.ddlCorporacion.DisplayMember = "Descripcion";
+                            this.ddlCorporacion.ValueMember = "Value";
+                        }
+                    }
+                }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
             }
-            catch (Exception ex)
-            { this.SAIEtiquetaEstado.Text = ex.Message; }
+            catch (SAIExcepcion)
+            { }
+        }
+
+        private object ObtieneValor(int indice)
+        {
+            return ((ComboItem)this.ddlCorporacion.Items[indice]).Valor;
+        }
+
+        private string ObtieneDescripcion(int indice)
+        {
+            return ((ComboItem)this.ddlCorporacion.Items[indice]).Descripcion;
+        }
+
+        private void SeleccionarComboItem(int Value)
+        {
+            foreach (ComboItem item in this.ddlCorporacion.Items)
+            {
+                if (Convert.ToInt32(item.Valor) == Value)
+                {
+                    this.ddlCorporacion.SelectedItem = item;
+                    break;
+                }
+                else
+                { this.ddlCorporacion.SelectedIndex = -1; }
+            }
         }
 
         private void LlenarGrid()
@@ -96,6 +133,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             this.chkActivo.Checked = false;
             this.btnEliminar.Visible = false;
             this.btnModificar.Enabled = false;
+            this.btnAgregar.Enabled = true;
         }
         #region ABC
         /// <summary>
@@ -107,9 +145,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             {
                 try
                 {
-
                     Entidades.ListaUnidades newUnidad = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.ListaUnidades();
-                    newUnidad.ClaveCorporacion = Convert.ToInt32(this.ddlCorporacion.SelectedValue);
+                    newUnidad.ClaveCorporacion = Convert.ToInt32(this.ObtieneValor(this.ddlCorporacion.SelectedIndex)); // Convert.ToInt32(this.ddlCorporacion.SelectedValue);
                     newUnidad.Codigo = saiTxtCodigo.Text;
                     newUnidad.Activo = this.chkActivo.Checked;
 
@@ -135,7 +172,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     int selectedRow = this.gvUnidades.CurrentCellAddress.Y;
                     int clave = Convert.ToInt32(this.gvUnidades.Rows[selectedRow].Cells["Clave"].Value);
                     Entidades.ListaUnidades updUnidad = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.ListaUnidades(clave);
-                    updUnidad.ClaveCorporacion = Convert.ToInt32(this.ddlCorporacion.SelectedValue);
+                    updUnidad.ClaveCorporacion = Convert.ToInt32(this.ObtieneValor(this.ddlCorporacion.SelectedIndex));
                     updUnidad.Codigo = this.saiTxtCodigo.Text;
                     updUnidad.Activo = this.chkActivo.Checked;
 
@@ -210,10 +247,12 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     if (selectedRow > -1)
                     {
                         this.saiTxtCodigo.Text = Convert.ToString(this.gvUnidades.Rows[selectedRow].Cells["Codigo"].Value);
-                        this.ddlCorporacion.SelectedValue = this.gvUnidades.Rows[selectedRow].Cells["ClaveCorporacion"].Value;
+                        //this.ddlCorporacion.SelectedValue = this.gvUnidades.Rows[selectedRow].Cells["ClaveCorporacion"].Value;
+                        this.SeleccionarComboItem(Convert.ToInt32(this.gvUnidades.Rows[selectedRow].Cells["ClaveCorporacion"].Value));
                         this.chkActivo.Checked = Convert.ToBoolean(this.gvUnidades.Rows[selectedRow].Cells["Activo"].Value);
                         this.btnEliminar.Visible = true;
                         this.btnModificar.Enabled = true;
+                        btnAgregar.Enabled = false;
                     }
                 }
                 catch (Exception ex)

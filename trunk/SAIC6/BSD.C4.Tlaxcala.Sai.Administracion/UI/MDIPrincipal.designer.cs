@@ -39,14 +39,17 @@
             this.catalogoDeTiposDeIncidenciasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.catalogoDeUnidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.catalogoDeCorporacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.catalogoDeMunicipiosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.catalogoDeLocalidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.catalogoDeColoniasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuStripPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 462);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 530);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(940, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(994, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -57,7 +60,7 @@
             this.operacionesToolStripMenuItem});
             this.mnuStripPrincipal.Location = new System.Drawing.Point(0, 0);
             this.mnuStripPrincipal.Name = "mnuStripPrincipal";
-            this.mnuStripPrincipal.Size = new System.Drawing.Size(940, 24);
+            this.mnuStripPrincipal.Size = new System.Drawing.Size(994, 24);
             this.mnuStripPrincipal.TabIndex = 2;
             this.mnuStripPrincipal.Text = "menuStrip1";
             // 
@@ -84,7 +87,10 @@
             this.catalogoDePermisosToolStripMenuItem,
             this.catalogoDeTiposDeIncidenciasToolStripMenuItem,
             this.catalogoDeUnidadesToolStripMenuItem,
-            this.catalogoDeCorporacionesToolStripMenuItem});
+            this.catalogoDeCorporacionesToolStripMenuItem,
+            this.catalogoDeMunicipiosToolStripMenuItem,
+            this.catalogoDeLocalidadesToolStripMenuItem,
+            this.catalogoDeColoniasToolStripMenuItem});
             this.operacionesToolStripMenuItem.Name = "operacionesToolStripMenuItem";
             this.operacionesToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
             this.operacionesToolStripMenuItem.Text = "&Catalogos";
@@ -129,20 +135,39 @@
             this.catalogoDeCorporacionesToolStripMenuItem.Text = "Catalogo de Corporaciones";
             this.catalogoDeCorporacionesToolStripMenuItem.Click += new System.EventHandler(this.catalogoDeCorporacionesToolStripMenuItem_Click);
             // 
+            // catalogoDeMunicipiosToolStripMenuItem
+            // 
+            this.catalogoDeMunicipiosToolStripMenuItem.Name = "catalogoDeMunicipiosToolStripMenuItem";
+            this.catalogoDeMunicipiosToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.catalogoDeMunicipiosToolStripMenuItem.Text = "Catalogo de Municipios";
+            // 
+            // catalogoDeLocalidadesToolStripMenuItem
+            // 
+            this.catalogoDeLocalidadesToolStripMenuItem.Name = "catalogoDeLocalidadesToolStripMenuItem";
+            this.catalogoDeLocalidadesToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.catalogoDeLocalidadesToolStripMenuItem.Text = "Catalogo de Localidades";
+            // 
+            // catalogoDeColoniasToolStripMenuItem
+            // 
+            this.catalogoDeColoniasToolStripMenuItem.Name = "catalogoDeColoniasToolStripMenuItem";
+            this.catalogoDeColoniasToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.catalogoDeColoniasToolStripMenuItem.Text = "Catalogo de Colonias";
+            // 
             // MDIPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(940, 484);
+            this.ClientSize = new System.Drawing.Size(994, 552);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.mnuStripPrincipal);
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.mnuStripPrincipal;
             this.Name = "MDIPrincipal";
-            this.Text = "MDIPrincipal";
+            this.Text = "SAI Administración";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.mnuStripPrincipal.ResumeLayout(false);
             this.mnuStripPrincipal.PerformLayout();
@@ -163,5 +188,8 @@
         private System.Windows.Forms.ToolStripMenuItem catalogoDeTiposDeIncidenciasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem catalogoDeUnidadesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem catalogoDeCorporacionesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem catalogoDeMunicipiosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem catalogoDeLocalidadesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem catalogoDeColoniasToolStripMenuItem;
     }
 }
