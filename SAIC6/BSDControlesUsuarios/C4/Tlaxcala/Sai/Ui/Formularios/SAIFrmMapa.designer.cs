@@ -58,6 +58,7 @@
             this.btnLeyenda});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolStrip1.Size = new System.Drawing.Size(632, 25);
             this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
@@ -218,7 +219,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SAIFrmMapa";
-            this.Text = "CMapa";
+            this.Text = "SAI - Mapa";
             this.Deactivate += new System.EventHandler(this.CMapa_Deactivate);
             this.Load += new System.EventHandler(this.CMapa_Load);
             this.Activated += new System.EventHandler(this.CMapa_Activated);
