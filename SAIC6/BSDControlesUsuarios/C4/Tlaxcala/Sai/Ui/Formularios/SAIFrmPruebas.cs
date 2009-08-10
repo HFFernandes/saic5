@@ -44,7 +44,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 var rec =SAIReport.SAIInstancia.reportControl.CreateRecordsFromDropArray(res.ToArray());
                 for (var i = 0; i < rec.Count; i++)
                 {
-                    Debug.WriteLine(rec[0][0].Value);
+                    Debug.WriteLine(rec[i][0].Value);
                 }
             }
         }

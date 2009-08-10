@@ -84,6 +84,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         lstIncidenciasRegistradas.Add(incidencia);
                         var corporaciones = new StringBuilder();
                         var zonas = new StringBuilder();
+                        var totalCorporaciones = 0;
 
                         CorporacionMapper.Instance().GetBySQLQuery(string.Format(SQL_CORPORACIONES, incidencia.Folio)).ForEach(delegate(Corporacion c)
                         {
@@ -92,6 +93,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                             zonas.Append(c.Zn);
                             zonas.Append(",");
+
+                            if (c.Descripcion != string.Empty)
+                                totalCorporaciones += 1;
                         });
 
                         lstRegistrosReporte.Add(saiReport1.AgregarRegistro(incidencia.Folio,
@@ -100,7 +104,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                                                        corporaciones.ToString().Trim().Length > 0 ? corporaciones.ToString().Trim().Remove(corporaciones.Length - 1) : string.Empty,
                                                                        TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? 1).Descripcion,
                                                                        zonas.ToString().Trim().Length > 0 ? zonas.ToString().Trim().Remove(zonas.Length - 1) : string.Empty,
-                                                                       corporaciones.Length.ToString(),
+                                                                       totalCorporaciones.ToString(),
                                                                        ObtenerLapso(incidencia.HoraRecepcion),
                                                                        UsuarioMapper.Instance().GetOne(incidencia.ClaveUsuario).NombreUsuario));
                     }
@@ -151,8 +155,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                         ? zonas.ToString().Trim().Remove(zonas.Length - 1)
                                         : "(desconocido)";
 
-                                saiReport1.reportControl.Records[itm.Record.Index][6].Value =
-                                    corporaciones.Length.ToString();
+                                //saiReport1.reportControl.Records[itm.Record.Index][6].Value =
+                                //    corporaciones.Length.ToString();
                                 saiReport1.reportControl.Records[itm.Record.Index][7].Value = ObtenerLapso(incidencia.HoraRecepcion);
                             }
                         }
