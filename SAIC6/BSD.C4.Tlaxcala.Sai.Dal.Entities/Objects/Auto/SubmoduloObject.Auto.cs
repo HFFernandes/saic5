@@ -94,9 +94,10 @@ protected System.String _Descripcion;
             {
                 return _Clave;
             }
-            
+
+            set { _Clave = value; }
         }
-        
+
         /// <summary>
         /// 
         /// </summary>

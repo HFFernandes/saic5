@@ -31,6 +31,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 SAIBarraComandos.GlobalSettings.ResourceFile = Environment.CurrentDirectory +
                                                                "\\SuitePro.ResourceES.xml";
                 SAIBarraComandos.KeyBindings.AllowDoubleKeyShortcuts = true;
+                SAIBarraComandos.Icons.AddIcons(imgAdministrador.Icons);
 
                 //Se establece el ancho,posición superior e izquierda en base a la definición
                 //de la pantalla primaria
@@ -211,6 +212,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         public CommandBarControl AgregarBoton(CommandBarControls Controles, XTPControlType TipoControl, int Identificador, string Caption, bool IniciarGrupo, string Descripcion, bool EsVisible)
         {
             var controlBarra = Controles.Add(TipoControl, Identificador, Caption, -1, false);
+            controlBarra.IconId = Identificador;
             controlBarra.Visible = EsVisible;
             controlBarra.BeginGroup = IniciarGrupo;
             controlBarra.DescriptionText = Descripcion;
@@ -222,11 +224,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void SAIFrmComandos_Load(object sender, EventArgs e)
         {
-            SAIBarraComandos.LoadCommandBars("SAIC4", "Sistema de Administracion de Incidencias", "BarraComandos");
+            //SAIBarraComandos.LoadCommandBars("SAIC4", "Sistema de Administracion de Incidencias", "BarraComandos");
             if (SAIBarraComandos.Count == 0)
             {
                 var barra = SAIBarraComandos.Add("Comandos", XTPBarPosition.xtpBarTop);
-                barra.SetIconSize(32, 32); //Tamaño predeterminado para el item
+                barra.SetIconSize(64, 64); //Tamaño predeterminado para el item
                 barra.Closeable = false;
                 //Indicamos que no es posible cerrar la colección de items en la barra para evitar la lógica requerida
                 barra.EnableAnimation = true; //Indicamos que mostraremos efectos de desvanecimiento
@@ -336,7 +338,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void SAIFrmComandos_FormClosed(object sender, FormClosedEventArgs e)
         {
-            SAIBarraComandos.SaveCommandBars("SAIC4", "Sistema de Administracion de Incidencias", "BarraComandos");
+            //SAIBarraComandos.SaveCommandBars("SAIC4", "Sistema de Administracion de Incidencias", "BarraComandos");
         }
 
     }
