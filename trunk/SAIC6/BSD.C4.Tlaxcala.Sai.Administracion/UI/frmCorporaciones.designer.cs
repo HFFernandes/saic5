@@ -36,6 +36,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.gvCorporaciones = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             this.saiTxtDescripcion = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -44,7 +45,6 @@
             this.logoPicture = new System.Windows.Forms.PictureBox();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnLimpiar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvCorporaciones)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -127,6 +127,17 @@
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos Generales";
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Enabled = false;
+            this.btnLimpiar.Location = new System.Drawing.Point(479, 109);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
+            this.btnLimpiar.TabIndex = 7;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // saiTxtDescripcion
             // 
@@ -218,17 +229,6 @@
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.Enabled = false;
-            this.btnLimpiar.Location = new System.Drawing.Point(479, 109);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpiar.TabIndex = 7;
-            this.btnLimpiar.Text = "Limpiar";
-            this.btnLimpiar.UseVisualStyleBackColor = true;
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
-            // 
             // frmCorporaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -244,6 +244,7 @@
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnAgregar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "frmCorporaciones";
             this.Text = "Corporaciones";
             this.Load += new System.EventHandler(this.frmCorporaciones_Load);

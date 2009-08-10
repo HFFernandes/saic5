@@ -38,17 +38,17 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.gpbDatosUsuario = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.gvUsuarios = new System.Windows.Forms.DataGridView();
+            this.label4 = new System.Windows.Forms.Label();
+            this.chkActivado = new System.Windows.Forms.CheckBox();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             this.rbOperador = new System.Windows.Forms.RadioButton();
             this.rbDespachador = new System.Windows.Forms.RadioButton();
-            this.label5 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gvUsuarios = new System.Windows.Forms.DataGridView();
             this.btnModificar = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.logoPicture = new System.Windows.Forms.PictureBox();
-            this.chkActivado = new System.Windows.Forms.CheckBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.gpbDatosUsuario.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvUsuarios)).BeginInit();
@@ -148,6 +148,68 @@
             this.gpbDatosUsuario.TabStop = false;
             this.gpbDatosUsuario.Text = "Datos Generales";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(11, 124);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(398, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Seleccione esta opción para Activar o Desactivar el acceso al sistema del Usuario" +
+                ".";
+            // 
+            // chkActivado
+            // 
+            this.chkActivado.AutoSize = true;
+            this.chkActivado.Location = new System.Drawing.Point(23, 150);
+            this.chkActivado.Name = "chkActivado";
+            this.chkActivado.Size = new System.Drawing.Size(68, 17);
+            this.chkActivado.TabIndex = 6;
+            this.chkActivado.Text = "Activado";
+            this.chkActivado.UseVisualStyleBackColor = true;
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancelar.Location = new System.Drawing.Point(485, 214);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.TabIndex = 9;
+            this.btnCancelar.Text = "Limpiar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(11, 187);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(202, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Seleccione un Rol para el nuevo usuario:";
+            // 
+            // rbOperador
+            // 
+            this.rbOperador.AutoSize = true;
+            this.rbOperador.Location = new System.Drawing.Point(142, 207);
+            this.rbOperador.Name = "rbOperador";
+            this.rbOperador.Size = new System.Drawing.Size(69, 17);
+            this.rbOperador.TabIndex = 5;
+            this.rbOperador.TabStop = true;
+            this.rbOperador.Text = "Operador";
+            this.rbOperador.UseVisualStyleBackColor = true;
+            // 
+            // rbDespachador
+            // 
+            this.rbDespachador.AutoSize = true;
+            this.rbDespachador.Location = new System.Drawing.Point(28, 207);
+            this.rbDespachador.Name = "rbDespachador";
+            this.rbDespachador.Size = new System.Drawing.Size(89, 17);
+            this.rbDespachador.TabIndex = 4;
+            this.rbDespachador.TabStop = true;
+            this.rbDespachador.Text = "Despachador";
+            this.rbDespachador.UseVisualStyleBackColor = true;
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.gvUsuarios);
@@ -175,37 +237,6 @@
             this.gvUsuarios.TabStop = false;
             this.gvUsuarios.SelectionChanged += new System.EventHandler(this.gvUsuarios_SelectionChanged);
             // 
-            // rbOperador
-            // 
-            this.rbOperador.AutoSize = true;
-            this.rbOperador.Location = new System.Drawing.Point(142, 207);
-            this.rbOperador.Name = "rbOperador";
-            this.rbOperador.Size = new System.Drawing.Size(69, 17);
-            this.rbOperador.TabIndex = 5;
-            this.rbOperador.TabStop = true;
-            this.rbOperador.Text = "Operador";
-            this.rbOperador.UseVisualStyleBackColor = true;
-            // 
-            // rbDespachador
-            // 
-            this.rbDespachador.AutoSize = true;
-            this.rbDespachador.Location = new System.Drawing.Point(28, 207);
-            this.rbDespachador.Name = "rbDespachador";
-            this.rbDespachador.Size = new System.Drawing.Size(89, 17);
-            this.rbDespachador.TabIndex = 4;
-            this.rbDespachador.TabStop = true;
-            this.rbDespachador.Text = "Despachador";
-            this.rbDespachador.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(11, 187);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(202, 13);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Seleccione un Rol para el nuevo usuario:";
-            // 
             // btnModificar
             // 
             this.btnModificar.Enabled = false;
@@ -219,17 +250,6 @@
             this.btnModificar.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(485, 214);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 9;
-            this.btnCancelar.Text = "Limpiar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnEliminar
             // 
@@ -257,26 +277,6 @@
             this.logoPicture.TabIndex = 0;
             this.logoPicture.TabStop = false;
             // 
-            // chkActivado
-            // 
-            this.chkActivado.AutoSize = true;
-            this.chkActivado.Location = new System.Drawing.Point(23, 150);
-            this.chkActivado.Name = "chkActivado";
-            this.chkActivado.Size = new System.Drawing.Size(68, 17);
-            this.chkActivado.TabIndex = 6;
-            this.chkActivado.Text = "Activado";
-            this.chkActivado.UseVisualStyleBackColor = true;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(11, 124);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(398, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Seleccione esta opción para Activar o Desactivar el acceso al sistema del Usuario" +
-                ".";
-            // 
             // frmUsuarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -291,6 +291,7 @@
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.gpbDatosUsuario);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "frmUsuarios";
             this.Text = "Control de Usuarios";
             this.Load += new System.EventHandler(this.frmUsuarios_Load);
