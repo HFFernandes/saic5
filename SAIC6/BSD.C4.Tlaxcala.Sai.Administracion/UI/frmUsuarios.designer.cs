@@ -40,7 +40,7 @@
             this.gpbDatosUsuario = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.chkActivado = new System.Windows.Forms.CheckBox();
-            this.btnCancelar = new System.Windows.Forms.Button();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.rbOperador = new System.Windows.Forms.RadioButton();
             this.rbDespachador = new System.Windows.Forms.RadioButton();
@@ -49,6 +49,7 @@
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.logoPicture = new System.Windows.Forms.PictureBox();
+            this.btnCancelar = new System.Windows.Forms.Button();
             this.gpbDatosUsuario.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvUsuarios)).BeginInit();
@@ -91,7 +92,7 @@
             this.btnAgregar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
             this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregar.Location = new System.Drawing.Point(497, 501);
+            this.btnAgregar.Location = new System.Drawing.Point(315, 500);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
             this.btnAgregar.TabIndex = 7;
@@ -131,7 +132,7 @@
             // 
             this.gpbDatosUsuario.Controls.Add(this.label4);
             this.gpbDatosUsuario.Controls.Add(this.chkActivado);
-            this.gpbDatosUsuario.Controls.Add(this.btnCancelar);
+            this.gpbDatosUsuario.Controls.Add(this.btnLimpiar);
             this.gpbDatosUsuario.Controls.Add(this.label5);
             this.gpbDatosUsuario.Controls.Add(this.rbOperador);
             this.gpbDatosUsuario.Controls.Add(this.rbDespachador);
@@ -168,16 +169,16 @@
             this.chkActivado.Text = "Activado";
             this.chkActivado.UseVisualStyleBackColor = true;
             // 
-            // btnCancelar
+            // btnLimpiar
             // 
-            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(485, 214);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 9;
-            this.btnCancelar.Text = "Limpiar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            this.btnLimpiar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnLimpiar.Location = new System.Drawing.Point(485, 214);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
+            this.btnLimpiar.TabIndex = 9;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // label5
             // 
@@ -242,7 +243,7 @@
             this.btnModificar.Enabled = false;
             this.btnModificar.Image = ((System.Drawing.Image)(resources.GetObject("btnModificar.Image")));
             this.btnModificar.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnModificar.Location = new System.Drawing.Point(315, 501);
+            this.btnModificar.Location = new System.Drawing.Point(234, 499);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
             this.btnModificar.TabIndex = 6;
@@ -277,13 +278,24 @@
             this.logoPicture.TabIndex = 0;
             this.logoPicture.TabStop = false;
             // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Location = new System.Drawing.Point(497, 499);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.TabIndex = 9;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
             // frmUsuarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.CancelButton = this.btnCancelar;
+            this.CancelButton = this.btnLimpiar;
             this.ClientSize = new System.Drawing.Size(584, 548);
+            this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.logoPicture);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnModificar);
@@ -301,6 +313,7 @@
             this.Controls.SetChildIndex(this.btnModificar, 0);
             this.Controls.SetChildIndex(this.btnEliminar, 0);
             this.Controls.SetChildIndex(this.logoPicture, 0);
+            this.Controls.SetChildIndex(this.btnCancelar, 0);
             this.gpbDatosUsuario.ResumeLayout(false);
             this.gpbDatosUsuario.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -327,10 +340,11 @@
         private System.Windows.Forms.RadioButton rbDespachador;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnModificar;
-        private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.PictureBox logoPicture;
         private System.Windows.Forms.CheckBox chkActivado;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnCancelar;
     }
 }
