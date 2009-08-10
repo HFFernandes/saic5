@@ -202,11 +202,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             else { this.Limpiar(); }
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            this.Limpiar();
-        }
-
         private void gvUsuarios_SelectionChanged(object sender, EventArgs e)
         {
             try
@@ -245,6 +240,16 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         private int ObtieneIndiceSeleccionado()
         {
             return this.gvUsuarios.CurrentCellAddress.Y;
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            this.Limpiar();
         }
     }
 }
