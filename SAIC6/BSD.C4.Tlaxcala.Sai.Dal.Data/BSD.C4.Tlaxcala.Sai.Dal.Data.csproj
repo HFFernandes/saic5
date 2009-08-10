@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Gateways\Auto\CodigoPostalGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\ColoniaGateway.Auto.cs" />
+    <Compile Include="Gateways\Auto\CorporacionGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\EstadoGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\LocalidadGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\MunicipioGateway.Auto.cs" />
@@ -68,11 +69,13 @@
     <Compile Include="Gateways\Auto\PropietarioVehiculoGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\RoboVehiculoAccesoriosGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\RoboVehiculoAccesoriosVehiculoInvolucradoGateway.Auto.cs" />
+    <Compile Include="Gateways\Auto\UnidadGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\UsuarioCorporacionGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\VehiculoGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\VehiculoRobadoGateway.Auto.cs" />
     <Compile Include="Gateways\CodigoPostalGateway.cs" />
     <Compile Include="Gateways\ColoniaGateway.cs" />
+    <Compile Include="Gateways\CorporacionGateway.cs" />
     <Compile Include="Gateways\EstadoGateway.cs" />
     <Compile Include="Gateways\LocalidadGateway.cs" />
     <Compile Include="Gateways\MunicipioGateway.cs" />
@@ -81,12 +84,14 @@
     <Compile Include="Gateways\PropietarioVehiculoGateway.cs" />
     <Compile Include="Gateways\RoboVehiculoAccesoriosGateway.cs" />
     <Compile Include="Gateways\RoboVehiculoAccesoriosVehiculoInvolucradoGateway.cs" />
+    <Compile Include="Gateways\UnidadGateway.cs" />
     <Compile Include="Gateways\UsuarioCorporacionGateway.cs" />
     <Compile Include="Gateways\VehiculoGateway.cs" />
     <Compile Include="Gateways\VehiculoRobadoGateway.cs" />
     <Compile Include="LazyProviders\DefaultLazyProvider.cs" />
     <Compile Include="Mappers\Auto\CodigoPostalMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\ColoniaMapper.Auto.cs" />
+    <Compile Include="Mappers\Auto\CorporacionMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\EstadoMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\LocalidadMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\MunicipioMapper.Auto.cs" />
@@ -95,19 +100,17 @@
     <Compile Include="Mappers\Auto\PropietarioVehiculoMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\RoboVehiculoAccesoriosMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\RoboVehiculoAccesoriosVehiculoInvolucradoMapper.Auto.cs" />
+    <Compile Include="Mappers\Auto\UnidadMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\UsuarioCorporacionMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\VehiculoMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\VehiculoRobadoMapper.Auto.cs" />
     <Compile Include="Mappers\CodigoPostalMapper.cs" />
     <Compile Include="Mappers\ColoniaMapper.cs" />
-    <Compile Include="Mappers\CorporacionMapper.cs" />
-    <Compile Include="Mappers\Auto\CorporacionMapper.Auto.cs" />
-    <Compile Include="Gateways\CorporacionGateway.cs" />
-    <Compile Include="Gateways\Auto\CorporacionGateway.Auto.cs" />
     <Compile Include="Mappers\CorporacionIncidenciaMapper.cs" />
     <Compile Include="Mappers\Auto\CorporacionIncidenciaMapper.Auto.cs" />
     <Compile Include="Gateways\CorporacionIncidenciaGateway.cs" />
     <Compile Include="Gateways\Auto\CorporacionIncidenciaGateway.Auto.cs" />
+    <Compile Include="Mappers\CorporacionMapper.cs" />
     <Compile Include="Mappers\DenuncianteMapper.cs" />
     <Compile Include="Mappers\Auto\DenuncianteMapper.Auto.cs" />
     <Compile Include="Gateways\DenuncianteGateway.cs" />
@@ -156,6 +159,7 @@
     <Compile Include="Mappers\Auto\ListaUnidadesMapper.Auto.cs" />
     <Compile Include="Gateways\ListaUnidadesGateway.cs" />
     <Compile Include="Gateways\Auto\ListaUnidadesGateway.Auto.cs" />
+    <Compile Include="Mappers\UnidadMapper.cs" />
     <Compile Include="Mappers\UsuarioCorporacionMapper.cs" />
     <Compile Include="Mappers\UsuarioMapper.cs" />
     <Compile Include="Mappers\Auto\UsuarioMapper.Auto.cs" />
