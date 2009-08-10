@@ -9,7 +9,7 @@ using BSD.C4.Tlaxcala.Sai.Ui.Formularios;
 using Entidades = BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using Mappers = BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using Objetos = BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects;
-
+using BSD.C4.Tlaxcala.Sai.Excepciones;
 
 namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 {
@@ -149,16 +149,21 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// </summary>
         private void Eliminar()
         {
-            try 
+            try
             {
-                int selectedRow = this.gvCorporaciones.CurrentCellAddress.Y;
-                if (selectedRow > -1)
+                try
                 {
-                    Mappers.CorporacionMapper.Instance().Delete(Convert.ToInt32(this.gvCorporaciones.Rows[selectedRow].Cells["Clave"].Value));
-                }
+                    int selectedRow = this.gvCorporaciones.CurrentCellAddress.Y;
+                    if (selectedRow > -1)
+                    {
+                        Mappers.CorporacionMapper.Instance().Delete(Convert.ToInt32(this.gvCorporaciones.Rows[selectedRow].Cells["Clave"].Value));
+                    }
+                }                
+                catch (Exception ex)
+                { throw new SAIExcepcion("No puede eliminar la corporcaion porque esta asociada."); }
             }
-            catch (Exception ex)
-            { MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias"); }
+            catch (SAIExcepcion) { }
+        
         }
         #endregion
 
