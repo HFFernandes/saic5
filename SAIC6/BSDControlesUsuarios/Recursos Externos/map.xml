@@ -1,22 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map>
+   
+
     <layer>
-            <file>ESTADO.SHP</file>
-            <layername>Estado</layername>
-            <labelfield>NOMBRE</labelfield>
-            <labelsize>10</labelsize>
-            <showlabel>true</showlabel>
-            <type>poly</type>
-            <fillstyle>UpwardDiagonal</fillstyle>
-            <fillcolor>LightGray</fillcolor>
-            <linestyle>Solid</linestyle>
-            <linecolor>Gray</linecolor>
-            <size>1</size>
-            <visible>true</visible>
-    </layer>
-    <layer>
-    		<file>MUNICIPIO.SHP</file>
-    		<layername>Municipio</layername>
+          <file>municipio.TAB</file>
+    	  <layername>Municipio</layername>
     		<labelfield>NOMBRE</labelfield>
             <labelsize>10</labelsize>
             <showlabel>true</showlabel>
@@ -29,7 +17,7 @@
             <visible>true</visible>
     </layer>
     <layer>
-            <file>LOCALIDAD.SHP</file>
+            <file>localidad.TAB</file>
             <layername>Localidad</layername>
             <labelfield>NOMBRE</labelfield>
             <labelsize>10</labelsize>
@@ -43,7 +31,7 @@
             <visible>true</visible>
     </layer>
     <layer>
-    		<file>COLONIA.SHP</file>
+    		<file>colonia.TAB</file>
     		<layername>Colonia</layername>
     		<labelfield>NOMBRE</labelfield>
             <labelsize>10</labelsize>
