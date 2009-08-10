@@ -47,31 +47,39 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
         private void LlenarGrid()
         {
-            DataTable catUbicacion = new DataTable("CatUbicaciones");
             try
             {
-                catUbicacion.Columns.Add(new DataColumn("Clave", Type.GetType("System.Int32")));
-                catUbicacion.Columns.Add(new DataColumn("Codigo", Type.GetType("System.String")));
-                catUbicacion.Columns.Add(new DataColumn("ClaveCorporacion", Type.GetType("System.Int32")));
-                catUbicacion.Columns.Add(new DataColumn("Corporacion", Type.GetType("System.String")));
-                catUbicacion.Columns.Add(new DataColumn("Activo", Type.GetType("System.Boolean")));
-
-                Entidades.ListaUnidadesList lstUnidades = Mappers.ListaUnidadesMapper.Instance().GetAll();
-
-                foreach (Entidades.ListaUnidades unidad in lstUnidades)
+                DataTable catUbicacion = new DataTable("CatUbicaciones");
+                try
                 {
-                    object[] registro = new object[] { unidad.Clave, unidad.Codigo, unidad.ClaveCorporacion,
-                       Mappers.CorporacionMapper.Instance().GetOne(unidad.ClaveCorporacion).Descripcion, unidad.Activo};
-                    catUbicacion.Rows.Add(registro);
-                }
-                
+                    catUbicacion.Columns.Add(new DataColumn("Clave", Type.GetType("System.Int32")));
+                    catUbicacion.Columns.Add(new DataColumn("Codigo", Type.GetType("System.String")));
+                    catUbicacion.Columns.Add(new DataColumn("ClaveCorporacion", Type.GetType("System.Int32")));
+                    catUbicacion.Columns.Add(new DataColumn("Corporacion", Type.GetType("System.String")));
+                    catUbicacion.Columns.Add(new DataColumn("Activo", Type.GetType("System.Boolean")));
 
-                this.gvUnidades.DataSource = catUbicacion;
-                this.gvUnidades.Columns["Clave"].Visible = false;
-                this.gvUnidades.Columns["ClaveCorporacion"].Visible = false;
+                    Entidades.ListaUnidadesList lstUnidades = Mappers.ListaUnidadesMapper.Instance().GetAll();
+
+                    foreach (Entidades.ListaUnidades unidad in lstUnidades)
+                    {
+                        object[] registro = new object[] { unidad.Clave, unidad.Codigo, unidad.ClaveCorporacion,
+                       Mappers.CorporacionMapper.Instance().GetOne(unidad.ClaveCorporacion).Descripcion, unidad.Activo};
+                        catUbicacion.Rows.Add(registro);
+                    }
+
+
+                    this.gvUnidades.DataSource = catUbicacion;
+                    this.gvUnidades.Columns["Clave"].Visible = false;
+                    this.gvUnidades.Columns["ClaveCorporacion"].Visible = false;
+                }
+                catch (Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
+
             }
-            catch(Exception ex)
-            { this.SAIEtiquetaEstado.Text = ex.Message; }
+            catch (SAIExcepcion)
+            { }
         }
 
         /// <summary>
@@ -120,35 +128,46 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// </summary>
         private void Modificar()
         {
-            try 
+            try
             {
-                int selectedRow = this.gvUnidades.CurrentCellAddress.Y;
-                int clave = Convert.ToInt32(this.gvUnidades.Rows[selectedRow].Cells["Clave"].Value);
-                Entidades.ListaUnidades updUnidad = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.ListaUnidades(clave);
-                updUnidad.ClaveCorporacion = Convert.ToInt32(this.ddlCorporacion.SelectedValue);
-                updUnidad.Codigo = this.saiTxtCodigo.Text;
-                updUnidad.Activo = this.chkActivo.Checked;
+                try
+                {
+                    int selectedRow = this.gvUnidades.CurrentCellAddress.Y;
+                    int clave = Convert.ToInt32(this.gvUnidades.Rows[selectedRow].Cells["Clave"].Value);
+                    Entidades.ListaUnidades updUnidad = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.ListaUnidades(clave);
+                    updUnidad.ClaveCorporacion = Convert.ToInt32(this.ddlCorporacion.SelectedValue);
+                    updUnidad.Codigo = this.saiTxtCodigo.Text;
+                    updUnidad.Activo = this.chkActivo.Checked;
 
-                Mappers.ListaUnidadesMapper.Instance().Save(updUnidad);
+                    Mappers.ListaUnidadesMapper.Instance().Save(updUnidad);
+                }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
             }
-            catch (Exception ex)
-            { this.SAIEtiquetaEstado.Text = ex.Message; }
+            catch (SAIExcepcion)
+            { }
         }
         /// <summary>
         /// Elimina una Unidad del Catalogo
         /// </summary>
         private void Eliminar()
         {
-            try 
+            try
             {
-                int selectedRow = this.gvUnidades.CurrentCellAddress.Y;
-                if (selectedRow > -1)
+                try
                 {
-                    Mappers.ListaUnidadesMapper.Instance().Delete(Convert.ToInt32(this.gvUnidades.Rows[selectedRow].Cells["Clave"].Value));
+                    int selectedRow = this.gvUnidades.CurrentCellAddress.Y;
+                    if (selectedRow > -1)
+                    {
+                        Mappers.ListaUnidadesMapper.Instance().Delete(Convert.ToInt32(this.gvUnidades.Rows[selectedRow].Cells["Clave"].Value));
+                    }
+                    else { throw new SAIExcepcion("Seleccione la unidad que desea eliminar."); }
                 }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
             }
-            catch (Exception ex)
-            { this.SAIEtiquetaEstado.Text = ex.Message; }
+            catch (SAIExcepcion)
+            { }
         }
         #endregion
 
@@ -185,18 +204,22 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             try 
             {
-                int selectedRow = this.gvUnidades.CurrentCellAddress.Y;
-                if (selectedRow > -1)
+                try
                 {
-                    this.saiTxtCodigo.Text = Convert.ToString(this.gvUnidades.Rows[selectedRow].Cells["Codigo"].Value);
-                    this.ddlCorporacion.SelectedValue = this.gvUnidades.Rows[selectedRow].Cells["ClaveCorporacion"].Value;
-                    this.chkActivo.Checked = Convert.ToBoolean(this.gvUnidades.Rows[selectedRow].Cells["Activo"].Value);
-                    this.btnEliminar.Visible = true;
-                    this.btnModificar.Enabled = true;
+                    int selectedRow = this.gvUnidades.CurrentCellAddress.Y;
+                    if (selectedRow > -1)
+                    {
+                        this.saiTxtCodigo.Text = Convert.ToString(this.gvUnidades.Rows[selectedRow].Cells["Codigo"].Value);
+                        this.ddlCorporacion.SelectedValue = this.gvUnidades.Rows[selectedRow].Cells["ClaveCorporacion"].Value;
+                        this.chkActivo.Checked = Convert.ToBoolean(this.gvUnidades.Rows[selectedRow].Cells["Activo"].Value);
+                        this.btnEliminar.Visible = true;
+                        this.btnModificar.Enabled = true;
+                    }
                 }
-                //else { throw new SAIExcepcion("Seleccione una Unidad del Catalogo."); }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
             }
-            catch //(Exception ex)
+            catch(SAIExcepcion)
             { } //this.SAIEtiquetaEstado.Text = ex.Message; }
         }
 
