@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using BSD.C4.Tlaxcala.Sai.Ui.Formularios;
 using Entidades = BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using Mappers = BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
+using BSD.C4.Tlaxcala.Sai.Excepciones;
 
 namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 {
@@ -100,16 +101,21 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             try 
             {
-                Entidades.Usuario newUsuario = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Usuario();
-                newUsuario.NombrePropio = this.txtNombrePropio.Text;
-                newUsuario.NombreUsuario = this.txtUsuario.Text;
-                newUsuario.Contraseña = this.txtContrasena.Text;
-                newUsuario.Despachador = this.rbDespachador.Checked ? true : false;
-                newUsuario.Activo = this.chkActivado.Checked;
-                Mappers.UsuarioMapper.Instance().Insert(newUsuario);
+                try
+                {
+                    Entidades.Usuario newUsuario = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Usuario();
+                    newUsuario.NombrePropio = this.txtNombrePropio.Text;
+                    newUsuario.NombreUsuario = this.txtUsuario.Text;
+                    newUsuario.Contraseña = this.txtContrasena.Text;
+                    newUsuario.Despachador = this.rbDespachador.Checked ? true : false;
+                    newUsuario.Activo = this.chkActivado.Checked;
+                    Mappers.UsuarioMapper.Instance().Insert(newUsuario);
+                }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
             }
-            catch (Exception ex)
-            { MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias)"); }
+            catch (SAIExcepcion)
+            {  }
         }
 
         /// <summary>
@@ -117,22 +123,27 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// </summary>
         private void Modificar()
         {
-            try 
-            {                
-                if (this.ObtieneIndiceSeleccionado() > -1)
+            try
+            {
+                try
                 {
-                    int clave = Convert.ToInt32(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Clave"].Value);
-                    Entidades.Usuario updUsuario = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Usuario(clave);
-                    updUsuario.NombrePropio = this.txtNombrePropio.Text;
-                    updUsuario.NombreUsuario = this.txtUsuario.Text;
-                    updUsuario.Contraseña = this.txtContrasena.Text;
-                    updUsuario.Despachador = this.rbDespachador.Checked ? true : false;
-                    updUsuario.Activo = this.chkActivado.Checked;
-                    Mappers.UsuarioMapper.Instance().Save(updUsuario);
+                    if (this.ObtieneIndiceSeleccionado() > -1)
+                    {
+                        int clave = Convert.ToInt32(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Clave"].Value);
+                        Entidades.Usuario updUsuario = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Usuario(clave);
+                        updUsuario.NombrePropio = this.txtNombrePropio.Text;
+                        updUsuario.NombreUsuario = this.txtUsuario.Text;
+                        updUsuario.Contraseña = this.txtContrasena.Text;
+                        updUsuario.Despachador = this.rbDespachador.Checked ? true : false;
+                        updUsuario.Activo = this.chkActivado.Checked;
+                        Mappers.UsuarioMapper.Instance().Save(updUsuario);
+                    }
                 }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
             }
-            catch (Exception ex)
-            { MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias)"); }
+            catch (SAIExcepcion)
+            { }
         }
 
         /// <summary>
@@ -140,17 +151,22 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// </summary>
         private void Eliminar()
         {
-            try 
+            try
             {
-                //int selectedRow = this.gvUsuarios.CurrentCellAddress.Y;
-                if (this.ObtieneIndiceSeleccionado() > -1)
+                try
                 {
-                    int clave = Convert.ToInt32(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Clave"].Value);
-                    Mappers.UsuarioMapper.Instance().Delete(clave);
+                    //int selectedRow = this.gvUsuarios.CurrentCellAddress.Y;
+                    if (this.ObtieneIndiceSeleccionado() > -1)
+                    {
+                        int clave = Convert.ToInt32(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Clave"].Value);
+                        Mappers.UsuarioMapper.Instance().Delete(clave);
+                    }
                 }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
             }
-            catch (Exception ex)
-            { MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias)"); }
+            catch (SAIExcepcion)
+            { }
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -195,30 +211,35 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             try
             {
-                if (this.ObtieneIndiceSeleccionado() > -1)
+                try
                 {
-                    //Llena los controles con los datos del Datagrid
-                    this.txtNombrePropio.Text = Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["NombrePropio"].Value);
-                    this.txtUsuario.Text = Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["NombreUsuario"].Value);
-                    this.txtContrasena.Text = Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Contraseña"].Value);
-                    this.chkActivado.Checked = Convert.ToBoolean(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Activo"].Value);
-                    if (Convert.ToBoolean(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Desp"].Value))
+                    if (this.ObtieneIndiceSeleccionado() > -1)
                     {
-                        this.rbDespachador.Checked = true;
-                        this.rbOperador.Checked = false;
+                        //Llena los controles con los datos del Datagrid
+                        this.txtNombrePropio.Text = Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["NombrePropio"].Value);
+                        this.txtUsuario.Text = Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["NombreUsuario"].Value);
+                        this.txtContrasena.Text = Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Contraseña"].Value);
+                        this.chkActivado.Checked = Convert.ToBoolean(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Activo"].Value);
+                        if (Convert.ToBoolean(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Desp"].Value))
+                        {
+                            this.rbDespachador.Checked = true;
+                            this.rbOperador.Checked = false;
+                        }
+                        else
+                        {
+                            this.rbOperador.Checked = true;
+                            this.rbDespachador.Checked = false;
+                        }
+                        //Se muestran los botones de Eliminar y Modificar
+                        this.btnEliminar.Visible = true;
+                        this.btnModificar.Enabled = true;
                     }
-                    else
-                    {
-                        this.rbOperador.Checked = true;
-                        this.rbDespachador.Checked = false;
-                    }
-                    //Se muestran los botones de Eliminar y Modificar
-                    this.btnEliminar.Visible = true;
-                    this.btnModificar.Enabled = true;
                 }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
             }
-            catch (Exception ex)
-            { MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias)"); }
+            catch (SAIExcepcion)
+            { }
         }
 
         private int ObtieneIndiceSeleccionado()
