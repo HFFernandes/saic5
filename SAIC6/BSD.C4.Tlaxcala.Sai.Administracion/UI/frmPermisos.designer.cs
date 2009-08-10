@@ -73,7 +73,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.trvwPermisos);
-            this.groupBox2.Location = new System.Drawing.Point(12, 330);
+            this.groupBox2.Location = new System.Drawing.Point(12, 296);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(560, 195);
             this.groupBox2.TabIndex = 0;
@@ -90,18 +90,21 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(416, 531);
+            this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
+            this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGuardar.Location = new System.Drawing.Point(416, 518);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(75, 23);
             this.btnGuardar.TabIndex = 2;
             this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(497, 531);
+            this.btnCancelar.Location = new System.Drawing.Point(497, 518);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 3;
@@ -123,7 +126,7 @@
             // lblUsuario
             // 
             this.lblUsuario.AutoSize = true;
-            this.lblUsuario.Location = new System.Drawing.Point(16, 272);
+            this.lblUsuario.Location = new System.Drawing.Point(16, 262);
             this.lblUsuario.Name = "lblUsuario";
             this.lblUsuario.Size = new System.Drawing.Size(46, 13);
             this.lblUsuario.TabIndex = 0;
@@ -131,10 +134,10 @@
             // 
             // lblDatos
             // 
-            this.lblDatos.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDatos.Location = new System.Drawing.Point(68, 272);
+            this.lblDatos.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDatos.Location = new System.Drawing.Point(68, 263);
             this.lblDatos.Name = "lblDatos";
-            this.lblDatos.Size = new System.Drawing.Size(504, 55);
+            this.lblDatos.Size = new System.Drawing.Size(504, 30);
             this.lblDatos.TabIndex = 0;
             this.lblDatos.Text = "No ha seleccionado un usuario.";
             // 
@@ -144,7 +147,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(584, 579);
+            this.ClientSize = new System.Drawing.Size(584, 566);
             this.Controls.Add(this.lblDatos);
             this.Controls.Add(this.lblUsuario);
             this.Controls.Add(this.logoPicture);
@@ -152,6 +155,8 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "frmPermisos";
             this.Text = "Permisos";
             this.Load += new System.EventHandler(this.frmPermisos_Load);
