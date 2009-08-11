@@ -75,8 +75,30 @@
             this.Vestimenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Destino = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Caracteristicas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grpRoboAccesorios = new System.Windows.Forms.GroupBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.saiDataGridView1 = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDataGridView(this.components);
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mnuBorrarExtravio = new System.Windows.Forms.MenuStrip();
             this.grpRoboVehiculo = new System.Windows.Forms.GroupBox();
+            this.txtTelefonoPropietario = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtDireccionPropietario = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtNombrePropietario = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
+            this.label11 = new System.Windows.Forms.Label();
             this.dgvVehiculo = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDataGridView(this.components);
             this.Marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -85,9 +107,18 @@
             this.Color = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NumeroSerie = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SeñasParticulares = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.saiTextBox1 = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
+            this.saiTextBox2 = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
+            this.saiTextBox3 = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
+            this.saiTextBox4 = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
+            this.saiDatePicker1 = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDatePicker(this.components);
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.saiTextBox5 = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.groupBox1.SuspendLayout();
             this.grpExtravio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonaExtraviada)).BeginInit();
+            this.grpRoboAccesorios.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.saiDataGridView1)).BeginInit();
             this.grpRoboVehiculo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVehiculo)).BeginInit();
             this.SuspendLayout();
@@ -335,14 +366,14 @@
             this.saiLogoControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.saiLogoControl.Location = new System.Drawing.Point(0, 0);
             this.saiLogoControl.Name = "saiLogoControl";
-            this.saiLogoControl.Size = new System.Drawing.Size(599, 70);
+            this.saiLogoControl.Size = new System.Drawing.Size(636, 70);
             this.saiLogoControl.TabIndex = 21;
             this.saiLogoControl.VelocidadAnimacion = 8;
             // 
             // grpExtravio
             // 
             this.grpExtravio.Controls.Add(this.dgvPersonaExtraviada);
-            this.grpExtravio.Location = new System.Drawing.Point(6, 12);
+            this.grpExtravio.Location = new System.Drawing.Point(64, 8);
             this.grpExtravio.Name = "grpExtravio";
             this.grpExtravio.Size = new System.Drawing.Size(572, 224);
             this.grpExtravio.TabIndex = 22;
@@ -500,24 +531,226 @@
             this.Caracteristicas.HeaderText = "Caracteristicas";
             this.Caracteristicas.Name = "Caracteristicas";
             // 
+            // grpRoboAccesorios
+            // 
+            this.grpRoboAccesorios.Controls.Add(this.saiTextBox5);
+            this.grpRoboAccesorios.Controls.Add(this.checkBox1);
+            this.grpRoboAccesorios.Controls.Add(this.saiDatePicker1);
+            this.grpRoboAccesorios.Controls.Add(this.saiTextBox4);
+            this.grpRoboAccesorios.Controls.Add(this.saiTextBox3);
+            this.grpRoboAccesorios.Controls.Add(this.saiTextBox2);
+            this.grpRoboAccesorios.Controls.Add(this.saiTextBox1);
+            this.grpRoboAccesorios.Controls.Add(this.label20);
+            this.grpRoboAccesorios.Controls.Add(this.label16);
+            this.grpRoboAccesorios.Controls.Add(this.label15);
+            this.grpRoboAccesorios.Controls.Add(this.label14);
+            this.grpRoboAccesorios.Controls.Add(this.label19);
+            this.grpRoboAccesorios.Controls.Add(this.label18);
+            this.grpRoboAccesorios.Controls.Add(this.label17);
+            this.grpRoboAccesorios.Controls.Add(this.saiDataGridView1);
+            this.grpRoboAccesorios.Location = new System.Drawing.Point(13, 39);
+            this.grpRoboAccesorios.Name = "grpRoboAccesorios";
+            this.grpRoboAccesorios.Size = new System.Drawing.Size(572, 224);
+            this.grpRoboAccesorios.TabIndex = 1;
+            this.grpRoboAccesorios.TabStop = false;
+            this.grpRoboAccesorios.Text = "Robo Accesorios de Vehículo";
+            this.grpRoboAccesorios.Visible = false;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(4, 80);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(151, 13);
+            this.label20.TabIndex = 17;
+            this.label20.Text = "Descripción de Responsables:";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(299, 45);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(76, 26);
+            this.label16.TabIndex = 16;
+            this.label16.Text = "Fecha en que \r\nse percató:";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(8, 45);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(67, 26);
+            this.label15.TabIndex = 15;
+            this.label15.Text = "Persona que\r\n se percató:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(298, 19);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(108, 13);
+            this.label14.TabIndex = 14;
+            this.label14.Text = "Accesorios Robados:";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(152, 19);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(69, 13);
+            this.label19.TabIndex = 13;
+            this.label19.Text = "No. de Serie:";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(5, 100);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(122, 13);
+            this.label18.TabIndex = 12;
+            this.label18.Text = "Vehículos Involucrados:";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(9, 19);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(42, 13);
+            this.label17.TabIndex = 11;
+            this.label17.Text = "Placas:";
+            // 
+            // saiDataGridView1
+            // 
+            this.saiDataGridView1.AllowUserToOrderColumns = true;
+            this.saiDataGridView1.ClrBackColorFoco = System.Drawing.Color.Empty;
+            this.saiDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.saiDataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7});
+            this.saiDataGridView1.Location = new System.Drawing.Point(6, 111);
+            this.saiDataGridView1.Name = "saiDataGridView1";
+            this.saiDataGridView1.RowHeadersVisible = false;
+            this.saiDataGridView1.Size = new System.Drawing.Size(566, 109);
+            this.saiDataGridView1.TabIndex = 8;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Marca";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Tipo";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Modelo";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Placas";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Color";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "Número de Serie";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.HeaderText = "Señas Particulares";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            // 
             // mnuBorrarExtravio
             // 
             this.mnuBorrarExtravio.Location = new System.Drawing.Point(0, 70);
             this.mnuBorrarExtravio.Name = "mnuBorrarExtravio";
-            this.mnuBorrarExtravio.Size = new System.Drawing.Size(599, 24);
+            this.mnuBorrarExtravio.Size = new System.Drawing.Size(636, 24);
             this.mnuBorrarExtravio.TabIndex = 23;
             this.mnuBorrarExtravio.Text = "Borrar";
             // 
             // grpRoboVehiculo
             // 
+            this.grpRoboVehiculo.Controls.Add(this.txtTelefonoPropietario);
+            this.grpRoboVehiculo.Controls.Add(this.label13);
+            this.grpRoboVehiculo.Controls.Add(this.txtDireccionPropietario);
+            this.grpRoboVehiculo.Controls.Add(this.label12);
+            this.grpRoboVehiculo.Controls.Add(this.txtNombrePropietario);
+            this.grpRoboVehiculo.Controls.Add(this.label11);
             this.grpRoboVehiculo.Controls.Add(this.dgvVehiculo);
-            this.grpRoboVehiculo.Location = new System.Drawing.Point(6, 251);
+            this.grpRoboVehiculo.Location = new System.Drawing.Point(24, 280);
             this.grpRoboVehiculo.Name = "grpRoboVehiculo";
             this.grpRoboVehiculo.Size = new System.Drawing.Size(572, 224);
             this.grpRoboVehiculo.TabIndex = 24;
             this.grpRoboVehiculo.TabStop = false;
             this.grpRoboVehiculo.Text = "Robo de Vehículo";
             this.grpRoboVehiculo.Visible = false;
+            // 
+            // txtTelefonoPropietario
+            // 
+            this.txtTelefonoPropietario.ClrBackColorFoco = System.Drawing.Color.Empty;
+            this.txtTelefonoPropietario.Location = new System.Drawing.Point(381, 13);
+            this.txtTelefonoPropietario.Name = "txtTelefonoPropietario";
+            this.txtTelefonoPropietario.Size = new System.Drawing.Size(185, 20);
+            this.txtTelefonoPropietario.StrMensajeCampoRequerido = "El campo es requerido.";
+            this.txtTelefonoPropietario.TabIndex = 4;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(323, 19);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(52, 13);
+            this.label13.TabIndex = 3;
+            this.label13.Text = "Teléfono:";
+            // 
+            // txtDireccionPropietario
+            // 
+            this.txtDireccionPropietario.ClrBackColorFoco = System.Drawing.Color.Empty;
+            this.txtDireccionPropietario.Location = new System.Drawing.Point(130, 46);
+            this.txtDireccionPropietario.Name = "txtDireccionPropietario";
+            this.txtDireccionPropietario.Size = new System.Drawing.Size(436, 20);
+            this.txtDireccionPropietario.StrMensajeCampoRequerido = "El campo es requerido.";
+            this.txtDireccionPropietario.TabIndex = 6;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 52);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(125, 13);
+            this.label12.TabIndex = 5;
+            this.label12.Text = "Dirección del Propietario:";
+            // 
+            // txtNombrePropietario
+            // 
+            this.txtNombrePropietario.ClrBackColorFoco = System.Drawing.Color.Empty;
+            this.txtNombrePropietario.Location = new System.Drawing.Point(130, 12);
+            this.txtNombrePropietario.Name = "txtNombrePropietario";
+            this.txtNombrePropietario.Size = new System.Drawing.Size(187, 20);
+            this.txtNombrePropietario.StrMensajeCampoRequerido = "El campo es requerido.";
+            this.txtNombrePropietario.TabIndex = 2;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(9, 19);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(117, 13);
+            this.label11.TabIndex = 1;
+            this.label11.Text = "Nombre del Propietario:";
             // 
             // dgvVehiculo
             // 
@@ -532,12 +765,11 @@
             this.Color,
             this.NumeroSerie,
             this.SeñasParticulares});
-            this.dgvVehiculo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvVehiculo.Location = new System.Drawing.Point(3, 16);
+            this.dgvVehiculo.Location = new System.Drawing.Point(3, 102);
             this.dgvVehiculo.Name = "dgvVehiculo";
             this.dgvVehiculo.RowHeadersVisible = false;
-            this.dgvVehiculo.Size = new System.Drawing.Size(566, 205);
-            this.dgvVehiculo.TabIndex = 0;
+            this.dgvVehiculo.Size = new System.Drawing.Size(566, 119);
+            this.dgvVehiculo.TabIndex = 7;
             // 
             // Marca
             // 
@@ -574,12 +806,81 @@
             this.SeñasParticulares.HeaderText = "Señas Particulares";
             this.SeñasParticulares.Name = "SeñasParticulares";
             // 
+            // saiTextBox1
+            // 
+            this.saiTextBox1.ClrBackColorFoco = System.Drawing.Color.Empty;
+            this.saiTextBox1.Location = new System.Drawing.Point(50, 14);
+            this.saiTextBox1.Name = "saiTextBox1";
+            this.saiTextBox1.Size = new System.Drawing.Size(100, 20);
+            this.saiTextBox1.StrMensajeCampoRequerido = "El campo es requerido.";
+            this.saiTextBox1.TabIndex = 18;
+            // 
+            // saiTextBox2
+            // 
+            this.saiTextBox2.ClrBackColorFoco = System.Drawing.Color.Empty;
+            this.saiTextBox2.Location = new System.Drawing.Point(222, 14);
+            this.saiTextBox2.Name = "saiTextBox2";
+            this.saiTextBox2.Size = new System.Drawing.Size(64, 20);
+            this.saiTextBox2.StrMensajeCampoRequerido = "El campo es requerido.";
+            this.saiTextBox2.TabIndex = 19;
+            // 
+            // saiTextBox3
+            // 
+            this.saiTextBox3.ClrBackColorFoco = System.Drawing.Color.Empty;
+            this.saiTextBox3.Location = new System.Drawing.Point(412, 14);
+            this.saiTextBox3.Name = "saiTextBox3";
+            this.saiTextBox3.Size = new System.Drawing.Size(154, 20);
+            this.saiTextBox3.StrMensajeCampoRequerido = "El campo es requerido.";
+            this.saiTextBox3.TabIndex = 20;
+            // 
+            // saiTextBox4
+            // 
+            this.saiTextBox4.ClrBackColorFoco = System.Drawing.Color.Empty;
+            this.saiTextBox4.Location = new System.Drawing.Point(81, 51);
+            this.saiTextBox4.Name = "saiTextBox4";
+            this.saiTextBox4.Size = new System.Drawing.Size(205, 20);
+            this.saiTextBox4.StrMensajeCampoRequerido = "El campo es requerido.";
+            this.saiTextBox4.TabIndex = 21;
+            // 
+            // saiDatePicker1
+            // 
+            this.saiDatePicker1.CalendarTitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.saiDatePicker1.ClrBackColorFoco = System.Drawing.Color.Empty;
+            this.saiDatePicker1.CustomFormat = "dd/MM/yyyy";
+            this.saiDatePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.saiDatePicker1.Location = new System.Drawing.Point(416, 50);
+            this.saiDatePicker1.MaxDate = new System.DateTime(3000, 12, 31, 0, 0, 0, 0);
+            this.saiDatePicker1.Name = "saiDatePicker1";
+            this.saiDatePicker1.Size = new System.Drawing.Size(115, 20);
+            this.saiDatePicker1.StrMensajeCampoRequerido = "El campo es requerido.";
+            this.saiDatePicker1.TabIndex = 22;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(551, 57);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(15, 14);
+            this.checkBox1.TabIndex = 23;
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // saiTextBox5
+            // 
+            this.saiTextBox5.ClrBackColorFoco = System.Drawing.Color.Empty;
+            this.saiTextBox5.Location = new System.Drawing.Point(162, 80);
+            this.saiTextBox5.Name = "saiTextBox5";
+            this.saiTextBox5.Size = new System.Drawing.Size(404, 20);
+            this.saiTextBox5.StrMensajeCampoRequerido = "El campo es requerido.";
+            this.saiTextBox5.TabIndex = 24;
+            // 
             // SAIFrmIncidencia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(599, 489);
+            this.Controls.Add(this.grpRoboAccesorios);
             this.Controls.Add(this.grpRoboVehiculo);
             this.Controls.Add(this.mnuBorrarExtravio);
             this.Controls.Add(this.grpExtravio);
@@ -627,11 +928,16 @@
             this.Controls.SetChildIndex(this.grpExtravio, 0);
             this.Controls.SetChildIndex(this.mnuBorrarExtravio, 0);
             this.Controls.SetChildIndex(this.grpRoboVehiculo, 0);
+            this.Controls.SetChildIndex(this.grpRoboAccesorios, 0);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.grpExtravio.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonaExtraviada)).EndInit();
+            this.grpRoboAccesorios.ResumeLayout(false);
+            this.grpRoboAccesorios.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.saiDataGridView1)).EndInit();
             this.grpRoboVehiculo.ResumeLayout(false);
+            this.grpRoboVehiculo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVehiculo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -696,5 +1002,34 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Color;
         private System.Windows.Forms.DataGridViewTextBoxColumn NumeroSerie;
         private System.Windows.Forms.DataGridViewTextBoxColumn SeñasParticulares;
+        private System.Windows.Forms.GroupBox grpRoboAccesorios;
+        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox txtTelefonoPropietario;
+        private System.Windows.Forms.Label label13;
+        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox txtDireccionPropietario;
+        private System.Windows.Forms.Label label12;
+        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox txtNombrePropietario;
+        private System.Windows.Forms.Label label11;
+        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDataGridView saiDataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label20;
+        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox saiTextBox2;
+        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox saiTextBox1;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDatePicker saiDatePicker1;
+        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox saiTextBox4;
+        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox saiTextBox3;
+        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox saiTextBox5;
     }
 }
