@@ -69,6 +69,7 @@
     <Compile Include="Gateways\Auto\PropietarioVehiculoGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\RoboVehiculoAccesoriosGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\RoboVehiculoAccesoriosVehiculoInvolucradoGateway.Auto.cs" />
+    <Compile Include="Gateways\Auto\SubmoduloGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\UnidadGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\UsuarioCorporacionGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\VehiculoGateway.Auto.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Gateways\PropietarioVehiculoGateway.cs" />
     <Compile Include="Gateways\RoboVehiculoAccesoriosGateway.cs" />
     <Compile Include="Gateways\RoboVehiculoAccesoriosVehiculoInvolucradoGateway.cs" />
+    <Compile Include="Gateways\SubmoduloGateway.cs" />
     <Compile Include="Gateways\UnidadGateway.cs" />
     <Compile Include="Gateways\UsuarioCorporacionGateway.cs" />
     <Compile Include="Gateways\VehiculoGateway.cs" />
@@ -100,6 +102,7 @@
     <Compile Include="Mappers\Auto\PropietarioVehiculoMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\RoboVehiculoAccesoriosMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\RoboVehiculoAccesoriosVehiculoInvolucradoMapper.Auto.cs" />
+    <Compile Include="Mappers\Auto\SubmoduloMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\UnidadMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\UsuarioCorporacionMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\VehiculoMapper.Auto.cs" />
@@ -148,9 +151,6 @@
     <Compile Include="Gateways\SistemaGateway.cs" />
     <Compile Include="Gateways\Auto\SistemaGateway.Auto.cs" />
     <Compile Include="Mappers\SubmoduloMapper.cs" />
-    <Compile Include="Mappers\Auto\SubmoduloMapper.Auto.cs" />
-    <Compile Include="Gateways\SubmoduloGateway.cs" />
-    <Compile Include="Gateways\Auto\SubmoduloGateway.Auto.cs" />
     <Compile Include="Mappers\TipoIncidenciaMapper.cs" />
     <Compile Include="Mappers\Auto\TipoIncidenciaMapper.Auto.cs" />
     <Compile Include="Gateways\TipoIncidenciaGateway.cs" />
