@@ -246,7 +246,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     {
                         AgregarBoton(barra.Controls, XTPControlType.xtpControlButton, comando.Identificador, comando.Caption,
                                   comando.IniciaGrupo, comando.Descripcion, comando.EsVisible);
-                        SAIBarraComandos.KeyBindings.Add(ID.FCONTROL, comando.TeclaAccesoRapido, comando.Identificador);
+
+                        if (comando.TeclaAccesoRapido != null)
+                            SAIBarraComandos.KeyBindings.Add(ID.FCONTROL, comando.TeclaAccesoRapido ?? '0', comando.Identificador);
                     }
                 }
             }

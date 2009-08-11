@@ -15,7 +15,7 @@
         /// <param name="teclaaccesorapido">Combinación de tecla de acceso rápido</param>
         /// <param name="iniciagrupo">Propiedad que indica si el comando definido iniciará un grupo</param>
         /// <param name="esvisible">Propiedad que indica si el comando será o no visible</param>
-        public Comando(int identificador, string caption, string descripcion, char teclaaccesorapido, bool iniciagrupo,
+        public Comando(int identificador, string caption, string descripcion, char? teclaaccesorapido, bool iniciagrupo,
                        bool esvisible)
         {
             Identificador = identificador;
@@ -29,7 +29,7 @@
         public int Identificador { get; set; }
         public string Caption { get; set; }
         public string Descripcion { get; set; }
-        public char TeclaAccesoRapido { get; set; }
+        public char? TeclaAccesoRapido { get; set; }
         public bool IniciaGrupo { get; set; }
         public bool EsVisible { get; set; }
     }
