@@ -57,6 +57,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
         }
 
+        private void catalogoDeColoniasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmColonias frm_Colonias = new frmColonias();
+            frm_Colonias.MdiParent = this;
+            frm_Colonias.Show();
+        }
+
         /*private void catalogoDeMunicipiosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmMunicipios frm_Municipios = new frmMunicipios();
