@@ -16,16 +16,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
     /// </summary>
     public partial class SAIFrmIncidenciasActivas : SAIFrmBase
     {
-        /// <summary>
-        /// Identificador del módulo en el sistema
-        /// </summary>
-        //public static int intSubModulo
-        //{
-        //    get
-        //    {
-        //        return ID.PNT_IA;
-        //    }
-        //}
 
         /// <summary>
         /// listado tipado de incidencias para manipular cuando han cambiado de estado
@@ -44,10 +34,26 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
             Width = Screen.GetWorkingArea(this).Width;
             saiReport1.btnLigarIncidencias.Click += btnLigarIncidencias_Click;
+            saiReport1.btnDespacharIncidencias.Click += btnDespacharIncidencias_Click;
+            saiReport1.btnBajaUnidad.Click += btnBajaUnidad_Click;
+            saiReport1.btnAltaUnidad.Click += btnAltaUnidad_Click;
+
             lstIncidenciasRegistradas = new List<Incidencia>();
             lstIncidenciasTemporales = new List<Incidencia>();
             lstIncidenciasPorRemover = new List<Incidencia>();
             lstRegistrosReporte = new List<ReportRecord>();
+        }
+
+        void btnAltaUnidad_Click(object sender, EventArgs e)
+        {
+        }
+
+        void btnBajaUnidad_Click(object sender, EventArgs e)
+        {
+        }
+
+        void btnDespacharIncidencias_Click(object sender, EventArgs e)
+        {
         }
 
         void btnLigarIncidencias_Click(object sender, EventArgs e)
@@ -57,6 +63,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         void SAIFrmIncidenciasActivas_Load(object sender, EventArgs e)
         {
             saiReport1.btnDespacharIncidencias.Visible = false;
+            saiReport1.btnAltaUnidad.Visible = false;
+            saiReport1.btnBajaUnidad.Visible = false;
 
             //Establecer permisos para los elementos de interacción con el usuario
             //saiReport1.btnLigarIncidencias.Enabled = Aplicacion.UsuarioPersistencia.blnPuedeEscribir(intSubModulo);

@@ -7,7 +7,7 @@
     public class ID
     {
         //Definición de comandos (deberá existir en la base de submodulos)
-        public const int CMD_BSC = 100; //Muestra incidentes guardados con F9 (089)
+        public const int CMD_BSC = 100; //Muestra incidentes guardados (089)
         public const int CMD_CAN = 200; //Cancelar incidencia (089 y 066)
         public const int CMD_DT = 300;  //Dividir incidente (089 y 066)
         public const int CMD_FIN = 400; //Cerrar el programa SafetyNet CAD (089 y 066)
@@ -37,11 +37,6 @@
         public const int CMD_UA = 2800; //Dar de alta unidades (066)
         public const int CMD_UB = 2900; //Dar de baja unidades (066)
         public const int CMD_V = 3000;  //Introducción de datos de vehiculo sospechoso (066)
-
-        //Definición de identificadores de pantalla
-        public const int PNT_IA = 13;    //Pantalla incidencias activas
-        public const int PNT_IP = 14;   //Pantalla de incidencias pendientes
-        public const int PNT_AU = 15;   //Pantalla de Unidades Disponibles
 
         #region Teclas de función
 
