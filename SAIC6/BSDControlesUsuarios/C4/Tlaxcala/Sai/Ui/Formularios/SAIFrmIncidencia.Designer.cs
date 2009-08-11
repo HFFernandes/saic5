@@ -51,7 +51,45 @@
             this.cmbCP = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox(this.components);
             this.cmbColonia = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox(this.components);
             this.saiLogoControl = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAILogoControl();
+            this.grpExtravio = new System.Windows.Forms.GroupBox();
+            this.dgvPersonaExtraviada = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDataGridView(this.components);
+            this.Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Folio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Edad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sexo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Estatura = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Parentesco = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaExtravio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tez = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TipoCabello = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColorCabello = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LargoCabello = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Frente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cejas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OjosColor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OjosForma = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NarizForma = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BocaTamaño = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Labios = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Vestimenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Destino = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Caracteristicas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mnuBorrarExtravio = new System.Windows.Forms.MenuStrip();
+            this.grpRoboVehiculo = new System.Windows.Forms.GroupBox();
+            this.dgvVehiculo = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDataGridView(this.components);
+            this.Marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Modelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Placas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Color = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NumeroSerie = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SeñasParticulares = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
+            this.grpExtravio.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPersonaExtraviada)).BeginInit();
+            this.grpRoboVehiculo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVehiculo)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -222,6 +260,7 @@
             this.cmbTipoIncidencia.Size = new System.Drawing.Size(205, 21);
             this.cmbTipoIncidencia.StrMensajeCampoRequerido = "El campo es requerido.";
             this.cmbTipoIncidencia.TabIndex = 8;
+            this.cmbTipoIncidencia.SelectedIndexChanged += new System.EventHandler(this.cmbTipoIncidencia_SelectedIndexChanged);
             this.cmbTipoIncidencia.Leave += new System.EventHandler(this.cmbTipoIncidencia_Leave);
             this.cmbTipoIncidencia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbTipoIncidencia_KeyUp);
             // 
@@ -296,16 +335,254 @@
             this.saiLogoControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.saiLogoControl.Location = new System.Drawing.Point(0, 0);
             this.saiLogoControl.Name = "saiLogoControl";
-            this.saiLogoControl.Size = new System.Drawing.Size(596, 70);
+            this.saiLogoControl.Size = new System.Drawing.Size(599, 70);
             this.saiLogoControl.TabIndex = 21;
             this.saiLogoControl.VelocidadAnimacion = 8;
+            // 
+            // grpExtravio
+            // 
+            this.grpExtravio.Controls.Add(this.dgvPersonaExtraviada);
+            this.grpExtravio.Location = new System.Drawing.Point(6, 12);
+            this.grpExtravio.Name = "grpExtravio";
+            this.grpExtravio.Size = new System.Drawing.Size(572, 224);
+            this.grpExtravio.TabIndex = 22;
+            this.grpExtravio.TabStop = false;
+            this.grpExtravio.Text = "Extravío de Persona";
+            this.grpExtravio.Visible = false;
+            this.grpExtravio.Enter += new System.EventHandler(this.grpExtravio_Enter);
+            // 
+            // dgvPersonaExtraviada
+            // 
+            this.dgvPersonaExtraviada.AllowUserToOrderColumns = true;
+            this.dgvPersonaExtraviada.ClrBackColorFoco = System.Drawing.Color.Empty;
+            this.dgvPersonaExtraviada.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPersonaExtraviada.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Clave,
+            this.Folio,
+            this.Nombre,
+            this.Edad,
+            this.Sexo,
+            this.Estatura,
+            this.Parentesco,
+            this.FechaExtravio,
+            this.Tez,
+            this.TipoCabello,
+            this.ColorCabello,
+            this.LargoCabello,
+            this.Frente,
+            this.Cejas,
+            this.OjosColor,
+            this.OjosForma,
+            this.NarizForma,
+            this.BocaTamaño,
+            this.Labios,
+            this.Vestimenta,
+            this.Destino,
+            this.Caracteristicas});
+            this.dgvPersonaExtraviada.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPersonaExtraviada.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dgvPersonaExtraviada.Location = new System.Drawing.Point(3, 16);
+            this.dgvPersonaExtraviada.Name = "dgvPersonaExtraviada";
+            this.dgvPersonaExtraviada.RowHeadersVisible = false;
+            this.dgvPersonaExtraviada.Size = new System.Drawing.Size(566, 205);
+            this.dgvPersonaExtraviada.TabIndex = 0;
+            // 
+            // Clave
+            // 
+            this.Clave.HeaderText = "Clave";
+            this.Clave.Name = "Clave";
+            this.Clave.Visible = false;
+            // 
+            // Folio
+            // 
+            this.Folio.HeaderText = "Folio";
+            this.Folio.Name = "Folio";
+            this.Folio.Visible = false;
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.Width = 300;
+            // 
+            // Edad
+            // 
+            this.Edad.HeaderText = "Edad";
+            this.Edad.Name = "Edad";
+            // 
+            // Sexo
+            // 
+            this.Sexo.HeaderText = "Sexo";
+            this.Sexo.Name = "Sexo";
+            // 
+            // Estatura
+            // 
+            this.Estatura.HeaderText = "Estatura";
+            this.Estatura.Name = "Estatura";
+            // 
+            // Parentesco
+            // 
+            this.Parentesco.HeaderText = "Parentesco";
+            this.Parentesco.Name = "Parentesco";
+            // 
+            // FechaExtravio
+            // 
+            this.FechaExtravio.HeaderText = "Fecha de Extravío";
+            this.FechaExtravio.Name = "FechaExtravio";
+            // 
+            // Tez
+            // 
+            this.Tez.HeaderText = "Tez";
+            this.Tez.Name = "Tez";
+            // 
+            // TipoCabello
+            // 
+            this.TipoCabello.HeaderText = "Tipo de Cabello";
+            this.TipoCabello.Name = "TipoCabello";
+            // 
+            // ColorCabello
+            // 
+            this.ColorCabello.HeaderText = "Color de Cabello";
+            this.ColorCabello.Name = "ColorCabello";
+            // 
+            // LargoCabello
+            // 
+            this.LargoCabello.HeaderText = "Largo de Cabello";
+            this.LargoCabello.Name = "LargoCabello";
+            // 
+            // Frente
+            // 
+            this.Frente.HeaderText = "Frente";
+            this.Frente.Name = "Frente";
+            // 
+            // Cejas
+            // 
+            this.Cejas.HeaderText = "Cejas";
+            this.Cejas.Name = "Cejas";
+            // 
+            // OjosColor
+            // 
+            this.OjosColor.HeaderText = "Color de Ojos";
+            this.OjosColor.Name = "OjosColor";
+            // 
+            // OjosForma
+            // 
+            this.OjosForma.HeaderText = "Forma de Ojos";
+            this.OjosForma.Name = "OjosForma";
+            // 
+            // NarizForma
+            // 
+            this.NarizForma.HeaderText = "Forma de Nariz";
+            this.NarizForma.Name = "NarizForma";
+            // 
+            // BocaTamaño
+            // 
+            this.BocaTamaño.HeaderText = "Tamaño de Boca";
+            this.BocaTamaño.Name = "BocaTamaño";
+            // 
+            // Labios
+            // 
+            this.Labios.HeaderText = "Labios";
+            this.Labios.Name = "Labios";
+            // 
+            // Vestimenta
+            // 
+            this.Vestimenta.HeaderText = "Vestimenta";
+            this.Vestimenta.Name = "Vestimenta";
+            // 
+            // Destino
+            // 
+            this.Destino.HeaderText = "Destino";
+            this.Destino.Name = "Destino";
+            // 
+            // Caracteristicas
+            // 
+            this.Caracteristicas.HeaderText = "Caracteristicas";
+            this.Caracteristicas.Name = "Caracteristicas";
+            // 
+            // mnuBorrarExtravio
+            // 
+            this.mnuBorrarExtravio.Location = new System.Drawing.Point(0, 70);
+            this.mnuBorrarExtravio.Name = "mnuBorrarExtravio";
+            this.mnuBorrarExtravio.Size = new System.Drawing.Size(599, 24);
+            this.mnuBorrarExtravio.TabIndex = 23;
+            this.mnuBorrarExtravio.Text = "Borrar";
+            // 
+            // grpRoboVehiculo
+            // 
+            this.grpRoboVehiculo.Controls.Add(this.dgvVehiculo);
+            this.grpRoboVehiculo.Location = new System.Drawing.Point(6, 251);
+            this.grpRoboVehiculo.Name = "grpRoboVehiculo";
+            this.grpRoboVehiculo.Size = new System.Drawing.Size(572, 224);
+            this.grpRoboVehiculo.TabIndex = 24;
+            this.grpRoboVehiculo.TabStop = false;
+            this.grpRoboVehiculo.Text = "Robo de Vehículo";
+            this.grpRoboVehiculo.Visible = false;
+            // 
+            // dgvVehiculo
+            // 
+            this.dgvVehiculo.AllowUserToOrderColumns = true;
+            this.dgvVehiculo.ClrBackColorFoco = System.Drawing.Color.Empty;
+            this.dgvVehiculo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvVehiculo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Marca,
+            this.Tipo,
+            this.Modelo,
+            this.Placas,
+            this.Color,
+            this.NumeroSerie,
+            this.SeñasParticulares});
+            this.dgvVehiculo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvVehiculo.Location = new System.Drawing.Point(3, 16);
+            this.dgvVehiculo.Name = "dgvVehiculo";
+            this.dgvVehiculo.RowHeadersVisible = false;
+            this.dgvVehiculo.Size = new System.Drawing.Size(566, 205);
+            this.dgvVehiculo.TabIndex = 0;
+            // 
+            // Marca
+            // 
+            this.Marca.HeaderText = "Marca";
+            this.Marca.Name = "Marca";
+            // 
+            // Tipo
+            // 
+            this.Tipo.HeaderText = "Tipo";
+            this.Tipo.Name = "Tipo";
+            // 
+            // Modelo
+            // 
+            this.Modelo.HeaderText = "Modelo";
+            this.Modelo.Name = "Modelo";
+            // 
+            // Placas
+            // 
+            this.Placas.HeaderText = "Placas";
+            this.Placas.Name = "Placas";
+            // 
+            // Color
+            // 
+            this.Color.HeaderText = "Color";
+            this.Color.Name = "Color";
+            // 
+            // NumeroSerie
+            // 
+            this.NumeroSerie.HeaderText = "Número de Serie";
+            this.NumeroSerie.Name = "NumeroSerie";
+            // 
+            // SeñasParticulares
+            // 
+            this.SeñasParticulares.HeaderText = "Señas Particulares";
+            this.SeñasParticulares.Name = "SeñasParticulares";
             // 
             // SAIFrmIncidencia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(596, 568);
+            this.ClientSize = new System.Drawing.Size(599, 489);
+            this.Controls.Add(this.grpRoboVehiculo);
+            this.Controls.Add(this.mnuBorrarExtravio);
+            this.Controls.Add(this.grpExtravio);
             this.Controls.Add(this.saiLogoControl);
             this.Controls.Add(this.cmbColonia);
             this.Controls.Add(this.cmbCP);
@@ -324,6 +601,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.txtTelefono);
             this.Controls.Add(this.label3);
+            this.MainMenuStrip = this.mnuBorrarExtravio;
             this.MaximizeBox = false;
             this.Name = "SAIFrmIncidencia";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
@@ -346,8 +624,15 @@
             this.Controls.SetChildIndex(this.cmbCP, 0);
             this.Controls.SetChildIndex(this.cmbColonia, 0);
             this.Controls.SetChildIndex(this.saiLogoControl, 0);
+            this.Controls.SetChildIndex(this.grpExtravio, 0);
+            this.Controls.SetChildIndex(this.mnuBorrarExtravio, 0);
+            this.Controls.SetChildIndex(this.grpRoboVehiculo, 0);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.grpExtravio.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPersonaExtraviada)).EndInit();
+            this.grpRoboVehiculo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVehiculo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -377,5 +662,39 @@
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox cmbCP;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox cmbColonia;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAILogoControl saiLogoControl;
+        private System.Windows.Forms.GroupBox grpExtravio;
+        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDataGridView dgvPersonaExtraviada;
+        private System.Windows.Forms.MenuStrip mnuBorrarExtravio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Clave;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Folio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Edad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Sexo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Estatura;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Parentesco;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaExtravio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tez;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TipoCabello;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColorCabello;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LargoCabello;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Frente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cejas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OjosColor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OjosForma;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NarizForma;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BocaTamaño;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Labios;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Vestimenta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Destino;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Caracteristicas;
+        private System.Windows.Forms.GroupBox grpRoboVehiculo;
+        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDataGridView dgvVehiculo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Marca;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Modelo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Placas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Color;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NumeroSerie;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SeñasParticulares;
     }
 }

@@ -33,6 +33,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private Mapa.EstructuraUbicacion _objUbicacion = new Mapa.EstructuraUbicacion();
         private Boolean _blnBloqueaEventos;
         protected Boolean _blnSeActivoClosed = false;
+        protected Boolean _blnSeDesactivoVentana = false;
+        protected int _intAltoOriginal=200;
         /// <summary>
         /// Lleva el estado del caso de la tecla control presionada.
         /// </summary>
@@ -50,6 +52,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 this._blnBloqueaEventos = true;
                 InitializeComponent();
+                this._intAltoOriginal = this.Height;
                 this.InicializaListas();
                 //****Crea una nueva incidencia, el formulario se abrió para insertar*******
                 this._entIncidencia.Referencias = string.Empty;
@@ -115,6 +118,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             this._blnBloqueaEventos = true;
             InitializeComponent();
+            this._intAltoOriginal = this.Height;
             this.InicializaListas();
             this._entIncidencia = entIncidencia;
             //Se actualiza la información de la incidencia en la lista de ventanas
@@ -127,16 +131,27 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             Aplicacion.VentanasIncidencias.Add(new SAIWinSwitchItem(this._entIncidencia.Folio.ToString(), "", (this as Form)));
 
 
+
         }
 
         protected override void OnActivated(EventArgs e)
         {
             base.OnActivated(e);
             //Se actualiza el mapa:
-            this.actualizaMapaUbicacion();
+            //if (this._blnSeDesactivoVentana)
+            //{
+                this.actualizaMapaUbicacion();
+                this._blnSeDesactivoVentana = false;
+            //}
             this._blnSeActivoClosed = false;
         }
 
+        protected override void OnDeactivate(EventArgs e)
+        {
+
+            base.OnDeactivate(e);
+            this._blnSeDesactivoVentana = true;
+        }
         /// <summary>
         /// Recupera la información de los catálogos que se utilizan en el formulario
         /// </summary>
@@ -499,19 +514,31 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                 if (entColonia.ClaveCodigoPostal.HasValue)
                 {
-
+                    this._entIncidencia.ClaveCodigoPostal = entColonia.ClaveCodigoPostal.Value;
                     foreach (var objElemento in this.cmbCP.Items)
                     {
                         if ((objElemento as CodigoPostal).Clave == entColonia.ClaveCodigoPostal)
                         {
+                            
                             this._blnLimpiarColonias = false;
                             this.cmbCP.SelectedIndex = -1;
                             this.cmbCP.SelectedItem = objElemento;
+                           
                             break;
                         }
                     }
                 }
+                else
+                {
+                    this._entIncidencia.ClaveCodigoPostal = null;
+                }
+                this._entIncidencia.ClaveColonia = entColonia.Clave;
             }
+            else
+            {
+                this._entIncidencia.ClaveColonia = null;
+            }
+
             this._blnBloqueaEventos = false;
             this.actualizaMapaUbicacion();
           
@@ -529,6 +556,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             CodigoPostal entCP;
             Localidad entLoc;
 
+            this._blnBloqueaEventos = true;
 
             if (this.cmbColonia.SelectedIndex == -1 && this.cmbColonia.Text.Trim() != string.Empty)
             {
@@ -555,7 +583,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         entColonia.ClaveCodigoPostal = entCP.Clave;
                         entColonia.ClaveLocalidad = entLoc.Clave;
                         entColonia.Nombre = this.cmbColonia.Text;
-                        ColoniaMapper.Instance().Save(entColonia);
+                        ColoniaMapper.Instance().Insert(entColonia);
                         MessageBox.Show("La colonia se registró satisfactoriamente");
                         lstColonias = ColoniaMapper.Instance().GetByLocalidad(entLoc.Clave);
                         if (lstColonias.Count > 0)
@@ -607,6 +635,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
                 }
             }
+            this._blnBloqueaEventos = false;
             this.actualizaMapaUbicacion();
             if (!this._blnSeActivoClosed)
             {
@@ -663,6 +692,18 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 this.cmbColonia.Text = string.Empty;
             }
             this._blnBloqueaEventos = false;
+
+            if (this.cmbCP.SelectedIndex != -1 && this.cmbCP.Text.Trim() != string.Empty)
+            {
+                this._entIncidencia.ClaveCodigoPostal  = (this.cmbCP.SelectedItem as CodigoPostal).Clave;
+            }
+            else
+            {
+                this._entIncidencia.ClaveCodigoPostal = null;
+            }
+
+           
+
             this.actualizaMapaUbicacion();
         }
 
@@ -919,6 +960,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 {
                     this._objUbicacion.IdMunicipio = (this.cmbMunicipio.SelectedItem as Municipio).Clave;
                 }
+
                 if (this.cmbLocalidad.SelectedIndex == -1 || this.cmbLocalidad.Text.Trim() == string.Empty)
                 {
                     this._objUbicacion.IdLocalidad = null;
@@ -927,6 +969,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 {
                     this._objUbicacion.IdLocalidad = (this.cmbLocalidad.SelectedItem as Localidad).Clave;
                 }
+
                 if (this.cmbColonia.SelectedIndex == -1 || this.cmbColonia.Text.Trim() == string.Empty)
                 {
                     this._objUbicacion.IdColonia = null;
@@ -936,6 +979,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this._objUbicacion.IdColonia = (this.cmbColonia.SelectedItem as Colonia).Clave;
                    
                 }
+
                 if (this.cmbCP.SelectedIndex == -1 || this.cmbCP.Text.Trim() == string.Empty)
                 {
                     this._objUbicacion.IdCodigoPostal = null;
@@ -1037,6 +1081,65 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
             }
             this._blnCtrPresionado = false;
+        }
+
+        private void cmbTipoIncidencia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.cmbTipoIncidencia.SelectedIndex != -1 && this.cmbTipoIncidencia.Text.Trim() != string.Empty)
+            {
+                TipoIncidencia objTipo = (cmbTipoIncidencia.SelectedItem as TipoIncidencia);
+
+                if (objTipo.Descripcion.ToUpper().Contains("ROBO") && objTipo.Descripcion.ToUpper().Contains("VEHICULO"))
+                {
+                    this.SuspendLayout();
+                    this.grpExtravio.Visible = false;
+                    this.grpRoboVehiculo.Visible = true;
+                    this.Height = 750;
+                    this.grpRoboVehiculo.Top = 450;
+                    this.grpRoboVehiculo.Left = 10;
+                    this.ResumeLayout(false);
+                    this.PerformLayout();
+                }
+                else if (objTipo.Descripcion.ToUpper().Contains("ROBO") && objTipo.Descripcion.ToUpper().Contains("ACCESORIOS"))
+                {
+                    this.SuspendLayout();
+                    this.grpExtravio.Visible = false;
+                    this.grpRoboVehiculo.Visible = false;
+                    this.Height = this._intAltoOriginal;
+                    this.ResumeLayout(false);
+                    this.PerformLayout();
+
+                }
+                else if ((objTipo.Descripcion.ToUpper().Contains("EXTRAVÍO") && objTipo.Descripcion.ToUpper().Contains("PERSONA")) || (objTipo.Descripcion.ToUpper().Contains("EXTRAVIO") && objTipo.Descripcion.ToUpper().Contains("PERSONA")))
+                {
+                    this.SuspendLayout();
+                    this.grpExtravio.Visible = true;
+                    this.grpRoboVehiculo.Visible = false;
+                    this.Height = 750;
+                    this.grpExtravio.Top = 450;
+                    this.grpExtravio.Left = 10;
+                    this.ResumeLayout(false);
+                    this.PerformLayout();
+
+                }
+                else
+                {
+                    this.SuspendLayout();
+                    this.grpExtravio.Visible = false;
+                    this.grpRoboVehiculo.Visible = false;
+                    this.Height = this._intAltoOriginal;
+                    this.ResumeLayout(false);
+                    this.PerformLayout();
+
+                }
+                
+
+            }
+        }
+
+        private void grpExtravio_Enter(object sender, EventArgs e)
+        {
+
         }
 
        
