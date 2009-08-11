@@ -42,12 +42,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void btnLigarIncidencias_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
         }
 
         private void tmrRegistros_Tick(object sender, EventArgs e)
         {
-
         }
 
         private void SAIFrmEstadoUnidades_Load(object sender, EventArgs e)
