@@ -62,8 +62,20 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmColonias.resx">
+      <DependentUpon>frmColonias.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\frmCorporaciones.resx">
       <DependentUpon>frmCorporaciones.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmLocalidades.resx">
+      <DependentUpon>frmLocalidades.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmMunicipios.resx">
+      <DependentUpon>frmMunicipios.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\frmPermisos.resx">
@@ -100,11 +112,29 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="UI\frmColonias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmColonias.Designer.cs">
+      <DependentUpon>frmColonias.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\frmCorporaciones.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\frmCorporaciones.designer.cs">
       <DependentUpon>frmCorporaciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmLocalidades.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmLocalidades.Designer.cs">
+      <DependentUpon>frmLocalidades.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmMunicipios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmMunicipios.Designer.cs">
+      <DependentUpon>frmMunicipios.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\frmPermisos.cs">
       <SubType>Form</SubType>
