@@ -833,7 +833,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             if (!base.SAIProveedorValidacion.ValidarCamposRequeridos(this))
             {
                 e.Cancel = true;
+
+                throw new SAIExcepcion("Debe de indicar el tipo de incidencia");
                 return;
+
             }
 
             Mapa.Controlador.RevisaInstancias(this);
@@ -1089,14 +1092,27 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 TipoIncidencia objTipo = (cmbTipoIncidencia.SelectedItem as TipoIncidencia);
 
-                if (objTipo.Descripcion.ToUpper().Contains("ROBO") && objTipo.Descripcion.ToUpper().Contains("VEHICULO"))
+                if (objTipo.Descripcion.ToUpper().Contains("ROBO") && objTipo.Descripcion.ToUpper().Contains("VEHICULO") && !objTipo.Descripcion.ToUpper().Contains("ACCESORIOS"))
                 {
                     this.SuspendLayout();
                     this.grpExtravio.Visible = false;
                     this.grpRoboVehiculo.Visible = true;
+                    this.grpRoboAccesorios.Visible = false;
+
                     this.Height = 750;
-                    this.grpRoboVehiculo.Top = 450;
+                    this.grpRoboAccesorios.SuspendLayout();
+                    if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+                    {
+                        this.grpRoboVehiculo.Top = 450;
+                    }
+                    else
+                    {
+                        this.grpRoboVehiculo.Top = 703;
+                    }
                     this.grpRoboVehiculo.Left = 10;
+                    this.grpRoboVehiculo.Refresh();
+                    this.grpRoboAccesorios.ResumeLayout(true);
+
                     this.ResumeLayout(false);
                     this.PerformLayout();
                 }
@@ -1105,7 +1121,22 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.SuspendLayout();
                     this.grpExtravio.Visible = false;
                     this.grpRoboVehiculo.Visible = false;
-                    this.Height = this._intAltoOriginal;
+                    
+                    this.Height = 750;
+                    this.grpRoboAccesorios.SuspendLayout();
+                    if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+                    {
+                        this.grpRoboAccesorios.Top = 450;
+                    }
+                    else
+                    {
+                        this.grpRoboAccesorios.Top = 703;
+                    }
+                    this.grpRoboAccesorios.Left = 10;
+                    this.grpRoboAccesorios.Refresh();
+                    this.grpRoboAccesorios.ResumeLayout(true);
+                    this.grpRoboAccesorios.Visible = true;
+
                     this.ResumeLayout(false);
                     this.PerformLayout();
 
@@ -1115,8 +1146,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.SuspendLayout();
                     this.grpExtravio.Visible = true;
                     this.grpRoboVehiculo.Visible = false;
+                    this.grpRoboAccesorios.Visible = false;
                     this.Height = 750;
-                    this.grpExtravio.Top = 450;
+                    if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+                    {
+                        this.grpExtravio.Top = 450;
+                    }
+                    else
+                    {
+                        this.grpExtravio.Top = 703;
+                    }
                     this.grpExtravio.Left = 10;
                     this.ResumeLayout(false);
                     this.PerformLayout();
@@ -1127,6 +1166,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.SuspendLayout();
                     this.grpExtravio.Visible = false;
                     this.grpRoboVehiculo.Visible = false;
+                    this.grpRoboAccesorios.Visible = false;
                     this.Height = this._intAltoOriginal;
                     this.ResumeLayout(false);
                     this.PerformLayout();
