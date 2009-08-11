@@ -131,6 +131,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                                 var corporaciones = new StringBuilder();
                                 var zonas = new StringBuilder();
+                                var totalCorporaciones = 0;
 
                                 CorporacionMapper.Instance().GetBySQLQuery(string.Format(SQL_CORPORACIONES, incidencia.Folio)).ForEach(delegate(Corporacion c)
                                 {
@@ -139,6 +140,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                                     zonas.Append(c.Zn);
                                     zonas.Append(",");
+
+                                    if (c.Descripcion != string.Empty)
+                                        totalCorporaciones += 1;
                                 });
 
                                 saiReport1.reportControl.Records[itm.Record.Index][3].Value =
@@ -155,8 +159,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                         ? zonas.ToString().Trim().Remove(zonas.Length - 1)
                                         : "(desconocido)";
 
-                                //saiReport1.reportControl.Records[itm.Record.Index][6].Value =
-                                //    corporaciones.Length.ToString();
+                                saiReport1.reportControl.Records[itm.Record.Index][6].Value =
+                                    totalCorporaciones.ToString();
                                 saiReport1.reportControl.Records[itm.Record.Index][7].Value = ObtenerLapso(incidencia.HoraRecepcion);
                             }
                         }
