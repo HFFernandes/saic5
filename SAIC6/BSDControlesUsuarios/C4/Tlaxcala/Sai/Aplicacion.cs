@@ -56,6 +56,7 @@ namespace BSD.C4.Tlaxcala.Sai
             public static string[] strSistemas { get; set; }
             public static string strSistemaActual { get; set; }
             public static bool? blnEsDespachador { get; set; }
+            public static int? intClaveSistema { get; set; }
 
             /// <summary>
             /// Función que determina si el usuario actual tiene permisos de LECTURA sobre el modulo specificado
@@ -64,7 +65,7 @@ namespace BSD.C4.Tlaxcala.Sai
             /// <returns>verdadero o falso</returns>
             public static bool blnPuedeLeer(int intSubModulo)
             {
-                var permisoObjectList = PermisoMapper.Instance().GetBySQLQuery(string.Format(SQL_OBTENERPERMISOS, intClaveUsuario, intSubModulo));
+                var permisoObjectList = PermisoMapper.Instance().GetBySQLQuery(string.Format(SQL_OBTENERPERMISOS, intClaveUsuario, intSubModulo, ObtenerClaveSistema()));
                 foreach (var o in permisoObjectList)
                 {
                     if (o.Valor == 2)
@@ -81,7 +82,7 @@ namespace BSD.C4.Tlaxcala.Sai
             /// <returns>verdadero o falso</returns>
             public static bool blnPuedeEscribir(int intSubModulo)
             {
-                var permisoObjectList = PermisoMapper.Instance().GetBySQLQuery(string.Format(SQL_OBTENERPERMISOS, intClaveUsuario, intSubModulo));
+                var permisoObjectList = PermisoMapper.Instance().GetBySQLQuery(string.Format(SQL_OBTENERPERMISOS, intClaveUsuario, intSubModulo, ObtenerClaveSistema()));
                 foreach (var o in permisoObjectList)
                 {
                     if (o.Valor == 4)
@@ -101,17 +102,37 @@ namespace BSD.C4.Tlaxcala.Sai
                 return blnPuedeLeer(intSubModulo) || blnPuedeEscribir(intSubModulo);
             }
 
+            internal static string ObtenerClaveSistema()
+            {
+                switch (strSistemaActual)
+                {
+                    case "066":
+                        intClaveSistema = 2;
+                        break;
+                    case "089":
+                        intClaveSistema = 1;
+                        break;
+                    case "ADM":
+                        intClaveSistema = 6;
+                        break;
+                    default:
+                        intClaveSistema = null;
+                        break;
+                }
+                return intClaveSistema.ToString();
+            }
+
             private const string SQL_OBTENERPERMISOS =
-                "SELECT Permiso.* FROM PermisoUsuario INNER JOIN Permiso ON PermisoUsuario.ClavePermiso = Permiso.Clave WHERE (PermisoUsuario.ClaveUsuario = {0}) AND (PermisoUsuario.ClaveSubmodulo = {1})";
+                "SELECT Permiso.* FROM PermisoUsuario INNER JOIN Permiso ON PermisoUsuario.ClavePermiso = Permiso.Clave WHERE (PermisoUsuario.ClaveUsuario = {0}) AND (PermisoUsuario.ClaveSubmodulo = {1}) AND (PermisoUsuario.ClaveSistema={2})";
         }
     }
 
     public enum ESTATUSINCIDENCIAS
     {
-        NUEVA=1,
-        PENDIENTE=2,
-        ACTIVA=3,
-        CERRADA=4,
-        CANCELADA=5
+        NUEVA = 1,
+        PENDIENTE = 2,
+        ACTIVA = 3,
+        CERRADA = 4,
+        CANCELADA = 5
     }
 }
