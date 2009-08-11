@@ -39,6 +39,9 @@
             this.catalogoDeTiposDeIncidenciasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.catalogoDeUnidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.catalogoDeCorporacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.catalogoDeColoniasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.catalogoDeMunicipiosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.catalogoDeLocalidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuStripPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,7 +87,10 @@
             this.catalogoDePermisosToolStripMenuItem,
             this.catalogoDeTiposDeIncidenciasToolStripMenuItem,
             this.catalogoDeUnidadesToolStripMenuItem,
-            this.catalogoDeCorporacionesToolStripMenuItem});
+            this.catalogoDeCorporacionesToolStripMenuItem,
+            this.catalogoDeColoniasToolStripMenuItem,
+            this.catalogoDeMunicipiosToolStripMenuItem,
+            this.catalogoDeLocalidadesToolStripMenuItem});
             this.operacionesToolStripMenuItem.Name = "operacionesToolStripMenuItem";
             this.operacionesToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
             this.operacionesToolStripMenuItem.Text = "&Catalogos";
@@ -129,6 +135,28 @@
             this.catalogoDeCorporacionesToolStripMenuItem.Text = "Catalogo de Corporaciones";
             this.catalogoDeCorporacionesToolStripMenuItem.Click += new System.EventHandler(this.catalogoDeCorporacionesToolStripMenuItem_Click);
             // 
+            // catalogoDeColoniasToolStripMenuItem
+            // 
+            this.catalogoDeColoniasToolStripMenuItem.Enabled = false;
+            this.catalogoDeColoniasToolStripMenuItem.Name = "catalogoDeColoniasToolStripMenuItem";
+            this.catalogoDeColoniasToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.catalogoDeColoniasToolStripMenuItem.Text = "Catalogo de Colonias";
+            this.catalogoDeColoniasToolStripMenuItem.Click += new System.EventHandler(this.catalogoDeColoniasToolStripMenuItem_Click);
+            // 
+            // catalogoDeMunicipiosToolStripMenuItem
+            // 
+            this.catalogoDeMunicipiosToolStripMenuItem.Enabled = false;
+            this.catalogoDeMunicipiosToolStripMenuItem.Name = "catalogoDeMunicipiosToolStripMenuItem";
+            this.catalogoDeMunicipiosToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.catalogoDeMunicipiosToolStripMenuItem.Text = "Catalogo de Municipios";
+            // 
+            // catalogoDeLocalidadesToolStripMenuItem
+            // 
+            this.catalogoDeLocalidadesToolStripMenuItem.Enabled = false;
+            this.catalogoDeLocalidadesToolStripMenuItem.Name = "catalogoDeLocalidadesToolStripMenuItem";
+            this.catalogoDeLocalidadesToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.catalogoDeLocalidadesToolStripMenuItem.Text = "Catalogo de Localidades";
+            // 
             // MDIPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -164,5 +192,8 @@
         private System.Windows.Forms.ToolStripMenuItem catalogoDeTiposDeIncidenciasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem catalogoDeUnidadesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem catalogoDeCorporacionesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem catalogoDeColoniasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem catalogoDeMunicipiosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem catalogoDeLocalidadesToolStripMenuItem;
     }
 }

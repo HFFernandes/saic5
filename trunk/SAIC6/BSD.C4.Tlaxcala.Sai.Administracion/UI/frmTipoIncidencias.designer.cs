@@ -72,6 +72,7 @@
             // 
             // ddlSistema
             // 
+            this.ddlSistema.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlSistema.FormattingEnabled = true;
             this.ddlSistema.Location = new System.Drawing.Point(101, 52);
             this.ddlSistema.Name = "ddlSistema";

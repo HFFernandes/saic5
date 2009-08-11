@@ -172,7 +172,40 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 try
                 {
                     Objetos.PermisoUsuarioObjectList permisosReal = Mappers.PermisoUsuarioMapper.Instance().GetByUsuario(claveUsuario); //.GetAll();
-                    foreach (TreeNode sistemas in this.trvwPermisos.Nodes)
+
+                    foreach (Objetos.PermisoUsuarioObject permisoActual in permisosReal)
+                    {
+                        foreach (TreeNode sistemas in this.trvwPermisos.Nodes)
+                        {
+                            if (Convert.ToInt32(sistemas.Name) == permisoActual.ClaveSistema)
+                            {
+                                foreach (TreeNode submodulo in sistemas.Nodes)
+                                {
+                                    if (Convert.ToInt32(submodulo.Name) == permisoActual.ClaveSubmodulo)
+                                    {
+                                        foreach (TreeNode permiso in submodulo.Nodes)
+                                        {
+                                            if (Convert.ToInt32(permiso.Name) == permisoActual.ClavePermiso)
+                                            {
+                                                permiso.Checked = true;
+                                                expander = true;
+                                            }
+                                        }
+                                    }
+                                    if (expander)
+                                    {
+                                        submodulo.Expand();
+                                        submodulo.Parent.Expand();
+                                        expander = false;
+                                    }
+                                }                                
+                            }
+                        }
+                    }
+
+
+                    //----
+                    /*foreach (TreeNode sistemas in this.trvwPermisos.Nodes)
                     {
                         foreach (TreeNode submodulo in sistemas.Nodes)
                         {
@@ -194,7 +227,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                                 expander = false;
                             }
                         }
-                    }
+                    }*/
                 }
                 catch (Exception ex)
                 {
@@ -353,6 +386,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                                     tempPermiso.ClavePermiso = Convert.ToInt32(permiso.Name);
                                     tempPermiso.ClaveSubmodulo = Convert.ToInt32(submodulo.Name);
                                     tempPermiso.ClaveUsuario = claveUsuario;
+                                    tempPermiso.ClaveSistema = Convert.ToInt32(sistemas.Name);
                                     lstPermisosAdd.Add(tempPermiso);
                                 }
                                 else
@@ -362,6 +396,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                                     tempPermiso.ClavePermiso = Convert.ToInt32(permiso.Name);
                                     tempPermiso.ClaveSubmodulo = Convert.ToInt32(submodulo.Name);
                                     tempPermiso.ClaveUsuario = claveUsuario;
+                                    tempPermiso.ClaveSistema = Convert.ToInt32(sistemas.Name);
                                     lstPermisosDel.Add(tempPermiso);
                                 }
                             }
