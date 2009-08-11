@@ -210,7 +210,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     {
                         foreach (Objetos.PermisoUsuarioObject permiso in lstPermisos)
                         {
-                            Mappers.PermisoUsuarioMapper.Instance().Delete(permiso.ClaveUsuario, permiso.ClaveSubmodulo, permiso.ClavePermiso);
+                            Mappers.PermisoUsuarioMapper.Instance().Delete(permiso.ClaveUsuario, permiso.ClaveSubmodulo, permiso.ClavePermiso, permiso.ClaveSistema);
                         }
                         this.Eliminar();
                         this.LlenarGrid();

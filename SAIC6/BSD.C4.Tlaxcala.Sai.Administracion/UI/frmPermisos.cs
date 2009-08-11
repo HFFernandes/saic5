@@ -134,10 +134,10 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         foreach (Entidades.Submodulo submodulo in lstSubModulos)
                         {
 
-                            if (sistema.Name == Convert.ToString(submodulo.ClaveSistema))
-                            {
+                            /*if (sistema.Name == Convert.ToString(submodulo.ClaveSistema))
+                            {*/
                                 sistema.Nodes.Add(Convert.ToString(submodulo.Clave), submodulo.Descripcion);
-                            }
+                            //}
                         }
                     }
                     foreach (TreeNode sistema in this.trvwPermisos.Nodes)
@@ -243,7 +243,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                                     {
                                         if (pAgregar.ClavePermiso != pTUsuario.ClavePermiso)
                                         {
-                                            Objetos.PermisoUsuarioObject pExiste = Mappers.PermisoUsuarioMapper.Instance().GetOne(pAgregar.ClaveUsuario, pAgregar.ClaveSubmodulo, pAgregar.ClavePermiso);
+                                            Objetos.PermisoUsuarioObject pExiste = Mappers.PermisoUsuarioMapper.Instance().GetOne(pAgregar.ClaveUsuario, pAgregar.ClaveSubmodulo, pAgregar.ClavePermiso, pAgregar.ClaveSistema);
                                             if (pExiste == null)
                                             {
                                                 Mappers.PermisoUsuarioMapper.Instance().Insert(pAgregar);
@@ -254,7 +254,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                                     {
                                         if (pAgregar.ClavePermiso != pTUsuario.ClavePermiso)
                                         {
-                                            Objetos.PermisoUsuarioObject pExiste = Mappers.PermisoUsuarioMapper.Instance().GetOne(pAgregar.ClaveUsuario, pAgregar.ClaveSubmodulo, pAgregar.ClavePermiso);
+                                            Objetos.PermisoUsuarioObject pExiste = Mappers.PermisoUsuarioMapper.Instance().GetOne(pAgregar.ClaveUsuario, pAgregar.ClaveSubmodulo, pAgregar.ClavePermiso, pAgregar.ClaveSistema);
                                             if (pExiste == null)
                                             {
                                                 Mappers.PermisoUsuarioMapper.Instance().Insert(pAgregar);
@@ -307,7 +307,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                                 //solo se quitan aquellos que el usuario deselecciono
                                 if (pTUsuario.ClavePermiso == pQuitar.ClavePermiso && pTUsuario.ClaveSubmodulo == pQuitar.ClaveSubmodulo && pQuitar.ClaveUsuario == claveUsr)
                                 {
-                                    Mappers.PermisoUsuarioMapper.Instance().Delete(pQuitar.ClaveUsuario, pQuitar.ClaveSubmodulo, pQuitar.ClavePermiso);
+                                    Mappers.PermisoUsuarioMapper.Instance().Delete(pQuitar.ClaveUsuario, pQuitar.ClaveSubmodulo, pQuitar.ClavePermiso, pQuitar.ClaveSistema);
                                 }
                             }
                         }
