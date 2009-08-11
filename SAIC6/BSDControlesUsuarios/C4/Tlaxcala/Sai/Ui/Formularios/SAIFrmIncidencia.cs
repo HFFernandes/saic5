@@ -183,7 +183,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 this.cmbMunicipio.SelectedIndex = -1;
                 this.cmbMunicipio.Text = string.Empty;
 
-         
+
+                this.cmbMunicipio.AllowDrop = this.cmbTipoIncidencia.AllowDrop;
+                this.cmbMunicipio.DropDownStyle = this.cmbTipoIncidencia.DropDownStyle;
 
           
         }
@@ -1107,7 +1109,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
                     else
                     {
-                        this.grpRoboVehiculo.Top = 703;
+                        this.grpRoboVehiculo.Top = 720;
                     }
                     this.grpRoboVehiculo.Left = 10;
                     this.grpRoboVehiculo.Refresh();
@@ -1130,7 +1132,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
                     else
                     {
-                        this.grpRoboAccesorios.Top = 703;
+                        this.grpRoboAccesorios.Top = 720;
                     }
                     this.grpRoboAccesorios.Left = 10;
                     this.grpRoboAccesorios.Refresh();
@@ -1154,7 +1156,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
                     else
                     {
-                        this.grpExtravio.Top = 703;
+                        this.grpExtravio.Top = 720;
                     }
                     this.grpExtravio.Left = 10;
                     this.ResumeLayout(false);
@@ -1167,7 +1169,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.grpExtravio.Visible = false;
                     this.grpRoboVehiculo.Visible = false;
                     this.grpRoboAccesorios.Visible = false;
-                    this.Height = this._intAltoOriginal;
+                    if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+                    {
+                        this.Height = this._intAltoOriginal;
+                    }
+                    else
+                    {
+                        this.Height = this._intAltoOriginal + 50;
+                    }
                     this.ResumeLayout(false);
                     this.PerformLayout();
 
