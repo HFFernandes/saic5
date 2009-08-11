@@ -159,6 +159,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             IEnumerator myEnumerator;
             CorporacionList ListaCorporaciones = CorporacionMapper.Instance().GetAll();
+            Boolean blnTieneDatos = false;
 
             if (this._entIncidencia == null)
                 return;
@@ -174,11 +175,19 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 {
                     if (this.cklCorporacion.Items[y].ToString() == objCorporacion.Descripcion)
                     {
+                        blnTieneDatos = true;
                         CorporacionIncidenciaMapper.Instance().Insert(new CorporacionIncidencia(this._entIncidencia.Folio, objCorporacion.Clave));
                     }
                 }
             }
 
+            if (blnTieneDatos)
+            {
+                this._entIncidencia.ClaveEstatus = 2;
+                IncidenciaMapper.Instance().Save(this._entIncidencia);
+
+            }
+            
         }
 
         private void GuardaDenunciante()
