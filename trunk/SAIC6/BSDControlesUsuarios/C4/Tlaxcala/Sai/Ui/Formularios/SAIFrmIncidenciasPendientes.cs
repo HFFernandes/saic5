@@ -11,13 +11,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
     public partial class SAIFrmIncidenciasPendientes : SAIFrmBase
     {
-        public static int intSubModulo
-        {
-            get
-            {
-                return ID.PNT_IP;
-            }
-        }
+        //public static int intSubModulo
+        //{
+        //    get
+        //    {
+        //        return ID.PNT_IP;
+        //    }
+        //}
 
         private List<Incidencia> lstIncidenciasRegistradas;
         private List<Incidencia> lstIncidenciasTemporales;
@@ -47,7 +47,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void SAIFrmIncidenciasPendientes_Load(object sender, EventArgs e)
         {
-            saiReport1.btnLigarIncidencias.Enabled = Aplicacion.UsuarioPersistencia.blnPuedeEscribir(intSubModulo);
+            //saiReport1.btnLigarIncidencias.Enabled = Aplicacion.UsuarioPersistencia.blnPuedeEscribir(intSubModulo);
 
             saiReport1.AgregarColumna(0, "ID", 20, false, false, false);
             saiReport1.AgregarColumna(1, "Folio", 150, true, true, true);

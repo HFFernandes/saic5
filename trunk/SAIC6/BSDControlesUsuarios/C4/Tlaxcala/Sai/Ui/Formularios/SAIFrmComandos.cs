@@ -48,11 +48,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             switch (e.control.Id)
             {
                 case ID.CMD_A:
-                    if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(SAIFrmIncidenciasActivas.intSubModulo))
-                    {
-                        var activas = new SAIFrmIncidenciasActivas();
-                        MostrarEnSegundoMonitorSiEsPosible(activas);
-                    }
+                    //if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(SAIFrmIncidenciasActivas.intSubModulo))
+                    //{
+                    var activas = new SAIFrmIncidenciasActivas();
+                    MostrarEnSegundoMonitorSiEsPosible(activas);
+                    //}
                     break;
                 case ID.CMD_AU:
                     break;
@@ -112,11 +112,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                     break;
                 case ID.CMD_P:
-                    if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(SAIFrmIncidenciasPendientes.intSubModulo))
-                    {
-                        var pendientes = new SAIFrmIncidenciasPendientes();
-                        MostrarEnSegundoMonitorSiEsPosible(pendientes);
-                    }
+                    //if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(SAIFrmIncidenciasPendientes.intSubModulo))
+                    //{
+                    var pendientes = new SAIFrmIncidenciasPendientes();
+                    MostrarEnSegundoMonitorSiEsPosible(pendientes);
+                    //}
                     break;
                 case ID.CMD_PH:
                     break;
@@ -161,8 +161,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 foreach (var comando in coleccionComandos)
                 {
                     //verificar el boton y si el usuario actual tiene permisos
-                    AgregarBoton(controls, XTPControlType.xtpControlButton, comando.Identificador, comando.Caption,
-                                 comando.IniciaGrupo, comando.Descripcion, comando.EsVisible);
+                    if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(comando.Identificador))
+                    {
+                        AgregarBoton(controls, XTPControlType.xtpControlButton, comando.Identificador, comando.Caption,
+                                     comando.IniciaGrupo, comando.Descripcion, comando.EsVisible);
+                    }
                 }
             }
 
@@ -239,10 +242,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 var coleccionComandos = ComandosColeccion.ColeccionComandos();
                 foreach (var comando in coleccionComandos)
                 {
-                    AgregarBoton(barra.Controls, XTPControlType.xtpControlButton, comando.Identificador, comando.Caption,
-                                 comando.IniciaGrupo, comando.Descripcion, comando.EsVisible);
-
-                    SAIBarraComandos.KeyBindings.Add(ID.FCONTROL, comando.TeclaAccesoRapido, comando.Identificador);
+                    if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(comando.Identificador))
+                    {
+                        AgregarBoton(barra.Controls, XTPControlType.xtpControlButton, comando.Identificador, comando.Caption,
+                                  comando.IniciaGrupo, comando.Descripcion, comando.EsVisible);
+                        SAIBarraComandos.KeyBindings.Add(ID.FCONTROL, comando.TeclaAccesoRapido, comando.Identificador);
+                    }
                 }
             }
         }

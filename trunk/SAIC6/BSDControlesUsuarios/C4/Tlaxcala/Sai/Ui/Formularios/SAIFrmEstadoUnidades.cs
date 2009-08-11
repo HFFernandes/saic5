@@ -15,13 +15,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <summary>
         /// Identificador del módulo en el sistema
         /// </summary>
-        public static int intSubModulo
-        {
-            get
-            {
-                return ID.PNT_AU;
-            }
-        }
+        //public static int intSubModulo
+        //{
+        //    get
+        //    {
+        //        return ID.PNT_AU;
+        //    }
+        //}
 
         private List<Unidad> lstUnidadesRegistradas;
         private List<Unidad> lstUnidadesTemporales;

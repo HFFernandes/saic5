@@ -19,13 +19,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <summary>
         /// Identificador del módulo en el sistema
         /// </summary>
-        public static int intSubModulo
-        {
-            get
-            {
-                return ID.PNT_IA;
-            }
-        }
+        //public static int intSubModulo
+        //{
+        //    get
+        //    {
+        //        return ID.PNT_IA;
+        //    }
+        //}
 
         /// <summary>
         /// listado tipado de incidencias para manipular cuando han cambiado de estado
@@ -57,7 +57,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         void SAIFrmIncidenciasActivas_Load(object sender, EventArgs e)
         {
             //Establecer permisos para los elementos de interacción con el usuario
-            saiReport1.btnLigarIncidencias.Enabled = Aplicacion.UsuarioPersistencia.blnPuedeEscribir(intSubModulo);
+            //saiReport1.btnLigarIncidencias.Enabled = Aplicacion.UsuarioPersistencia.blnPuedeEscribir(intSubModulo);
 
             //Definir las columnas del listado y obtener los registros
             saiReport1.AgregarColumna(0, "ID", 20, false, false, false);
