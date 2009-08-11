@@ -12,16 +12,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
     public partial class SAIFrmEstadoUnidades : SAIFrmBase
     {
-        /// <summary>
-        /// Identificador del módulo en el sistema
-        /// </summary>
-        //public static int intSubModulo
-        //{
-        //    get
-        //    {
-        //        return ID.PNT_AU;
-        //    }
-        //}
 
         private List<Unidad> lstUnidadesRegistradas;
         private List<Unidad> lstUnidadesTemporales;
@@ -34,10 +24,26 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
             Width = Screen.GetWorkingArea(this).Width;
             saiReport1.btnLigarIncidencias.Click += btnLigarIncidencias_Click;
-            lstUnidadesRegistradas=new List<Unidad>();
-            lstUnidadesTemporales=new List<Unidad>();
-            lstUnidadesPorRemover=new List<Unidad>();
-            lstRegistrosReporte=new List<ReportRecord>();
+            saiReport1.btnDespacharIncidencias.Click += btnDespacharIncidencias_Click;
+            saiReport1.btnBajaUnidad.Click += btnBajaUnidad_Click;
+            saiReport1.btnAltaUnidad.Click += btnAltaUnidad_Click;
+
+            lstUnidadesRegistradas = new List<Unidad>();
+            lstUnidadesTemporales = new List<Unidad>();
+            lstUnidadesPorRemover = new List<Unidad>();
+            lstRegistrosReporte = new List<ReportRecord>();
+        }
+
+        void btnAltaUnidad_Click(object sender, EventArgs e)
+        {
+        }
+
+        void btnBajaUnidad_Click(object sender, EventArgs e)
+        {
+        }
+
+        void btnDespacharIncidencias_Click(object sender, EventArgs e)
+        {
         }
 
         void btnLigarIncidencias_Click(object sender, EventArgs e)
@@ -50,14 +56,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void SAIFrmEstadoUnidades_Load(object sender, EventArgs e)
         {
+            saiReport1.btnDespacharIncidencias.Visible = false;
+            saiReport1.btnLigarIncidencias.Visible = false;
+
             saiReport1.AgregarColumna(0, "ID", 20, false, false, false);
-            saiReport1.AgregarColumna(1, "No de Teléfono", 200, true, true, true);
-            saiReport1.AgregarColumna(2, "Status", 200, true, true, true);
-            saiReport1.AgregarColumna(3, "Hora de Entrada", 200, true, true, true);
-            saiReport1.AgregarColumna(4, "Ubicación", 200, true, true, true);
-            saiReport1.AgregarColumna(5, "Tipo de Incidencia", 200, true, true, true);
-            saiReport1.AgregarColumna(6, "Dividido En", 200, true, true, true);
-            saiReport1.AgregarColumna(7, "Folio", 200, true, true, true);
+            saiReport1.AgregarColumna(1, "Folio", 200, true, true, true);
+            saiReport1.AgregarColumna(2, "Unidad", 200, true, true, true);
+            saiReport1.AgregarColumna(3, "Nombre", 200, true, true, true);
+            saiReport1.AgregarColumna(4, "Status", 200, true, true, true);
+            saiReport1.AgregarColumna(5, "Hora", 200, true, true, true);
+            saiReport1.AgregarColumna(6, "Localizacion", 200, true, true, true);
+            saiReport1.AgregarColumna(7, "Motivo", 200, true, true, true);
         }
     }
 }

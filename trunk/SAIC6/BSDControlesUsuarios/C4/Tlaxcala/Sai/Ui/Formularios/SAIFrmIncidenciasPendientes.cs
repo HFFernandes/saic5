@@ -11,14 +11,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
     public partial class SAIFrmIncidenciasPendientes : SAIFrmBase
     {
-        //public static int intSubModulo
-        //{
-        //    get
-        //    {
-        //        return ID.PNT_IP;
-        //    }
-        //}
-
         private List<Incidencia> lstIncidenciasRegistradas;
         private List<Incidencia> lstIncidenciasTemporales;
         private List<Incidencia> lstIncidenciasPorRemover;
@@ -32,13 +24,29 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                           XTPReportDragDrop.xtpReportAllowDrag |
                                           XTPReportDragDrop.xtpReportAllowDrop);
             saiReport1.btnLigarIncidencias.Click += btnLigarIncidencias_Click;
+            saiReport1.btnDespacharIncidencias.Click += btnDespacharIncidencias_Click;
+            saiReport1.btnBajaUnidad.Click += btnBajaUnidad_Click;
+            saiReport1.btnAltaUnidad.Click += btnAltaUnidad_Click;
+
             lstIncidenciasRegistradas = new List<Incidencia>();
             lstIncidenciasTemporales = new List<Incidencia>();
             lstIncidenciasPorRemover = new List<Incidencia>();
             lstRegistrosReporte = new List<ReportRecord>();
 
-            SAIFrmPruebas pruebas = new SAIFrmPruebas();
-            pruebas.Show();
+            //SAIFrmPruebas pruebas = new SAIFrmPruebas();
+            //pruebas.Show();
+        }
+
+        void btnAltaUnidad_Click(object sender, EventArgs e)
+        {
+        }
+
+        void btnBajaUnidad_Click(object sender, EventArgs e)
+        {
+        }
+
+        void btnDespacharIncidencias_Click(object sender, EventArgs e)
+        {
         }
 
         void btnLigarIncidencias_Click(object sender, EventArgs e)
@@ -48,6 +56,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void SAIFrmIncidenciasPendientes_Load(object sender, EventArgs e)
         {
             //saiReport1.btnLigarIncidencias.Enabled = Aplicacion.UsuarioPersistencia.blnPuedeEscribir(intSubModulo);
+            saiReport1.btnAltaUnidad.Visible = false;
+            saiReport1.btnBajaUnidad.Visible = false;
 
             saiReport1.AgregarColumna(0, "ID", 20, false, false, false);
             saiReport1.AgregarColumna(1, "Folio", 150, true, true, true);
