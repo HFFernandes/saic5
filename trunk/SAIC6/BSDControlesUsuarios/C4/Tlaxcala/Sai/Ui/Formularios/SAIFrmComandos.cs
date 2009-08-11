@@ -48,11 +48,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             switch (e.control.Id)
             {
                 case ID.CMD_A:
-                    //if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(SAIFrmIncidenciasActivas.intSubModulo))
-                    //{
                     var activas = new SAIFrmIncidenciasActivas();
                     MostrarEnSegundoMonitorSiEsPosible(activas);
-                    //}
                     break;
                 case ID.CMD_AU:
                     break;
@@ -83,9 +80,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 case ID.CMD_N:
                     break;
                 case ID.CMD_NI:
-
-
-
                     //Se pregunta qué es el usuario y a qué sistema entró:
                     if (Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
                         Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
@@ -108,15 +102,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         frmIncidencia089.Show(this);
 
                     }
-
-
                     break;
                 case ID.CMD_P:
-                    //if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(SAIFrmIncidenciasPendientes.intSubModulo))
-                    //{
                     var pendientes = new SAIFrmIncidenciasPendientes();
                     MostrarEnSegundoMonitorSiEsPosible(pendientes);
-                    //}
                     break;
                 case ID.CMD_PH:
                     break;
@@ -151,9 +140,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void SAIBarraComandos_Customization(object sender, AxXtremeCommandBars._DCommandBarsEvents_CustomizationEvent e)
         {
-            //No se mostrará la página correspondiente a menús ya que no existe alguno
-            //e.options.ShowMenusPage = false;
-
             var controls = SAIBarraComandos.DesignerControls;
             if (controls.Count == 0)
             {
