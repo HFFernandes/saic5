@@ -33,24 +33,27 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
                 _frmMapa = new SAIFrmMapa(ConfigurationSettings.AppSettings["XmlCartografia"], Application.StartupPath + @"\");
                 _frmMapa.Show();
             }
-
             
-            
-            if (objDatosUbicacion.IdCodigoPostal.HasValue)
-            {
-                _frmMapa.CP(objDatosUbicacion.IdCodigoPostal.Value);
-            }
-            else if (objDatosUbicacion.IdColonia.HasValue)
+            //if (objDatosUbicacion.IdCodigoPostal.HasValue)
+            //{
+            //    _frmMapa.CP(objDatosUbicacion.IdCodigoPostal.Value);
+            //    _frmMapa.Refresh();
+            //}
+            //else 
+            if (objDatosUbicacion.IdColonia.HasValue)
             {
                 _frmMapa.Colonia(objDatosUbicacion.IdColonia.Value);
+                _frmMapa.Refresh();
             }
             else if (objDatosUbicacion.IdLocalidad.HasValue)
             {
                 _frmMapa.Localidad(objDatosUbicacion.IdLocalidad.Value);
+                _frmMapa.Refresh();
             }
             else if (objDatosUbicacion.IdMunicipio.HasValue)
             {
                 _frmMapa.Municipio(objDatosUbicacion.IdMunicipio.Value);
+                _frmMapa.Refresh();
             }
             else
             {

@@ -156,7 +156,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(604, 495);
+            this.ClientSize = new System.Drawing.Size(599, 489);
             this.Controls.Add(this.chkFechaNotificacion);
             this.Controls.Add(this.chkFechaDocumento);
             this.Controls.Add(this.chkFechaEnvio);
