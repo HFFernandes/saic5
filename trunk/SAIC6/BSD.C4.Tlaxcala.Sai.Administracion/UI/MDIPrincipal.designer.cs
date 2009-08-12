@@ -137,7 +137,6 @@
             // 
             // catalogoDeColoniasToolStripMenuItem
             // 
-            this.catalogoDeColoniasToolStripMenuItem.Enabled = false;
             this.catalogoDeColoniasToolStripMenuItem.Name = "catalogoDeColoniasToolStripMenuItem";
             this.catalogoDeColoniasToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
             this.catalogoDeColoniasToolStripMenuItem.Text = "Catalogo de Colonias";
@@ -145,17 +144,17 @@
             // 
             // catalogoDeMunicipiosToolStripMenuItem
             // 
-            this.catalogoDeMunicipiosToolStripMenuItem.Enabled = false;
             this.catalogoDeMunicipiosToolStripMenuItem.Name = "catalogoDeMunicipiosToolStripMenuItem";
             this.catalogoDeMunicipiosToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
             this.catalogoDeMunicipiosToolStripMenuItem.Text = "Catalogo de Municipios";
+            this.catalogoDeMunicipiosToolStripMenuItem.Click += new System.EventHandler(this.catalogoDeMunicipiosToolStripMenuItem_Click);
             // 
             // catalogoDeLocalidadesToolStripMenuItem
             // 
-            this.catalogoDeLocalidadesToolStripMenuItem.Enabled = false;
             this.catalogoDeLocalidadesToolStripMenuItem.Name = "catalogoDeLocalidadesToolStripMenuItem";
             this.catalogoDeLocalidadesToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
             this.catalogoDeLocalidadesToolStripMenuItem.Text = "Catalogo de Localidades";
+            this.catalogoDeLocalidadesToolStripMenuItem.Click += new System.EventHandler(this.catalogoDeLocalidadesToolStripMenuItem_Click);
             // 
             // MDIPrincipal
             // 
@@ -173,6 +172,7 @@
             this.Name = "MDIPrincipal";
             this.Text = "SAI Administración";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.MDIPrincipal_Load);
             this.mnuStripPrincipal.ResumeLayout(false);
             this.mnuStripPrincipal.PerformLayout();
             this.ResumeLayout(false);
