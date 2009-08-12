@@ -106,7 +106,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         var iRows = saiReport1.reportControl.Rows.Count;
 
                         //buscamos el Row por el código de la unidad para obtener su posición dentro del grid
-                        var itm = saiReport1.reportControl.Records.FindRecordItem(1, iRows, 1, iCols, 1, 1, unidad.Codigo, XTPReportTextSearchParms.xtpReportTextSearchExactPhrase);
+                        var itm = saiReport1.reportControl.Records.FindRecordItem(0, iRows, 0, iCols, 0, 1, unidad.Codigo, XTPReportTextSearchParms.xtpReportTextSearchExactPhrase);
                         if (itm != null && itm.Index >= 0)
                         {
                             var dtHora = new DateTime();
@@ -118,7 +118,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 DespachoIncidenciaMapper.Instance().GetBySQLQuery(string.Format(
                                                                                       SQL_OBTENERDESPACHOS,
                                                                                       Aplicacion.UsuarioPersistencia
-                                                                                          .intCorporacion ?? -1));
+                                                                                          .intCorporacion ?? -1,itm.Record[0].Value));
                             foreach (var unidadDespacho in unidadDespachoList)
                             {
                                 if (unidadDespacho.HoraLiberada != null)
@@ -208,7 +208,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
-        public const string SQL_OBTENERDESPACHOS = "SELECT DespachoIncidencia.* FROM DespachoIncidencia WHERE (HoraLiberada IS NULL OR HoraLlegada IS NULL OR HoraDespachada IS NULL) AND (ClaveCorporacion={0})";
+        public const string SQL_OBTENERDESPACHOS = "SELECT DespachoIncidencia.* FROM DespachoIncidencia WHERE (HoraLiberada IS NULL OR HoraLlegada IS NULL OR HoraDespachada IS NULL) AND (ClaveCorporacion={0}) AND (ClaveUnidad={1})";
 
+        //public const string SQL_OBTENERDESPACHOS ="SELECT DespachoIncidencia.* FROM DespachoIncidencia WHERE (ClaveCorporacion={0})";
     }
 }
