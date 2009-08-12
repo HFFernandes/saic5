@@ -79,6 +79,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
         private void LlenarCodigoPostal()
         {
+            this.ddlCodigoPostal.Items.Clear();
             try
             {
                 try
@@ -92,9 +93,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
                     this.ddlCodigoPostal.ValueMember = "Valor";
                     this.ddlCodigoPostal.DisplayMember = "Descripcion";
-                    /*this.ddlCodigoPostal.DataSource = Mappers.CodigoPostalMapper.Instance().GetAll();
-                    this.ddlCodigoPostal.DisplayMember = "Valor";
-                    this.ddlCodigoPostal.ValueMember = "Clave";*/
                 }
                 catch(Exception ex)
                 { throw new SAIExcepcion(ex.Message); }
@@ -110,18 +108,51 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             try
             {
-                try { }
+                try 
+                {
+                    Entidades.Colonia newColonia = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Colonia();
+                    newColonia.ClaveLocalidad = Convert.ToInt32(this.ddlLocalidad.SelectedValue);
+                    newColonia.Nombre = this.txtCP.Text;
+                    if (Convert.ToString(ObtenerValor()) == "000")
+                    {
+                        newColonia.ClaveCodigoPostal = this.ObtenerCodigoPostal(this.txtCP.Text);
+                    }
+                    else
+                    {
+                        newColonia.ClaveCodigoPostal = Convert.ToInt32(this.ObtenerValor());
+                    }
+
+                    Mappers.ColoniaMapper.Instance().Insert(newColonia);
+                }
                 catch (Exception ex)
                 { throw new SAIExcepcion(ex.Message); }
             }
             catch (SAIExcepcion)
             { }
         }
+
         private void Modificar()
         {
             try
             {
-                try { }
+                try 
+                {
+                    int selectedColonia = Convert.ToInt32(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["Clave"].Value);
+                    Entidades.Colonia updColonia = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Colonia(selectedColonia);
+                    updColonia.ClaveLocalidad = Convert.ToInt32(this.ddlLocalidad.SelectedValue);
+                    updColonia.Nombre = this.saiTxtNombre.Text;
+
+                    if (Convert.ToString(ObtenerValor()) == "000")
+                    {
+                        updColonia.ClaveCodigoPostal = this.ObtenerCodigoPostal(this.txtCP.Text);
+                    }
+                    else
+                    {
+                        updColonia.ClaveCodigoPostal = Convert.ToInt32(this.ObtenerValor());
+                    }
+
+                    Mappers.ColoniaMapper.Instance().Save(updColonia);
+                }
                 catch (Exception ex)
                 { throw new SAIExcepcion(ex.Message); }
             }
@@ -133,7 +164,10 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             try
             {
-                try { }
+                try 
+                {
+                    Mappers.ColoniaMapper.Instance().Delete(Convert.ToInt32(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["Clave"].Value));
+                }
                 catch (Exception ex)
                 { throw new SAIExcepcion(ex.Message); }
             }
@@ -182,16 +216,24 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            this.Agregar();
-            this.LlenarGrid();
-            this.Limpiar();
+            if (this.SAIProveedorValidacion.ValidarCamposRequeridos(this.groupBox2))
+            {
+                this.Agregar();
+                this.LlenarGrid();
+                this.LlenarCodigoPostal();
+                this.Limpiar();
+            }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            this.Modificar();
-            this.LlenarGrid();
-            this.Limpiar();
+            if (this.SAIProveedorValidacion.ValidarCamposRequeridos(this.groupBox2))
+            {
+                this.Modificar();
+                this.LlenarGrid();
+                this.LlenarCodigoPostal();
+                this.Limpiar();
+            }
         }
 
         
@@ -207,6 +249,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 if (this.ObtenerIndiceSeleccionado() > -1)
                 {
                     this.saiTxtNombre.Text = Convert.ToString(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["Nombre"].Value);
+                    this.SeleccionarComboItem(Convert.ToInt32(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveCodigo"].Value));
                     this.btnModificar.Enabled = true;
                     this.btnEliminar.Visible = true;
                     this.btnAgregar.Enabled = false;
@@ -218,16 +261,84 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
         private void ddlCodigoPostal_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Convert.ToString(this.ddlCodigoPostal.SelectedValue) == "000")
+
+            if (Convert.ToString(this.ObtenerValor()) == "000")
             {
-                this.saiTxtCP.Visible = true;
+                this.txtCP.Visible = true;
                 this.lblOtro.Visible = true;
             }
             else 
             {
-                this.saiTxtCP.Visible = false;
+                this.txtCP.Visible = false;
                 this.lblOtro.Visible = false;
             }
+        }
+
+        private object ObtenerValor()
+        {
+            if (this.ddlCodigoPostal.SelectedItem != null)
+                return ((Utilerias.ComboItem)this.ddlCodigoPostal.SelectedItem).Valor;
+            else
+                return 0;
+        }
+
+        private void SeleccionarComboItem(int Value)
+        {
+            foreach (Utilerias.ComboItem item in this.ddlCodigoPostal.Items)
+            {
+                if (Convert.ToInt32(item.Valor) == Value)
+                {
+                    this.ddlCodigoPostal.SelectedItem = item;
+                    break;
+                }
+                /*else
+                { this.ddlCodigoPostal.SelectedIndex = -1; }*/
+            }
+        }
+
+        /// <summary>
+        /// Obtiene la clave del codigo postal
+        /// </summary>
+        /// <param name="cp">Especifica el cp que no esta en la lista</param>
+        /// <returns></returns>
+        private int ObtenerCodigoPostal(string cp)
+        {
+            try
+            {
+                try 
+                {
+                    bool existe = false;
+                    int max = 0;
+                    Entidades.CodigoPostalList lstCodigoPostal = Mappers.CodigoPostalMapper.Instance().GetAll();
+                    foreach (Entidades.CodigoPostal codigoPostal in lstCodigoPostal) 
+                    {
+                        if (codigoPostal.Valor == cp)
+                        {
+                            existe = true;
+                            max = codigoPostal.Clave;
+                            break;
+                        }
+
+                        if(codigoPostal.Clave > max)
+                            max = codigoPostal.Clave;
+                    }
+                    
+                    if (!existe)
+                    {
+                        Entidades.CodigoPostal newCP = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.CodigoPostal();
+                        newCP.Clave = max + 1;
+                        newCP.Valor = cp;
+                        Mappers.CodigoPostalMapper.Instance().Insert(newCP);
+                        return newCP.Clave;
+                    }
+                    return max;
+                }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
+            }
+            catch (SAIExcepcion)
+            { }
+            return 0;
         }
     }
 }
