@@ -79,13 +79,27 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
         private void LlenarCodigoPostal()
         {
-            try 
+            try
             {
-                this.ddlCodigoPostal.DataSource = Mappers.CodigoPostalMapper.Instance().GetAll();
-                this.ddlCodigoPostal.DisplayMember = "Valor";
-                this.ddlCodigoPostal.ValueMember = "Clave";
+                try
+                {
+                    this.ddlCodigoPostal.Items.Add(new Utilerias.ComboItem("000", "Otro..."));
+                    Entidades.CodigoPostalList lstCodigoPostal = Mappers.CodigoPostalMapper.Instance().GetAll();
+                    foreach (Entidades.CodigoPostal cp in lstCodigoPostal)
+                    {
+                        this.ddlCodigoPostal.Items.Add(new Utilerias.ComboItem(cp.Clave, cp.Valor));
+                    }
+
+                    this.ddlCodigoPostal.ValueMember = "Valor";
+                    this.ddlCodigoPostal.DisplayMember = "Descripcion";
+                    /*this.ddlCodigoPostal.DataSource = Mappers.CodigoPostalMapper.Instance().GetAll();
+                    this.ddlCodigoPostal.DisplayMember = "Valor";
+                    this.ddlCodigoPostal.ValueMember = "Clave";*/
+                }
+                catch(Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
             }
-            catch
+            catch (SAIExcepcion)
             { }
 
         }
@@ -180,11 +194,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             this.Limpiar();
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
+        
         private void groupBox2_Enter(object sender, EventArgs e)
         {
 
@@ -204,6 +214,20 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             }
             catch (Exception ex)
             { }
+        }
+
+        private void ddlCodigoPostal_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Convert.ToString(this.ddlCodigoPostal.SelectedValue) == "000")
+            {
+                this.saiTxtCP.Visible = true;
+                this.lblOtro.Visible = true;
+            }
+            else 
+            {
+                this.saiTxtCP.Visible = false;
+                this.lblOtro.Visible = false;
+            }
         }
     }
 }

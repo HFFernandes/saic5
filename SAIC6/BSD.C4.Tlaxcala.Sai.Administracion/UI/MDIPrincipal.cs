@@ -64,12 +64,23 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             frm_Colonias.Show();
         }
 
-        /*private void catalogoDeMunicipiosToolStripMenuItem_Click(object sender, EventArgs e)
+        private void MDIPrincipal_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void catalogoDeMunicipiosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmMunicipios frm_Municipios = new frmMunicipios();
             frm_Municipios.MdiParent = this;
             frm_Municipios.Show();
-        }*/
+        }
 
+        private void catalogoDeLocalidadesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmLocalidades frm_Localidades = new frmLocalidades();
+            frm_Localidades.MdiParent = this;
+            frm_Localidades.Show();
+        }
     }
 }
