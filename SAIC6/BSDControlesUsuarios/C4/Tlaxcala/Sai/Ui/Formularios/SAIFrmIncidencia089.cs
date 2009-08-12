@@ -18,9 +18,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         public SAIFrmIncidencia089()
         {
             InitializeComponent();
+            this.lblTitulo.Text = "REGISTRO DE INCIDENCIA 089";
             this.SuspendLayout();
-            this.Height = 650;
-            this.Width = 647;
+            this.Height = 485;
+            this.Width = 600;
             this.ResumeLayout(false);
             if (this._entIncidencia != null)
             {
@@ -31,6 +32,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void SIAFrmIncidencia089(Incidencia EntIncidencia)
         {
+            this.lblTitulo.Text = "INCIDENCIA 089";
+            InitializeComponent();
             this.InicializaCampos();
             this.SuspendLayout();
             this.Height = 650;
@@ -58,12 +61,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 {
                     this.dtmFechaDocumento.Value = this._entIncidencia.FechaEnvio.Value;
                     this.dtmFechaDocumento.Enabled = true;
-                    this.chkFechaDocumento.Enabled = true;
+                    this.chkFechaDocumento.Checked  = true;
                 }
                 else
                 {
                     this.dtmFechaDocumento.Enabled = false;
-                    this.chkFechaDocumento.Enabled = false;
+                    this.chkFechaDocumento.Checked = false;
                 }
 
                 if (this._entIncidencia.FechaEnvioDependencia.HasValue)
