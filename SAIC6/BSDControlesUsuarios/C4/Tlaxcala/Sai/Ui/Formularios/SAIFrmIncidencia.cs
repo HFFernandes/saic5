@@ -1271,67 +1271,312 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         }
 
-        private void dgvPersonaExtraviada_CellLeave(object sender, DataGridViewCellEventArgs e)
+       
+        private void dgvPersonaExtraviada_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
             Boolean blnExiste = false;
             PersonaExtraviada entPersonaExtraviada = new PersonaExtraviada();
 
-            if (!(dgvPersonaExtraviada[0,e.RowIndex].Value == null))
+            if (this._entIncidencia == null)
             {
-                blnExiste = true;
-                int Clave = (int) dgvPersonaExtraviada[0, e.RowIndex].Value;
-                entPersonaExtraviada = PersonaExtraviadaMapper.Instance().GetOne((Clave));
-            }
-            
-
-
-            switch(e.ColumnIndex)
-            {
-                case 0: //Calve
-                    break;
-                case 1: //Folio
-                    break;
-                case 2: //Nombre
-                    break;
-                case 3: //Edad
-                    break;
-                case 4: //Sexo
-                    break;
-                case 5://Estatura
-                    break;
-                case 6: //Parentesco
-                    break;
-                case 7://Fecha de extravío
-                    break;
-                case 9:// Tez
-                    break;
-                case 10://Tipo cabello
-                    break;
-                case 11://Color cabello
-                    break;
-                case 12://Largo cabello
-                    break;
-                case 13://Frente
-                    break;
-                case 14://Cejas
-                    break;
-                case 15:// Color de ojos
-                    break;
-                case 16:// tamaño de boca
-                    break;
-                case 17:// labios
-                    break;
-                case 18:// labios
-                    break;
-                case 19:// vestimenta
-                    break;
-                case 20:// destino
-                    break;
-                case 21:// caracteristicas
-                    break;
+                this.dgvPersonaExtraviada.Rows.Clear();
+                throw new SAIExcepcion("No es posible registrar personas extraviadas", this);
             }
 
-            
+            try
+            {
+
+                if (!(this.dgvPersonaExtraviada[0,e.RowIndex].Value  == null))
+                {
+                    blnExiste = true;
+                    int Clave = (int)this.dgvPersonaExtraviada[0, e.RowIndex].Value;
+                    entPersonaExtraviada = PersonaExtraviadaMapper.Instance().GetOne((Clave));
+                }
+
+                entPersonaExtraviada.FechaExtravio = DateTime.Now;
+
+                switch (e.ColumnIndex)
+                {
+                    case 0: //Calve
+                        break;
+                    case 1: //Folio
+                        break;
+                    case 2: //Nombre
+                        String strNombre;
+                        if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                        {
+                            strNombre = e.FormattedValue.ToString();
+                            strNombre = strNombre.ToUpper();
+                            dgvPersonaExtraviada.CurrentCell.Value = strNombre;
+                            entPersonaExtraviada.Nombre = strNombre;
+                        }
+
+                        break;
+                    case 3: //Edad
+                        int intEdad;
+                        if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                        {
+                            try
+                            {
+                                intEdad = int.Parse(e.FormattedValue.ToString());
+                                if (intEdad <= 0)
+                                {
+                                    dgvPersonaExtraviada.CurrentCell.Value = string.Empty;
+                                    e.Cancel = true;
+                                    throw new SAIExcepcion("La edad no se encuentra en el formato correcto, debe de ser un valor numérico mayor a 0", this);
+                                }
+                                entPersonaExtraviada.Edad = intEdad;
+                            }
+                            catch
+                            {
+                                dgvPersonaExtraviada.CurrentCell.Value = string.Empty;
+                                e.Cancel = true;
+                                throw new SAIExcepcion("La edad no se encuentra en el formato correcto, debe de ser un valor numérico mayor a 0", this);
+                            }
+                        }
+
+                        break;
+                    case 4: //Sexo
+                        String strSexo;
+                        if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                        {
+                            strSexo = e.FormattedValue.ToString();
+                            strSexo = strSexo.ToUpper();
+                            if (strSexo != "F" && strSexo != "M")
+                            {
+                                dgvPersonaExtraviada.CurrentCell.Value = string.Empty;
+                                e.Cancel = true;
+                                throw new SAIExcepcion("El valor del sexo no se encuentra en el formato correcto, debe de ser F (Femenino) y M (Masculino)", this);
+                            }
+
+                            dgvPersonaExtraviada.CurrentCell.Value = strSexo;
+                            entPersonaExtraviada.Sexo = strSexo;
+                        }
+
+                        break;
+                    case 5://Estatura
+                        float fltEstatura;
+                        if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                        {
+                            try
+                            {
+                                fltEstatura = float.Parse(e.FormattedValue.ToString());
+                                if (fltEstatura <= 0)
+                                {
+                                    dgvPersonaExtraviada.CurrentCell.Value = string.Empty;
+                                    dgvPersonaExtraviada.Refresh();
+                                    e.Cancel = true;
+                                    throw new SAIExcepcion("La estatura no se encuentra en el formato correcto, debe de ser un valor numérico mayor a 0 con decimales", this);
+                                }
+                                entPersonaExtraviada.Estatura = fltEstatura;
+                            }
+                            catch
+                            {
+                                dgvPersonaExtraviada.CurrentCell.Value = string.Empty;
+                                dgvPersonaExtraviada.Refresh();
+                                e.Cancel = true;
+                                throw new SAIExcepcion("La estatura no se encuentra en el formato correcto, debe de ser un valor numérico mayor a 0 con decimales", this);
+                            }
+                        }
+                        break;
+                    case 6: //Parentesco
+
+                        if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                        {
+                            String strParentesco;
+                            strParentesco = e.FormattedValue.ToString();
+                            strParentesco = strParentesco.ToUpper();
+                            dgvPersonaExtraviada.CurrentCell.Value = strParentesco;
+                            entPersonaExtraviada.Parentesco = strParentesco;
+                        }
+
+                        break;
+                    case 7://Fecha de extravío
+                        DateTime dtmFecha;
+                        if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                        {
+                            try
+                            {
+                                dtmFecha = DateTime.Parse(e.FormattedValue.ToString());
+                                if (dtmFecha > DateTime.Today)
+                                {
+                                    dgvPersonaExtraviada.CurrentCell.Value = string.Empty;
+                                    e.Cancel = true;
+                                    throw new SAIExcepcion("La fecha de extravío no se encuentra en el formato correcto, debe de ser una fecha menor o igual al dia actual", this);
+                                }
+                                entPersonaExtraviada.FechaExtravio = dtmFecha;
+                            }
+                            catch
+                            {
+                                dgvPersonaExtraviada.CurrentCell.Value = string.Empty;
+                                e.Cancel = true;
+                                throw new SAIExcepcion("La fecha de extravío no se encuentra en el formato correcto, debe de ser una fecha menor o igual al dia actual", this);
+                            }
+                        }
+                        break;
+                    case 8:// Tez
+
+                        if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                        {
+                            String strTez;
+                            strTez = e.FormattedValue.ToString();
+                            strTez = strTez.ToUpper();
+                            dgvPersonaExtraviada.CurrentCell.Value = strTez;
+                            entPersonaExtraviada.Tez = strTez;
+                        }
+
+                        break;
+                    case 9://Tipo cabello
+
+                        if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                        {
+                            String strTipoCabello;
+                            strTipoCabello = e.FormattedValue.ToString();
+                            strTipoCabello = strTipoCabello.ToUpper();
+                            dgvPersonaExtraviada.CurrentCell.Value = strTipoCabello;
+                            entPersonaExtraviada.TipoCabello = strTipoCabello;
+                        }
+
+                        break;
+                    case 10://Color cabello
+
+                        if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                        {
+                            String strColorCabello;
+                            strColorCabello = e.FormattedValue.ToString();
+                            strColorCabello = strColorCabello.ToUpper();
+                            dgvPersonaExtraviada.CurrentCell.Value = strColorCabello;
+                            entPersonaExtraviada.ColorCabello = strColorCabello;
+                        }
+
+                        break;
+                    case 11://Largo cabello
+
+                        if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                        {
+                            String strLargoCabello;
+                            strLargoCabello = e.FormattedValue.ToString();
+                            strLargoCabello = strLargoCabello.ToUpper();
+                            dgvPersonaExtraviada.CurrentCell.Value = strLargoCabello;
+                            entPersonaExtraviada.LargoCabello = strLargoCabello;
+                        }
+
+                        break;
+                    case 12://Frente
+
+                        if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                        {
+                            String strFrente;
+                            strFrente = e.FormattedValue.ToString();
+                            strFrente = strFrente.ToUpper();
+                            dgvPersonaExtraviada.CurrentCell.Value = strFrente;
+                            entPersonaExtraviada.Frente = strFrente;
+                        }
+
+                        break;
+                    case 13://Cejas
+
+                        if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                        {
+                            String strCejas;
+                            strCejas = e.FormattedValue.ToString();
+                            dgvPersonaExtraviada.CurrentCell.Value = strCejas.ToUpper();
+                            entPersonaExtraviada.Cejas = strCejas;
+                        }
+
+                        break;
+                    case 14:// Color de ojos
+
+                        if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                        {
+                            String strColorOjos;
+                            strColorOjos = e.FormattedValue.ToString();
+                            strColorOjos = strColorOjos.ToUpper();
+                            dgvPersonaExtraviada.CurrentCell.Value = strColorOjos;
+                            entPersonaExtraviada.OjosColor = strColorOjos;
+                        }
+
+                        break;
+                    case 15:// tamaño de boca
+
+                        if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                        {
+                            String strTamañoBoca;
+                            strTamañoBoca = e.FormattedValue.ToString();
+                            strTamañoBoca = strTamañoBoca.ToUpper();
+                            dgvPersonaExtraviada.CurrentCell.Value = strTamañoBoca;
+                            entPersonaExtraviada.BocaTamaño = strTamañoBoca;
+                        }
+
+                        break;
+                    case 16:// labios
+                        if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                        {
+                            String strLabios;
+                            strLabios = e.FormattedValue.ToString();
+                            strLabios = strLabios.ToUpper();
+                            dgvPersonaExtraviada.CurrentCell.Value = strLabios;
+                            entPersonaExtraviada.Labios = strLabios;
+                        }
+                        break;
+                    case 17:// vestimenta
+                        if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                        {
+                            String strVestimenta;
+                            strVestimenta = e.FormattedValue.ToString();
+                            strVestimenta = strVestimenta.ToUpper();
+                            dgvPersonaExtraviada.CurrentCell.Value = strVestimenta;
+                            entPersonaExtraviada.Vestimenta = strVestimenta;
+                        }
+                        break;
+                    case 18:// destino
+                        if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                        {
+                            String strDestino;
+                            strDestino = e.FormattedValue.ToString();
+                            strDestino = strDestino.ToUpper();
+                            dgvPersonaExtraviada.CurrentCell.Value = strDestino;
+                            entPersonaExtraviada.Destino = strDestino;
+                        }
+                        break;
+                    case 19:// caracteristicas
+                        if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                        {
+                            String strCaracteristicas;
+                            strCaracteristicas = e.FormattedValue.ToString();
+                            strCaracteristicas = strCaracteristicas.ToUpper();
+                            dgvPersonaExtraviada.CurrentCell.Value = strCaracteristicas;
+                            entPersonaExtraviada.Caracteristicas = strCaracteristicas;
+                        }
+                        break;
+                }
+
+                entPersonaExtraviada.Folio = this._entIncidencia.Folio;
+
+                try
+                {
+                    if (blnExiste)
+                    {
+                        PersonaExtraviadaMapper.Instance().Save(entPersonaExtraviada);
+                    }
+                    else
+                    {
+                        PersonaExtraviadaMapper.Instance().Insert(entPersonaExtraviada);
+                        dgvPersonaExtraviada[0, e.RowIndex].Value = entPersonaExtraviada.Clave;
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
+            }
+            catch (SAIExcepcion)
+            { }
+        }
+
+        private void dgvPersonaExtraviada_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+
         }
 
        

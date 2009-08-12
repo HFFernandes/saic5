@@ -422,10 +422,10 @@
             this.dgvPersonaExtraviada.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvPersonaExtraviada.Location = new System.Drawing.Point(3, 16);
             this.dgvPersonaExtraviada.Name = "dgvPersonaExtraviada";
-            this.dgvPersonaExtraviada.RowHeadersVisible = false;
             this.dgvPersonaExtraviada.Size = new System.Drawing.Size(566, 205);
             this.dgvPersonaExtraviada.TabIndex = 0;
-            this.dgvPersonaExtraviada.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPersonaExtraviada_CellLeave);
+            this.dgvPersonaExtraviada.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvPersonaExtraviada_CellValidating);
+            this.dgvPersonaExtraviada.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dgvPersonaExtraviada_RowsRemoved);
             // 
             // Clave
             // 
