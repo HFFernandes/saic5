@@ -83,7 +83,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             try
             {
-                //Limpiamos el listado donde se almacenan las incidencias cuyo estado sea activo
+                //Limpiamos el listado donde se almacenan las incidencias cuyo estado sea pendiente
                 //para iniciar nuevamente el ciclo
                 lstIncidenciasTemporales.Clear();
                 foreach (var incidencia in (IncidenciaMapper.Instance().GetByEstatusIncidencia((int)ESTATUSINCIDENCIAS.PENDIENTE))) //vamos a la base para obtener los registros de estado pendiente
