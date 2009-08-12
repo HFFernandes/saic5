@@ -29,11 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SAIFrmIncidencia));
             this.label1 = new System.Windows.Forms.Label();
             this.lblFechaHora = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblOperador = new System.Windows.Forms.Label();
+            this.lblTitulo = new System.Windows.Forms.Label();
             this.lblTelefono = new System.Windows.Forms.Label();
             this.txtTelefono = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.lblTipoIncidencia = new System.Windows.Forms.Label();
@@ -50,7 +52,6 @@
             this.cmbMunicipio = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox(this.components);
             this.cmbCP = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox(this.components);
             this.cmbColonia = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox(this.components);
-            this.saiLogoControl = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAILogoControl();
             this.grpExtravio = new System.Windows.Forms.GroupBox();
             this.dgvPersonaExtraviada = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDataGridView(this.components);
             this.Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -115,6 +116,7 @@
             this.SeñasParticulares = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtReferencias = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.label10 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             this.grpExtravio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonaExtraviada)).BeginInit();
@@ -122,13 +124,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.saiDataGridView1)).BeginInit();
             this.grpRoboVehiculo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVehiculo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(1, 8);
+            this.label1.Location = new System.Drawing.Point(1, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(79, 13);
             this.label1.TabIndex = 1;
@@ -138,7 +141,7 @@
             // 
             this.lblFechaHora.AutoSize = true;
             this.lblFechaHora.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFechaHora.Location = new System.Drawing.Point(85, 8);
+            this.lblFechaHora.Location = new System.Drawing.Point(85, 10);
             this.lblFechaHora.Name = "lblFechaHora";
             this.lblFechaHora.Size = new System.Drawing.Size(0, 13);
             this.lblFechaHora.TabIndex = 2;
@@ -147,7 +150,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(290, 8);
+            this.label2.Location = new System.Drawing.Point(290, 10);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 13);
             this.label2.TabIndex = 3;
@@ -159,9 +162,9 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.lblFechaHora);
-            this.groupBox1.Location = new System.Drawing.Point(4, 66);
+            this.groupBox1.Location = new System.Drawing.Point(1, 45);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(581, 25);
+            this.groupBox1.Size = new System.Drawing.Size(581, 29);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
@@ -169,15 +172,26 @@
             // 
             this.lblOperador.AutoSize = true;
             this.lblOperador.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblOperador.Location = new System.Drawing.Point(360, 8);
+            this.lblOperador.Location = new System.Drawing.Point(360, 10);
             this.lblOperador.Name = "lblOperador";
             this.lblOperador.Size = new System.Drawing.Size(0, 13);
             this.lblOperador.TabIndex = 4;
             // 
+            // lblTitulo
+            // 
+            this.lblTitulo.AutoSize = true;
+            this.lblTitulo.BackColor = System.Drawing.Color.White;
+            this.lblTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitulo.Location = new System.Drawing.Point(186, 18);
+            this.lblTitulo.Name = "lblTitulo";
+            this.lblTitulo.Size = new System.Drawing.Size(318, 24);
+            this.lblTitulo.TabIndex = 26;
+            this.lblTitulo.Text = "REGISTRO DE NUEVA INCIDENCIA";
+            // 
             // lblTelefono
             // 
             this.lblTelefono.AutoSize = true;
-            this.lblTelefono.Location = new System.Drawing.Point(6, 98);
+            this.lblTelefono.Location = new System.Drawing.Point(6, 82);
             this.lblTelefono.Name = "lblTelefono";
             this.lblTelefono.Size = new System.Drawing.Size(52, 13);
             this.lblTelefono.TabIndex = 5;
@@ -186,7 +200,7 @@
             // txtTelefono
             // 
             this.txtTelefono.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.txtTelefono.Location = new System.Drawing.Point(67, 96);
+            this.txtTelefono.Location = new System.Drawing.Point(67, 80);
             this.txtTelefono.MaxLength = 25;
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(203, 20);
@@ -198,7 +212,7 @@
             // lblTipoIncidencia
             // 
             this.lblTipoIncidencia.AutoSize = true;
-            this.lblTipoIncidencia.Location = new System.Drawing.Point(275, 98);
+            this.lblTipoIncidencia.Location = new System.Drawing.Point(275, 82);
             this.lblTipoIncidencia.Name = "lblTipoIncidencia";
             this.lblTipoIncidencia.Size = new System.Drawing.Size(98, 13);
             this.lblTipoIncidencia.TabIndex = 7;
@@ -207,7 +221,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 124);
+            this.label5.Location = new System.Drawing.Point(6, 108);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(55, 13);
             this.label5.TabIndex = 9;
@@ -216,7 +230,7 @@
             // txtDireccion
             // 
             this.txtDireccion.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.txtDireccion.Location = new System.Drawing.Point(67, 121);
+            this.txtDireccion.Location = new System.Drawing.Point(67, 105);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(517, 20);
             this.txtDireccion.StrMensajeCampoRequerido = "El campo es requerido.";
@@ -227,7 +241,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 156);
+            this.label6.Location = new System.Drawing.Point(6, 140);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(55, 13);
             this.label6.TabIndex = 11;
@@ -236,7 +250,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(315, 154);
+            this.label7.Location = new System.Drawing.Point(315, 138);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(56, 13);
             this.label7.TabIndex = 13;
@@ -245,7 +259,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(29, 176);
+            this.label8.Location = new System.Drawing.Point(29, 160);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(30, 13);
             this.label8.TabIndex = 15;
@@ -254,7 +268,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(326, 178);
+            this.label9.Location = new System.Drawing.Point(326, 162);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(47, 13);
             this.label9.TabIndex = 17;
@@ -263,7 +277,7 @@
             // lblDescripcionIncidencia
             // 
             this.lblDescripcionIncidencia.AutoSize = true;
-            this.lblDescripcionIncidencia.Location = new System.Drawing.Point(6, 287);
+            this.lblDescripcionIncidencia.Location = new System.Drawing.Point(6, 271);
             this.lblDescripcionIncidencia.Name = "lblDescripcionIncidencia";
             this.lblDescripcionIncidencia.Size = new System.Drawing.Size(85, 26);
             this.lblDescripcionIncidencia.TabIndex = 22;
@@ -272,9 +286,10 @@
             // txtDescripcion
             // 
             this.txtDescripcion.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.txtDescripcion.Location = new System.Drawing.Point(97, 287);
+            this.txtDescripcion.Location = new System.Drawing.Point(97, 271);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
+            this.txtDescripcion.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtDescripcion.Size = new System.Drawing.Size(488, 90);
             this.txtDescripcion.StrMensajeCampoRequerido = "El campo es requerido.";
             this.txtDescripcion.TabIndex = 21;
@@ -288,7 +303,7 @@
             this.cmbTipoIncidencia.BlnEsRequerido = true;
             this.cmbTipoIncidencia.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.cmbTipoIncidencia.FormattingEnabled = true;
-            this.cmbTipoIncidencia.Location = new System.Drawing.Point(377, 95);
+            this.cmbTipoIncidencia.Location = new System.Drawing.Point(377, 79);
             this.cmbTipoIncidencia.MaxLength = 150;
             this.cmbTipoIncidencia.Name = "cmbTipoIncidencia";
             this.cmbTipoIncidencia.Size = new System.Drawing.Size(205, 21);
@@ -304,7 +319,7 @@
             this.cmbLocalidad.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbLocalidad.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.cmbLocalidad.FormattingEnabled = true;
-            this.cmbLocalidad.Location = new System.Drawing.Point(377, 146);
+            this.cmbLocalidad.Location = new System.Drawing.Point(377, 130);
             this.cmbLocalidad.Name = "cmbLocalidad";
             this.cmbLocalidad.Size = new System.Drawing.Size(205, 21);
             this.cmbLocalidad.StrMensajeCampoRequerido = "El campo es requerido.";
@@ -320,7 +335,7 @@
             this.cmbMunicipio.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbMunicipio.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.cmbMunicipio.FormattingEnabled = true;
-            this.cmbMunicipio.Location = new System.Drawing.Point(67, 146);
+            this.cmbMunicipio.Location = new System.Drawing.Point(67, 130);
             this.cmbMunicipio.Name = "cmbMunicipio";
             this.cmbMunicipio.Size = new System.Drawing.Size(205, 21);
             this.cmbMunicipio.StrMensajeCampoRequerido = "El campo es requerido.";
@@ -336,7 +351,7 @@
             this.cmbCP.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbCP.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.cmbCP.FormattingEnabled = true;
-            this.cmbCP.Location = new System.Drawing.Point(67, 171);
+            this.cmbCP.Location = new System.Drawing.Point(67, 155);
             this.cmbCP.Name = "cmbCP";
             this.cmbCP.Size = new System.Drawing.Size(205, 21);
             this.cmbCP.StrMensajeCampoRequerido = "El campo es requerido.";
@@ -353,7 +368,7 @@
             this.cmbColonia.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbColonia.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.cmbColonia.FormattingEnabled = true;
-            this.cmbColonia.Location = new System.Drawing.Point(377, 172);
+            this.cmbColonia.Location = new System.Drawing.Point(377, 156);
             this.cmbColonia.Name = "cmbColonia";
             this.cmbColonia.Size = new System.Drawing.Size(205, 21);
             this.cmbColonia.StrMensajeCampoRequerido = "El campo es requerido.";
@@ -362,16 +377,6 @@
             this.cmbColonia.Leave += new System.EventHandler(this.cmbColonia_Leave);
             this.cmbColonia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbColonia_KeyUp);
             this.cmbColonia.TextUpdate += new System.EventHandler(this.cmbColonia_TextUpdate);
-            // 
-            // saiLogoControl
-            // 
-            this.saiLogoControl.BackColor = System.Drawing.Color.White;
-            this.saiLogoControl.Dock = System.Windows.Forms.DockStyle.Top;
-            this.saiLogoControl.Location = new System.Drawing.Point(0, 0);
-            this.saiLogoControl.Name = "saiLogoControl";
-            this.saiLogoControl.Size = new System.Drawing.Size(1267, 70);
-            this.saiLogoControl.TabIndex = 21;
-            this.saiLogoControl.VelocidadAnimacion = 8;
             // 
             // grpExtravio
             // 
@@ -420,6 +425,7 @@
             this.dgvPersonaExtraviada.RowHeadersVisible = false;
             this.dgvPersonaExtraviada.Size = new System.Drawing.Size(566, 205);
             this.dgvPersonaExtraviada.TabIndex = 0;
+            this.dgvPersonaExtraviada.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPersonaExtraviada_CellLeave);
             // 
             // Clave
             // 
@@ -873,23 +879,34 @@
             // txtReferencias
             // 
             this.txtReferencias.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.txtReferencias.Location = new System.Drawing.Point(97, 197);
+            this.txtReferencias.Location = new System.Drawing.Point(97, 181);
             this.txtReferencias.Multiline = true;
             this.txtReferencias.Name = "txtReferencias";
+            this.txtReferencias.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtReferencias.Size = new System.Drawing.Size(488, 85);
             this.txtReferencias.StrMensajeCampoRequerido = "El campo es requerido.";
             this.txtReferencias.TabIndex = 20;
             this.txtReferencias.Leave += new System.EventHandler(this.txtReferencias_Leave);
-            this.txtReferencias.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtReferencias_KeyUp);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 200);
+            this.label10.Location = new System.Drawing.Point(6, 184);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(73, 13);
             this.label10.TabIndex = 19;
             this.label10.Text = "  Referencias:";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.White;
+            this.pictureBox1.ErrorImage = null;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(0, 1);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(582, 50);
+            this.pictureBox1.TabIndex = 25;
+            this.pictureBox1.TabStop = false;
             // 
             // SAIFrmIncidencia
             // 
@@ -898,12 +915,13 @@
             this.AutoScroll = true;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1284, 778);
+            this.Controls.Add(this.lblTitulo);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txtReferencias);
             this.Controls.Add(this.grpRoboAccesorios);
             this.Controls.Add(this.grpRoboVehiculo);
             this.Controls.Add(this.grpExtravio);
-            this.Controls.Add(this.saiLogoControl);
             this.Controls.Add(this.cmbColonia);
             this.Controls.Add(this.cmbCP);
             this.Controls.Add(this.cmbMunicipio);
@@ -943,12 +961,13 @@
             this.Controls.SetChildIndex(this.cmbMunicipio, 0);
             this.Controls.SetChildIndex(this.cmbCP, 0);
             this.Controls.SetChildIndex(this.cmbColonia, 0);
-            this.Controls.SetChildIndex(this.saiLogoControl, 0);
             this.Controls.SetChildIndex(this.grpExtravio, 0);
             this.Controls.SetChildIndex(this.grpRoboVehiculo, 0);
             this.Controls.SetChildIndex(this.grpRoboAccesorios, 0);
             this.Controls.SetChildIndex(this.txtReferencias, 0);
             this.Controls.SetChildIndex(this.label10, 0);
+            this.Controls.SetChildIndex(this.pictureBox1, 0);
+            this.Controls.SetChildIndex(this.lblTitulo, 0);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.grpExtravio.ResumeLayout(false);
@@ -959,6 +978,7 @@
             this.grpRoboVehiculo.ResumeLayout(false);
             this.grpRoboVehiculo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVehiculo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -987,7 +1007,6 @@
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox cmbMunicipio;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox cmbCP;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox cmbColonia;
-        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAILogoControl saiLogoControl;
         private System.Windows.Forms.GroupBox grpExtravio;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDataGridView dgvPersonaExtraviada;
         private System.Windows.Forms.DataGridViewTextBoxColumn Clave;
@@ -1052,5 +1071,7 @@
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox txtAccesoriosResponsables;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox txtReferencias;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        protected System.Windows.Forms.Label lblTitulo;
     }
 }

@@ -34,9 +34,9 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.txtNumeroOficio = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
-            this.dtmFechaEnvioDependencia = new System.Windows.Forms.DateTimePicker();
-            this.dtmFechaDocumento = new System.Windows.Forms.DateTimePicker();
-            this.dtmFechaNotificacion = new System.Windows.Forms.DateTimePicker();
+            this.dtmFechaEnvioDependencia = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDatePicker();
+            this.dtmFechaDocumento = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDatePicker();
+            this.dtmFechaNotificacion = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDatePicker();
             this.chkFechaEnvio = new System.Windows.Forms.CheckBox();
             this.chkFechaDocumento = new System.Windows.Forms.CheckBox();
             this.chkFechaNotificacion = new System.Windows.Forms.CheckBox();
@@ -45,7 +45,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(4, 380);
+            this.label11.Location = new System.Drawing.Point(4, 364);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(84, 26);
             this.label11.TabIndex = 21;
@@ -54,7 +54,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(288, 380);
+            this.label12.Location = new System.Drawing.Point(288, 364);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(65, 26);
             this.label12.TabIndex = 23;
@@ -63,7 +63,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(11, 410);
+            this.label13.Location = new System.Drawing.Point(11, 394);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(66, 26);
             this.label13.TabIndex = 25;
@@ -72,7 +72,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(287, 407);
+            this.label14.Location = new System.Drawing.Point(287, 391);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(89, 26);
             this.label14.TabIndex = 27;
@@ -80,8 +80,8 @@
             // 
             // txtNumeroOficio
             // 
-            this.txtNumeroOficio.ClrBackColorFoco = System.Drawing.Color.Empty;
-            this.txtNumeroOficio.Location = new System.Drawing.Point(378, 411);
+            this.txtNumeroOficio.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txtNumeroOficio.Location = new System.Drawing.Point(378, 395);
             this.txtNumeroOficio.Name = "txtNumeroOficio";
             this.txtNumeroOficio.Size = new System.Drawing.Size(205, 20);
             this.txtNumeroOficio.StrMensajeCampoRequerido = "El campo es requerido.";
@@ -92,7 +92,7 @@
             // 
             this.dtmFechaEnvioDependencia.Enabled = false;
             this.dtmFechaEnvioDependencia.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtmFechaEnvioDependencia.Location = new System.Drawing.Point(97, 382);
+            this.dtmFechaEnvioDependencia.Location = new System.Drawing.Point(97, 366);
             this.dtmFechaEnvioDependencia.Name = "dtmFechaEnvioDependencia";
             this.dtmFechaEnvioDependencia.Size = new System.Drawing.Size(110, 20);
             this.dtmFechaEnvioDependencia.TabIndex = 22;
@@ -103,7 +103,7 @@
             // 
             this.dtmFechaDocumento.Enabled = false;
             this.dtmFechaDocumento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtmFechaDocumento.Location = new System.Drawing.Point(376, 382);
+            this.dtmFechaDocumento.Location = new System.Drawing.Point(376, 366);
             this.dtmFechaDocumento.Name = "dtmFechaDocumento";
             this.dtmFechaDocumento.Size = new System.Drawing.Size(110, 20);
             this.dtmFechaDocumento.TabIndex = 24;
@@ -115,7 +115,7 @@
             // 
             this.dtmFechaNotificacion.Enabled = false;
             this.dtmFechaNotificacion.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtmFechaNotificacion.Location = new System.Drawing.Point(97, 411);
+            this.dtmFechaNotificacion.Location = new System.Drawing.Point(97, 395);
             this.dtmFechaNotificacion.Name = "dtmFechaNotificacion";
             this.dtmFechaNotificacion.Size = new System.Drawing.Size(110, 20);
             this.dtmFechaNotificacion.TabIndex = 26;
@@ -125,7 +125,7 @@
             // chkFechaEnvio
             // 
             this.chkFechaEnvio.AutoSize = true;
-            this.chkFechaEnvio.Location = new System.Drawing.Point(213, 389);
+            this.chkFechaEnvio.Location = new System.Drawing.Point(213, 373);
             this.chkFechaEnvio.Name = "chkFechaEnvio";
             this.chkFechaEnvio.Size = new System.Drawing.Size(15, 14);
             this.chkFechaEnvio.TabIndex = 23;
@@ -135,7 +135,7 @@
             // chkFechaDocumento
             // 
             this.chkFechaDocumento.AutoSize = true;
-            this.chkFechaDocumento.Location = new System.Drawing.Point(492, 388);
+            this.chkFechaDocumento.Location = new System.Drawing.Point(492, 372);
             this.chkFechaDocumento.Name = "chkFechaDocumento";
             this.chkFechaDocumento.Size = new System.Drawing.Size(15, 14);
             this.chkFechaDocumento.TabIndex = 25;
@@ -145,7 +145,7 @@
             // chkFechaNotificacion
             // 
             this.chkFechaNotificacion.AutoSize = true;
-            this.chkFechaNotificacion.Location = new System.Drawing.Point(213, 418);
+            this.chkFechaNotificacion.Location = new System.Drawing.Point(213, 402);
             this.chkFechaNotificacion.Name = "chkFechaNotificacion";
             this.chkFechaNotificacion.Size = new System.Drawing.Size(15, 14);
             this.chkFechaNotificacion.TabIndex = 27;
@@ -170,6 +170,7 @@
             this.Controls.Add(this.label11);
             this.Name = "SAIFrmIncidencia089";
             this.Text = "SAIFrmIncidencia089";
+            this.Controls.SetChildIndex(this.lblTitulo, 0);
             this.Controls.SetChildIndex(this.label11, 0);
             this.Controls.SetChildIndex(this.label12, 0);
             this.Controls.SetChildIndex(this.label13, 0);
@@ -193,9 +194,9 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox txtNumeroOficio;
-        private System.Windows.Forms.DateTimePicker dtmFechaEnvioDependencia;
-        private System.Windows.Forms.DateTimePicker dtmFechaDocumento;
-        private System.Windows.Forms.DateTimePicker dtmFechaNotificacion;
+        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDatePicker  dtmFechaEnvioDependencia;
+        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDatePicker dtmFechaDocumento;
+        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDatePicker dtmFechaNotificacion;
         private System.Windows.Forms.CheckBox chkFechaEnvio;
         private System.Windows.Forms.CheckBox chkFechaDocumento;
         private System.Windows.Forms.CheckBox chkFechaNotificacion;

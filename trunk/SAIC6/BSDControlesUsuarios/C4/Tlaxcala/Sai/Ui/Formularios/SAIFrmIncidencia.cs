@@ -836,11 +836,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void txtReferencias_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.txtDescripcion.Focus();
-            }
-            this.SAIFrmIncidenciaKeyUp(e);
+
         }
        
 
@@ -875,7 +871,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 e.Cancel = true;
 
-                throw new SAIExcepcion("Debe de indicar el tipo de incidencia");
+                throw new SAIExcepcion("Debe de indicar el tipo de incidencia",this);
                 return;
 
             }
@@ -1156,16 +1152,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                     {
 
-                        this.Height = 834;
-                        this.Width = 647;
-                        this.grpRoboVehiculo.Top = 600;
+                        this.Height = 720;
+                        this.Width = 600;
+                        this.grpRoboVehiculo.Top = 425;
                        
 
                     }
                     else
                     {
                         this.Height = 776;
-                        this.Width = 647;
+                        this.Width = 600;
                         this.grpRoboVehiculo.Top = 720;
                     
                     }
@@ -1185,14 +1181,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.grpRoboAccesorios.SuspendLayout();
                     if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                     {
-                        this.Height = 834;
-                        this.Width = 647;
-                        this.grpRoboAccesorios.Top = 600;
+                        this.Height = 720;
+                        this.Width = 600;
+                        this.grpRoboAccesorios.Top = 425;
                     }
                     else
                     {
                         this.Height = 776;
-                        this.Width = 647;
+                        this.Width = 600;
                         this.grpRoboAccesorios.Top = 720;
                     }
                     this.grpRoboAccesorios.Left = 10;
@@ -1213,14 +1209,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                    
                     if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                     {
-                        this.Height = 834;
-                        this.Width = 647;
-                        this.grpExtravio.Top = 600;
+                        this.Height = 720;
+                        this.Width = 600;
+                        this.grpExtravio.Top = 425;
                     }
                     else
                     {
                         this.Height = 776;
-                        this.Width = 647;
+                        this.Width = 600;
                         this.grpExtravio.Top = 720;
                     }
                     this.grpExtravio.Left = 10;
@@ -1236,14 +1232,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.grpRoboAccesorios.Visible = false;
                     if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                     {
-                        this.Height = 650;
-                        this.Width = 647;
+                        this.Height = 485;
+                        this.Width = 600;
                        
                     }
                     else
                     {
                         this.Height = 776;
-                        this.Width = 647;
+                        this.Width = 600;
                        
                     }
                     this.ResumeLayout(false);
@@ -1273,6 +1269,69 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void SAIFrmIncidencia_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void dgvPersonaExtraviada_CellLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            Boolean blnExiste = false;
+            PersonaExtraviada entPersonaExtraviada = new PersonaExtraviada();
+
+            if (!(dgvPersonaExtraviada[0,e.RowIndex].Value == null))
+            {
+                blnExiste = true;
+                int Clave = (int) dgvPersonaExtraviada[0, e.RowIndex].Value;
+                entPersonaExtraviada = PersonaExtraviadaMapper.Instance().GetOne((Clave));
+            }
+            
+
+
+            switch(e.ColumnIndex)
+            {
+                case 0: //Calve
+                    break;
+                case 1: //Folio
+                    break;
+                case 2: //Nombre
+                    break;
+                case 3: //Edad
+                    break;
+                case 4: //Sexo
+                    break;
+                case 5://Estatura
+                    break;
+                case 6: //Parentesco
+                    break;
+                case 7://Fecha de extravío
+                    break;
+                case 9:// Tez
+                    break;
+                case 10://Tipo cabello
+                    break;
+                case 11://Color cabello
+                    break;
+                case 12://Largo cabello
+                    break;
+                case 13://Frente
+                    break;
+                case 14://Cejas
+                    break;
+                case 15:// Color de ojos
+                    break;
+                case 16:// tamaño de boca
+                    break;
+                case 17:// labios
+                    break;
+                case 18:// labios
+                    break;
+                case 19:// vestimenta
+                    break;
+                case 20:// destino
+                    break;
+                case 21:// caracteristicas
+                    break;
+            }
+
+            
         }
 
        
