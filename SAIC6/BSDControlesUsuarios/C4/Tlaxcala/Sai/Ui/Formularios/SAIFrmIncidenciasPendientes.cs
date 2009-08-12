@@ -58,7 +58,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             //saiReport1.btnLigarIncidencias.Enabled = Aplicacion.UsuarioPersistencia.blnPuedeEscribir(intSubModulo);
             saiReport1.btnAltaUnidad.Visible = false;
             saiReport1.btnBajaUnidad.Visible = false;
+            saiReport1.btnSeparador2.Visible = false;
 
+            //Falta mostrar la prioridad del incidente
             saiReport1.AgregarColumna(0, "ID", 20, false, false, false);
             saiReport1.AgregarColumna(1, "Folio", 150, true, true, true);
             saiReport1.AgregarColumna(2, "Hora de Entrada", 200, true, true, true);
@@ -206,7 +208,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (Exception ex)
             {
                 tmrRegistros.Enabled = false;
-                throw new SAIExcepcion(ex.Message);
+                throw new SAIExcepcion(ex.Message,this);
             }
         }
 

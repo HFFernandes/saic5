@@ -34,16 +34,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             this.reportControl = new AxXtremeReportControl.AxReportControl();
             this.barraHerramientas = new System.Windows.Forms.ToolStrip();
             this.btnCampos = new System.Windows.Forms.ToolStripButton();
+            this.btnSeparador1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnLigarIncidencias = new System.Windows.Forms.ToolStripButton();
             this.btnDespacharIncidencias = new System.Windows.Forms.ToolStripButton();
+            this.btnSeparador2 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnBajaUnidad = new System.Windows.Forms.ToolStripButton();
+            this.btnAltaUnidad = new System.Windows.Forms.ToolStripButton();
             this.btnSeparador3 = new System.Windows.Forms.ToolStripSeparator();
             this.lblFiltroRegistros = new System.Windows.Forms.ToolStripLabel();
             this.txtFiltroRegistros = new System.Windows.Forms.ToolStripTextBox();
             this.reportContenedor = new System.Windows.Forms.Panel();
-            this.btnBajaUnidad = new System.Windows.Forms.ToolStripButton();
-            this.btnAltaUnidad = new System.Windows.Forms.ToolStripButton();
-            this.btnSeparador1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnSeparador2 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.reportControl)).BeginInit();
             this.barraHerramientas.SuspendLayout();
             this.reportContenedor.SuspendLayout();
@@ -88,6 +88,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             this.btnCampos.ToolTipText = "Mostrar u ocultar campos";
             this.btnCampos.Click += new System.EventHandler(this.btnCampos_Click);
             // 
+            // btnSeparador1
+            // 
+            this.btnSeparador1.Name = "btnSeparador1";
+            this.btnSeparador1.Size = new System.Drawing.Size(6, 25);
+            // 
             // btnLigarIncidencias
             // 
             this.btnLigarIncidencias.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -105,6 +110,29 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             this.btnDespacharIncidencias.Name = "btnDespacharIncidencias";
             this.btnDespacharIncidencias.Size = new System.Drawing.Size(23, 22);
             this.btnDespacharIncidencias.ToolTipText = "Despachar incidencia(s)";
+            // 
+            // btnSeparador2
+            // 
+            this.btnSeparador2.Name = "btnSeparador2";
+            this.btnSeparador2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // btnBajaUnidad
+            // 
+            this.btnBajaUnidad.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnBajaUnidad.Image = ((System.Drawing.Image)(resources.GetObject("btnBajaUnidad.Image")));
+            this.btnBajaUnidad.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnBajaUnidad.Name = "btnBajaUnidad";
+            this.btnBajaUnidad.Size = new System.Drawing.Size(23, 22);
+            this.btnBajaUnidad.ToolTipText = "Borrar unidad";
+            // 
+            // btnAltaUnidad
+            // 
+            this.btnAltaUnidad.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnAltaUnidad.Image = ((System.Drawing.Image)(resources.GetObject("btnAltaUnidad.Image")));
+            this.btnAltaUnidad.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAltaUnidad.Name = "btnAltaUnidad";
+            this.btnAltaUnidad.Size = new System.Drawing.Size(23, 22);
+            this.btnAltaUnidad.ToolTipText = "Agregar unidad";
             // 
             // btnSeparador3
             // 
@@ -133,34 +161,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             this.reportContenedor.Size = new System.Drawing.Size(446, 173);
             this.reportContenedor.TabIndex = 2;
             // 
-            // btnBajaUnidad
-            // 
-            this.btnBajaUnidad.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnBajaUnidad.Image = ((System.Drawing.Image)(resources.GetObject("btnBajaUnidad.Image")));
-            this.btnBajaUnidad.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnBajaUnidad.Name = "btnBajaUnidad";
-            this.btnBajaUnidad.Size = new System.Drawing.Size(23, 22);
-            this.btnBajaUnidad.ToolTipText = "Borrar unidad";
-            // 
-            // btnAltaUnidad
-            // 
-            this.btnAltaUnidad.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnAltaUnidad.Image = ((System.Drawing.Image)(resources.GetObject("btnAltaUnidad.Image")));
-            this.btnAltaUnidad.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnAltaUnidad.Name = "btnAltaUnidad";
-            this.btnAltaUnidad.Size = new System.Drawing.Size(23, 22);
-            this.btnAltaUnidad.ToolTipText = "Agregar unidad";
-            // 
-            // btnSeparador1
-            // 
-            this.btnSeparador1.Name = "btnSeparador1";
-            this.btnSeparador1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // btnSeparador2
-            // 
-            this.btnSeparador2.Name = "btnSeparador2";
-            this.btnSeparador2.Size = new System.Drawing.Size(6, 25);
-            // 
             // SAIReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -182,7 +182,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 
         private System.Windows.Forms.ToolStrip barraHerramientas;
         private System.Windows.Forms.Panel reportContenedor;
-        private System.Windows.Forms.ToolStripSeparator btnSeparador3;
         private System.Windows.Forms.ToolStripLabel lblFiltroRegistros;
         private System.Windows.Forms.ToolStripTextBox txtFiltroRegistros;
         public System.Windows.Forms.ToolStripButton btnCampos;
@@ -191,8 +190,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         public System.Windows.Forms.ToolStripButton btnDespacharIncidencias;
         public System.Windows.Forms.ToolStripButton btnBajaUnidad;
         public System.Windows.Forms.ToolStripButton btnAltaUnidad;
-        private System.Windows.Forms.ToolStripSeparator btnSeparador1;
-        private System.Windows.Forms.ToolStripSeparator btnSeparador2;
+        public System.Windows.Forms.ToolStripSeparator btnSeparador3;
+        public System.Windows.Forms.ToolStripSeparator btnSeparador1;
+        public System.Windows.Forms.ToolStripSeparator btnSeparador2;
 
     }
 }
