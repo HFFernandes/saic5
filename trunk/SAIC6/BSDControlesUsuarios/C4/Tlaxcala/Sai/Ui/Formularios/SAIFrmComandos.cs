@@ -52,6 +52,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     MostrarEnSegundoMonitorSiEsPosible(activas);
                     break;
                 case ID.CMD_AU:
+                    var unidades = new SAIFrmEstadoUnidades();
+                    MostrarEnSegundoMonitorSiEsPosible(unidades);
                     break;
                 case ID.CMD_BSC:
                     break;

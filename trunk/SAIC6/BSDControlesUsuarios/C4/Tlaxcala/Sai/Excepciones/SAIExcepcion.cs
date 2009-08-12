@@ -1,11 +1,12 @@
 ﻿using System;
 using Microsoft.NetEnterpriseServers;
+using System.Windows.Forms;
 
 namespace BSD.C4.Tlaxcala.Sai.Excepciones
 {
     public class SAIExcepcion : Exception
     {
-        public SAIExcepcion(string message)
+        public SAIExcepcion(string message,Form formulario)
             : base(message)
         {
             var excepcion = new ApplicationException("Error en la aplicación", this)
@@ -20,7 +21,7 @@ namespace BSD.C4.Tlaxcala.Sai.Excepciones
                 Beep = true
             };
 
-            exceptionMessageBox.Show(null);
+            exceptionMessageBox.Show(formulario);
         }
     }
 }

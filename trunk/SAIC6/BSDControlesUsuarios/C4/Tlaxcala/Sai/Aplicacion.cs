@@ -135,4 +135,11 @@ namespace BSD.C4.Tlaxcala.Sai
         CERRADA = 4,
         CANCELADA = 5
     }
+
+    public enum ESTATUSUNIDADES
+    {
+        LIBRE=1,    //Unidad que puede ser asignada a una incidencia (VERDE)
+        DESPACHADA=2,   //Unidad que va en camino a atender la incidencia (ROJO)
+        LLEGADA=3   //Unidad que se encuentra ya en el lugar de la incidencia 
+    }
 }

@@ -76,10 +76,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         Close();
                     }
                     else
-                        throw new SAIExcepcion("Las credenciales de autenticación no son válidas.");
+                        throw new SAIExcepcion("Las credenciales de autenticación no son válidas.",this);
                 }
                 else
-                    throw new SAIExcepcion("Existen campos requeridos vacios.");
+                    throw new SAIExcepcion("Existen campos requeridos vacios.",this);
             }
             catch (SAIExcepcion)
             {
