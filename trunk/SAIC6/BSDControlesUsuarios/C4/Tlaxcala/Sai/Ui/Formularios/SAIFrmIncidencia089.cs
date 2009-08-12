@@ -18,7 +18,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         public SAIFrmIncidencia089()
         {
             InitializeComponent();
-
+            this.SuspendLayout();
+            this.Height = 650;
+            this.Width = 647;
+            this.ResumeLayout(false);
             if (this._entIncidencia != null)
             {
                 this.Text = this._entIncidencia.Folio.ToString();
@@ -29,6 +32,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void SIAFrmIncidencia089(Incidencia EntIncidencia)
         {
             this.InicializaCampos();
+            this.SuspendLayout();
+            this.Height = 650;
+            this.Width = 647;
+            this.ResumeLayout(false);
         }
 
         private void InicializaCampos()
