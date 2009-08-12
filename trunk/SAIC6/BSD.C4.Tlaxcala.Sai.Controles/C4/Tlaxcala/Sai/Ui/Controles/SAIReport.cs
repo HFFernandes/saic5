@@ -35,7 +35,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         /// <param name="blnMostrarEnChooser">Propiedad que establece si la columna aparece o no en el selector de campos cuando esta oculta o agrupada</param>
         public void AgregarColumna(int intIndice, string strCaption, int intTamaño, bool blnCambiaTamaño, [Optional, DefaultParameterValue(true)] bool blnVisible, [Optional, DefaultParameterValue(true)] bool blnMostrarEnChooser)
         {
-            ReportColumn columna = reportControl.Columns.Add(intIndice, strCaption, intTamaño, blnCambiaTamaño);
+            var columna = reportControl.Columns.Add(intIndice, strCaption, intTamaño, blnCambiaTamaño);
             columna.Visible = blnVisible;
             columna.ShowInFieldChooser = blnMostrarEnChooser;
         }
