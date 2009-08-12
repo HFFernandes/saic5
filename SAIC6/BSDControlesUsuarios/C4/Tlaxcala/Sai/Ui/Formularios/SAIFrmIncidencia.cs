@@ -34,12 +34,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private Boolean _blnBloqueaEventos;
         protected Boolean _blnSeActivoClosed = false;
         protected Boolean _blnSeDesactivoVentana = false;
-        protected int _intAltoOriginal=200;
         /// <summary>
         /// Lleva el estado del caso de la tecla control presionada.
         /// </summary>
         private bool _blnCtrPresionado = false;
-        
+
+        private Control _ctlSiguiente;
 
         /// <summary>
         /// Constructor del formulario SIAFrmIncidencia, se ejecuta cuando se registra una incidencia nueva
@@ -51,8 +51,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             try
             {
                 this._blnBloqueaEventos = true;
+                
                 InitializeComponent();
-                this._intAltoOriginal = this.Height;
+
+
+
                 this.InicializaListas();
                 //****Crea una nueva incidencia, el formulario se abrió para insertar*******
                 this._entIncidencia.Referencias = string.Empty;
@@ -68,7 +71,23 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 this.ActualizaVentanaIncidencias();
                 //Se muestra la información de la incidencia en el formulario:
                 this.InicializaCampos();
+                this.SuspendLayout();
+                if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+                {
+                    this.lblDescripcionIncidencia.Text  = "Descripción de  \n la Denuncia:";
+                    this.lblTelefono.Visible = false;
+                    this.txtTelefono.Visible = false;
+                    this.lblTipoIncidencia.Left = lblTelefono.Left-5;
+                    this.cmbTipoIncidencia.Left = this.txtTelefono.Left;
+                    this.lblTipoIncidencia.Text = "Tipo de \n la Denuncia:";
+                    this.lblTipoIncidencia.Top -= 10;
 
+                }
+                else
+                {
+                    this.lblDescripcionIncidencia.Text  = "Descripción de  \n la Incidencia:";
+                }
+                this.ResumeLayout(false);
                 this._blnBloqueaEventos = false;
 
                 Aplicacion.VentanasIncidencias.Add(new SAIWinSwitchItem(this._entIncidencia.Folio.ToString(),"",(this as Form)));
@@ -76,6 +95,38 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
             catch { }
                
+        }
+
+        /// <summary>
+        /// Constructor que toma la entidad incidencia que se va a mostrar en el formulario
+        /// </summary>
+        /// <param name="entIncidencia">Entidad incidencia que contiene los valores para mostrar</param>
+        public SAIFrmIncidencia(Incidencia entIncidencia)
+        {
+            this._blnBloqueaEventos = true;
+            InitializeComponent();
+            this.SuspendLayout();
+            if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+            {
+                this.lblDescripcionIncidencia.Text  = "Descripción de  \n la Denuncia:";
+
+            }
+            else
+            {
+                this.lblDescripcionIncidencia.Text  = "Descripción de  \n la Incidencia:";
+
+
+            }
+            this.ResumeLayout(false);
+            this.InicializaListas();
+            this._entIncidencia = entIncidencia;
+            //Se actualiza la información de la incidencia en la lista de ventanas
+            this.ActualizaVentanaIncidencias();
+            //Se muestra la información de la incidencia en el formulario:
+            this.InicializaCampos();
+            this._blnBloqueaEventos = false;
+            Aplicacion.VentanasIncidencias.Add(new SAIWinSwitchItem(this._entIncidencia.Folio.ToString(), "", (this as Form)));
+
         }
 
         /// <summary>
@@ -110,29 +161,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             return false;
         }
 
-        /// <summary>
-        /// Constructor que toma la entidad incidencia que se va a mostrar en el formulario
-        /// </summary>
-        /// <param name="entIncidencia">Entidad incidencia que contiene los valores para mostrar</param>
-        public SAIFrmIncidencia(Incidencia  entIncidencia)
-        {
-            this._blnBloqueaEventos = true;
-            InitializeComponent();
-            this._intAltoOriginal = this.Height;
-            this.InicializaListas();
-            this._entIncidencia = entIncidencia;
-            //Se actualiza la información de la incidencia en la lista de ventanas
-            this.ActualizaVentanaIncidencias();
-            //Se muestra la información de la incidencia en el formulario:
-            this.InicializaCampos();
-            
-            this._blnBloqueaEventos = false;
-
-            Aplicacion.VentanasIncidencias.Add(new SAIWinSwitchItem(this._entIncidencia.Folio.ToString(), "", (this as Form)));
-
-
-
-        }
+       
 
         protected override void OnActivated(EventArgs e)
         {
@@ -805,7 +834,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         }
 
-
+        private void txtReferencias_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.txtDescripcion.Focus();
+            }
+            this.SAIFrmIncidenciaKeyUp(e);
+        }
        
 
 
@@ -816,13 +852,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="e">Parámetros del evento</param>
         private void txtDescripcion_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter && txtDescripcion_OnKeyEnterUp != null)
+            if (e.KeyCode == Keys.Enter && txtDescripcion_OnKeyEnterUp != null && this._ctlSiguiente != null)
             {
-                txtDescripcion_OnKeyEnterUp(this, e); 
+                this._ctlSiguiente.Focus();
             }
             this.SAIFrmIncidenciaKeyUp(e);
 
         }
+
+
+        
 
 
         /// <summary>
@@ -1074,6 +1113,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
+        private void txtReferencias_Leave(object sender, EventArgs e)
+        {
+            this._entIncidencia.Referencias = this.txtReferencias.Text;
+            if (!this._blnSeActivoClosed)
+            {
+                this.GuardaIncidencia();
+            }
+        }
+
+
+
         protected void SAIFrmIncidenciaKeyUp(KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Tab && this._blnCtrPresionado)
@@ -1101,15 +1151,23 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.grpRoboVehiculo.Visible = true;
                     this.grpRoboAccesorios.Visible = false;
 
-                    this.Height = 750;
+                   
                     this.grpRoboAccesorios.SuspendLayout();
                     if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                     {
-                        this.grpRoboVehiculo.Top = 450;
+
+                        this.Height = 834;
+                        this.Width = 647;
+                        this.grpRoboVehiculo.Top = 600;
+                       
+
                     }
                     else
                     {
+                        this.Height = 776;
+                        this.Width = 647;
                         this.grpRoboVehiculo.Top = 720;
+                    
                     }
                     this.grpRoboVehiculo.Left = 10;
                     this.grpRoboVehiculo.Refresh();
@@ -1124,14 +1182,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.grpExtravio.Visible = false;
                     this.grpRoboVehiculo.Visible = false;
                     
-                    this.Height = 750;
                     this.grpRoboAccesorios.SuspendLayout();
                     if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                     {
-                        this.grpRoboAccesorios.Top = 450;
+                        this.Height = 834;
+                        this.Width = 647;
+                        this.grpRoboAccesorios.Top = 600;
                     }
                     else
                     {
+                        this.Height = 776;
+                        this.Width = 647;
                         this.grpRoboAccesorios.Top = 720;
                     }
                     this.grpRoboAccesorios.Left = 10;
@@ -1149,13 +1210,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.grpExtravio.Visible = true;
                     this.grpRoboVehiculo.Visible = false;
                     this.grpRoboAccesorios.Visible = false;
-                    this.Height = 750;
+                   
                     if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                     {
-                        this.grpExtravio.Top = 450;
+                        this.Height = 834;
+                        this.Width = 647;
+                        this.grpExtravio.Top = 600;
                     }
                     else
                     {
+                        this.Height = 776;
+                        this.Width = 647;
                         this.grpExtravio.Top = 720;
                     }
                     this.grpExtravio.Left = 10;
@@ -1171,11 +1236,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.grpRoboAccesorios.Visible = false;
                     if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                     {
-                        this.Height = this._intAltoOriginal;
+                        this.Height = 650;
+                        this.Width = 647;
+                       
                     }
                     else
                     {
-                        this.Height = this._intAltoOriginal + 50;
+                        this.Height = 776;
+                        this.Width = 647;
+                       
                     }
                     this.ResumeLayout(false);
                     this.PerformLayout();
@@ -1190,6 +1259,23 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
 
         }
+
+        private void saiTextBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtAccesoriosRobados_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SAIFrmIncidencia_Load(object sender, EventArgs e)
+        {
+
+        }
+
+       
 
        
        

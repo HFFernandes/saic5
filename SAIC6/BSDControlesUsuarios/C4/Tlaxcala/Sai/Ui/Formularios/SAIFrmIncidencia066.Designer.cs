@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.label11 = new System.Windows.Forms.Label();
-            this.txtReferencias = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.label12 = new System.Windows.Forms.Label();
             this.cklCorporacion = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAICheckedListBox(this.components);
             this.grpDenunciante = new System.Windows.Forms.GroupBox();
@@ -42,27 +40,6 @@
             this.label13 = new System.Windows.Forms.Label();
             this.grpDenunciante.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 367);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(67, 13);
-            this.label11.TabIndex = 22;
-            this.label11.Text = "Referencias:";
-            // 
-            // txtReferencias
-            // 
-            this.txtReferencias.ClrBackColorFoco = System.Drawing.Color.Empty;
-            this.txtReferencias.Location = new System.Drawing.Point(96, 369);
-            this.txtReferencias.Multiline = true;
-            this.txtReferencias.Name = "txtReferencias";
-            this.txtReferencias.Size = new System.Drawing.Size(488, 85);
-            this.txtReferencias.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtReferencias.TabIndex = 23;
-            this.txtReferencias.Leave += new System.EventHandler(this.txtReferencias_Leave);
-            this.txtReferencias.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtReferencias_KeyUp);
             // 
             // label12
             // 
@@ -99,9 +76,6 @@
             this.grpDenunciante.TabStop = false;
             this.grpDenunciante.Text = "Denunciante";
             this.grpDenunciante.Enter += new System.EventHandler(this.grpDenunciante_Enter);
-            this.grpDenunciante.Controls.SetChildIndex(this.txtNombreDenunciante, 0);
-            this.grpDenunciante.Controls.SetChildIndex(this.txtApellidoDenunciante, 0);
-            this.grpDenunciante.Controls.SetChildIndex(this.txtDenuncianteDireccion, 0);
             // 
             // txtDenuncianteDireccion
             // 
@@ -166,17 +140,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(639, 742);
+            this.ClientSize = new System.Drawing.Size(1213, 772);
             this.Controls.Add(this.grpDenunciante);
             this.Controls.Add(this.cklCorporacion);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.txtReferencias);
             this.Name = "SAIFrmIncidencia066";
             this.Text = "SAIFrmIncidencia066";
             this.Load += new System.EventHandler(this.SAIFrmIncidencia066_Load);
-            this.Controls.SetChildIndex(this.txtReferencias, 0);
-            this.Controls.SetChildIndex(this.label11, 0);
             this.Controls.SetChildIndex(this.label12, 0);
             this.Controls.SetChildIndex(this.cklCorporacion, 0);
             this.Controls.SetChildIndex(this.grpDenunciante, 0);
@@ -189,8 +159,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label11;
-        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox txtReferencias;
         private System.Windows.Forms.Label label12;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAICheckedListBox cklCorporacion;
         private System.Windows.Forms.GroupBox grpDenunciante;

@@ -140,11 +140,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void RecuperaDatosEnIncidencia()
         {
 
-            if (this._entIncidencia != null)
-            {
-                this._entIncidencia.Referencias  = this.txtReferencias.Text;
-              
-            }
+          
         }
 
         protected override void OnClosed(EventArgs e)
