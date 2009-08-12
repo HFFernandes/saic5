@@ -41,12 +41,12 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblOtro = new System.Windows.Forms.Label();
-            this.saiTxtCP = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.ddlCodigoPostal = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnEliminar = new System.Windows.Forms.Button();
+            this.txtCP = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.logoPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvColonias)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -150,8 +150,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txtCP);
             this.groupBox2.Controls.Add(this.lblOtro);
-            this.groupBox2.Controls.Add(this.saiTxtCP);
             this.groupBox2.Controls.Add(this.ddlCodigoPostal);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label2);
@@ -170,22 +170,12 @@
             // lblOtro
             // 
             this.lblOtro.AutoSize = true;
-            this.lblOtro.Location = new System.Drawing.Point(334, 76);
+            this.lblOtro.Location = new System.Drawing.Point(318, 76);
             this.lblOtro.Name = "lblOtro";
-            this.lblOtro.Size = new System.Drawing.Size(30, 13);
+            this.lblOtro.Size = new System.Drawing.Size(65, 13);
             this.lblOtro.TabIndex = 21;
-            this.lblOtro.Text = "Otro:";
+            this.lblOtro.Text = "Especifique:";
             this.lblOtro.Visible = false;
-            // 
-            // saiTxtCP
-            // 
-            this.saiTxtCP.ClrBackColorFoco = System.Drawing.Color.Empty;
-            this.saiTxtCP.Location = new System.Drawing.Point(385, 73);
-            this.saiTxtCP.Name = "saiTxtCP";
-            this.saiTxtCP.Size = new System.Drawing.Size(129, 20);
-            this.saiTxtCP.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.saiTxtCP.TabIndex = 20;
-            this.saiTxtCP.Visible = false;
             // 
             // ddlCodigoPostal
             // 
@@ -234,6 +224,15 @@
             this.btnEliminar.UseVisualStyleBackColor = true;
             this.btnEliminar.Visible = false;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // txtCP
+            // 
+            this.txtCP.Location = new System.Drawing.Point(389, 73);
+            this.txtCP.MaxLength = 5;
+            this.txtCP.Name = "txtCP";
+            this.txtCP.Size = new System.Drawing.Size(100, 20);
+            this.txtCP.TabIndex = 22;
+            this.txtCP.Visible = false;
             // 
             // frmColonias
             // 
@@ -284,7 +283,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox ddlCodigoPostal;
-        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox saiTxtCP;
         private System.Windows.Forms.Label lblOtro;
+        private System.Windows.Forms.TextBox txtCP;
     }
 }
