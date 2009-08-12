@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects;
 using BSD.C4.Tlaxcala.Sai.Ui.Controles;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 
@@ -57,6 +58,23 @@ namespace BSD.C4.Tlaxcala.Sai
             public static string strSistemaActual { get; set; }
             public static bool? blnEsDespachador { get; set; }
             public static int? intClaveSistema { get; set; }
+            public static int? intCorporacion
+            {
+                get
+                {
+                    if (blnEsDespachador == true)
+                    {
+                        UsuarioCorporacionObjectList usuarioCorporacion =
+                            UsuarioCorporacionMapper.Instance().GetByUsuario(intClaveUsuario);
+                        if (usuarioCorporacion != null)
+                        {
+                            return usuarioCorporacion[0].ClaveCorporacion;
+                        }
+                    }
+
+                    return null;
+                }
+            }
 
             /// <summary>
             /// Función que determina si el usuario actual tiene permisos de LECTURA sobre el modulo specificado
@@ -138,8 +156,8 @@ namespace BSD.C4.Tlaxcala.Sai
 
     public enum ESTATUSUNIDADES
     {
-        LIBRE=1,    //Unidad que puede ser asignada a una incidencia (VERDE)
-        DESPACHADA=2,   //Unidad que va en camino a atender la incidencia (ROJO)
-        LLEGADA=3   //Unidad que se encuentra ya en el lugar de la incidencia 
+        LIBRE = 1,    //Unidad que puede ser asignada a una incidencia (VERDE)
+        DESPACHADA = 2,   //Unidad que va en camino a atender la incidencia (ROJO)
+        LLEGADA = 3   //Unidad que se encuentra ya en el lugar de la incidencia 
     }
 }
