@@ -68,13 +68,13 @@
             // 
             // cmdAceptar
             // 
-            this.cmdAceptar.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.cmdAceptar.Location = new System.Drawing.Point(113, 62);
             this.cmdAceptar.Name = "cmdAceptar";
             this.cmdAceptar.Size = new System.Drawing.Size(75, 23);
             this.cmdAceptar.TabIndex = 3;
             this.cmdAceptar.Text = "&Aceptar";
             this.cmdAceptar.UseVisualStyleBackColor = true;
+            this.cmdAceptar.Click += new System.EventHandler(this.cmdAceptar_Click);
             // 
             // SAIFrmLigarIncidencias
             // 

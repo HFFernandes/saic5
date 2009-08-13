@@ -129,21 +129,21 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                                                                           .intCorporacion ?? -1, itm.Record[0].Value));
                             foreach (var unidadDespacho in unidadDespachoList)
                             {
-                                saiReport1.reportControl.Records[itm.Record.Index][1].Value = "(desconocido)";
+                                saiReport1.reportControl.Records[itm.Record.Index][1].Value = ID.STR_REGDESC;
 
                                 if (unidadDespacho.HoraLiberada != null)
                                 {
                                     dtHora = unidadDespacho.HoraLiberada ?? DateTime.Now;
                                     strStatus = "Libre";
 
-                                    saiReport1.reportControl.Records[itm.Record.Index][1].Value = "(desconocido)";   //por ser libre no tiene folio
+                                    saiReport1.reportControl.Records[itm.Record.Index][1].Value = ID.STR_REGDESC;   //por ser libre no tiene folio
                                     saiReport1.reportControl.Records[itm.Record.Index][2].Value = unidad.Codigo;
-                                    saiReport1.reportControl.Records[itm.Record.Index][3].Value = "(desconocido)";   //falta el campo para colocar el responsable de la unidad
+                                    saiReport1.reportControl.Records[itm.Record.Index][3].Value = ID.STR_REGDESC;   //falta el campo para colocar el responsable de la unidad
                                     saiReport1.reportControl.Records[itm.Record.Index][4].Value = strStatus;
-                                    saiReport1.reportControl.Records[itm.Record.Index][4].BackColor =(uint) Aplicacion.HexadecimalADecimal("99FF33");
-                                    saiReport1.reportControl.Records[itm.Record.Index][5].Value =dtHora.ToShortTimeString();
-                                    saiReport1.reportControl.Records[itm.Record.Index][6].Value = "(desconocido)";
-                                    saiReport1.reportControl.Records[itm.Record.Index][7].Value = "(desconocido)";
+                                    saiReport1.reportControl.Records[itm.Record.Index][4].BackColor = ID.COL_ESTLIBERADA;
+                                    saiReport1.reportControl.Records[itm.Record.Index][5].Value = dtHora.ToShortTimeString();
+                                    saiReport1.reportControl.Records[itm.Record.Index][6].Value = ID.STR_REGDESC;
+                                    saiReport1.reportControl.Records[itm.Record.Index][7].Value = ID.STR_REGDESC;
                                     continue;
                                 }
 
@@ -152,8 +152,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     dtHora = unidadDespacho.HoraLlegada ?? DateTime.Now;
                                     strStatus = "Llegada";
 
-                                    saiReport1.reportControl.Records[itm.Record.Index][1].Value =unidadDespacho.Folio;
-                                    saiReport1.reportControl.Records[itm.Record.Index][4].BackColor = (uint)Aplicacion.HexadecimalADecimal("FFFFFF");
+                                    saiReport1.reportControl.Records[itm.Record.Index][1].Value = unidadDespacho.Folio;
+                                    saiReport1.reportControl.Records[itm.Record.Index][4].BackColor = ID.COL_ESTLLEGADA;
                                     goto Actualizar;
                                 }
 
@@ -162,39 +162,40 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     dtHora = unidadDespacho.HoraDespachada ?? DateTime.Now;
                                     strStatus = "Despachada";
 
-                                    saiReport1.reportControl.Records[itm.Record.Index][1].Value =unidadDespacho.Folio;
-                                    saiReport1.reportControl.Records[itm.Record.Index][4].BackColor = (uint)Aplicacion.HexadecimalADecimal("FFCC66");
+                                    saiReport1.reportControl.Records[itm.Record.Index][1].Value = unidadDespacho.Folio;
+                                    saiReport1.reportControl.Records[itm.Record.Index][4].BackColor =
+                                        ID.COL_ESTDESPACHADA;
                                     goto Actualizar;
                                 }
 
                             Actualizar:
-                                saiReport1.reportControl.Records[itm.Record.Index][3].Value = "(desconocido)";   //falta el campo para colocar el responsable de la unidad
-                                saiReport1.reportControl.Records[itm.Record.Index][4].Value = strStatus != string.Empty ? strStatus : "(desconocido)";
+                                saiReport1.reportControl.Records[itm.Record.Index][3].Value = ID.STR_REGDESC;   //falta el campo para colocar el responsable de la unidad
+                                saiReport1.reportControl.Records[itm.Record.Index][4].Value = strStatus != string.Empty ? strStatus : ID.STR_REGDESC;
                                 saiReport1.reportControl.Records[itm.Record.Index][5].Value = dtHora.ToShortTimeString();
                                 saiReport1.reportControl.Records[itm.Record.Index][6].Value =
                                     IncidenciaMapper.Instance().GetOne(unidadDespacho.Folio).Direccion != string.Empty
                                         ? IncidenciaMapper.Instance().GetOne(unidadDespacho.Folio).Direccion
-                                        : "(desconocido)";
+                                        : ID.STR_REGDESC;
                                 saiReport1.reportControl.Records[itm.Record.Index][7].Value =
                                     TipoIncidenciaMapper.Instance().GetOne(
                                         IncidenciaMapper.Instance().GetOne(unidadDespacho.Folio).ClaveTipo ?? -1).
-                                        Descripcion ?? "(desconocido)";
+                                        Descripcion ?? ID.STR_REGDESC;
                             }
-                           
+
                             //TODO: La hora no es la de la liberación 
                             if (unidadDespachoList.Count == 0)
                             {
                                 dtHora = DateTime.Now;
                                 strStatus = "Libre";
 
-                                saiReport1.reportControl.Records[itm.Record.Index][1].Value = "(desconocido)";   //por ser libre no tiene folio
+                                saiReport1.reportControl.Records[itm.Record.Index][1].Value = ID.STR_REGDESC;   //por ser libre no tiene folio
                                 saiReport1.reportControl.Records[itm.Record.Index][2].Value = unidad.Codigo;
-                                saiReport1.reportControl.Records[itm.Record.Index][3].Value = "(desconocido)";   //falta el campo para colocar el responsable de la unidad
+                                saiReport1.reportControl.Records[itm.Record.Index][3].Value = ID.STR_REGDESC;   //falta el campo para colocar el responsable de la unidad
                                 saiReport1.reportControl.Records[itm.Record.Index][4].Value = strStatus;
-                                saiReport1.reportControl.Records[itm.Record.Index][4].BackColor = (uint)Aplicacion.HexadecimalADecimal("99FF33");
-                                saiReport1.reportControl.Records[itm.Record.Index][5].Value =dtHora.ToShortTimeString();
-                                saiReport1.reportControl.Records[itm.Record.Index][6].Value = "(desconocido)";
-                                saiReport1.reportControl.Records[itm.Record.Index][7].Value = "(desconocido)";
+                                saiReport1.reportControl.Records[itm.Record.Index][4].BackColor = ID.COL_ESTLIBERADA;
+                                saiReport1.reportControl.Records[itm.Record.Index][5].Value = dtHora.ToShortTimeString();
+                                saiReport1.reportControl.Records[itm.Record.Index][6].Value = ID.STR_REGDESC;
+                                saiReport1.reportControl.Records[itm.Record.Index][7].Value = ID.STR_REGDESC;
                             }
 
                         }
