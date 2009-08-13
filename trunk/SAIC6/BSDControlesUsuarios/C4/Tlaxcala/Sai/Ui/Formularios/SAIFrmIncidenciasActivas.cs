@@ -96,7 +96,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void tmrRegistros_Tick(object sender, EventArgs e)
         {
             ObtenerRegistros();
-            saiReport1.reportControl.Refresh();
+            //saiReport1.reportControl.Refresh();
+            saiReport1.reportControl.Redraw();
         }
 
         private void ObtenerRegistros()
