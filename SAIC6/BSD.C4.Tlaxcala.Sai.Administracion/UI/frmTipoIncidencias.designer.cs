@@ -36,6 +36,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtClaveoperacion = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
@@ -43,10 +46,7 @@
             this.gvTipoIncidencias = new System.Windows.Forms.DataGridView();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
-            this.dUpDwPrioridad = new System.Windows.Forms.DomainUpDown();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtClaveoperacion = new System.Windows.Forms.TextBox();
+            this.ddlPrioridad = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.logoPicture)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -103,10 +103,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.ddlPrioridad);
             this.groupBox1.Controls.Add(this.txtClaveoperacion);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.dUpDwPrioridad);
             this.groupBox1.Controls.Add(this.btnLimpiar);
             this.groupBox1.Controls.Add(this.saiTxtDescripcion);
             this.groupBox1.Controls.Add(this.label2);
@@ -118,6 +118,31 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos Generales";
+            // 
+            // txtClaveoperacion
+            // 
+            this.txtClaveoperacion.Location = new System.Drawing.Point(116, 76);
+            this.txtClaveoperacion.Name = "txtClaveoperacion";
+            this.txtClaveoperacion.Size = new System.Drawing.Size(129, 20);
+            this.txtClaveoperacion.TabIndex = 10;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(17, 79);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(89, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Clave Operación:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(17, 104);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(51, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Prioridad:";
             // 
             // btnLimpiar
             // 
@@ -189,7 +214,7 @@
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 5;
-            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.Text = "Cerrar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
@@ -207,44 +232,20 @@
             this.btnEliminar.Visible = false;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
-            // dUpDwPrioridad
+            // ddlPrioridad
             // 
-            this.dUpDwPrioridad.Items.Add("1");
-            this.dUpDwPrioridad.Items.Add("2");
-            this.dUpDwPrioridad.Items.Add("3");
-            this.dUpDwPrioridad.Items.Add("4");
-            this.dUpDwPrioridad.Items.Add("5");
-            this.dUpDwPrioridad.Location = new System.Drawing.Point(116, 102);
-            this.dUpDwPrioridad.Name = "dUpDwPrioridad";
-            this.dUpDwPrioridad.ReadOnly = true;
-            this.dUpDwPrioridad.Size = new System.Drawing.Size(64, 20);
-            this.dUpDwPrioridad.TabIndex = 7;
-            this.dUpDwPrioridad.Text = "1";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 104);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(51, 13);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Prioridad:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(17, 79);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(89, 13);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Clave Operación:";
-            // 
-            // txtClaveoperacion
-            // 
-            this.txtClaveoperacion.Location = new System.Drawing.Point(116, 76);
-            this.txtClaveoperacion.Name = "txtClaveoperacion";
-            this.txtClaveoperacion.Size = new System.Drawing.Size(129, 20);
-            this.txtClaveoperacion.TabIndex = 10;
+            this.ddlPrioridad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlPrioridad.FormattingEnabled = true;
+            this.ddlPrioridad.Items.AddRange(new object[] {
+            "1",
+            "2",
+            "3",
+            "4",
+            "5"});
+            this.ddlPrioridad.Location = new System.Drawing.Point(116, 102);
+            this.ddlPrioridad.Name = "ddlPrioridad";
+            this.ddlPrioridad.Size = new System.Drawing.Size(121, 21);
+            this.ddlPrioridad.TabIndex = 11;
             // 
             // frmTipoIncidencias
             // 
@@ -297,8 +298,8 @@
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DomainUpDown dUpDwPrioridad;
         private System.Windows.Forms.TextBox txtClaveoperacion;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox ddlPrioridad;
     }
 }
