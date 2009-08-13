@@ -96,6 +96,7 @@
             this.saiTxtPrioridad5.Size = new System.Drawing.Size(38, 20);
             this.saiTxtPrioridad5.StrMensajeCampoRequerido = "El campo es requerido.";
             this.saiTxtPrioridad5.TabIndex = 11;
+            this.saiTxtPrioridad5.Text = "0";
             // 
             // lbl5
             // 
@@ -115,6 +116,7 @@
             this.saiTxtPrioridad4.Size = new System.Drawing.Size(38, 20);
             this.saiTxtPrioridad4.StrMensajeCampoRequerido = "El campo es requerido.";
             this.saiTxtPrioridad4.TabIndex = 9;
+            this.saiTxtPrioridad4.Text = "0";
             // 
             // lbl4
             // 
@@ -134,6 +136,7 @@
             this.saiTxtPrioridad3.Size = new System.Drawing.Size(38, 20);
             this.saiTxtPrioridad3.StrMensajeCampoRequerido = "El campo es requerido.";
             this.saiTxtPrioridad3.TabIndex = 7;
+            this.saiTxtPrioridad3.Text = "0";
             // 
             // lbl3
             // 
@@ -153,6 +156,7 @@
             this.saiTxtPrioridad1.Size = new System.Drawing.Size(38, 20);
             this.saiTxtPrioridad1.StrMensajeCampoRequerido = "El campo es requerido.";
             this.saiTxtPrioridad1.TabIndex = 3;
+            this.saiTxtPrioridad1.Text = "0";
             // 
             // lbl1
             // 
@@ -172,6 +176,7 @@
             this.saiTxtPrioridad2.Size = new System.Drawing.Size(38, 20);
             this.saiTxtPrioridad2.StrMensajeCampoRequerido = "El campo es requerido.";
             this.saiTxtPrioridad2.TabIndex = 5;
+            this.saiTxtPrioridad2.Text = "0";
             // 
             // lbl2
             // 
@@ -191,6 +196,7 @@
             this.saiTxtS.Size = new System.Drawing.Size(38, 20);
             this.saiTxtS.StrMensajeCampoRequerido = "El campo es requerido.";
             this.saiTxtS.TabIndex = 1;
+            this.saiTxtS.Text = "0";
             // 
             // lblS
             // 
