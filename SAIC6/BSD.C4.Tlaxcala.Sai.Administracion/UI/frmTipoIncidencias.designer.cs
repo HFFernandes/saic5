@@ -43,6 +43,10 @@
             this.gvTipoIncidencias = new System.Windows.Forms.DataGridView();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
+            this.dUpDwPrioridad = new System.Windows.Forms.DomainUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtClaveoperacion = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.logoPicture)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -64,7 +68,7 @@
             // 
             this.saiTxtDescripcion.BlnEsRequerido = true;
             this.saiTxtDescripcion.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.saiTxtDescripcion.Location = new System.Drawing.Point(101, 23);
+            this.saiTxtDescripcion.Location = new System.Drawing.Point(116, 23);
             this.saiTxtDescripcion.Name = "saiTxtDescripcion";
             this.saiTxtDescripcion.Size = new System.Drawing.Size(294, 20);
             this.saiTxtDescripcion.StrMensajeCampoRequerido = "El campo es requerido.";
@@ -74,7 +78,7 @@
             // 
             this.ddlSistema.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlSistema.FormattingEnabled = true;
-            this.ddlSistema.Location = new System.Drawing.Point(101, 52);
+            this.ddlSistema.Location = new System.Drawing.Point(116, 49);
             this.ddlSistema.Name = "ddlSistema";
             this.ddlSistema.Size = new System.Drawing.Size(182, 21);
             this.ddlSistema.TabIndex = 2;
@@ -99,6 +103,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtClaveoperacion);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.dUpDwPrioridad);
             this.groupBox1.Controls.Add(this.btnLimpiar);
             this.groupBox1.Controls.Add(this.saiTxtDescripcion);
             this.groupBox1.Controls.Add(this.label2);
@@ -106,14 +114,14 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 216);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(560, 105);
+            this.groupBox1.Size = new System.Drawing.Size(560, 143);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos Generales";
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(479, 76);
+            this.btnLimpiar.Location = new System.Drawing.Point(479, 114);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
             this.btnLimpiar.TabIndex = 6;
@@ -125,7 +133,7 @@
             // 
             this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
             this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregar.Location = new System.Drawing.Point(316, 336);
+            this.btnAgregar.Location = new System.Drawing.Point(316, 384);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
             this.btnAgregar.TabIndex = 4;
@@ -139,7 +147,7 @@
             this.btnModificar.Enabled = false;
             this.btnModificar.Image = ((System.Drawing.Image)(resources.GetObject("btnModificar.Image")));
             this.btnModificar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnModificar.Location = new System.Drawing.Point(235, 336);
+            this.btnModificar.Location = new System.Drawing.Point(235, 384);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
             this.btnModificar.TabIndex = 3;
@@ -177,7 +185,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(497, 336);
+            this.btnCancelar.Location = new System.Drawing.Point(497, 384);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 5;
@@ -189,7 +197,7 @@
             // 
             this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
             this.btnEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEliminar.Location = new System.Drawing.Point(397, 336);
+            this.btnEliminar.Location = new System.Drawing.Point(397, 384);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
             this.btnEliminar.TabIndex = 7;
@@ -199,12 +207,51 @@
             this.btnEliminar.Visible = false;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
+            // dUpDwPrioridad
+            // 
+            this.dUpDwPrioridad.Items.Add("1");
+            this.dUpDwPrioridad.Items.Add("2");
+            this.dUpDwPrioridad.Items.Add("3");
+            this.dUpDwPrioridad.Items.Add("4");
+            this.dUpDwPrioridad.Items.Add("5");
+            this.dUpDwPrioridad.Location = new System.Drawing.Point(116, 102);
+            this.dUpDwPrioridad.Name = "dUpDwPrioridad";
+            this.dUpDwPrioridad.ReadOnly = true;
+            this.dUpDwPrioridad.Size = new System.Drawing.Size(64, 20);
+            this.dUpDwPrioridad.TabIndex = 7;
+            this.dUpDwPrioridad.Text = "1";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(17, 104);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(51, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Prioridad:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(17, 79);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(89, 13);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Clave Operación:";
+            // 
+            // txtClaveoperacion
+            // 
+            this.txtClaveoperacion.Location = new System.Drawing.Point(116, 76);
+            this.txtClaveoperacion.Name = "txtClaveoperacion";
+            this.txtClaveoperacion.Size = new System.Drawing.Size(129, 20);
+            this.txtClaveoperacion.TabIndex = 10;
+            // 
             // frmTipoIncidencias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(584, 394);
+            this.ClientSize = new System.Drawing.Size(584, 432);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnCancelar);
@@ -249,5 +296,9 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnLimpiar;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DomainUpDown dUpDwPrioridad;
+        private System.Windows.Forms.TextBox txtClaveoperacion;
+        private System.Windows.Forms.Label label4;
     }
 }

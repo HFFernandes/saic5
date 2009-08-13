@@ -38,6 +38,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.gvLocalidades = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.saiTxtNombre = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -45,8 +46,7 @@
             this.ddlMunicipio = new System.Windows.Forms.ComboBox();
             this.ddlEstado = new System.Windows.Forms.ComboBox();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtClaveLocalidadCartografia = new System.Windows.Forms.TextBox();
+            this.txtClaveLocalidadCartografia = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.logoPicture)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvLocalidades)).BeginInit();
@@ -149,8 +149,18 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos Generales";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(13, 104);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(140, 13);
+            this.label4.TabIndex = 21;
+            this.label4.Text = "Clave Localidad Cartografia:";
+            // 
             // saiTxtNombre
             // 
+            this.saiTxtNombre.BlnEsRequerido = true;
             this.saiTxtNombre.ClrBackColorFoco = System.Drawing.Color.Empty;
             this.saiTxtNombre.Location = new System.Drawing.Point(110, 74);
             this.saiTxtNombre.Name = "saiTxtNombre";
@@ -210,25 +220,19 @@
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 16;
-            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.Text = "Cerrar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(13, 104);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(140, 13);
-            this.label4.TabIndex = 21;
-            this.label4.Text = "Clave Localidad Cartografia:";
-            // 
             // txtClaveLocalidadCartografia
             // 
+            this.txtClaveLocalidadCartografia.BlnEsRequerido = true;
+            this.txtClaveLocalidadCartografia.ClrBackColorFoco = System.Drawing.Color.Empty;
             this.txtClaveLocalidadCartografia.Location = new System.Drawing.Point(159, 100);
             this.txtClaveLocalidadCartografia.Name = "txtClaveLocalidadCartografia";
-            this.txtClaveLocalidadCartografia.Size = new System.Drawing.Size(132, 20);
-            this.txtClaveLocalidadCartografia.TabIndex = 22;
+            this.txtClaveLocalidadCartografia.Size = new System.Drawing.Size(156, 20);
+            this.txtClaveLocalidadCartografia.StrMensajeCampoRequerido = "El campo es requerido.";
+            this.txtClaveLocalidadCartografia.TabIndex = 23;
             // 
             // frmLocalidades
             // 
@@ -279,7 +283,7 @@
         private System.Windows.Forms.ComboBox ddlMunicipio;
         private System.Windows.Forms.ComboBox ddlEstado;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox saiTxtNombre;
-        private System.Windows.Forms.TextBox txtClaveLocalidadCartografia;
         private System.Windows.Forms.Label label4;
+        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox txtClaveLocalidadCartografia;
     }
 }

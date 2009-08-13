@@ -23,9 +23,50 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
         private void frmColonias_Load(object sender, EventArgs e)
         {
+            this.LlenarEstado();
+            //this.LlenarMunicipio();
             this.LlenarGrid();
             this.LlenarLocalidad();
             this.LlenarCodigoPostal();
+        }
+
+        private void LlenarEstado()
+        {
+            try
+            {
+                try 
+                {
+                    this.ddlEstado.DataSource = Mappers.EstadoMapper.Instance().GetAll();
+                    this.ddlEstado.DisplayMember = "Nombre";
+                    this.ddlEstado.ValueMember = "Clave";
+                }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
+            }
+            catch (SAIExcepcion)
+            { }
+        }
+
+        private void LlenarMunicipio(int idlocalidad)
+        {
+            try
+            {
+                try 
+                {
+                    Entidades.Localidad localidad = Mappers.LocalidadMapper.Instance().GetOne(idlocalidad);
+                    Entidades.Municipio municipio = Mappers.MunicipioMapper.Instance().GetOne(localidad.ClaveMunicipio);
+                    Entidades.MunicipioList municipios = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.MunicipioList();
+                    municipios.Add(municipio);
+                    this.ddlMunicipio.DataSource = municipios;
+                    this.ddlMunicipio.DisplayMember = "Nombre";
+                    this.ddlMunicipio.ValueMember = "Clave";
+                }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
+            }
+            catch (SAIExcepcion)
+            { }
+
         }
 
         private void LlenarGrid()
@@ -35,7 +76,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 DataTable catColonias = new DataTable("catColonias");
                 try
                 {
-                    catColonias.Columns.Add(new DataColumn("Clave", Type.GetType("System.Int32")));
+                    catColonias.Columns.Add(new DataColumn("ClaveCartografia", Type.GetType("System.Int32")));
                     catColonias.Columns.Add(new DataColumn("ClaveLocalidad", Type.GetType("System.Int32")));
                     catColonias.Columns.Add(new DataColumn("Localidad", Type.GetType("System.String")));
                     catColonias.Columns.Add(new DataColumn("Nombre", Type.GetType("System.String")));
@@ -53,7 +94,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     }
 
                     this.gvColonias.DataSource = catColonias;
-                    this.gvColonias.Columns["Clave"].Visible = false;
+                    //this.gvColonias.Columns["Clave"].Visible = false;
                     this.gvColonias.Columns["ClaveLocalidad"].Visible = false;
                     this.gvColonias.Columns["ClaveCodigo"].Visible = false;
                 }
@@ -111,8 +152,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 try 
                 {
                     Entidades.Colonia newColonia = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Colonia();
+                    newColonia.Clave = Convert.ToInt32(this.saiClave.Text);
                     newColonia.ClaveLocalidad = Convert.ToInt32(this.ddlLocalidad.SelectedValue);
-                    newColonia.Nombre = this.txtCP.Text;
+                    newColonia.Nombre = this.saiTxtNombre.Text;
                     if (Convert.ToString(ObtenerValor()) == "000")
                     {
                         newColonia.ClaveCodigoPostal = this.ObtenerCodigoPostal(this.txtCP.Text);
@@ -137,8 +179,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             {
                 try 
                 {
-                    int selectedColonia = Convert.ToInt32(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["Clave"].Value);
+                    int selectedColonia = Convert.ToInt32(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveCartografia"].Value);
                     Entidades.Colonia updColonia = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Colonia(selectedColonia);
+                    updColonia.Clave = Convert .ToInt32(this.saiClave.Text);
                     updColonia.ClaveLocalidad = Convert.ToInt32(this.ddlLocalidad.SelectedValue);
                     updColonia.Nombre = this.saiTxtNombre.Text;
 
@@ -166,7 +209,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             {
                 try 
                 {
-                    Mappers.ColoniaMapper.Instance().Delete(Convert.ToInt32(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["Clave"].Value));
+                    Mappers.ColoniaMapper.Instance().Delete(Convert.ToInt32(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveCartografia"].Value));
                 }
                 catch (Exception ex)
                 { throw new SAIExcepcion(ex.Message); }
@@ -181,6 +224,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             {
                 row.Selected = false;
             }
+            this.saiClave.Text = string.Empty;
             this.ddlCodigoPostal.SelectedIndex = -1;
             this.ddlLocalidad.SelectedIndex = -1;
             this.saiTxtNombre.Text = string.Empty;
@@ -248,8 +292,11 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             {
                 if (this.ObtenerIndiceSeleccionado() > -1)
                 {
+                    this.saiClave.Text = Convert.ToString(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveCartografia"].Value);
                     this.saiTxtNombre.Text = Convert.ToString(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["Nombre"].Value);
                     this.SeleccionarComboItem(Convert.ToInt32(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveCodigo"].Value));
+                    this.ddlLocalidad.SelectedValue = this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveLocalidad"].Value;
+                    this.LlenarMunicipio(Convert.ToInt32(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveLocalidad"].Value));
                     this.btnModificar.Enabled = true;
                     this.btnEliminar.Visible = true;
                     this.btnAgregar.Enabled = false;
@@ -340,5 +387,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             { }
             return 0;
         }
+
+
     }
 }
