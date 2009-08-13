@@ -33,9 +33,12 @@
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(89, 65);
+            this.panel1.AllowDrop = true;
+            this.panel1.BackColor = System.Drawing.Color.Red;
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 100);
+            this.panel1.Size = new System.Drawing.Size(425, 100);
             this.panel1.TabIndex = 0;
             this.panel1.DragOver += new System.Windows.Forms.DragEventHandler(this.panel1_DragOver);
             this.panel1.DragDrop += new System.Windows.Forms.DragEventHandler(this.panel1_DragDrop);
@@ -51,10 +54,6 @@
             this.Controls.Add(this.panel1);
             this.Name = "SAIFrmPruebas";
             this.Text = "SAIFrmPruebas";
-            this.DragLeave += new System.EventHandler(this.SAIFrmPruebas_DragLeave);
-            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.SAIFrmPruebas_DragDrop);
-            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.SAIFrmPruebas_DragEnter);
-            this.DragOver += new System.Windows.Forms.DragEventHandler(this.SAIFrmPruebas_DragOver);
             this.ResumeLayout(false);
 
         }
