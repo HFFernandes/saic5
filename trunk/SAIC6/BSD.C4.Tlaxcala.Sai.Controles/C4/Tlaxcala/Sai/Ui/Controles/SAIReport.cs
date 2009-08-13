@@ -22,6 +22,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             InitializeComponent();
 
             SAIInstancia = this;
+            reportControl.PaintManager.ColumnStyle = XTPReportColumnStyle.xtpColumnExplorer;
         }
 
         /// <summary>
