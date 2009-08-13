@@ -93,8 +93,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                                
                         //entIncidencia = lstIncidencias[0];
 
-                        SAIFrmIncidencia066Despacho frmIncidencia066Despacho = new SAIFrmIncidencia066Despacho(entIncidencia);
-                        frmIncidencia066Despacho.Show(this);
+                        //SAIFrmIncidencia066Despacho frmIncidencia066Despacho = new SAIFrmIncidencia066Despacho(entIncidencia);
+                        //frmIncidencia066Despacho.Show(this);
 
 
                     }
