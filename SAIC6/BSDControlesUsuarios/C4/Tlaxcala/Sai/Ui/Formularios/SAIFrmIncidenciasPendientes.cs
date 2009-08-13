@@ -20,9 +20,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             InitializeComponent();
             Width = Screen.GetWorkingArea(this).Width;
-            var intReg = saiReport1.reportControl.EnableDragDrop("SAIC4:iPendientes",
-                                          XTPReportDragDrop.xtpReportAllowDrag |
-                                          XTPReportDragDrop.xtpReportAllowDrop);
+            //var intReg = saiReport1.reportControl.EnableDragDrop("SAIC4:iPendientes",
+            //                              XTPReportDragDrop.xtpReportAllowDrag |
+            //                              XTPReportDragDrop.xtpReportAllowDrop);
             saiReport1.btnLigarIncidencias.Click += btnLigarIncidencias_Click;
             saiReport1.btnDespacharIncidencias.Click += btnDespacharIncidencias_Click;
             saiReport1.btnBajaUnidad.Click += btnBajaUnidad_Click;

@@ -38,7 +38,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void SAIFrmPruebas_DragOver(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Link;
-            var res = (MemoryStream)e.Data.GetData("SAIC4:iPendientes");
+            var res = (MemoryStream)e.Data.GetData("SAIC4:iUnidades");
             if (res != null)
             {
                 var rec =SAIReport.SAIInstancia.reportControl.CreateRecordsFromDropArray(res.ToArray());

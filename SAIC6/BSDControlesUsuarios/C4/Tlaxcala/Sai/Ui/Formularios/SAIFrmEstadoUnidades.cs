@@ -12,8 +12,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
     {
 
         private List<Unidad> lstUnidadesRegistradas;
-        private List<Unidad> lstUnidadesTemporales;
-        private List<Unidad> lstUnidadesPorRemover;
+        //private List<Unidad> lstUnidadesTemporales;
+        //private List<Unidad> lstUnidadesPorRemover;
         private List<ReportRecord> lstRegistrosReporte;
 
         public SAIFrmEstadoUnidades()
@@ -30,8 +30,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             saiReport1.btnAltaUnidad.Click += btnAltaUnidad_Click;
 
             lstUnidadesRegistradas = new List<Unidad>();
-            lstUnidadesTemporales = new List<Unidad>();
-            lstUnidadesPorRemover = new List<Unidad>();
+            //lstUnidadesTemporales = new List<Unidad>();
+            //lstUnidadesPorRemover = new List<Unidad>();
             lstRegistrosReporte = new List<ReportRecord>();
         }
 
@@ -80,10 +80,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 //Limpiamos el listado donde se almacenan las unidades 
                 //para iniciar nuevamente el ciclo
-                lstUnidadesTemporales.Clear();
+                //lstUnidadesTemporales.Clear();
                 foreach (var unidad in (UnidadMapper.Instance().GetByCorporacion(Aplicacion.UsuarioPersistencia.intCorporacion ?? -1))) //vamos a la base para obtener las unidades de la corporacion del usuario
                 {
-                    lstUnidadesTemporales.Add(unidad);
+                    //lstUnidadesTemporales.Add(unidad);
                     //verificamos que la unidad no esté ya en la lista de unidades registradas
                     //que de no estarlo la agregamos al listado tipado y al grid
                     if (!lstUnidadesRegistradas.Contains(unidad))
@@ -113,14 +113,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             var strStatus = string.Empty;
 
                             //Obtenemos todos los datos de las unidades que estan libres, en despacho o en llegada
-                            //TODO: Como vamos a distinguir las unidades -> falta un where en la sentencia
                             var unidadDespachoList =
                                 DespachoIncidenciaMapper.Instance().GetBySQLQuery(string.Format(
                                                                                       SQL_OBTENERDESPACHOS,
                                                                                       Aplicacion.UsuarioPersistencia
-                                                                                          .intCorporacion ?? -1,itm.Record[0].Value));
+                                                                                          .intCorporacion ?? -1, itm.Record[0].Value));
                             foreach (var unidadDespacho in unidadDespachoList)
                             {
+                                saiReport1.reportControl.Records[itm.Record.Index][1].Value = "(desconocido)";
+                                //saiReport1.reportControl.Records[itm.Record.Index][2].Value = ""; //Nunca cambia siempre es la misma
+
                                 if (unidadDespacho.HoraLiberada != null)
                                 {
                                     dtHora = unidadDespacho.HoraLiberada ?? DateTime.Now;
@@ -158,48 +160,64 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 }
 
                             Actualizar:
-                                //saiReport1.reportControl.Records[itm.Record.Index][1].Value = "";
-                                //saiReport1.reportControl.Records[itm.Record.Index][2].Value = ""; //Nunca cambia siempre es la misma
-                                saiReport1.reportControl.Records[itm.Record.Index][3].Value = "(desconocido)";   //falta el campo para coloca el responsable de la unidad
-                                saiReport1.reportControl.Records[itm.Record.Index][4].Value = strStatus;
-                                saiReport1.reportControl.Records[itm.Record.Index][5].Value =
-                                    dtHora.ToShortTimeString();
+                                saiReport1.reportControl.Records[itm.Record.Index][3].Value = "(desconocido)";   //falta el campo para colocar el responsable de la unidad
+                                saiReport1.reportControl.Records[itm.Record.Index][4].Value = strStatus != string.Empty ? strStatus : "(desconocido)";
+                                saiReport1.reportControl.Records[itm.Record.Index][5].Value = dtHora.ToShortTimeString();
                                 saiReport1.reportControl.Records[itm.Record.Index][6].Value =
-                                    IncidenciaMapper.Instance().GetOne(unidadDespacho.Folio).Direccion;
+                                    IncidenciaMapper.Instance().GetOne(unidadDespacho.Folio).Direccion != string.Empty
+                                        ? IncidenciaMapper.Instance().GetOne(unidadDespacho.Folio).Direccion
+                                        : "(desconocido)";
                                 saiReport1.reportControl.Records[itm.Record.Index][7].Value =
                                     TipoIncidenciaMapper.Instance().GetOne(
                                         IncidenciaMapper.Instance().GetOne(unidadDespacho.Folio).ClaveTipo ?? -1).
-                                        Descripcion;
+                                        Descripcion ?? "(desconocido)";
                             }
+                           
+                            //TODO: La hora no es la de la liberación 
+                            if (unidadDespachoList.Count == 0)
+                            {
+                                dtHora = DateTime.Now;
+                                strStatus = "Libre";
+
+                                saiReport1.reportControl.Records[itm.Record.Index][1].Value = "(desconocido)";   //por ser libre no tiene folio
+                                saiReport1.reportControl.Records[itm.Record.Index][2].Value = unidad.Codigo;
+                                saiReport1.reportControl.Records[itm.Record.Index][3].Value = "(desconocido)";   //falta el campo para colocar el responsable de la unidad
+                                saiReport1.reportControl.Records[itm.Record.Index][4].Value = strStatus;
+                                saiReport1.reportControl.Records[itm.Record.Index][5].Value =
+                                    dtHora.ToShortTimeString();
+                                saiReport1.reportControl.Records[itm.Record.Index][6].Value = "(desconocido)";
+                                saiReport1.reportControl.Records[itm.Record.Index][7].Value = "(desconocido)";
+                            }
+
                         }
                     }
                 }
 
-                foreach (var unidad in lstUnidadesRegistradas)
-                {
-                    //comprobar si la unidad registrada existe en la unidad temporal
-                    //para luego entonces determinar cuales deberan ser eliminadas del grid
-                    if (!lstUnidadesTemporales.Contains(unidad))
-                    {
-                        lstUnidadesPorRemover.Add(unidad);
-                    }
-                }
+                //foreach (var unidad in lstUnidadesRegistradas)
+                //{
+                //    //comprobar si la unidad registrada existe en la unidad temporal
+                //    //para luego entonces determinar cuales deberan ser eliminadas del grid
+                //    if (!lstUnidadesTemporales.Contains(unidad))
+                //    {
+                //        lstUnidadesPorRemover.Add(unidad);
+                //    }
+                //}
 
-                //recorremos la colección de unidades por remover
-                //y hacemos match contra la clave para proceder
-                //a eliminar el registro del grid
-                foreach (var unidad in lstUnidadesPorRemover)
-                {
-                    foreach (var registro in lstRegistrosReporte)
-                    {
-                        if (Convert.ToInt32(registro.Tag) == unidad.Clave)
-                        {
-                            saiReport1.QuitarRegistro(registro);
-                        }
-                    }
-                    lstUnidadesRegistradas.Remove(unidad);
-                }
-                lstUnidadesPorRemover.Clear();   //limpiamos la colección para el nuevo ciclo
+                ////recorremos la colección de unidades por remover
+                ////y hacemos match contra la clave para proceder
+                ////a eliminar el registro del grid
+                //foreach (var unidad in lstUnidadesPorRemover)
+                //{
+                //    foreach (var registro in lstRegistrosReporte)
+                //    {
+                //        if (Convert.ToInt32(registro.Tag) == unidad.Clave)
+                //        {
+                //            saiReport1.QuitarRegistro(registro);
+                //        }
+                //    }
+                //    lstUnidadesRegistradas.Remove(unidad);
+                //}
+                //lstUnidadesPorRemover.Clear();   //limpiamos la colección para el nuevo ciclo
             }
             catch (Exception ex)
             {
