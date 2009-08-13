@@ -81,8 +81,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             // btnCampos
             // 
             this.btnCampos.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnCampos.Image = ((System.Drawing.Image)(resources.GetObject("btnCampos.Image")));
-            this.btnCampos.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnCampos.Image = global::BSD.Properties.Resources.campos_16;
+            this.btnCampos.ImageTransparentColor = System.Drawing.Color.Black;
             this.btnCampos.Name = "btnCampos";
             this.btnCampos.Size = new System.Drawing.Size(23, 22);
             this.btnCampos.ToolTipText = "Mostrar u ocultar campos";
@@ -96,8 +96,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             // btnLigarIncidencias
             // 
             this.btnLigarIncidencias.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnLigarIncidencias.Image = ((System.Drawing.Image)(resources.GetObject("btnLigarIncidencias.Image")));
-            this.btnLigarIncidencias.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnLigarIncidencias.Image = global::BSD.Properties.Resources.ligar_16;
+            this.btnLigarIncidencias.ImageTransparentColor = System.Drawing.Color.Black;
             this.btnLigarIncidencias.Name = "btnLigarIncidencias";
             this.btnLigarIncidencias.Size = new System.Drawing.Size(23, 22);
             this.btnLigarIncidencias.ToolTipText = "Ligar incidencias";
@@ -105,8 +105,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             // btnDespacharIncidencias
             // 
             this.btnDespacharIncidencias.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnDespacharIncidencias.Image = ((System.Drawing.Image)(resources.GetObject("btnDespacharIncidencias.Image")));
-            this.btnDespacharIncidencias.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDespacharIncidencias.Image = global::BSD.Properties.Resources.despachar_16;
+            this.btnDespacharIncidencias.ImageTransparentColor = System.Drawing.Color.Black;
             this.btnDespacharIncidencias.Name = "btnDespacharIncidencias";
             this.btnDespacharIncidencias.Size = new System.Drawing.Size(23, 22);
             this.btnDespacharIncidencias.ToolTipText = "Despachar incidencia(s)";
@@ -119,8 +119,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             // btnBajaUnidad
             // 
             this.btnBajaUnidad.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnBajaUnidad.Image = ((System.Drawing.Image)(resources.GetObject("btnBajaUnidad.Image")));
-            this.btnBajaUnidad.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnBajaUnidad.Image = global::BSD.Properties.Resources.baja_16;
+            this.btnBajaUnidad.ImageTransparentColor = System.Drawing.Color.Black;
             this.btnBajaUnidad.Name = "btnBajaUnidad";
             this.btnBajaUnidad.Size = new System.Drawing.Size(23, 22);
             this.btnBajaUnidad.ToolTipText = "Borrar unidad";
@@ -128,8 +128,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             // btnAltaUnidad
             // 
             this.btnAltaUnidad.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnAltaUnidad.Image = ((System.Drawing.Image)(resources.GetObject("btnAltaUnidad.Image")));
-            this.btnAltaUnidad.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAltaUnidad.Image = global::BSD.Properties.Resources.alta_16;
+            this.btnAltaUnidad.ImageTransparentColor = System.Drawing.Color.Black;
             this.btnAltaUnidad.Name = "btnAltaUnidad";
             this.btnAltaUnidad.Size = new System.Drawing.Size(23, 22);
             this.btnAltaUnidad.ToolTipText = "Agregar unidad";
