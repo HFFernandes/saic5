@@ -44,6 +44,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     catUsuarios.Columns.Add(new DataColumn("NombreUsuario", Type.GetType("System.String")));
                     catUsuarios.Columns.Add(new DataColumn("NombrePropio", Type.GetType("System.String")));
                     catUsuarios.Columns.Add(new DataColumn("Activo", Type.GetType("System.Boolean")));
+                    catUsuarios.Columns.Add(new DataColumn("Contrasena", Type.GetType("System.String")));
                     catUsuarios.Columns.Add(new DataColumn("Contraseña", Type.GetType("System.String")));
                     catUsuarios.Columns.Add(new DataColumn("Desp", Type.GetType("System.Boolean")));
                     //Columna para mostarse "SI" o "NO"
@@ -55,13 +56,14 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     foreach (Entidades.Usuario usr in lstUsuarios)
                     {
                         object[] usuario = new object[] { usr.Clave, usr.NombreUsuario, usr.NombrePropio,
-                        usr.Activo, usr.Contraseña, usr.Despachador.Value, usr.Despachador.Value?"SI":"NO"};
+                        usr.Activo,  usr.Contraseña,"*******", usr.Despachador.Value, usr.Despachador.Value?"SI":"NO"};
                         catUsuarios.Rows.Add(usuario);
                     }
 
                     this.gvUsuarios.DataSource = catUsuarios;
                     //se ocultan columnas al usuario
                     this.gvUsuarios.Columns["Clave"].Visible = false;
+                    this.gvUsuarios.Columns["Contrasena"].Visible = false;
                     this.gvUsuarios.Columns["Desp"].Visible = false;
                 }
                 catch (Exception ex)
@@ -238,7 +240,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         //Llena los controles con los datos del Datagrid
                         this.txtNombrePropio.Text = Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["NombrePropio"].Value);
                         this.txtUsuario.Text = Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["NombreUsuario"].Value);
-                        this.txtContrasena.Text = Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Contraseña"].Value);
+                        this.txtContrasena.Text = Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Contrasena"].Value);
                         this.chkActivado.Checked = Convert.ToBoolean(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Activo"].Value);
                         if (Convert.ToBoolean(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Desp"].Value))
                         {
