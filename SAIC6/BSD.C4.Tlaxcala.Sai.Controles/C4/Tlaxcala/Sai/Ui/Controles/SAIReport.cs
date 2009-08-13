@@ -22,7 +22,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             InitializeComponent();
 
             SAIInstancia = this;
-            reportControl.PaintManager.ColumnStyle = XTPReportColumnStyle.xtpColumnExplorer;
         }
 
         /// <summary>
@@ -70,7 +69,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 
             registro.Tag = intID;
             reportControl.Populate();
-
             return registro;
         }
 

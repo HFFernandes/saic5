@@ -219,7 +219,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             if (SAIBarraComandos.Count == 0)
             {
                 var barra = SAIBarraComandos.Add("Comandos", XTPBarPosition.xtpBarTop);
-                barra.SetIconSize(64, 64); //Tamaño predeterminado para el item
+                barra.SetIconSize(32, 32); //Tamaño predeterminado para el item
                 barra.Closeable = false;
                 //Indicamos que no es posible cerrar la colección de items en la barra para evitar la lógica requerida
                 barra.EnableAnimation = true; //Indicamos que mostraremos efectos de desvanecimiento

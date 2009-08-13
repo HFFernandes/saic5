@@ -33,6 +33,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             //lstUnidadesTemporales = new List<Unidad>();
             //lstUnidadesPorRemover = new List<Unidad>();
             lstRegistrosReporte = new List<ReportRecord>();
+
+            SAIFrmPruebas pruebas = new SAIFrmPruebas();
+            pruebas.Show();
         }
 
         void btnAltaUnidad_Click(object sender, EventArgs e)
@@ -132,8 +135,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     saiReport1.reportControl.Records[itm.Record.Index][2].Value = unidad.Codigo;
                                     saiReport1.reportControl.Records[itm.Record.Index][3].Value = "(desconocido)";   //falta el campo para colocar el responsable de la unidad
                                     saiReport1.reportControl.Records[itm.Record.Index][4].Value = strStatus;
-                                    saiReport1.reportControl.Records[itm.Record.Index][5].Value =
-                                        dtHora.ToShortTimeString();
+                                    saiReport1.reportControl.Records[itm.Record.Index][4].BackColor =(uint) Aplicacion.HexadecimalADecimal("808080");
+                                    saiReport1.reportControl.Records[itm.Record.Index][5].Value =dtHora.ToShortTimeString();
                                     saiReport1.reportControl.Records[itm.Record.Index][6].Value = "(desconocido)";
                                     saiReport1.reportControl.Records[itm.Record.Index][7].Value = "(desconocido)";
                                     continue;
@@ -144,8 +147,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     dtHora = unidadDespacho.HoraLlegada ?? DateTime.Now;
                                     strStatus = "Llegada";
 
-                                    saiReport1.reportControl.Records[itm.Record.Index][1].Value =
-                                        unidadDespacho.Folio;
+                                    saiReport1.reportControl.Records[itm.Record.Index][1].Value =unidadDespacho.Folio;
+                                    saiReport1.reportControl.Records[itm.Record.Index][4].BackColor = (uint)Aplicacion.HexadecimalADecimal("F80F80");
                                     goto Actualizar;
                                 }
 
@@ -154,8 +157,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     dtHora = unidadDespacho.HoraDespachada ?? DateTime.Now;
                                     strStatus = "Despachada";
 
-                                    saiReport1.reportControl.Records[itm.Record.Index][1].Value =
-                                        unidadDespacho.Folio;
+                                    saiReport1.reportControl.Records[itm.Record.Index][1].Value =unidadDespacho.Folio;
+                                    saiReport1.reportControl.Records[itm.Record.Index][4].BackColor = (uint)Aplicacion.HexadecimalADecimal("F40F10");
                                     goto Actualizar;
                                 }
 
@@ -183,8 +186,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 saiReport1.reportControl.Records[itm.Record.Index][2].Value = unidad.Codigo;
                                 saiReport1.reportControl.Records[itm.Record.Index][3].Value = "(desconocido)";   //falta el campo para colocar el responsable de la unidad
                                 saiReport1.reportControl.Records[itm.Record.Index][4].Value = strStatus;
-                                saiReport1.reportControl.Records[itm.Record.Index][5].Value =
-                                    dtHora.ToShortTimeString();
+                                saiReport1.reportControl.Records[itm.Record.Index][4].BackColor = (uint)Aplicacion.HexadecimalADecimal("808080");
+                                saiReport1.reportControl.Records[itm.Record.Index][5].Value =dtHora.ToShortTimeString();
                                 saiReport1.reportControl.Records[itm.Record.Index][6].Value = "(desconocido)";
                                 saiReport1.reportControl.Records[itm.Record.Index][7].Value = "(desconocido)";
                             }

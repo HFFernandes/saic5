@@ -32,9 +32,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             lstIncidenciasTemporales = new List<Incidencia>();
             lstIncidenciasPorRemover = new List<Incidencia>();
             lstRegistrosReporte = new List<ReportRecord>();
-
-            //SAIFrmPruebas pruebas = new SAIFrmPruebas();
-            //pruebas.Show();
         }
 
         void btnAltaUnidad_Click(object sender, EventArgs e)
