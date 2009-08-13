@@ -6,6 +6,8 @@
     /// </summary>
     public class ID
     {
+        #region Teclas de Comando
+
         //Definición de comandos (deberá existir en la base de submodulos)
         public const int CMD_BSC = 100; //Muestra incidentes guardados (089)
         public const int CMD_CAN = 200; //Cancelar incidencia (089 y 066)
@@ -37,6 +39,8 @@
         public const int CMD_UA = 2800; //Dar de alta unidades (066)
         public const int CMD_UB = 2900; //Dar de baja unidades (066)
         public const int CMD_V = 3000;  //Introducción de datos de vehiculo sospechoso (066)
+
+        #endregion
 
         #region Teclas de función
 
@@ -75,6 +79,15 @@
         public const int VK_SUBTRACT = 0x6D;
         public const int VK_TAB = 0x9;
         public const int VK_UP = 0x26;
+
+        #endregion
+
+        #region Cadenas y Colores
+
+        public const string STR_REGDESC = "(desconocido)";
+        public static readonly uint COL_ESTLIBERADA = (uint)Aplicacion.HexadecimalADecimal("99FF33");
+        public static readonly uint COL_ESTDESPACHADA = (uint)Aplicacion.HexadecimalADecimal("FFCC66");
+        public static readonly uint COL_ESTLLEGADA = (uint)Aplicacion.HexadecimalADecimal("FFFFFF");
 
         #endregion
     }

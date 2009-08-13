@@ -192,7 +192,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 saiReport1.reportControl.Records[itm.Record.Index][6].Value =
                                     corporaciones.ToString().Trim().Length > 0
                                         ? corporaciones.ToString().Trim().Remove(corporaciones.Length - 1)
-                                        : "(desconocido)";
+                                        : ID.STR_REGDESC;
                             }
                         }
                     }
@@ -227,7 +227,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (Exception ex)
             {
                 tmrRegistros.Enabled = false;
-                throw new SAIExcepcion(ex.Message,this);
+                throw new SAIExcepcion(ex.Message, this);
             }
         }
 
