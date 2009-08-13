@@ -171,12 +171,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_AB7F0427FB404B88B8FD0706A551E17F"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_B3BD7EE24AFC07DFEBC8334661530ECA"
         "OwnerKey" = "8:_F854A9337EA248479DE392CD65847486"
         "MsmSig" = "8:_UNDEFINED"
@@ -726,26 +720,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AB7F0427FB404B88B8FD0706A551E17F"
-            {
-            "SourcePath" = "8:..\\BSD.C4.Tlaxcala.Sai.Administracion\\App.config"
-            "TargetName" = "8:App.config"
-            "Tag" = "8:"
-            "Folder" = "8:_3B5EB2B7173048E197A541141940A901"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B3BD7EE24AFC07DFEBC8334661530ECA"
             {
             "AssemblyRegister" = "3:1"
@@ -1003,7 +977,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Administrador SAI"
         "ProductCode" = "8:{10F056C1-C7D5-469F-8208-464BD143BF69}"
-        "PackageCode" = "8:{08E19907-C88E-49CF-9616-789A620CB0E7}"
+        "PackageCode" = "8:{861E2BE7-AE92-4FF0-B431-9D5EA5B99F50}"
         "UpgradeCode" = "8:{3D332439-8634-4058-8491-1C92BA61CA86}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
