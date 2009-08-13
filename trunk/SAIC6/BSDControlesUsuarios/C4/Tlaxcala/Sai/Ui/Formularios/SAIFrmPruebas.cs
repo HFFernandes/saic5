@@ -42,5 +42,25 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
+        private void panel1_DragDrop(object sender, DragEventArgs e)
+        {
+            Debug.WriteLine("dragdrop");
+        }
+
+        private void panel1_DragEnter(object sender, DragEventArgs e)
+        {
+            Debug.WriteLine("dragenter");
+        }
+
+        private void panel1_DragLeave(object sender, EventArgs e)
+        {
+            Debug.WriteLine("dragleave");
+        }
+
+        private void panel1_DragOver(object sender, DragEventArgs e)
+        {
+            Debug.WriteLine("dragover");
+        }
+
     }
 }

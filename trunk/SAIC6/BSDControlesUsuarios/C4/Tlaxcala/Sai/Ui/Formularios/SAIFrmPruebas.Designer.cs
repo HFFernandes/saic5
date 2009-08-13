@@ -28,7 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
+            // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(89, 65);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(200, 100);
+            this.panel1.TabIndex = 0;
+            this.panel1.DragOver += new System.Windows.Forms.DragEventHandler(this.panel1_DragOver);
+            this.panel1.DragDrop += new System.Windows.Forms.DragEventHandler(this.panel1_DragDrop);
+            this.panel1.DragLeave += new System.EventHandler(this.panel1_DragLeave);
+            this.panel1.DragEnter += new System.Windows.Forms.DragEventHandler(this.panel1_DragEnter);
             // 
             // SAIFrmPruebas
             // 
@@ -36,6 +48,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(425, 273);
+            this.Controls.Add(this.panel1);
             this.Name = "SAIFrmPruebas";
             this.Text = "SAIFrmPruebas";
             this.DragLeave += new System.EventHandler(this.SAIFrmPruebas_DragLeave);
@@ -47,6 +60,8 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.Panel panel1;
 
 
     }
