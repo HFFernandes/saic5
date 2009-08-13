@@ -86,8 +86,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     if (Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
                         Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
                     {
-                        SAIFrmIncidencia066Despacho frmIncidencia066Despacho = new SAIFrmIncidencia066Despacho();
+
+                        //Código de prueba
+                        Sai.Dal.Rules.Entities.Incidencia entIncidencia = Sai.Dal.Rules.Mappers.IncidenciaMapper.Instance().GetOne(1000490);
+                        //Sai.Dal.Rules.Entities.IncidenciaList lstIncidencias = Sai.Dal.Rules.Mappers.IncidenciaMapper.Instance().GetOne(1000490);
+                                               
+                        //entIncidencia = lstIncidencias[0];
+
+                        SAIFrmIncidencia066Despacho frmIncidencia066Despacho = new SAIFrmIncidencia066Despacho(entIncidencia);
                         frmIncidencia066Despacho.Show(this);
+
 
                     }
                     else if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
