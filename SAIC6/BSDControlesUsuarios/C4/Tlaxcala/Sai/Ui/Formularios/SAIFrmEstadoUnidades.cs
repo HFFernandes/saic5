@@ -124,7 +124,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             foreach (var unidadDespacho in unidadDespachoList)
                             {
                                 saiReport1.reportControl.Records[itm.Record.Index][1].Value = "(desconocido)";
-                                //saiReport1.reportControl.Records[itm.Record.Index][2].Value = ""; //Nunca cambia siempre es la misma
 
                                 if (unidadDespacho.HoraLiberada != null)
                                 {
@@ -135,7 +134,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     saiReport1.reportControl.Records[itm.Record.Index][2].Value = unidad.Codigo;
                                     saiReport1.reportControl.Records[itm.Record.Index][3].Value = "(desconocido)";   //falta el campo para colocar el responsable de la unidad
                                     saiReport1.reportControl.Records[itm.Record.Index][4].Value = strStatus;
-                                    saiReport1.reportControl.Records[itm.Record.Index][4].BackColor =(uint) Aplicacion.HexadecimalADecimal("808080");
+                                    saiReport1.reportControl.Records[itm.Record.Index][4].BackColor =(uint) Aplicacion.HexadecimalADecimal("99FF33");
                                     saiReport1.reportControl.Records[itm.Record.Index][5].Value =dtHora.ToShortTimeString();
                                     saiReport1.reportControl.Records[itm.Record.Index][6].Value = "(desconocido)";
                                     saiReport1.reportControl.Records[itm.Record.Index][7].Value = "(desconocido)";
@@ -148,7 +147,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     strStatus = "Llegada";
 
                                     saiReport1.reportControl.Records[itm.Record.Index][1].Value =unidadDespacho.Folio;
-                                    saiReport1.reportControl.Records[itm.Record.Index][4].BackColor = (uint)Aplicacion.HexadecimalADecimal("F80F80");
+                                    saiReport1.reportControl.Records[itm.Record.Index][4].BackColor = (uint)Aplicacion.HexadecimalADecimal("FFFFFF");
                                     goto Actualizar;
                                 }
 
@@ -158,7 +157,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     strStatus = "Despachada";
 
                                     saiReport1.reportControl.Records[itm.Record.Index][1].Value =unidadDespacho.Folio;
-                                    saiReport1.reportControl.Records[itm.Record.Index][4].BackColor = (uint)Aplicacion.HexadecimalADecimal("F40F10");
+                                    saiReport1.reportControl.Records[itm.Record.Index][4].BackColor = (uint)Aplicacion.HexadecimalADecimal("CCCCCC");
                                     goto Actualizar;
                                 }
 
@@ -186,7 +185,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 saiReport1.reportControl.Records[itm.Record.Index][2].Value = unidad.Codigo;
                                 saiReport1.reportControl.Records[itm.Record.Index][3].Value = "(desconocido)";   //falta el campo para colocar el responsable de la unidad
                                 saiReport1.reportControl.Records[itm.Record.Index][4].Value = strStatus;
-                                saiReport1.reportControl.Records[itm.Record.Index][4].BackColor = (uint)Aplicacion.HexadecimalADecimal("808080");
+                                saiReport1.reportControl.Records[itm.Record.Index][4].BackColor = (uint)Aplicacion.HexadecimalADecimal("99FF33");
                                 saiReport1.reportControl.Records[itm.Record.Index][5].Value =dtHora.ToShortTimeString();
                                 saiReport1.reportControl.Records[itm.Record.Index][6].Value = "(desconocido)";
                                 saiReport1.reportControl.Records[itm.Record.Index][7].Value = "(desconocido)";
