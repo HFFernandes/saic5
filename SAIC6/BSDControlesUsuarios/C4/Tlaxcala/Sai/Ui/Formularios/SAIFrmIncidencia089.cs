@@ -17,11 +17,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
     {
         public SAIFrmIncidencia089()
         {
+            int intHeight = base.Height;
+            int intWidth = base.Width;
+
             InitializeComponent();
             this.lblTitulo.Text = "REGISTRO DE INCIDENCIA 089";
             this.SuspendLayout();
-            this.Height = 485;
-            this.Width = 600;
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            this.Height = intHeight;
+            this.Width = intWidth;
             this.ResumeLayout(false);
             if (this._entIncidencia != null)
             {
@@ -32,12 +36,18 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void SIAFrmIncidencia089(Incidencia EntIncidencia)
         {
+            int intHeight = base.Height;
+            int intWidth = base.Width;
+
             this.lblTitulo.Text = "INCIDENCIA 089";
             InitializeComponent();
+            this.Height = intHeight;
+            this.Width = intWidth;
             this.InicializaCampos();
             this.SuspendLayout();
-            this.Height = 650;
-            this.Width = 647;
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            this.Height = base.Height;
+            this.Width = base.Width;
             this.ResumeLayout(false);
         }
 

@@ -18,7 +18,18 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
     {
         public SAIFrmIncidencia066()
         {
+            int intHeight = base.Height;
+            int intWidth = base.Width;
+
             InitializeComponent();
+
+
+            this.lblTitulo.Text = "REGISTRO DE INCIDENCIA 066";
+            this.SuspendLayout();
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            base.Height = intHeight;
+            base.Width = intWidth;
+            this.ResumeLayout(false);
             if (this._entIncidencia != null)
             {
                 this.Text = this._entIncidencia.Folio.ToString();

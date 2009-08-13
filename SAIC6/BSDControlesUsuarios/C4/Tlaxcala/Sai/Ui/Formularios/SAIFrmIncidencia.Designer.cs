@@ -78,7 +78,7 @@
             this.Caracteristicas = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpRoboAccesorios = new System.Windows.Forms.GroupBox();
             this.txtAccesoriosResponsables = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.chkAccesoriosPercato = new System.Windows.Forms.CheckBox();
             this.dtpAccesoriosFechaPercato = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDatePicker(this.components);
             this.txtAccesoriosPersonaSePercato = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.txtAccesoriosRobados = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
@@ -91,14 +91,7 @@
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.saiDataGridView1 = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDataGridView(this.components);
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvVehiculoAccesorios = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDataGridView(this.components);
             this.grpRoboVehiculo = new System.Windows.Forms.GroupBox();
             this.label11 = new System.Windows.Forms.Label();
             this.txtTelefonoPropietario = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
@@ -107,6 +100,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.txtNombrePropietario = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.dgvVehiculo = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDataGridView(this.components);
+            this.ClaveVehiculo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Modelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -117,11 +111,19 @@
             this.txtReferencias = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.label10 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.ClaveVehiculoInvolucrado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.grpExtravio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonaExtraviada)).BeginInit();
             this.grpRoboAccesorios.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.saiDataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVehiculoAccesorios)).BeginInit();
             this.grpRoboVehiculo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVehiculo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -422,6 +424,7 @@
             this.dgvPersonaExtraviada.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvPersonaExtraviada.Location = new System.Drawing.Point(3, 16);
             this.dgvPersonaExtraviada.Name = "dgvPersonaExtraviada";
+            this.dgvPersonaExtraviada.RowHeadersVisible = false;
             this.dgvPersonaExtraviada.Size = new System.Drawing.Size(566, 205);
             this.dgvPersonaExtraviada.TabIndex = 0;
             this.dgvPersonaExtraviada.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvPersonaExtraviada_CellValidating);
@@ -543,7 +546,7 @@
             // grpRoboAccesorios
             // 
             this.grpRoboAccesorios.Controls.Add(this.txtAccesoriosResponsables);
-            this.grpRoboAccesorios.Controls.Add(this.checkBox1);
+            this.grpRoboAccesorios.Controls.Add(this.chkAccesoriosPercato);
             this.grpRoboAccesorios.Controls.Add(this.dtpAccesoriosFechaPercato);
             this.grpRoboAccesorios.Controls.Add(this.txtAccesoriosPersonaSePercato);
             this.grpRoboAccesorios.Controls.Add(this.txtAccesoriosRobados);
@@ -556,7 +559,7 @@
             this.grpRoboAccesorios.Controls.Add(this.label19);
             this.grpRoboAccesorios.Controls.Add(this.label18);
             this.grpRoboAccesorios.Controls.Add(this.label17);
-            this.grpRoboAccesorios.Controls.Add(this.saiDataGridView1);
+            this.grpRoboAccesorios.Controls.Add(this.dgvVehiculoAccesorios);
             this.grpRoboAccesorios.Location = new System.Drawing.Point(635, 536);
             this.grpRoboAccesorios.Name = "grpRoboAccesorios";
             this.grpRoboAccesorios.Size = new System.Drawing.Size(572, 224);
@@ -572,29 +575,35 @@
             this.txtAccesoriosResponsables.Name = "txtAccesoriosResponsables";
             this.txtAccesoriosResponsables.Size = new System.Drawing.Size(404, 20);
             this.txtAccesoriosResponsables.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtAccesoriosResponsables.TabIndex = 24;
+            this.txtAccesoriosResponsables.TabIndex = 12;
+            this.txtAccesoriosResponsables.Leave += new System.EventHandler(this.txtAccesoriosResponsables_Leave);
+            this.txtAccesoriosResponsables.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtAccesoriosResponsables_KeyUp);
             // 
-            // checkBox1
+            // chkAccesoriosPercato
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(551, 57);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(15, 14);
-            this.checkBox1.TabIndex = 23;
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.chkAccesoriosPercato.AutoSize = true;
+            this.chkAccesoriosPercato.Location = new System.Drawing.Point(551, 57);
+            this.chkAccesoriosPercato.Name = "chkAccesoriosPercato";
+            this.chkAccesoriosPercato.Size = new System.Drawing.Size(15, 14);
+            this.chkAccesoriosPercato.TabIndex = 11;
+            this.chkAccesoriosPercato.UseVisualStyleBackColor = true;
+            this.chkAccesoriosPercato.CheckedChanged += new System.EventHandler(this.chkAccesoriosPercato_CheckedChanged);
             // 
             // dtpAccesoriosFechaPercato
             // 
             this.dtpAccesoriosFechaPercato.CalendarTitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.dtpAccesoriosFechaPercato.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.dtpAccesoriosFechaPercato.CustomFormat = "dd/MM/yyyy";
+            this.dtpAccesoriosFechaPercato.Enabled = false;
             this.dtpAccesoriosFechaPercato.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpAccesoriosFechaPercato.Location = new System.Drawing.Point(416, 50);
             this.dtpAccesoriosFechaPercato.MaxDate = new System.DateTime(3000, 12, 31, 0, 0, 0, 0);
             this.dtpAccesoriosFechaPercato.Name = "dtpAccesoriosFechaPercato";
             this.dtpAccesoriosFechaPercato.Size = new System.Drawing.Size(115, 20);
             this.dtpAccesoriosFechaPercato.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.dtpAccesoriosFechaPercato.TabIndex = 22;
+            this.dtpAccesoriosFechaPercato.TabIndex = 10;
+            this.dtpAccesoriosFechaPercato.Leave += new System.EventHandler(this.dtpAccesoriosFechaPercato_Leave);
+            this.dtpAccesoriosFechaPercato.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dtpAccesoriosFechaPercato_KeyUp);
             // 
             // txtAccesoriosPersonaSePercato
             // 
@@ -603,7 +612,9 @@
             this.txtAccesoriosPersonaSePercato.Name = "txtAccesoriosPersonaSePercato";
             this.txtAccesoriosPersonaSePercato.Size = new System.Drawing.Size(205, 20);
             this.txtAccesoriosPersonaSePercato.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtAccesoriosPersonaSePercato.TabIndex = 21;
+            this.txtAccesoriosPersonaSePercato.TabIndex = 8;
+            this.txtAccesoriosPersonaSePercato.Leave += new System.EventHandler(this.txtAccesoriosPersonaSePercato_Leave);
+            this.txtAccesoriosPersonaSePercato.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtAccesoriosPersonaSePercato_KeyUp);
             // 
             // txtAccesoriosRobados
             // 
@@ -612,8 +623,10 @@
             this.txtAccesoriosRobados.Name = "txtAccesoriosRobados";
             this.txtAccesoriosRobados.Size = new System.Drawing.Size(154, 20);
             this.txtAccesoriosRobados.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtAccesoriosRobados.TabIndex = 20;
+            this.txtAccesoriosRobados.TabIndex = 6;
             this.txtAccesoriosRobados.TextChanged += new System.EventHandler(this.txtAccesoriosRobados_TextChanged);
+            this.txtAccesoriosRobados.Leave += new System.EventHandler(this.txtAccesoriosRobados_Leave);
+            this.txtAccesoriosRobados.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtAccesoriosRobados_KeyUp);
             // 
             // txtAccesoriosSerie
             // 
@@ -622,8 +635,10 @@
             this.txtAccesoriosSerie.Name = "txtAccesoriosSerie";
             this.txtAccesoriosSerie.Size = new System.Drawing.Size(64, 20);
             this.txtAccesoriosSerie.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtAccesoriosSerie.TabIndex = 19;
+            this.txtAccesoriosSerie.TabIndex = 4;
             this.txtAccesoriosSerie.TextChanged += new System.EventHandler(this.saiTextBox2_TextChanged);
+            this.txtAccesoriosSerie.Leave += new System.EventHandler(this.txtAccesoriosSerie_Leave);
+            this.txtAccesoriosSerie.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtAccesoriosSerie_KeyUp);
             // 
             // txtAccesoriosPlacas
             // 
@@ -632,7 +647,9 @@
             this.txtAccesoriosPlacas.Name = "txtAccesoriosPlacas";
             this.txtAccesoriosPlacas.Size = new System.Drawing.Size(100, 20);
             this.txtAccesoriosPlacas.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtAccesoriosPlacas.TabIndex = 18;
+            this.txtAccesoriosPlacas.TabIndex = 2;
+            this.txtAccesoriosPlacas.Leave += new System.EventHandler(this.txtAccesoriosPlacas_Leave);
+            this.txtAccesoriosPlacas.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtAccesoriosPlacas_KeyUp);
             // 
             // label20
             // 
@@ -649,7 +666,7 @@
             this.label16.Location = new System.Drawing.Point(299, 45);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(76, 26);
-            this.label16.TabIndex = 16;
+            this.label16.TabIndex = 9;
             this.label16.Text = "Fecha en que \r\nse percató:";
             // 
             // label15
@@ -658,7 +675,7 @@
             this.label15.Location = new System.Drawing.Point(8, 45);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(67, 26);
-            this.label15.TabIndex = 15;
+            this.label15.TabIndex = 7;
             this.label15.Text = "Persona que\r\n se percató:";
             // 
             // label14
@@ -667,7 +684,7 @@
             this.label14.Location = new System.Drawing.Point(298, 19);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(108, 13);
-            this.label14.TabIndex = 14;
+            this.label14.TabIndex = 5;
             this.label14.Text = "Accesorios Robados:";
             // 
             // label19
@@ -676,7 +693,7 @@
             this.label19.Location = new System.Drawing.Point(152, 19);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(69, 13);
-            this.label19.TabIndex = 13;
+            this.label19.TabIndex = 3;
             this.label19.Text = "No. de Serie:";
             // 
             // label18
@@ -694,15 +711,16 @@
             this.label17.Location = new System.Drawing.Point(9, 19);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(42, 13);
-            this.label17.TabIndex = 11;
+            this.label17.TabIndex = 1;
             this.label17.Text = "Placas:";
             // 
-            // saiDataGridView1
+            // dgvVehiculoAccesorios
             // 
-            this.saiDataGridView1.AllowUserToOrderColumns = true;
-            this.saiDataGridView1.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.saiDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.saiDataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvVehiculoAccesorios.AllowUserToOrderColumns = true;
+            this.dgvVehiculoAccesorios.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.dgvVehiculoAccesorios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvVehiculoAccesorios.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ClaveVehiculoInvolucrado,
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3,
@@ -710,46 +728,12 @@
             this.dataGridViewTextBoxColumn5,
             this.dataGridViewTextBoxColumn6,
             this.dataGridViewTextBoxColumn7});
-            this.saiDataGridView1.Location = new System.Drawing.Point(6, 111);
-            this.saiDataGridView1.Name = "saiDataGridView1";
-            this.saiDataGridView1.RowHeadersVisible = false;
-            this.saiDataGridView1.Size = new System.Drawing.Size(566, 109);
-            this.saiDataGridView1.TabIndex = 8;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Marca";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Tipo";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Modelo";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Placas";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "Color";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "Número de Serie";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.HeaderText = "Señas Particulares";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dgvVehiculoAccesorios.Location = new System.Drawing.Point(6, 111);
+            this.dgvVehiculoAccesorios.Name = "dgvVehiculoAccesorios";
+            this.dgvVehiculoAccesorios.RowHeadersVisible = false;
+            this.dgvVehiculoAccesorios.Size = new System.Drawing.Size(566, 109);
+            this.dgvVehiculoAccesorios.TabIndex = 13;
+            this.dgvVehiculoAccesorios.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvVehiculoAccesorios_CellValidating);
             // 
             // grpRoboVehiculo
             // 
@@ -785,6 +769,8 @@
             this.txtTelefonoPropietario.Size = new System.Drawing.Size(185, 20);
             this.txtTelefonoPropietario.StrMensajeCampoRequerido = "El campo es requerido.";
             this.txtTelefonoPropietario.TabIndex = 4;
+            this.txtTelefonoPropietario.Leave += new System.EventHandler(this.txtTelefonoPropietario_Leave);
+            this.txtTelefonoPropietario.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtTelefonoPropietario_KeyUp);
             // 
             // label13
             // 
@@ -803,6 +789,7 @@
             this.txtDireccionPropietario.Size = new System.Drawing.Size(436, 20);
             this.txtDireccionPropietario.StrMensajeCampoRequerido = "El campo es requerido.";
             this.txtDireccionPropietario.TabIndex = 6;
+            this.txtDireccionPropietario.Leave += new System.EventHandler(this.txtDireccionPropietario_Leave);
             // 
             // label12
             // 
@@ -821,6 +808,8 @@
             this.txtNombrePropietario.Size = new System.Drawing.Size(187, 20);
             this.txtNombrePropietario.StrMensajeCampoRequerido = "El campo es requerido.";
             this.txtNombrePropietario.TabIndex = 2;
+            this.txtNombrePropietario.Leave += new System.EventHandler(this.txtNombrePropietario_Leave);
+            this.txtNombrePropietario.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtNombrePropietario_KeyUp);
             // 
             // dgvVehiculo
             // 
@@ -828,6 +817,7 @@
             this.dgvVehiculo.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.dgvVehiculo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvVehiculo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ClaveVehiculo,
             this.Marca,
             this.Tipo,
             this.Modelo,
@@ -840,6 +830,13 @@
             this.dgvVehiculo.RowHeadersVisible = false;
             this.dgvVehiculo.Size = new System.Drawing.Size(566, 119);
             this.dgvVehiculo.TabIndex = 7;
+            this.dgvVehiculo.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvVehiculo_CellValidating);
+            // 
+            // ClaveVehiculo
+            // 
+            this.ClaveVehiculo.HeaderText = "Clave";
+            this.ClaveVehiculo.Name = "ClaveVehiculo";
+            this.ClaveVehiculo.Visible = false;
             // 
             // Marca
             // 
@@ -908,6 +905,47 @@
             this.pictureBox1.TabIndex = 25;
             this.pictureBox1.TabStop = false;
             // 
+            // ClaveVehiculoInvolucrado
+            // 
+            this.ClaveVehiculoInvolucrado.HeaderText = "Clave";
+            this.ClaveVehiculoInvolucrado.Name = "ClaveVehiculoInvolucrado";
+            this.ClaveVehiculoInvolucrado.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Marca";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Tipo";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Modelo";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Placas";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Color";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "Número de Serie";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.HeaderText = "Señas Particulares";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            // 
             // SAIFrmIncidencia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -974,7 +1012,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonaExtraviada)).EndInit();
             this.grpRoboAccesorios.ResumeLayout(false);
             this.grpRoboAccesorios.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.saiDataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVehiculoAccesorios)).EndInit();
             this.grpRoboVehiculo.ResumeLayout(false);
             this.grpRoboVehiculo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVehiculo)).EndInit();
@@ -1033,13 +1071,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Caracteristicas;
         private System.Windows.Forms.GroupBox grpRoboVehiculo;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDataGridView dgvVehiculo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Marca;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Modelo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Placas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Color;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NumeroSerie;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SeñasParticulares;
         private System.Windows.Forms.GroupBox grpRoboAccesorios;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox txtTelefonoPropietario;
         private System.Windows.Forms.Label label13;
@@ -1047,14 +1078,7 @@
         private System.Windows.Forms.Label label12;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox txtNombrePropietario;
         private System.Windows.Forms.Label label11;
-        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDataGridView saiDataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDataGridView dgvVehiculoAccesorios;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
@@ -1064,7 +1088,7 @@
         private System.Windows.Forms.Label label20;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox txtAccesoriosSerie;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox txtAccesoriosPlacas;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox chkAccesoriosPercato;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDatePicker dtpAccesoriosFechaPercato;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox txtAccesoriosPersonaSePercato;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox txtAccesoriosRobados;
@@ -1073,5 +1097,21 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.PictureBox pictureBox1;
         protected System.Windows.Forms.Label lblTitulo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClaveVehiculo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Marca;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Modelo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Placas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Color;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NumeroSerie;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SeñasParticulares;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClaveVehiculoInvolucrado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
     }
 }

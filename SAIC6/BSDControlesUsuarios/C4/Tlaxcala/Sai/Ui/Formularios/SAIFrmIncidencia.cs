@@ -34,12 +34,41 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private Boolean _blnBloqueaEventos;
         protected Boolean _blnSeActivoClosed = false;
         protected Boolean _blnSeDesactivoVentana = false;
+        protected PropietarioVehiculoObject _objPropietarioVehiculo = null;
+        protected RoboVehiculoAccesorios _entRoboVehiculoAccesorios = null;
+        protected VehiculoObject _objVeiculoAccesoriosRobado = null;
         /// <summary>
         /// Lleva el estado del caso de la tecla control presionada.
         /// </summary>
         private bool _blnCtrPresionado = false;
 
         private Control _ctlSiguiente;
+        private Boolean _blnSoloLectura;
+
+        public Boolean  SoloLectura 
+        {
+            get { return this._blnSoloLectura; } 
+            set 
+            {
+                this._blnSoloLectura = value;
+
+                if (value)
+                {
+                    foreach (Control objControl in this.Controls)
+                    {
+                        objControl.Enabled = false;
+                    }
+                }
+                else
+                {
+                    foreach (Control objControl in this.Controls)
+                    {
+                        objControl.Enabled = true;
+                    }
+                }
+            } 
+        }
+
 
         /// <summary>
         /// Constructor del formulario SIAFrmIncidencia, se ejecuta cuando se registra una incidencia nueva
@@ -230,44 +259,55 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             TipoIncidencia entTipoIncidenciaElemento;
             Municipio entMunicipio;
 
-           
-                entUsuario = UsuarioMapper.Instance().GetOne(Aplicacion.UsuarioPersistencia.intClaveUsuario);
+            try
+            {
 
-                this.lblOperador.Text  = entUsuario.NombrePropio;
-                this.lblFechaHora.Text = this._entIncidencia.HoraRecepcion.ToString();
-                this.Text = this._entIncidencia.Folio.ToString();
-                this.txtTelefono.Text = this._entIncidencia.Telefono;
-                this.txtDireccion.Text = this._entIncidencia.Direccion;
-
-
-                if (this._entIncidencia.ClaveTipo.HasValue)
+                try
                 {
-                    foreach (Object elemento in this.cmbTipoIncidencia.Items)
-                    {
-                        entTipoIncidenciaElemento = (TipoIncidencia)elemento;
-                        if (this._entIncidencia.ClaveTipo.Value == entTipoIncidenciaElemento.Clave)
-                        {
-                            this.cmbTipoIncidencia.SelectedIndex = -1;
-                            this.cmbTipoIncidencia.SelectedItem = entTipoIncidenciaElemento;
-                            break;
-                        }
-                    }
-                }
+                    entUsuario = UsuarioMapper.Instance().GetOne(Aplicacion.UsuarioPersistencia.intClaveUsuario);
 
-                if (this._entIncidencia.ClaveEstado.HasValue && this._entIncidencia.ClaveMunicipio.HasValue)
-                {
-                    foreach (Object elemento in this.cmbMunicipio.Items)
+                    this.lblOperador.Text = entUsuario.NombrePropio;
+                    this.lblFechaHora.Text = this._entIncidencia.HoraRecepcion.ToString();
+                    this.Text = this._entIncidencia.Folio.ToString();
+                    this.txtTelefono.Text = this._entIncidencia.Telefono;
+                    this.txtDireccion.Text = this._entIncidencia.Direccion;
+
+
+                    if (this._entIncidencia.ClaveTipo.HasValue)
                     {
-                        entMunicipio = (Municipio)elemento;
-                        if (this._entIncidencia.ClaveMunicipio.Value == entMunicipio.Clave)
+                        foreach (Object elemento in this.cmbTipoIncidencia.Items)
                         {
-                            this.cmbMunicipio.SelectedIndex = -1;
-                            this.cmbMunicipio.SelectedItem = entMunicipio;
-                            break;
+                            entTipoIncidenciaElemento = (TipoIncidencia)elemento;
+                            if (this._entIncidencia.ClaveTipo.Value == entTipoIncidenciaElemento.Clave)
+                            {
+                                this.cmbTipoIncidencia.SelectedIndex = -1;
+                                this.cmbTipoIncidencia.SelectedItem = entTipoIncidenciaElemento;
+                                break;
+                            }
                         }
                     }
 
+                    if (this._entIncidencia.ClaveEstado.HasValue && this._entIncidencia.ClaveMunicipio.HasValue)
+                    {
+                        foreach (Object elemento in this.cmbMunicipio.Items)
+                        {
+                            entMunicipio = (Municipio)elemento;
+                            if (this._entIncidencia.ClaveMunicipio.Value == entMunicipio.Clave)
+                            {
+                                this.cmbMunicipio.SelectedIndex = -1;
+                                this.cmbMunicipio.SelectedItem = entMunicipio;
+                                break;
+                            }
+                        }
+
+                    }
                 }
+                catch (Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
+            }
+            catch (SAIExcepcion) { }
 
            
         }
@@ -813,12 +853,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         }
 
-
-      
-
-       
-
-
         /// <summary>
         /// Manda el foco del campo Direccion al campo Municipio cuando se presiona y se suelta la tecla intro
         /// </summary>
@@ -1136,6 +1170,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void cmbTipoIncidencia_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (Aplicacion.UsuarioPersistencia.blnEsDespachador.HasValue && Aplicacion.UsuarioPersistencia.blnEsDespachador.Value == true)
+            {
+                return;
+            }
+
             if (this.cmbTipoIncidencia.SelectedIndex != -1 && this.cmbTipoIncidencia.Text.Trim() != string.Empty)
             {
                 TipoIncidencia objTipo = (cmbTipoIncidencia.SelectedItem as TipoIncidencia);
@@ -1160,9 +1199,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
                     else
                     {
-                        this.Height = 776;
+                        this.Height = 830;
                         this.Width = 600;
-                        this.grpRoboVehiculo.Top = 720;
+                        this.grpRoboVehiculo.Top = 534;
                     
                     }
                     this.grpRoboVehiculo.Left = 10;
@@ -1187,9 +1226,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
                     else
                     {
-                        this.Height = 776;
+                        this.Height = 830;
                         this.Width = 600;
-                        this.grpRoboAccesorios.Top = 720;
+                        this.grpRoboAccesorios.Top = 534;
                     }
                     this.grpRoboAccesorios.Left = 10;
                     this.grpRoboAccesorios.Refresh();
@@ -1215,9 +1254,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
                     else
                     {
-                        this.Height = 776;
+                        this.Height = 830;
                         this.Width = 600;
-                        this.grpExtravio.Top = 720;
+                        this.grpExtravio.Top = 534;
                     }
                     this.grpExtravio.Left = 10;
                     this.ResumeLayout(false);
@@ -1238,7 +1277,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
                     else
                     {
-                        this.Height = 776;
+                        this.Height = 630;
                         this.Width = 600;
                        
                     }
@@ -1277,19 +1316,20 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             Boolean blnExiste = false;
             PersonaExtraviada entPersonaExtraviada = new PersonaExtraviada();
 
-            if (this._entIncidencia == null)
-            {
-                this.dgvPersonaExtraviada.Rows.Clear();
-                throw new SAIExcepcion("No es posible registrar personas extraviadas", this);
-            }
-
+           
             try
             {
+                if (this._entIncidencia == null)
+                {
+                    this.dgvPersonaExtraviada.Rows.Clear();
+                    throw new SAIExcepcion("No es posible registrar personas extraviadas", this);
+                }
+
 
                 if (!(this.dgvPersonaExtraviada[0,e.RowIndex].Value  == null))
                 {
                     blnExiste = true;
-                    int Clave = (int)this.dgvPersonaExtraviada[0, e.RowIndex].Value;
+                    int Clave = int.Parse(this.dgvPersonaExtraviada[0, e.RowIndex].Value.ToString());
                     entPersonaExtraviada = PersonaExtraviadaMapper.Instance().GetOne((Clave));
                 }
 
@@ -1307,6 +1347,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         {
                             strNombre = e.FormattedValue.ToString();
                             strNombre = strNombre.ToUpper();
+                            if (strNombre.Length > 250)
+                            {
+                                strNombre = strNombre.Substring(0, 250);
+                            }
                             dgvPersonaExtraviada.CurrentCell.Value = strNombre;
                             entPersonaExtraviada.Nombre = strNombre;
                         }
@@ -1386,6 +1430,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             String strParentesco;
                             strParentesco = e.FormattedValue.ToString();
                             strParentesco = strParentesco.ToUpper();
+                            if (strParentesco.Length > 15)
+                            {
+                                strParentesco = strParentesco.Substring(0, 15);
+                            }
                             dgvPersonaExtraviada.CurrentCell.Value = strParentesco;
                             entPersonaExtraviada.Parentesco = strParentesco;
                         }
@@ -1421,6 +1469,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             String strTez;
                             strTez = e.FormattedValue.ToString();
                             strTez = strTez.ToUpper();
+                            if (strTez.Length > 50)
+                            {
+                                strTez = strTez.Substring(0, 50);
+                            }
                             dgvPersonaExtraviada.CurrentCell.Value = strTez;
                             entPersonaExtraviada.Tez = strTez;
                         }
@@ -1433,6 +1485,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             String strTipoCabello;
                             strTipoCabello = e.FormattedValue.ToString();
                             strTipoCabello = strTipoCabello.ToUpper();
+                            if (strTipoCabello.Length > 15)
+                            {
+                                strTipoCabello = strTipoCabello.Substring(0, 15);
+                            }
                             dgvPersonaExtraviada.CurrentCell.Value = strTipoCabello;
                             entPersonaExtraviada.TipoCabello = strTipoCabello;
                         }
@@ -1445,6 +1501,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             String strColorCabello;
                             strColorCabello = e.FormattedValue.ToString();
                             strColorCabello = strColorCabello.ToUpper();
+                            if (strColorCabello.Length > 15)
+                            {
+                                strColorCabello = strColorCabello.Substring(0, 15);
+                            }
                             dgvPersonaExtraviada.CurrentCell.Value = strColorCabello;
                             entPersonaExtraviada.ColorCabello = strColorCabello;
                         }
@@ -1457,6 +1517,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             String strLargoCabello;
                             strLargoCabello = e.FormattedValue.ToString();
                             strLargoCabello = strLargoCabello.ToUpper();
+                            if (strLargoCabello.Length > 15)
+                            {
+                                strLargoCabello = strLargoCabello.Substring(0, 15);
+                            }
                             dgvPersonaExtraviada.CurrentCell.Value = strLargoCabello;
                             entPersonaExtraviada.LargoCabello = strLargoCabello;
                         }
@@ -1469,6 +1533,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             String strFrente;
                             strFrente = e.FormattedValue.ToString();
                             strFrente = strFrente.ToUpper();
+                            if (strFrente.Length > 15)
+                            {
+                                strFrente = strFrente.Substring(0, 15);
+                            }
+
                             dgvPersonaExtraviada.CurrentCell.Value = strFrente;
                             entPersonaExtraviada.Frente = strFrente;
                         }
@@ -1480,6 +1549,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         {
                             String strCejas;
                             strCejas = e.FormattedValue.ToString();
+                            if (strCejas.Length > 15)
+                            {
+                                strCejas = strCejas.Substring(0, 15);
+                            }
                             dgvPersonaExtraviada.CurrentCell.Value = strCejas.ToUpper();
                             entPersonaExtraviada.Cejas = strCejas;
                         }
@@ -1492,6 +1565,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             String strColorOjos;
                             strColorOjos = e.FormattedValue.ToString();
                             strColorOjos = strColorOjos.ToUpper();
+                            if (strColorOjos.Length > 15)
+                            {
+                                strColorOjos = strColorOjos.Substring(0, 15);
+                            }
                             dgvPersonaExtraviada.CurrentCell.Value = strColorOjos;
                             entPersonaExtraviada.OjosColor = strColorOjos;
                         }
@@ -1504,6 +1581,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             String strTamañoBoca;
                             strTamañoBoca = e.FormattedValue.ToString();
                             strTamañoBoca = strTamañoBoca.ToUpper();
+                            if (strTamañoBoca.Length > 15)
+                            {
+                                strTamañoBoca = strTamañoBoca.Substring(0, 15);
+                            }
                             dgvPersonaExtraviada.CurrentCell.Value = strTamañoBoca;
                             entPersonaExtraviada.BocaTamaño = strTamañoBoca;
                         }
@@ -1515,6 +1596,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             String strLabios;
                             strLabios = e.FormattedValue.ToString();
                             strLabios = strLabios.ToUpper();
+                            if (strLabios.Length > 15)
+                            {
+                                strLabios = strLabios.Substring(0, 15);
+                            }
                             dgvPersonaExtraviada.CurrentCell.Value = strLabios;
                             entPersonaExtraviada.Labios = strLabios;
                         }
@@ -1525,6 +1610,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             String strVestimenta;
                             strVestimenta = e.FormattedValue.ToString();
                             strVestimenta = strVestimenta.ToUpper();
+                            if (strVestimenta.Length > 250)
+                            {
+                                strVestimenta = strVestimenta.Substring(0, 250);
+                            }
                             dgvPersonaExtraviada.CurrentCell.Value = strVestimenta;
                             entPersonaExtraviada.Vestimenta = strVestimenta;
                         }
@@ -1535,6 +1624,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             String strDestino;
                             strDestino = e.FormattedValue.ToString();
                             strDestino = strDestino.ToUpper();
+                            if (strDestino.Length > 250)
+                            {
+                                strDestino = strDestino.Substring(0, 250);
+                            }
                             dgvPersonaExtraviada.CurrentCell.Value = strDestino;
                             entPersonaExtraviada.Destino = strDestino;
                         }
@@ -1545,6 +1638,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             String strCaracteristicas;
                             strCaracteristicas = e.FormattedValue.ToString();
                             strCaracteristicas = strCaracteristicas.ToUpper();
+                            if (strCaracteristicas.Length > 250)
+                            {
+                                strCaracteristicas = strCaracteristicas.Substring(0, 250);
+                            }
                             dgvPersonaExtraviada.CurrentCell.Value = strCaracteristicas;
                             entPersonaExtraviada.Caracteristicas = strCaracteristicas;
                         }
@@ -1579,10 +1676,757 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         }
 
-       
+        private void txtNombrePropietario_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.txtTelefonoPropietario.Focus();
+            }
+            this.SAIFrmIncidenciaKeyUp(e);
+        }
+
+        private void txtNombrePropietario_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                try
+                {
+                    if (this._objPropietarioVehiculo == null)
+                    {
+                        this._objPropietarioVehiculo = new PropietarioVehiculoObject();
+                        this._objPropietarioVehiculo.Nombre = this.txtNombrePropietario.Text;
+                        PropietarioVehiculoMapper.Instance().Insert(this._objPropietarioVehiculo);
+                    }
+                    else
+                    {
+                        this._objPropietarioVehiculo.Nombre = this.txtNombrePropietario.Text;
+                        PropietarioVehiculoMapper.Instance().Save(this._objPropietarioVehiculo);
+                    }
+                    //Se revisa si ya hay vehículos para este folio y se actualizan con el id del propietario:
+                    VehiculoRobadoObjectList ListaVehiculos = VehiculoRobadoMapper.Instance().GetByIncidencia(this._entIncidencia.Folio);
+                    foreach (VehiculoRobadoObject objVehiculo in ListaVehiculos)
+                    {
+                        objVehiculo.ClavePropietario = this._objPropietarioVehiculo.Clave;
+                    }
+                    if (ListaVehiculos.Count > 0)
+                    {
+                        VehiculoRobadoMapper.Instance().Update(ListaVehiculos);
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
+            }
+            catch (SAIExcepcion) { }
+
+        }
+
+        private void txtTelefonoPropietario_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.txtDireccionPropietario.Focus();
+            }
+            this.SAIFrmIncidenciaKeyUp(e);
+        }
+
+        private void txtTelefonoPropietario_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                try
+                {
+                    if (this._objPropietarioVehiculo == null)
+                    {
+                        this._objPropietarioVehiculo = new PropietarioVehiculoObject();
+                        this._objPropietarioVehiculo.Telefono  = this.txtTelefono.Text;
+                        PropietarioVehiculoMapper.Instance().Insert(this._objPropietarioVehiculo);
+                    }
+                    else
+                    {
+                        this._objPropietarioVehiculo.Telefono = this.txtTelefono.Text;
+                        PropietarioVehiculoMapper.Instance().Save(this._objPropietarioVehiculo);
+                    }
+                    //Se revisa si ya hay vehículos para este folio y se actualizan con el id del propietario:
+                    VehiculoRobadoObjectList ListaVehiculos = VehiculoRobadoMapper.Instance().GetByIncidencia(this._entIncidencia.Folio);
+                    foreach (VehiculoRobadoObject objVehiculo in ListaVehiculos)
+                    {
+                        objVehiculo.ClavePropietario = this._objPropietarioVehiculo.Clave;
+                    }
+                    if (ListaVehiculos.Count > 0)
+                    {
+                        VehiculoRobadoMapper.Instance().Update(ListaVehiculos);
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
+            }
+            catch (SAIExcepcion) { }
+        }
 
        
-       
+        private void txtDireccionPropietario_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                try
+                {
+                    if (this._objPropietarioVehiculo == null)
+                    {
+                        this._objPropietarioVehiculo = new PropietarioVehiculoObject();
+                        this._objPropietarioVehiculo.Domicilio = this.txtDireccionPropietario.Text;
+                        PropietarioVehiculoMapper.Instance().Insert(this._objPropietarioVehiculo);
+                    }
+                    else
+                    {
+                        this._objPropietarioVehiculo.Telefono = this.txtTelefono.Text;
+                        this._objPropietarioVehiculo.Domicilio = this.txtDireccionPropietario.Text;
+                        PropietarioVehiculoMapper.Instance().Save(this._objPropietarioVehiculo);
+                    }
+                    //Se revisa si ya hay vehículos para este folio y se actualizan con el id del propietario:
+                    VehiculoRobadoObjectList ListaVehiculos = VehiculoRobadoMapper.Instance().GetByIncidencia(this._entIncidencia.Folio);
+                    foreach (VehiculoRobadoObject objVehiculo in ListaVehiculos)
+                    {
+                        objVehiculo.ClavePropietario = this._objPropietarioVehiculo.Clave;
+                    }
+                    if (ListaVehiculos.Count > 0)
+                    {
+                        VehiculoRobadoMapper.Instance().Update(ListaVehiculos);
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
+            }
+            catch (SAIExcepcion) { }
+        }
 
+        private void dgvVehiculo_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            Boolean blnExiste = false;
+            VehiculoObject  objVehiculo = new VehiculoObject();
+
+           
+            try
+            {
+                if (this._entIncidencia == null)
+                {
+                    this.dgvVehiculo.Rows.Clear();
+                    throw new SAIExcepcion("No es posible registrar vehiculos robados", this);
+                }
+                try
+                  {
+                      if (!(this.dgvVehiculo[0, e.RowIndex].Value == null))
+                      {
+                          blnExiste = true;
+                          int Clave = int.Parse(this.dgvVehiculo[0, e.RowIndex].Value.ToString());
+                          objVehiculo = VehiculoMapper.Instance().GetOne((Clave));
+                      }
+                      switch (e.ColumnIndex)
+                      {
+                          case 0: //Clave
+                              break;
+                          case 1: //Marca
+                              
+                              if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                              {
+                                  String strMarca;
+                                  strMarca = e.FormattedValue.ToString();
+                                  if (strMarca.Length > 50)
+                                  {
+                                      strMarca = strMarca.Substring(0, 50);
+                                  }
+                                  strMarca = strMarca.ToUpper();
+                                  dgvVehiculo.CurrentCell.Value = strMarca;
+                                  objVehiculo.Marca = strMarca;
+                              }
+                              break;
+                          case 2://Tipo
+                              if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                              {
+                                  String strTipo;
+                                  strTipo = e.FormattedValue.ToString();
+                                  if (strTipo.Length > 50)
+                                  {
+                                      strTipo = strTipo.Substring(0, 50);
+                                  }
+                                  strTipo = strTipo.ToUpper();
+                                  dgvVehiculo.CurrentCell.Value = strTipo;
+                                  objVehiculo.Tipo = strTipo;
+                              }
+                              break;
+                          case 3://Modelo
+                              if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                              {
+                                  String strModelo;
+                                  strModelo = e.FormattedValue.ToString();
+                                  if (strModelo.Length > 50)
+                                  {
+                                      strModelo = strModelo.Substring(0, 50);
+                                  }
+                                  strModelo = strModelo.ToUpper();
+                                  dgvVehiculo.CurrentCell.Value = strModelo;
+                                  objVehiculo.Modelo = strModelo;
+                              }
+                              break;
+                          case 4://Color
+                              if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                              {
+                                  String strColor;
+                                  strColor = e.FormattedValue.ToString();
+                                  if (strColor.Length > 50)
+                                  {
+                                      strColor = strColor.Substring(0, 50);
+                                  }
+                                  strColor = strColor.ToUpper();
+                                  dgvVehiculo.CurrentCell.Value = strColor;
+                                  objVehiculo.Color = strColor;
+                              }
+                              break;
+                          case 5://Número de Serie
+                              if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                              {
+                                  String strNumeroSerie;
+                                  strNumeroSerie = e.FormattedValue.ToString();
+                                  if (strNumeroSerie.Length > 50)
+                                  {
+                                      strNumeroSerie = strNumeroSerie.Substring(0, 50);
+                                  }
+                                  strNumeroSerie = strNumeroSerie.ToUpper();
+                                  dgvVehiculo.CurrentCell.Value = strNumeroSerie;
+                                  objVehiculo.NumeroSerie = strNumeroSerie;
+                              }
+                              break;
+                          case 6://Señas Particulares
+                              if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                              {
+                                  String strSeñasParticulares;
+                                  strSeñasParticulares = e.FormattedValue.ToString();
+                                  if (strSeñasParticulares.Length > 250)
+                                  {
+                                      strSeñasParticulares = strSeñasParticulares.Substring(0, 250);
+                                  }
+                                  strSeñasParticulares = strSeñasParticulares.ToUpper();
+                                  dgvVehiculo.CurrentCell.Value = strSeñasParticulares;
+                                  objVehiculo.SeñasParticulares = strSeñasParticulares;
+                              }
+                              break;
+                      }
+
+                      try
+                      {
+                          if (blnExiste)
+                          {
+                              VehiculoMapper.Instance().Save(objVehiculo);
+                              if (this._objPropietarioVehiculo != null)
+                              {
+                                    VehiculoRobadoObject objVehiculoRobado = VehiculoRobadoMapper.Instance().GetOne(objVehiculo.Clave, this._entIncidencia.Folio);
+                                    objVehiculoRobado.ClavePropietario = this._objPropietarioVehiculo.Clave;
+                                    VehiculoRobadoMapper.Instance().Save(objVehiculoRobado);
+                              }
+                              
+                          }
+                          else
+                          {
+                              VehiculoRobadoObject objVehiculoRobado = new VehiculoRobadoObject();
+                              VehiculoMapper.Instance().Insert(objVehiculo);
+                              objVehiculoRobado.ClaveVehiculo = objVehiculo.Clave;
+                              dgvVehiculo[0, e.RowIndex].Value = objVehiculo.Clave;
+                              if (this._objPropietarioVehiculo != null)
+                              {
+                                  objVehiculoRobado.ClavePropietario = this._objPropietarioVehiculo.Clave;
+                              }
+                              objVehiculoRobado.Folio = this._entIncidencia.Folio;
+                              VehiculoRobadoMapper.Instance().Insert(objVehiculoRobado);
+
+                          }
+                      }
+                      catch (System.Exception ex)
+                      {
+                          throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                      }
+
+                  }
+                  catch (System.Exception ex)
+                  {
+                      throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                  }
+            }
+              catch (SAIExcepcion)
+              { }
+        }
+
+        private void chkAccesoriosPercato_CheckedChanged(object sender, EventArgs e)
+        {
+            this.dtpAccesoriosFechaPercato.Enabled = this.chkAccesoriosPercato.Checked;
+        }
+
+        private void txtAccesoriosPlacas_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.txtAccesoriosSerie.Focus();
+            }
+            this.SAIFrmIncidenciaKeyUp(e);
+        }
+
+        private void txtAccesoriosPlacas_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                try
+                {
+                    if (this._objVeiculoAccesoriosRobado == null)
+                    {
+                        this._objVeiculoAccesoriosRobado = new VehiculoObject();
+                        this._objVeiculoAccesoriosRobado.Placas = this.txtAccesoriosPlacas.Text;
+                        VehiculoMapper.Instance().Insert(this._objVeiculoAccesoriosRobado);
+                        if (this._entRoboVehiculoAccesorios != null)
+                        {
+                          this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
+                        }
+                    }
+                    else
+                    {
+                        if (this._entRoboVehiculoAccesorios != null)
+                        {
+                          this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
+                        }
+                        this._objVeiculoAccesoriosRobado.Placas = this.txtAccesoriosPlacas.Text;
+                        VehiculoMapper.Instance().Save(this._objVeiculoAccesoriosRobado);
+                    }
+                   
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
+            }
+            catch (SAIExcepcion) { }
+
+        }
+
+        private void txtAccesoriosSerie_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.txtAccesoriosRobados.Focus();
+            }
+            this.SAIFrmIncidenciaKeyUp(e);
+        }
+
+        private void txtAccesoriosSerie_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                try
+                {
+                    if (this._objVeiculoAccesoriosRobado == null)
+                    {
+                        this._objVeiculoAccesoriosRobado = new VehiculoObject();
+                        this._objVeiculoAccesoriosRobado.NumeroSerie = this.txtAccesoriosSerie.Text;
+                        VehiculoMapper.Instance().Insert(this._objVeiculoAccesoriosRobado);
+
+                       if (this._entRoboVehiculoAccesorios != null)
+                        {
+                          this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
+                          RoboVehiculoAccesoriosMapper.Instance().Save(this._entRoboVehiculoAccesorios);
+                        }
+                    }
+                    else
+                    {
+                        if (this._entRoboVehiculoAccesorios != null)
+                        {
+                          this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
+                          RoboVehiculoAccesoriosMapper.Instance().Save(this._entRoboVehiculoAccesorios);
+                        }
+                        this._objVeiculoAccesoriosRobado.NumeroSerie = this.txtAccesoriosSerie.Text;
+                        VehiculoMapper.Instance().Save(this._objVeiculoAccesoriosRobado);
+                    }
+
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
+            }
+            catch (SAIExcepcion) { }
+
+        }
+
+        private void txtAccesoriosRobados_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.txtAccesoriosPersonaSePercato.Focus();
+            }
+            this.SAIFrmIncidenciaKeyUp(e);
+        }
+
+        private void txtAccesoriosRobados_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                try
+                {
+                    if (this._entRoboVehiculoAccesorios  == null)
+                    {
+                        this._entRoboVehiculoAccesorios = new RoboVehiculoAccesorios();
+                        this._entRoboVehiculoAccesorios.AccesoriosRobados = this.txtAccesoriosRobados.Text;
+                        this._entRoboVehiculoAccesorios.Folio = this._entIncidencia.Folio;
+                        if (this._objVeiculoAccesoriosRobado != null)
+                        {
+                            this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
+                            
+                        }
+                        RoboVehiculoAccesoriosMapper.Instance().Insert(this._entRoboVehiculoAccesorios);
+                        for (int i = 0; i < this.dgvVehiculoAccesorios.Rows.Count; i++)
+                        {
+                            try
+                            {
+                                int Clave = int.Parse(this.dgvVehiculoAccesorios[0, i].Value.ToString());
+                                RoboVehiculoAccesoriosVehiculoInvolucradoObject objVehiculoInvolucrado = new RoboVehiculoAccesoriosVehiculoInvolucradoObject();
+                                objVehiculoInvolucrado.ClaveVehiculo = Clave;
+                                objVehiculoInvolucrado.ClaveRoboAccesorios = this._entRoboVehiculoAccesorios.Clave;
+                                RoboVehiculoAccesoriosVehiculoInvolucradoMapper.Instance().Insert(objVehiculoInvolucrado);
+                            }
+                            catch { }
+
+                        }   
+                    }
+                    else
+                    {
+                        if (this._objVeiculoAccesoriosRobado != null)
+                        {
+                            this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
+                         }
+                        this._entRoboVehiculoAccesorios.AccesoriosRobados = this.txtAccesoriosRobados.Text;
+                        RoboVehiculoAccesoriosMapper.Instance().Save(this._entRoboVehiculoAccesorios);
+                    
+                    }
+
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
+            }
+            catch (SAIExcepcion) { }
+        }
+
+        private void txtAccesoriosPersonaSePercato_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.dtpAccesoriosFechaPercato.Focus();
+            }
+            this.SAIFrmIncidenciaKeyUp(e);
+        }
+
+        private void txtAccesoriosPersonaSePercato_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                try
+                {
+                    if (this._entRoboVehiculoAccesorios == null)
+                    {
+                        this._entRoboVehiculoAccesorios = new RoboVehiculoAccesorios();
+                        this._entRoboVehiculoAccesorios.SePercato = this.txtAccesoriosPersonaSePercato.Text;
+                        this._entRoboVehiculoAccesorios.Folio = this._entIncidencia.Folio;
+                        if (this._objVeiculoAccesoriosRobado != null)
+                        {
+                            this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
+                        }
+                        RoboVehiculoAccesoriosMapper.Instance().Insert(this._entRoboVehiculoAccesorios);
+                        for (int i = 0; i < this.dgvVehiculoAccesorios.Rows.Count;i++ )
+                        {
+                            try
+                            {
+                                int Clave = int.Parse(this.dgvVehiculoAccesorios[0, i].Value.ToString());
+                                RoboVehiculoAccesoriosVehiculoInvolucradoObject objVehiculoInvolucrado = new RoboVehiculoAccesoriosVehiculoInvolucradoObject();
+                                objVehiculoInvolucrado.ClaveVehiculo = Clave;
+                                objVehiculoInvolucrado.ClaveRoboAccesorios = this._entRoboVehiculoAccesorios.Clave;
+                                RoboVehiculoAccesoriosVehiculoInvolucradoMapper.Instance().Insert(objVehiculoInvolucrado);
+                            }
+                            catch { }
+
+                        }
+                    }
+                    else
+                    {
+                         if (this._objVeiculoAccesoriosRobado != null)
+                        {
+                            this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
+                        }
+                        this._entRoboVehiculoAccesorios.SePercato = this.txtAccesoriosPersonaSePercato.Text;
+                        RoboVehiculoAccesoriosMapper.Instance().Save(this._entRoboVehiculoAccesorios);
+                    }
+
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
+            }
+            catch (SAIExcepcion) { }
+        }
+
+        private void dtpAccesoriosFechaPercato_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.txtAccesoriosResponsables.Focus();
+            }
+            this.SAIFrmIncidenciaKeyUp(e);
+        }
+
+        private void dtpAccesoriosFechaPercato_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                try
+                {
+                    if (this._entRoboVehiculoAccesorios == null)
+                    {
+                        this._entRoboVehiculoAccesorios = new RoboVehiculoAccesorios();
+                        this._entRoboVehiculoAccesorios.FechaPercato = this.dtpAccesoriosFechaPercato.Value;
+                        this._entRoboVehiculoAccesorios.Folio = this._entIncidencia.Folio;
+                         if (this._objVeiculoAccesoriosRobado != null)
+                        {
+                            this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
+                        }
+                        RoboVehiculoAccesoriosMapper.Instance().Insert(this._entRoboVehiculoAccesorios);
+                        //Ahora se inserta en RoboVehiculoAccesoriosRoboVehiculo
+                        for (int i = 0; i < this.dgvVehiculoAccesorios.Rows.Count; i++)
+                        {
+                            try
+                            {
+                                int Clave = int.Parse(this.dgvVehiculoAccesorios[0, i].Value.ToString());
+                                RoboVehiculoAccesoriosVehiculoInvolucradoObject objVehiculoInvolucrado = new RoboVehiculoAccesoriosVehiculoInvolucradoObject();
+                                objVehiculoInvolucrado.ClaveVehiculo = Clave;
+                                objVehiculoInvolucrado.ClaveRoboAccesorios = this._entRoboVehiculoAccesorios.Clave;
+                                RoboVehiculoAccesoriosVehiculoInvolucradoMapper.Instance().Insert(objVehiculoInvolucrado);
+                            }
+                            catch { }
+
+                        }
+                    }
+                    else
+                    {
+                         if (this._objVeiculoAccesoriosRobado != null)
+                        {
+                            this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
+                        }
+                        this._entRoboVehiculoAccesorios.FechaPercato = this.dtpAccesoriosFechaPercato.Value;
+                        RoboVehiculoAccesoriosMapper.Instance().Save(this._entRoboVehiculoAccesorios);
+                    }
+
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
+            }
+            catch (SAIExcepcion) { }
+        }
+
+        private void txtAccesoriosResponsables_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.dgvVehiculoAccesorios.Focus();
+            }
+            this.SAIFrmIncidenciaKeyUp(e);
+        }
+
+        private void txtAccesoriosResponsables_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                try
+                {
+                    if (this._entRoboVehiculoAccesorios == null)
+                    {
+                        this._entRoboVehiculoAccesorios = new RoboVehiculoAccesorios();
+                        this._entRoboVehiculoAccesorios.DescripcionResponsables = this.txtAccesoriosResponsables.Text;
+                        this._entRoboVehiculoAccesorios.Folio = this._entIncidencia.Folio;
+                        if (this._objVeiculoAccesoriosRobado != null)
+                        {
+                            this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
+                        }
+                        RoboVehiculoAccesoriosMapper.Instance().Insert(this._entRoboVehiculoAccesorios);
+                        //Ahora se inserta en RoboVehiculoAccesoriosRoboVehiculo
+                        for (int i = 0; i < this.dgvVehiculoAccesorios.Rows.Count; i++)
+                        {
+                            try
+                            {
+                                int Clave = int.Parse(this.dgvVehiculoAccesorios[0, i].Value.ToString());
+                                RoboVehiculoAccesoriosVehiculoInvolucradoObject objVehiculoInvolucrado = new RoboVehiculoAccesoriosVehiculoInvolucradoObject();
+                                objVehiculoInvolucrado.ClaveVehiculo = Clave;
+                                objVehiculoInvolucrado.ClaveRoboAccesorios = this._entRoboVehiculoAccesorios.Clave;
+                                RoboVehiculoAccesoriosVehiculoInvolucradoMapper.Instance().Insert(objVehiculoInvolucrado);
+                            }
+                            catch { }
+
+                        }
+                    }
+                    else
+                    {
+                         if (this._objVeiculoAccesoriosRobado != null)
+                        {
+                            this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
+                        }
+                        this._entRoboVehiculoAccesorios.DescripcionResponsables = this.txtAccesoriosResponsables.Text;
+                        RoboVehiculoAccesoriosMapper.Instance().Save(this._entRoboVehiculoAccesorios);
+                    }
+
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
+            }
+            catch (SAIExcepcion) { }
+        }
+
+        private void dgvVehiculoAccesorios_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            Boolean blnExiste = false;
+            VehiculoObject objVehiculo = new VehiculoObject();
+               try
+            {
+                
+               
+                   try
+                  {
+                      if (!(this.dgvVehiculoAccesorios[0, e.RowIndex].Value == null))
+                      {
+                          blnExiste = true;
+                          int Clave = int.Parse(this.dgvVehiculoAccesorios[0, e.RowIndex].Value.ToString());
+                          objVehiculo = VehiculoMapper.Instance().GetOne((Clave));
+                      }
+                      switch (e.ColumnIndex)
+                      {
+                          case 0:
+                              break;
+                          case 1: //Marca
+                              
+                              if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                              {
+                                  String strMarca;
+                                  strMarca = e.FormattedValue.ToString();
+                                  if (strMarca.Length > 50)
+                                  {
+                                      strMarca = strMarca.Substring(0, 50);
+                                  }
+                                  strMarca = strMarca.ToUpper();
+                                  dgvVehiculoAccesorios.CurrentCell.Value = strMarca;
+                                  objVehiculo.Marca = strMarca;
+                              }
+                              break;
+                          case 2://Tipo
+                              if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                              {
+                                  String strTipo;
+                                  strTipo = e.FormattedValue.ToString();
+                                  if (strTipo.Length > 50)
+                                  {
+                                      strTipo = strTipo.Substring(0, 50);
+                                  }
+                                  strTipo = strTipo.ToUpper();
+                                  dgvVehiculoAccesorios.CurrentCell.Value = strTipo;
+                                  objVehiculo.Tipo = strTipo;
+                              }
+                              break;
+                          case 3://Modelo
+                              if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                              {
+                                  String strModelo;
+                                  strModelo = e.FormattedValue.ToString();
+                                  if (strModelo.Length > 50)
+                                  {
+                                      strModelo = strModelo.Substring(0, 50);
+                                  }
+                                  strModelo = strModelo.ToUpper();
+                                  dgvVehiculoAccesorios.CurrentCell.Value = strModelo;
+                                  objVehiculo.Modelo = strModelo;
+                              }
+                              break;
+                          case 4://Color
+                              if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                              {
+                                  String strColor;
+                                  strColor = e.FormattedValue.ToString();
+                                  if (strColor.Length > 50)
+                                  {
+                                      strColor = strColor.Substring(0, 50);
+                                  }
+                                  strColor = strColor.ToUpper();
+                                  dgvVehiculoAccesorios.CurrentCell.Value = strColor;
+                                  objVehiculo.Color = strColor;
+                              }
+                              break;
+                          case 5://Número de Serie
+                              if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                              {
+                                  String strNumeroSerie;
+                                  strNumeroSerie = e.FormattedValue.ToString();
+                                  if (strNumeroSerie.Length > 50)
+                                  {
+                                      strNumeroSerie = strNumeroSerie.Substring(0, 50);
+                                  }
+                                  strNumeroSerie = strNumeroSerie.ToUpper();
+                                  dgvVehiculoAccesorios.CurrentCell.Value = strNumeroSerie;
+                                  objVehiculo.NumeroSerie = strNumeroSerie;
+                              }
+                              break;
+                          case 6://Señas Particulares
+                              if (e.FormattedValue != null && e.FormattedValue.ToString().Trim() != string.Empty)
+                              {
+                                  String strSeñasParticulares;
+                                  strSeñasParticulares = e.FormattedValue.ToString();
+                                  if (strSeñasParticulares.Length > 250)
+                                  {
+                                      strSeñasParticulares = strSeñasParticulares.Substring(0, 250);
+                                  }
+                                  strSeñasParticulares = strSeñasParticulares.ToUpper();
+                                  dgvVehiculoAccesorios.CurrentCell.Value = strSeñasParticulares;
+                                  objVehiculo.SeñasParticulares = strSeñasParticulares;
+                              }
+                              break;
+                      }
+                    
+                      if (blnExiste)
+                      {
+                              VehiculoMapper.Instance().Save(objVehiculo);
+                              
+                      }
+                      else
+                          {
+                              RoboVehiculoAccesoriosVehiculoInvolucradoObject objVehiculoInvolucrado = new RoboVehiculoAccesoriosVehiculoInvolucradoObject();
+                              VehiculoMapper.Instance().Insert(objVehiculo);
+
+                              objVehiculoInvolucrado.ClaveVehiculo = objVehiculo.Clave;
+                              dgvVehiculoAccesorios[0, e.RowIndex].Value = objVehiculo.Clave;
+
+                              if (_entRoboVehiculoAccesorios != null)
+                              {
+                                  objVehiculoInvolucrado.ClaveRoboAccesorios = this._entRoboVehiculoAccesorios.Clave;
+                                  RoboVehiculoAccesoriosVehiculoInvolucradoMapper.Instance().Insert(objVehiculoInvolucrado);
+                              }
+                          }
+                     }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
+            }
+            catch (SAIExcepcion) { }
+        }     
     }
 }
