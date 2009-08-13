@@ -37,6 +37,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void reportControl_RowDblClick(object sender, AxXtremeReportControl._DReportControlEvents_RowDblClickEvent e)
         {
+            //TODO: Guardar un registro en la tabla de DespachoIncidencia ??
+            //Recuperar el folio y generar una instancia de la entidad para
+            //pasarla al nuevo formulario
+
+            var incidencia = IncidenciaMapper.Instance().GetOne(Convert.ToInt32(e.row.Record[0].Value));
+            if (incidencia != null)
+            {
+
+            }
         }
 
         void btnAltaUnidad_Click(object sender, EventArgs e)
@@ -49,10 +58,24 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void btnDespacharIncidencias_Click(object sender, EventArgs e)
         {
+            for (int i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
+            {
+                var incidencia = IncidenciaMapper.Instance().GetOne(Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
+                if (incidencia != null)
+                {
+
+                }
+            }
         }
 
         void btnLigarIncidencias_Click(object sender, EventArgs e)
         {
+            var lstIncidenciasPorLigar = new List<int>();
+            for (int i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
+            {
+                lstIncidenciasPorLigar.Add(Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
+            }
+            //Mostrar ventana para la seleccion del padre
         }
 
         private void SAIFrmIncidenciasPendientes_Load(object sender, EventArgs e)
@@ -80,6 +103,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             ObtenerRegistros();
             //saiReport1.reportControl.Refresh();
             saiReport1.reportControl.Redraw();
+
+            saiReport1.btnLigarIncidencias.Enabled = saiReport1.reportControl.SelectedRows.Count > 1;
+            saiReport1.btnDespacharIncidencias.Enabled = saiReport1.reportControl.SelectedRows.Count >= 1;
         }
 
         private void ObtenerRegistros()
