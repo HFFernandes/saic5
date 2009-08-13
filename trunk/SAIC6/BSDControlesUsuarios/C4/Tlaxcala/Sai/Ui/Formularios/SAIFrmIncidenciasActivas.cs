@@ -37,11 +37,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             saiReport1.btnDespacharIncidencias.Click += btnDespacharIncidencias_Click;
             saiReport1.btnBajaUnidad.Click += btnBajaUnidad_Click;
             saiReport1.btnAltaUnidad.Click += btnAltaUnidad_Click;
+            saiReport1.reportControl.RowDblClick += reportControl_RowDblClick;
 
             lstIncidenciasRegistradas = new List<Incidencia>();
             lstIncidenciasTemporales = new List<Incidencia>();
             lstIncidenciasPorRemover = new List<Incidencia>();
             lstRegistrosReporte = new List<ReportRecord>();
+        }
+
+        void reportControl_RowDblClick(object sender, AxXtremeReportControl._DReportControlEvents_RowDblClickEvent e)
+        {
         }
 
         void btnAltaUnidad_Click(object sender, EventArgs e)
