@@ -92,13 +92,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             //Falta mostrar la prioridad del incidente
             saiReport1.AgregarColumna(0, "ID", 20, false, false, false, false);
             saiReport1.AgregarColumna(1, "Folio", 150, true, true, true, false);
-            saiReport1.AgregarColumna(2, "Hora de Entrada", 200, true, true, true, false);
-            saiReport1.AgregarColumna(3, "Corporación", 300, true, true, true, false);
-            saiReport1.AgregarColumna(4, "Tipo de Incidencia", 150, true, true, true, false);
-            saiReport1.AgregarColumna(5, "Zn", 100, true, true, true, false);
-            saiReport1.AgregarColumna(6, "Dividido En", 80, true, false, true, false);
-            saiReport1.AgregarColumna(7, "Pendiente Desde", 150, true, true, true, false);
-            saiReport1.AgregarColumna(8, "Nombre del Operador", 200, true, true, true, false);
+            saiReport1.AgregarColumna(2, "Hora de Entrada", 100, true, true, true, false);
+            saiReport1.AgregarColumna(3, "Corporación", 150, true, true, true, false);
+            saiReport1.AgregarColumna(4, "Tipo de Incidencia", 250, true, true, true, false);
+            saiReport1.AgregarColumna(5, "Zn", 70, true, true, true, false);
+            saiReport1.AgregarColumna(6, "Dividido En", 70, true, false, true, false);
+            saiReport1.AgregarColumna(7, "Pendiente Desde", 200, true, true, true, false);
+            saiReport1.AgregarColumna(8, "Nombre del Operador", 90, true, true, true, false);
             ObtenerRegistros();
         }
 
