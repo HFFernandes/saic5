@@ -116,11 +116,13 @@
             // 
             // pnlUnidadAsignada
             // 
+            this.pnlUnidadAsignada.AllowDrop = true;
             this.pnlUnidadAsignada.Controls.Add(this.lblUnidadApoyo);
             this.pnlUnidadAsignada.Location = new System.Drawing.Point(7, 11);
             this.pnlUnidadAsignada.Name = "pnlUnidadAsignada";
             this.pnlUnidadAsignada.Size = new System.Drawing.Size(255, 64);
             this.pnlUnidadAsignada.TabIndex = 0;
+            this.pnlUnidadAsignada.DragOver += new System.Windows.Forms.DragEventHandler(this.pnlUnidadAsignada_DragOver);
             // 
             // lblUnidadApoyo
             // 
@@ -143,11 +145,14 @@
             // 
             // pnlUnidad
             // 
+            this.pnlUnidad.AllowDrop = true;
             this.pnlUnidad.Controls.Add(this.lblUnidad);
             this.pnlUnidad.Location = new System.Drawing.Point(7, 11);
             this.pnlUnidad.Name = "pnlUnidad";
             this.pnlUnidad.Size = new System.Drawing.Size(251, 67);
             this.pnlUnidad.TabIndex = 0;
+            this.pnlUnidad.DragOver += new System.Windows.Forms.DragEventHandler(this.pnlUnidad_DragOver);
+            this.pnlUnidad.DragDrop += new System.Windows.Forms.DragEventHandler(this.pnlUnidad_DragDrop);
             // 
             // lblUnidad
             // 
