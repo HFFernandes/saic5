@@ -25,13 +25,13 @@ namespace BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers
     /// </summary>
     public  partial class DespachoIncidenciaMapper
     {
-        // /// <summary>
-        // /// Enables GetObjectBySQLText and GetObjectListBySQLText methods.
-        // /// </summary>
-        //protected override bool SQLQueriesEnabled()
-        //{
-        //    return true;
-        //}
+        /// <summary>
+        /// Enables GetObjectBySQLText and GetObjectListBySQLText methods.
+        /// </summary>
+        protected override bool SQLQueriesEnabled()
+        {
+            return true;
+        }
 
         // /// <summary>
         // /// Checks for security ritghs
