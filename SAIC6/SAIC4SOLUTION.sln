@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSD.C4.Tlaxcala.Sai.Administracion", "BSD.C4.Tlaxcala.Sai.Administracion\BSD.C4.Tlaxcala.Sai.Administracion.csproj", "{B281EAF8-FFB3-4EEB-949B-EA7CFE8E0960}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "InstaladorOperativo", "InstaladorOperativo\InstaladorOperativo.vdproj", "{23CC93A4-431D-4291-9361-09101BC35C31}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = SAIC4SOLUTION.vsmdi
@@ -52,6 +54,8 @@ Global
 		{B281EAF8-FFB3-4EEB-949B-EA7CFE8E0960}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B281EAF8-FFB3-4EEB-949B-EA7CFE8E0960}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B281EAF8-FFB3-4EEB-949B-EA7CFE8E0960}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23CC93A4-431D-4291-9361-09101BC35C31}.Debug|Any CPU.ActiveCfg = Debug
+		{23CC93A4-431D-4291-9361-09101BC35C31}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
