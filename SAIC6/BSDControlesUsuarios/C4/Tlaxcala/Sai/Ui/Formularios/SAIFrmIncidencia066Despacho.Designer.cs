@@ -123,6 +123,7 @@
             this.pnlUnidadAsignada.Size = new System.Drawing.Size(255, 64);
             this.pnlUnidadAsignada.TabIndex = 0;
             this.pnlUnidadAsignada.DragOver += new System.Windows.Forms.DragEventHandler(this.pnlUnidadAsignada_DragOver);
+            this.pnlUnidadAsignada.DragDrop += new System.Windows.Forms.DragEventHandler(this.pnlUnidadAsignada_DragDrop);
             // 
             // lblUnidadApoyo
             // 
