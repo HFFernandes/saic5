@@ -86,6 +86,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 //organizar los nodos para desplegar el tree
                 //y verificar que al momento del despacho si es hijo se pase la incidencia
                 //del padre..para prevenir el despacho a una misma incidencia
+
+                //TODO: Falta obtener los folios hijos
             }
         }
 
@@ -98,7 +100,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
             //Falta mostrar la prioridad del incidente
             saiReport1.AgregarColumna(0, "ID", 20, false, false, false, false);
-            saiReport1.AgregarColumna(1, "Folio", 150, true, true, true, false);
+            saiReport1.AgregarColumna(1, "Folio", 150, true, true, true, true);
             saiReport1.AgregarColumna(2, "Hora de Entrada", 100, true, true, true, false);
             saiReport1.AgregarColumna(3, "Corporación", 150, true, true, true, false);
             saiReport1.AgregarColumna(4, "Tipo de Incidencia", 250, true, true, true, false);
@@ -182,6 +184,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         var incidenciaTemp = lstIncidenciasRegistradas.Find(inc => inc.Folio == incidencia.Folio);
                         if (incidenciaTemp != null)
                         {
+                            //verificar que la incidencia actual tenga una incidencia padre
+                            //en cuyo caso determino su reportrecord, lo elimino y agrego el padre con sus nuevos hijos
+
+
                             //contamos las columnas y los registros actuales para
                             //delimitar la busqueda del Row
                             var iCols = saiReport1.reportControl.Columns.Count;

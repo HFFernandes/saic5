@@ -12,7 +12,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             InitializeComponent();
 
-            saiCmbFolioPadre.Refresh();
             saiCmbFolioPadre.Items.Clear();
             foreach (var registro in lstRegistros)
             {
