@@ -7,8 +7,10 @@ using System.Text;
 using System.Windows.Forms;
 using BSD.C4.Tlaxcala.Sai.Ui.Formularios;
 using Entidades = BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
+using Objetos = BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects;
 using Mappers = BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
+using BSD.C4.Tlaxcala.Sai.Administracion.Utilerias;
 
 namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 {
@@ -68,7 +70,14 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             {
                 try
                 {
-                    this.ddlSistema.DataSource = Mappers.SistemaMapper.Instance().GetAll();
+                    Objetos.SistemaObjectList lstSistema = Mappers.SistemaMapper.Instance().GetAll();
+
+                    foreach (Objetos.SistemaObject sistema in lstSistema)
+                    {
+                        if(sistema.Descripcion != "ADM")
+                            this.ddlSistema.Items.Add(new ComboItem(sistema.Clave, sistema.Descripcion)); 
+                    }
+                    
                     this.ddlSistema.DisplayMember = "Descripcion";
                     this.ddlSistema.ValueMember = "Clave";
                 }
@@ -106,7 +115,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     {
                         this.btnModificar.Enabled = true;
                         this.saiTxtDescripcion.Text = Convert.ToString(this.gvTipoIncidencias.Rows[this.ObtenerIndiceSeleccionado()].Cells["Descripcion"].Value);
-                        this.ddlSistema.SelectedValue = this.gvTipoIncidencias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveSistema"].Value;
+                        this.SeleccionarComboItem(Convert.ToInt32(this.gvTipoIncidencias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveSistema"].Value));
+                        //this.ddlSistema.SelectedValue = this.gvTipoIncidencias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveSistema"].Value;
                         this.txtClaveoperacion.Text = Convert.ToString(this.gvTipoIncidencias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveOperacion"].Value);
                         this.ddlPrioridad.SelectedText = Convert.ToString(this.gvTipoIncidencias.Rows[this.ObtenerIndiceSeleccionado()].Cells["Prioridad"].Value);
                         
@@ -157,10 +167,11 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 try
                 {
                     Entidades.TipoIncidencia newTipoIncidencia = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.TipoIncidencia();
-                    newTipoIncidencia.ClaveSistema = Convert.ToInt32(this.ddlSistema.SelectedValue);
+                    //newTipoIncidencia.ClaveSistema = Convert.ToInt32(this.ddlSistema.SelectedValue);
+                    newTipoIncidencia.ClaveSistema = Convert.ToInt32(this.ObtieneValor(this.ddlSistema.SelectedIndex));
                     newTipoIncidencia.Descripcion = this.saiTxtDescripcion.Text;
                     newTipoIncidencia.ClaveOperacion = this.txtClaveoperacion.Text;
-                    newTipoIncidencia.Prioridad = Convert.ToInt32(this.ddlPrioridad.SelectedText);
+                    newTipoIncidencia.Prioridad = Convert.ToInt32(this.ddlPrioridad.SelectedItem);
                     Mappers.TipoIncidenciaMapper.Instance().Insert(newTipoIncidencia);
 
                     //this.gvTipoIncidencias.CurrentRow.Selected = false;
@@ -185,10 +196,11 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
                     int clave = Convert.ToInt32(this.gvTipoIncidencias.Rows[rowSelected].Cells["Clave"].Value);
                     Entidades.TipoIncidencia updTipoIncidencia = new Entidades.TipoIncidencia(clave);
-                    updTipoIncidencia.ClaveSistema = Convert.ToInt32(this.ddlSistema.SelectedValue);
+                    updTipoIncidencia.ClaveSistema = Convert.ToInt32(this.ObtieneValor(this.ddlSistema.SelectedIndex));
+                    //updTipoIncidencia.ClaveSistema = Convert.ToInt32(this.ddlSistema.SelectedValue);
                     updTipoIncidencia.Descripcion = Convert.ToString(this.saiTxtDescripcion.Text);
                     updTipoIncidencia.ClaveOperacion = this.txtClaveoperacion.Text;
-                    updTipoIncidencia.Prioridad = Convert.ToInt32(this.ddlPrioridad.SelectedText);
+                    updTipoIncidencia.Prioridad = Convert.ToInt32(this.ddlPrioridad.SelectedItem);
 
                     Mappers.TipoIncidenciaMapper.Instance().Save(updTipoIncidencia);
                 }
@@ -268,6 +280,30 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         private int ObtenerIndiceSeleccionado()
         {
             return this.gvTipoIncidencias.CurrentCellAddress.Y;
+        }
+
+        private object ObtieneValor(int indice)
+        {
+            return ((ComboItem)this.ddlSistema.Items[indice]).Valor;
+        }
+
+        private string ObtieneDescripcion(int indice)
+        {
+            return ((ComboItem)this.ddlSistema.Items[indice]).Descripcion;
+        }
+
+        private void SeleccionarComboItem(int Value)
+        {
+            foreach (ComboItem item in this.ddlSistema.Items)
+            {
+                if (Convert.ToInt32(item.Valor) == Value)
+                {
+                    this.ddlSistema.SelectedItem = item;
+                    break;
+                }
+                else
+                { this.ddlSistema.SelectedIndex = -1; }
+            }
         }
     }
 }

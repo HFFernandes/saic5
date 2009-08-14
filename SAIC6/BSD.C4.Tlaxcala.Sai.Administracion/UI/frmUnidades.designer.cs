@@ -71,7 +71,7 @@
             this.btnLimpiar.Location = new System.Drawing.Point(479, 95);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpiar.TabIndex = 6;
+            this.btnLimpiar.TabIndex = 4;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
@@ -84,7 +84,7 @@
             this.saiTxtCodigo.Name = "saiTxtCodigo";
             this.saiTxtCodigo.Size = new System.Drawing.Size(198, 20);
             this.saiTxtCodigo.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.saiTxtCodigo.TabIndex = 5;
+            this.saiTxtCodigo.TabIndex = 1;
             // 
             // label2
             // 
@@ -92,7 +92,7 @@
             this.label2.Location = new System.Drawing.Point(19, 52);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(97, 13);
-            this.label2.TabIndex = 4;
+            this.label2.TabIndex = 0;
             this.label2.Text = "Clave Corporación:";
             // 
             // label1
@@ -101,7 +101,7 @@
             this.label1.Location = new System.Drawing.Point(19, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(43, 13);
-            this.label1.TabIndex = 3;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Código:";
             // 
             // chkActivo
@@ -110,7 +110,7 @@
             this.chkActivo.Location = new System.Drawing.Point(73, 85);
             this.chkActivo.Name = "chkActivo";
             this.chkActivo.Size = new System.Drawing.Size(56, 17);
-            this.chkActivo.TabIndex = 2;
+            this.chkActivo.TabIndex = 3;
             this.chkActivo.Text = "Activo";
             this.chkActivo.UseVisualStyleBackColor = true;
             // 
@@ -121,17 +121,17 @@
             this.ddlCorporacion.Location = new System.Drawing.Point(139, 49);
             this.ddlCorporacion.Name = "ddlCorporacion";
             this.ddlCorporacion.Size = new System.Drawing.Size(198, 21);
-            this.ddlCorporacion.TabIndex = 0;
+            this.ddlCorporacion.TabIndex = 2;
             // 
             // btnModificar
             // 
             this.btnModificar.Enabled = false;
             this.btnModificar.Image = ((System.Drawing.Image)(resources.GetObject("btnModificar.Image")));
             this.btnModificar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnModificar.Location = new System.Drawing.Point(227, 410);
+            this.btnModificar.Location = new System.Drawing.Point(227, 399);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
-            this.btnModificar.TabIndex = 1;
+            this.btnModificar.TabIndex = 5;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnModificar.UseVisualStyleBackColor = true;
@@ -141,10 +141,10 @@
             // 
             this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
             this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregar.Location = new System.Drawing.Point(308, 410);
+            this.btnAgregar.Location = new System.Drawing.Point(308, 399);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
-            this.btnAgregar.TabIndex = 2;
+            this.btnAgregar.TabIndex = 6;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAgregar.UseVisualStyleBackColor = true;
@@ -156,7 +156,7 @@
             this.groupBox2.Location = new System.Drawing.Point(12, 73);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(560, 171);
-            this.groupBox2.TabIndex = 3;
+            this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Unidades";
             // 
@@ -171,6 +171,7 @@
             this.gvUnidades.ReadOnly = true;
             this.gvUnidades.Size = new System.Drawing.Size(548, 146);
             this.gvUnidades.TabIndex = 0;
+            this.gvUnidades.TabStop = false;
             this.gvUnidades.SelectionChanged += new System.EventHandler(this.gvUnidades_SelectionChanged);
             // 
             // logoPicture
@@ -188,10 +189,10 @@
             // 
             this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
             this.btnEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEliminar.Location = new System.Drawing.Point(389, 410);
+            this.btnEliminar.Location = new System.Drawing.Point(389, 399);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
-            this.btnEliminar.TabIndex = 10;
+            this.btnEliminar.TabIndex = 7;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnEliminar.UseVisualStyleBackColor = true;
@@ -200,11 +201,11 @@
             // 
             // bnCancelar
             // 
-            this.bnCancelar.Location = new System.Drawing.Point(497, 410);
+            this.bnCancelar.Location = new System.Drawing.Point(497, 399);
             this.bnCancelar.Name = "bnCancelar";
             this.bnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.bnCancelar.TabIndex = 11;
-            this.bnCancelar.Text = "Cancelar";
+            this.bnCancelar.TabIndex = 8;
+            this.bnCancelar.Text = "Cerrar";
             this.bnCancelar.UseVisualStyleBackColor = true;
             this.bnCancelar.Click += new System.EventHandler(this.bnCancelar_Click);
             // 
@@ -213,7 +214,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(584, 462);
+            this.ClientSize = new System.Drawing.Size(584, 447);
             this.Controls.Add(this.bnCancelar);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.logoPicture);

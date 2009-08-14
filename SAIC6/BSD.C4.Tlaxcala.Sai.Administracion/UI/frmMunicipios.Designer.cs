@@ -34,6 +34,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.gvMunicipios = new System.Windows.Forms.DataGridView();
             this.gpbDatosGenerales = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.saiClave = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.ddlEstado = new System.Windows.Forms.ComboBox();
             this.saiTxtNombre = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.label2 = new System.Windows.Forms.Label();
@@ -41,8 +43,6 @@
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.saiClave = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
-            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logoPicture)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvMunicipios)).BeginInit();
@@ -102,6 +102,25 @@
             this.gpbDatosGenerales.Text = "Datos Generales";
             this.gpbDatosGenerales.Enter += new System.EventHandler(this.gpbDatosGenerales_Enter);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(16, 23);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(91, 13);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Clave Cartografia:";
+            // 
+            // saiClave
+            // 
+            this.saiClave.BlnEsRequerido = true;
+            this.saiClave.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.saiClave.Location = new System.Drawing.Point(115, 20);
+            this.saiClave.Name = "saiClave";
+            this.saiClave.Size = new System.Drawing.Size(100, 20);
+            this.saiClave.StrMensajeCampoRequerido = "El campo es requerido.";
+            this.saiClave.TabIndex = 1;
+            // 
             // ddlEstado
             // 
             this.ddlEstado.Enabled = false;
@@ -113,7 +132,7 @@
             // 
             // saiTxtNombre
             // 
-            this.saiTxtNombre.ClrBackColorFoco = System.Drawing.Color.Empty;
+            this.saiTxtNombre.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.saiTxtNombre.Location = new System.Drawing.Point(115, 73);
             this.saiTxtNombre.Name = "saiTxtNombre";
             this.saiTxtNombre.Size = new System.Drawing.Size(209, 20);
@@ -168,25 +187,6 @@
             this.btnCancelar.Text = "Cerrar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // saiClave
-            // 
-            this.saiClave.BlnEsRequerido = true;
-            this.saiClave.ClrBackColorFoco = System.Drawing.Color.Empty;
-            this.saiClave.Location = new System.Drawing.Point(115, 20);
-            this.saiClave.Name = "saiClave";
-            this.saiClave.Size = new System.Drawing.Size(100, 20);
-            this.saiClave.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.saiClave.TabIndex = 1;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 23);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(91, 13);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Clave Cartografia:";
             // 
             // frmMunicipios
             // 
