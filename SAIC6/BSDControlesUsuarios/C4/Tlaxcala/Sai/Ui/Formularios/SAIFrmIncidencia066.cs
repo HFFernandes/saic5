@@ -167,9 +167,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             IEnumerator myEnumerator;
             CorporacionList ListaCorporaciones = CorporacionMapper.Instance().GetAll();
             Boolean blnTieneDatos = false;
+            
+
 
             if (this._entIncidencia == null)
                 return;
+
+            this._entIncidencia.ClaveEstatus = 1;
+            
+            IncidenciaMapper.Instance().Save(this._entIncidencia);
 
             CorporacionIncidenciaMapper.Instance().DeleteByIncidencia(this._entIncidencia.Folio);
 
@@ -231,6 +237,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
             }
 
+        }
+
+        private void cklCorporacion_MouseUp(object sender, MouseEventArgs e)
+        {
+            this.GuardaCorporaciones();
         }
 
     }
