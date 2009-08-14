@@ -9,6 +9,8 @@ using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
 using BSD.C4.Tlaxcala.Sai.Mapa;
+using System.IO;
+using BSD.C4.Tlaxcala.Sai.Ui.Controles;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -352,5 +354,54 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
             catch (SAIExcepcion) { }
         }
+
+        private void pnlUnidad_DragDrop(object sender, DragEventArgs e)
+        {
+            try
+            {
+                try
+                {
+                    this.lblUnidad.Text = this.RegresaValorDrop(e).ToString();
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
+            }
+            catch (SAIExcepcion) { }
+        }
+
+        private void pnlUnidad_DragOver(object sender, DragEventArgs e)
+        {
+            if (this.RegresaValorDrop(e) != null)
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+            
+        }
+
+        private object RegresaValorDrop(DragEventArgs e)
+        {
+            
+            var res = (MemoryStream)e.Data.GetData("SAIC4:iUnidades");
+            if (res != null)
+            {
+                var rec = SAIReport.SAIInstancia.reportControl.CreateRecordsFromDropArray(res.ToArray());
+                for (var i = 0; i < rec.Count; i++)
+                {
+                    return rec[i][0].Value;
+                }
+            }
+            return null;
+        }
+        
+
+
+        private void pnlUnidadAsignada_DragOver(object sender, DragEventArgs e)
+        {
+
+        }
+
+      
     }
 }
