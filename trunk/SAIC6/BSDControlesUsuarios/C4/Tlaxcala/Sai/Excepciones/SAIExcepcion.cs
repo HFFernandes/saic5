@@ -9,14 +9,13 @@ namespace BSD.C4.Tlaxcala.Sai.Excepciones
         public SAIExcepcion(string message)
             : base(message)
         {
-            var excepcion = new ApplicationException("Error en la aplicación", this)
-            {
-                Source = "Sistema de Administración de Incidencias"
-            };
+            var excepcion = new ApplicationException(ID.STR_TITULOERROR, this)
+                                {
+                                    Source = ID.STR_NOMBREAPLICATIVO
+                                };
 
             var exceptionMessageBox = new ExceptionMessageBox(excepcion)
             {
-                HelpLink = "http://www.infinitysoft.com.mx",
                 Symbol = ExceptionMessageBoxSymbol.Information,
                 Beep = true
             };
@@ -27,14 +26,13 @@ namespace BSD.C4.Tlaxcala.Sai.Excepciones
         public SAIExcepcion(string message, Form formulario)
             : base(message)
         {
-            var excepcion = new ApplicationException("Error en la aplicación", this)
+            var excepcion = new ApplicationException(ID.STR_TITULOERROR, this)
             {
-                Source = "Sistema de Administración de Incidencias"
+                Source = ID.STR_NOMBREAPLICATIVO
             };
 
             var exceptionMessageBox = new ExceptionMessageBox(excepcion)
             {
-                HelpLink = "http://www.infinitysoft.com.mx",
                 Symbol = ExceptionMessageBoxSymbol.Information,
                 Beep = true
             };

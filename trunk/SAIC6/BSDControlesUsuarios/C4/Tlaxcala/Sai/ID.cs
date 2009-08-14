@@ -85,9 +85,13 @@
         #region Cadenas y Colores
 
         public const string STR_REGDESC = "(desconocido)";
-        public static readonly uint COL_ESTLIBERADA = (uint)Aplicacion.HexadecimalADecimal("99FF33");
-        public static readonly uint COL_ESTDESPACHADA = (uint)Aplicacion.HexadecimalADecimal("FFCC66");
-        public static readonly uint COL_ESTLLEGADA = (uint)Aplicacion.HexadecimalADecimal("FFFFFF");
+        public const string STR_NOMBREAPLICATIVO = "Sistema de Administración de Incidencias.";
+        public const string STR_TITULOERROR = "Error en la aplicación.";
+        public static readonly uint COLOR_VERDE = (uint)Aplicacion.HexadecimalADecimal("99FF33");
+        public static readonly uint COLOR_NARANJA = (uint)Aplicacion.HexadecimalADecimal("FF9933");
+        public static readonly uint COLOR_VERDE2 = (uint)Aplicacion.HexadecimalADecimal("CCFF00");
+        public static readonly uint COLOR_ROJO = (uint)Aplicacion.HexadecimalADecimal("FF0000");
+        public static readonly uint COLOR_AMARILLO = (uint)Aplicacion.HexadecimalADecimal("FFFF33");
 
         #endregion
     }

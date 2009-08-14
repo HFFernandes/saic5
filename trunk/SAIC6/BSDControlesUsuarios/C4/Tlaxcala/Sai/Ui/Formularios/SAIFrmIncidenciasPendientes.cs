@@ -20,9 +20,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             InitializeComponent();
             Width = Screen.GetWorkingArea(this).Width;
-            //var intReg = saiReport1.reportControl.EnableDragDrop("SAIC4:iPendientes",
-            //                              XTPReportDragDrop.xtpReportAllowDrag |
-            //                              XTPReportDragDrop.xtpReportAllowDrop);
             saiReport1.btnLigarIncidencias.Click += btnLigarIncidencias_Click;
             saiReport1.btnDespacharIncidencias.Click += btnDespacharIncidencias_Click;
             saiReport1.btnBajaUnidad.Click += btnBajaUnidad_Click;
@@ -37,10 +34,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void reportControl_RowDblClick(object sender, AxXtremeReportControl._DReportControlEvents_RowDblClickEvent e)
         {
-            //TODO: Guardar un registro en la tabla de DespachoIncidencia ??
             //Recuperar el folio y generar una instancia de la entidad para
             //pasarla al nuevo formulario
-
             var incidencia = IncidenciaMapper.Instance().GetOne(Convert.ToInt32(e.row.Record[0].Value));
             if (incidencia != null)
             {
@@ -58,6 +53,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void btnDespacharIncidencias_Click(object sender, EventArgs e)
         {
+            //Recuperar el folio y generar una instancia de la entidad para
+            //pasarla al nuevo formulario
             for (int i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
             {
                 var incidencia = IncidenciaMapper.Instance().GetOne(Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
@@ -75,7 +72,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 lstIncidenciasPorLigar.Add(Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
             }
+
             //Mostrar ventana para la seleccion del padre
+            var ligarIncidencias = new SAIFrmLigarIncidencias(lstIncidenciasPorLigar);
+            var dialogResult = ligarIncidencias.ShowDialog(this);
+            if (dialogResult == DialogResult.OK)
+            {
+
+            }
         }
 
         private void SAIFrmIncidenciasPendientes_Load(object sender, EventArgs e)
@@ -86,22 +90,21 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             saiReport1.btnSeparador2.Visible = false;
 
             //Falta mostrar la prioridad del incidente
-            saiReport1.AgregarColumna(0, "ID", 20, false, false, false);
-            saiReport1.AgregarColumna(1, "Folio", 150, true, true, true);
-            saiReport1.AgregarColumna(2, "Hora de Entrada", 200, true, true, true);
-            saiReport1.AgregarColumna(3, "Corporación", 300, true, true, true);
-            saiReport1.AgregarColumna(4, "Tipo de Incidencia", 150, true, true, true);
-            saiReport1.AgregarColumna(5, "Zn", 100, true, true, true);
-            saiReport1.AgregarColumna(6, "Dividido En", 80, true, false, true);
-            saiReport1.AgregarColumna(7, "Pendiente Desde", 150, true, true, true);
-            saiReport1.AgregarColumna(8, "Nombre del Operador", 200, true, true, true);
+            saiReport1.AgregarColumna(0, "ID", 20, false, false, false, false);
+            saiReport1.AgregarColumna(1, "Folio", 150, true, true, true, false);
+            saiReport1.AgregarColumna(2, "Hora de Entrada", 200, true, true, true, false);
+            saiReport1.AgregarColumna(3, "Corporación", 300, true, true, true, false);
+            saiReport1.AgregarColumna(4, "Tipo de Incidencia", 150, true, true, true, false);
+            saiReport1.AgregarColumna(5, "Zn", 100, true, true, true, false);
+            saiReport1.AgregarColumna(6, "Dividido En", 80, true, false, true, false);
+            saiReport1.AgregarColumna(7, "Pendiente Desde", 150, true, true, true, false);
+            saiReport1.AgregarColumna(8, "Nombre del Operador", 200, true, true, true, false);
             ObtenerRegistros();
         }
 
         private void tmrRegistros_Tick(object sender, EventArgs e)
         {
             ObtenerRegistros();
-            //saiReport1.reportControl.Refresh();
             saiReport1.reportControl.Redraw();
 
             saiReport1.btnLigarIncidencias.Enabled = saiReport1.reportControl.SelectedRows.Count > 1;
@@ -115,7 +118,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 //Limpiamos el listado donde se almacenan las incidencias cuyo estado sea pendiente
                 //para iniciar nuevamente el ciclo
                 lstIncidenciasTemporales.Clear();
-                foreach (var incidencia in (IncidenciaMapper.Instance().GetByEstatusIncidencia((int)ESTATUSINCIDENCIAS.PENDIENTE))) //vamos a la base para obtener los registros de estado pendiente
+                foreach (var incidencia in (IncidenciaMapper.Instance().GetBySQLQuery(string.Format(SQL_INCIDENCIASCORPORACION, Aplicacion.UsuarioPersistencia.intCorporacion, (int)ESTATUSINCIDENCIAS.PENDIENTE)))) //vamos a la base para obtener los registros de estado pendiente y de la corporación del usuario
                 {
                     lstIncidenciasTemporales.Add(incidencia);
                     //verificamos que la incidencia no esté ya en la lista de incidencias registradas
@@ -139,7 +142,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 totalCorporaciones += 1;
                         });
 
-                        lstRegistrosReporte.Add(saiReport1.AgregarRegistro(incidencia.Folio,
+                        lstRegistrosReporte.Add(saiReport1.AgregarRegistro(null, incidencia.Folio,
                                                                        incidencia.Folio.ToString(),
                                                                        incidencia.HoraRecepcion.ToShortTimeString(),
                                                                        corporaciones.ToString().Trim().Length > 0 ? corporaciones.ToString().Trim().Remove(corporaciones.Length - 1) : string.Empty,
@@ -203,6 +206,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 saiReport1.reportControl.Records[itm.Record.Index][6].Value =
                                     totalCorporaciones.ToString();
                                 saiReport1.reportControl.Records[itm.Record.Index][7].Value = ObtenerLapso(incidencia.HoraRecepcion);
+
+                                var lapso = DateTime.Now.Subtract(incidencia.HoraRecepcion);
+                                saiReport1.reportControl.Records[itm.Record.Index][7].BackColor = (int)lapso.TotalMinutes < 3 ? ID.COLOR_AMARILLO : ID.COLOR_ROJO;
                             }
                         }
                     }
@@ -241,15 +247,21 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
-        private string ObtenerLapso(DateTime dtFecha)
+        private static string ObtenerLapso(DateTime dtFecha)
         {
             try
             {
+                string strMensaje;
                 var ahora = DateTime.Now;
                 var lapso = ahora.Subtract(dtFecha);
 
-                return string.Format("{0:0} dias {1:0} horas y {2:0} minutos", lapso.TotalDays, lapso.TotalHours,
-                                     lapso.TotalMinutes);
+                if (lapso.TotalHours > 0)
+                    strMensaje = string.Format("{0:0} horas y {1:0} minutos", lapso.TotalHours, lapso.TotalMinutes);
+                else strMensaje = lapso.TotalDays > 0 ? string.Format("{0:0} dias {1:0} horas y {2:0} minutos", lapso.TotalDays,
+                                                                      lapso.TotalHours,
+                                                                      lapso.TotalMinutes) : string.Format("{0:0} minutos", lapso.TotalMinutes);
+
+                return strMensaje;
             }
             catch (Exception)
             {
@@ -259,5 +271,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private const string SQL_CORPORACIONES =
             "SELECT Corporacion.* FROM Corporacion INNER JOIN CorporacionIncidencia ON Corporacion.Clave = CorporacionIncidencia.ClaveCorporacion INNER JOIN Incidencia ON CorporacionIncidencia.Folio = Incidencia.Folio WHERE (Incidencia.Folio = {0})";
+
+        private const string SQL_INCIDENCIASCORPORACION =
+            "SELECT Incidencia.* FROM Incidencia INNER JOIN CorporacionIncidencia ON Incidencia.Folio = CorporacionIncidencia.Folio WHERE (CorporacionIncidencia.ClaveCorporacion = {0}) AND (Incidencia.ClaveEstatus = {1})";
     }
 }

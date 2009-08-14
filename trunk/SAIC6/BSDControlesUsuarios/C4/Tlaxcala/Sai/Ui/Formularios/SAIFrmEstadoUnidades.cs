@@ -62,7 +62,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void tmrRegistros_Tick(object sender, EventArgs e)
         {
             ObtenerRegistros();
-            //saiReport1.reportControl.Refresh();
             saiReport1.reportControl.Redraw();
         }
 
@@ -72,14 +71,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             saiReport1.btnLigarIncidencias.Visible = false;
             saiReport1.btnSeparador2.Visible = false;
 
-            saiReport1.AgregarColumna(0, "ID", 20, false, false, false);
-            saiReport1.AgregarColumna(1, "Folio", 200, true, true, true);
-            saiReport1.AgregarColumna(2, "Unidad", 200, true, true, true);
-            saiReport1.AgregarColumna(3, "Nombre", 200, true, true, true);
-            saiReport1.AgregarColumna(4, "Status", 200, true, true, true);
-            saiReport1.AgregarColumna(5, "Hora", 200, true, true, true);
-            saiReport1.AgregarColumna(6, "Localizacion", 200, true, true, true);
-            saiReport1.AgregarColumna(7, "Motivo", 200, true, true, true);
+            saiReport1.AgregarColumna(0, "ID", 20, false, false, false,false);
+            saiReport1.AgregarColumna(1, "Folio", 200, true, true, true, false);
+            saiReport1.AgregarColumna(2, "Unidad", 200, true, true, true, false);
+            saiReport1.AgregarColumna(3, "Nombre", 200, true, true, true, false);
+            saiReport1.AgregarColumna(4, "Status", 200, true, true, true, false);
+            saiReport1.AgregarColumna(5, "Hora", 200, true, true, true, false);
+            saiReport1.AgregarColumna(6, "Localizacion", 200, true, true, true, false);
+            saiReport1.AgregarColumna(7, "Motivo", 200, true, true, true, false);
             ObtenerRegistros();
         }
 
@@ -98,7 +97,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     if (!lstUnidadesRegistradas.Contains(unidad))
                     {
                         lstUnidadesRegistradas.Add(unidad);
-                        lstRegistrosReporte.Add(saiReport1.AgregarRegistro(unidad.Clave,
+                        lstRegistrosReporte.Add(saiReport1.AgregarRegistro(null,unidad.Clave,
                             string.Empty,
                             unidad.Codigo,
                             string.Empty,
@@ -140,7 +139,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     saiReport1.reportControl.Records[itm.Record.Index][2].Value = unidad.Codigo;
                                     saiReport1.reportControl.Records[itm.Record.Index][3].Value = ID.STR_REGDESC;   //falta el campo para colocar el responsable de la unidad
                                     saiReport1.reportControl.Records[itm.Record.Index][4].Value = strStatus;
-                                    saiReport1.reportControl.Records[itm.Record.Index][4].BackColor = ID.COL_ESTLIBERADA;
+                                    saiReport1.reportControl.Records[itm.Record.Index][4].BackColor = ID.COLOR_VERDE;
                                     saiReport1.reportControl.Records[itm.Record.Index][5].Value = dtHora.ToShortTimeString();
                                     saiReport1.reportControl.Records[itm.Record.Index][6].Value = ID.STR_REGDESC;
                                     saiReport1.reportControl.Records[itm.Record.Index][7].Value = ID.STR_REGDESC;
@@ -153,7 +152,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     strStatus = "Llegada";
 
                                     saiReport1.reportControl.Records[itm.Record.Index][1].Value = unidadDespacho.Folio;
-                                    saiReport1.reportControl.Records[itm.Record.Index][4].BackColor = ID.COL_ESTLLEGADA;
+                                    saiReport1.reportControl.Records[itm.Record.Index][4].BackColor = ID.COLOR_VERDE2;
                                     goto Actualizar;
                                 }
 
@@ -164,7 +163,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                                     saiReport1.reportControl.Records[itm.Record.Index][1].Value = unidadDespacho.Folio;
                                     saiReport1.reportControl.Records[itm.Record.Index][4].BackColor =
-                                        ID.COL_ESTDESPACHADA;
+                                        ID.COLOR_NARANJA;
                                     goto Actualizar;
                                 }
 
@@ -192,7 +191,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 saiReport1.reportControl.Records[itm.Record.Index][2].Value = unidad.Codigo;
                                 saiReport1.reportControl.Records[itm.Record.Index][3].Value = ID.STR_REGDESC;   //falta el campo para colocar el responsable de la unidad
                                 saiReport1.reportControl.Records[itm.Record.Index][4].Value = strStatus;
-                                saiReport1.reportControl.Records[itm.Record.Index][4].BackColor = ID.COL_ESTLIBERADA;
+                                saiReport1.reportControl.Records[itm.Record.Index][4].BackColor = ID.COLOR_VERDE;
                                 saiReport1.reportControl.Records[itm.Record.Index][5].Value = dtHora.ToShortTimeString();
                                 saiReport1.reportControl.Records[itm.Record.Index][6].Value = ID.STR_REGDESC;
                                 saiReport1.reportControl.Records[itm.Record.Index][7].Value = ID.STR_REGDESC;

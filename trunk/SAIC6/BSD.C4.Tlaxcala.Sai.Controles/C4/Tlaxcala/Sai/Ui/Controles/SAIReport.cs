@@ -33,11 +33,70 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         /// <param name="blnCambiaTamaño">Propiedad que establece si el usuario podrá cambiar de tamaño la columna</param>
         /// <param name="blnVisible">Propiedad que establece si la columna sera o no visible</param>
         /// <param name="blnMostrarEnChooser">Propiedad que establece si la columna aparece o no en el selector de campos cuando esta oculta o agrupada</param>
-        public void AgregarColumna(int intIndice, string strCaption, int intTamaño, bool blnCambiaTamaño, [Optional, DefaultParameterValue(true)] bool blnVisible, [Optional, DefaultParameterValue(true)] bool blnMostrarEnChooser)
+        /// <param name="blnTreeColumn">Propiedad que establece si la columna será raiz de más nodos para generar un tree</param>
+        /// <param name="blnPlusMinus"></param>
+        /// <param name="intBloque"></param>
+        public void AgregarColumna(int intIndice, string strCaption, int intTamaño, bool blnCambiaTamaño, bool blnVisible, bool blnMostrarEnChooser, bool blnTreeColumn, bool blnPlusMinus, int intBloque)
         {
             var columna = reportControl.Columns.Add(intIndice, strCaption, intTamaño, blnCambiaTamaño);
             columna.Visible = blnVisible;
             columna.ShowInFieldChooser = blnMostrarEnChooser;
+            columna.TreeColumn = blnTreeColumn;
+
+            if (blnPlusMinus)
+            {
+                columna.PlusMinus = true;
+                columna.NextVisualBlock = intBloque;
+                columna.Expanded = true;
+            }
+        }
+
+        /// <summary>
+        /// Método para la creación de una nueva columna del control en base a los parametros
+        /// </summary>
+        /// <param name="intIndice">Posición que ocupará en la colección de columnas</param>
+        /// <param name="strCaption">Texto que representa el encabezado de la columna</param>
+        /// <param name="intTamaño">Tamaño en pixeles que ocupará la columna</param>
+        /// <param name="blnCambiaTamaño">Propiedad que establece si el usuario podrá cambiar de tamaño la columna</param>
+        /// <param name="blnVisible">Propiedad que establece si la columna sera o no visible</param>
+        /// <param name="blnMostrarEnChooser">Propiedad que establece si la columna aparece o no en el selector de campos cuando esta oculta o agrupada</param>
+        /// <param name="blnTreeColumn">Propiedad que establece si la columna será raiz de más nodos para generar un tree</param>
+        public void AgregarColumna(int intIndice, string strCaption, int intTamaño, bool blnCambiaTamaño, bool blnVisible, bool blnMostrarEnChooser, bool blnTreeColumn)
+        {
+            var columna = reportControl.Columns.Add(intIndice, strCaption, intTamaño, blnCambiaTamaño);
+            columna.Visible = blnVisible;
+            columna.ShowInFieldChooser = blnMostrarEnChooser;
+            columna.TreeColumn = blnTreeColumn;
+        }
+
+        /// <summary>
+        /// Método para la creación de una nueva columna del control en base a los parametros
+        /// </summary>
+        /// <param name="intIndice">Posición que ocupará en la colección de columnas</param>
+        /// <param name="strCaption">Texto que representa el encabezado de la columna</param>
+        /// <param name="intTamaño">Tamaño en pixeles que ocupará la columna</param>
+        /// <param name="blnCambiaTamaño">Propiedad que establece si el usuario podrá cambiar de tamaño la columna</param>
+        /// <param name="blnVisible">Propiedad que establece si la columna sera o no visible</param>
+        /// <param name="blnMostrarEnChooser">Propiedad que establece si la columna aparece o no en el selector de campos cuando esta oculta o agrupada</param>
+        public void AgregarColumna(int intIndice, string strCaption, int intTamaño, bool blnCambiaTamaño, bool blnVisible, bool blnMostrarEnChooser)
+        {
+            var columna = reportControl.Columns.Add(intIndice, strCaption, intTamaño, blnCambiaTamaño);
+            columna.Visible = blnVisible;
+            columna.ShowInFieldChooser = blnMostrarEnChooser;
+        }
+
+        /// <summary>
+        /// Método para la creación de una nueva columna del control en base a los parametros
+        /// </summary>
+        /// <param name="intIndice">Posición que ocupará en la colección de columnas</param>
+        /// <param name="strCaption">Texto que representa el encabezado de la columna</param>
+        /// <param name="intTamaño">Tamaño en pixeles que ocupará la columna</param>
+        /// <param name="blnCambiaTamaño">Propiedad que establece si el usuario podrá cambiar de tamaño la columna</param>
+        /// <param name="blnVisible">Propiedad que establece si la columna sera o no visible</param>
+        public void AgregarColumna(int intIndice, string strCaption, int intTamaño, bool blnCambiaTamaño, bool blnVisible)
+        {
+            var columna = reportControl.Columns.Add(intIndice, strCaption, intTamaño, blnCambiaTamaño);
+            columna.Visible = blnVisible;
         }
 
         /// <summary>
@@ -51,11 +110,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         /// <summary>
         /// Método para la creación de un nuevo registro en base a los parametros
         /// </summary>
+        /// <param name="rPadre">Registro superior al cual pertenece</param>
         /// <param name="intID">Identificador</param>
         /// <param name="strSubItems">Colección de sub-elementos para el registro</param>
-        public ReportRecord AgregarRegistro(int intID, params string[] strSubItems)
+        public ReportRecord AgregarRegistro(ReportRecord rPadre, int intID, params string[] strSubItems)
         {
-            var registro = reportControl.Records.Add();
+            var registro = rPadre != null ? rPadre.Childs.Add() : reportControl.Records.Add();
             var elemento = registro.AddItem(intID);
 
             if (strSubItems.Length > 0)
