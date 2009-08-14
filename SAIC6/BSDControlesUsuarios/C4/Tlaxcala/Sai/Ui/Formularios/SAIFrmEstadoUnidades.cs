@@ -70,13 +70,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             saiReport1.btnSeparador2.Visible = false;
 
             saiReport1.AgregarColumna(0, "ID", 20, false, false, false, false);
-            saiReport1.AgregarColumna(1, "Folio", 200, true, true, true, false);
-            saiReport1.AgregarColumna(2, "Unidad", 200, true, true, true, false);
+            saiReport1.AgregarColumna(1, "Folio", 150, true, true, true, false);
+            saiReport1.AgregarColumna(2, "Unidad", 100, true, true, true, false);
             saiReport1.AgregarColumna(3, "Nombre", 200, true, true, true, false);
-            saiReport1.AgregarColumna(4, "Status", 200, true, true, true, false);
-            saiReport1.AgregarColumna(5, "Hora", 200, true, true, true, false);
-            saiReport1.AgregarColumna(6, "Localizacion", 200, true, true, true, false);
-            saiReport1.AgregarColumna(7, "Motivo", 200, true, true, true, false);
+            saiReport1.AgregarColumna(4, "Status", 100, true, true, true, false);
+            saiReport1.AgregarColumna(5, "Hora", 100, true, true, true, false);
+            saiReport1.AgregarColumna(6, "Localizacion", 250, true, true, true, false);
+            saiReport1.AgregarColumna(7, "Motivo", 250, true, true, true, false);
             ObtenerRegistros();
         }
 

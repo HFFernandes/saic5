@@ -91,13 +91,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             //Definir las columnas del listado y obtener los registros
             //falta mostrar la unidad asignada
             saiReport1.AgregarColumna(0, "ID", 20, false, false, false, false);
-            saiReport1.AgregarColumna(1, "No de Teléfono", 200, true, true, true, false);
-            saiReport1.AgregarColumna(2, "Status", 200, true, true, true, false);  //Indica si esta "libre", "despchada" o "llegada"
-            saiReport1.AgregarColumna(3, "Hora de Entrada", 200, true, true, true, false);
-            saiReport1.AgregarColumna(4, "Ubicación", 200, true, true, true, false, true, 2);
-            saiReport1.AgregarColumna(5, "Tipo de Incidencia", 200, true, true, true, false);
-            saiReport1.AgregarColumna(6, "Dividido En", 200, true, true, true, false);
-            saiReport1.AgregarColumna(7, "Folio", 200, true, true, true, false);
+            saiReport1.AgregarColumna(1, "No de Teléfono", 100, true, true, true, false);
+            saiReport1.AgregarColumna(2, "Status", 100, true, true, true, false);  //Indica si esta "libre", "despchada" o "llegada"
+            saiReport1.AgregarColumna(3, "Hora de Entrada", 100, true, true, true, false);
+            saiReport1.AgregarColumna(4, "Ubicación", 250, true, true, true, false, true, 2);
+            saiReport1.AgregarColumna(5, "Tipo de Incidencia", 250, true, true, true, false);
+            saiReport1.AgregarColumna(6, "Dividido En", 70, true, true, true, false);
+            saiReport1.AgregarColumna(7, "Folio", 150, true, true, true, false);
             ObtenerRegistros();
         }
 
