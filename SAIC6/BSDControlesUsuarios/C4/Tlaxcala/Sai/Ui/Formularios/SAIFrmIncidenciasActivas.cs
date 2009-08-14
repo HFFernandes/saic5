@@ -53,7 +53,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             var incidencia = IncidenciaMapper.Instance().GetOne(Convert.ToInt32(e.row.Record[0].Value));
             if (incidencia != null)
             {
-
+                //TODO: Definir las acciones
             }
         }
 
