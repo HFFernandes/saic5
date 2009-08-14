@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
+using BSD.C4.Tlaxcala.Sai.Mapa;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -23,14 +24,18 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         public SAIFrmIncidencia066Despacho(Incidencia entIncidencia) : base(entIncidencia,true)
         {
 
-            try
-            {
-                if (!Aplicacion.UsuarioPersistencia.intCorporacion.HasValue)
-                {
-                    throw new SAIExcepcion("No es posible hacer el despacho de la incidencia, falta corporación del usuario",this);
-                }
+            //try
+            //{
+            //    try
+            //    {
+               
                                            
                 InitializeComponent();
+                if (!Aplicacion.UsuarioPersistencia.intCorporacion.HasValue)
+                {
+                    Controlador.RevisaInstancias(this);
+                    throw new SAIExcepcion("No es posible hacer el despacho de la incidencia, falta corporación del usuario. Favor de acudir al administrador del sistema", this);
+                }
                 this.lblTitulo.Text = "DESPACHO DE INCIDENCIA 066";
                 this.SuspendLayout();
                 this.FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -126,10 +131,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
 
                 //***********************************************
-                
 
-            }
-            catch(Exception  ex) { }
+
+            //    }
+            //    catch (System.Exception ex)
+            //    {
+            //        throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+            //    }
+            //}
+            //catch (SAIExcepcion) { }
         }
 
         private void chkHoraLiberacion_CheckedChanged(object sender, EventArgs e)

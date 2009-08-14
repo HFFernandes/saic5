@@ -189,6 +189,10 @@
       <DependentUpon>SAIFrmIncidencia066.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidencia066Despacho.resx">
+      <DependentUpon>SAIFrmIncidencia066Despacho.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmLigarIncidencias.resx">
       <DependentUpon>SAIFrmLigarIncidencias.cs</DependentUpon>
       <SubType>Designer</SubType>
