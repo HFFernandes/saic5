@@ -113,12 +113,28 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void ObtenerRegistros()
         {
+            IncidenciaList resIncidencias;
+
             try
             {
                 //Limpiamos el listado donde se almacenan las incidencias cuyo estado sea pendiente
                 //para iniciar nuevamente el ciclo
                 lstIncidenciasTemporales.Clear();
-                foreach (var incidencia in (IncidenciaMapper.Instance().GetBySQLQuery(string.Format(SQL_INCIDENCIASCORPORACION, Aplicacion.UsuarioPersistencia.intCorporacion, (int)ESTATUSINCIDENCIAS.PENDIENTE)))) //vamos a la base para obtener los registros de estado pendiente y de la corporación del usuario
+                if (Aplicacion.UsuarioPersistencia.blnEsDespachador == true)
+                {
+                    resIncidencias = IncidenciaMapper.Instance().GetBySQLQuery(string.Format(SQL_INCIDENCIASCORPORACION,
+                                                                                Aplicacion.UsuarioPersistencia.
+                                                                                    intCorporacion,
+                                                                                (int)ESTATUSINCIDENCIAS.PENDIENTE));
+                }
+                else
+                {
+                    resIncidencias =
+                        IncidenciaMapper.Instance().GetBySQLQuery(string.Format(SQL_INCIDENCIAS,
+                                                                                (int)ESTATUSINCIDENCIAS.PENDIENTE));
+                }
+
+                foreach (var incidencia in resIncidencias) //vamos a la base para obtener los registros de estado pendiente y de la corporación del usuario
                 {
                     lstIncidenciasTemporales.Add(incidencia);
                     //verificamos que la incidencia no esté ya en la lista de incidencias registradas
@@ -192,7 +208,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 saiReport1.reportControl.Records[itm.Record.Index][3].Value =
                                     corporaciones.ToString().Trim().Length > 0
                                         ? corporaciones.ToString().Trim().Remove(corporaciones.Length - 1)
-                                        : ID.STR_REGDESC;
+                                        : ID.STR_DESCONOCIDO;
 
                                 if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
                                     saiReport1.reportControl.Records[itm.Record.Index][4].Value =
@@ -201,7 +217,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 saiReport1.reportControl.Records[itm.Record.Index][5].Value =
                                     zonas.ToString().Trim().Length > 0
                                         ? zonas.ToString().Trim().Remove(zonas.Length - 1)
-                                        : ID.STR_REGDESC;
+                                        : ID.STR_DESCONOCIDO;
 
                                 saiReport1.reportControl.Records[itm.Record.Index][6].Value =
                                     totalCorporaciones.ToString();
@@ -274,5 +290,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private const string SQL_INCIDENCIASCORPORACION =
             "SELECT Incidencia.* FROM Incidencia INNER JOIN CorporacionIncidencia ON Incidencia.Folio = CorporacionIncidencia.Folio WHERE (CorporacionIncidencia.ClaveCorporacion = {0}) AND (Incidencia.ClaveEstatus = {1})";
+
+        private const string SQL_INCIDENCIAS =
+            "SELECT Incidencia.* FROM Incidencia WHERE (Incidencia.ClaveEstatus = {0})";
     }
 }

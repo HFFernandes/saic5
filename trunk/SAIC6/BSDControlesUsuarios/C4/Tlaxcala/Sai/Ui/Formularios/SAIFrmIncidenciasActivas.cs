@@ -121,7 +121,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 //Limpiamos el listado donde se almacenan las incidencias cuyo estado sea activo
                 //para iniciar nuevamente el ciclo
                 lstIncidenciasTemporales.Clear();
-
                 if (Aplicacion.UsuarioPersistencia.blnEsDespachador == true)
                 {
                     resIncidencias = IncidenciaMapper.Instance().GetBySQLQuery(string.Format(SQL_INCIDENCIASCORPORACION,
@@ -135,6 +134,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         IncidenciaMapper.Instance().GetBySQLQuery(string.Format(SQL_INCIDENCIAS,
                                                                                 (int)ESTATUSINCIDENCIAS.ACTIVA));
                 }
+
                 foreach (var incidencia in resIncidencias) //vamos a la base para obtener los registros de estado activo
                 {
                     lstIncidenciasTemporales.Add(incidencia);
@@ -205,7 +205,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 saiReport1.reportControl.Records[itm.Record.Index][6].Value =
                                     corporaciones.ToString().Trim().Length > 0
                                         ? corporaciones.ToString().Trim().Remove(corporaciones.Length - 1)
-                                        : ID.STR_REGDESC;
+                                        : ID.STR_DESCONOCIDO;
                             }
                         }
                     }
