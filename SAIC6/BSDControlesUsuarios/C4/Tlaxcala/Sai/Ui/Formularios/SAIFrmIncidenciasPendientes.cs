@@ -6,6 +6,7 @@ using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
 using XtremeReportControl;
 using System.Text;
+using System.Diagnostics;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -78,7 +79,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             var dialogResult = ligarIncidencias.ShowDialog(this);
             if (dialogResult == DialogResult.OK)
             {
-
+                Debug.WriteLine(ligarIncidencias.strFolioPadre);
             }
         }
 
@@ -161,9 +162,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         lstRegistrosReporte.Add(saiReport1.AgregarRegistro(null, incidencia.Folio,
                                                                        incidencia.Folio.ToString(),
                                                                        incidencia.HoraRecepcion.ToShortTimeString(),
-                                                                       corporaciones.ToString().Trim().Length > 0 ? corporaciones.ToString().Trim().Remove(corporaciones.Length - 1) : string.Empty,
+                                                                       corporaciones.ToString().Trim().Length > 1 ? corporaciones.ToString().Trim().Remove(corporaciones.Length - 1) : string.Empty,
                                                                        TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? 1).Descripcion,
-                                                                       zonas.ToString().Trim().Length > 0 ? zonas.ToString().Trim().Remove(zonas.Length - 1) : string.Empty,
+                                                                       zonas.ToString().Trim().Length > 1 ? zonas.ToString().Trim().Remove(zonas.Length - 1) : string.Empty,
                                                                        totalCorporaciones.ToString(),
                                                                        ObtenerLapso(incidencia.HoraRecepcion),
                                                                        UsuarioMapper.Instance().GetOne(incidencia.ClaveUsuario).NombreUsuario));
@@ -206,7 +207,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 });
 
                                 saiReport1.reportControl.Records[itm.Record.Index][3].Value =
-                                    corporaciones.ToString().Trim().Length > 0
+                                    corporaciones.ToString().Trim().Length > 1
                                         ? corporaciones.ToString().Trim().Remove(corporaciones.Length - 1)
                                         : ID.STR_DESCONOCIDO;
 
@@ -215,7 +216,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                         TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? 1).Descripcion;
 
                                 saiReport1.reportControl.Records[itm.Record.Index][5].Value =
-                                    zonas.ToString().Trim().Length > 0
+                                    zonas.ToString().Trim().Length > 1
                                         ? zonas.ToString().Trim().Remove(zonas.Length - 1)
                                         : ID.STR_DESCONOCIDO;
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Windows.Forms;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
@@ -75,7 +76,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 lstIncidenciasPorLigar.Add(Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
             }
+            
             //Mostrar ventana para la seleccion del padre
+            var ligarIncidencias = new SAIFrmLigarIncidencias(lstIncidenciasPorLigar);
+            var dialogResult = ligarIncidencias.ShowDialog(this);
+            if (dialogResult == DialogResult.OK)
+            {
+                Debug.WriteLine(ligarIncidencias.strFolioPadre);
+            }
         }
 
         void SAIFrmIncidenciasActivas_Load(object sender, EventArgs e)
@@ -110,6 +118,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             ObtenerRegistros();
             saiReport1.reportControl.Redraw();
+
+            saiReport1.btnLigarIncidencias.Enabled = saiReport1.reportControl.SelectedRows.Count > 1;
+            saiReport1.btnDespacharIncidencias.Enabled = saiReport1.reportControl.SelectedRows.Count >= 1;
         }
 
         private void ObtenerRegistros()
@@ -157,7 +168,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                                                        incidencia.HoraRecepcion.ToShortTimeString(),
                                                                        incidencia.Direccion,
                                                                        TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? 1).Descripcion,
-                                                                       corporaciones.ToString().Trim().Length > 0 ? corporaciones.ToString().Trim().Remove(corporaciones.Length - 1) : string.Empty,
+                                                                       corporaciones.ToString().Trim().Length > 1 ? corporaciones.ToString().Trim().Remove(corporaciones.Length - 1) : string.Empty,
                                                                        incidencia.Folio.ToString()));
                     }
                     else
@@ -203,7 +214,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 });
 
                                 saiReport1.reportControl.Records[itm.Record.Index][6].Value =
-                                    corporaciones.ToString().Trim().Length > 0
+                                    corporaciones.ToString().Trim().Length > 1
                                         ? corporaciones.ToString().Trim().Remove(corporaciones.Length - 1)
                                         : ID.STR_DESCONOCIDO;
                             }

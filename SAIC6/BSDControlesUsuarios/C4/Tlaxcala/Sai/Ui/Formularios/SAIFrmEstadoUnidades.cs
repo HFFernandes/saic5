@@ -31,8 +31,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             lstUnidadesRegistradas = new List<Unidad>();
             lstRegistrosReporte = new List<ReportRecord>();
 
-            SAIFrmPruebas pruebas = new SAIFrmPruebas();
-            pruebas.Show();
+            //SAIFrmPruebas pruebas = new SAIFrmPruebas();
+            //pruebas.Show();
         }
 
         void reportControl_RowDblClick(object sender, AxXtremeReportControl._DReportControlEvents_RowDblClickEvent e)
