@@ -66,7 +66,7 @@ namespace BSD.C4.Tlaxcala.Sai
                     {
                         UsuarioCorporacionObjectList usuarioCorporacion =
                             UsuarioCorporacionMapper.Instance().GetByUsuario(intClaveUsuario);
-                        if (usuarioCorporacion != null)
+                        if (usuarioCorporacion != null && usuarioCorporacion.Count > 0)
                         {
                             return usuarioCorporacion[0].ClaveCorporacion;
                         }

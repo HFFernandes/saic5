@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using Microsoft.NetEnterpriseServers;
 using XtremeCommandBars;
+using BSD.C4.Tlaxcala.Sai.Excepciones;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -89,25 +90,37 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                         //Código de prueba
                         Sai.Dal.Rules.Entities.Incidencia entIncidencia = Sai.Dal.Rules.Mappers.IncidenciaMapper.Instance().GetOne(1000490);
-                        //Sai.Dal.Rules.Entities.IncidenciaList lstIncidencias = Sai.Dal.Rules.Mappers.IncidenciaMapper.Instance().GetOne(1000490);
-
-                        //entIncidencia = lstIncidencias[0];
-
-                        //SAIFrmIncidencia066Despacho frmIncidencia066Despacho = new SAIFrmIncidencia066Despacho(entIncidencia);
-                        //frmIncidencia066Despacho.Show(this);
-
+                       
+                        try
+                        {
+                            try
+                            {
+                                    SAIFrmIncidencia066Despacho frmIncidencia066Despacho = new SAIFrmIncidencia066Despacho(entIncidencia);
+                                    frmIncidencia066Despacho.Show(this);
+                            }
+                            catch (System.Exception ex)
+                            {
+                                throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                            }
+                        }
+                        catch (SAIExcepcion) { }
 
                     }
                     else if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
                         Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
                     {
-                        SAIFrmIncidencia066 frmIncidencia066 = new SAIFrmIncidencia066();
-                        frmIncidencia066.Show(this);
+
+                        if (Aplicacion.VentanasIncidencias.Count == 0)
+                        {
+                            SAIFrmIncidencia066 frmIncidencia066 = new SAIFrmIncidencia066();
+                            frmIncidencia066.Show(this);
+                        }
 
                     }
                     else if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
                         Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                     {
+
                         SAIFrmIncidencia089 frmIncidencia089 = new SAIFrmIncidencia089();
                         frmIncidencia089.Show(this);
 
