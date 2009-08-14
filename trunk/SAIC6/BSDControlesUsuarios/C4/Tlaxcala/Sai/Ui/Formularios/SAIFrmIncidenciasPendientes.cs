@@ -82,6 +82,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             if (dialogResult == DialogResult.OK)
             {
                 Debug.WriteLine(ligarIncidencias.strFolioPadre);
+                //Actualizar el foliopadre, pero antes verificar que no este ligada
+                //organizar los nodos para desplegar el tree
+                //y verificar que al momento del despacho si es hijo se pase la incidencia
+                //del padre..para prevenir el despacho a una misma incidencia
             }
         }
 
@@ -262,7 +266,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (Exception ex)
             {
                 tmrRegistros.Enabled = false;
-                throw new SAIExcepcion(ex.Message, this);
+                //throw new SAIExcepcion(ex.Message, this);
+                base.Close();
             }
         }
 
