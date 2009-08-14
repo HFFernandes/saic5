@@ -126,10 +126,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 if (this._despachoIncidencia.HoraLlegada.HasValue)
                 {
                     this.dtpHoraLlegada.Value = this._despachoIncidencia.HoraLlegada.Value;
+                    this.dtpHoraLlegada.Enabled = true;
+                    this.chkHoraLlegada.Checked = true;
                 }
                 if (this._despachoIncidencia.HoraLiberada.HasValue)
                 {
                     this.dtpHoraLiberacion.Value = this._despachoIncidencia.HoraLiberada.Value;
+                    this.dtpHoraLiberacion.Enabled = true;
+                    this.chkHoraLiberacion.Checked = true;
                 }
 
                 //***********************************************
@@ -146,7 +150,29 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void chkHoraLiberacion_CheckedChanged(object sender, EventArgs e)
         {
-            this.dtpHoraLiberacion.Enabled = this.chkHoraLiberacion.Checked;
+            try
+            {
+                try
+                {
+                    this.dtpHoraLiberacion.Enabled = this.chkHoraLiberacion.Checked;
+                    if (!this.chkHoraLiberacion.Checked && this._despachoIncidencia != null)
+                    {
+                        this._despachoIncidencia.HoraLiberada = null;
+                        DespachoIncidenciaMapper.Instance().Save(this._despachoIncidencia);
+                    }
+                    else if (this._despachoIncidencia != null)
+                    {
+                        this._despachoIncidencia.HoraLiberada = this.dtpHoraLiberacion.Value;
+                        DespachoIncidenciaMapper.Instance().Save(this._despachoIncidencia);
+                    }
+                    
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
+            }
+            catch (SAIExcepcion) { }
         }
 
         private void SAIFrmIncidencia066Despacho_KeyUp(object sender, KeyEventArgs e)
@@ -156,7 +182,30 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void chkHoraLlegada_CheckedChanged(object sender, EventArgs e)
         {
-            this.dtpHoraLlegada.Enabled = this.chkHoraLlegada.Checked;
+            try
+            {
+                try
+                {
+                    this.dtpHoraLlegada.Enabled = this.chkHoraLlegada.Checked;
+                    if (!this.chkHoraLlegada.Checked && this._despachoIncidencia != null)
+                    {
+                        this._despachoIncidencia.HoraLlegada = null;
+                        DespachoIncidenciaMapper.Instance().Save(this._despachoIncidencia);
+                    }
+                    else if (this._despachoIncidencia != null)
+                    {
+                        this._despachoIncidencia.HoraLlegada = this.dtpHoraLlegada.Value;
+                        DespachoIncidenciaMapper.Instance().Save(this._despachoIncidencia);
+                    }
+
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
+            }
+            catch (SAIExcepcion) { }
+           
         }
 
         private void dgvComentarios_KeyUp(object sender, KeyEventArgs e)
@@ -361,7 +410,57 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 try
                 {
-                    this.lblUnidad.Text = this.RegresaValorDrop(e).ToString();
+                    if (this._unidadAsignada != null)
+                    {
+                        if (MessageBox.Show("La incidencia ya tiene una unidad asignada ¿Desea reemplazarla?", "SAI C4", MessageBoxButtons.YesNo) == DialogResult.No)
+                        {
+                            e.Effect = DragDropEffects.None;
+                            return;
+                        }
+                        this.dtpHoraLlegada.Enabled = false;
+                        this.chkHoraLlegada.Checked = false;
+                        this.dtpHoraLiberacion.Enabled = false;
+                        this.chkHoraLiberacion.Enabled = false;
+
+                        if (this._despachoIncidencia != null)
+                        {
+                            this._despachoIncidencia.HoraLlegada = null;
+                            this._despachoIncidencia.HoraLiberada = null;
+                            DespachoIncidenciaMapper.Instance().Save(this._despachoIncidencia);
+                        }
+
+                    }
+
+                    this._unidadAsignada = UnidadMapper.Instance().GetOne(int.Parse(this.RegresaValorDrop(e).ToString()));
+
+                    if (this._despachoIncidencia == null)
+                    {
+                        if (this._entCorporacionIncidencia == null)
+                        {
+                            this._entCorporacionIncidencia = new CorporacionIncidencia();
+                            this._entCorporacionIncidencia.Folio = this._entIncidencia.Folio;
+                            this._entCorporacionIncidencia.ClaveCorporacion = this._entCorporacion.Clave;
+                            CorporacionIncidenciaMapper.Instance().Insert(this._entCorporacionIncidencia);
+
+                        }
+
+                        this._despachoIncidencia = new DespachoIncidencia();
+
+                        this._despachoIncidencia.ClaveUsuario = Aplicacion.UsuarioPersistencia.intClaveUsuario;
+                        this._despachoIncidencia.ClaveCorporacion = this._entCorporacion.Clave;
+                        this._despachoIncidencia.Folio = this._entIncidencia.Folio;
+                        this._despachoIncidencia.ClaveUnidad = this._unidadAsignada.Clave;
+                        DespachoIncidenciaMapper.Instance().Insert(this._despachoIncidencia);
+
+                    }
+                    else
+                    {
+                        this._despachoIncidencia.ClaveUnidad = this._unidadAsignada.Clave;
+                        DespachoIncidenciaMapper.Instance().Save(this._despachoIncidencia);
+                    }
+
+                    this.lblUnidad.Text  = "Unidad " + this._unidadAsignada.Codigo;
+                    
                 }
                 catch (System.Exception ex)
                 {
@@ -396,10 +495,67 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         }
         
 
-
         private void pnlUnidadAsignada_DragOver(object sender, DragEventArgs e)
         {
+            if (this.RegresaValorDrop(e) != null)
+            {
+                e.Effect = DragDropEffects.Copy;
+            }
+        }
 
+        private void pnlUnidadAsignada_DragDrop(object sender, DragEventArgs e)
+        {
+            try
+            {
+                try
+                {
+                    if (this._unidadApoyo != null)
+                    {
+                        if (MessageBox.Show("La incidencia ya tiene una unidad de apoyo asignada ¿Desea reemplazarla?", "SAI C4", MessageBoxButtons.YesNo) == DialogResult.No)
+                        {
+                            e.Effect = DragDropEffects.None;
+                            return;
+                        }
+                       
+                    }
+
+                    this._unidadApoyo  = UnidadMapper.Instance().GetOne(int.Parse(this.RegresaValorDrop(e).ToString()));
+
+                    if (this._despachoIncidencia == null)
+                    {
+                        if (this._entCorporacionIncidencia == null)
+                        {
+                            this._entCorporacionIncidencia = new CorporacionIncidencia();
+                            this._entCorporacionIncidencia.Folio = this._entIncidencia.Folio;
+                            this._entCorporacionIncidencia.ClaveCorporacion = this._entCorporacion.Clave;
+                            CorporacionIncidenciaMapper.Instance().Insert(this._entCorporacionIncidencia);
+
+                        }
+
+                        this._despachoIncidencia = new DespachoIncidencia();
+
+                        this._despachoIncidencia.ClaveUsuario = Aplicacion.UsuarioPersistencia.intClaveUsuario;
+                        this._despachoIncidencia.ClaveCorporacion = this._entCorporacion.Clave;
+                        this._despachoIncidencia.Folio = this._entIncidencia.Folio;
+                        this._despachoIncidencia.ClaveUnidadApoyo = this._unidadApoyo.Clave;
+                        DespachoIncidenciaMapper.Instance().Insert(this._despachoIncidencia);
+
+                    }
+                    else
+                    {
+                        this._despachoIncidencia.ClaveUnidadApoyo = this._unidadApoyo.Clave;
+                        DespachoIncidenciaMapper.Instance().Save(this._despachoIncidencia);
+                    }
+
+                    this.lblUnidadApoyo.Text = "Unidad " + this._unidadApoyo.Codigo;
+
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
+            }
+            catch (SAIExcepcion) { }
         }
 
       
