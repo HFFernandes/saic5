@@ -40,7 +40,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             var incidencia = IncidenciaMapper.Instance().GetOne(Convert.ToInt32(e.row.Record[0].Value));
             if (incidencia != null)
             {
-
+                var incidenciaDespacho = new SAIFrmIncidencia066Despacho(incidencia);
+                incidenciaDespacho.Show();
             }
         }
 
@@ -61,7 +62,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 var incidencia = IncidenciaMapper.Instance().GetOne(Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
                 if (incidencia != null)
                 {
-
+                    var incidenciaDespacho = new SAIFrmIncidencia066Despacho(incidencia);
+                    incidenciaDespacho.Show();
                 }
             }
         }
