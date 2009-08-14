@@ -47,10 +47,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void reportControl_RowDblClick(object sender, AxXtremeReportControl._DReportControlEvents_RowDblClickEvent e)
         {
-            //TODO: Guardar un registro en la tabla de DespachoIncidencia ??
             //Recuperar el folio y generar una instancia de la entidad para
             //pasarla al nuevo formulario
-
             var incidencia = IncidenciaMapper.Instance().GetOne(Convert.ToInt32(e.row.Record[0].Value));
             if (incidencia != null)
             {
@@ -92,14 +90,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
             //Definir las columnas del listado y obtener los registros
             //falta mostrar la unidad asignada
-            saiReport1.AgregarColumna(0, "ID", 20, false, false, false);
-            saiReport1.AgregarColumna(1, "No de Teléfono", 200, true, true, true);
-            saiReport1.AgregarColumna(2, "Status", 200, true, true, true);  //Indica si esta "libre", "despchada" o "llegada"
-            saiReport1.AgregarColumna(3, "Hora de Entrada", 200, true, true, true);
-            saiReport1.AgregarColumna(4, "Ubicación", 200, true, true, true);
-            saiReport1.AgregarColumna(5, "Tipo de Incidencia", 200, true, true, true);
-            saiReport1.AgregarColumna(6, "Dividido En", 200, true, true, true);
-            saiReport1.AgregarColumna(7, "Folio", 200, true, true, true);
+            saiReport1.AgregarColumna(0, "ID", 20, false, false, false, false);
+            saiReport1.AgregarColumna(1, "No de Teléfono", 200, true, true, true, false);
+            saiReport1.AgregarColumna(2, "Status", 200, true, true, true, false);  //Indica si esta "libre", "despchada" o "llegada"
+            saiReport1.AgregarColumna(3, "Hora de Entrada", 200, true, true, true, false);
+            saiReport1.AgregarColumna(4, "Ubicación", 200, true, true, true, false, true, 2);
+            saiReport1.AgregarColumna(5, "Tipo de Incidencia", 200, true, true, true, false);
+            saiReport1.AgregarColumna(6, "Dividido En", 200, true, true, true, false);
+            saiReport1.AgregarColumna(7, "Folio", 200, true, true, true, false);
             ObtenerRegistros();
         }
 
@@ -111,18 +109,33 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void tmrRegistros_Tick(object sender, EventArgs e)
         {
             ObtenerRegistros();
-            //saiReport1.reportControl.Refresh();
             saiReport1.reportControl.Redraw();
         }
 
         private void ObtenerRegistros()
         {
+            IncidenciaList resIncidencias;
+
             try
             {
                 //Limpiamos el listado donde se almacenan las incidencias cuyo estado sea activo
                 //para iniciar nuevamente el ciclo
                 lstIncidenciasTemporales.Clear();
-                foreach (var incidencia in (IncidenciaMapper.Instance().GetByEstatusIncidencia((int)ESTATUSINCIDENCIAS.ACTIVA))) //vamos a la base para obtener los registros de estado activo
+
+                if (Aplicacion.UsuarioPersistencia.blnEsDespachador == true)
+                {
+                    resIncidencias = IncidenciaMapper.Instance().GetBySQLQuery(string.Format(SQL_INCIDENCIASCORPORACION,
+                                                                                Aplicacion.UsuarioPersistencia.
+                                                                                    intCorporacion,
+                                                                                (int)ESTATUSINCIDENCIAS.ACTIVA));
+                }
+                else
+                {
+                    resIncidencias =
+                        IncidenciaMapper.Instance().GetBySQLQuery(string.Format(SQL_INCIDENCIAS,
+                                                                                (int)ESTATUSINCIDENCIAS.ACTIVA));
+                }
+                foreach (var incidencia in resIncidencias) //vamos a la base para obtener los registros de estado activo
                 {
                     lstIncidenciasTemporales.Add(incidencia);
                     //verificamos que la incidencia no esté ya en la lista de incidencias registradas
@@ -138,7 +151,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             corporaciones.Append(",");
                         });
 
-                        lstRegistrosReporte.Add(saiReport1.AgregarRegistro(incidencia.Folio,
+                        lstRegistrosReporte.Add(saiReport1.AgregarRegistro(null, incidencia.Folio,
                                                                        incidencia.Telefono,
                                                                        EstatusIncidenciaMapper.Instance().GetOne(incidencia.ClaveEstatus).Descripcion,
                                                                        incidencia.HoraRecepcion.ToShortTimeString(),
@@ -233,5 +246,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private const string SQL_CORPORACIONES =
             "SELECT Corporacion.* FROM Corporacion INNER JOIN CorporacionIncidencia ON Corporacion.Clave = CorporacionIncidencia.ClaveCorporacion INNER JOIN Incidencia ON CorporacionIncidencia.Folio = Incidencia.Folio WHERE (Incidencia.Folio = {0})";
+
+        private const string SQL_INCIDENCIASCORPORACION =
+            "SELECT Incidencia.* FROM Incidencia INNER JOIN CorporacionIncidencia ON Incidencia.Folio = CorporacionIncidencia.Folio WHERE (CorporacionIncidencia.ClaveCorporacion = {0}) AND (Incidencia.ClaveEstatus = {1})";
+
+        private const string SQL_INCIDENCIAS =
+            "SELECT Incidencia.* FROM Incidencia WHERE (Incidencia.ClaveEstatus = {0})";
     }
 }

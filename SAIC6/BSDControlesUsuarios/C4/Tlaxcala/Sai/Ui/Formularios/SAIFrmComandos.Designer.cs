@@ -239,17 +239,17 @@
         private AxXtremeCommandBars.AxCommandBars SAIBarraComandos;
         private AxXtremeCommandBars.AxImageManager imgAdministrador;
         private System.Windows.Forms.Panel pnResumenIncidencias;
-        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox saiTxtS;
         private System.Windows.Forms.Label lblS;
-        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox saiTxtPrioridad3;
         private System.Windows.Forms.Label lbl3;
-        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox saiTxtPrioridad1;
         private System.Windows.Forms.Label lbl1;
-        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox saiTxtPrioridad2;
         private System.Windows.Forms.Label lbl2;
-        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox saiTxtPrioridad5;
         private System.Windows.Forms.Label lbl5;
-        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox saiTxtPrioridad4;
         private System.Windows.Forms.Label lbl4;
+        public BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox saiTxtS;
+        public BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox saiTxtPrioridad3;
+        public BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox saiTxtPrioridad1;
+        public BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox saiTxtPrioridad2;
+        public BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox saiTxtPrioridad5;
+        public BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox saiTxtPrioridad4;
     }
 }
