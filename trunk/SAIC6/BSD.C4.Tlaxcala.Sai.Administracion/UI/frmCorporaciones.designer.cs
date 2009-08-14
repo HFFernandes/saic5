@@ -36,6 +36,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.gvCorporaciones = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.saiTxtZn = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
+            this.label3 = new System.Windows.Forms.Label();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.saiTxtDescripcion = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.label2 = new System.Windows.Forms.Label();
@@ -55,28 +57,28 @@
             // 
             this.ddlSistema.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlSistema.FormattingEnabled = true;
-            this.ddlSistema.Location = new System.Drawing.Point(110, 58);
+            this.ddlSistema.Location = new System.Drawing.Point(110, 49);
             this.ddlSistema.Name = "ddlSistema";
             this.ddlSistema.Size = new System.Drawing.Size(168, 21);
-            this.ddlSistema.TabIndex = 1;
+            this.ddlSistema.TabIndex = 2;
             // 
             // chkActivo
             // 
             this.chkActivo.AutoSize = true;
-            this.chkActivo.Location = new System.Drawing.Point(75, 99);
+            this.chkActivo.Location = new System.Drawing.Point(74, 115);
             this.chkActivo.Name = "chkActivo";
             this.chkActivo.Size = new System.Drawing.Size(56, 17);
-            this.chkActivo.TabIndex = 2;
+            this.chkActivo.TabIndex = 4;
             this.chkActivo.Text = "Activo";
             this.chkActivo.UseVisualStyleBackColor = true;
             // 
             // chkUnidadVirtual
             // 
             this.chkUnidadVirtual.AutoSize = true;
-            this.chkUnidadVirtual.Location = new System.Drawing.Point(188, 99);
+            this.chkUnidadVirtual.Location = new System.Drawing.Point(164, 115);
             this.chkUnidadVirtual.Name = "chkUnidadVirtual";
             this.chkUnidadVirtual.Size = new System.Drawing.Size(114, 17);
-            this.chkUnidadVirtual.TabIndex = 3;
+            this.chkUnidadVirtual.TabIndex = 5;
             this.chkUnidadVirtual.Text = "Unidades Virtuales";
             this.chkUnidadVirtual.UseVisualStyleBackColor = true;
             this.chkUnidadVirtual.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
@@ -110,10 +112,13 @@
             this.gvCorporaciones.ShowRowErrors = false;
             this.gvCorporaciones.Size = new System.Drawing.Size(544, 141);
             this.gvCorporaciones.TabIndex = 0;
+            this.gvCorporaciones.TabStop = false;
             this.gvCorporaciones.SelectionChanged += new System.EventHandler(this.gvCorporaciones_SelectionChanged);
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.saiTxtZn);
+            this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.btnLimpiar);
             this.groupBox2.Controls.Add(this.saiTxtDescripcion);
             this.groupBox2.Controls.Add(this.label2);
@@ -123,18 +128,36 @@
             this.groupBox2.Controls.Add(this.chkUnidadVirtual);
             this.groupBox2.Location = new System.Drawing.Point(12, 245);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(560, 138);
+            this.groupBox2.Size = new System.Drawing.Size(560, 159);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos Generales";
             // 
+            // saiTxtZn
+            // 
+            this.saiTxtZn.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.saiTxtZn.Location = new System.Drawing.Point(110, 76);
+            this.saiTxtZn.Name = "saiTxtZn";
+            this.saiTxtZn.Size = new System.Drawing.Size(100, 20);
+            this.saiTxtZn.StrMensajeCampoRequerido = "El campo es requerido.";
+            this.saiTxtZn.TabIndex = 3;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(17, 79);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(23, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Zn:";
+            // 
             // btnLimpiar
             // 
             this.btnLimpiar.Enabled = false;
-            this.btnLimpiar.Location = new System.Drawing.Point(479, 109);
+            this.btnLimpiar.Location = new System.Drawing.Point(479, 130);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpiar.TabIndex = 7;
+            this.btnLimpiar.TabIndex = 6;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
@@ -142,17 +165,17 @@
             // saiTxtDescripcion
             // 
             this.saiTxtDescripcion.BlnEsRequerido = true;
-            this.saiTxtDescripcion.ClrBackColorFoco = System.Drawing.Color.Empty;
+            this.saiTxtDescripcion.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.saiTxtDescripcion.Location = new System.Drawing.Point(110, 23);
             this.saiTxtDescripcion.Name = "saiTxtDescripcion";
             this.saiTxtDescripcion.Size = new System.Drawing.Size(288, 20);
             this.saiTxtDescripcion.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.saiTxtDescripcion.TabIndex = 6;
+            this.saiTxtDescripcion.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 61);
+            this.label2.Location = new System.Drawing.Point(17, 52);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 13);
             this.label2.TabIndex = 5;
@@ -171,10 +194,10 @@
             // 
             this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
             this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregar.Location = new System.Drawing.Point(320, 407);
+            this.btnAgregar.Location = new System.Drawing.Point(320, 429);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
-            this.btnAgregar.TabIndex = 6;
+            this.btnAgregar.TabIndex = 8;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAgregar.UseVisualStyleBackColor = true;
@@ -185,7 +208,7 @@
             this.btnModificar.Enabled = false;
             this.btnModificar.Image = ((System.Drawing.Image)(resources.GetObject("btnModificar.Image")));
             this.btnModificar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnModificar.Location = new System.Drawing.Point(239, 407);
+            this.btnModificar.Location = new System.Drawing.Point(239, 429);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
             this.btnModificar.TabIndex = 7;
@@ -209,7 +232,7 @@
             // 
             this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
             this.btnEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEliminar.Location = new System.Drawing.Point(401, 407);
+            this.btnEliminar.Location = new System.Drawing.Point(401, 429);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
             this.btnEliminar.TabIndex = 9;
@@ -222,11 +245,11 @@
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(497, 407);
+            this.btnCancelar.Location = new System.Drawing.Point(497, 429);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 10;
-            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.Text = "Cerrar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
@@ -236,7 +259,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(584, 464);
+            this.ClientSize = new System.Drawing.Size(584, 477);
             this.Controls.Add(this.logoPicture);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.groupBox2);
@@ -283,5 +306,7 @@
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnLimpiar;
+        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox saiTxtZn;
+        private System.Windows.Forms.Label label3;
     }
 }

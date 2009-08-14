@@ -137,6 +137,7 @@
             // 
             // catalogoDeColoniasToolStripMenuItem
             // 
+            this.catalogoDeColoniasToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("catalogoDeColoniasToolStripMenuItem.Image")));
             this.catalogoDeColoniasToolStripMenuItem.Name = "catalogoDeColoniasToolStripMenuItem";
             this.catalogoDeColoniasToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
             this.catalogoDeColoniasToolStripMenuItem.Text = "Catalogo de Colonias";
@@ -144,6 +145,7 @@
             // 
             // catalogoDeMunicipiosToolStripMenuItem
             // 
+            this.catalogoDeMunicipiosToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("catalogoDeMunicipiosToolStripMenuItem.Image")));
             this.catalogoDeMunicipiosToolStripMenuItem.Name = "catalogoDeMunicipiosToolStripMenuItem";
             this.catalogoDeMunicipiosToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
             this.catalogoDeMunicipiosToolStripMenuItem.Text = "Catalogo de Municipios";
@@ -151,6 +153,7 @@
             // 
             // catalogoDeLocalidadesToolStripMenuItem
             // 
+            this.catalogoDeLocalidadesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("catalogoDeLocalidadesToolStripMenuItem.Image")));
             this.catalogoDeLocalidadesToolStripMenuItem.Name = "catalogoDeLocalidadesToolStripMenuItem";
             this.catalogoDeLocalidadesToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
             this.catalogoDeLocalidadesToolStripMenuItem.Text = "Catalogo de Localidades";

@@ -88,6 +88,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 this.btnModificar.Enabled = false;
                 this.btnLimpiar.Enabled = false;
                 this.btnAgregar.Enabled = true;
+                this.saiTxtZn.Text = string.Empty;
             }
             catch (Exception ex)
             { MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias"); }
@@ -159,6 +160,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         newCorporacion.Descripcion = this.saiTxtDescripcion.Text;
                         newCorporacion.Activo = this.chkActivo.Checked;
                         newCorporacion.UnidadesVirtuales = this.chkUnidadVirtual.Checked;
+                        newCorporacion.Zn = this.saiTxtZn.Text;
 
                         Mappers.CorporacionMapper.Instance().Insert(newCorporacion);
                     }
@@ -188,6 +190,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         updCorporacion.Descripcion = this.saiTxtDescripcion.Text;
                         updCorporacion.UnidadesVirtuales = this.chkUnidadVirtual.Checked;
                         updCorporacion.Activo = this.chkActivo.Checked;
+                        updCorporacion.Zn = this.saiTxtZn.Text;
                         Mappers.CorporacionMapper.Instance().Save(updCorporacion);
                     }
                 }
@@ -235,10 +238,12 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         this.SeleccionarComboItem(Convert.ToInt32(this.gvCorporaciones.Rows[selectedRow].Cells["ClaveSistema"].Value));
                         this.chkActivo.Checked = Convert.ToBoolean(this.gvCorporaciones.Rows[selectedRow].Cells["Activo"].Value);
                         this.chkUnidadVirtual.Checked = Convert.ToBoolean(this.gvCorporaciones.Rows[selectedRow].Cells["UnidadesVirtuales"].Value);
+                        this.saiTxtZn.Text = Convert.ToString(this.gvCorporaciones.Rows[selectedRow].Cells["Zn"].Value);
                         this.btnEliminar.Visible = true;
                         this.btnModificar.Enabled = true;
                         this.btnAgregar.Enabled = false;
                         this.btnLimpiar.Enabled = true;
+
                     }
                 }
                 catch (Exception ex)
@@ -280,6 +285,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             this.Limpiar();
-        }        
+        }
     }
 }

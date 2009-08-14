@@ -95,7 +95,7 @@
             this.btnAgregar.Location = new System.Drawing.Point(315, 500);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
-            this.btnAgregar.TabIndex = 7;
+            this.btnAgregar.TabIndex = 9;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAgregar.UseVisualStyleBackColor = true;
@@ -155,7 +155,7 @@
             this.label4.Location = new System.Drawing.Point(11, 124);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(398, 13);
-            this.label4.TabIndex = 7;
+            this.label4.TabIndex = 0;
             this.label4.Text = "Seleccione esta opción para Activar o Desactivar el acceso al sistema del Usuario" +
                 ".";
             // 
@@ -165,7 +165,7 @@
             this.chkActivado.Location = new System.Drawing.Point(23, 150);
             this.chkActivado.Name = "chkActivado";
             this.chkActivado.Size = new System.Drawing.Size(68, 17);
-            this.chkActivado.TabIndex = 6;
+            this.chkActivado.TabIndex = 4;
             this.chkActivado.Text = "Activado";
             this.chkActivado.UseVisualStyleBackColor = true;
             // 
@@ -175,7 +175,7 @@
             this.btnLimpiar.Location = new System.Drawing.Point(485, 214);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpiar.TabIndex = 9;
+            this.btnLimpiar.TabIndex = 7;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
@@ -195,7 +195,7 @@
             this.rbOperador.Location = new System.Drawing.Point(142, 207);
             this.rbOperador.Name = "rbOperador";
             this.rbOperador.Size = new System.Drawing.Size(69, 17);
-            this.rbOperador.TabIndex = 5;
+            this.rbOperador.TabIndex = 6;
             this.rbOperador.TabStop = true;
             this.rbOperador.Text = "Operador";
             this.rbOperador.UseVisualStyleBackColor = true;
@@ -206,7 +206,7 @@
             this.rbDespachador.Location = new System.Drawing.Point(28, 207);
             this.rbDespachador.Name = "rbDespachador";
             this.rbDespachador.Size = new System.Drawing.Size(89, 17);
-            this.rbDespachador.TabIndex = 4;
+            this.rbDespachador.TabIndex = 5;
             this.rbDespachador.TabStop = true;
             this.rbDespachador.Text = "Despachador";
             this.rbDespachador.UseVisualStyleBackColor = true;
@@ -246,7 +246,7 @@
             this.btnModificar.Location = new System.Drawing.Point(234, 499);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
-            this.btnModificar.TabIndex = 6;
+            this.btnModificar.TabIndex = 8;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.btnModificar.UseVisualStyleBackColor = true;
@@ -260,7 +260,7 @@
             this.btnEliminar.Location = new System.Drawing.Point(396, 500);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
-            this.btnEliminar.TabIndex = 8;
+            this.btnEliminar.TabIndex = 10;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnEliminar.UseVisualStyleBackColor = true;
@@ -283,8 +283,8 @@
             this.btnCancelar.Location = new System.Drawing.Point(497, 499);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 9;
-            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.TabIndex = 11;
+            this.btnCancelar.Text = "Cerrar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 

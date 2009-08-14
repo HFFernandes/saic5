@@ -38,6 +38,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.gvLocalidades = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtClaveLocalidadCartografia = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.saiTxtNombre = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.label3 = new System.Windows.Forms.Label();
@@ -46,7 +47,6 @@
             this.ddlMunicipio = new System.Windows.Forms.ComboBox();
             this.ddlEstado = new System.Windows.Forms.ComboBox();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.txtClaveLocalidadCartografia = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.logoPicture)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvLocalidades)).BeginInit();
@@ -70,7 +70,7 @@
             this.btnModificar.Location = new System.Drawing.Point(219, 416);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
-            this.btnModificar.TabIndex = 10;
+            this.btnModificar.TabIndex = 6;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
@@ -80,7 +80,7 @@
             this.btnAgregar.Location = new System.Drawing.Point(301, 415);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
-            this.btnAgregar.TabIndex = 11;
+            this.btnAgregar.TabIndex = 7;
             this.btnAgregar.Text = "Argregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
@@ -90,7 +90,7 @@
             this.btnEliminar.Location = new System.Drawing.Point(383, 415);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
-            this.btnEliminar.TabIndex = 12;
+            this.btnEliminar.TabIndex = 8;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
             this.btnEliminar.Visible = false;
@@ -101,7 +101,7 @@
             this.btnLimpiar.Location = new System.Drawing.Point(479, 102);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpiar.TabIndex = 13;
+            this.btnLimpiar.TabIndex = 5;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
@@ -112,7 +112,7 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 73);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(560, 162);
-            this.groupBox1.TabIndex = 14;
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Localidades";
             // 
@@ -145,9 +145,19 @@
             this.groupBox2.Location = new System.Drawing.Point(12, 241);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(560, 131);
-            this.groupBox2.TabIndex = 15;
+            this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos Generales";
+            // 
+            // txtClaveLocalidadCartografia
+            // 
+            this.txtClaveLocalidadCartografia.BlnEsRequerido = true;
+            this.txtClaveLocalidadCartografia.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txtClaveLocalidadCartografia.Location = new System.Drawing.Point(159, 100);
+            this.txtClaveLocalidadCartografia.Name = "txtClaveLocalidadCartografia";
+            this.txtClaveLocalidadCartografia.Size = new System.Drawing.Size(156, 20);
+            this.txtClaveLocalidadCartografia.StrMensajeCampoRequerido = "El campo es requerido.";
+            this.txtClaveLocalidadCartografia.TabIndex = 4;
             // 
             // label4
             // 
@@ -155,18 +165,18 @@
             this.label4.Location = new System.Drawing.Point(13, 104);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(140, 13);
-            this.label4.TabIndex = 21;
+            this.label4.TabIndex = 0;
             this.label4.Text = "Clave Localidad Cartografia:";
             // 
             // saiTxtNombre
             // 
             this.saiTxtNombre.BlnEsRequerido = true;
-            this.saiTxtNombre.ClrBackColorFoco = System.Drawing.Color.Empty;
+            this.saiTxtNombre.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.saiTxtNombre.Location = new System.Drawing.Point(110, 74);
             this.saiTxtNombre.Name = "saiTxtNombre";
             this.saiTxtNombre.Size = new System.Drawing.Size(205, 20);
             this.saiTxtNombre.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.saiTxtNombre.TabIndex = 20;
+            this.saiTxtNombre.TabIndex = 3;
             // 
             // label3
             // 
@@ -174,7 +184,7 @@
             this.label3.Location = new System.Drawing.Point(13, 76);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 13);
-            this.label3.TabIndex = 19;
+            this.label3.TabIndex = 0;
             this.label3.Text = "Nombre:";
             // 
             // label2
@@ -183,7 +193,7 @@
             this.label2.Location = new System.Drawing.Point(13, 49);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 13);
-            this.label2.TabIndex = 18;
+            this.label2.TabIndex = 0;
             this.label2.Text = "Municipio:";
             // 
             // label1
@@ -192,7 +202,7 @@
             this.label1.Location = new System.Drawing.Point(13, 22);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(43, 13);
-            this.label1.TabIndex = 17;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Estado:";
             // 
             // ddlMunicipio
@@ -202,7 +212,7 @@
             this.ddlMunicipio.Location = new System.Drawing.Point(110, 46);
             this.ddlMunicipio.Name = "ddlMunicipio";
             this.ddlMunicipio.Size = new System.Drawing.Size(181, 21);
-            this.ddlMunicipio.TabIndex = 15;
+            this.ddlMunicipio.TabIndex = 2;
             // 
             // ddlEstado
             // 
@@ -212,32 +222,24 @@
             this.ddlEstado.Location = new System.Drawing.Point(110, 19);
             this.ddlEstado.Name = "ddlEstado";
             this.ddlEstado.Size = new System.Drawing.Size(181, 21);
-            this.ddlEstado.TabIndex = 14;
+            this.ddlEstado.TabIndex = 1;
             // 
             // btnCancelar
             // 
+            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelar.Location = new System.Drawing.Point(497, 416);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 16;
+            this.btnCancelar.TabIndex = 9;
             this.btnCancelar.Text = "Cerrar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // txtClaveLocalidadCartografia
-            // 
-            this.txtClaveLocalidadCartografia.BlnEsRequerido = true;
-            this.txtClaveLocalidadCartografia.ClrBackColorFoco = System.Drawing.Color.Empty;
-            this.txtClaveLocalidadCartografia.Location = new System.Drawing.Point(159, 100);
-            this.txtClaveLocalidadCartografia.Name = "txtClaveLocalidadCartografia";
-            this.txtClaveLocalidadCartografia.Size = new System.Drawing.Size(156, 20);
-            this.txtClaveLocalidadCartografia.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtClaveLocalidadCartografia.TabIndex = 23;
             // 
             // frmLocalidades
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(584, 464);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.groupBox2);
