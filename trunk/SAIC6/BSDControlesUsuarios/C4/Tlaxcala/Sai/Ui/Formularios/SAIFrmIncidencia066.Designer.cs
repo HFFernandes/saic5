@@ -64,6 +64,7 @@
             this.cklCorporacion.Size = new System.Drawing.Size(486, 94);
             this.cklCorporacion.StrMensajeCampoRequerido = "El campo es requerido.";
             this.cklCorporacion.TabIndex = 25;
+            this.cklCorporacion.MouseUp += new System.Windows.Forms.MouseEventHandler(this.cklCorporacion_MouseUp);
             this.cklCorporacion.Leave += new System.EventHandler(this.cklCorporacion_Leave);
             this.cklCorporacion.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cklCorporacion_KeyUp);
             // 
@@ -173,7 +174,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1247, 772);
+            this.ClientSize = new System.Drawing.Size(1264, 772);
             this.Controls.Add(this.grpDenunciante);
             this.Controls.Add(this.cklCorporacion);
             this.Controls.Add(this.label12);

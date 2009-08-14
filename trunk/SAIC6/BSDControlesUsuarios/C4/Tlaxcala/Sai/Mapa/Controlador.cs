@@ -24,8 +24,8 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
         /// <param name="frmIncidencia">Referencia del formulario que manda a llamar el método</param>
         public static void MuestraMapa(EstructuraUbicacion objDatosUbicacion, SAIFrmIncidencia frmIncidencia)
         {
-            if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
-                return;
+            //if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+            //    return;
 
 
             if (_frmMapa == null)
@@ -75,8 +75,8 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
         /// </remarks>
         public static void RevisaInstancias()
         {
-            if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
-                return;
+            //if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+            //    return;
 
             if (Aplicacion.VentanasIncidencias.Count == 0)
             {
@@ -94,8 +94,8 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
         /// </remarks>
         public static void RevisaInstancias(SAIFrmIncidencia frmIncidencia)
         {
-            if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
-                return;
+            //if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+            //    return;
 
             if (Aplicacion.VentanasIncidencias.Count == 0 || (Aplicacion.VentanasIncidencias.Count == 1 && Aplicacion.VentanasIncidencias[0].Ventana  == (frmIncidencia as Form)))
             {
