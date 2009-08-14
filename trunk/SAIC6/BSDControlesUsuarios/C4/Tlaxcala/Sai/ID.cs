@@ -91,10 +91,10 @@
         public const string STR_ESTATUSLLEGADA = "Llegada";
         public const string STR_ESTATUSDESPACHADA = "Despachada";
         public static readonly uint COLOR_VERDE = (uint)Aplicacion.HexadecimalADecimal("99FF33");
-        public static readonly uint COLOR_NARANJA = (uint)Aplicacion.HexadecimalADecimal("FF9933");
-        public static readonly uint COLOR_VERDE2 = (uint)Aplicacion.HexadecimalADecimal("CCFF00");
-        public static readonly uint COLOR_ROJO = (uint)Aplicacion.HexadecimalADecimal("FF0000");
-        public static readonly uint COLOR_AMARILLO = (uint)Aplicacion.HexadecimalADecimal("FFFF33");
+        public static readonly uint COLOR_NARANJA = (uint)Aplicacion.HexadecimalADecimal("FF8C00");
+        public static readonly uint COLOR_VERDE2 = (uint)Aplicacion.HexadecimalADecimal("008000");
+        public static readonly uint COLOR_ROJO = (uint)Aplicacion.HexadecimalADecimal("FF6347");
+        public static readonly uint COLOR_AMARILLO = (uint)Aplicacion.HexadecimalADecimal("FFD700");
 
         #endregion
     }

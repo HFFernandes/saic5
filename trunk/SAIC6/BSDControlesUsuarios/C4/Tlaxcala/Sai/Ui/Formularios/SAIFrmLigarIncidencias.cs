@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
-    public partial class SAIFrmLigarIncidencias : BSD.C4.Tlaxcala.Sai.Ui.Formularios.SAIFrmBase
+    public partial class SAIFrmLigarIncidencias : SAIFrmBase
     {
+        public string strFolioPadre;
+
         public SAIFrmLigarIncidencias(List<int> lstRegistros)
         {
             InitializeComponent();
 
+            saiCmbFolioPadre.Refresh();
             saiCmbFolioPadre.Items.Clear();
             foreach (var registro in lstRegistros)
             {
@@ -25,10 +24,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void cmdAceptar_Click(object sender, EventArgs e)
         {
-            if (base.SAIProveedorValidacion.ValidarCamposRequeridos(this))
+            if (SAIProveedorValidacion.ValidarCamposRequeridos(this))
             {
-                base.DialogResult = System.Windows.Forms.DialogResult.OK;
-                base.Close();
+                strFolioPadre = saiCmbFolioPadre.SelectedItem.ToString();
+                DialogResult = DialogResult.OK;
             }
         }
     }
