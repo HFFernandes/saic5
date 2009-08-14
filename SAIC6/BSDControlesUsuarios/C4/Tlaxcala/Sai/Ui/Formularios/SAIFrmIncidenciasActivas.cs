@@ -48,13 +48,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void reportControl_RowDblClick(object sender, AxXtremeReportControl._DReportControlEvents_RowDblClickEvent e)
         {
-            //Recuperar el folio y generar una instancia de la entidad para
-            //pasarla al nuevo formulario
-            var incidencia = IncidenciaMapper.Instance().GetOne(Convert.ToInt32(e.row.Record[0].Value));
-            if (incidencia != null)
-            {
-                //TODO: Definir las acciones
-            }
         }
 
         void btnAltaUnidad_Click(object sender, EventArgs e)
@@ -120,7 +113,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             saiReport1.reportControl.Redraw();
 
             saiReport1.btnLigarIncidencias.Enabled = saiReport1.reportControl.SelectedRows.Count > 1;
-            saiReport1.btnDespacharIncidencias.Enabled = saiReport1.reportControl.SelectedRows.Count >= 1;
+            //saiReport1.btnDespacharIncidencias.Enabled = saiReport1.reportControl.SelectedRows.Count >= 1;
         }
 
         private void ObtenerRegistros()
@@ -251,7 +244,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (Exception ex)
             {
                 tmrRegistros.Enabled = false;
-                throw new SAIExcepcion(ex.Message, this);
+                //throw new SAIExcepcion(ex.Message, this);
+                base.Close();
             }
         }
 
