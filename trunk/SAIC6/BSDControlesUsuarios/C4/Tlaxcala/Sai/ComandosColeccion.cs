@@ -10,8 +10,7 @@ namespace BSD.C4.Tlaxcala.Sai
     {
         public static List<Comando> ColeccionComandos()
         {
-            //TODO: la colección no está completa, deberá completarse
-            //retorna la nueva colección definida
+            //retorna la colección definida
             return new List<Comando>
                        {                           
                            new Comando(ID.CMD_NI,"NI","Nuevo incidente",'I',false,true),

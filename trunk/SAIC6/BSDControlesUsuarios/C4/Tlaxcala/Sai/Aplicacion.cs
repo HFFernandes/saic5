@@ -64,7 +64,7 @@ namespace BSD.C4.Tlaxcala.Sai
                 {
                     if (blnEsDespachador == true)
                     {
-                        UsuarioCorporacionObjectList usuarioCorporacion =
+                        var usuarioCorporacion =
                             UsuarioCorporacionMapper.Instance().GetByUsuario(intClaveUsuario);
                         if (usuarioCorporacion != null && usuarioCorporacion.Count > 0)
                         {

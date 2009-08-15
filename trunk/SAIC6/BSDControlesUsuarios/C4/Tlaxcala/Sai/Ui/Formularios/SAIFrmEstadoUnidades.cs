@@ -91,20 +91,30 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     {
                         for (int i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
                         {
-                            try
+                            var despachoIncidencia =
+                                DespachoIncidenciaMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_UNIDADENDESPACHO, saiReport1.reportControl.SelectedRows[i].Record[0].Value));
+
+                            switch (despachoIncidencia.Count)
                             {
-                                var unidad =
-                                                        UnidadMapper.Instance().GetOne(
-                                                            Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
-                                if (unidad != null)
-                                {
-                                    UnidadMapper.Instance().Delete(unidad);
-                                }
+                                case 1:
+                                    throw new SAIExcepcion("La unidad que intenta dar de baja está asignada a un incidente.");
+                                default:
+                                    if (despachoIncidencia.Count > 1)
+                                        throw new SAIExcepcion("Al menos una de las unidades que intenta dar de baja está asignada a un incidente.");
+                                    break;
                             }
-                            catch (Exception ex)
+
+                            var lstUnidades = new UnidadList();
+                            var unidad = UnidadMapper.Instance().GetOne(
+                                                        Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
+
+                            if (unidad != null)
                             {
-                                throw new SAIExcepcion(ex.Message);
+                                unidad.Activo = false;
+                                lstUnidades.Add(unidad);
                             }
+
+                            UnidadMapper.Instance().Update(lstUnidades);
                         }
                     }
                 }
