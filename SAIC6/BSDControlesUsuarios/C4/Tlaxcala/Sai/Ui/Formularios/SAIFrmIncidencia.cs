@@ -337,7 +337,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             CodigoPostalList objListaCodigosPostales = new CodigoPostalList();
             CodigoPostal entCodigoPostal;
             Boolean blnExisteCodigoPostal = false;
-
+            int i;
 
             try
             {
@@ -408,7 +408,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 if (this._entIncidencia.ClaveCodigoPostal.HasValue)
                                 {
                                     //Se recuperan los códigos postales del municipio
-                                    for (int i = 0; i < objListaLocalidades.Count; i++)
+                                    for (i = 0; i < objListaLocalidades.Count; i++)
                                     {
                                         objListaColonias = ColoniaMapper.Instance().GetByLocalidad(objListaLocalidades[i].Clave);
                                         for (int j = 0; j < objListaColonias.Count; j++)
@@ -487,8 +487,77 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.txtReferencias.Text = this._entIncidencia.Referencias;
                     this.txtDescripcion.Text = this._entIncidencia.Descripcion;
                     //Datos de Extravio de persona
+                    PersonaExtraviadaList lstPersonasExtraviadas = PersonaExtraviadaMapper.Instance().GetByIncidencia(this._entIncidencia.Folio);
+                    i = 1;
+                    foreach (PersonaExtraviada entPersonaExtraviada in lstPersonasExtraviadas)
+                    {
+                        
+                        dgvPersonaExtraviada.Rows.Add();
 
+                        dgvPersonaExtraviada[0, i - 1].Value = entPersonaExtraviada.Clave;
+                        dgvPersonaExtraviada[1, i - 1].Value = entPersonaExtraviada.Folio;
+                        dgvPersonaExtraviada[2, i - 1].Value = entPersonaExtraviada.Nombre;
+                        if (entPersonaExtraviada.Edad.HasValue)
+                        {
+                            dgvPersonaExtraviada[3, i - 1].Value = entPersonaExtraviada.Edad;
+                        }
+                        dgvPersonaExtraviada[4, i - 1].Value = entPersonaExtraviada.Sexo;
+                        if (entPersonaExtraviada.Estatura.HasValue)
+                        {
+                            dgvPersonaExtraviada[5, i - 1].Value = entPersonaExtraviada.Estatura;
+                        }
+                        dgvPersonaExtraviada[6, i - 1].Value = entPersonaExtraviada.Parentesco;
+                        dgvPersonaExtraviada[7, i - 1].Value = entPersonaExtraviada.FechaExtravio.ToString("dd/MM/aaaa");
+                        dgvPersonaExtraviada[8, i - 1].Value = entPersonaExtraviada.Tez;
+                        dgvPersonaExtraviada[9, i - 1].Value = entPersonaExtraviada.TipoCabello;
+                        dgvPersonaExtraviada[10, i - 1].Value = entPersonaExtraviada.ColorCabello;
+                        dgvPersonaExtraviada[11, i - 1].Value = entPersonaExtraviada.LargoCabello;
+                        dgvPersonaExtraviada[12, i - 1].Value = entPersonaExtraviada.Frente;
+                        dgvPersonaExtraviada[13, i - 1].Value = entPersonaExtraviada.Cejas;
+                        dgvPersonaExtraviada[14, i - 1].Value = entPersonaExtraviada.OjosColor;
+                        dgvPersonaExtraviada[15, i - 1].Value = entPersonaExtraviada.OjosForma;
+                        dgvPersonaExtraviada[16, i - 1].Value = entPersonaExtraviada.NarizForma;
+                        dgvPersonaExtraviada[17, i - 1].Value = entPersonaExtraviada.BocaTamaño;
+                        dgvPersonaExtraviada[18, i - 1].Value = entPersonaExtraviada.Labios;
+                        dgvPersonaExtraviada[19, i - 1].Value = entPersonaExtraviada.Vestimenta;
+                        dgvPersonaExtraviada[20, i - 1].Value = entPersonaExtraviada.Destino;
+                        dgvPersonaExtraviada[21, i - 1].Value = entPersonaExtraviada.Caracteristicas;
+                        
+                        i++;
+
+                    }
                     //Datos de robo de vehículo
+                    VehiculoRobadoObjectList lstVehiculosRobados = VehiculoRobadoMapper.Instance().GetByIncidencia(this._entIncidencia.Folio);
+                    i = 1;
+                    foreach (VehiculoRobadoObject objVehiculoRobado in lstVehiculosRobados)
+                    {
+                        
+                        if (objVehiculoRobado.ClavePropietario.HasValue)
+                        {
+                            PropietarioVehiculoObject objPropietarioVehiculo = PropietarioVehiculoMapper.Instance().GetOne(objVehiculoRobado.ClavePropietario.Value);
+                            if (objPropietarioVehiculo != null)
+                            {
+                                this.txtNombrePropietario.Text  = objPropietarioVehiculo.Nombre;
+                                this.txtDireccionPropietario.Text = objPropietarioVehiculo.Domicilio;
+                                this.txtTelefonoPropietario.Text = objPropietarioVehiculo.Telefono; 
+                            }
+                        }
+                        VehiculoObject objVehiculo = VehiculoMapper.Instance().GetOne(objVehiculoRobado.ClaveVehiculo);
+                        if (objVehiculo != null)
+                        {
+                            dgvVehiculo[0,i-1].Value = objVehiculo.Clave;
+                            dgvVehiculo[1,i-1].Value = objVehiculo.Marca;
+                            dgvVehiculo[2,i-1].Value = objVehiculo.Tipo;
+                            dgvVehiculo[3,i-1].Value = objVehiculo.Modelo;
+                            dgvVehiculo[4,i-1].Value = objVehiculo.Placas;
+                            dgvVehiculo[5,i-1].Value = objVehiculo.Color;
+                            dgvVehiculo[6,i-1].Value = objVehiculo.NumeroSerie;
+                            dgvVehiculo[7,i-1].Value = objVehiculo.SeñasParticulares;
+                            i++;
+                        }
+
+                       
+                    }
 
                     //Datos de robo de accesorios de vehiculo
 
