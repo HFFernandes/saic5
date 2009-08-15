@@ -558,9 +558,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                        
                     }
-
                     //Datos de robo de accesorios de vehiculo
+                    //-Se revisa si la incidencia tiene un registro en RoboVehiculoAccesorios:
+                    //RoboVehiculoAccesoriosList lstRoboVehiculoAccesorios = RoboVehiculoAccesoriosMapper.Instance().GetByIncidencia(this._entIncidencia.Folio);
+                    //if (lstRoboVehiculoAccesorios != null && lstRoboVehiculoAccesorios.Count > 0)
+                    //{
 
+                    //}
                     this.txtDireccion.Text = this._entIncidencia.Direccion;
 
                 }
@@ -1955,7 +1959,66 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="e">Parámetros del evento</param>
         private void chkAccesoriosPercato_CheckedChanged(object sender, EventArgs e)
         {
-            this.dtpAccesoriosFechaPercato.Enabled = this.chkAccesoriosPercato.Checked;
+            try
+            {
+                try
+                {
+                    this.dtpAccesoriosFechaPercato.Enabled = this.chkAccesoriosPercato.Checked;
+                    if (this._entRoboVehiculoAccesorios == null)
+                    {
+                        this._entRoboVehiculoAccesorios = new RoboVehiculoAccesorios();
+                        if (this.chkAccesoriosPercato.Checked)
+                        {
+                            this._entRoboVehiculoAccesorios.FechaPercato = this.dtpAccesoriosFechaPercato.Value;
+                        }
+                        else
+                        {
+                            this._entRoboVehiculoAccesorios.FechaPercato = null;
+                        }
+                        this._entRoboVehiculoAccesorios.Folio = this._entIncidencia.Folio;
+                        if (this._objVeiculoAccesoriosRobado != null)
+                        {
+                            this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
+                        }
+                        RoboVehiculoAccesoriosMapper.Instance().Insert(this._entRoboVehiculoAccesorios);
+                        //Ahora se inserta en RoboVehiculoAccesoriosRoboVehiculo
+                        for (int i = 0; i < this.dgvVehiculoAccesorios.Rows.Count; i++)
+                        {
+                            try
+                            {
+                                int Clave = int.Parse(this.dgvVehiculoAccesorios[0, i].Value.ToString());
+                                RoboVehiculoAccesoriosVehiculoInvolucradoObject objVehiculoInvolucrado = new RoboVehiculoAccesoriosVehiculoInvolucradoObject();
+                                objVehiculoInvolucrado.ClaveVehiculo = Clave;
+                                objVehiculoInvolucrado.ClaveRoboAccesorios = this._entRoboVehiculoAccesorios.Clave;
+                                RoboVehiculoAccesoriosVehiculoInvolucradoMapper.Instance().Insert(objVehiculoInvolucrado);
+                            }
+                            catch { }
+
+                        }
+                    }
+                    else
+                    {
+                        if (this._objVeiculoAccesoriosRobado != null)
+                        {
+                            this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
+                        }
+                        if (this.chkAccesoriosPercato.Checked)
+                        {
+                            this._entRoboVehiculoAccesorios.FechaPercato = this.dtpAccesoriosFechaPercato.Value;
+                        }
+                        else
+                        {
+                            this._entRoboVehiculoAccesorios.FechaPercato = null;
+                        }
+                        RoboVehiculoAccesoriosMapper.Instance().Save(this._entRoboVehiculoAccesorios);
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
+            }
+            catch (SAIExcepcion) { }
         }
 
         /// <summary>
