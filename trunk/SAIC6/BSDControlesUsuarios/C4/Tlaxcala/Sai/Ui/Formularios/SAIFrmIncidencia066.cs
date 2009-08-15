@@ -36,7 +36,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
 
             //Se recupera la lista de las corporaciones
-
             CorporacionList objListaCorporaciones = CorporacionMapper.Instance().GetAll();
             String[] arrCorporaciones = new String[objListaCorporaciones.Count];
 
