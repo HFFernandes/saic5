@@ -25,12 +25,19 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             saiReport1.btnDespacharIncidencias.Click += btnDespacharIncidencias_Click;
             saiReport1.btnBajaUnidad.Click += btnBajaUnidad_Click;
             saiReport1.btnAltaUnidad.Click += btnAltaUnidad_Click;
+            saiReport1.btnVistaPrevia.Click += btnVistaPrevia_Click;
             saiReport1.reportControl.RowDblClick += reportControl_RowDblClick;
 
             lstIncidenciasRegistradas = new List<Incidencia>();
             lstIncidenciasTemporales = new List<Incidencia>();
             lstIncidenciasPorRemover = new List<Incidencia>();
             lstRegistrosReporte = new List<ReportRecord>();
+        }
+
+        void btnVistaPrevia_Click(object sender, EventArgs e)
+        {
+            saiReport1.reportControl.PrintPreviewOptions.Title = "Reporte de Incidencias Pendientes";
+            saiReport1.reportControl.PrintPreview(true);
         }
 
         void reportControl_RowDblClick(object sender, AxXtremeReportControl._DReportControlEvents_RowDblClickEvent e)
@@ -70,10 +77,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void btnLigarIncidencias_Click(object sender, EventArgs e)
         {
-            var lstIncidenciasPorLigar = new List<int>();
+            var lstIncidenciasPorLigar = new List<string>();
             for (int i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
             {
-                lstIncidenciasPorLigar.Add(Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
+                lstIncidenciasPorLigar.Add(saiReport1.reportControl.SelectedRows[i].Record[0].Value.ToString());
             }
 
             //Mostrar ventana para la seleccion del padre
@@ -81,13 +88,25 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             var dialogResult = ligarIncidencias.ShowDialog(this);
             if (dialogResult == DialogResult.OK)
             {
-                Debug.WriteLine(ligarIncidencias.strFolioPadre);
+                var folioPadre = ligarIncidencias.strFolioPadre;
+                lstIncidenciasPorLigar.Remove(folioPadre);
+
+                //recorro los nodos hijos para asignarles el padre
+                IncidenciaList listadoIncidencias = IncidenciaMapper.Instance().GetBySQLQuery(string.Format("SELECT Incidencia.* FROM Incidencia WHERE Folio IN {0}", lstIncidenciasPorLigar));
+                foreach (var incidencia in listadoIncidencias)
+                {
+                    incidencia.FolioPadre = Convert.ToInt32(folioPadre);
+                }
+                if (listadoIncidencias.Count > 0)
+                {
+                    IncidenciaMapper.Instance().Update(listadoIncidencias);
+                }
+
                 //Actualizar el foliopadre, pero antes verificar que no este ligada
                 //organizar los nodos para desplegar el tree
                 //y verificar que al momento del despacho si es hijo se pase la incidencia
                 //del padre..para prevenir el despacho a una misma incidencia
 
-                //TODO: Falta obtener los folios hijos
             }
         }
 

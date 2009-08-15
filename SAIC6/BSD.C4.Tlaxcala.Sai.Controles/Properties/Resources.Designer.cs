@@ -94,5 +94,12 @@ namespace BSD.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        internal static System.Drawing.Bitmap previa_16 {
+            get {
+                object obj = ResourceManager.GetObject("previa_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
+using Microsoft.NetEnterpriseServers;
 using XtremeReportControl;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
+using System.Diagnostics;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -26,13 +28,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             saiReport1.btnDespacharIncidencias.Click += btnDespacharIncidencias_Click;
             saiReport1.btnBajaUnidad.Click += btnBajaUnidad_Click;
             saiReport1.btnAltaUnidad.Click += btnAltaUnidad_Click;
+            saiReport1.btnVistaPrevia.Click += btnVistaPrevia_Click;
             saiReport1.reportControl.RowDblClick += reportControl_RowDblClick;
 
             lstUnidadesRegistradas = new List<Unidad>();
             lstRegistrosReporte = new List<ReportRecord>();
+        }
 
-            //SAIFrmPruebas pruebas = new SAIFrmPruebas();
-            //pruebas.Show();
+        void btnVistaPrevia_Click(object sender, EventArgs e)
+        {
+            saiReport1.reportControl.PrintPreviewOptions.Title = "Reporte de Unidades";
+            saiReport1.reportControl.PrintPreview(true);
         }
 
         void reportControl_RowDblClick(object sender, AxXtremeReportControl._DReportControlEvents_RowDblClickEvent e)
@@ -42,11 +48,24 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         void btnAltaUnidad_Click(object sender, EventArgs e)
         {
             //TODO: Falta el procedimiento para agregar la unidad
+
+            var agregarUnidad = new SAIFrmAgregarUnidad();
+            var dialogResult = agregarUnidad.ShowDialog(this);
+            if (dialogResult == DialogResult.OK)
+            {
+
+            }
         }
 
         void btnBajaUnidad_Click(object sender, EventArgs e)
         {
-            //TODO: Falta el procedimiento para dar de baja la unidad
+            var confirmarBaja = new ExceptionMessageBox("¿Desea dar de baja la unidad?", "Confirmar Baja",
+                                                          ExceptionMessageBoxButtons.YesNo,
+                                                          ExceptionMessageBoxSymbol.Question,
+                                                          ExceptionMessageBoxDefaultButton.Button2);
+
+            if (DialogResult.Yes == confirmarBaja.Show(this))
+                Debug.WriteLine("dar de baja la unidad.");
         }
 
         void btnDespacharIncidencias_Click(object sender, EventArgs e)

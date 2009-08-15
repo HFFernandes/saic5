@@ -8,14 +8,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
     {
         public string strFolioPadre;
 
-        public SAIFrmLigarIncidencias(List<int> lstRegistros)
+        public SAIFrmLigarIncidencias(List<string> lstRegistros)
         {
             InitializeComponent();
 
             saiCmbFolioPadre.Items.Clear();
             foreach (var registro in lstRegistros)
             {
-                saiCmbFolioPadre.Items.Add(registro.ToString());
+                saiCmbFolioPadre.Items.Add(registro);
             }
 
             saiCmbFolioPadre.SelectedIndex = -1;
