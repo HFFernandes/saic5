@@ -13,6 +13,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
     public partial class SAIFrmEstadoUnidades : SAIFrmBase
     {
         private List<Unidad> lstUnidadesRegistradas;
+        private List<Unidad> lstUnidadesTemporales;
+        private List<Unidad> lstUnidadesPorRemover;
         private List<ReportRecord> lstRegistrosReporte;
 
         public SAIFrmEstadoUnidades()
@@ -31,6 +33,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             saiReport1.reportControl.RowDblClick += reportControl_RowDblClick;
 
             lstUnidadesRegistradas = new List<Unidad>();
+            lstUnidadesTemporales = new List<Unidad>();
+            lstUnidadesPorRemover = new List<Unidad>();
             lstRegistrosReporte = new List<ReportRecord>();
         }
 
@@ -63,10 +67,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 {
                     var agregarUnidad = new SAIFrmAgregarUnidad();
                     var dialogResult = agregarUnidad.ShowDialog(this);
-                    if (dialogResult == DialogResult.OK)
-                    {
-                        //Se agrego correctamente
-                    }
+                    if (dialogResult == DialogResult.OK) { }
                 }
                 else
                     throw new SAIExcepcion("No tiene los permisos suficientes para realizar esta acción.");
@@ -94,15 +95,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             var despachoIncidencia =
                                 DespachoIncidenciaMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_UNIDADENDESPACHO, saiReport1.reportControl.SelectedRows[i].Record[0].Value));
 
-                            switch (despachoIncidencia.Count)
-                            {
-                                case 1:
-                                    throw new SAIExcepcion("La unidad que intenta dar de baja está asignada a un incidente.");
-                                default:
-                                    if (despachoIncidencia.Count > 1)
-                                        throw new SAIExcepcion("Al menos una de las unidades que intenta dar de baja está asignada a un incidente.");
-                                    break;
-                            }
+                            if (despachoIncidencia.Count >= 1)
+                                throw new SAIExcepcion("La unidad que intenta dar de baja está asignada a un incidente.");
 
                             var lstUnidades = new UnidadList();
                             var unidad = UnidadMapper.Instance().GetOne(
@@ -165,10 +159,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 //Limpiamos el listado donde se almacenan las unidades 
                 //para iniciar nuevamente el ciclo
-                //lstUnidadesTemporales.Clear();
-                foreach (var unidad in (UnidadMapper.Instance().GetByCorporacion(Aplicacion.UsuarioPersistencia.intCorporacion ?? -1))) //vamos a la base para obtener las unidades de la corporacion del usuario
+                lstUnidadesTemporales.Clear();
+                foreach (var unidad in (UnidadMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_UNIDADESCORPORACION, Aplicacion.UsuarioPersistencia.intCorporacion ?? -1)))) //vamos a la base para obtener las unidades de la corporacion del usuario
                 {
-                    //lstUnidadesTemporales.Add(unidad);
+                    lstUnidadesTemporales.Add(unidad);
                     //verificamos que la unidad no esté ya en la lista de unidades registradas
                     //que de no estarlo la agregamos al listado tipado y al grid
                     if (!lstUnidadesRegistradas.Contains(unidad))
@@ -273,10 +267,35 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 saiReport1.reportControl.Records[itm.Record.Index][6].Value = ID.STR_DESCONOCIDO;
                                 saiReport1.reportControl.Records[itm.Record.Index][7].Value = ID.STR_DESCONOCIDO;
                             }
-
                         }
                     }
                 }
+
+                foreach (var unidad in lstUnidadesRegistradas)
+                {
+                    //comprobar si la unidad registrada existe en la unidad temporal
+                    //para luego entonces determinar cuales deberan ser eliminadas del grid
+                    if (!lstUnidadesTemporales.Contains(unidad))
+                    {
+                        lstUnidadesPorRemover.Add(unidad);
+                    }
+                }
+
+                //recorremos la colección de unidades por remover
+                //y hacemos match contra el id para proceder
+                //a eliminar el registro del grid
+                foreach (var unidad in lstUnidadesPorRemover)
+                {
+                    foreach (var registro in lstRegistrosReporte)
+                    {
+                        if (Convert.ToInt32(registro.Tag) == unidad.Clave)
+                        {
+                            saiReport1.QuitarRegistro(registro);
+                        }
+                    }
+                    lstUnidadesRegistradas.Remove(unidad);
+                }
+                lstUnidadesPorRemover.Clear();   //limpiamos la colección para el nuevo ciclo
             }
             catch (Exception)
             {

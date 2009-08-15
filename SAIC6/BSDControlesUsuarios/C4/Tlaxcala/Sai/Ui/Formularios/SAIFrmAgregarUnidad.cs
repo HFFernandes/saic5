@@ -27,7 +27,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     if (SAIProveedorValidacion.ValidarCamposRequeridos(this))
                     {
                         var unidad = UnidadMapper.Instance().GetOneBySQLQuery(string.Format(ID.SQL_VERIFICARUNIDAD, saiTxtUnidad.Text.Trim()));
-                        if (unidad != null)
+                        if (unidad == null)
                         {
                             UnidadMapper.Instance().Insert(new Unidad
                             {
