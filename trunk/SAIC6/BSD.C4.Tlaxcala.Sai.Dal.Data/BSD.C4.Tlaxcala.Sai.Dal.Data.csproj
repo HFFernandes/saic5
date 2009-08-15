@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Gateways\Auto\BitacoraGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\CodigoPostalGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\ColoniaGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\CorporacionGateway.Auto.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Gateways\Auto\UsuarioCorporacionGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\VehiculoGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\VehiculoRobadoGateway.Auto.cs" />
+    <Compile Include="Gateways\BitacoraGateway.cs" />
     <Compile Include="Gateways\CodigoPostalGateway.cs" />
     <Compile Include="Gateways\ColoniaGateway.cs" />
     <Compile Include="Gateways\CorporacionGateway.cs" />
@@ -91,6 +93,7 @@
     <Compile Include="Gateways\VehiculoGateway.cs" />
     <Compile Include="Gateways\VehiculoRobadoGateway.cs" />
     <Compile Include="LazyProviders\DefaultLazyProvider.cs" />
+    <Compile Include="Mappers\Auto\BitacoraMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\CodigoPostalMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\ColoniaMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\CorporacionMapper.Auto.cs" />
@@ -107,6 +110,7 @@
     <Compile Include="Mappers\Auto\UsuarioCorporacionMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\VehiculoMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\VehiculoRobadoMapper.Auto.cs" />
+    <Compile Include="Mappers\BitacoraMapper.cs" />
     <Compile Include="Mappers\CodigoPostalMapper.cs" />
     <Compile Include="Mappers\ColoniaMapper.cs" />
     <Compile Include="Mappers\CorporacionIncidenciaMapper.cs" />
