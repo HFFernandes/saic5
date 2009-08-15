@@ -135,7 +135,7 @@
             this.contenedorMapa.Panel2.Controls.Add(this.leyenda);
             this.contenedorMapa.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
             this.contenedorMapa.Size = new System.Drawing.Size(592, 341);
-            this.contenedorMapa.SplitterDistance = 451;
+            this.contenedorMapa.SplitterDistance = 450;
             this.contenedorMapa.TabIndex = 7;
             // 
             // lblUpdate
@@ -191,7 +191,7 @@
             this.mapa.ScaleBar.Symbol.Size = 1;
             this.mapa.ScaleBar.Symbol.TransparentColor = System.Drawing.Color.Empty;
             this.mapa.ScaleBar.Visible = false;
-            this.mapa.Size = new System.Drawing.Size(451, 341);
+            this.mapa.Size = new System.Drawing.Size(450, 341);
             this.mapa.SmoothingMode = ActualMap.SmoothingMode.None;
             this.mapa.TabIndex = 1;
             this.mapa.ToolShape.FillColor = System.Drawing.Color.Transparent;
@@ -205,7 +205,7 @@
             this.leyenda.IconWidth = 20;
             this.leyenda.Location = new System.Drawing.Point(0, 0);
             this.leyenda.Name = "leyenda";
-            this.leyenda.Size = new System.Drawing.Size(137, 341);
+            this.leyenda.Size = new System.Drawing.Size(138, 341);
             this.leyenda.TabIndex = 2;
             // 
             // SAIFrmMapa
@@ -215,7 +215,6 @@
             this.ClientSize = new System.Drawing.Size(592, 366);
             this.Controls.Add(this.contenedorMapa);
             this.Controls.Add(this.toolStrip1);
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(600, 400);
             this.Name = "SAIFrmMapa";

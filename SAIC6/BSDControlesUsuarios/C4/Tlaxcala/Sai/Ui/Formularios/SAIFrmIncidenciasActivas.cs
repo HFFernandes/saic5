@@ -49,8 +49,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void btnVistaPrevia_Click(object sender, EventArgs e)
         {
-            saiReport1.reportControl.PrintPreviewOptions.Title = "Reporte de Incidencias Activas";
-            saiReport1.reportControl.PrintPreview(true);
+            if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_A))
+            {
+                saiReport1.reportControl.PrintPreviewOptions.Title = "Reporte de Incidencias Activas";
+                saiReport1.reportControl.PrintPreview(true);
+            }
         }
 
         void reportControl_RowDblClick(object sender, AxXtremeReportControl._DReportControlEvents_RowDblClickEvent e)
@@ -71,27 +74,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void btnLigarIncidencias_Click(object sender, EventArgs e)
         {
-            var lstIncidenciasPorLigar = new List<int>();
-            for (int i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
-            {
-                lstIncidenciasPorLigar.Add(Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
-            }
-
-            //Mostrar ventana para la seleccion del padre
-            //var ligarIncidencias = new SAIFrmLigarIncidencias(lstIncidenciasPorLigar);
-            //var dialogResult = ligarIncidencias.ShowDialog(this);
-            //if (dialogResult == DialogResult.OK)
-            //{
-            //    Debug.WriteLine(ligarIncidencias.strFolioPadre);
-            //}
         }
 
         void SAIFrmIncidenciasActivas_Load(object sender, EventArgs e)
         {
-            saiReport1.btnDespacharIncidencias.Visible = false;
             saiReport1.btnAltaUnidad.Visible = false;
             saiReport1.btnBajaUnidad.Visible = false;
             saiReport1.btnSeparador2.Visible = false;
+            saiReport1.btnDespacharIncidencias.Visible = false;
 
             //Establecer permisos para los elementos de interacción con el usuario
             //saiReport1.btnLigarIncidencias.Enabled = Aplicacion.UsuarioPersistencia.blnPuedeEscribir(intSubModulo);
@@ -120,12 +110,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             saiReport1.reportControl.Redraw();
 
             saiReport1.btnLigarIncidencias.Enabled = saiReport1.reportControl.SelectedRows.Count > 1;
-            //saiReport1.btnDespacharIncidencias.Enabled = saiReport1.reportControl.SelectedRows.Count >= 1;
         }
 
         private void ObtenerRegistros()
         {
-            //TODO: Ordenar las incidencias por prioridad
             IncidenciaList resIncidencias;
 
             try
@@ -249,10 +237,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
                 lstIncidenciasPorRemover.Clear();   //limpiamos la colección para el nuevo ciclo
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 tmrRegistros.Enabled = false;
-                //throw new SAIExcepcion(ex.Message, this);
                 base.Close();
             }
         }
