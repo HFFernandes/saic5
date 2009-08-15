@@ -98,11 +98,12 @@
         public const string SQL_OBTENERUSUARIO = "SELECT * FROM Usuario WHERE (NombreUsuario='{0}') AND (Activo=1)";
         public const string SQL_OBTENERSISTEMAS = "SELECT DISTINCT Sistema.* FROM Sistema INNER JOIN PermisoUsuario ON Sistema.Clave = PermisoUsuario.ClaveSistema INNER JOIN Submodulo ON PermisoUsuario.ClaveSubmodulo = Submodulo.Clave WHERE (PermisoUsuario.ClaveUsuario = {0})";
         public const string SQL_AUTENTICARUSUARIO =
-            "SELECT * FROM Usuario WHERE (NombreUsuario='{0}' AND Contraseña='{1}')";
-        public const string SQL_VERIFICARUNIDAD = "SELECT Unidad.* FROM Unidad WHERE (Codigo='{0}' AND Activo=1)";
-
+            "SELECT * FROM Usuario WHERE (NombreUsuario='{0}') AND (Contraseña='{1}')";
+        public const string SQL_VERIFICARUNIDAD = "SELECT Unidad.* FROM Unidad WHERE (Codigo='{0}')";
         public const string SQL_UNIDADENDESPACHO =
             "SELECT DespachoIncidencia.* FROM DespachoIncidencia WHERE (ClaveUnidad={0} OR ClaveUnidadApoyo={0})";
+        public const string SQL_UNIDADESCORPORACION =
+            "SELECT Unidad.* FROM Unidad WHERE (ClaveCorporacion={0}) AND (Activo=1)";
 
         #endregion
 
