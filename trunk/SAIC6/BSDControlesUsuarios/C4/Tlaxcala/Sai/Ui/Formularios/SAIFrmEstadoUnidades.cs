@@ -36,12 +36,19 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void btnVistaPrevia_Click(object sender, EventArgs e)
         {
-            if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_AU))
+            try
             {
-                saiReport1.reportControl.PrintPreviewOptions.Title = "Reporte de Unidades";
-                saiReport1.reportControl.PrintPreview(true);
+                if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_AU))
+                {
+                    saiReport1.reportControl.PrintPreviewOptions.Title = "Reporte de Unidades";
+                    saiReport1.reportControl.PrintPreview(true);
+                }
+                else
+                    throw new SAIExcepcion("No tiene los permisos suficientes para realizar esta acción.");
             }
-
+            catch (SAIExcepcion)
+            {
+            }
         }
 
         void reportControl_RowDblClick(object sender, AxXtremeReportControl._DReportControlEvents_RowDblClickEvent e)
@@ -50,29 +57,62 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void btnAltaUnidad_Click(object sender, EventArgs e)
         {
-            if ((Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false) && Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_AU))
+            try
             {
-                var agregarUnidad = new SAIFrmAgregarUnidad();
-                var dialogResult = agregarUnidad.ShowDialog(this);
-                if (dialogResult == DialogResult.OK)
+                if ((Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false) && Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_AU))
                 {
-
+                    var agregarUnidad = new SAIFrmAgregarUnidad();
+                    var dialogResult = agregarUnidad.ShowDialog(this);
+                    if (dialogResult == DialogResult.OK)
+                    {
+                        //Se agrego correctamente
+                    }
                 }
+                else
+                    throw new SAIExcepcion("No tiene los permisos suficientes para realizar esta acción.");
             }
-
+            catch (SAIExcepcion)
+            {
+            }
         }
 
         void btnBajaUnidad_Click(object sender, EventArgs e)
         {
-            if ((Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false) && Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_AU))
+            try
             {
-                var confirmarBaja = new ExceptionMessageBox("¿Desea dar de baja la unidad?", "Confirmar Baja",
-                                                            ExceptionMessageBoxButtons.YesNo,
-                                                            ExceptionMessageBoxSymbol.Question,
-                                                            ExceptionMessageBoxDefaultButton.Button2);
+                if ((Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false) && Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_AU))
+                {
+                    var confirmarBaja = new ExceptionMessageBox(saiReport1.reportControl.SelectedRows.Count > 1 ? "¿Desea dar de baja las unidades seleccionadas?" : "¿Desea dar de baja esta unidad?", "Confirmar Baja",
+                                                                ExceptionMessageBoxButtons.YesNo,
+                                                                ExceptionMessageBoxSymbol.Question,
+                                                                ExceptionMessageBoxDefaultButton.Button2);
 
-                if (DialogResult.Yes == confirmarBaja.Show(this))
-                    Debug.WriteLine("dar de baja la unidad.");
+                    if (DialogResult.Yes == confirmarBaja.Show(this))
+                    {
+                        for (int i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
+                        {
+                            try
+                            {
+                                var unidad =
+                                                        UnidadMapper.Instance().GetOne(
+                                                            Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
+                                if (unidad != null)
+                                {
+                                    UnidadMapper.Instance().Delete(unidad);
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                throw new SAIExcepcion(ex.Message);
+                            }
+                        }
+                    }
+                }
+                else
+                    throw new SAIExcepcion("No tiene los permisos suficientes para realizar esta acción.");
+            }
+            catch (SAIExcepcion)
+            {
             }
         }
 
@@ -228,10 +268,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 tmrRegistros.Enabled = false;
-                throw new SAIExcepcion(ex.Message, this);
+                base.Close();
             }
         }
     }

@@ -26,7 +26,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 {
                     if (SAIProveedorValidacion.ValidarCamposRequeridos(this))
                     {
-                        var unidad = UnidadMapper.Instance().GetOneBySQLQuery(string.Format(SQL_VERIFICARUNIDAD, saiTxtUnidad.Text.Trim()));
+                        var unidad = UnidadMapper.Instance().GetOneBySQLQuery(string.Format(ID.SQL_VERIFICARUNIDAD, saiTxtUnidad.Text.Trim()));
                         if (unidad != null)
                         {
                             UnidadMapper.Instance().Insert(new Unidad
@@ -55,6 +55,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
-        private const string SQL_VERIFICARUNIDAD = "SELECT Unidad.* FROM Unidad WHERE (Codigo='{0}' AND Activo=True)";
+
     }
 }

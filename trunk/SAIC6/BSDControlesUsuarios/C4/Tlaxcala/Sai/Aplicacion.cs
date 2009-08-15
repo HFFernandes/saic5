@@ -83,7 +83,7 @@ namespace BSD.C4.Tlaxcala.Sai
             /// <returns>verdadero o falso</returns>
             public static bool blnPuedeLeer(int intSubModulo)
             {
-                var permisoObjectList = PermisoMapper.Instance().GetBySQLQuery(string.Format(SQL_OBTENERPERMISOS, intClaveUsuario, intSubModulo, ObtenerClaveSistema()));
+                var permisoObjectList = PermisoMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_OBTENERPERMISOS, intClaveUsuario, intSubModulo, ObtenerClaveSistema()));
                 foreach (var o in permisoObjectList)
                 {
                     if (o.Valor == 2)
@@ -100,7 +100,7 @@ namespace BSD.C4.Tlaxcala.Sai
             /// <returns>verdadero o falso</returns>
             public static bool blnPuedeEscribir(int intSubModulo)
             {
-                var permisoObjectList = PermisoMapper.Instance().GetBySQLQuery(string.Format(SQL_OBTENERPERMISOS, intClaveUsuario, intSubModulo, ObtenerClaveSistema()));
+                var permisoObjectList = PermisoMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_OBTENERPERMISOS, intClaveUsuario, intSubModulo, ObtenerClaveSistema()));
                 foreach (var o in permisoObjectList)
                 {
                     if (o.Valor == 4)
@@ -139,9 +139,6 @@ namespace BSD.C4.Tlaxcala.Sai
                 }
                 return intClaveSistema.ToString();
             }
-
-            private const string SQL_OBTENERPERMISOS =
-                "SELECT Permiso.* FROM PermisoUsuario INNER JOIN Permiso ON PermisoUsuario.ClavePermiso = Permiso.Clave WHERE (PermisoUsuario.ClaveUsuario = {0}) AND (PermisoUsuario.ClaveSubmodulo = {1}) AND (PermisoUsuario.ClaveSistema={2})";
         }
     }
 
