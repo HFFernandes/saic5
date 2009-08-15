@@ -140,7 +140,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             //Obtenemos todos los datos de las unidades que estan libres, en despacho o en llegada
                             var unidadDespachoList =
                                 DespachoIncidenciaMapper.Instance().GetBySQLQuery(string.Format(
-                                                                                      SQL_OBTENERDESPACHOS,
+                                                                                      ID.SQL_OBTENERDESPACHOS,
                                                                                       Aplicacion.UsuarioPersistencia
                                                                                           .intCorporacion ?? -1, itm.Record[0].Value));
                             foreach (var unidadDespacho in unidadDespachoList)
@@ -224,7 +224,5 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 throw new SAIExcepcion(ex.Message, this);
             }
         }
-
-        public const string SQL_OBTENERDESPACHOS = "SELECT DespachoIncidencia.* FROM DespachoIncidencia WHERE (HoraLiberada IS NULL OR HoraLlegada IS NULL OR HoraDespachada IS NULL) AND (ClaveCorporacion={0}) AND (ClaveUnidad={1})";
     }
 }

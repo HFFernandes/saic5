@@ -2,7 +2,7 @@
 {
     /// <summary>
     /// Clase que implementa los valores constantes
-    /// para los indices de los controles
+    /// para los indices de los controles,cadenas y consultas
     /// </summary>
     public class ID
     {
@@ -82,7 +82,20 @@
 
         #endregion
 
-        #region Cadenas y Colores
+        #region Consultas SQL
+
+        public const string SQL_CORPORACIONES =
+            "SELECT Corporacion.* FROM Corporacion INNER JOIN CorporacionIncidencia ON Corporacion.Clave = CorporacionIncidencia.ClaveCorporacion INNER JOIN Incidencia ON CorporacionIncidencia.Folio = Incidencia.Folio WHERE (Incidencia.Folio = {0})";
+        public const string SQL_INCIDENCIASCORPORACION =
+            "SELECT Incidencia.* FROM Incidencia INNER JOIN CorporacionIncidencia ON Incidencia.Folio = CorporacionIncidencia.Folio LEFT JOIN TipoIncidencia ON Incidencia.ClaveTipo = TipoIncidencia.Clave WHERE (CorporacionIncidencia.ClaveCorporacion = {0}) AND (Incidencia.ClaveEstatus = {1}) ORDER BY TipoIncidencia.Prioridad DESC";
+        public const string SQL_INCIDENCIAS =
+            "SELECT Incidencia.* FROM Incidencia LEFT JOIN TipoIncidencia ON Incidencia.ClaveTipo = dbo.TipoIncidencia.Clave WHERE (Incidencia.ClaveEstatus = {0}) ORDER BY TipoIncidencia.Prioridad DESC";
+        public const string SQL_OBTENERDESPACHOS =
+            "SELECT DespachoIncidencia.* FROM DespachoIncidencia WHERE (HoraLiberada IS NULL OR HoraLlegada IS NULL OR HoraDespachada IS NULL) AND (ClaveCorporacion={0}) AND (ClaveUnidad={1})";
+
+        #endregion
+
+        #region Cadenas
 
         public const string STR_DESCONOCIDO = "(desconocido)";
         public const string STR_NOMBREAPLICATIVO = "Sistema de Administración de Incidencias.";
@@ -90,6 +103,11 @@
         public const string STR_ESTATUSLIBRE = "Libre";
         public const string STR_ESTATUSLLEGADA = "Llegada";
         public const string STR_ESTATUSDESPACHADA = "Despachada";
+
+        #endregion
+
+        #region Colores
+
         public static readonly uint COLOR_VERDE = (uint)Aplicacion.HexadecimalADecimal("99FF33");
         public static readonly uint COLOR_NARANJA = (uint)Aplicacion.HexadecimalADecimal("FF8C00");
         public static readonly uint COLOR_VERDE2 = (uint)Aplicacion.HexadecimalADecimal("008000");
