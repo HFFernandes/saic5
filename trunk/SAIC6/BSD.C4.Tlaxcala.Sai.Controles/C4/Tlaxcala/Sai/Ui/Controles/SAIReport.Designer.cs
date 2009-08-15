@@ -40,6 +40,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             this.btnSeparador2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnBajaUnidad = new System.Windows.Forms.ToolStripButton();
             this.btnAltaUnidad = new System.Windows.Forms.ToolStripButton();
+            this.btnVistaPrevia = new System.Windows.Forms.ToolStripButton();
             this.btnSeparador3 = new System.Windows.Forms.ToolStripSeparator();
             this.lblFiltroRegistros = new System.Windows.Forms.ToolStripLabel();
             this.txtFiltroRegistros = new System.Windows.Forms.ToolStripTextBox();
@@ -69,6 +70,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             this.btnSeparador2,
             this.btnBajaUnidad,
             this.btnAltaUnidad,
+            this.btnVistaPrevia,
             this.btnSeparador3,
             this.lblFiltroRegistros,
             this.txtFiltroRegistros});
@@ -134,6 +136,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             this.btnAltaUnidad.Size = new System.Drawing.Size(23, 22);
             this.btnAltaUnidad.ToolTipText = "Agregar unidad";
             // 
+            // btnVistaPrevia
+            // 
+            this.btnVistaPrevia.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnVistaPrevia.Image = global::BSD.Properties.Resources.previa_16;
+            this.btnVistaPrevia.ImageTransparentColor = System.Drawing.Color.Black;
+            this.btnVistaPrevia.Name = "btnVistaPrevia";
+            this.btnVistaPrevia.Size = new System.Drawing.Size(23, 22);
+            this.btnVistaPrevia.ToolTipText = "Vista previa";
+            // 
             // btnSeparador3
             // 
             this.btnSeparador3.Name = "btnSeparador3";
@@ -193,6 +204,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         public System.Windows.Forms.ToolStripSeparator btnSeparador3;
         public System.Windows.Forms.ToolStripSeparator btnSeparador1;
         public System.Windows.Forms.ToolStripSeparator btnSeparador2;
+        public System.Windows.Forms.ToolStripButton btnVistaPrevia;
 
     }
 }

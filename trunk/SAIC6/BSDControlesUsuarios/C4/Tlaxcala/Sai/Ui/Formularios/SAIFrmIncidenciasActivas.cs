@@ -38,12 +38,19 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             saiReport1.btnDespacharIncidencias.Click += btnDespacharIncidencias_Click;
             saiReport1.btnBajaUnidad.Click += btnBajaUnidad_Click;
             saiReport1.btnAltaUnidad.Click += btnAltaUnidad_Click;
+            saiReport1.btnVistaPrevia.Click += btnVistaPrevia_Click;
             saiReport1.reportControl.RowDblClick += reportControl_RowDblClick;
 
             lstIncidenciasRegistradas = new List<Incidencia>();
             lstIncidenciasTemporales = new List<Incidencia>();
             lstIncidenciasPorRemover = new List<Incidencia>();
             lstRegistrosReporte = new List<ReportRecord>();
+        }
+
+        void btnVistaPrevia_Click(object sender, EventArgs e)
+        {
+            saiReport1.reportControl.PrintPreviewOptions.Title = "Reporte de Incidencias Activas";
+            saiReport1.reportControl.PrintPreview(true);
         }
 
         void reportControl_RowDblClick(object sender, AxXtremeReportControl._DReportControlEvents_RowDblClickEvent e)
@@ -69,14 +76,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 lstIncidenciasPorLigar.Add(Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
             }
-            
+
             //Mostrar ventana para la seleccion del padre
-            var ligarIncidencias = new SAIFrmLigarIncidencias(lstIncidenciasPorLigar);
-            var dialogResult = ligarIncidencias.ShowDialog(this);
-            if (dialogResult == DialogResult.OK)
-            {
-                Debug.WriteLine(ligarIncidencias.strFolioPadre);
-            }
+            //var ligarIncidencias = new SAIFrmLigarIncidencias(lstIncidenciasPorLigar);
+            //var dialogResult = ligarIncidencias.ShowDialog(this);
+            //if (dialogResult == DialogResult.OK)
+            //{
+            //    Debug.WriteLine(ligarIncidencias.strFolioPadre);
+            //}
         }
 
         void SAIFrmIncidenciasActivas_Load(object sender, EventArgs e)
