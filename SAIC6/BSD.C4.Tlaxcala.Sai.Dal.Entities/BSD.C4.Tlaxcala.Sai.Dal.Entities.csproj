@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Auto\Bitacora.Auto.cs" />
     <Compile Include="Entities\Auto\CodigoPostal.Auto.cs" />
     <Compile Include="Entities\Auto\Colonia.Auto.cs" />
     <Compile Include="Entities\Auto\Estado.Auto.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Entities\Auto\PersonaExtraviada.Auto.cs" />
     <Compile Include="Entities\Auto\RoboVehiculoAccesorios.Auto.cs" />
     <Compile Include="Entities\Auto\Unidad.Auto.cs" />
+    <Compile Include="Entities\Bitacora.cs" />
     <Compile Include="Entities\CodigoPostal.cs" />
     <Compile Include="Entities\Colonia.cs" />
     <Compile Include="Entities\Auto\Corporacion.Auto.cs" />
@@ -67,6 +69,7 @@
     <Compile Include="Entities\PersonaExtraviada.cs" />
     <Compile Include="Entities\RoboVehiculoAccesorios.cs" />
     <Compile Include="Entities\Unidad.cs" />
+    <Compile Include="Objects\Auto\BitacoraObject.Auto.cs" />
     <Compile Include="Objects\Auto\CodigoPostalObject.Auto.cs" />
     <Compile Include="Objects\Auto\ColoniaObject.Auto.cs" />
     <Compile Include="Objects\Auto\CorporacionObject.Auto.cs" />
@@ -82,6 +85,7 @@
     <Compile Include="Objects\Auto\UsuarioCorporacionObject.Auto.cs" />
     <Compile Include="Objects\Auto\VehiculoObject.Auto.cs" />
     <Compile Include="Objects\Auto\VehiculoRobadoObject.Auto.cs" />
+    <Compile Include="Objects\BitacoraObject.cs" />
     <Compile Include="Objects\CodigoPostalObject.cs" />
     <Compile Include="Objects\ColoniaObject.cs" />
     <Compile Include="Entities\CorporacionIncidencia.cs" />
