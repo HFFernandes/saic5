@@ -304,10 +304,9 @@
             // cmbTipoIncidencia
             // 
             this.cmbTipoIncidencia.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbTipoIncidencia.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbTipoIncidencia.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.cmbTipoIncidencia.BlnEsRequerido = true;
             this.cmbTipoIncidencia.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.cmbTipoIncidencia.FormattingEnabled = true;
             this.cmbTipoIncidencia.Location = new System.Drawing.Point(377, 79);
             this.cmbTipoIncidencia.MaxLength = 150;
             this.cmbTipoIncidencia.Name = "cmbTipoIncidencia";
@@ -336,11 +335,7 @@
             // 
             // cmbMunicipio
             // 
-            this.cmbMunicipio.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbMunicipio.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbMunicipio.BlnEsRequerido = false;
             this.cmbMunicipio.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.cmbMunicipio.FormattingEnabled = true;
             this.cmbMunicipio.Location = new System.Drawing.Point(67, 130);
             this.cmbMunicipio.MaxLength = 75;
             this.cmbMunicipio.Name = "cmbMunicipio";
@@ -609,7 +604,7 @@
             this.dtpAccesoriosFechaPercato.CustomFormat = "dd/MM/yyyy";
             this.dtpAccesoriosFechaPercato.Enabled = false;
             this.dtpAccesoriosFechaPercato.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpAccesoriosFechaPercato.Location = new System.Drawing.Point(416, 50);
+            this.dtpAccesoriosFechaPercato.Location = new System.Drawing.Point(415, 51);
             this.dtpAccesoriosFechaPercato.MaxDate = new System.DateTime(3000, 12, 31, 0, 0, 0, 0);
             this.dtpAccesoriosFechaPercato.Name = "dtpAccesoriosFechaPercato";
             this.dtpAccesoriosFechaPercato.Size = new System.Drawing.Size(115, 20);
