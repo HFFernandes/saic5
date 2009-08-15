@@ -110,8 +110,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             try 
             {
-                try
-                {
+                /*try
+                {*/
                     Entidades.Usuario newUsuario = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Usuario();
                     newUsuario.NombrePropio = this.txtNombrePropio.Text;
                     newUsuario.NombreUsuario = this.txtUsuario.Text;
@@ -119,9 +119,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     newUsuario.Despachador = this.rbDespachador.Checked ? true : false;
                     newUsuario.Activo = this.chkActivado.Checked;
                     Mappers.UsuarioMapper.Instance().Insert(newUsuario);
+                /*}
+                catch (Cooperator.Framework.Data.Exceptions.InvalidConnectionStringException)
+                {
+                    throw new SAIExcepcion("No es posible conectarse a la BD, la cadena de conexion es erronea, consute con el Administrador del sistema;");
                 }
-                catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                catch (Cooperator.Framework.Data.Exceptions.NoRowAffectedException)
+                { }*/
             }
             catch (SAIExcepcion)
             {  }
@@ -148,8 +152,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         Mappers.UsuarioMapper.Instance().Save(updUsuario);
                     }
                 }
-                catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                catch (Cooperator.Framework.Data.Exceptions.NoRowAffectedException)
+                { return; }
             }
             catch (SAIExcepcion)
             { }
