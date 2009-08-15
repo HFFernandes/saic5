@@ -36,26 +36,41 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void btnVistaPrevia_Click(object sender, EventArgs e)
         {
-            if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_P))
+            try
             {
-                saiReport1.reportControl.PrintPreviewOptions.Title = "Reporte de Incidencias Pendientes";
-                saiReport1.reportControl.PrintPreview(true);
+                if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_P))
+                {
+                    saiReport1.reportControl.PrintPreviewOptions.Title = "Reporte de Incidencias Pendientes";
+                    saiReport1.reportControl.PrintPreview(true);
+                }
+                else
+                    throw new SAIExcepcion("No tiene los permisos suficientes para realizar esta acción.");
             }
-
+            catch (SAIExcepcion)
+            {
+            }
         }
 
         void reportControl_RowDblClick(object sender, AxXtremeReportControl._DReportControlEvents_RowDblClickEvent e)
         {
-            if ((Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false) && Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_P))
+            try
             {
-                //Recuperar el folio y generar una instancia de la entidad para
-                //pasarla al nuevo formulario
-                var incidencia = IncidenciaMapper.Instance().GetOne(Convert.ToInt32(e.row.Record[0].Value));
-                if (incidencia != null)
+                if ((Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false) && Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_P))
                 {
-                    var incidenciaDespacho = new SAIFrmIncidencia066Despacho(incidencia);
-                    incidenciaDespacho.Show();
+                    //Recuperar el folio y generar una instancia de la entidad para
+                    //pasarla al nuevo formulario
+                    var incidencia = IncidenciaMapper.Instance().GetOne(Convert.ToInt32(e.row.Record[0].Value));
+                    if (incidencia != null)
+                    {
+                        var incidenciaDespacho = new SAIFrmIncidencia066Despacho(incidencia);
+                        incidenciaDespacho.Show();
+                    }
                 }
+                else
+                    throw new SAIExcepcion("No tiene los permisos suficientes para realizar esta acción.");
+            }
+            catch (SAIExcepcion)
+            {
             }
         }
 
@@ -69,21 +84,29 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void btnDespacharIncidencias_Click(object sender, EventArgs e)
         {
-            if ((Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false) && Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_P))
+            try
             {
-                //Recuperar el folio y generar una instancia de la entidad para
-                //pasarla al nuevo formulario
-                for (int i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
+                if ((Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false) && Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_P))
                 {
-                    var incidencia =
-                        IncidenciaMapper.Instance().GetOne(
-                            Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
-                    if (incidencia != null)
+                    //Recuperar el folio y generar una instancia de la entidad para
+                    //pasarla al nuevo formulario
+                    for (int i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
                     {
-                        var incidenciaDespacho = new SAIFrmIncidencia066Despacho(incidencia);
-                        incidenciaDespacho.Show();
+                        var incidencia =
+                            IncidenciaMapper.Instance().GetOne(
+                                Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
+                        if (incidencia != null)
+                        {
+                            var incidenciaDespacho = new SAIFrmIncidencia066Despacho(incidencia);
+                            incidenciaDespacho.Show();
+                        }
                     }
                 }
+                else
+                    throw new SAIExcepcion("No tiene los permisos suficientes para realizar esta acción.");
+            }
+            catch (SAIExcepcion)
+            {
             }
         }
 
@@ -105,15 +128,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 lstIncidenciasPorLigar.Remove(folioPadre);
 
                 //recorro los nodos hijos para asignarles el padre
-                IncidenciaList listadoIncidencias = IncidenciaMapper.Instance().GetBySQLQuery(string.Format("SELECT Incidencia.* FROM Incidencia WHERE Folio IN {0}", lstIncidenciasPorLigar));
-                foreach (var incidencia in listadoIncidencias)
-                {
-                    incidencia.FolioPadre = Convert.ToInt32(folioPadre);
-                }
-                if (listadoIncidencias.Count > 0)
-                {
-                    IncidenciaMapper.Instance().Update(listadoIncidencias);
-                }
+                //IncidenciaList listadoIncidencias = IncidenciaMapper.Instance().GetBySQLQuery(string.Format("SELECT Incidencia.* FROM Incidencia WHERE Folio IN {0}", lstIncidenciasPorLigar));
+                //foreach (var incidencia in listadoIncidencias)
+                //{
+                //    incidencia.FolioPadre = Convert.ToInt32(folioPadre);
+                //}
+                //if (listadoIncidencias.Count > 0)
+                //{
+                //    IncidenciaMapper.Instance().Update(listadoIncidencias);
+                //}
 
                 //Actualizar el foliopadre, pero antes verificar que no este ligada
                 //organizar los nodos para desplegar el tree

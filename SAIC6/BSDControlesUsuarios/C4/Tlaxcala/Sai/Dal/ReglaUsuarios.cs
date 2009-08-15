@@ -18,13 +18,13 @@ namespace BSD.C4.Tlaxcala.Sai.Dal
         public static List<string> ObtenerSistemas(string strNombreUsuario, string strContraseña)
         {
             var sistemas = new List<string>();
-            var usuario = UsuarioMapper.Instance().GetOneBySQLQuery(string.Format(SQL_OBTENERUSUARIO, strNombreUsuario));
+            var usuario = UsuarioMapper.Instance().GetOneBySQLQuery(string.Format(ID.SQL_OBTENERUSUARIO, strNombreUsuario));
 
             if (usuario != null)
             {
                 //Existe un usuario con las credenciales proporcionadas
                 //Luego entonces, obtengo y presento los sistemas a los cuales puede accesar
-                var sistema = SistemaMapper.Instance().GetBySQLQuery(string.Format(SQL_OBTENERSISTEMAS, usuario.Clave));
+                var sistema = SistemaMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_OBTENERSISTEMAS, usuario.Clave));
                 foreach (var s in sistema)
                 {
                     sistemas.Add(s.Descripcion);
@@ -42,13 +42,7 @@ namespace BSD.C4.Tlaxcala.Sai.Dal
         /// <returns>Una instancia de la entidad usuario pasada, pudiendo ser nula</returns>
         public static Usuario AutenticarUsuario(string strNombreUsuario, string strContraseña)
         {
-            return UsuarioMapper.Instance().GetOneBySQLQuery(string.Format(SQL_AUTENTICARUSUARIO, strNombreUsuario, strContraseña));
+            return UsuarioMapper.Instance().GetOneBySQLQuery(string.Format(ID.SQL_AUTENTICARUSUARIO, strNombreUsuario, strContraseña));
         }
-
-        //Definición de constantes para consultas definidas por el desarrollador
-        private const string SQL_OBTENERUSUARIO = "SELECT * FROM [Usuario] WHERE (NombreUsuario='{0}') AND (Activo=1)";
-        private const string SQL_OBTENERSISTEMAS = "SELECT DISTINCT Sistema.* FROM Sistema INNER JOIN PermisoUsuario ON Sistema.Clave = PermisoUsuario.ClaveSistema INNER JOIN Submodulo ON PermisoUsuario.ClaveSubmodulo = Submodulo.Clave WHERE (PermisoUsuario.ClaveUsuario = {0})";
-        private const string SQL_AUTENTICARUSUARIO =
-            "SELECT * FROM [Usuario] WHERE (NombreUsuario='{0}' AND Contraseña='{1}')";
     }
 }
