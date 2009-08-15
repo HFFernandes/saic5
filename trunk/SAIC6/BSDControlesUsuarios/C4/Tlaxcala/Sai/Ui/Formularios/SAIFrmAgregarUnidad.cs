@@ -26,16 +26,23 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 {
                     if (SAIProveedorValidacion.ValidarCamposRequeridos(this))
                     {
-                        var unidad = new Unidad
-                                         {
-                                             Activo = true,
-                                             ClaveCorporacion = Aplicacion.UsuarioPersistencia.intCorporacion ?? -1,
-                                             Codigo = saiTxtUnidad.Text
-                                         };
+                        var unidad = UnidadMapper.Instance().GetOneBySQLQuery(string.Format(SQL_VERIFICARUNIDAD, saiTxtUnidad.Text.Trim()));
+                        if (unidad != null)
+                        {
+                            UnidadMapper.Instance().Insert(new Unidad
+                            {
+                                Activo = true,
+                                ClaveCorporacion = Aplicacion.UsuarioPersistencia.intCorporacion ?? -1,
+                                Codigo = saiTxtUnidad.Text
+                            });
 
-                        UnidadMapper.Instance().Insert(unidad);
-                        DialogResult = DialogResult.OK;
-                        base.Close();
+                            DialogResult = DialogResult.OK;
+                            Close();
+                        }
+                        else
+                        {
+                            throw new Exception("La unidad ya existe para su corporación. Probablemente no este activa, consulte con el Administrador.");
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -47,5 +54,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
             }
         }
+
+        private const string SQL_VERIFICARUNIDAD = "SELECT Unidad.* FROM Unidad WHERE (Codigo='{0}' AND Activo=True)";
     }
 }

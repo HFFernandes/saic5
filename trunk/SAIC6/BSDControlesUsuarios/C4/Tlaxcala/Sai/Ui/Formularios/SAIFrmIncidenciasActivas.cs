@@ -125,6 +125,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void ObtenerRegistros()
         {
+            //TODO: Ordenar las incidencias por prioridad
             IncidenciaList resIncidencias;
 
             try
@@ -134,7 +135,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 lstIncidenciasTemporales.Clear();
                 if (Aplicacion.UsuarioPersistencia.blnEsDespachador == true)
                 {
-                    resIncidencias = IncidenciaMapper.Instance().GetBySQLQuery(string.Format(SQL_INCIDENCIASCORPORACION,
+                    resIncidencias = IncidenciaMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_INCIDENCIASCORPORACION,
                                                                                 Aplicacion.UsuarioPersistencia.
                                                                                     intCorporacion,
                                                                                 (int)ESTATUSINCIDENCIAS.ACTIVA));
@@ -142,7 +143,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 else
                 {
                     resIncidencias =
-                        IncidenciaMapper.Instance().GetBySQLQuery(string.Format(SQL_INCIDENCIAS,
+                        IncidenciaMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_INCIDENCIAS,
                                                                                 (int)ESTATUSINCIDENCIAS.ACTIVA));
                 }
 
@@ -156,7 +157,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         lstIncidenciasRegistradas.Add(incidencia);
                         var corporaciones = new StringBuilder();
 
-                        CorporacionMapper.Instance().GetBySQLQuery(string.Format(SQL_CORPORACIONES, incidencia.Folio)).ForEach(delegate(Corporacion c)
+                        CorporacionMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_CORPORACIONES, incidencia.Folio)).ForEach(delegate(Corporacion c)
                         {
                             corporaciones.Append(c.Descripcion);
                             corporaciones.Append(",");
@@ -207,7 +208,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                         TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? 1).Descripcion;
 
                                 var corporaciones = new StringBuilder();
-                                CorporacionMapper.Instance().GetBySQLQuery(string.Format(SQL_CORPORACIONES, incidencia.Folio)).ForEach(delegate(Corporacion c)
+                                CorporacionMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_CORPORACIONES, incidencia.Folio)).ForEach(delegate(Corporacion c)
                                 {
                                     corporaciones.Append(c.Descripcion);
                                     corporaciones.Append(",");
@@ -255,14 +256,5 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 base.Close();
             }
         }
-
-        private const string SQL_CORPORACIONES =
-            "SELECT Corporacion.* FROM Corporacion INNER JOIN CorporacionIncidencia ON Corporacion.Clave = CorporacionIncidencia.ClaveCorporacion INNER JOIN Incidencia ON CorporacionIncidencia.Folio = Incidencia.Folio WHERE (Incidencia.Folio = {0})";
-
-        private const string SQL_INCIDENCIASCORPORACION =
-            "SELECT Incidencia.* FROM Incidencia INNER JOIN CorporacionIncidencia ON Incidencia.Folio = CorporacionIncidencia.Folio WHERE (CorporacionIncidencia.ClaveCorporacion = {0}) AND (Incidencia.ClaveEstatus = {1})";
-
-        private const string SQL_INCIDENCIAS =
-            "SELECT Incidencia.* FROM Incidencia WHERE (Incidencia.ClaveEstatus = {0})";
     }
 }
