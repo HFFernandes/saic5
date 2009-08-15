@@ -36,19 +36,26 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void btnVistaPrevia_Click(object sender, EventArgs e)
         {
-            saiReport1.reportControl.PrintPreviewOptions.Title = "Reporte de Incidencias Pendientes";
-            saiReport1.reportControl.PrintPreview(true);
+            if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_P))
+            {
+                saiReport1.reportControl.PrintPreviewOptions.Title = "Reporte de Incidencias Pendientes";
+                saiReport1.reportControl.PrintPreview(true);
+            }
+
         }
 
         void reportControl_RowDblClick(object sender, AxXtremeReportControl._DReportControlEvents_RowDblClickEvent e)
         {
-            //Recuperar el folio y generar una instancia de la entidad para
-            //pasarla al nuevo formulario
-            var incidencia = IncidenciaMapper.Instance().GetOne(Convert.ToInt32(e.row.Record[0].Value));
-            if (incidencia != null)
+            if ((Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false) && Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_P))
             {
-                var incidenciaDespacho = new SAIFrmIncidencia066Despacho(incidencia);
-                incidenciaDespacho.Show();
+                //Recuperar el folio y generar una instancia de la entidad para
+                //pasarla al nuevo formulario
+                var incidencia = IncidenciaMapper.Instance().GetOne(Convert.ToInt32(e.row.Record[0].Value));
+                if (incidencia != null)
+                {
+                    var incidenciaDespacho = new SAIFrmIncidencia066Despacho(incidencia);
+                    incidenciaDespacho.Show();
+                }
             }
         }
 
@@ -62,21 +69,27 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void btnDespacharIncidencias_Click(object sender, EventArgs e)
         {
-            //Recuperar el folio y generar una instancia de la entidad para
-            //pasarla al nuevo formulario
-            for (int i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
+            if ((Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false) && Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_P))
             {
-                var incidencia = IncidenciaMapper.Instance().GetOne(Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
-                if (incidencia != null)
+                //Recuperar el folio y generar una instancia de la entidad para
+                //pasarla al nuevo formulario
+                for (int i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
                 {
-                    var incidenciaDespacho = new SAIFrmIncidencia066Despacho(incidencia);
-                    incidenciaDespacho.Show();
+                    var incidencia =
+                        IncidenciaMapper.Instance().GetOne(
+                            Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
+                    if (incidencia != null)
+                    {
+                        var incidenciaDespacho = new SAIFrmIncidencia066Despacho(incidencia);
+                        incidenciaDespacho.Show();
+                    }
                 }
             }
         }
 
         void btnLigarIncidencias_Click(object sender, EventArgs e)
         {
+            //TODO: Falta verificar el permiso
             var lstIncidenciasPorLigar = new List<string>();
             for (int i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
             {
@@ -112,10 +125,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void SAIFrmIncidenciasPendientes_Load(object sender, EventArgs e)
         {
-            //saiReport1.btnLigarIncidencias.Enabled = Aplicacion.UsuarioPersistencia.blnPuedeEscribir(intSubModulo);
             saiReport1.btnAltaUnidad.Visible = false;
             saiReport1.btnBajaUnidad.Visible = false;
             saiReport1.btnSeparador2.Visible = false;
+            saiReport1.btnDespacharIncidencias.Visible = Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false;
 
             //Falta mostrar la prioridad del incidente
             saiReport1.AgregarColumna(0, "ID", 20, false, false, false, false);
@@ -141,7 +154,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void ObtenerRegistros()
         {
-            //TODO: Ordenar las incidencias por prioridad
             IncidenciaList resIncidencias;
 
             try
@@ -289,10 +301,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
                 lstIncidenciasPorRemover.Clear();   //limpiamos la colección para el nuevo ciclo
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 tmrRegistros.Enabled = false;
-                //throw new SAIExcepcion(ex.Message, this);
                 base.Close();
             }
         }

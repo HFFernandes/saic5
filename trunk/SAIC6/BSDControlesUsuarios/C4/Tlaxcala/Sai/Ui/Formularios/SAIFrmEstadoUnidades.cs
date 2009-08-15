@@ -12,7 +12,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
     public partial class SAIFrmEstadoUnidades : SAIFrmBase
     {
-
         private List<Unidad> lstUnidadesRegistradas;
         private List<ReportRecord> lstRegistrosReporte;
 
@@ -37,8 +36,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void btnVistaPrevia_Click(object sender, EventArgs e)
         {
-            saiReport1.reportControl.PrintPreviewOptions.Title = "Reporte de Unidades";
-            saiReport1.reportControl.PrintPreview(true);
+            if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_AU))
+            {
+                saiReport1.reportControl.PrintPreviewOptions.Title = "Reporte de Unidades";
+                saiReport1.reportControl.PrintPreview(true);
+            }
+
         }
 
         void reportControl_RowDblClick(object sender, AxXtremeReportControl._DReportControlEvents_RowDblClickEvent e)
@@ -47,25 +50,30 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void btnAltaUnidad_Click(object sender, EventArgs e)
         {
-            //TODO: Falta el procedimiento para agregar la unidad
-
-            var agregarUnidad = new SAIFrmAgregarUnidad();
-            var dialogResult = agregarUnidad.ShowDialog(this);
-            if (dialogResult == DialogResult.OK)
+            if ((Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false) && Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_AU))
             {
+                var agregarUnidad = new SAIFrmAgregarUnidad();
+                var dialogResult = agregarUnidad.ShowDialog(this);
+                if (dialogResult == DialogResult.OK)
+                {
 
+                }
             }
+
         }
 
         void btnBajaUnidad_Click(object sender, EventArgs e)
         {
-            var confirmarBaja = new ExceptionMessageBox("¿Desea dar de baja la unidad?", "Confirmar Baja",
-                                                          ExceptionMessageBoxButtons.YesNo,
-                                                          ExceptionMessageBoxSymbol.Question,
-                                                          ExceptionMessageBoxDefaultButton.Button2);
+            if ((Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false) && Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_AU))
+            {
+                var confirmarBaja = new ExceptionMessageBox("¿Desea dar de baja la unidad?", "Confirmar Baja",
+                                                            ExceptionMessageBoxButtons.YesNo,
+                                                            ExceptionMessageBoxSymbol.Question,
+                                                            ExceptionMessageBoxDefaultButton.Button2);
 
-            if (DialogResult.Yes == confirmarBaja.Show(this))
-                Debug.WriteLine("dar de baja la unidad.");
+                if (DialogResult.Yes == confirmarBaja.Show(this))
+                    Debug.WriteLine("dar de baja la unidad.");
+            }
         }
 
         void btnDespacharIncidencias_Click(object sender, EventArgs e)
@@ -80,6 +88,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             ObtenerRegistros();
             saiReport1.reportControl.Redraw();
+
+            saiReport1.btnBajaUnidad.Enabled = saiReport1.reportControl.SelectedRows.Count >= 1;
         }
 
         private void SAIFrmEstadoUnidades_Load(object sender, EventArgs e)

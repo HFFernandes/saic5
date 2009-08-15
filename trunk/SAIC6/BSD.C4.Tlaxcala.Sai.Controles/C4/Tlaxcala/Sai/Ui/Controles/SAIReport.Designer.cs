@@ -125,7 +125,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             this.btnBajaUnidad.ImageTransparentColor = System.Drawing.Color.Black;
             this.btnBajaUnidad.Name = "btnBajaUnidad";
             this.btnBajaUnidad.Size = new System.Drawing.Size(23, 22);
-            this.btnBajaUnidad.ToolTipText = "Borrar unidad";
+            this.btnBajaUnidad.ToolTipText = "Borrar unidad(es)";
             // 
             // btnAltaUnidad
             // 
