@@ -52,6 +52,7 @@
     <Compile Include="Entities\Auto\Bitacora.Auto.cs" />
     <Compile Include="Entities\Auto\CodigoPostal.Auto.cs" />
     <Compile Include="Entities\Auto\Colonia.Auto.cs" />
+    <Compile Include="Entities\Auto\Dependencia.Auto.cs" />
     <Compile Include="Entities\Auto\Estado.Auto.cs" />
     <Compile Include="Entities\Auto\Localidad.Auto.cs" />
     <Compile Include="Entities\Auto\Municipio.Auto.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Entities\Colonia.cs" />
     <Compile Include="Entities\Auto\Corporacion.Auto.cs" />
     <Compile Include="Entities\Corporacion.cs" />
+    <Compile Include="Entities\Dependencia.cs" />
     <Compile Include="Entities\Estado.cs" />
     <Compile Include="Entities\Localidad.cs" />
     <Compile Include="Entities\Municipio.cs" />
@@ -73,6 +75,7 @@
     <Compile Include="Objects\Auto\CodigoPostalObject.Auto.cs" />
     <Compile Include="Objects\Auto\ColoniaObject.Auto.cs" />
     <Compile Include="Objects\Auto\CorporacionObject.Auto.cs" />
+    <Compile Include="Objects\Auto\DependenciaObject.Auto.cs" />
     <Compile Include="Objects\Auto\EstadoObject.Auto.cs" />
     <Compile Include="Objects\Auto\LocalidadObject.Auto.cs" />
     <Compile Include="Objects\Auto\MunicipioObject.Auto.cs" />
@@ -97,6 +100,7 @@
     <Compile Include="Objects\Auto\DenuncianteObject.Auto.cs" />
     <Compile Include="Entities\DespachoIncidencia.cs" />
     <Compile Include="Entities\Auto\DespachoIncidencia.Auto.cs" />
+    <Compile Include="Objects\DependenciaObject.cs" />
     <Compile Include="Objects\DespachoIncidenciaObject.cs" />
     <Compile Include="Objects\Auto\DespachoIncidenciaObject.Auto.cs" />
     <Compile Include="Entities\DetalleDespachoIncidencia.cs" />
