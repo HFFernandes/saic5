@@ -283,12 +283,18 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
             {
                 this.lblDescripcionIncidencia.Text  = "Descripción de  \n la Denuncia:";
-
+                this.lblTelefono.Visible = false;
+                this.txtTelefono.Visible = false;
+                this.lblTipoIncidencia.Left = lblTelefono.Left - 5;
+                this.cmbTipoIncidencia.Left = this.txtTelefono.Left;
+                this.lblTipoIncidencia.Text = "Tipo de \n la Denuncia:";
+                this.lblTipoIncidencia.Top -= 10;
             }
             else
             {
                 this.lblDescripcionIncidencia.Text  = "Descripción de  \n la Incidencia:";
             }
+
             this.ResumeLayout(false);
             this.InicializaListas();
             this._entIncidencia = entIncidencia;
@@ -1923,7 +1929,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                             {
 
-                                this.Height = 720;
+                                this.Height = 750;
                                 this.Width = 600;
                                 this.grpRoboVehiculo.Top = 425;
                                
@@ -1952,7 +1958,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             this.grpRoboAccesorios.SuspendLayout();
                             if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                             {
-                                this.Height = 720;
+                                this.Height = 750;
                                 this.Width = 600;
                                 this.grpRoboAccesorios.Top = 425;
                             }
@@ -1980,7 +1986,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                            
                             if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                             {
-                                this.Height = 720;
+                                this.Height = 750;
                                 this.Width = 600;
                                 this.grpExtravio.Top = 425;
                             }
@@ -2003,7 +2009,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             this.grpRoboAccesorios.Visible = false;
                             if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                             {
-                                this.Height = 485;
+                                this.Height = 515;
                                 this.Width = 600;
                                
                             }
