@@ -98,6 +98,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 this.txtApellidoDenunciante.Text  = objDenunciante.Apellido;
                 this.txtDenuncianteDireccion.Text  = objDenunciante.Direccion;
             }
+            this.CambiaHabilitadoTipoIncidencia(false);
 
         }
 

@@ -629,7 +629,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     i = 1;
                     foreach (VehiculoRobadoObject objVehiculoRobado in lstVehiculosRobados)
                     {
-                        
+                       
+
                         if (objVehiculoRobado.ClavePropietario.HasValue)
                         {
                             PropietarioVehiculoObject objPropietarioVehiculo = PropietarioVehiculoMapper.Instance().GetOne(objVehiculoRobado.ClavePropietario.Value);
@@ -643,6 +644,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         VehiculoObject objVehiculo = VehiculoMapper.Instance().GetOne(objVehiculoRobado.ClaveVehiculo);
                         if (objVehiculo != null)
                         {
+                            dgvVehiculo.Rows.Add();
                             dgvVehiculo[0,i-1].Value = objVehiculo.Clave;
                             dgvVehiculo[1,i-1].Value = objVehiculo.Marca;
                             dgvVehiculo[2,i-1].Value = objVehiculo.Tipo;
@@ -662,6 +664,55 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     RoboVehiculoAccesoriosList lstRoboVehiculoAccesorios = RoboVehiculoAccesoriosMapper.Instance().GetByIncidencia(this._entIncidencia.Folio);
                     if (lstRoboVehiculoAccesorios != null && lstRoboVehiculoAccesorios.Count > 0)
                     {
+                        RoboVehiculoAccesorios entRoboVehiculoAccesorios = lstRoboVehiculoAccesorios[0];
+                        if (entRoboVehiculoAccesorios.ClaveVehiculo.HasValue)
+                        {
+                            VehiculoObject objVehiculo = VehiculoMapper.Instance().GetOne(entRoboVehiculoAccesorios.ClaveVehiculo.Value);
+                            this.txtAccesoriosPlacas.Text = objVehiculo.Placas;
+                            this.txtAccesoriosSerie.Text = objVehiculo.NumeroSerie;
+                        }
+                        this.txtAccesoriosRobados.Text = entRoboVehiculoAccesorios.AccesoriosRobados;
+                        this.txtAccesoriosPersonaSePercato.Text = entRoboVehiculoAccesorios.SePercato;
+                        if (entRoboVehiculoAccesorios.FechaPercato.HasValue)
+                        {
+                            this.dtpAccesoriosFechaPercato.Value = entRoboVehiculoAccesorios.FechaPercato.Value;
+                            this.dtpAccesoriosFechaPercato.Enabled = true;
+                            this.chkAccesoriosPercato.Checked = true;
+                        }
+                        else
+                        {
+                            this.dtpAccesoriosFechaPercato.Enabled = false;
+                            this.chkAccesoriosPercato.Checked = false;
+                        }
+                        this.txtAccesoriosResponsables.Text = entRoboVehiculoAccesorios.DescripcionResponsables;
+
+                        //Se revisa si hay vehículos involucrados
+                        RoboVehiculoAccesoriosVehiculoInvolucradoObjectList lstRoboVehiculosInv = RoboVehiculoAccesoriosVehiculoInvolucradoMapper.Instance().GetByRoboVehiculoAccesorios(entRoboVehiculoAccesorios.Clave);
+
+                        if (lstRoboVehiculosInv != null && lstRoboVehiculosInv.Count > 0)
+                        {
+                            i = 1;
+                            foreach(RoboVehiculoAccesoriosVehiculoInvolucradoObject objRoboVehiculoInv in lstRoboVehiculosInv)
+                            {
+                                VehiculoObject objVehiculoInv = VehiculoMapper.Instance().GetOne(objRoboVehiculoInv.ClaveVehiculo);
+                                if (objVehiculoInv != null)
+                                {
+                                    dgvVehiculoAccesorios.Rows.Add();
+                                    dgvVehiculoAccesorios[0, i - 1].Value = objVehiculoInv.Clave;
+                                    dgvVehiculoAccesorios[1, i - 1].Value = objVehiculoInv.Marca;
+                                    dgvVehiculoAccesorios[2, i - 1].Value = objVehiculoInv.Tipo;
+                                    dgvVehiculoAccesorios[3, i - 1].Value = objVehiculoInv.Modelo;
+                                    dgvVehiculoAccesorios[4, i - 1].Value = objVehiculoInv.Placas;
+                                    dgvVehiculoAccesorios[5, i - 1].Value = objVehiculoInv.Color;
+                                    dgvVehiculoAccesorios[6, i - 1].Value = objVehiculoInv.NumeroMotor;
+                                    dgvVehiculoAccesorios[7, i - 1].Value = objVehiculoInv.NumeroSerie;
+                                    dgvVehiculoAccesorios[8, i - 1].Value = objVehiculoInv.SeñasParticulares;
+                                    i++;
+                                }
+                                i++;
+                            }
+                        }
+
 
                     }
                     this.txtDireccion.Text = this._entIncidencia.Direccion;
@@ -1988,6 +2039,27 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 {
                                     this._grpDenunciante.Enabled = true;
                                 }
+                            }
+                            if (objTipo.Descripcion.ToUpper().Contains("BROMA"))
+                            {
+                                //Se cambia a incidencia cerrada
+                                this._entIncidencia.ClaveEstatus = 5;
+                            }
+                            else
+                            {
+                                //Se verifica si tiene coorporación para ponerle estado 2:
+                                CorporacionIncidenciaList lstCorporacionIncidencia = CorporacionIncidenciaMapper.Instance().GetByIncidencia(this._entIncidencia.Folio);
+                                if (lstCorporacionIncidencia != null && lstCorporacionIncidencia.Count > 0)
+                                {
+                                    //Se cambia a pendiente
+                                    this._entIncidencia.ClaveEstatus = 2;
+                                }
+                                else
+                                {
+                                    //Se cambia a nueva incidencia
+                                    this._entIncidencia.ClaveEstatus = 1;
+                                }
+
                             }
 
                         }
@@ -3327,6 +3399,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (SAIExcepcion) { }
         }
 
+        protected void CambiaHabilitadoTipoIncidencia(Boolean blnHabilitado)
+        {
+            this.cmbTipoIncidencia.Enabled = blnHabilitado;
+        }
        
     }
 }
