@@ -129,16 +129,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             lstIncidenciasPorLigar.Add(saiReport1.reportControl.SelectedRows[i].Record[0].Value.ToString());
                         }
 
-                        //Mostrar ventana para la seleccion del padre
-                        var ligarIncidencias = new SAIFrmLigarIncidencias(lstIncidenciasPorLigar);
+                        var lstLigarResultado = removerDuplicados(lstIncidenciasPorLigar);
+                        var ligarIncidencias = new SAIFrmLigarIncidencias(lstLigarResultado);
                         var dialogResult = ligarIncidencias.ShowDialog(this);
                         if (dialogResult == DialogResult.OK)
                         {
                             var folioPadre = ligarIncidencias.strFolioPadre;
-                            lstIncidenciasPorLigar.Remove(folioPadre);
+                            lstLigarResultado.Remove(folioPadre);
 
                             var stbFolios = new StringBuilder();
-                            foreach (var s in lstIncidenciasPorLigar)
+                            foreach (var s in lstLigarResultado)
                             {
                                 stbFolios.Append(s);
                                 stbFolios.Append(",");
@@ -158,6 +158,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             {
                                 IncidenciaMapper.Instance().Update(listadoIncidencias);
                             }
+
+                            //Ejecutar el stored procedure
                         }
                     }
                     catch (Exception ex)
@@ -169,6 +171,22 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 {
                 }
             }
+        }
+
+        static List<string> removerDuplicados(List<string> listaEntrada)
+        {
+            var diccionario = new Dictionary<string, int>();
+            var listaFinal = new List<string>();
+
+            foreach (var valorActual in listaEntrada)
+            {
+                if (!diccionario.ContainsKey(valorActual))
+                {
+                    diccionario.Add(valorActual, 0);
+                    listaFinal.Add(valorActual);
+                }
+            }
+            return listaFinal;
         }
 
         private void SAIFrmIncidenciasPendientes_Load(object sender, EventArgs e)
@@ -318,7 +336,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 saiReport1.reportControl.Records[itm.Record.Index][7].BackColor = (int)lapso.TotalMinutes < 3 ? ID.COLOR_AMARILLO : ID.COLOR_ROJO;
 
                                 saiReport1.reportControl.Records[itm.Record.Index][9].Value =
-                                    incidencia.FolioPadre.ToString();
+                                    incidencia.FolioPadre.ToString() != string.Empty
+                                        ? incidencia.Folio.ToString()
+                                        : ID.STR_DESCONOCIDO;
                             }
                         }
                     }
