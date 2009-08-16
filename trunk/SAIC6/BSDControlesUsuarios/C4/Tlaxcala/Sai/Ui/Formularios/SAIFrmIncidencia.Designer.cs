@@ -319,9 +319,9 @@
             // 
             // cmbLocalidad
             // 
-            this.cmbLocalidad.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbLocalidad.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbLocalidad.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.cmbLocalidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLocalidad.FormattingEnabled = true;
             this.cmbLocalidad.Location = new System.Drawing.Point(377, 130);
             this.cmbLocalidad.Name = "cmbLocalidad";
@@ -335,7 +335,9 @@
             // 
             // cmbMunicipio
             // 
+            this.cmbMunicipio.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.cmbMunicipio.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.cmbMunicipio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMunicipio.Location = new System.Drawing.Point(67, 130);
             this.cmbMunicipio.MaxLength = 75;
             this.cmbMunicipio.Name = "cmbMunicipio";
@@ -343,14 +345,12 @@
             this.cmbMunicipio.StrMensajeCampoRequerido = "El campo es requerido.";
             this.cmbMunicipio.TabIndex = 12;
             this.cmbMunicipio.SelectedIndexChanged += new System.EventHandler(this.cmbMunicipio_SelectedIndexChanged);
-            this.cmbMunicipio.Leave += new System.EventHandler(this.cmbMunicipio_Leave);
-            this.cmbMunicipio.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbMunicipio_KeyUp);
-            this.cmbMunicipio.TextUpdate += new System.EventHandler(this.cmbMunicipio_TextUpdate);
+            this.cmbMunicipio.CambiaMapa += new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox.DelegadoCambiaMapa(this.cmbMunicipio_CambiaMapa);
             // 
             // cmbCP
             // 
             this.cmbCP.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbCP.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbCP.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.cmbCP.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.cmbCP.FormattingEnabled = true;
             this.cmbCP.Location = new System.Drawing.Point(67, 155);
@@ -366,9 +366,9 @@
             // 
             // cmbColonia
             // 
-            this.cmbColonia.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbColonia.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cmbColonia.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.cmbColonia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbColonia.FormattingEnabled = true;
             this.cmbColonia.Location = new System.Drawing.Point(377, 156);
             this.cmbColonia.Name = "cmbColonia";

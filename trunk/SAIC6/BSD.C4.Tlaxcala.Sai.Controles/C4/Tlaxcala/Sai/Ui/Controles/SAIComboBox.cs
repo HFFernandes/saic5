@@ -19,7 +19,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         private bool _blnFueValido;
         //Guarda el valor de la cadena escrita en el combo
         private string _strCadenaEscrita = string.Empty;
-
+        private bool _blnBusqueda = false;
+        public delegate void DelegadoCambiaMapa();
+        public event DelegadoCambiaMapa CambiaMapa;
         #endregion
 
         #region Propiedades
@@ -162,12 +164,23 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 
         protected override void OnSelectedIndexChanged(EventArgs e)
         {
-            if (this.SelectedIndex != -1)
+            if (this._blnBusqueda)
+            {
+                if (this.CambiaMapa!= null)
+                {
+                    this.CambiaMapa();
+                }
+                this._blnBusqueda = false;
+                return;
+            }
+
+            if (this.SelectedIndex != -1 && !this.DroppedDown)
             {
                     this._strCadenaEscrita = string.Empty;
             }
+           
             
-
+            
             base.OnSelectedIndexChanged(e);
         }
 
@@ -177,6 +190,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             this._strCadenaEscrita = this.Text;
            
             this.AutoComplete();
+            e.Handled = true;
             base.OnKeyUp(e);
         }
 
@@ -220,18 +234,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
                     }
                     else if (objElemento.GetType().GetProperty(this.DisplayMember) != null)
                     {
-                        //buscamos en el objeto la propiedad que coincide con el displaymember del combo:
-
-                        //int intIndicePropiedad;
-                        int j = 0;
-                        for (j = 0; j < objElemento.GetType().GetProperties().Length; j++)
-                        {
-                            if (objElemento.GetType().GetProperties()[j].Name == this.DisplayMember)
-                            {
-                                break;
-                            }
-                        }
-
+                       
                         strElemento = objElemento.GetType().GetProperty(this.DisplayMember).GetValue(objElemento, null).ToString();
 
                         if (strElemento.ToUpper().Contains(this._strCadenaEscrita.ToUpper()))
@@ -247,120 +250,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             }
             if (blnSeEncontro)
             {
+                    if (!this.DroppedDown)
+                    {
+                        this.DroppedDown = true;
+                    }
+                    this._blnBusqueda = true;
                     this.SelectedIndex = intIdx;
-                    this.DroppedDown = true;
-                    //this.
-                    //string CadenaElemento = this.Items[i].GetType().
-                    //this.SelectionStart = this.Text.ToUpper().IndexOf(_strCadenaEscrita.ToUpper());
-                    //this.SelectionLength = this._strCadenaEscrita.Length;
+                    this.Text = this._strCadenaEscrita;
+                    this.SelectionStart = this.Text.Length;
             }
         }
 
-        //public void AutoComplete(ComboBox cb, System.Windows.Forms.KeyPressEventArgs e)
-        //{
-        //    string strFindStr = "";
-
-        //    if (e.KeyChar == (char)8)
-        //    {
-        //        if (cb.SelectionStart <= 1)
-        //        {
-
-        //            cb.SelectedIndex = -1;
-        //            return;
-        //        }
-
-        //        if (cb.SelectionLength == 0)
-        //            strFindStr = cb.Text.Substring(0, cb.Text.Length - 1);
-        //        else
-        //            strFindStr = cb.Text.Substring(0, cb.SelectionStart - 1);
-        //    }
-        //    else
-        //    {
-        //        if (cb.SelectionLength == 0)
-        //            strFindStr = cb.Text + e.KeyChar;
-        //        else
-        //            strFindStr = cb.Text.Substring(0, cb.SelectionStart) + e.KeyChar;
-        //    }
-
-        //    int intIdx = -1;
-
-        //    // Search the string in the ComboBox list.
-
-        //    intIdx = cb.FindString(strFindStr);
-
-
-        //    if (intIdx != -1)
-        //    {
-        //        cb.SelectedText = "";
-        //        cb.SelectedIndex = intIdx;
-        //        cb.SelectionStart = strFindStr.Length;
-        //        cb.SelectionLength = cb.Text.Length;
-        //        e.Handled = true;
-        //    }
-        //    else
-        //    {
-        //        // y si ahora que no lo encontramos en el principio de una cadena
-        //        // lo buscamos dentro de la cadena???
-        //        int i = 0;
-        //        Boolean blnSeEncontro = false;
-
-        //        foreach (Object objElemento in cb.Items)
-        //        {
-
-        //            string strElemento = string.Empty;
-
-        //            if (objElemento.GetType() == strElemento.GetType())
-        //            {
-        //                strElemento = (String)objElemento;
-
-        //                if (strElemento.Contains(strFindStr))
-        //                {
-        //                    intIdx = i;
-        //                    blnSeEncontro = true;
-        //                    break;
-        //                }
-        //            }
-        //            else if (objElemento.GetType().GetProperty(cb.DisplayMember) != null)
-        //            {
-        //                //buscamos en el objeto la propiedad que coincide con el displaymember del combo:
-
-        //                int intIndicePropiedad;
-        //                int j = 0;
-        //                for (j = 0; j < objElemento.GetType().GetProperties().Length; j++)
-        //                {
-        //                    if (objElemento.GetType().GetProperties()[j].Name == cb.DisplayMember)
-        //                    {
-        //                        break;
-        //                    }
-        //                }
-
-        //                strElemento = objElemento.GetType().GetProperty(cb.DisplayMember).GetValue(objElemento, null).ToString();
-
-        //                if (strElemento.ToUpper().Contains(strFindStr.ToUpper()))
-        //                {
-        //                    intIdx = i;
-        //                    blnSeEncontro = true;
-        //                    break;
-        //                }
-
-        //            }
-        //            i++;
-        //        }
-        //        if (blnSeEncontro)
-        //        {
-        //            cb.SelectedText = "";
-        //            cb.SelectedIndex = intIdx;
-        //            cb.SelectionStart = strFindStr.Length;
-        //            cb.SelectionLength = cb.Text.Length;
-        //            e.Handled = true;
-        //        }
-        //        else
-        //        {
-        //            e.Handled = true;
-        //        }
-        //    }
-
-        //}
         #region Funciones
         #endregion
 
