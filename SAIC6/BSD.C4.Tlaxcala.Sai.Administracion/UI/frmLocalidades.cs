@@ -10,7 +10,7 @@ using Entidades = BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using Objetos = BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects;
 using Mappers = BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using BSD.C4.Tlaxcala.Sai.Ui.Formularios;
-
+using System.Configuration;
 
 namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 {
@@ -106,6 +106,15 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     newLocalidad.Nombre = this.saiTxtNombre.Text;
                     newLocalidad.ClaveLocalidadCartografia = this.txtClaveLocalidadCartografia.Text != string.Empty ? Convert.ToInt32(this.txtClaveLocalidadCartografia.Text) : 0;
                     Mappers.LocalidadMapper.Instance().Insert(newLocalidad);
+
+                    Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
+                    bitacora.Descripcion = "Se agrego la Localidad: " + newLocalidad.Nombre;
+                    bitacora.FechaOperacion = DateTime.Today;
+                    bitacora.NombreCatalogo = "Localidades";
+                    bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
+                    bitacora.Operacion = "INSERT";
+
+                    Mappers.BitacoraMapper.Instance().Insert(bitacora);
                 }
                 catch (Exception ex)
                 { throw new SAIExcepcion(ex.Message); }
@@ -126,6 +135,17 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     updLocalidad.Nombre = this.saiTxtNombre.Text;
                     updLocalidad.ClaveLocalidadCartografia = this.txtClaveLocalidadCartografia.Text != string.Empty ? Convert.ToInt32(this.txtClaveLocalidadCartografia.Text) : 0;
                     Mappers.LocalidadMapper.Instance().Save(updLocalidad);
+
+                    Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
+                    bitacora.Descripcion = "Se modifico la Localidad: " + updLocalidad.Nombre;
+                    bitacora.FechaOperacion = DateTime.Today;
+                    bitacora.NombreCatalogo = "Localidades";
+                    bitacora.Operacion = "UPDATE";
+                    bitacora.ValorActual = updLocalidad.Nombre;
+                    bitacora.ValorAnterior = Convert.ToString(this.gvLocalidades.Rows[this.ObtenerIndiceSeleccionado()].Cells["Localidad"].Value);
+                    bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
+
+                    Mappers.BitacoraMapper.Instance().Insert(bitacora);
                 }
                 catch (Exception ex)
                 { throw new SAIExcepcion(ex.Message); }
@@ -141,6 +161,15 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 try 
                 {
                     Mappers.LocalidadMapper.Instance().Delete(Convert.ToInt32(this.gvLocalidades.Rows[this.ObtenerIndiceSeleccionado()].Cells["Clave"].Value));
+
+                    Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
+                    bitacora.Descripcion = "Se elimino la Localidad: " + Convert.ToString(this.gvLocalidades.Rows[this.ObtenerIndiceSeleccionado()].Cells["Localidad"].Value);
+                    bitacora.FechaOperacion = DateTime.Today;
+                    bitacora.NombreCatalogo = "Localidades";
+                    bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
+                    bitacora.Operacion = "DELETE";
+
+                    Mappers.BitacoraMapper.Instance().Insert(bitacora);
                 }
                 catch (Exception ex)
                 { throw new SAIExcepcion(ex.Message); }

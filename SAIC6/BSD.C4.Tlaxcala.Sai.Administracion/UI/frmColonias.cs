@@ -10,7 +10,7 @@ using Entidades = BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using Objetos = BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects;
 using Mappers = BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using BSD.C4.Tlaxcala.Sai.Ui.Formularios;
-
+using System.Configuration;
 
 namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 {
@@ -165,6 +165,15 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     }
 
                     Mappers.ColoniaMapper.Instance().Insert(newColonia);
+
+                    Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
+                    bitacora.Descripcion = "Se agrego la Colonia: " + newColonia.Nombre;
+                    bitacora.FechaOperacion = DateTime.Today;
+                    bitacora.NombreCatalogo = "Colonias";
+                    bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
+                    bitacora.Operacion = "INSERT";
+
+                    Mappers.BitacoraMapper.Instance().Insert(bitacora);
                 }
                 catch (Exception ex)
                 { throw new SAIExcepcion(ex.Message); }
@@ -195,6 +204,17 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     }
 
                     Mappers.ColoniaMapper.Instance().Save(updColonia);
+
+                    Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
+                    bitacora.Descripcion = "Se modifico la Colonia: " + updColonia.Nombre;
+                    bitacora.FechaOperacion = DateTime.Today;
+                    bitacora.NombreCatalogo = "Colonia";
+                    bitacora.Operacion = "UPDATE";
+                    bitacora.ValorActual = this.saiTxtNombre.Text;
+                    bitacora.ValorAnterior = Convert.ToString(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["Nombre"].Value);
+                    bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
+
+                    Mappers.BitacoraMapper.Instance().Insert(bitacora);
                 }
                 catch (Exception ex)
                 { throw new SAIExcepcion(ex.Message); }
@@ -210,6 +230,15 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 try 
                 {
                     Mappers.ColoniaMapper.Instance().Delete(Convert.ToInt32(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveCartografia"].Value));
+
+                    Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
+                    bitacora.Descripcion = "Se elimino la colonia: " + Convert.ToString(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["Nombre"].Value);
+                    bitacora.FechaOperacion = DateTime.Today;
+                    bitacora.NombreCatalogo = "Colonias";
+                    bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
+                    bitacora.Operacion = "DELETE";
+
+                    Mappers.BitacoraMapper.Instance().Insert(bitacora);
                 }
                 catch (Exception ex)
                 { throw new SAIExcepcion(ex.Message); }
@@ -376,6 +405,17 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         newCP.Clave = max + 1;
                         newCP.Valor = cp;
                         Mappers.CodigoPostalMapper.Instance().Insert(newCP);
+
+                        Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
+                        bitacora.Descripcion = "Se agrego el Codigo Postal: " + newCP.Valor;
+                        bitacora.FechaOperacion = DateTime.Today;
+                        bitacora.NombreCatalogo = "Codigo Postal";
+                        bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
+                        bitacora.Operacion = "INSERT";
+
+                        Mappers.BitacoraMapper.Instance().Insert(bitacora);
+
+
                         return newCP.Clave;
                     }
                     return max;

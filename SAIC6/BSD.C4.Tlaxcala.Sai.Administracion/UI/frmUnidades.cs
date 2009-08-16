@@ -11,6 +11,7 @@ using Mappers = BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
 using System.Data.SqlClient;
 using BSD.C4.Tlaxcala.Sai.Administracion.Utilerias;
+using System.Configuration;
 
 namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 {
@@ -151,6 +152,15 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     newUnidad.Activo = this.chkActivo.Checked;
 
                     Mappers.ListaUnidadesMapper.Instance().Insert(newUnidad);
+
+                    Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
+                    bitacora.Descripcion = "Se agrego la unidad: " + newUnidad.Codigo;
+                    bitacora.FechaOperacion = DateTime.Today;
+                    bitacora.NombreCatalogo = "Unidades";
+                    bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
+                    bitacora.Operacion = "INSERT";
+
+                    Mappers.BitacoraMapper.Instance().Insert(bitacora);
                 }
                 catch (Exception ex)
                 {
@@ -177,6 +187,17 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     updUnidad.Activo = this.chkActivo.Checked;
 
                     Mappers.ListaUnidadesMapper.Instance().Save(updUnidad);
+
+                    Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
+                    bitacora.Descripcion = "Se modifico la Unidad: " + updUnidad.Codigo;
+                    bitacora.FechaOperacion = DateTime.Today;
+                    bitacora.NombreCatalogo = "Unidades";
+                    bitacora.Operacion = "UPDATE";
+                    bitacora.ValorActual = "Todos los campos";
+                    bitacora.ValorAnterior = "Todos los campos";
+                    bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
+
+                    Mappers.BitacoraMapper.Instance().Insert(bitacora);
                 }
                 catch (Exception ex)
                 { throw new SAIExcepcion(ex.Message); }
@@ -197,6 +218,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     if (selectedRow > -1)
                     {
                         Mappers.ListaUnidadesMapper.Instance().Delete(Convert.ToInt32(this.gvUnidades.Rows[selectedRow].Cells["Clave"].Value));
+
+                        Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
+                        bitacora.Descripcion = "Se elimino la Unidad: " + Convert.ToString(this.gvUnidades.Rows[selectedRow].Cells["Codigo"].Value);
+                        bitacora.FechaOperacion = DateTime.Today;
+                        bitacora.NombreCatalogo = "Unidades";
+                        bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
+                        bitacora.Operacion = "DELETE";
                     }
                     else { throw new SAIExcepcion("Seleccione la unidad que desea eliminar."); }
                 }

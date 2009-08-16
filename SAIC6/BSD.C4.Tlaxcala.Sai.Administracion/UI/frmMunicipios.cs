@@ -10,6 +10,7 @@ using BSD.C4.Tlaxcala.Sai.Ui.Formularios;
 using Mappers = BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using Entidades = BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using Objetos = BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects;
+using System.Configuration;
 
 namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 {
@@ -93,6 +94,15 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     newMunicipio.ClaveEstado = Convert.ToInt32(this.ddlEstado.SelectedValue);
                     newMunicipio.Nombre = this.saiTxtNombre.Text;
                     Mappers.MunicipioMapper.Instance().Insert(newMunicipio);
+
+                    Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
+                    bitacora.Descripcion = "Se agrego el Municipio: " + newMunicipio.Nombre;
+                    bitacora.FechaOperacion = DateTime.Today;
+                    bitacora.NombreCatalogo = "Municipios";
+                    bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
+                    bitacora.Operacion = "INSERT";
+
+                    Mappers.BitacoraMapper.Instance().Insert(bitacora);
                 }
                 catch (Exception ex)
                 { throw new SAIExcepcion(ex.Message); }
