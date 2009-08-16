@@ -224,9 +224,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 this._blnBloqueaEventos = true;
                 
                 InitializeComponent();
-
-
-
+                if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+                {
+                    this.Height = 750;
+                    this.Width = 600;
+                }
+                else
+                {
+                    this.Height = 830;
+                    this.Width = 600;
+                }
                 this.InicializaListas();
                 //****Crea una nueva incidencia, el formulario se abrió para insertar*******
                 this._entIncidencia.Referencias = string.Empty;
@@ -253,10 +260,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.cmbTipoIncidencia.Left = this.txtTelefono.Left;
                     this.lblTipoIncidencia.Text = "Tipo de \n la Denuncia:";
                     this.lblTipoIncidencia.Top -= 10;
+                    
 
                 }
                 else
                 {
+                    this.Height = 830;
+                    this.Width = 600;
                     this.lblDescripcionIncidencia.Text  = "Descripción de  \n la Incidencia:";
                 }
                 this.ResumeLayout(false);
@@ -279,6 +289,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             entIncidencia.ClaveEstado = 29;
             this._blnBloqueaEventos = true;
             InitializeComponent();
+            if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+            {
+                this.Height = 750;
+                this.Width = 600;
+            }
+            else
+            {
+                this.Height = 830;
+                this.Width = 600;
+            }
             this.SuspendLayout();
             if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
             {
