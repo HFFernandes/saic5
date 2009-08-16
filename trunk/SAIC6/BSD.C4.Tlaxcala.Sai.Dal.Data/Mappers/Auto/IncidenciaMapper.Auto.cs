@@ -240,8 +240,16 @@ reader.GetBoolean(15),
 
 
         // GetOne By Objects and Params
-            
 
+        /// <summary>
+        /// Liga la información de las incidencias hijas a la incidencia padre
+        /// </summary>
+        /// <param name="Folio">Folio de la incidencia padre</param>
+        /// <remarks>Las incidencias hijas ya deben de tener en el campo FolioPadre el valor de la incidencia padre</remarks>
+        public void LigaIncidencia(System.Int32 Folio)
+        {
+            Incidencia entIncidencia = base.GetObjectByAnyStoredProcedure(StoredProceduresPrefix() + "Incidencia_Liga", Folio);
+        }
 
         
 
