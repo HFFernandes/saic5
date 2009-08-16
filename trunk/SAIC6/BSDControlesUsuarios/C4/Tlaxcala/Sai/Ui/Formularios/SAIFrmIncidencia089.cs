@@ -50,6 +50,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.Height = base.Height;
             this.Width = base.Width;
             this.ResumeLayout(false);
+            this.CambiaHabilitadoTipoIncidencia(false);
            
         }
 
