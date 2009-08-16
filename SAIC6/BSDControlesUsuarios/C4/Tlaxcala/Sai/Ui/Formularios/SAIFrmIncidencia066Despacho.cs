@@ -86,11 +86,19 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         this._unidadAsignada = UnidadMapper.Instance().GetOne(this._despachoIncidencia.ClaveUnidad.Value);
                         this.lblUnidad.Text = this._unidadAsignada.Codigo;
                     }
+                    else
+                    {
+                        this.lblUnidad.Text = "NO ASIGNADA";
+                    }
 
                     if (this._despachoIncidencia.ClaveUnidadApoyo.HasValue)
                     {
                         this._unidadApoyo = UnidadMapper.Instance().GetOne(this._despachoIncidencia.ClaveUnidadApoyo.Value);
                         this.lblUnidadApoyo.Text = this._unidadApoyo.Clave.ToString();
+                    }
+                    else
+                    {
+                        this.lblUnidadApoyo.Text = "NO ASIGNADA";
                     }
 
                 }
@@ -407,10 +415,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void pnlUnidad_DragDrop(object sender, DragEventArgs e)
         {
+
+            int ClaveUnidadDropped;
+            Boolean blnBorraUnidad = false;
+
             try
             {
                 try
                 {
+                    ClaveUnidadDropped = int.Parse(this.RegresaValorDrop(e).ToString());
+
                     if (this._unidadAsignada != null)
                     {
                         if (MessageBox.Show("La incidencia ya tiene una unidad asignada ¿Desea reemplazarla?", "SAI C4", MessageBoxButtons.YesNo) == DialogResult.No)
@@ -418,6 +432,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             e.Effect = DragDropEffects.None;
                             return;
                         }
+
                         this.dtpHoraLlegada.Enabled = false;
                         this.chkHoraLlegada.Checked = false;
                         this.dtpHoraLiberacion.Enabled = false;
@@ -432,7 +447,22 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                     }
 
-                    this._unidadAsignada = UnidadMapper.Instance().GetOne(int.Parse(this.RegresaValorDrop(e).ToString()));
+                    if (this._unidadApoyo != null && this._unidadApoyo.Clave == ClaveUnidadDropped)
+                    {
+                        if (MessageBox.Show("La unidad que trata de asignar ya se encuentra como unidad de apoyo de la incidencia  ¿Desea reemplazarla?", "SAI C4", MessageBoxButtons.YesNo) == DialogResult.No)
+                        {
+                            e.Effect = DragDropEffects.None;
+                            return;
+                        }
+                        else
+                        {
+                            this._unidadApoyo = null;
+                            this.lblUnidadApoyo.Text = "NO ASIGNADA";
+                            blnBorraUnidad = true;
+                        }
+                    }
+
+                    this._unidadAsignada = UnidadMapper.Instance().GetOne(ClaveUnidadDropped);
 
                     if (this._despachoIncidencia == null)
                     {
@@ -451,12 +481,20 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         this._despachoIncidencia.ClaveCorporacion = this._entCorporacion.Clave;
                         this._despachoIncidencia.Folio = this._entIncidencia.Folio;
                         this._despachoIncidencia.ClaveUnidad = this._unidadAsignada.Clave;
+                        if (blnBorraUnidad)
+                        {
+                            this._despachoIncidencia.ClaveUnidadApoyo = null;
+                        }
                         DespachoIncidenciaMapper.Instance().Insert(this._despachoIncidencia);
 
                     }
                     else
                     {
                         this._despachoIncidencia.ClaveUnidad = this._unidadAsignada.Clave;
+                        if (blnBorraUnidad)
+                        {
+                            this._despachoIncidencia.ClaveUnidadApoyo = null;
+                        }
                         DespachoIncidenciaMapper.Instance().Save(this._despachoIncidencia);
                     }
 
@@ -520,7 +558,25 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                        
                     }
 
-                    this._unidadApoyo  = UnidadMapper.Instance().GetOne(int.Parse(this.RegresaValorDrop(e).ToString()));
+                    int ClaveUnidadDropped = int.Parse(this.RegresaValorDrop(e).ToString());
+                    Boolean blnBorraUnidad = false;
+
+                    if (this._unidadAsignada != null && this._unidadAsignada.Clave == ClaveUnidadDropped)
+                    {
+                        if (MessageBox.Show("La unidad que trata de asignar como unidad de apoyo ya se encuentra como unidad de la incidencia  ¿Desea reemplazarla?", "SAI C4", MessageBoxButtons.YesNo) == DialogResult.No)
+                        {
+                            e.Effect = DragDropEffects.None;
+                            return;
+                        }
+                        else
+                        {
+                            this._unidadAsignada = null;
+                            this.lblUnidad.Text = "NO ASIGNADA";
+                            blnBorraUnidad = true;
+                        }
+                    }
+
+                    this._unidadApoyo  = UnidadMapper.Instance().GetOne(ClaveUnidadDropped);
 
                     if (this._despachoIncidencia == null)
                     {
@@ -539,11 +595,19 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         this._despachoIncidencia.ClaveCorporacion = this._entCorporacion.Clave;
                         this._despachoIncidencia.Folio = this._entIncidencia.Folio;
                         this._despachoIncidencia.ClaveUnidadApoyo = this._unidadApoyo.Clave;
+                        if (blnBorraUnidad)
+                        {
+                            this._despachoIncidencia.ClaveUnidad = null;
+                        }
                         DespachoIncidenciaMapper.Instance().Insert(this._despachoIncidencia);
 
                     }
                     else
                     {
+                        if (blnBorraUnidad)
+                        {
+                            this._despachoIncidencia.ClaveUnidad = null;
+                        }
                         this._despachoIncidencia.ClaveUnidadApoyo = this._unidadApoyo.Clave;
                         DespachoIncidenciaMapper.Instance().Save(this._despachoIncidencia);
                     }
