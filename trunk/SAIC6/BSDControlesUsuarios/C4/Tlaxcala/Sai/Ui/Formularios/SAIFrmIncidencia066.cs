@@ -62,7 +62,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             InitializeComponent();
 
            
-            this.lblTitulo.Text = "REGISTRO DE INCIDENCIA 066";
+            this.lblTitulo.Text = "ACTUALIZACIÓN DE INCIDENCIA 066";
             this.SuspendLayout();
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             base.Height = intHeight;

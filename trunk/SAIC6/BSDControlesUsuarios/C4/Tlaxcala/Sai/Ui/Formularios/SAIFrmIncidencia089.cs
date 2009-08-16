@@ -40,7 +40,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             int intHeight = base.Height;
             int intWidth = base.Width;
 
-            this.lblTitulo.Text = "INCIDENCIA 089";
+            this.lblTitulo.Text = "ACTUALIZACIÓN DE INCIDENCIA 089";
             InitializeComponent();
             this.Height = intHeight;
             this.Width = intWidth;
