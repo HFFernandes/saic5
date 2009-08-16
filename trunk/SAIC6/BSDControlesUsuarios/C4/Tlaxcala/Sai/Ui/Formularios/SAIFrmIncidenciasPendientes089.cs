@@ -52,10 +52,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void reportControl_RowDblClick(object sender, AxXtremeReportControl._DReportControlEvents_RowDblClickEvent e)
         {
-            //TODO: implementar si el usuario es operador debe poder abrir la incidencia para agregar más datos
             try
             {
-                if (Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_P))
+                if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_NI))
                 {
                     //Recuperar el folio y generar una instancia de la entidad para
                     //pasarla al nuevo formulario
@@ -84,10 +83,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void btnDespacharIncidencias_Click(object sender, EventArgs e)
         {
-            //TODO: implementar si el usuario es operador debe poder abrir la incidencia para agregar más datos
             try
             {
-                if (Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_P))
+                if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_NI))
                 {
                     //Recuperar el folio y generar una instancia de la entidad para
                     //pasarla al nuevo formulario
@@ -113,65 +111,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void btnLigarIncidencias_Click(object sender, EventArgs e)
         {
-            //Actualizar el foliopadre, pero antes verificar que no este ligada
-            //organizar los nodos para desplegar el tree
-            //y verificar que al momento del despacho si es hijo se pase la incidencia
-            //del padre..para prevenir el despacho a una misma incidencia
-
-            if (Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_P))
-            {
-                try
-                {
-                    try
-                    {
-                        var lstIncidenciasPorLigar = new List<string>();
-                        for (int i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
-                        {
-                            lstIncidenciasPorLigar.Add(saiReport1.reportControl.SelectedRows[i].Record[0].Value.ToString());
-                        }
-
-                        var lstLigarResultado = Aplicacion.removerDuplicados(lstIncidenciasPorLigar);
-                        var ligarIncidencias = new SAIFrmLigarIncidencias(lstLigarResultado);
-                        var dialogResult = ligarIncidencias.ShowDialog(this);
-                        if (dialogResult == DialogResult.OK)
-                        {
-                            var folioPadre = ligarIncidencias.strFolioPadre;
-                            lstLigarResultado.Remove(folioPadre);
-
-                            var stbFolios = new StringBuilder();
-                            foreach (var s in lstLigarResultado)
-                            {
-                                stbFolios.Append(s);
-                                stbFolios.Append(",");
-                            }
-
-                            //recorro los nodos hijos para asignarles el padre
-                            var listadoIncidencias =
-                                IncidenciaMapper.Instance().GetBySQLQuery(
-                                    string.Format(ID.SQL_INCIDENCIASLIGADAS,
-                                                  stbFolios.ToString().Trim().Remove(stbFolios.ToString().Trim().Length - 1)));
-                            foreach (var incidencia in listadoIncidencias)
-                            {
-                                if (incidencia.FolioPadre == null)
-                                    incidencia.FolioPadre = Convert.ToInt32(folioPadre);
-                            }
-                            if (listadoIncidencias.Count > 0)
-                            {
-                                IncidenciaMapper.Instance().Update(listadoIncidencias);
-                            }
-
-                            //Ejecutar el stored procedure
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new SAIExcepcion(ex.Message);
-                    }
-                }
-                catch (SAIExcepcion)
-                {
-                }
-            }
         }
 
         private void SAIFrmIncidenciasPendientes089_Load(object sender, EventArgs e)
