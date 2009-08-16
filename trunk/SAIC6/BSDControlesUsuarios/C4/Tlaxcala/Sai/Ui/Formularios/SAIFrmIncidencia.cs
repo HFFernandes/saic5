@@ -226,12 +226,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 InitializeComponent();
                 if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                 {
-                    this.Height = 750;
+                    this.Height = 515;
                     this.Width = 600;
                 }
                 else
                 {
-                    this.Height = 830;
+                    this.Height = 630;
                     this.Width = 600;
                 }
                 this.InicializaListas();
@@ -265,8 +265,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
                 else
                 {
-                    this.Height = 830;
-                    this.Width = 600;
+                   
                     this.lblDescripcionIncidencia.Text  = "Descripción de  \n la Incidencia:";
                 }
                 this.ResumeLayout(false);
@@ -291,12 +290,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             InitializeComponent();
             if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
             {
-                this.Height = 750;
+                this.Height = 515;
                 this.Width = 600;
             }
             else
             {
-                this.Height = 830;
+                this.Height = 630;
                 this.Width = 600;
             }
             this.SuspendLayout();
