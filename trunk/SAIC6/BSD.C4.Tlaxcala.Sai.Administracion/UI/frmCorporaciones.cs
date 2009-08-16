@@ -11,6 +11,7 @@ using Mappers = BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using Objetos = BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
 using BSD.C4.Tlaxcala.Sai.Administracion.Utilerias;
+using System.Configuration;
 
 namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 {
@@ -163,6 +164,15 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         newCorporacion.Zn = this.saiTxtZn.Text;
 
                         Mappers.CorporacionMapper.Instance().Insert(newCorporacion);
+
+                        Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
+                        bitacora.Descripcion = "Se agrego la corporacion: " + newCorporacion.Descripcion;
+                        bitacora.FechaOperacion = DateTime.Today;
+                        bitacora.NombreCatalogo = "Corporaciones";
+                        bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
+                        bitacora.Operacion = "INSERT";
+
+                        Mappers.BitacoraMapper.Instance().Insert(bitacora);
                     }
                 }
                 catch (Exception ex)
@@ -192,6 +202,17 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         updCorporacion.Activo = this.chkActivo.Checked;
                         updCorporacion.Zn = this.saiTxtZn.Text;
                         Mappers.CorporacionMapper.Instance().Save(updCorporacion);
+
+                        Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
+                        bitacora.Descripcion = "Se modifico la corporacion: " + updCorporacion.Descripcion;
+                        bitacora.FechaOperacion = DateTime.Today;
+                        bitacora.NombreCatalogo = "Corporaciones";
+                        bitacora.Operacion = "UPDATE";
+                        bitacora.ValorActual = "Todos los campos";
+                        bitacora.ValorAnterior = "Todos los campos";
+                        bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
+
+                        Mappers.BitacoraMapper.Instance().Insert(bitacora);
                     }
                 }
                 catch (Exception ex)
@@ -214,6 +235,14 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     if (selectedRow > -1)
                     {
                         Mappers.CorporacionMapper.Instance().Delete(Convert.ToInt32(this.gvCorporaciones.Rows[selectedRow].Cells["Clave"].Value));
+                        Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
+                        bitacora.Descripcion = "Se elimino la corporacion" + Convert.ToString(this.gvCorporaciones.Rows[selectedRow].Cells["Descripcion"].Value);
+                        bitacora.FechaOperacion = DateTime.Today;
+                        bitacora.NombreCatalogo = "Corporaciones";
+                        bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
+                        bitacora.Operacion = "DELETE";
+
+                        Mappers.BitacoraMapper.Instance().Insert(bitacora);
                     }
                 }                
                 catch

@@ -10,7 +10,7 @@ using Entidades = BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using Objetos = BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects;
 using Mappers = BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
-
+using System.Configuration;
 namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 {
     public partial class frmUsuarios : SAIFrmBase
@@ -119,6 +119,15 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     newUsuario.Despachador = this.rbDespachador.Checked ? true : false;
                     newUsuario.Activo = this.chkActivado.Checked;
                     Mappers.UsuarioMapper.Instance().Insert(newUsuario);
+
+                    Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
+                    bitacora.Descripcion = "Se agrego el usuario: "+ newUsuario.NombrePropio;
+                    bitacora.FechaOperacion = DateTime.Today;
+                    bitacora.NombreCatalogo = "Usuario";
+                    bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
+                    bitacora.Operacion = "INSERT";
+                
+                    Mappers.BitacoraMapper.Instance().Insert(bitacora);
                 /*}
                 catch (Cooperator.Framework.Data.Exceptions.InvalidConnectionStringException)
                 {
@@ -150,6 +159,17 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         updUsuario.Despachador = this.rbDespachador.Checked ? true : false;
                         updUsuario.Activo = this.chkActivado.Checked;
                         Mappers.UsuarioMapper.Instance().Save(updUsuario);
+
+                        Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
+                        bitacora.Descripcion = "Se modifico el usuario: " + updUsuario.NombrePropio;
+                        bitacora.FechaOperacion = DateTime.Today;
+                        bitacora.NombreCatalogo = "Usuario";
+                        bitacora.Operacion = "UPDATE";
+                        bitacora.ValorActual = this.txtNombrePropio.Text + ", " + this.txtUsuario.Text;
+                        bitacora.ValorAnterior = Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["NombreUsuario"].Value);
+                        bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
+
+                        Mappers.BitacoraMapper.Instance().Insert(bitacora);
                     }
                 }
                 catch (Cooperator.Framework.Data.Exceptions.NoRowAffectedException)
@@ -173,6 +193,15 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     {
                         int clave = Convert.ToInt32(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Clave"].Value);
                         Mappers.UsuarioMapper.Instance().Delete(clave);
+
+                        Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
+                        bitacora.Descripcion = "Se elimino el usuario: " + Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["NombrePropio"].Value);
+                        bitacora.FechaOperacion = DateTime.Today;
+                        bitacora.NombreCatalogo = "Usuario";
+                        bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
+                        bitacora.Operacion = "DELETE";
+
+                        Mappers.BitacoraMapper.Instance().Insert(bitacora);
                     }
                 }
                 catch (Exception ex)
@@ -214,10 +243,19 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 {
                     if (MessageBox.Show("El usuario tiene permisos asignados, ¿Desea borrar de todas formas?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
+                        Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
+                        bitacora.Descripcion = "Se elimino el permiso del usuario: " + Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["NombrePropio"].Value);
+                        bitacora.FechaOperacion = DateTime.Today; 
+                        bitacora.NombreCatalogo = "Permiso Usuario";
+                        bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
+                        bitacora.Operacion = "DELETE";
+
                         foreach (Objetos.PermisoUsuarioObject permiso in lstPermisos)
                         {
                             Mappers.PermisoUsuarioMapper.Instance().Delete(permiso.ClaveUsuario, permiso.ClaveSubmodulo, permiso.ClavePermiso, permiso.ClaveSistema);
+                            Mappers.BitacoraMapper.Instance().Insert(bitacora);
                         }
+
                         this.Eliminar();
                         this.LlenarGrid();
                         this.Limpiar();

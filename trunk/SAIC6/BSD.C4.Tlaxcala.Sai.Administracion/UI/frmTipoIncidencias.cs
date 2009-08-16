@@ -11,6 +11,7 @@ using Objetos = BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects;
 using Mappers = BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
 using BSD.C4.Tlaxcala.Sai.Administracion.Utilerias;
+using System.Configuration;
 
 namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 {
@@ -175,6 +176,15 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     Mappers.TipoIncidenciaMapper.Instance().Insert(newTipoIncidencia);
 
                     //this.gvTipoIncidencias.CurrentRow.Selected = false;
+
+                    Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
+                    bitacora.Descripcion = "Se agrego la incidencia: " + newTipoIncidencia.Descripcion;
+                    bitacora.FechaOperacion = DateTime.Today;
+                    bitacora.NombreCatalogo = "Tipo Incidencias";
+                    bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
+                    bitacora.Operacion = "INSERT";
+
+                    Mappers.BitacoraMapper.Instance().Insert(bitacora);
                 }
                 catch (Exception ex)
                 { throw new SAIExcepcion(ex.Message); }
@@ -203,6 +213,17 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     updTipoIncidencia.Prioridad = Convert.ToInt32(this.ddlPrioridad.SelectedItem);
 
                     Mappers.TipoIncidenciaMapper.Instance().Save(updTipoIncidencia);
+
+                    Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
+                    bitacora.Descripcion = "Se modifico el Tipo de Incidencia: " + updTipoIncidencia.Descripcion;
+                    bitacora.FechaOperacion = DateTime.Today;
+                    bitacora.NombreCatalogo = "Tipo Incidencia";
+                    bitacora.Operacion = "UPDATE";
+                    bitacora.ValorActual = this.saiTxtDescripcion.Text + ", " + this.txtClaveoperacion.Text;
+                    bitacora.ValorAnterior = Convert.ToString(this.gvTipoIncidencias.Rows[this.ObtenerIndiceSeleccionado()].Cells["Descripcion"].Value);
+                    bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
+
+                    Mappers.BitacoraMapper.Instance().Insert(bitacora);
                 }
                 catch (Exception ex)
                 { throw new SAIExcepcion(ex.Message); }
@@ -224,6 +245,15 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     if (rowSelected > -1)
                     {
                         Mappers.TipoIncidenciaMapper.Instance().Delete(Convert.ToInt32(this.gvTipoIncidencias.Rows[rowSelected].Cells["Clave"].Value));
+
+                        Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
+                        bitacora.Descripcion = "Se elimino el Tipo de Incidencia: " + Convert.ToString(this.gvTipoIncidencias.Rows[rowSelected].Cells["Descripcion"].Value);
+                        bitacora.FechaOperacion = DateTime.Today;
+                        bitacora.NombreCatalogo = "Tipo Incidencias";
+                        bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
+                        bitacora.Operacion = "DELETE";
+
+                        Mappers.BitacoraMapper.Instance().Insert(bitacora);
                     }
                 }
                 catch (Exception ex)
