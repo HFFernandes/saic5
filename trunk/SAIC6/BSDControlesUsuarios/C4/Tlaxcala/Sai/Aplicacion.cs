@@ -47,6 +47,22 @@ namespace BSD.C4.Tlaxcala.Sai
             return ColorDecimal;
         }
 
+        public static List<string> removerDuplicados(List<string> listaEntrada)
+        {
+            var diccionario = new Dictionary<string, int>();
+            var listaFinal = new List<string>();
+
+            foreach (var valorActual in listaEntrada)
+            {
+                if (!diccionario.ContainsKey(valorActual))
+                {
+                    diccionario.Add(valorActual, 0);
+                    listaFinal.Add(valorActual);
+                }
+            }
+            return listaFinal;
+        }
+
         /// <summary>
         /// Clase donde persisten los permisos y configuraciones de un usuario especifico
         /// </summary>

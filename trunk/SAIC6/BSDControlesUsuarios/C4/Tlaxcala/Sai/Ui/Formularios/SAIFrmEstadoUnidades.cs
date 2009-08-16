@@ -138,6 +138,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void SAIFrmEstadoUnidades_Load(object sender, EventArgs e)
         {
+            saiReport1.btnAltaUnidad.Visible = Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false;
+            saiReport1.btnBajaUnidad.Visible = Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false;
             saiReport1.btnDespacharIncidencias.Visible = false;
             saiReport1.btnLigarIncidencias.Visible = false;
             saiReport1.btnSeparador2.Visible = false;

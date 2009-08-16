@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows.Forms;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
 using XtremeReportControl;
-using System.Text;
-using System.Diagnostics;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
-    public partial class SAIFrmIncidenciasPendientes : SAIFrmBase
+    public partial class SAIFrmIncidenciasPendientes089 : SAIFrmBase
     {
         private List<Incidencia> lstIncidenciasRegistradas;
         private List<Incidencia> lstIncidenciasTemporales;
         private List<Incidencia> lstIncidenciasPorRemover;
         private List<ReportRecord> lstRegistrosReporte;
 
-        public SAIFrmIncidenciasPendientes()
+        public SAIFrmIncidenciasPendientes089()
         {
             InitializeComponent();
             Width = Screen.GetWorkingArea(this).Width;
@@ -40,7 +39,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_P))
                 {
-                    saiReport1.reportControl.PrintPreviewOptions.Title = "Reporte de Incidencias Pendientes";
+                    saiReport1.reportControl.PrintPreviewOptions.Title = "Reporte de Incidencias 089";
                     saiReport1.reportControl.PrintPreview(true);
                 }
                 else
@@ -56,15 +55,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             //TODO: implementar si el usuario es operador debe poder abrir la incidencia para agregar más datos
             try
             {
-                if ((Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false) && Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_P))
+                if (Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_P))
                 {
                     //Recuperar el folio y generar una instancia de la entidad para
                     //pasarla al nuevo formulario
                     var incidencia = IncidenciaMapper.Instance().GetOne(Convert.ToInt32(e.row.Record[0].Value));
                     if (incidencia != null)
                     {
-                        var incidenciaDespacho = new SAIFrmIncidencia066Despacho(incidencia);
-                        incidenciaDespacho.Show();
+                        var incidenciaInfo = new SAIFrmIncidencia089();
+                        incidenciaInfo.Show();
                     }
                 }
                 else
@@ -88,7 +87,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             //TODO: implementar si el usuario es operador debe poder abrir la incidencia para agregar más datos
             try
             {
-                if ((Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false) && Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_P))
+                if (Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_P))
                 {
                     //Recuperar el folio y generar una instancia de la entidad para
                     //pasarla al nuevo formulario
@@ -99,8 +98,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
                         if (incidencia != null)
                         {
-                            var incidenciaDespacho = new SAIFrmIncidencia066Despacho(incidencia);
-                            incidenciaDespacho.Show();
+                            var incidenciaInfo = new SAIFrmIncidencia089();
+                            incidenciaInfo.Show();
                         }
                     }
                 }
@@ -175,7 +174,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
-        private void SAIFrmIncidenciasPendientes_Load(object sender, EventArgs e)
+        private void SAIFrmIncidenciasPendientes089_Load(object sender, EventArgs e)
         {
             saiReport1.btnAltaUnidad.Visible = false;
             saiReport1.btnBajaUnidad.Visible = false;
