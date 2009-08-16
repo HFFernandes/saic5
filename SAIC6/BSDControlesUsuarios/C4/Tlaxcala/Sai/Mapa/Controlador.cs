@@ -5,6 +5,7 @@ using BSD.C4.Tlaxcala.Sai.Ui.Formularios;
 using BSD.C4.Tlaxcala.Sai;
 using System.Configuration;
 using System.Windows.Forms;
+using System.Threading;
 
 
 namespace BSD.C4.Tlaxcala.Sai.Mapa
@@ -12,28 +13,13 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
     public static class Controlador
     {
         public static SAIFrmMapa _frmMapa;
+        private static Thread tr;
+        public delegate void DelegadoActualizarMapa(EstructuraUbicacion objDatosUbicacion);
 
-        /// <summary>
-        /// Muestra el mapa con la información del formulario que lo manda a llamar
-        /// </summary>
-        /// <remarks>
-        /// Si la ventana no se encuentra abierta o instanciada, crea una nueva instancia y la muestra según el caso, 
-        /// éste método debe de llamarse desde el evento activate de cada formulario o cuando el usuario cambia la información de la ubicación.
-        /// </remarks>
-        /// <param name="objDatosUbicacion">Clase que contiene los identificadores de municipio, localidad, colonia y código postal</param>
-        /// <param name="frmIncidencia">Referencia del formulario que manda a llamar el método</param>
-        public static void MuestraMapa(EstructuraUbicacion objDatosUbicacion, SAIFrmIncidencia frmIncidencia)
+        private static void ActualizarMapa(EstructuraUbicacion objDatosUbicacion)
         {
-            //if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
-            //    return;
+           
 
-
-            if (_frmMapa == null)
-            {
-                _frmMapa = new SAIFrmMapa(ConfigurationSettings.AppSettings["XmlCartografia"], Application.StartupPath + @"\");
-                _frmMapa.Show();
-            }
-            
             //if (objDatosUbicacion.IdCodigoPostal.HasValue)
             //{
             //    _frmMapa.CP(objDatosUbicacion.IdCodigoPostal.Value);
@@ -61,8 +47,46 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
                 _frmMapa.CentrarEstado();
             }
 
+        }
+
+
+        /// <summary>
+        /// Muestra el mapa con la información del formulario que lo manda a llamar
+        /// </summary>
+        /// <remarks>
+        /// Si la ventana no se encuentra abierta o instanciada, crea una nueva instancia y la muestra según el caso, 
+        /// éste método debe de llamarse desde el evento activate de cada formulario o cuando el usuario cambia la información de la ubicación.
+        /// </remarks>
+        /// <param name="objDatosUbicacion">Clase que contiene los identificadores de municipio, localidad, colonia y código postal</param>
+        /// <param name="frmIncidencia">Referencia del formulario que manda a llamar el método</param>
+        public static void MuestraMapa(EstructuraUbicacion objDatosUbicacion, SAIFrmIncidencia frmIncidencia)
+        {
+            //if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+            //    return;
+
+            if (_frmMapa == null)
+            {
+                _frmMapa = new SAIFrmMapa(ConfigurationSettings.AppSettings["XmlCartografia"], Application.StartupPath + @"\");
+                _frmMapa.Show();
+            }
+
+            tr = new Thread(delegate()
+            {
+                try
+                {
+                    _frmMapa.Invoke(new DelegadoActualizarMapa(ActualizarMapa), new object[] { objDatosUbicacion });
+                }
+                catch { }
+                              
+
+                
+            }) { IsBackground = true };
+            tr.Start();
+
            
-           frmIncidencia.Focus();
+
+           
+           //frmIncidencia.Focus();
            
 
         }

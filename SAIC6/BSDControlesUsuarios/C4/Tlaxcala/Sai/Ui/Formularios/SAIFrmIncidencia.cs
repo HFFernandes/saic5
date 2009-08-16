@@ -10,6 +10,7 @@ using BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
 using BSD.C4.Tlaxcala.Sai.Ui.Controles;
+using System.Threading;
 
 using Mapa = BSD.C4.Tlaxcala.Sai.Mapa;
 
@@ -79,6 +80,84 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         private Boolean _blnSoloLectura;
 
+        protected GroupBox _grpDenunciante =null;
+
+        public delegate  void DelegadoActualizaLocalidades(LocalidadList lstLocalidades);
+        public delegate void DelegadoLimpiaLocalidades();
+        public delegate void DelegadoActualizaCodigosPostales(CodigoPostalList  lstCodigosPostales);
+        public delegate void DelegadoLimpiaCodigosPostales();
+        public delegate void DelegadoActualizaColonias(ColoniaList lstColonias);
+        public delegate void DelegadoLimpiaColonias();
+        public delegate void DelegadoLimpiaTextoCodigPostal();
+        public delegate void DelegadoSeleccionaCodigoPostal(Object objElemento);
+        public delegate void DelegadoLimpiaTextoColonia();
+
+        private void ActualizaLocalidades(LocalidadList objListaLocalidades)
+        {
+            this.cmbLocalidad.DataSource = objListaLocalidades;
+            this.cmbLocalidad.DisplayMember = "Nombre";
+            this.cmbLocalidad.ValueMember = "Clave";
+            this.cmbLocalidad.SelectedIndex = -1;
+            this.cmbLocalidad.Text = string.Empty;
+
+        }
+
+        private void LimpiaLocalidades()
+        {
+            this.cmbLocalidad.DataSource = null;
+            this.cmbLocalidad.Items.Clear();
+        }
+
+
+        private void ActualizaCodigosPostales(CodigoPostalList objListaCodigosPostales)
+        {
+            this.cmbCP.DataSource = objListaCodigosPostales;
+            this.cmbCP.DisplayMember = "Valor";
+            this.cmbCP.ValueMember = "Clave";
+            this.cmbCP.SelectedIndex = -1;
+            this.cmbCP.Text = string.Empty;
+        }
+
+        private void LimpiaTextoCodigoPostal()
+        {
+            this.cmbCP.Text = string.Empty;
+        }
+
+        private void SeleccionaCodigoPostal(Object objElemento)
+        {
+            this.cmbCP.SelectedIndex = -1;
+            this.cmbCP.SelectedItem = objElemento;
+                                   
+        }
+
+        private void LimpiaCodigosPostales()
+        {
+            this.cmbCP.DataSource = null;
+            this.cmbCP.Items.Clear();
+        }
+
+        private void ActualizaColonias(ColoniaList lstColonias)
+        {
+            this.cmbColonia.DataSource = lstColonias;
+            this.cmbColonia.DisplayMember = "Nombre";
+            this.cmbColonia.ValueMember = "Clave";
+            this.cmbColonia.SelectedIndex = -1;
+            this.cmbColonia.Text = String.Empty;
+
+
+        }
+
+        private void LimpiaTextoColonia()
+        {
+            this.cmbColonia.SelectedIndex = -1;
+            this.cmbColonia.Text = string.Empty;
+        }
+
+        private void LimpiaColonias()
+        {
+            this.cmbColonia.DataSource = null;
+            this.cmbColonia.Items.Clear();
+        }
 
         /// <summary>
         /// Obtiene o establece el valor que indica si el formulario será de solo lectura
@@ -300,9 +379,30 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         
                         lstMunicipios = MunicipioMapper.Instance().GetAll();
 
+                        foreach (TipoIncidencia objTipoIncidencia in lstTipoIncidencias)
+                        {
+                            objTipoIncidencia.Descripcion += " " + objTipoIncidencia.ClaveOperacion;
+                        }
                         this.cmbTipoIncidencia.DataSource = lstTipoIncidencias;
                         this.cmbTipoIncidencia.DisplayMember = "Descripcion";
                         this.cmbTipoIncidencia.ValueMember = "Clave";
+
+                        //int j = 0;
+                        //foreach(Object objTipoIncidencia in cmbTipoIncidencia.Items)
+                        //{
+                        //    //for (j = 0; j < objTipoIncidencia.GetType().GetProperties().Length; j++)
+                        //    //{
+                        //    //    if (objElemento.GetType().GetProperties()[j].Name == "Descripcion")
+                        //    //    {
+                        //    //        break;
+                        //    //    }
+                        //    //}                        
+                        //    objTipoIncidencia.GetType().GetProperty("Descripcion").SetValue
+                        //        (objTipoIncidencia,
+                        //         objTipoIncidencia.GetType().GetProperty("Descripcion").GetValue(objTipoIncidencia,null).ToString() + " " +
+                        //         objTipoIncidencia.GetType().GetProperty("ClaveOperacion").GetValue(objTipoIncidencia,null).ToString(),null);
+
+                        //}
 
                         this.cmbMunicipio.DataSource = lstMunicipios;
                         this.cmbMunicipio.DisplayMember = "Nombre";
@@ -312,9 +412,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         this.cmbMunicipio.Text = string.Empty;
 
 
-                        this.cmbMunicipio.AllowDrop = this.cmbTipoIncidencia.AllowDrop;
-                        this.cmbMunicipio.DropDownStyle = this.cmbTipoIncidencia.DropDownStyle;
-                     }
+                       }
                 catch (System.Exception ex)
                 {
                     throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
@@ -620,97 +718,111 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         #region Eventos del combo MUNICIPIO
 
-        /// <summary>
-        /// Recupera las localidades y los códigos postales del municipio seleccionado
-        /// </summary>
-        /// <param name="sender">Objeto que causó el evento</param>
-        /// <param name="e">Parámetros del evento</param>
-        private void cmbMunicipio_SelectedIndexChanged(object sender, EventArgs e)
+
+
+        private void cmbMunicipio_CambiaMapa()
         {
-           
+            this.cmbMunicipioRefrescaControles();   
+        }
+
+        private void cmbMunicipioRefrescaControles()
+        {
             LocalidadList objListaLocalidades;
             ColoniaList objListaColonias;
             CodigoPostalList objListaCodigosPostales = new CodigoPostalList();
             CodigoPostal entCodigoPostal;
             Boolean blnExisteCodigoPostal;
+            //Thread tr1;
+            //Thread tr2;
+            //Thread tr3;
 
             try
             {
                 try
                 {
+                    this.Cursor = Cursors.WaitCursor;
 
                     if (this._blnBloqueaEventos == true)
                     {
+                        this.Cursor = Cursors.Default;
                         return;
                     }
 
                     this._blnBloqueaEventos = true;
+                    //tr1 = new Thread(delegate()
+                    //{
+                    //    this.cmbLocalidad.Invoke(new DelegadoLimpiaLocalidades(LimpiaLocalidades));
+                    //    this.cmbColonia.Invoke(new DelegadoLimpiaColonias(LimpiaColonias));
+                    //    this.cmbCP.Invoke(new DelegadoLimpiaCodigosPostales(LimpiaCodigosPostales));
 
-                    this.cmbLocalidad.DataSource = null;
-                    this.cmbLocalidad.Items.Clear();
-                    this.cmbColonia.DataSource = null;
-                    this.cmbColonia.Items.Clear();
-                    this.cmbCP.DataSource = null;
-                    this.cmbCP.Items.Clear();
-
+                    //}) { IsBackground = false };
+                    
+                    //tr1.Start();
+                    this.LimpiaLocalidades();
+                    this.LimpiaColonias();
+                    this.LimpiaCodigosPostales();
+                    
                     if (this.cmbMunicipio.SelectedItem == null)
                     {
+                        this.Cursor = Cursors.Default;
                         return;
                     }
 
                     objListaLocalidades = LocalidadMapper.Instance().GetByMunicipio((this.cmbMunicipio.SelectedItem as Municipio).Clave);
                     if (objListaLocalidades != null)
                     {
-                            this.cmbLocalidad.DataSource = objListaLocalidades;
-                            this.cmbLocalidad.DisplayMember = "Nombre";
-                            this.cmbLocalidad.ValueMember = "Clave";
-                            this.cmbLocalidad.SelectedIndex = -1;
-                            this.cmbLocalidad.Text  = string.Empty;
+                        //tr1.Abort();
+                        //tr1 = new Thread(delegate()
+                        //{
+                        //    this.cmbLocalidad.Invoke(new DelegadoActualizaLocalidades(ActualizaLocalidades), new object[] { objListaLocalidades });
+                        //}) { IsBackground = false };
+                        //tr1.Start();
 
-                            //Se recuperan los códigos postales del municipio
-                            for (int i = 0; i < objListaLocalidades.Count; i++)
+                        this.ActualizaLocalidades(objListaLocalidades);
+                        //Se recuperan los códigos postales del municipio
+                        for (int i = 0; i < objListaLocalidades.Count; i++)
+                        {
+                            objListaColonias = ColoniaMapper.Instance().GetByLocalidad(objListaLocalidades[i].Clave);
+                            for (int j = 0; j < objListaColonias.Count; j++)
                             {
-                                objListaColonias = ColoniaMapper.Instance().GetByLocalidad(objListaLocalidades[i].Clave);
-                                for (int j = 0; j < objListaColonias.Count; j++)
+                                if (objListaColonias[j].ClaveCodigoPostal.HasValue)
                                 {
-                                    if (objListaColonias[j].ClaveCodigoPostal.HasValue)
+                                    entCodigoPostal = CodigoPostalMapper.Instance().GetOne(objListaColonias[j].ClaveCodigoPostal.Value);
+                                    blnExisteCodigoPostal = false;
+                                    //Se revisa que el código postal no exista en la lista
+                                    for (int k = 0; k < objListaCodigosPostales.Count; k++)
                                     {
-                                        entCodigoPostal = CodigoPostalMapper.Instance().GetOne(objListaColonias[j].ClaveCodigoPostal.Value );
-                                        blnExisteCodigoPostal = false;
-                                        //Se revisa que el código postal no exista en la lista
-                                        for (int k = 0; k < objListaCodigosPostales.Count; k++)
+                                        if (objListaCodigosPostales[k].Valor == entCodigoPostal.Valor)
                                         {
-                                            if (objListaCodigosPostales[k].Valor == entCodigoPostal.Valor)
-                                            {
-                                                blnExisteCodigoPostal = true;
-                                                break;
-                                            }
-                                        }
-
-                                        if (!blnExisteCodigoPostal)
-                                        {
-                                            objListaCodigosPostales.Add(entCodigoPostal);
+                                            blnExisteCodigoPostal = true;
+                                            break;
                                         }
                                     }
-                                }
-                                
-                            }
 
-                            if (objListaCodigosPostales.Count > 0)
-                            {
-                                this.cmbCP.DataSource = objListaCodigosPostales;
-                                this.cmbCP.DisplayMember = "Valor";
-                                this.cmbCP.ValueMember = "Clave";
-                                this.cmbCP.SelectedIndex = -1;
-                                this.cmbCP.Text = string.Empty;
+                                    if (!blnExisteCodigoPostal)
+                                    {
+                                        objListaCodigosPostales.Add(entCodigoPostal);
+                                    }
+                                }
                             }
 
                         }
-                      
 
+                        if (objListaCodigosPostales.Count > 0)
+                        {
+                            //tr1.Abort();
+                            //tr1 = new Thread(delegate()
+                            //{
+                            //    this.cmbCP.Invoke(new DelegadoActualizaCodigosPostales(ActualizaCodigosPostales), new object[] { objListaCodigosPostales });
+                            //}) { IsBackground = false };
+                            //tr1.Start();
+                            this.ActualizaCodigosPostales(objListaCodigosPostales);
+                        }
+
+                    }
                     this._blnBloqueaEventos = false;
                     this.actualizaMapaUbicacion();
-
+                    
                 }
                 catch (System.Exception ex)
                 {
@@ -718,7 +830,22 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
             }
             catch (SAIExcepcion) { }
-            
+            finally
+            {
+                this.Cursor = Cursors.Default;
+            }
+        
+        }
+
+        /// <summary>
+        /// Recupera las localidades y los códigos postales del municipio seleccionado
+        /// </summary>
+        /// <param name="sender">Objeto que causó el evento</param>
+        /// <param name="e">Parámetros del evento</param>
+        private void cmbMunicipio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            this.cmbMunicipioRefrescaControles();    
 
         }
 
@@ -736,10 +863,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 {
                     if (this.cmbMunicipio.SelectedIndex == -1 || this.cmbMunicipio.Text.Trim() == string.Empty)
                     {
-                       this.cmbLocalidad.DataSource = null;
-                       this.cmbLocalidad.Items.Clear();
-                       this.cmbColonia.DataSource = null;
-                       this.cmbColonia.Items.Clear();
+                        //var tr = new Thread(delegate()
+                        //{
+                        //    this.cmbLocalidad.Invoke(new DelegadoLimpiaLocalidades(LimpiaLocalidades));
+                        //    this.cmbColonia.Invoke(new DelegadoLimpiaColonias(LimpiaColonias));
+
+                        //}) { IsBackground = false };
+                        //tr.Start();
+                        this.LimpiaLocalidades();
+                        this.LimpiaColonias();
                     }
                     
                     this.actualizaMapaUbicacion();
@@ -816,18 +948,39 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                     this._blnBloqueaEventos = true;
 
-                    this.cmbColonia.DataSource = null;
-                    this.cmbColonia.Items.Clear();
 
-                    lstColonias = ColoniaMapper.Instance().GetByLocalidad((this.cmbLocalidad.SelectedItem as Localidad).Clave);
+
+                    //var tr = new Thread(delegate()
+                    //{
+                    //    this.cmbColonia.Invoke(new DelegadoLimpiaColonias(LimpiaColonias));
+
+                    //}) { IsBackground = false };
+                    //tr.Start();
+                    this.LimpiaColonias();
+
+                    if (this.cmbLocalidad.SelectedItem != null)
+                    {
+                        lstColonias = ColoniaMapper.Instance().GetByLocalidad((this.cmbLocalidad.SelectedItem as Localidad).Clave);
+                    }
+                    else
+                    {
+                        lstColonias = null;
+                    }
 
                     if (lstColonias != null)
                     {
-                        this.cmbColonia.DataSource = lstColonias;
-                        this.cmbColonia.DisplayMember = "Nombre";
-                        this.cmbColonia.ValueMember = "Clave";
-                        this.cmbColonia.Text = String.Empty;
-                        this.cmbCP.Text = string.Empty;
+
+                       //Actualiza colonias
+                       //limpia el texto del codigo postal
+                        //var tr2 = new Thread(delegate()
+                        //{
+                        //    this.cmbColonia.Invoke(new DelegadoActualizaColonias (ActualizaColonias),new object[]{lstColonias});
+                        //    this.cmbCP.Invoke(new DelegadoLimpiaTextoCodigPostal(LimpiaTextoCodigoPostal));
+
+                        //}) { IsBackground = false };
+                        //tr2.Start();
+                        this.ActualizaColonias(lstColonias);
+                        this.LimpiaTextoCodigoPostal();
                     }
 
 
@@ -893,8 +1046,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 {
                     if (this.cmbLocalidad.SelectedIndex == -1 || this.cmbLocalidad.Text.Trim() == string.Empty)
                     {
-                        this.cmbColonia.DataSource = null;
-                        this.cmbColonia.Items.Clear();
+                        //var tr = new Thread(delegate()
+                        //{
+                        //    try
+                        //    {
+                        //        this.cmbColonia.Invoke(new DelegadoLimpiaColonias(LimpiaColonias));
+                        //    }
+                        //    catch { }
+                        //}) { IsBackground = false };
+                        //tr.Start();
+                        this.LimpiaColonias();
+
                     }
                     this.actualizaMapaUbicacion();
                     if (!this._blnSeActivoClosed)
@@ -946,9 +1108,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 {
                                     
                                     this._blnLimpiarColonias = false;
-                                    this.cmbCP.SelectedIndex = -1;
-                                    this.cmbCP.SelectedItem = objElemento;
-                                   
+                                    //selecciona codigo postal
+                                    //var tr = new Thread(delegate()
+                                    //{
+                                    //    this.cmbCP.Invoke(new DelegadoSeleccionaCodigoPostal(SeleccionaCodigoPostal), new object[]{objElemento});
+
+                                    //}) { IsBackground = false };
+                                    //tr.Start();
+                                    this.SeleccionaCodigoPostal(objElemento);
                                     break;
                                 }
                             }
@@ -1024,19 +1191,37 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 lstColonias = ColoniaMapper.Instance().GetByLocalidad(entLoc.Clave);
                                 if (lstColonias.Count > 0)
                                 {
-                                    this.cmbColonia.DataSource = lstColonias;
-                                    this.cmbColonia.DisplayMember = "Nombre";
-                                    this.cmbColonia.ValueMember = "Clave";
+                                   //var tr = new Thread(delegate()
+                                   // {
+                                   //     this.cmbCP.Invoke(new DelegadoActualizaColonias(ActualizaColonias), new object[] { lstColonias });
+
+                                   // }) { IsBackground = false };
+                                   // tr.Start();
+                                    this.ActualizaColonias(lstColonias);
+
                                 }
                                 else
                                 {
-                                    this.cmbColonia.DataSource = null;
-                                    this.cmbColonia.Items.Clear();
+                                    
+                                    //var tr2 = new Thread(delegate()
+                                    //{
+                                    //    this.cmbColonia.Invoke(new DelegadoLimpiaColonias(LimpiaColonias));
+
+                                    //}) { IsBackground = false };
+                                    //tr2.Start();
+                                    this.LimpiaColonias();
+
                                 }
                             }
                             else
                             {
-                               this.cmbColonia.Text = string.Empty;
+                                //var trd = new Thread(delegate()
+                                //{
+                                //    this.cmbColonia.Invoke(new DelegadoLimpiaTextoColonia (LimpiaTextoColonia));
+
+                                //}) { IsBackground = false };
+                                //trd.Start();
+                                this.LimpiaTextoColonia();
                             }
                         }
                         else if (entColonia != null)
@@ -1047,8 +1232,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 {
                                     if ((objElemento as CodigoPostal).Clave == entColonia.ClaveCodigoPostal)
                                     {
-                                        this.cmbCP.SelectedIndex = -1;
-                                        this.cmbCP.SelectedItem = objElemento;
+                                        //var tr3 = new Thread(delegate()
+                                        //{
+                                        //    this.cmbCP.Invoke(new DelegadoSeleccionaCodigoPostal(SeleccionaCodigoPostal), new object[] { objElemento });
+
+                                        //}) { IsBackground = false };
+                                        //tr3.Start();
+                                        this.SeleccionaCodigoPostal(objElemento);
                                         break;
                                     }
                                 }
@@ -1064,8 +1254,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             {
                                 if ((objElemento as CodigoPostal).Clave == entColonia.ClaveCodigoPostal)
                                 {
-                                    this.cmbCP.SelectedIndex = -1;
-                                    this.cmbCP.SelectedItem = objElemento;
+                                    //var tr4 = new Thread(delegate()
+                                    //{
+                                    //    this.cmbCP.Invoke(new DelegadoSeleccionaCodigoPostal(SeleccionaCodigoPostal), new object[] { objElemento });
+
+                                    //}) { IsBackground = false };
+                                    //tr4.Start();
+                                    this.SeleccionaCodigoPostal(objElemento);
                                     break;
                                 }
                             }
@@ -1146,8 +1341,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this._blnBloqueaEventos = true;
                     if (this._blnLimpiarColonias)
                     {
-                        this.cmbColonia.SelectedIndex = -1;
-                        this.cmbColonia.Text = string.Empty;
+                        //var trd = new Thread(delegate()
+                        //{
+                        //    this.cmbColonia.Invoke(new DelegadoLimpiaTextoColonia(LimpiaTextoColonia));
+
+                        //}) { IsBackground = false };
+                        //trd.Start();
+                        this.LimpiaTextoColonia();
                     }
                     this._blnBloqueaEventos = false;
 
@@ -1306,7 +1506,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 try
                 {
-                    if (!base.SAIProveedorValidacion.ValidarCamposRequeridos(this))
+                    if (!base.SAIProveedorValidacion.ValidarCamposRequeridos(this) && !this._blnSoloLectura)
                     {
                         e.Cancel = true;
 
@@ -1440,7 +1640,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
                 else
                 {
-                    this._objUbicacion.IdMunicipio = (this.cmbMunicipio.SelectedItem as Municipio).Clave;
+                    this._objUbicacion.IdMunicipio = int.Parse((this.cmbMunicipio.SelectedItem as Municipio).Clave.ToString());
+                   
                 }
 
                 if (this.cmbLocalidad.SelectedIndex == -1 || this.cmbLocalidad.Text.Trim() == string.Empty)
@@ -1762,6 +1963,31 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             }
                             this.ResumeLayout(false);
                             this.PerformLayout();
+                            if ((objTipo.Descripcion.ToUpper().Contains("FORANEO") || objTipo.Descripcion.ToUpper().Contains("FORÁNEO")) || (objTipo.Descripcion.ToUpper().Contains("FORÁNEA") || objTipo.Descripcion.ToUpper().Contains("FORANEA")))
+                            {
+                                this.cmbMunicipio.Enabled = false;
+                                this.cmbLocalidad.Enabled = false;
+                                this.cmbColonia.Enabled = false;
+                                this.cmbCP.Enabled = false;
+                            }
+                            else
+                            {
+                                this.cmbMunicipio.Enabled = true;
+                                this.cmbLocalidad.Enabled = true;
+                                this.cmbColonia.Enabled = true;
+                                this.cmbCP.Enabled = true;
+                            }
+                            if (this._grpDenunciante != null)
+                            {
+                                if ((objTipo.Descripcion.ToUpper().Contains("ANONIMO") || objTipo.Descripcion.ToUpper().Contains("ANÓNIMO")) || (objTipo.Descripcion.ToUpper().Contains("ANONIMA") || objTipo.Descripcion.ToUpper().Contains("ANÓNIMA")))
+                                {
+                                    this._grpDenunciante.Enabled = false;
+                                }
+                                else
+                                {
+                                    this._grpDenunciante.Enabled = true;
+                                }
+                            }
 
                         }
                         
@@ -3069,6 +3295,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
             }
             catch (SAIExcepcion) { }
-        }     
+        }
+
+       
     }
 }

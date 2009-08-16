@@ -50,7 +50,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
             this.cklCorporacion.CheckOnClick = true;
 
-           
+            this._grpDenunciante = this.grpDenunciante;
         }
 
         private void SAIFrmIncidencia066_Load(object sender, EventArgs e)
