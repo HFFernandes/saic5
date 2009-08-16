@@ -649,8 +649,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             dgvVehiculo[3,i-1].Value = objVehiculo.Modelo;
                             dgvVehiculo[4,i-1].Value = objVehiculo.Placas;
                             dgvVehiculo[5,i-1].Value = objVehiculo.Color;
-                            dgvVehiculo[6,i-1].Value = objVehiculo.NumeroSerie;
-                            dgvVehiculo[7,i-1].Value = objVehiculo.SeñasParticulares;
+                            dgvVehiculo[6,i-1].Value = objVehiculo.NumeroMotor;
+                            dgvVehiculo[7,i-1].Value = objVehiculo.NumeroSerie;
+                            dgvVehiculo[8,i-1].Value = objVehiculo.SeñasParticulares;
                             i++;
                         }
 
@@ -658,11 +659,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
                     //Datos de robo de accesorios de vehiculo
                     //-Se revisa si la incidencia tiene un registro en RoboVehiculoAccesorios:
-                    //RoboVehiculoAccesoriosList lstRoboVehiculoAccesorios = RoboVehiculoAccesoriosMapper.Instance().GetByIncidencia(this._entIncidencia.Folio);
-                    //if (lstRoboVehiculoAccesorios != null && lstRoboVehiculoAccesorios.Count > 0)
-                    //{
+                    RoboVehiculoAccesoriosList lstRoboVehiculoAccesorios = RoboVehiculoAccesoriosMapper.Instance().GetByIncidencia(this._entIncidencia.Folio);
+                    if (lstRoboVehiculoAccesorios != null && lstRoboVehiculoAccesorios.Count > 0)
+                    {
 
-                    //}
+                    }
                     this.txtDireccion.Text = this._entIncidencia.Direccion;
 
                 }
@@ -3089,7 +3090,22 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 objVehiculo.Color = strColor;
                             }
                             break;
-                        case 5://Número de Serie
+
+                        case 6://Número de Motor
+                            if (dgvVehiculo[e.ColumnIndex, e.RowIndex].Value != null && dgvVehiculo[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
+                            {
+                                String strNumeroMotor;
+                                strNumeroMotor = dgvVehiculo[e.ColumnIndex, e.RowIndex].Value.ToString();
+                                if (strNumeroMotor.Length > 50)
+                                {
+                                    strNumeroMotor = strNumeroMotor.Substring(0, 50);
+                                }
+                                strNumeroMotor = strNumeroMotor.ToUpper();
+                                dgvVehiculo.CurrentCell.Value = strNumeroMotor;
+                                objVehiculo.NumeroMotor = strNumeroMotor;
+                            }
+                            break;
+                        case 7://Número de Serie
                             if (dgvVehiculo[e.ColumnIndex,e.RowIndex].Value != null && dgvVehiculo[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
                             {
                                 String strNumeroSerie;
@@ -3103,7 +3119,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 objVehiculo.NumeroSerie = strNumeroSerie;
                             }
                             break;
-                        case 6://Señas Particulares
+                        case 8://Señas Particulares
                             if (dgvVehiculo[e.ColumnIndex,e.RowIndex].Value != null && dgvVehiculo[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
                             {
                                 String strSeñasParticulares;
@@ -3239,7 +3255,21 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 objVehiculo.Color = strColor;
                             }
                             break;
-                        case 5://Número de Serie
+                        case 6://Número de Motor
+                            if (dgvVehiculo[e.ColumnIndex, e.RowIndex].Value != null && dgvVehiculo[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
+                            {
+                                String strNumeroMotor;
+                                strNumeroMotor = dgvVehiculo[e.ColumnIndex, e.RowIndex].Value.ToString();
+                                if (strNumeroMotor.Length > 50)
+                                {
+                                    strNumeroMotor = strNumeroMotor.Substring(0, 50);
+                                }
+                                strNumeroMotor = strNumeroMotor.ToUpper();
+                                dgvVehiculo.CurrentCell.Value = strNumeroMotor;
+                                objVehiculo.NumeroMotor = strNumeroMotor;
+                            }
+                            break;
+                        case 7://Número de Serie
                             if (dgvVehiculoAccesorios[e.ColumnIndex,e.RowIndex].Value != null && dgvVehiculoAccesorios[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
                             {
                                 String strNumeroSerie;
@@ -3253,7 +3283,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 objVehiculo.NumeroSerie = strNumeroSerie;
                             }
                             break;
-                        case 6://Señas Particulares
+                        case 8://Señas Particulares
                             if (dgvVehiculoAccesorios[e.ColumnIndex,e.RowIndex].Value != null && dgvVehiculoAccesorios[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
                             {
                                 String strSeñasParticulares;

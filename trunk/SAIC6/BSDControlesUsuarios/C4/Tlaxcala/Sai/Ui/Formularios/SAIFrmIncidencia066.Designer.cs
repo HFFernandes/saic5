@@ -97,6 +97,7 @@
             // 
             this.txtDenuncianteDireccion.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtDenuncianteDireccion.Location = new System.Drawing.Point(83, 38);
+            this.txtDenuncianteDireccion.MaxLength = 500;
             this.txtDenuncianteDireccion.Name = "txtDenuncianteDireccion";
             this.txtDenuncianteDireccion.Size = new System.Drawing.Size(484, 20);
             this.txtDenuncianteDireccion.StrMensajeCampoRequerido = "El campo es requerido.";
@@ -116,6 +117,7 @@
             // 
             this.txtApellidoDenunciante.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtApellidoDenunciante.Location = new System.Drawing.Point(328, 13);
+            this.txtApellidoDenunciante.MaxLength = 50;
             this.txtApellidoDenunciante.Name = "txtApellidoDenunciante";
             this.txtApellidoDenunciante.Size = new System.Drawing.Size(239, 20);
             this.txtApellidoDenunciante.StrMensajeCampoRequerido = "El campo es requerido.";
@@ -136,6 +138,7 @@
             // 
             this.txtNombreDenunciante.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtNombreDenunciante.Location = new System.Drawing.Point(83, 13);
+            this.txtNombreDenunciante.MaxLength = 50;
             this.txtNombreDenunciante.Name = "txtNombreDenunciante";
             this.txtNombreDenunciante.Size = new System.Drawing.Size(174, 20);
             this.txtNombreDenunciante.StrMensajeCampoRequerido = "El campo es requerido.";
@@ -174,7 +177,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1264, 772);
+            this.ClientSize = new System.Drawing.Size(1281, 772);
             this.Controls.Add(this.grpDenunciante);
             this.Controls.Add(this.cklCorporacion);
             this.Controls.Add(this.label12);
