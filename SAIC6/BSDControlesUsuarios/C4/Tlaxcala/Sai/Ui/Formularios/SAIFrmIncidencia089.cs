@@ -34,7 +34,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.InicializaCampos();
         }
 
-        private void SIAFrmIncidencia089(Incidencia EntIncidencia)
+        public SAIFrmIncidencia089(Incidencia EntIncidencia)
+            : base(EntIncidencia, false)
         {
             int intHeight = base.Height;
             int intWidth = base.Width;
@@ -49,10 +50,20 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.Height = base.Height;
             this.Width = base.Width;
             this.ResumeLayout(false);
+           
         }
 
         private void InicializaCampos()
         {
+            //Se cargan los elementos en dependencias
+            DependenciaList lstDependencias = DependenciaMapper.Instance().GetAll();
+            if (lstDependencias != null && lstDependencias.Count > 0)
+            {
+                this.cmbDependencia.DataSource = lstDependencias;
+                this.cmbDependencia.ValueMember = "Clave";
+                this.cmbDependencia.DisplayMember = "Descripcion";
+            }
+
             if (this._entIncidencia != null)
             {
                 if (this._entIncidencia.FechaNotificacion.HasValue)
@@ -90,7 +101,19 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.dtmFechaEnvioDependencia.Enabled = false;
                     this.chkFechaEnvio.Checked = false;
                 }
+                if (this._entIncidencia.ClaveDependencia.HasValue && this.cmbDependencia.Items.Count > 0)
+                {
+                    foreach (Object objElemento in this.cmbDependencia.Items)
+                    {
+                        if ((objElemento as Dependencia).Clave == this._entIncidencia.ClaveDependencia)
+                        {
+                            this.cmbDependencia.SelectedItem = objElemento;
+                            break;
+                        }
+                    }
+                }
 
+                this.txtAlias.Text = this._entIncidencia.AliasDelincuente;
                 this.txtNumeroOficio.Text = this._entIncidencia.NumeroOficio;
             }
 
@@ -161,6 +184,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 this._entIncidencia.FechaEnvio = this.dtmFechaDocumento.Value;
                 this._entIncidencia.FechaNotificacion = this.dtmFechaNotificacion.Value;
                 this._entIncidencia.NumeroOficio = this.txtNumeroOficio.Text;
+                this._entIncidencia.AliasDelincuente = this.txtAlias.Text;
+                if (this.cmbDependencia.Items.Count > 0)
+                {
+                    this._entIncidencia.ClaveDependencia = (this.cmbDependencia.SelectedItem as Dependencia).Clave;
+                }
             }
         }
 
@@ -196,11 +224,42 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
             this.SAIFrmIncidenciaKeyUp(e);
         }
+
+        private void SAIFrmIncidencia089_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbDependencia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!this._blnSeActivoClosed)
+            {
+                base.RecuperaDatosEnIncidencia();
+                this.RecuperaDatosEnIncidencia();
+                this.GuardaIncidencia();
+            }
+        }
+
+        private void txtAlias_Leave(object sender, EventArgs e)
+        {
+            if (!this._blnSeActivoClosed)
+            {
+                base.RecuperaDatosEnIncidencia();
+                this.RecuperaDatosEnIncidencia();
+                this.GuardaIncidencia();
+            }
+        }
+
+        private void txtAlias_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.dtmFechaEnvioDependencia.Focus();
+            }
+            this.SAIFrmIncidenciaKeyUp(e);
+        }
        
 
-        // public override void txtDescripcion_OnKeyEnterUp(object sender,KeyEventArgs e)
-        //{
-        //    string s = string.Empty;
-        //}
+      
     }
 }

@@ -44,6 +44,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 this.Height = 740;
                 this.Width = 600;
                 this.ResumeLayout(false);
+               
                 if (this._entIncidencia != null)
                 {
                     this.Text = this._entIncidencia.Folio.ToString();

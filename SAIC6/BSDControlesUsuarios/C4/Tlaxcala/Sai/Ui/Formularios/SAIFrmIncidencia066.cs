@@ -53,6 +53,54 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this._grpDenunciante = this.grpDenunciante;
         }
 
+        public SAIFrmIncidencia066(Incidencia entIncidencia)
+            : base(entIncidencia, false)
+        {
+            int intHeight = base.Height;
+            int intWidth = base.Width;
+
+            InitializeComponent();
+
+           
+            this.lblTitulo.Text = "REGISTRO DE INCIDENCIA 066";
+            this.SuspendLayout();
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            base.Height = intHeight;
+            base.Width = intWidth;
+            this.ResumeLayout(false);
+            if (this._entIncidencia != null)
+            {
+                this.Text = this._entIncidencia.Folio.ToString();
+            }
+
+            //Se recupera la lista de las corporaciones
+            CorporacionList objListaCorporaciones = CorporacionMapper.Instance().GetAll();
+            String[] arrCorporaciones = new String[objListaCorporaciones.Count];
+
+            int i = 0;
+            foreach (Corporacion objCorporacion in objListaCorporaciones)
+            {
+                arrCorporaciones[i] = objCorporacion.Descripcion;
+                i++;
+            }
+
+            this.cklCorporacion.Items.AddRange(arrCorporaciones);
+
+            this.cklCorporacion.CheckOnClick = true;
+
+            this._grpDenunciante = this.grpDenunciante;
+
+            if (this._entIncidencia.ClaveDenunciante.HasValue)
+            {
+                DenuncianteObject objDenunciante = DenuncianteMapper.Instance().GetOne(this._entIncidencia.ClaveDenunciante.Value);
+
+                this.txtNombreDenunciante.Text  = objDenunciante.Nombre;
+                this.txtApellidoDenunciante.Text  = objDenunciante.Apellido;
+                this.txtDenuncianteDireccion.Text  = objDenunciante.Direccion;
+            }
+
+        }
+
         private void SAIFrmIncidencia066_Load(object sender, EventArgs e)
         {
 
