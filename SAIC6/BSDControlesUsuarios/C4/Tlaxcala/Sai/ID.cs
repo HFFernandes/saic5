@@ -87,24 +87,36 @@
 
         public const string SQL_CORPORACIONES =
             "SELECT Corporacion.* FROM Corporacion INNER JOIN CorporacionIncidencia ON Corporacion.Clave = CorporacionIncidencia.ClaveCorporacion INNER JOIN Incidencia ON CorporacionIncidencia.Folio = Incidencia.Folio WHERE (Incidencia.Folio = {0}) AND (Corporacion.Activo=1)";
+        
         public const string SQL_INCIDENCIASCORPORACION =
             "SELECT Incidencia.* FROM Incidencia INNER JOIN CorporacionIncidencia ON Incidencia.Folio = CorporacionIncidencia.Folio LEFT JOIN TipoIncidencia ON Incidencia.ClaveTipo = TipoIncidencia.Clave WHERE (CorporacionIncidencia.ClaveCorporacion = {0}) AND (Incidencia.ClaveEstatus = {1}) AND (Incidencia.Activo=1) ORDER BY TipoIncidencia.Prioridad DESC";
+        
         public const string SQL_INCIDENCIAS =
             "SELECT Incidencia.* FROM Incidencia LEFT JOIN TipoIncidencia ON Incidencia.ClaveTipo = dbo.TipoIncidencia.Clave WHERE (Incidencia.ClaveEstatus = {0}) AND (Incidencia.Activo=1) ORDER BY TipoIncidencia.Prioridad DESC";
+        
         public const string SQL_OBTENERDESPACHOS =
             "SELECT DespachoIncidencia.* FROM DespachoIncidencia WHERE (HoraLiberada IS NULL OR HoraLlegada IS NULL OR HoraDespachada IS NULL) AND (ClaveCorporacion={0}) AND (ClaveUnidad={1} OR ClaveUnidadApoyo={1})";
+        
         public const string SQL_OBTENERPERMISOS =
                 "SELECT Permiso.* FROM PermisoUsuario INNER JOIN Permiso ON PermisoUsuario.ClavePermiso = Permiso.Clave WHERE (PermisoUsuario.ClaveUsuario = {0}) AND (PermisoUsuario.ClaveSubmodulo = {1}) AND (PermisoUsuario.ClaveSistema={2})";
+        
         public const string SQL_OBTENERUSUARIO = "SELECT * FROM Usuario WHERE (NombreUsuario='{0}') AND (Activo=1)";
+        
         public const string SQL_OBTENERSISTEMAS = "SELECT DISTINCT Sistema.* FROM Sistema INNER JOIN PermisoUsuario ON Sistema.Clave = PermisoUsuario.ClaveSistema INNER JOIN Submodulo ON PermisoUsuario.ClaveSubmodulo = Submodulo.Clave WHERE (PermisoUsuario.ClaveUsuario = {0})";
+        
         public const string SQL_AUTENTICARUSUARIO =
             "SELECT * FROM Usuario WHERE (NombreUsuario='{0}') AND (Contraseña='{1}')";
+        
         public const string SQL_VERIFICARUNIDAD = "SELECT Unidad.* FROM Unidad WHERE (Codigo='{0}')";
+        
         public const string SQL_UNIDADENDESPACHO =
             "SELECT DespachoIncidencia.* FROM DespachoIncidencia WHERE (ClaveUnidad={0} OR ClaveUnidadApoyo={0})";
+        
         public const string SQL_UNIDADESCORPORACION =
             "SELECT Unidad.* FROM Unidad WHERE (ClaveCorporacion={0}) AND (Activo=1)";
 
+        public const string SQL_INCIDENCIASLIGADAS = "SELECT Incidencia.* FROM Incidencia WHERE Folio IN ({0})";
+        
         #endregion
 
         #region Cadenas

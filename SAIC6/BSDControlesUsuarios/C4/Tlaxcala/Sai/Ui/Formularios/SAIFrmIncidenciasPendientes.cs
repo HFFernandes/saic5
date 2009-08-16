@@ -147,7 +147,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             //recorro los nodos hijos para asignarles el padre
                             var listadoIncidencias =
                                 IncidenciaMapper.Instance().GetBySQLQuery(
-                                    string.Format("SELECT Incidencia.* FROM Incidencia WHERE Folio IN ({0})",
+                                    string.Format(ID.SQL_INCIDENCIASLIGADAS,
                                                   stbFolios.ToString().Trim().Remove(stbFolios.ToString().Trim().Length - 1)));
                             foreach (var incidencia in listadoIncidencias)
                             {
@@ -188,6 +188,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             saiReport1.AgregarColumna(6, "Dividido En", 70, true, false, true, false);
             saiReport1.AgregarColumna(7, "Pendiente Desde", 200, true, true, true, false);
             saiReport1.AgregarColumna(8, "Nombre del Operador", 90, true, true, true, false);
+            saiReport1.AgregarColumna(9, "Ligado a", 90, true, true, true, false);
             ObtenerRegistros();
         }
 
@@ -255,7 +256,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                                                        zonas.ToString().Trim().Length > 1 ? zonas.ToString().Trim().Remove(zonas.Length - 1) : string.Empty,
                                                                        totalCorporaciones.ToString(),
                                                                        ObtenerLapso(incidencia.HoraRecepcion),
-                                                                       UsuarioMapper.Instance().GetOne(incidencia.ClaveUsuario).NombreUsuario));
+                                                                       UsuarioMapper.Instance().GetOne(incidencia.ClaveUsuario).NombreUsuario,
+                                                                       incidencia.FolioPadre.ToString()));
                     }
                     else
                     {
@@ -264,10 +266,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         var incidenciaTemp = lstIncidenciasRegistradas.Find(inc => inc.Folio == incidencia.Folio);
                         if (incidenciaTemp != null)
                         {
-                            //verificar que la incidencia actual tenga una incidencia padre
-                            //en cuyo caso determino su reportrecord, lo elimino y agrego el padre con sus nuevos hijos
-
-
                             //contamos las columnas y los registros actuales para
                             //delimitar la busqueda del Row
                             var iCols = saiReport1.reportControl.Columns.Count;
@@ -318,6 +316,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                                 var lapso = DateTime.Now.Subtract(incidencia.HoraRecepcion);
                                 saiReport1.reportControl.Records[itm.Record.Index][7].BackColor = (int)lapso.TotalMinutes < 3 ? ID.COLOR_AMARILLO : ID.COLOR_ROJO;
+
+                                saiReport1.reportControl.Records[itm.Record.Index][9].Value =
+                                    incidencia.FolioPadre.ToString();
                             }
                         }
                     }
