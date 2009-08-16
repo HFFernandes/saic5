@@ -116,7 +116,10 @@
             "SELECT Unidad.* FROM Unidad WHERE (ClaveCorporacion={0}) AND (Activo=1)";
 
         public const string SQL_INCIDENCIASLIGADAS = "SELECT Incidencia.* FROM Incidencia WHERE Folio IN ({0})";
-        
+
+        public const string SQL_INCIDENCIAS089 =
+           "SELECT Incidencia.* FROM Incidencia LEFT OUTER JOIN TipoIncidencia ON Incidencia.ClaveTipo = TipoIncidencia.Clave WHERE (Incidencia.ClaveEstatus = {0}) AND (TipoIncidencia.ClaveSistema={1}) AND (Incidencia.Activo=1) ORDER BY TipoIncidencia.Prioridad DESC";
+
         #endregion
 
         #region Cadenas

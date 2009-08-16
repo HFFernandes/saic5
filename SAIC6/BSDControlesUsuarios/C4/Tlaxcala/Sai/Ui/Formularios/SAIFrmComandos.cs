@@ -49,12 +49,22 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             switch (e.control.Id)
             {
                 case ID.CMD_A:
-                    var activas = new SAIFrmIncidenciasActivas();
-                    MostrarEnSegundoMonitorSiEsPosible(activas);
+                    if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+                    {
+
+                    }
+                    else if (Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
+                    {
+                        var activas = new SAIFrmIncidenciasActivas();
+                        MostrarEnSegundoMonitorSiEsPosible(activas);
+                    }
                     break;
                 case ID.CMD_AU:
-                    var unidades = new SAIFrmEstadoUnidades();
-                    MostrarEnSegundoMonitorSiEsPosible(unidades);
+                    if (Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
+                    {
+                        var unidades = new SAIFrmEstadoUnidades();
+                        MostrarEnSegundoMonitorSiEsPosible(unidades);
+                    }
                     break;
                 case ID.CMD_BSC:
                     break;
@@ -90,13 +100,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                         //Código de prueba
                         Sai.Dal.Rules.Entities.Incidencia entIncidencia = Sai.Dal.Rules.Mappers.IncidenciaMapper.Instance().GetOne(1000490);
-                       
+
                         try
                         {
                             try
                             {
-                                    SAIFrmIncidencia066Despacho frmIncidencia066Despacho = new SAIFrmIncidencia066Despacho(entIncidencia);
-                                    frmIncidencia066Despacho.Show(this);
+                                SAIFrmIncidencia066Despacho frmIncidencia066Despacho = new SAIFrmIncidencia066Despacho(entIncidencia);
+                                frmIncidencia066Despacho.Show(this);
                             }
                             catch (System.Exception ex)
                             {
@@ -127,8 +137,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
                     break;
                 case ID.CMD_P:
-                    var pendientes = new SAIFrmIncidenciasPendientes();
-                    MostrarEnSegundoMonitorSiEsPosible(pendientes);
+                    if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+                    {
+                        var pendientes = new SAIFrmIncidenciasPendientes089();
+                        MostrarEnSegundoMonitorSiEsPosible(pendientes);
+                    }
+                    else if (Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
+                    {
+                        var pendientes = new SAIFrmIncidenciasPendientes();
+                        MostrarEnSegundoMonitorSiEsPosible(pendientes);
+                    }
                     break;
                 case ID.CMD_PH:
                     break;
