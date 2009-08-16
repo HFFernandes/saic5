@@ -559,21 +559,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
 
                     int ClaveUnidadDropped = int.Parse(this.RegresaValorDrop(e).ToString());
-                    Boolean blnBorraUnidad = false;
-
+                    
                     if (this._unidadAsignada != null && this._unidadAsignada.Clave == ClaveUnidadDropped)
                     {
-                        if (MessageBox.Show("La unidad que trata de asignar como unidad de apoyo ya se encuentra como unidad de la incidencia  ¿Desea reemplazarla?", "SAI C4", MessageBoxButtons.YesNo) == DialogResult.No)
-                        {
-                            e.Effect = DragDropEffects.None;
-                            return;
-                        }
-                        else
-                        {
-                            this._unidadAsignada = null;
-                            this.lblUnidad.Text = "NO ASIGNADA";
-                            blnBorraUnidad = true;
-                        }
+                        MessageBox.Show("La unidad que trata de asignar como unidad de apoyo ya se encuentra como unidad de la incidencia, cambie antes esta última para poder hacer la asinganción de la unidad de apoyo","SAI C4"); 
+                        e.Effect = DragDropEffects.None;
+                        return;
                     }
 
                     this._unidadApoyo  = UnidadMapper.Instance().GetOne(ClaveUnidadDropped);
@@ -595,19 +586,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         this._despachoIncidencia.ClaveCorporacion = this._entCorporacion.Clave;
                         this._despachoIncidencia.Folio = this._entIncidencia.Folio;
                         this._despachoIncidencia.ClaveUnidadApoyo = this._unidadApoyo.Clave;
-                        if (blnBorraUnidad)
-                        {
-                            this._despachoIncidencia.ClaveUnidad = null;
-                        }
+                       
                         DespachoIncidenciaMapper.Instance().Insert(this._despachoIncidencia);
 
                     }
                     else
                     {
-                        if (blnBorraUnidad)
-                        {
-                            this._despachoIncidencia.ClaveUnidad = null;
-                        }
+                       
                         this._despachoIncidencia.ClaveUnidadApoyo = this._unidadApoyo.Clave;
                         DespachoIncidenciaMapper.Instance().Save(this._despachoIncidencia);
                     }
