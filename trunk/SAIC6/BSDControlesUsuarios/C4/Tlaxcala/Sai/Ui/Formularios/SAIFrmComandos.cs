@@ -236,7 +236,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void SAIFrmComandos_Load(object sender, EventArgs e)
         {
-            SAIBarraComandos.LoadCommandBars("SAIC4", "Sistema de Administracion de Incidencias", "BarraComandos");
+            //SAIBarraComandos.LoadCommandBars("SAIC4", "Sistema de Administracion de Incidencias", "BarraComandos");
             if (SAIBarraComandos.Count == 0)
             {
                 var barra = SAIBarraComandos.Add("Comandos", XTPBarPosition.xtpBarTop);
@@ -354,7 +354,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void SAIFrmComandos_FormClosed(object sender, FormClosedEventArgs e)
         {
-            SAIBarraComandos.SaveCommandBars("SAIC4", "Sistema de Administracion de Incidencias", "BarraComandos");
+            //SAIBarraComandos.SaveCommandBars("SAIC4", "Sistema de Administracion de Incidencias", "BarraComandos");
         }
 
     }
