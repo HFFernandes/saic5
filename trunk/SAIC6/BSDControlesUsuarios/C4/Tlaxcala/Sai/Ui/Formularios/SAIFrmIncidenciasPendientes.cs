@@ -112,37 +112,62 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void btnLigarIncidencias_Click(object sender, EventArgs e)
         {
-            //TODO: Falta verificar el permiso
-            var lstIncidenciasPorLigar = new List<string>();
-            for (int i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
+            //Actualizar el foliopadre, pero antes verificar que no este ligada
+            //organizar los nodos para desplegar el tree
+            //y verificar que al momento del despacho si es hijo se pase la incidencia
+            //del padre..para prevenir el despacho a una misma incidencia
+
+            if (Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_P))
             {
-                lstIncidenciasPorLigar.Add(saiReport1.reportControl.SelectedRows[i].Record[0].Value.ToString());
-            }
+                try
+                {
+                    try
+                    {
+                        var lstIncidenciasPorLigar = new List<string>();
+                        for (int i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
+                        {
+                            lstIncidenciasPorLigar.Add(saiReport1.reportControl.SelectedRows[i].Record[0].Value.ToString());
+                        }
 
-            //Mostrar ventana para la seleccion del padre
-            var ligarIncidencias = new SAIFrmLigarIncidencias(lstIncidenciasPorLigar);
-            var dialogResult = ligarIncidencias.ShowDialog(this);
-            if (dialogResult == DialogResult.OK)
-            {
-                var folioPadre = ligarIncidencias.strFolioPadre;
-                lstIncidenciasPorLigar.Remove(folioPadre);
+                        //Mostrar ventana para la seleccion del padre
+                        var ligarIncidencias = new SAIFrmLigarIncidencias(lstIncidenciasPorLigar);
+                        var dialogResult = ligarIncidencias.ShowDialog(this);
+                        if (dialogResult == DialogResult.OK)
+                        {
+                            var folioPadre = ligarIncidencias.strFolioPadre;
+                            lstIncidenciasPorLigar.Remove(folioPadre);
 
-                //recorro los nodos hijos para asignarles el padre
-                //IncidenciaList listadoIncidencias = IncidenciaMapper.Instance().GetBySQLQuery(string.Format("SELECT Incidencia.* FROM Incidencia WHERE Folio IN {0}", lstIncidenciasPorLigar));
-                //foreach (var incidencia in listadoIncidencias)
-                //{
-                //    incidencia.FolioPadre = Convert.ToInt32(folioPadre);
-                //}
-                //if (listadoIncidencias.Count > 0)
-                //{
-                //    IncidenciaMapper.Instance().Update(listadoIncidencias);
-                //}
+                            var stbFolios = new StringBuilder();
+                            foreach (var s in lstIncidenciasPorLigar)
+                            {
+                                stbFolios.Append(s);
+                                stbFolios.Append(",");
+                            }
 
-                //Actualizar el foliopadre, pero antes verificar que no este ligada
-                //organizar los nodos para desplegar el tree
-                //y verificar que al momento del despacho si es hijo se pase la incidencia
-                //del padre..para prevenir el despacho a una misma incidencia
-
+                            //recorro los nodos hijos para asignarles el padre
+                            var listadoIncidencias =
+                                IncidenciaMapper.Instance().GetBySQLQuery(
+                                    string.Format("SELECT Incidencia.* FROM Incidencia WHERE Folio IN ({0})",
+                                                  stbFolios.ToString().Trim().Remove(stbFolios.ToString().Trim().Length - 1)));
+                            foreach (var incidencia in listadoIncidencias)
+                            {
+                                if (incidencia.FolioPadre == null)
+                                    incidencia.FolioPadre = Convert.ToInt32(folioPadre);
+                            }
+                            if (listadoIncidencias.Count > 0)
+                            {
+                                IncidenciaMapper.Instance().Update(listadoIncidencias);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new SAIExcepcion(ex.Message);
+                    }
+                }
+                catch (SAIExcepcion)
+                {
+                }
             }
         }
 
