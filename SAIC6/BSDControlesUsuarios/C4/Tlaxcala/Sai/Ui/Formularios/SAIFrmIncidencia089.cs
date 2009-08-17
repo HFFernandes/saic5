@@ -68,52 +68,52 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
             if (this._entIncidencia != null)
             {
-                if (this._entIncidencia.FechaNotificacion.HasValue)
-                {
-                    this.dtmFechaNotificacion.Value = this._entIncidencia.FechaNotificacion.Value;
-                    this.dtmFechaNotificacion.Enabled = true;
-                    this.chkFechaNotificacion.Checked = true;
-                }
-                else
-                {
-                    this.dtmFechaNotificacion.Enabled = false;
-                    this.chkFechaNotificacion.Checked = false;
-                }
+                //if (this._entIncidencia.FechaNotificacion.HasValue)
+                //{
+                //    this.dtmFechaNotificacion.Value = this._entIncidencia.FechaNotificacion.Value;
+                //    this.dtmFechaNotificacion.Enabled = true;
+                //    this.chkFechaNotificacion.Checked = true;
+                //}
+                //else
+                //{
+                //    this.dtmFechaNotificacion.Enabled = false;
+                //    this.chkFechaNotificacion.Checked = false;
+                //}
 
-                if (this._entIncidencia.FechaEnvio.HasValue)
-                {
-                    this.dtmFechaDocumento.Value = this._entIncidencia.FechaEnvio.Value;
-                    this.dtmFechaDocumento.Enabled = true;
-                    this.chkFechaDocumento.Checked  = true;
-                }
-                else
-                {
-                    this.dtmFechaDocumento.Enabled = false;
-                    this.chkFechaDocumento.Checked = false;
-                }
+                //if (this._entIncidencia.FechaEnvio.HasValue)
+                //{
+                //    this.dtmFechaDocumento.Value = this._entIncidencia.FechaEnvio.Value;
+                //    this.dtmFechaDocumento.Enabled = true;
+                //    this.chkFechaDocumento.Checked  = true;
+                //}
+                //else
+                //{
+                //    this.dtmFechaDocumento.Enabled = false;
+                //    this.chkFechaDocumento.Checked = false;
+                //}
 
-                if (this._entIncidencia.FechaEnvioDependencia.HasValue)
-                {
-                    this.dtmFechaEnvioDependencia.Value = this._entIncidencia.FechaEnvioDependencia.Value;
-                    this.dtmFechaEnvioDependencia.Enabled = true;
-                    this.chkFechaEnvio.Checked = true;
-                }
-                else
-                {
-                    this.dtmFechaEnvioDependencia.Enabled = false;
-                    this.chkFechaEnvio.Checked = false;
-                }
-                if (this._entIncidencia.ClaveDependencia.HasValue && this.cmbDependencia.Items.Count > 0)
-                {
-                    foreach (Object objElemento in this.cmbDependencia.Items)
-                    {
-                        if ((objElemento as Dependencia).Clave == this._entIncidencia.ClaveDependencia)
-                        {
-                            this.cmbDependencia.SelectedItem = objElemento;
-                            break;
-                        }
-                    }
-                }
+                //if (this._entIncidencia.FechaEnvioDependencia.HasValue)
+                //{
+                //    this.dtmFechaEnvioDependencia.Value = this._entIncidencia.FechaEnvioDependencia.Value;
+                //    this.dtmFechaEnvioDependencia.Enabled = true;
+                //    this.chkFechaEnvio.Checked = true;
+                //}
+                //else
+                //{
+                //    this.dtmFechaEnvioDependencia.Enabled = false;
+                //    this.chkFechaEnvio.Checked = false;
+                //}
+                //if (this._entIncidencia.ClaveDependencia.HasValue && this.cmbDependencia.Items.Count > 0)
+                //{
+                //    foreach (Object objElemento in this.cmbDependencia.Items)
+                //    {
+                //        if ((objElemento as Dependencia).Clave == this._entIncidencia.ClaveDependencia)
+                //        {
+                //            this.cmbDependencia.SelectedItem = objElemento;
+                //            break;
+                //        }
+                //    }
+                //}
 
                 this.txtAlias.Text = this._entIncidencia.AliasDelincuente;
                 this.txtNumeroOficio.Text = this._entIncidencia.NumeroOficio;
@@ -200,47 +200,47 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
            
             if (this._entIncidencia != null)
             {
-                if (this.chkFechaEnvio.Checked)
-                {
-                    this._entIncidencia.ClaveEstatus = 3;
-                    this._entIncidencia.FechaEnvioDependencia = this.dtmFechaEnvioDependencia.Value;
-                }
-                else
-                {
-                    this._entIncidencia.ClaveEstatus = 2;
-                    this._entIncidencia.FechaEnvioDependencia = null;
-                }
-                if (this.chkFechaDocumento.Checked)
-                {
+                //if (this.chkFechaEnvio.Checked)
+                //{
+                //    this._entIncidencia.ClaveEstatus = 3;
+                //    this._entIncidencia.FechaEnvioDependencia = this.dtmFechaEnvioDependencia.Value;
+                //}
+                //else
+                //{
+                //    this._entIncidencia.ClaveEstatus = 2;
+                //    this._entIncidencia.FechaEnvioDependencia = null;
+                //}
+                //if (this.chkFechaDocumento.Checked)
+                //{
 
-                    this._entIncidencia.FechaEnvio = this.dtmFechaDocumento.Value;
-                }
-                else
-                {
-                    this._entIncidencia.FechaEnvio = null;
-                }
-                if (this.chkFechaNotificacion.Checked)
-                {
-                    this._entIncidencia.FechaNotificacion = this.dtmFechaNotificacion.Value;
-                }
-                else
-                {
-                    this._entIncidencia.FechaNotificacion = null;
-                }
+                //    this._entIncidencia.FechaEnvio = this.dtmFechaDocumento.Value;
+                //}
+                //else
+                //{
+                //    this._entIncidencia.FechaEnvio = null;
+                //}
+                //if (this.chkFechaNotificacion.Checked)
+                //{
+                //    this._entIncidencia.FechaNotificacion = this.dtmFechaNotificacion.Value;
+                //}
+                //else
+                //{
+                //    this._entIncidencia.FechaNotificacion = null;
+                //}
                 if (this.txtNumeroOficio.Text != string.Empty)
                 {
                     this._entIncidencia.ClaveEstatus = 4;
                 }
                 else
                 {
-                    if (this._entIncidencia.FechaEnvioDependencia == null)
-                    {
-                        this._entIncidencia.ClaveEstatus = 2;
-                    }
-                    else
-                    {
-                        this._entIncidencia.ClaveEstatus = 3;
-                    }
+                    //if (this._entIncidencia.FechaEnvioDependencia == null)
+                    //{
+                    //    this._entIncidencia.ClaveEstatus = 2;
+                    //}
+                    //else
+                    //{
+                    //    this._entIncidencia.ClaveEstatus = 3;
+                    //}
                 }
                 this._entIncidencia.NumeroOficio = this.txtNumeroOficio.Text; 
                 this._entIncidencia.AliasDelincuente = this.txtAlias.Text;
@@ -248,19 +248,19 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 {
                     if (this.cmbDependencia.SelectedIndex != 1)
                     {
-                        if (this._entIncidencia.FechaEnvioDependencia == null)
-                        {
-                            this._entIncidencia.ClaveEstatus = 2;
-                        }
-                        else
-                        {
-                            this._entIncidencia.ClaveEstatus = 3;
-                        }
+                        //if (this._entIncidencia.FechaEnvioDependencia == null)
+                        //{
+                        //    this._entIncidencia.ClaveEstatus = 2;
+                        //}
+                        //else
+                        //{
+                        //    this._entIncidencia.ClaveEstatus = 3;
+                        //}
                         if (this.txtNumeroOficio.Text != string.Empty)
                         {
                             this._entIncidencia.ClaveEstatus = 4;
                         }
-                        this._entIncidencia.ClaveDependencia = (this.cmbDependencia.SelectedItem as Dependencia).Clave;
+                        //this._entIncidencia.ClaveDependencia = (this.cmbDependencia.SelectedItem as Dependencia).Clave;
                     }
                 }
             }
