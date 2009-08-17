@@ -354,6 +354,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this._blnBloqueaEventos = false;
             Aplicacion.VentanasIncidencias.Add(new SAIWinSwitchItem(this._entIncidencia.Folio.ToString(), "", (this as Form)));
             this.SoloLectura = SoloLectura;
+            this.cmbTipoIncidencia.BlnEsRequerido = false;
         }
 
         /// <summary>
@@ -3493,6 +3494,74 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             this.cmbTipoIncidencia.Enabled = blnHabilitado;
         }
+
+        /// <summary>
+        /// Busca el municipio, localidad y colonia del código introducido
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cmbCP_TextChanged(object sender, EventArgs e)
+        {
+            ColoniaList lstColonias;
+            CodigoPostalList lstCodigoPostal;
+            Localidad entLocalidad;
+            LocalidadList lstLocalidades;
+
+            if (this._blnBloqueaEventos)
+            {
+                return;
+            }
+
+            try
+            {
+                try
+                {
+                    if (this.cmbCP.Text.Trim() != string.Empty)
+                    {
+                        lstCodigoPostal = CodigoPostalMapper.Instance().GetBySQLQuery("Select Clave, Valor from CodigoPostal where Valor = '" + this.cmbCP.Text + "'");
+                        if (lstCodigoPostal != null && lstCodigoPostal.Count > 0)
+                        {
+                            lstColonias = ColoniaMapper.Instance().GetByCodigoPostal(lstCodigoPostal[0].Clave);
+                           
+                            if (lstColonias != null && lstColonias.Count > 0)
+                            {
+                                this._blnBloqueaEventos = true;
+                                this.ActualizaColonias(lstColonias);
+                                entLocalidad =  LocalidadMapper.Instance().GetOne(lstColonias[0].ClaveLocalidad);
+                                lstLocalidades = LocalidadMapper.Instance().GetByMunicipio(entLocalidad.ClaveMunicipio);
+                                this.ActualizaLocalidades(lstLocalidades);
+                                foreach (Object objElemento in this.cmbLocalidad.Items)
+                                {
+                                    if ((objElemento as Localidad).Clave == entLocalidad.Clave)
+                                    {
+                                        this.cmbLocalidad.SelectedItem = objElemento;
+                                        break;
+                                    }
+                                }
+                                foreach (Object objElemento in this.cmbMunicipio.Items)
+                                {
+                                    if ((objElemento as Municipio).Clave == entLocalidad.ClaveMunicipio)
+                                    {
+                                        this.cmbMunicipio.SelectedItem = objElemento;
+                                        break;
+                                    }
+                                }
+
+
+                                this._blnBloqueaEventos = false;
+                            }
+                        }
+                    }
+                    this.actualizaMapaUbicacion();
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
+            }
+            catch (SAIExcepcion) { }
+        }
+
        
     }
 }
