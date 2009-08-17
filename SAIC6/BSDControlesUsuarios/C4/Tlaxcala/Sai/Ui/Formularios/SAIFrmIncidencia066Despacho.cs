@@ -21,6 +21,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private Unidad _unidadApoyo;
         private Corporacion _entCorporacion;
         private CorporacionIncidencia _entCorporacionIncidencia;
+        private int _intEstatusAnterior;
         
 
         public SAIFrmIncidencia066Despacho(Incidencia entIncidencia) : base(entIncidencia,true)
@@ -145,6 +146,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.chkHoraLiberacion.Checked = true;
                 }
 
+                this._intEstatusAnterior = entIncidencia.ClaveEstatus;
                 //***********************************************
 
 
@@ -167,12 +169,18 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     if (!this.chkHoraLiberacion.Checked && this._despachoIncidencia != null)
                     {
                         this._despachoIncidencia.HoraLiberada = null;
+
                         DespachoIncidenciaMapper.Instance().Save(this._despachoIncidencia);
+                        this._entIncidencia.ClaveEstatus = this._intEstatusAnterior;
+
+                        IncidenciaMapper.Instance().Save(this._entIncidencia);
                     }
                     else if (this._despachoIncidencia != null)
                     {
                         this._despachoIncidencia.HoraLiberada = this.dtpHoraLiberacion.Value;
                         DespachoIncidenciaMapper.Instance().Save(this._despachoIncidencia);
+                        this._entIncidencia.ClaveEstatus = 4;
+                        IncidenciaMapper.Instance().Save(this._entIncidencia);
                     }
                     
                 }
@@ -285,6 +293,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         this._despachoIncidencia.HoraLiberada = dtpHoraLiberacion.Value;
                     }
                     DespachoIncidenciaMapper.Instance().Save(this._despachoIncidencia);
+                    this._entIncidencia.ClaveEstatus = 4;
+                    IncidenciaMapper.Instance().Save(this._entIncidencia);
                 }
                 catch (System.Exception ex)
                 {

@@ -92,6 +92,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         public delegate void DelegadoSeleccionaCodigoPostal(Object objElemento);
         public delegate void DelegadoLimpiaTextoColonia();
 
+        /// <summary>
+        /// Actualiza el combo de localidades 
+        /// </summary>
+        /// <param name="objListaLocalidades">Lista de localidades que se mostrarán en el control</param>
         private void ActualizaLocalidades(LocalidadList objListaLocalidades)
         {
             this.cmbLocalidad.DataSource = objListaLocalidades;
@@ -102,13 +106,19 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         }
 
+        /// <summary>
+        /// Limpia el control que contiene la lista de localidades
+        /// </summary>
         private void LimpiaLocalidades()
         {
             this.cmbLocalidad.DataSource = null;
             this.cmbLocalidad.Items.Clear();
         }
 
-
+        /// <summary>
+        /// Actualiza la lista de los códigos postales
+        /// </summary>
+        /// <param name="objListaCodigosPostales">Lista de los códigos postales que se mostrarán en el control</param>
         private void ActualizaCodigosPostales(CodigoPostalList objListaCodigosPostales)
         {
             this.cmbCP.DataSource = objListaCodigosPostales;
@@ -118,11 +128,18 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.cmbCP.Text = string.Empty;
         }
 
+        /// <summary>
+        /// Limpia el texto del combo de códigos postales
+        /// </summary>
         private void LimpiaTextoCodigoPostal()
         {
             this.cmbCP.Text = string.Empty;
         }
 
+        /// <summary>
+        /// Selecciona el elemento del combo de codigos postales
+        /// </summary>
+        /// <param name="objElemento">Elemento que se va a seleccionar</param>
         private void SeleccionaCodigoPostal(Object objElemento)
         {
             this.cmbCP.SelectedIndex = -1;
@@ -130,12 +147,19 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                    
         }
 
+        /// <summary>
+        /// Limpia el combo que contiene los códigos postales
+        /// </summary>
         private void LimpiaCodigosPostales()
         {
             this.cmbCP.DataSource = null;
             this.cmbCP.Items.Clear();
         }
 
+        /// <summary>
+        /// Actualiza la lista de colonias del combo correspondiente
+        /// </summary>
+        /// <param name="lstColonias">Lista de colonias que se van a mostrar en el control</param>
         private void ActualizaColonias(ColoniaList lstColonias)
         {
             this.cmbColonia.DataSource = lstColonias;
@@ -147,12 +171,18 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         }
 
+        /// <summary>
+        /// Limpia el texto del control del combo de colonias
+        /// </summary>
         private void LimpiaTextoColonia()
         {
             this.cmbColonia.SelectedIndex = -1;
             this.cmbColonia.Text = string.Empty;
         }
 
+        /// <summary>
+        /// Limpia el combo que contiene la lista de colonias
+        /// </summary>
         private void LimpiaColonias()
         {
             this.cmbColonia.DataSource = null;
@@ -796,12 +826,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         #region Eventos del combo MUNICIPIO
 
 
-
+        /// <summary>
+        /// Implementa el evento cambia mapa del control SAIComboBox
+        /// </summary>
         private void cmbMunicipio_CambiaMapa()
         {
             this.cmbMunicipioRefrescaControles();   
         }
 
+        /// <summary>
+        /// Recarga los controles de localidades y códigos postales con base al municipio seleccioando
+        /// </summary>
         private void cmbMunicipioRefrescaControles()
         {
             LocalidadList objListaLocalidades;
@@ -2745,6 +2780,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
            
         }
 
+        /// <summary>
+        /// Guarda la información en el grid de persona extraviada
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgvPersonaExtraviada_CellValidated(object sender, DataGridViewCellEventArgs e)
         {
             Boolean blnExiste = false;
@@ -3105,6 +3145,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             { }
         }
 
+        /// <summary>
+        /// Guarda la información en el grid de vehículo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgvVehiculo_CellValidated(object sender, DataGridViewCellEventArgs e)
         {
             Boolean blnExiste = false;
@@ -3275,6 +3320,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             { }
         }
 
+        /// <summary>
+        /// Guarda la información en el grid de vehículos involucrados en un robo a accesorio de vehículos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dgvVehiculoAccesorios_CellValidated(object sender, DataGridViewCellEventArgs e)
         {
             Boolean blnExiste = false;
@@ -3424,6 +3474,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (SAIExcepcion) { }
         }
 
+        /// <summary>
+        /// Se manda a llamar desde las clases hijas y cambia el estado del control de la lista de tipo de incidencias
+        /// </summary>
+        /// <param name="blnHabilitado"></param>
         protected void CambiaHabilitadoTipoIncidencia(Boolean blnHabilitado)
         {
             this.cmbTipoIncidencia.Enabled = blnHabilitado;

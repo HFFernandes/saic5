@@ -101,65 +101,107 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.CambiaHabilitadoTipoIncidencia(false);
 
         }
+            
+      
 
-        private void SAIFrmIncidencia066_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void grpDenunciante_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtReferencias_Leave(object sender, EventArgs e)
-        {
-            if (!this._blnSeActivoClosed)
-            {
-                base.RecuperaDatosEnIncidencia();
-                this.RecuperaDatosEnIncidencia();
-                this.GuardaIncidencia();
-            }
-        }
-
+        /// <summary>
+        /// Guarda las corporaciones asociadas a la incidencia cuando se sale del control de corporaciones 
+        /// </summary>
+        ///<remarks>Según las corporaciones asociadas se hace el despacho de la incidencia </remarks>
         private void cklCorporacion_Leave(object sender, EventArgs e)
         {
-            this.GuardaCorporaciones();
+            try
+            {
+                try
+                {
+                    this.GuardaCorporaciones();
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
+            }
+            catch (SAIExcepcion) { }
         }
 
+        /// <summary>
+        /// Guarda la incidencia cuando se termina de editar el nombre del denunciante
+        /// </summary>
         private void txtNombreDenunciante_Leave(object sender, EventArgs e)
         {
-            this.GuardaDenunciante();
-            if (!this._blnSeActivoClosed)
+            try
             {
-                base.RecuperaDatosEnIncidencia();
-                this.RecuperaDatosEnIncidencia();
-                this.GuardaIncidencia();
+             try
+             {
+                
+                if (!this._blnSeActivoClosed)
+                {
+                    base.RecuperaDatosEnIncidencia();
+                    this.GuardaDenunciante();
+                    this.GuardaIncidencia();
+                }
+             }
+             catch (System.Exception ex)
+             {
+                 throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+             }
             }
+            catch (SAIExcepcion) { }
         }
 
+        /// <summary>
+        ///Guarda la incidencia cuando se termina de editar el apellido del denunciante 
+        /// </summary>
         private void txtApellidoDenunciante_Leave(object sender, EventArgs e)
         {
-            this.GuardaDenunciante();
-            if (!this._blnSeActivoClosed)
+            try
             {
-                base.RecuperaDatosEnIncidencia();
-                this.RecuperaDatosEnIncidencia();
-                this.GuardaIncidencia();
+                try
+                {
+                   if (!this._blnSeActivoClosed)
+                    {
+                        base.RecuperaDatosEnIncidencia();
+                        this.GuardaDenunciante();
+                        this.GuardaIncidencia();
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
             }
+            catch (SAIExcepcion) { }
         }
 
+        /// <summary>
+        /// Guarda la incidencia cuando se termina de editar la dirección del denunciante
+        /// </summary>
         private void txtDenuncianteDireccion_Leave(object sender, EventArgs e)
         {
-            this.GuardaDenunciante();
-            if (!this._blnSeActivoClosed)
+            try
             {
-                base.RecuperaDatosEnIncidencia();
-                this.RecuperaDatosEnIncidencia();
-                this.GuardaIncidencia();
+                try
+                {
+                    
+                    if (!this._blnSeActivoClosed)
+                    {
+                        base.RecuperaDatosEnIncidencia();
+                        this.GuardaDenunciante();
+                        this.GuardaIncidencia();
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
             }
+            catch (SAIExcepcion) { }
         }
 
+        /// <summary>
+        /// Manda el foco al control de corporaciones cuando se presiona la tecla enter en referencias
+        /// </summary>
+       
         private void txtReferencias_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -169,7 +211,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.SAIFrmIncidenciaKeyUp(e);
         }
 
-        private void cklCorporacion_KeyUp(object sender, KeyEventArgs e)
+        /// <summary>
+        /// Manda el foco al control del nombre del denunciante cuando se presiona la tecla enter en el control de corporaciones
+        /// </summary>
+         private void cklCorporacion_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -178,6 +223,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.SAIFrmIncidenciaKeyUp(e);
         }
 
+        /// <summary>
+        /// Manda el foco al control del apellido del denunciante cuando se presiona enter en el control del nombre del denunciante
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtNombreDenunciante_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -187,6 +237,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.SAIFrmIncidenciaKeyUp(e);
         }
 
+        /// <summary>
+        /// Manda el foco al control de la dirección del denunciante cuando se presiona enter en el control del apellido del denunciante
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtApellidoDenunciante_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -196,15 +251,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.SAIFrmIncidenciaKeyUp(e);
         }
 
-        private void RecuperaDatosEnIncidencia()
-        {
-
-          
-        }
+       
 
         protected override void OnClosed(EventArgs e)
         {
-            this.RecuperaDatosEnIncidencia();
             this.GuardaCorporaciones();
             this.GuardaDenunciante();
             base.OnClosed(e);
