@@ -1678,11 +1678,22 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         protected  void GuardaIncidencia()
         {
-            if (this._entIncidencia != null)
-            {
-               
-                IncidenciaMapper.Instance().Save(this._entIncidencia);
+            try
+            { 
+                try
+                {
+                    if (this._entIncidencia != null)
+                    {
+                       
+                        IncidenciaMapper.Instance().Save(this._entIncidencia);
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
             }
+            catch (SAIExcepcion) { }
         }
 
         /// <summary>
@@ -1985,7 +1996,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                                 this.Height = 750;
                                 this.Width = 600;
-                                this.grpRoboVehiculo.Top = 425;
+                                this.grpRoboVehiculo.Top = 455;
                                
 
                             }
@@ -2014,7 +2025,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             {
                                 this.Height = 750;
                                 this.Width = 600;
-                                this.grpRoboAccesorios.Top = 425;
+                                this.grpRoboAccesorios.Top = 455;
                             }
                             else
                             {
@@ -2042,7 +2053,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             {
                                 this.Height = 750;
                                 this.Width = 600;
-                                this.grpExtravio.Top = 425;
+                                this.grpExtravio.Top = 455;
                             }
                             else
                             {

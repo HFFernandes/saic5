@@ -510,7 +510,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             this._despachoIncidencia.ClaveUnidadApoyo = null;
                         }
                         DespachoIncidenciaMapper.Instance().Insert(this._despachoIncidencia);
-
+                        //La incidencia ahora es activa
+                        this._entIncidencia.ClaveEstatus = 3;
+                        IncidenciaMapper.Instance().Save(this._entIncidencia);
                     }
                     else
                     {
@@ -520,6 +522,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             this._despachoIncidencia.ClaveUnidadApoyo = null;
                         }
                         DespachoIncidenciaMapper.Instance().Save(this._despachoIncidencia);
+                        //La incidencia ahora es activa
+                        this._entIncidencia.ClaveEstatus = 3;
+                        IncidenciaMapper.Instance().Save(this._entIncidencia);
                     }
 
                     this.lblUnidad.Text  = "Unidad " + this._unidadAsignada.Codigo;
