@@ -159,12 +159,18 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             //catch (SAIExcepcion) { }
         }
 
+
+        /// <summary>
+        /// Guarda la hora de liberación y actualiza el estatus de la incidencia
+        /// </summary>
         private void chkHoraLiberacion_CheckedChanged(object sender, EventArgs e)
         {
             try
             {
                 try
                 {
+                   
+
                     this.dtpHoraLiberacion.Enabled = this.chkHoraLiberacion.Checked;
                     if (!this.chkHoraLiberacion.Checked && this._despachoIncidencia != null)
                     {
@@ -177,6 +183,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
                     else if (this._despachoIncidencia != null)
                     {
+                        
                         this._despachoIncidencia.HoraLiberada = this.dtpHoraLiberacion.Value;
                         DespachoIncidenciaMapper.Instance().Save(this._despachoIncidencia);
                         this._entIncidencia.ClaveEstatus = 4;
@@ -197,12 +204,19 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         }
 
+        /// <summary>
+        /// Guarda la hora de llegada de la unidad
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void chkHoraLlegada_CheckedChanged(object sender, EventArgs e)
         {
             try
             {
                 try
                 {
+                    
+
                     this.dtpHoraLlegada.Enabled = this.chkHoraLlegada.Checked;
                     if (!this.chkHoraLlegada.Checked && this._despachoIncidencia != null)
                     {

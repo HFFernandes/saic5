@@ -252,55 +252,86 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         }
 
        
-
+        /// <summary>
+        /// Guarda la información de la incidencia al cerrar la ventana
+        /// </summary>
+       
         protected override void OnClosed(EventArgs e)
         {
-            this.GuardaCorporaciones();
-            this.GuardaDenunciante();
-            base.OnClosed(e);
+            try
+            {
+                try
+                {
+                    this.GuardaCorporaciones();
+                    this.GuardaDenunciante();
+                    base.OnClosed(e);
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
+            }
+            catch (SAIExcepcion) { }
         }
 
+        /// <summary>
+        /// Guarda las corporaciones asociadas a la incidencia
+        /// </summary>
         private void GuardaCorporaciones()
         {
             IEnumerator myEnumerator;
             CorporacionList ListaCorporaciones = CorporacionMapper.Instance().GetAll();
             Boolean blnTieneDatos = false;
             
-
-
-            if (this._entIncidencia == null)
-                return;
-
-            this._entIncidencia.ClaveEstatus = 1;
-            
-            IncidenciaMapper.Instance().Save(this._entIncidencia);
-
-            CorporacionIncidenciaMapper.Instance().DeleteByIncidencia(this._entIncidencia.Folio);
-
-            myEnumerator = this.cklCorporacion.CheckedIndices.GetEnumerator();
-            int y;
-            while (myEnumerator.MoveNext() != false)
+            try
             {
-                y = (int)myEnumerator.Current;
-                foreach (Corporacion objCorporacion in ListaCorporaciones)
+                try
                 {
-                    if (this.cklCorporacion.Items[y].ToString() == objCorporacion.Descripcion)
-                    {
-                        blnTieneDatos = true;
-                        CorporacionIncidenciaMapper.Instance().Insert(new CorporacionIncidencia(this._entIncidencia.Folio, objCorporacion.Clave));
-                    }
-                }
-            }
 
-            if (blnTieneDatos)
-            {
-                this._entIncidencia.ClaveEstatus = 2;
+                if (this._entIncidencia == null)
+                    return;
+
+                this._entIncidencia.ClaveEstatus = 1;
+                
                 IncidenciaMapper.Instance().Save(this._entIncidencia);
 
+                CorporacionIncidenciaMapper.Instance().DeleteByIncidencia(this._entIncidencia.Folio);
+
+                myEnumerator = this.cklCorporacion.CheckedIndices.GetEnumerator();
+                int y;
+                while (myEnumerator.MoveNext() != false)
+                {
+                    y = (int)myEnumerator.Current;
+                    foreach (Corporacion objCorporacion in ListaCorporaciones)
+                    {
+                        if (this.cklCorporacion.Items[y].ToString() == objCorporacion.Descripcion)
+                        {
+                            blnTieneDatos = true;
+                            CorporacionIncidenciaMapper.Instance().Insert(new CorporacionIncidencia(this._entIncidencia.Folio, objCorporacion.Clave));
+                        }
+                    }
+                }
+
+                if (blnTieneDatos)
+                {
+                    this._entIncidencia.ClaveEstatus = 2;
+                    IncidenciaMapper.Instance().Save(this._entIncidencia);
+
             }
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
+            }
+            catch (SAIExcepcion) { }
             
         }
 
+
+        /// <summary>
+        /// Guarda los datos del denunciante
+        /// </summary>
         private void GuardaDenunciante()
         {
             if (this._entIncidencia == null)
@@ -308,32 +339,43 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
             DenuncianteObject objDenunciante;
 
-            if (this.txtNombreDenunciante.Text.Trim() != string.Empty || this.txtApellidoDenunciante.Text.Trim() != string.Empty
-                || this.txtDenuncianteDireccion.Text.Trim() != string.Empty)
+            try
             {
-                
-
-                if (this._entIncidencia.ClaveDenunciante.HasValue)
+                try
                 {
-                    objDenunciante = DenuncianteMapper.Instance().GetOne(this._entIncidencia.ClaveDenunciante.Value);
-                    objDenunciante.Apellido = this.txtApellidoDenunciante.Text;
-                    objDenunciante.Direccion = this.txtDenuncianteDireccion.Text;
-                    objDenunciante.Nombre = this.txtNombreDenunciante.Text;
-                    DenuncianteMapper.Instance().Save(objDenunciante);
+                    if (this.txtNombreDenunciante.Text.Trim() != string.Empty || this.txtApellidoDenunciante.Text.Trim() != string.Empty
+                        || this.txtDenuncianteDireccion.Text.Trim() != string.Empty)
+                    {
+                        
+
+                        if (this._entIncidencia.ClaveDenunciante.HasValue)
+                        {
+                            objDenunciante = DenuncianteMapper.Instance().GetOne(this._entIncidencia.ClaveDenunciante.Value);
+                            objDenunciante.Apellido = this.txtApellidoDenunciante.Text;
+                            objDenunciante.Direccion = this.txtDenuncianteDireccion.Text;
+                            objDenunciante.Nombre = this.txtNombreDenunciante.Text;
+                            DenuncianteMapper.Instance().Save(objDenunciante);
+                        }
+                        else
+                        {
+                            objDenunciante = new DenuncianteObject();
+                            objDenunciante.Apellido = this.txtApellidoDenunciante.Text;
+                            objDenunciante.Direccion = this.txtDenuncianteDireccion.Text;
+                            objDenunciante.Nombre = this.txtNombreDenunciante.Text;
+                            DenuncianteMapper.Instance().Insert(objDenunciante);
+                        }
+
+                        this._entIncidencia.ClaveDenunciante = objDenunciante.Clave;
+
+
+                    }
                 }
-                else
+                catch (System.Exception ex)
                 {
-                    objDenunciante = new DenuncianteObject();
-                    objDenunciante.Apellido = this.txtApellidoDenunciante.Text;
-                    objDenunciante.Direccion = this.txtDenuncianteDireccion.Text;
-                    objDenunciante.Nombre = this.txtNombreDenunciante.Text;
-                    DenuncianteMapper.Instance().Insert(objDenunciante);
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
                 }
-
-                this._entIncidencia.ClaveDenunciante = objDenunciante.Clave;
-
-
             }
+            catch (SAIExcepcion) { }
 
         }
 
