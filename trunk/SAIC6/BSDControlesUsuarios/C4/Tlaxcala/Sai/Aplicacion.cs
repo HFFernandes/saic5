@@ -24,27 +24,7 @@ namespace BSD.C4.Tlaxcala.Sai
         /// <returns>Valor decimal correspondiente</returns>
         public static int HexadecimalADecimal(string strHex)
         {
-            var ColorHex = strHex.ToCharArray();
-            var ColorDecimal = 0;
-            var iLength = ColorHex.Length - 1;
-            int NumeroDecimal;
-
-            foreach (var ValorHex in ColorHex)
-            {
-                if (char.IsNumber(ValorHex))
-                {
-                    NumeroDecimal = int.Parse(ValorHex.ToString());
-                }
-                else
-                {
-                    NumeroDecimal = Convert.ToInt32(ValorHex) - 55;
-                }
-
-                ColorDecimal += NumeroDecimal * (Convert.ToInt32(Math.Pow(16, iLength)));
-                iLength--;
-            }
-
-            return ColorDecimal;
+            return Int32.Parse(strHex, System.Globalization.NumberStyles.HexNumber);
         }
 
         public static List<string> removerDuplicados(List<string> listaEntrada)
