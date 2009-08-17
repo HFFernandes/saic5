@@ -93,6 +93,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SAI - Ligar Incidencias";
+            this.Load += new System.EventHandler(this.SAIFrmLigarIncidencias_Load);
             this.Controls.SetChildIndex(this.cmdAceptar, 0);
             this.Controls.SetChildIndex(this.cmdCancelar, 0);
             this.Controls.SetChildIndex(this.saiCmbFolioPadre, 0);
