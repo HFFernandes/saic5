@@ -66,6 +66,23 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void reportControl_RowDblClick(object sender, AxXtremeReportControl._DReportControlEvents_RowDblClickEvent e)
         {
+            try
+            {
+                if (Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_NI))
+                {
+                    var incidencia = IncidenciaMapper.Instance().GetOne(Convert.ToInt32(e.row.Record[0].Value));
+                    if (incidencia != null)
+                    {
+                        var incidenciaInfo = new SAIFrmIncidencia066(incidencia);
+                        incidenciaInfo.Show();
+                    }
+                }
+                else
+                    throw new SAIExcepcion("No tiene los permisos suficientes para realizar esta acción.");
+            }
+            catch (SAIExcepcion)
+            {
+            }
         }
 
         void btnAltaUnidad_Click(object sender, EventArgs e)
@@ -78,10 +95,87 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void btnDespacharIncidencias_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_NI))
+                {
+                    for (int i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
+                    {
+                        var incidencia =
+                            IncidenciaMapper.Instance().GetOne(
+                                Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
+                        if (incidencia != null)
+                        {
+                            var incidenciaInfo = new SAIFrmIncidencia066(incidencia);
+                            incidenciaInfo.Show();
+                        }
+                    }
+                }
+                else
+                    throw new SAIExcepcion("No tiene los permisos suficientes para realizar esta acción.");
+            }
+            catch (SAIExcepcion)
+            {
+            }
         }
 
         void btnLigarIncidencias_Click(object sender, EventArgs e)
         {
+            if (Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_A))
+            {
+                try
+                {
+                    try
+                    {
+                        var lstIncidenciasPorLigar = new List<string>();
+                        for (int i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
+                        {
+                            lstIncidenciasPorLigar.Add(saiReport1.reportControl.SelectedRows[i].Record[0].Value.ToString());
+                        }
+
+                        var lstLigarResultado = Aplicacion.removerDuplicados(lstIncidenciasPorLigar);
+                        var ligarIncidencias = new SAIFrmLigarIncidencias(lstLigarResultado);
+                        var dialogResult = ligarIncidencias.ShowDialog(this);
+                        if (dialogResult == DialogResult.OK)
+                        {
+                            var folioPadre = ligarIncidencias.strFolioPadre;
+                            lstLigarResultado.Remove(folioPadre);
+
+                            var stbFolios = new StringBuilder();
+                            foreach (var s in lstLigarResultado)
+                            {
+                                stbFolios.Append(s);
+                                stbFolios.Append(",");
+                            }
+
+                            //recorro los nodos hijos para asignarles el padre
+                            var listadoIncidencias =
+                                IncidenciaMapper.Instance().GetBySQLQuery(
+                                    string.Format(ID.SQL_INCIDENCIASLIGADAS,
+                                                  stbFolios.ToString().Trim().Remove(stbFolios.ToString().Trim().Length - 1)));
+                            foreach (var incidencia in listadoIncidencias)
+                            {
+                                if (incidencia.FolioPadre == null)
+                                    incidencia.FolioPadre = Convert.ToInt32(folioPadre);
+                            }
+                            if (listadoIncidencias.Count > 0)
+                            {
+                                IncidenciaMapper.Instance().Update(listadoIncidencias);
+                            }
+
+                            //Ejecutar el stored procedure
+                            IncidenciaMapper.Instance().LigaIncidencia(Convert.ToInt32(folioPadre));
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new SAIExcepcion(ex.Message);
+                    }
+                }
+                catch (SAIExcepcion)
+                {
+                }
+            }
         }
 
         void SAIFrmIncidenciasActivas_Load(object sender, EventArgs e)
@@ -90,9 +184,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             saiReport1.btnBajaUnidad.Visible = false;
             saiReport1.btnSeparador2.Visible = false;
             saiReport1.btnDespacharIncidencias.Visible = false;
-
-            //Establecer permisos para los elementos de interacción con el usuario
-            //saiReport1.btnLigarIncidencias.Enabled = Aplicacion.UsuarioPersistencia.blnPuedeEscribir(intSubModulo);
 
             //Definir las columnas del listado y obtener los registros
             //falta mostrar la unidad asignada

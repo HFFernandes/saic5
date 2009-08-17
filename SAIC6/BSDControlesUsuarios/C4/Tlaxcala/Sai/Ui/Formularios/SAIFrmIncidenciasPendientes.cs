@@ -53,10 +53,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void reportControl_RowDblClick(object sender, AxXtremeReportControl._DReportControlEvents_RowDblClickEvent e)
         {
-            //TODO: implementar si el usuario es operador debe poder abrir la incidencia para agregar más datos
             try
             {
-                if ((Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false) && Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_P))
+                if ((Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false) && Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_NI))
                 {
                     //Recuperar el folio y generar una instancia de la entidad para
                     //pasarla al nuevo formulario
@@ -65,6 +64,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     {
                         var incidenciaDespacho = new SAIFrmIncidencia066Despacho(incidencia);
                         incidenciaDespacho.Show();
+                    }
+                }
+                else if (Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_NI))
+                {
+                    var incidencia = IncidenciaMapper.Instance().GetOne(Convert.ToInt32(e.row.Record[0].Value));
+                    if (incidencia != null)
+                    {
+                        var incidenciaInfo = new SAIFrmIncidencia066(incidencia);
+                        incidenciaInfo.Show();
                     }
                 }
                 else
@@ -85,10 +93,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void btnDespacharIncidencias_Click(object sender, EventArgs e)
         {
-            //TODO: implementar si el usuario es operador debe poder abrir la incidencia para agregar más datos
             try
             {
-                if ((Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false) && Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_P))
+                if ((Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false) && Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_NI))
                 {
                     //Recuperar el folio y generar una instancia de la entidad para
                     //pasarla al nuevo formulario
@@ -101,6 +108,20 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         {
                             var incidenciaDespacho = new SAIFrmIncidencia066Despacho(incidencia);
                             incidenciaDespacho.Show();
+                        }
+                    }
+                }
+                else if (Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_NI))
+                {
+                    for (int i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
+                    {
+                        var incidencia =
+                            IncidenciaMapper.Instance().GetOne(
+                                Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
+                        if (incidencia != null)
+                        {
+                            var incidenciaInfo = new SAIFrmIncidencia066(incidencia);
+                            incidenciaInfo.Show();
                         }
                     }
                 }

@@ -51,11 +51,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             switch (e.control.Id)
             {
                 case ID.CMD_A:
-                    if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
-                    {
-
-                    }
-                    else if (Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
+                    if (Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
                     {
                         var activas = new SAIFrmIncidenciasActivas();
                         MostrarEnSegundoMonitorSiEsPosible(activas);
