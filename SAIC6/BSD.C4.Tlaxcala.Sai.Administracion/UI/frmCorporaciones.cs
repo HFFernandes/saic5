@@ -236,7 +236,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     {
                         Mappers.CorporacionMapper.Instance().Delete(Convert.ToInt32(this.gvCorporaciones.Rows[selectedRow].Cells["Clave"].Value));
                         Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
-                        bitacora.Descripcion = "Se elimino la corporacion" + Convert.ToString(this.gvCorporaciones.Rows[selectedRow].Cells["Descripcion"].Value);
+                        bitacora.Descripcion = "Se elimino la corporacion: " + Convert.ToString(this.gvCorporaciones.Rows[selectedRow].Cells["Descripcion"].Value);
                         bitacora.FechaOperacion = DateTime.Today;
                         bitacora.NombreCatalogo = "Corporaciones";
                         bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
