@@ -12,6 +12,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
     public partial class SAIFrmIncidenciasPendientes : SAIFrmBase
     {
+        //TODO: LOS incidentes ligados desaparecen del listado sin poder despacharse
         private List<Incidencia> lstIncidenciasRegistradas;
         private List<Incidencia> lstIncidenciasTemporales;
         private List<Incidencia> lstIncidenciasPorRemover;
@@ -276,11 +277,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 }
                                 else
                                 {
-                                    corporaciones.Append(c.Descripcion);
-                                    corporaciones.Append(",");
+                                    if (c.Descripcion != string.Empty)
+                                    {
+                                        corporaciones.Append(c.Descripcion);
+                                        corporaciones.Append(",");
+                                    }
 
-                                    zonas.Append(c.Zn);
-                                    zonas.Append(",");
+                                    if (c.Zn != string.Empty)
+                                    {
+                                        zonas.Append(c.Zn);
+                                        zonas.Append(",");
+                                    }
                                 }
 
                                 if (c.Descripcion != string.Empty)
@@ -335,11 +342,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     }
                                     else
                                     {
-                                        corporaciones.Append(c.Descripcion);
-                                        corporaciones.Append(",");
+                                        if (c.Descripcion != string.Empty)
+                                        {
+                                            corporaciones.Append(c.Descripcion);
+                                            corporaciones.Append(",");
+                                        }
 
-                                        zonas.Append(c.Zn);
-                                        zonas.Append(",");
+                                        if (c.Zn != string.Empty)
+                                        {
+                                            zonas.Append(c.Zn);
+                                            zonas.Append(",");
+                                        }
                                     }
 
                                     if (c.Descripcion != string.Empty)
