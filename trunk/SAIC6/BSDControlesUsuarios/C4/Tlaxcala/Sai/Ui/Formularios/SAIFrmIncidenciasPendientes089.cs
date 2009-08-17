@@ -139,7 +139,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                                                        TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Descripcion,
                                                                        incidencia.Descripcion,
                                                                        incidencia.Direccion,
-                                                                       DependenciaMapper.Instance().GetOne(incidencia.ClaveDependencia ?? 4).Descripcion,
+                                                                       "DEPENDENCIA",
                                                                        incidencia.NumeroOficio,
                                                                        UsuarioMapper.Instance().GetOne(incidencia.ClaveUsuario).NombreUsuario,
                                                                        incidencia.FolioPadre.ToString()));
@@ -179,8 +179,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                             ? incidencia.Direccion
                                             : ID.STR_DESCONOCIDO;
 
-                                saiReport1.reportControl.Records[itm.Record.Index][6].Value =
-                                    DependenciaMapper.Instance().GetOne(incidencia.ClaveDependencia ?? 4).Descripcion;
+                                saiReport1.reportControl.Records[itm.Record.Index][6].Value ="dependencia";
 
                                 if (!incidenciaTemp.NumeroOficio.Equals(incidencia.NumeroOficio))
                                     saiReport1.reportControl.Records[itm.Record.Index][7].Value =
