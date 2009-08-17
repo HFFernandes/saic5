@@ -58,7 +58,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(288, 391);
+            this.label12.Location = new System.Drawing.Point(319, 391);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(65, 26);
             this.label12.TabIndex = 28;
@@ -76,7 +76,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(287, 416);
+            this.label14.Location = new System.Drawing.Point(318, 416);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(89, 26);
             this.label14.TabIndex = 27;
@@ -85,10 +85,10 @@
             // txtNumeroOficio
             // 
             this.txtNumeroOficio.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.txtNumeroOficio.Location = new System.Drawing.Point(384, 418);
+            this.txtNumeroOficio.Location = new System.Drawing.Point(414, 418);
             this.txtNumeroOficio.MaxLength = 50;
             this.txtNumeroOficio.Name = "txtNumeroOficio";
-            this.txtNumeroOficio.Size = new System.Drawing.Size(199, 20);
+            this.txtNumeroOficio.Size = new System.Drawing.Size(169, 20);
             this.txtNumeroOficio.StrMensajeCampoRequerido = "El campo es requerido.";
             this.txtNumeroOficio.TabIndex = 34;
             this.txtNumeroOficio.Leave += new System.EventHandler(this.txtNumeroOficio_Leave);
@@ -116,7 +116,7 @@
             this.dtmFechaDocumento.CustomFormat = "dd/MM/yyyy";
             this.dtmFechaDocumento.Enabled = false;
             this.dtmFechaDocumento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtmFechaDocumento.Location = new System.Drawing.Point(384, 393);
+            this.dtmFechaDocumento.Location = new System.Drawing.Point(415, 393);
             this.dtmFechaDocumento.MaxDate = new System.DateTime(3000, 12, 31, 0, 0, 0, 0);
             this.dtmFechaDocumento.Name = "dtmFechaDocumento";
             this.dtmFechaDocumento.Size = new System.Drawing.Size(110, 20);
@@ -155,7 +155,7 @@
             // chkFechaDocumento
             // 
             this.chkFechaDocumento.AutoSize = true;
-            this.chkFechaDocumento.Location = new System.Drawing.Point(500, 399);
+            this.chkFechaDocumento.Location = new System.Drawing.Point(531, 399);
             this.chkFechaDocumento.Name = "chkFechaDocumento";
             this.chkFechaDocumento.Size = new System.Drawing.Size(15, 14);
             this.chkFechaDocumento.TabIndex = 30;
@@ -184,7 +184,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(288, 375);
+            this.label4.Location = new System.Drawing.Point(319, 375);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(92, 13);
             this.label4.TabIndex = 23;
@@ -197,7 +197,7 @@
             this.cmbDependencia.FormattingEnabled = true;
             this.cmbDependencia.Location = new System.Drawing.Point(97, 367);
             this.cmbDependencia.Name = "cmbDependencia";
-            this.cmbDependencia.Size = new System.Drawing.Size(173, 21);
+            this.cmbDependencia.Size = new System.Drawing.Size(216, 21);
             this.cmbDependencia.StrMensajeCampoRequerido = "El campo es requerido.";
             this.cmbDependencia.TabIndex = 22;
             this.cmbDependencia.SelectedIndexChanged += new System.EventHandler(this.cmbDependencia_SelectedIndexChanged);
@@ -205,10 +205,10 @@
             // txtAlias
             // 
             this.txtAlias.ClrBackColorFoco = System.Drawing.Color.Empty;
-            this.txtAlias.Location = new System.Drawing.Point(383, 366);
+            this.txtAlias.Location = new System.Drawing.Point(414, 366);
             this.txtAlias.MaxLength = 50;
             this.txtAlias.Name = "txtAlias";
-            this.txtAlias.Size = new System.Drawing.Size(199, 20);
+            this.txtAlias.Size = new System.Drawing.Size(168, 20);
             this.txtAlias.StrMensajeCampoRequerido = "El campo es requerido.";
             this.txtAlias.TabIndex = 24;
             this.txtAlias.Leave += new System.EventHandler(this.txtAlias_Leave);
@@ -234,6 +234,7 @@
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
+            this.Location = new System.Drawing.Point(0, 0);
             this.Name = "SAIFrmIncidencia089";
             this.Text = "SAIFrmIncidencia089";
             this.Load += new System.EventHandler(this.SAIFrmIncidencia089_Load);

@@ -21,7 +21,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             int intWidth = base.Width;
 
             InitializeComponent();
-            this.lblTitulo.Text = "REGISTRO DE INCIDENCIA 089";
+            this.lblTitulo.Text = "REGISTRO DE DENUNCIA 089";
             this.SuspendLayout();
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.Height = intHeight;
@@ -40,7 +40,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             int intHeight = base.Height;
             int intWidth = base.Width;
 
-            this.lblTitulo.Text = "ACTUALIZACIÓN DE INCIDENCIA 089";
+            this.lblTitulo.Text = "ACTUALIZACIÓN DE DENUNCIA 089";
             InitializeComponent();
             this.Height = intHeight;
             this.Width = intWidth;
@@ -63,6 +63,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 this.cmbDependencia.DataSource = lstDependencias;
                 this.cmbDependencia.ValueMember = "Clave";
                 this.cmbDependencia.DisplayMember = "Descripcion";
+               
             }
 
             if (this._entIncidencia != null)
@@ -124,16 +125,34 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void chkFechaEnvio_CheckedChanged(object sender, EventArgs e)
         {
             this.dtmFechaEnvioDependencia.Enabled = !this.dtmFechaEnvioDependencia.Enabled;
+            if (!this._blnSeActivoClosed)
+            {
+                base.RecuperaDatosEnIncidencia();
+                this.RecuperaDatosEnIncidencia();
+                this.GuardaIncidencia();
+            }
         }
 
         private void chkFechaDocumento_CheckedChanged(object sender, EventArgs e)
         {
             this.dtmFechaDocumento.Enabled = !this.dtmFechaDocumento.Enabled;
+            if (!this._blnSeActivoClosed)
+            {
+                base.RecuperaDatosEnIncidencia();
+                this.RecuperaDatosEnIncidencia();
+                this.GuardaIncidencia();
+            }
         }
 
         private void chkFechaNotificacion_CheckedChanged(object sender, EventArgs e)
         {
             this.dtmFechaNotificacion.Enabled = !this.dtmFechaNotificacion.Enabled;
+            if (!this._blnSeActivoClosed)
+            {
+                base.RecuperaDatosEnIncidencia();
+                this.RecuperaDatosEnIncidencia();
+                this.GuardaIncidencia();
+            }
         }
 
         private void dtmFechaEnvioDependencia_Leave(object sender, EventArgs e)
@@ -181,18 +200,72 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
            
             if (this._entIncidencia != null)
             {
-                this._entIncidencia.FechaEnvioDependencia = this.dtmFechaEnvioDependencia.Value;
-                this._entIncidencia.FechaEnvio = this.dtmFechaDocumento.Value;
-                this._entIncidencia.FechaNotificacion = this.dtmFechaNotificacion.Value;
-                this._entIncidencia.NumeroOficio = this.txtNumeroOficio.Text;
+                if (this.chkFechaEnvio.Checked)
+                {
+                    this._entIncidencia.ClaveEstatus = 3;
+                    this._entIncidencia.FechaEnvioDependencia = this.dtmFechaEnvioDependencia.Value;
+                }
+                else
+                {
+                    this._entIncidencia.ClaveEstatus = 2;
+                    this._entIncidencia.FechaEnvioDependencia = null;
+                }
+                if (this.chkFechaDocumento.Checked)
+                {
+
+                    this._entIncidencia.FechaEnvio = this.dtmFechaDocumento.Value;
+                }
+                else
+                {
+                    this._entIncidencia.FechaEnvio = null;
+                }
+                if (this.chkFechaNotificacion.Checked)
+                {
+                    this._entIncidencia.FechaNotificacion = this.dtmFechaNotificacion.Value;
+                }
+                else
+                {
+                    this._entIncidencia.FechaNotificacion = null;
+                }
+                if (this.txtNumeroOficio.Text != string.Empty)
+                {
+                    this._entIncidencia.ClaveEstatus = 4;
+                }
+                else
+                {
+                    if (this._entIncidencia.FechaEnvioDependencia == null)
+                    {
+                        this._entIncidencia.ClaveEstatus = 2;
+                    }
+                    else
+                    {
+                        this._entIncidencia.ClaveEstatus = 3;
+                    }
+                }
+                this._entIncidencia.NumeroOficio = this.txtNumeroOficio.Text; 
                 this._entIncidencia.AliasDelincuente = this.txtAlias.Text;
                 if (this.cmbDependencia.Items.Count > 0)
                 {
-                    this._entIncidencia.ClaveDependencia = (this.cmbDependencia.SelectedItem as Dependencia).Clave;
+                    if (this.cmbDependencia.SelectedIndex != 1)
+                    {
+                        if (this._entIncidencia.FechaEnvioDependencia == null)
+                        {
+                            this._entIncidencia.ClaveEstatus = 2;
+                        }
+                        else
+                        {
+                            this._entIncidencia.ClaveEstatus = 3;
+                        }
+                        if (this.txtNumeroOficio.Text != string.Empty)
+                        {
+                            this._entIncidencia.ClaveEstatus = 4;
+                        }
+                        this._entIncidencia.ClaveDependencia = (this.cmbDependencia.SelectedItem as Dependencia).Clave;
+                    }
                 }
             }
         }
-
+      
         protected override void OnClosed(EventArgs e)
         {
             this.RecuperaDatosEnIncidencia();
@@ -237,6 +310,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 base.RecuperaDatosEnIncidencia();
                 this.RecuperaDatosEnIncidencia();
+
                 this.GuardaIncidencia();
             }
         }
