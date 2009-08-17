@@ -135,11 +135,11 @@
 
         #region Colores
 
-        public static readonly uint COLOR_VERDE = (uint)Aplicacion.HexadecimalADecimal("228B22");
-        public static readonly uint COLOR_NARANJA = (uint)Aplicacion.HexadecimalADecimal("DAA520");
-        public static readonly uint COLOR_VERDE2 = (uint)Aplicacion.HexadecimalADecimal("E0FFFF");
-        public static readonly uint COLOR_ROJO = (uint)Aplicacion.HexadecimalADecimal("FF0000");
+        public static readonly uint COLOR_VERDE = (uint)Aplicacion.HexadecimalADecimal("ADFF2F");
+        public static readonly uint COLOR_NARANJA = (uint)Aplicacion.HexadecimalADecimal("FFA500");
+        public static readonly uint COLOR_ROJO = (uint)Aplicacion.HexadecimalADecimal("CD5C5C");
         public static readonly uint COLOR_AMARILLO = (uint)Aplicacion.HexadecimalADecimal("FFFF00");
+        public static readonly uint COLOR_AZURE = (uint)Aplicacion.HexadecimalADecimal("F0FFFF");
 
         #endregion
     }

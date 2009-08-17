@@ -225,14 +225,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     strStatus = ID.STR_ESTATUSLLEGADA;
 
                                     saiReport1.reportControl.Records[itm.Record.Index][1].Value = unidadDespacho.Folio;
-                                    saiReport1.reportControl.Records[itm.Record.Index][4].BackColor = ID.COLOR_VERDE2;
+                                    saiReport1.reportControl.Records[itm.Record.Index][4].BackColor = ID.COLOR_AZURE;
                                     goto Actualizar;
                                 }
 
                                 if (unidadDespacho.HoraDespachada != null)
                                 {
                                     dtHora = unidadDespacho.HoraDespachada ?? DateTime.Now;
-                                    strStatus = ID.STR_ESTATUSLLEGADA;
+                                    strStatus = ID.STR_ESTATUSDESPACHADA;
 
                                     saiReport1.reportControl.Records[itm.Record.Index][1].Value = unidadDespacho.Folio;
                                     saiReport1.reportControl.Records[itm.Record.Index][4].BackColor =
