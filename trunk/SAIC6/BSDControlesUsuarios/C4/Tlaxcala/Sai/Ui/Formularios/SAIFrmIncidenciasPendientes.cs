@@ -298,7 +298,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                                                        incidencia.Folio.ToString(),
                                                                        incidencia.HoraRecepcion.ToShortTimeString(),
                                                                        corporaciones.ToString().Trim().Length > 1 ? corporaciones.ToString().Trim().Remove(corporaciones.Length - 1) : string.Empty,
-                                                                       TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Descripcion,
+                                                                       TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? 1).Descripcion,
                                                                        zonas.ToString().Trim().Length > 1 ? zonas.ToString().Trim().Remove(zonas.Length - 1) : string.Empty,
                                                                        totalCorporaciones.ToString(),
                                                                        ObtenerLapso(incidencia.HoraRecepcion),
@@ -366,7 +366,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                                 if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
                                     saiReport1.reportControl.Records[itm.Record.Index][4].Value =
-                                        TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Descripcion;
+                                        TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? 1).Descripcion;
 
                                 saiReport1.reportControl.Records[itm.Record.Index][5].Value =
                                     zonas.ToString().Trim().Length > 1
@@ -415,7 +415,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
                 lstIncidenciasPorRemover.Clear();   //limpiamos la colección para el nuevo ciclo
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 tmrRegistros.Enabled = false;
                 base.Close();
