@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using BSD.C4.Tlaxcala.Sai.Dal;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
-using BSD.C4.Tlaxcala.Sai.Ui.Controles;
 using System.Windows.Forms;
 using System.Threading;
 
@@ -76,10 +75,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         Close();
                     }
                     else
-                        throw new SAIExcepcion("Las credenciales de autenticación no son válidas.",this);
+                        throw new SAIExcepcion("Las credenciales de autenticación no son válidas.", this);
                 }
                 else
-                    throw new SAIExcepcion("Existen campos requeridos vacios.",this);
+                    throw new SAIExcepcion("Existen campos requeridos vacios.", this);
             }
             catch (SAIExcepcion)
             {
@@ -103,7 +102,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                                          if (saiTxtUsuario.Text.Length >= 5)
                                          {
-                                             sistemas = ReglaUsuarios.ObtenerSistemas(saiTxtUsuario.Text.Trim(), saiTxtContraseña.Text.Trim());
+                                             sistemas = Aplicacion.removerDuplicados(ReglaUsuarios.ObtenerSistemas(saiTxtUsuario.Text.Trim(), saiTxtContraseña.Text.Trim()));
                                              if (sistemas != null && sistemas.Count >= 1)
                                              {
                                                  saiCmbSistema.Invoke(new DelegadoLimpiarCombo(LimpiarCombo));

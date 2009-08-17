@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
@@ -83,30 +82,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void btnDespacharIncidencias_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_NI))
-                {
-                    //Recuperar el folio y generar una instancia de la entidad para
-                    //pasarla al nuevo formulario
-                    for (int i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
-                    {
-                        var incidencia =
-                            IncidenciaMapper.Instance().GetOne(
-                                Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
-                        if (incidencia != null)
-                        {
-                            var incidenciaInfo = new SAIFrmIncidencia089(incidencia);
-                            incidenciaInfo.Show();
-                        }
-                    }
-                }
-                else
-                    throw new SAIExcepcion("No tiene los permisos suficientes para realizar esta acción.");
-            }
-            catch (SAIExcepcion)
-            {
-            }
         }
 
         void btnLigarIncidencias_Click(object sender, EventArgs e)

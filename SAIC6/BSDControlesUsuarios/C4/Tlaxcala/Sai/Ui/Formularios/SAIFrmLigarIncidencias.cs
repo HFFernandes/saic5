@@ -29,5 +29,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 DialogResult = DialogResult.OK;
             }
         }
+
+        private void SAIFrmLigarIncidencias_Load(object sender, EventArgs e)
+        {
+            saiCmbFolioPadre.SelectedIndex = -1;
+        }
     }
 }
