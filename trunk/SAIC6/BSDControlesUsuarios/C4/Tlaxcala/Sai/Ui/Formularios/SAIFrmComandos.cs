@@ -4,6 +4,8 @@ using System.Windows.Forms;
 using Microsoft.NetEnterpriseServers;
 using XtremeCommandBars;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
+using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
+using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -60,10 +62,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
                     break;
                 case ID.CMD_AU:
-                    if (Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
+                    var corporacion =
+                        CorporacionMapper.Instance().GetOne(Aplicacion.UsuarioPersistencia.intCorporacion ?? -1);
+                    if (corporacion != null && corporacion.UnidadesVirtuales == false)
                     {
-                        var unidades = new SAIFrmEstadoUnidades();
-                        MostrarEnSegundoMonitorSiEsPosible(unidades);
+                        if (Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
+                        {
+                            var unidades = new SAIFrmEstadoUnidades();
+                            MostrarEnSegundoMonitorSiEsPosible(unidades);
+                        }
                     }
                     break;
                 case ID.CMD_BSC:

@@ -164,7 +164,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                                                        EstatusIncidenciaMapper.Instance().GetOne(incidencia.ClaveEstatus).Descripcion,
                                                                        incidencia.HoraRecepcion.ToShortTimeString(),
                                                                        incidencia.Direccion,
-                                                                       TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? 1).Descripcion,
+                                                                       TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Descripcion,
                                                                        corporaciones.ToString().Trim().Length > 1 ? corporaciones.ToString().Trim().Remove(corporaciones.Length - 1) : string.Empty,
                                                                        incidencia.Folio.ToString()));
                     }
@@ -201,7 +201,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                                 if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
                                     saiReport1.reportControl.Records[itm.Record.Index][5].Value =
-                                        TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? 1).Descripcion;
+                                        TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Descripcion;
 
                                 var corporaciones = new StringBuilder();
                                 CorporacionMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_CORPORACIONES, incidencia.Folio)).ForEach(delegate(Corporacion c)
