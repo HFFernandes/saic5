@@ -82,5 +82,12 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             frm_Localidades.MdiParent = this;
             frm_Localidades.Show();
         }
+
+        private void bitacoraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmBitacora frm_Bitacora = new frmBitacora();
+            frm_Bitacora.MdiParent = this;
+            frm_Bitacora.Show();
+        }
     }
 }

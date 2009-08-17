@@ -23,7 +23,26 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
         private void frmBitacora_Load(object sender, EventArgs e)
         {
+            SAIBarraEstado.SizingGrip = false;
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
             this.gvBitacora.DataSource = Mappers.BitacoraMapper.Instance().GetAll();
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnFiltrar_Click(object sender, EventArgs e)
+        {
+            if (this.ddlOperacion.SelectedIndex > -1)
+            {
+                string operacion = Convert.ToString(this.ddlOperacion.SelectedItem);
+                this.gvBitacora.DataSource = Mappers.BitacoraMapper.Instance().GetByOperacion(operacion);
+            }
         }
     }
 }

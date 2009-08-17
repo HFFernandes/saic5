@@ -189,9 +189,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             this.ddlMunicipio.SelectedIndex = -1;
             this.ddlEstado.SelectedIndex = 0;
             this.saiTxtNombre.Text = string.Empty;
-            this.btnAgregar.Enabled = true;
-            this.btnEliminar.Visible = false;
-            this.btnModificar.Enabled = false;
+            this.btnAgregar.Enabled = true;            
         }
 
         #endregion
@@ -267,8 +265,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         //this.ddlEstado.SelectedIndex = 0;
                         this.txtClaveLocalidadCartografia.Text = Convert.ToString(this.gvLocalidades.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveLocalidadCartografia"].Value);
                         this.btnAgregar.Enabled = false;
-                        this.btnEliminar.Visible = true;
-                        this.btnModificar.Enabled = true;
                     }
                 }
                 catch (Exception ex)

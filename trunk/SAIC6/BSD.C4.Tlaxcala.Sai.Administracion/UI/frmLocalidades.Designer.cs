@@ -31,9 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLocalidades));
             this.logoPicture = new System.Windows.Forms.PictureBox();
-            this.btnModificar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
-            this.btnEliminar = new System.Windows.Forms.Button();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.gvLocalidades = new System.Windows.Forms.DataGridView();
@@ -64,17 +62,6 @@
             this.logoPicture.TabIndex = 9;
             this.logoPicture.TabStop = false;
             // 
-            // btnModificar
-            // 
-            this.btnModificar.Enabled = false;
-            this.btnModificar.Location = new System.Drawing.Point(219, 416);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(75, 23);
-            this.btnModificar.TabIndex = 6;
-            this.btnModificar.Text = "Modificar";
-            this.btnModificar.UseVisualStyleBackColor = true;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
-            // 
             // btnAgregar
             // 
             this.btnAgregar.Location = new System.Drawing.Point(301, 415);
@@ -84,17 +71,6 @@
             this.btnAgregar.Text = "Argregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.Location = new System.Drawing.Point(383, 415);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(75, 23);
-            this.btnEliminar.TabIndex = 8;
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.UseVisualStyleBackColor = true;
-            this.btnEliminar.Visible = false;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnLimpiar
             // 
@@ -244,17 +220,13 @@
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnAgregar);
-            this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.logoPicture);
             this.Name = "frmLocalidades";
             this.Text = "Localidades";
             this.Load += new System.EventHandler(this.frmLocalidades_Load);
             this.Controls.SetChildIndex(this.logoPicture, 0);
-            this.Controls.SetChildIndex(this.btnModificar, 0);
             this.Controls.SetChildIndex(this.btnAgregar, 0);
-            this.Controls.SetChildIndex(this.btnEliminar, 0);
             this.Controls.SetChildIndex(this.groupBox1, 0);
             this.Controls.SetChildIndex(this.groupBox2, 0);
             this.Controls.SetChildIndex(this.btnCancelar, 0);
@@ -271,9 +243,7 @@
         #endregion
 
         private System.Windows.Forms.PictureBox logoPicture;
-        private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnAgregar;
-        private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView gvLocalidades;
