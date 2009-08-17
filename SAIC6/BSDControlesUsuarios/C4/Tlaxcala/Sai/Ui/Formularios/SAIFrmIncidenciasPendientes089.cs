@@ -139,7 +139,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                                                        TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Descripcion,
                                                                        incidencia.Descripcion,
                                                                        incidencia.Direccion,
-                                                                       "DEPENDENCIA",
+                                                                       "dependencia",
                                                                        incidencia.NumeroOficio,
                                                                        UsuarioMapper.Instance().GetOne(incidencia.ClaveUsuario).NombreUsuario,
                                                                        incidencia.FolioPadre.ToString()));
