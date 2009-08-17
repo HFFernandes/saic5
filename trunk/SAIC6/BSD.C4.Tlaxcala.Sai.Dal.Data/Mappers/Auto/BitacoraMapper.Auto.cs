@@ -224,9 +224,26 @@ namespace BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers
 
 
         // GetOne By Objects and Params
-            
 
+        /// <summary>
+        /// Obtiene todos los registros por operacion
+        /// </summary>
+        /// <param name="operacion"></param>
+        /// <returns></returns>
+        public BitacoraList GetByOperacion(System.String operacion)
+        {
+            return base.GetObjectListByAnyStoredProcedure(StoredProceduresPrefix() + "Bitacora_GetByOperacion", operacion);
+        }
 
+        /// <summary>
+        /// Obtiene todos los registros por catalogo
+        /// </summary>
+        /// <param name="catalogo"></param>
+        /// <returns></returns>
+        public BitacoraList GetByCatalogo(System.String catalogo)
+        {
+            return base.GetObjectListByAnyStoredProcedure(StoredProceduresPrefix() + "Bitacora_GetByCatalogo", catalogo);
+        }
         
 
 
