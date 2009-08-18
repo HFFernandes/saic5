@@ -211,6 +211,7 @@
     <EmbeddedResource Include="WinControls\Korzh.snk" />
     <EmbeddedResource Include="WinControls\XControls\XPanel.resx">
       <DependentUpon>XPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="WinControls\XPanel.bmp" />
   </ItemGroup>

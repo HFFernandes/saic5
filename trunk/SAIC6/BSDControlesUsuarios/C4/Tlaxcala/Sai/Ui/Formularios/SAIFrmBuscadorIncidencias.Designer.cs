@@ -60,7 +60,7 @@
             // ContenedorSplit.Panel2
             // 
             this.ContenedorSplit.Panel2.Controls.Add(this.QueryCondiciones);
-            this.ContenedorSplit.Size = new System.Drawing.Size(618, 251);
+            this.ContenedorSplit.Size = new System.Drawing.Size(911, 251);
             this.ContenedorSplit.SplitterDistance = 153;
             this.ContenedorSplit.TabIndex = 3;
             // 
@@ -99,7 +99,7 @@
             this.QueryColumnas.Model = null;
             this.QueryColumnas.Name = "QueryColumnas";
             this.QueryColumnas.Query = null;
-            this.QueryColumnas.Size = new System.Drawing.Size(618, 153);
+            this.QueryColumnas.Size = new System.Drawing.Size(911, 153);
             this.QueryColumnas.TabIndex = 0;
             this.QueryColumnas.TabStop = true;
             // 
@@ -137,7 +137,7 @@
             this.QueryCondiciones.Model = null;
             this.QueryCondiciones.Name = "QueryCondiciones";
             this.QueryCondiciones.Query = null;
-            this.QueryCondiciones.Size = new System.Drawing.Size(618, 94);
+            this.QueryCondiciones.Size = new System.Drawing.Size(911, 94);
             this.QueryCondiciones.TabIndex = 0;
             this.QueryCondiciones.TabStop = true;
             // 
@@ -168,7 +168,7 @@
             this.ContenedorResultados.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ContenedorResultados.Location = new System.Drawing.Point(0, 251);
             this.ContenedorResultados.Name = "ContenedorResultados";
-            this.ContenedorResultados.Size = new System.Drawing.Size(618, 180);
+            this.ContenedorResultados.Size = new System.Drawing.Size(911, 203);
             this.ContenedorResultados.TabIndex = 4;
             // 
             // GridResultados
@@ -181,7 +181,7 @@
             this.GridResultados.Location = new System.Drawing.Point(0, 0);
             this.GridResultados.Name = "GridResultados";
             this.GridResultados.ReadOnly = true;
-            this.GridResultados.Size = new System.Drawing.Size(618, 180);
+            this.GridResultados.Size = new System.Drawing.Size(911, 203);
             this.GridResultados.TabIndex = 2;
             // 
             // ResultadoDataTable
@@ -197,7 +197,7 @@
             // SAIFrmBuscadorIncidencias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(618, 453);
+            this.ClientSize = new System.Drawing.Size(911, 476);
             this.Controls.Add(this.ContenedorResultados);
             this.Controls.Add(this.ContenedorSplit);
             this.Name = "SAIFrmBuscadorIncidencias";

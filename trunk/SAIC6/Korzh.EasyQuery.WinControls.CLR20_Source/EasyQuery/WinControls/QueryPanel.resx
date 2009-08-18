@@ -124,7 +124,7 @@
     <value>Clic aquí para agregar nueva condición</value>
   </data>
   <data name="PredicateTitle" xml:space="preserve">
-    <value>&lt;lt&gt; condición de lo siguiente aplique</value>
+    <value>&lt;lt&gt;condición de lo siguiente aplique</value>
   </data>
   <data name="MsgEmptyListValue" xml:space="preserve">
     <value>[seleccionar valor]</value>
@@ -139,7 +139,7 @@
     <value>Abrir nuevo parentesis despues del actual</value>
   </data>
   <data name="RootPredicateTitle" xml:space="preserve">
-    <value>Seleccionar registros donde &lt;lt&gt; condición de lo siguiente aplique</value>
+    <value>Seleccionar registros donde &lt;lt&gt;condición de lo siguiente aplique</value>
   </data>
   <data name="LinkTypeAll" xml:space="preserve">
     <value>toda</value>
