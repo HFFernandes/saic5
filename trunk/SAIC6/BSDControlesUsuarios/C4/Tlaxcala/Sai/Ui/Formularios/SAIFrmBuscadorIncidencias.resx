@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,43 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddConditionInto" xml:space="preserve">
-    <value>Agregar nueva &amp;condición</value>
-  </data>
-  <data name="ClickToAdd" xml:space="preserve">
-    <value>Clic aquí para agregar nueva condición</value>
-  </data>
-  <data name="PredicateTitle" xml:space="preserve">
-    <value>&lt;lt&gt; condición de lo siguiente aplique</value>
-  </data>
-  <data name="MsgEmptyListValue" xml:space="preserve">
-    <value>[seleccionar valor]</value>
-  </data>
-  <data name="MsgEmptyScalarValue" xml:space="preserve">
-    <value>[escribir valor]</value>
-  </data>
-  <data name="AddPredicateInto" xml:space="preserve">
-    <value>Abrir nuevo parentesis</value>
-  </data>
-  <data name="CmdAddPredicateAfter" xml:space="preserve">
-    <value>Abrir nuevo parentesis despues del actual</value>
-  </data>
-  <data name="RootPredicateTitle" xml:space="preserve">
-    <value>Seleccionar registros donde &lt;lt&gt; condición de lo siguiente aplique</value>
-  </data>
-  <data name="LinkTypeAll" xml:space="preserve">
-    <value>toda</value>
-  </data>
-  <data name="LinkTypeAny" xml:space="preserve">
-    <value>cualquier</value>
-  </data>
-  <data name="MsgEmptyList" xml:space="preserve">
-    <value>(lista vacia)</value>
-  </data>
-  <data name="CmdAddConditionAfter" xml:space="preserve">
-    <value>Agregar nueva &amp;condición despues de la actual</value>
-  </data>
-  <data name="CmdDeleteRow" xml:space="preserve">
-    <value>Eliminar renglón actual</value>
-  </data>
+  <metadata name="SAIProveedorValidacion.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>146, 17</value>
+  </metadata>
+  <metadata name="ModeloDatos.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>315, 17</value>
+  </metadata>
+  <metadata name="ModeloQuery.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>431, 17</value>
+  </metadata>
 </root>

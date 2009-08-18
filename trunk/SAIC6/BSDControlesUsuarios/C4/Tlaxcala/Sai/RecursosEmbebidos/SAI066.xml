@@ -1,0 +1,334 @@
+<DATAMODEL Version="5" Name="SAI" DefQuery="">
+  <DESCRIPTION>Modelo del Sistema de Administracin de Incidencias</DESCRIPTION>
+  <DBPARAMS>
+    <ConnectionString>Data Source=.\SQLEXPRESS;Integrated Security=SSPI; Initial Catalog=SAI_BD</ConnectionString>
+    <LoginPrompt>False</LoginPrompt>
+    <GateClass>Korzh.EasyQuery.DataGates.SqlClientGate</GateClass>
+  </DBPARAMS>
+  <TABLES>
+    <TABLE NAME="TipoIncidencia" ALIAS="Tipos de Incidencias" SCHEMA="dbo" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="" />
+    <TABLE NAME="EstatusIncidencia" ALIAS="Estatus de Incidencias" SCHEMA="dbo" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="" />
+    <TABLE NAME="Incidencia" ALIAS="Incidencias" SCHEMA="dbo" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="" />
+  </TABLES>
+  <LINKS>
+    <LINK TABLE1="Tipos de Incidencias" TABLE2="Incidencias" TYPE="Inner" QF="False">
+      <CONDITION TYPE="FF" EXPR1="Clave" EXPR2="ClaveTipo" OP="=" />
+    </LINK>
+    <LINK TABLE1="Estatus de Incidencias" TABLE2="Incidencias" TYPE="Inner" QF="False">
+      <CONDITION TYPE="FF" EXPR1="Clave" EXPR2="ClaveEstatus" OP="=" />
+    </LINK>
+  </LINKS>
+  <OPERATORS>
+    <OPERATOR ID="Equal" CAPTION="sea igual a" EXPR="{expr1} = {expr2}" FORMAT="{expr1} [[is equal to]] {expr2}" CONSTFMT="{const}" KIND="Scalar" CASEINS="False" GROUP="Common operators" cond="False" tables="">
+      <TYPES>String,WideString,Byte,Word,Int,Int64,Bool,Float,Currency,BCD,Autoinc,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+    </OPERATOR>
+    <OPERATOR ID="NotEqual" CAPTION="no sea igual a" EXPR="{expr1} &lt;&gt; {expr2}" FORMAT="{expr1} [[is not equal to]] {expr2}" CONSTFMT="{const}" KIND="Scalar" CASEINS="False" GROUP="Common operators" cond="False" tables="">
+      <TYPES>String,WideString,Byte,Word,Int,Int64,Bool,Float,Currency,BCD,Autoinc,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+    </OPERATOR>
+    <OPERATOR ID="LessThan" CAPTION="sea menor que" EXPR="{expr1} &lt; {expr2}" FORMAT="{expr1} [[is less than]] {expr2}" CONSTFMT="{const}" KIND="Scalar" CASEINS="False" GROUP="Common operators" cond="False" tables="">
+      <TYPES>String,WideString,Byte,Word,Int,Int64,Bool,Float,Currency,BCD,Autoinc,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+    </OPERATOR>
+    <OPERATOR ID="LessOrEqual" CAPTION="sea menor que o igual a" EXPR="{expr1} &lt;= {expr2}" FORMAT="{expr1} [[is less than or equal to]] {expr2}" CONSTFMT="{const}" KIND="Scalar" CASEINS="False" GROUP="Common operators" cond="False" tables="">
+      <TYPES>String,WideString,Byte,Word,Int,Int64,Bool,Float,Currency,BCD,Autoinc,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+    </OPERATOR>
+    <OPERATOR ID="GreaterThan" CAPTION="sea mayor a" EXPR="{expr1} &gt; {expr2}" FORMAT="{expr1} [[is greater than]] {expr2}" CONSTFMT="{const}" KIND="Scalar" CASEINS="False" GROUP="Common operators" cond="False" tables="">
+      <TYPES>String,WideString,Byte,Word,Int,Int64,Bool,Float,Currency,BCD,Autoinc,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+    </OPERATOR>
+    <OPERATOR ID="GreaterOrEqual" CAPTION="sea mayor que o igual a" EXPR="{expr1} &gt;= {expr2}" FORMAT="{expr1} [[is greater than or equal to]] {expr2}" CONSTFMT="{const}" KIND="Scalar" CASEINS="False" GROUP="Common operators" cond="False" tables="">
+      <TYPES>String,WideString,Byte,Word,Int,Int64,Bool,Float,Currency,BCD,Autoinc,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+    </OPERATOR>
+    <OPERATOR ID="IsNull" CAPTION="sea vacio" EXPR="{expr1} IS NULL" FORMAT="{expr1} [[is null]] " CONSTFMT="{const}" KIND="Scalar" CASEINS="False" GROUP="Common operators" cond="False" tables="">
+      <TYPES>String,WideString,Byte,Word,Int,Int64,Bool,Float,Currency,BCD,Autoinc,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+    </OPERATOR>
+    <OPERATOR ID="IsNotNull" CAPTION="no sea vacio" EXPR="{expr1} IS NOT NULL" FORMAT="{expr1} [[is not null]]" CONSTFMT="{const}" KIND="Scalar" CASEINS="False" GROUP="Common operators" cond="False" tables="">
+      <TYPES>String,WideString,Byte,Word,Int,Int64,Bool,Float,Currency,BCD,Autoinc,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+    </OPERATOR>
+    <OPERATOR ID="InList" CAPTION="este enlistado" EXPR="{expr1} in ({expr2})" FORMAT="{expr1} [[is in list]] {expr2}" CONSTFMT="{const}" KIND="List" CASEINS="False" GROUP="Common operators" cond="False" tables="">
+      <TYPES>String,WideString,Byte,Word,Int,Int64,Bool,Float,Currency,BCD,Autoinc,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+    </OPERATOR>
+    <OPERATOR ID="NotInList" CAPTION="no este enlistado" EXPR="NOT ({expr1} in ({expr2}))" FORMAT="{expr1} [[is not in list]] {expr2}" CONSTFMT="{const}" KIND="List" CASEINS="False" GROUP="Common operators" cond="False" tables="">
+      <TYPES>String,WideString,Byte,Word,Int,Int64,Bool,Float,Currency,BCD,Autoinc,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+    </OPERATOR>
+    <OPERATOR ID="Between" CAPTION="este entre" EXPR="{expr1} BETWEEN {expr2} AND {expr3}" FORMAT="{expr1} [[is between]] {expr2} and {expr3}" CONSTFMT="{const}" KIND="Scalar" CASEINS="False" GROUP="Common operators" cond="False" tables="">
+      <TYPES>String,WideString,Byte,Word,Int,Int64,Bool,Float,Currency,BCD,Autoinc,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+    </OPERATOR>
+    <OPERATOR ID="NotBetween" CAPTION="no este entre" EXPR="NOT ({expr1} BETWEEN {expr2} AND {expr3})" FORMAT="{expr1} [[is not between]] {expr2} and {expr3}" CONSTFMT="{const}" KIND="Scalar" CASEINS="False" GROUP="Common operators" cond="False" tables="">
+      <TYPES>String,WideString,Byte,Word,Int,Int64,Bool,Float,Currency,BCD,Autoinc,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+    </OPERATOR>
+    <OPERATOR ID="StartsWith" CAPTION="empieze con" EXPR="{expr1} LIKE {expr2}" FORMAT="{expr1} [[starts with]] {expr2}" CONSTFMT="{const}{ws}" KIND="Scalar" CASEINS="False" GROUP="String operators" cond="False" tables="">
+      <TYPES>String,WideString,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="EDIT" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="NotStartsWith" CAPTION="no empieze con" EXPR="NOT ({expr1} LIKE {expr2})" FORMAT="{expr1} [[does not start with]] {expr2}" CONSTFMT="{const}{ws}" KIND="Scalar" CASEINS="False" GROUP="String operators" cond="False" tables="">
+      <TYPES>String,WideString,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="EDIT" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="Contains" CAPTION="contenga" EXPR="{expr1} LIKE {expr2}" FORMAT="{expr1} [[contains]] {expr2}" CONSTFMT="{ws}{const}{ws}" KIND="Scalar" CASEINS="False" GROUP="String operators" cond="False" tables="">
+      <TYPES>String,WideString,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="EDIT" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="NotContains" CAPTION="no contenga" EXPR="NOT ({expr1} LIKE {expr2})" FORMAT="{expr1} [[does not contain]] {expr2}" CONSTFMT="{ws}{const}{ws}" KIND="Scalar" CASEINS="False" GROUP="String operators" cond="False" tables="">
+      <TYPES>String,WideString,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="EDIT" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="InSubQuery" CAPTION="en subconsulta" EXPR="{expr1} IN ({expr2})" FORMAT="{expr1} [[in sub query]] {expr2}" CONSTFMT="{const}" KIND="Query" CASEINS="False" GROUP="Common operators" cond="False" tables="">
+      <TYPES>String,WideString,Byte,Word,Int,Int64,Bool,Float,Currency,BCD,Autoinc,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Byte" />
+    </OPERATOR>
+    <OPERATOR ID="DateEqualPrecise" CAPTION="sea (precisar fecha)" EXPR="{expr1} = {expr2}" FORMAT="{expr1} [[is]] {expr2}" CONSTFMT="{const}" KIND="Scalar" CASEINS="False" GROUP="Date/time operators" cond="False" tables="">
+      <TYPES>Date,DateTime</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="DATETIME" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="DateNotEqualPrecise" CAPTION="no sea (precisar fecha)" EXPR="{expr1} &lt;&gt; {expr2}" FORMAT="{expr1} [[is not]] {expr2}" CONSTFMT="{const}" KIND="Scalar" CASEINS="False" GROUP="Date/time operators" cond="False" tables="">
+      <TYPES>Date,DateTime</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="DATETIME" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="DateBeforePrecise" CAPTION="sea antes (precisar fecha)" EXPR="{expr1} &lt; {expr2}" FORMAT="{expr1} [[is before]] {expr2}" CONSTFMT="{const}" KIND="Scalar" CASEINS="False" GROUP="Date/time operators" cond="False" tables="">
+      <TYPES>Date,DateTime</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="DATETIME" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="DateAfterPrecise" CAPTION="sea despues (precisar fecha)" EXPR="{expr1} &gt;= {expr2}" FORMAT="{expr1} [[is after]] {expr2}" CONSTFMT="{const}" KIND="Scalar" CASEINS="False" GROUP="Date/time operators" cond="False" tables="">
+      <TYPES>Date,DateTime</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="DATETIME" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="DatePeriodPrecise" CAPTION="este entre" EXPR="{expr1} BETWEEN {expr2} AND {expr3}" FORMAT="{expr1} [[is between]] {expr2} and {expr3}" CONSTFMT="{const}" KIND="Scalar" CASEINS="False" GROUP="Date/time operators" cond="False" tables="">
+      <TYPES>Date,DateTime</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="DATETIME" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="TimeBeforePrecise" CAPTION="sea antes (precisar tiempo)" EXPR="{expr1} &lt; {expr2}" FORMAT="{expr1} [[is before]] {expr2}" CONSTFMT="{const}" KIND="Scalar" CASEINS="False" GROUP="Date/time operators" cond="False" tables="">
+      <TYPES>Time</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="DATETIME" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="TimeAfterPrecise" CAPTION="sea despues (precisar tiempo)" EXPR="{expr1} &gt;= {expr2}" FORMAT="{expr1} [[is after]] {expr2}" CONSTFMT="{const}" KIND="Scalar" CASEINS="False" GROUP="Date/time operators" cond="False" tables="">
+      <TYPES>Time</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="DATETIME" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="TimePeriodPrecise" CAPTION="este entre" EXPR="{expr1} BETWEEN {expr2} AND {expr3}" FORMAT="{expr1} [[is between]] {expr2} and {expr3}" CONSTFMT="{const}" KIND="Scalar" CASEINS="False" GROUP="Date/time operators" cond="False" tables="">
+      <TYPES>Time</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="DATETIME" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="MaximumOfAttr" CAPTION="sea el máximo de" EXPR="{expr1} = (SELECT MAX({expr2.field}) from {expr2.table})" FORMAT="{expr1} [[is equal to maximum of]] {expr2}" CONSTFMT="{const}" KIND="Attribute" CASEINS="False" GROUP="Other operators" cond="False" tables="">
+      <TYPES>String,WideString,Byte,Word,Int,Int64,Bool,Float,Currency,BCD,Date,Time,DateTime,Autoinc,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+    </OPERATOR>
+  </OPERATORS>
+  <ENTITIES MAXID="1">
+    <ENTITY NAME="Estatus de Incidencias">
+      <USERDATA />
+      <ATTR ID="{Estatus de Incidencias}.Clave" KIND="Data" EXPR="Clave" CAPTION="Clave" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Estatus de Incidencias">
+        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="{Estatus de Incidencias}.Descripcion" KIND="Data" EXPR="Descripcion" CAPTION="Descripcion del estatus" TYPE="String" SIZE="15" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Estatus de Incidencias">
+        <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+    </ENTITY>
+    <ENTITY NAME="Tipos de Incidencias">
+      <USERDATA />
+      <ATTR ID="{Tipos de Incidencia}.Clave" KIND="Data" EXPR="Clave" CAPTION="Clave" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Tipos de Incidencias">
+        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="{Tipos de Incidencia}.ClaveOperacion" KIND="Data" EXPR="ClaveOperacion" CAPTION="Codigo de la incidencia" TYPE="String" SIZE="5" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Tipos de Incidencias">
+        <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="{Tipos de Incidencia}.ClaveSistema" KIND="Data" EXPR="ClaveSistema" CAPTION="Sistema al que pertenece" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Tipos de Incidencias">
+        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="{Tipos de Incidencia}.Descripcion" KIND="Data" EXPR="Descripcion" CAPTION="Descripcion del tipo" TYPE="String" SIZE="150" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Tipos de Incidencias">
+        <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="{Tipos de Incidencia}.Prioridad" KIND="Data" EXPR="Prioridad" CAPTION="Prioridad" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Tipos de Incidencias">
+        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+    </ENTITY>
+    <ENTITY NAME="Incidencias">
+      <USERDATA />
+      <ATTR ID="Incidencias.Activo" KIND="Data" EXPR="Activo" CAPTION="Activo" TYPE="Bool" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>Equal,NotEqual,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="Incidencias.AliasDelincuente" KIND="Data" EXPR="AliasDelincuente" CAPTION="Alias del Delincuente" TYPE="String" SIZE="250" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="Incidencias.ClaveCodigoPostal" KIND="Data" EXPR="ClaveCodigoPostal" CAPTION="ClaveCodigoPostal" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="Incidencias.ClaveColonia" KIND="Data" EXPR="ClaveColonia" CAPTION="ClaveColonia" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="Incidencias.ClaveDenunciante" KIND="Data" EXPR="ClaveDenunciante" CAPTION="ClaveDenunciante" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="Incidencias.ClaveDependencia" KIND="Data" EXPR="ClaveDependencia" CAPTION="ClaveDependencia" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="Incidencias.ClaveEstado" KIND="Data" EXPR="ClaveEstado" CAPTION="ClaveEstado" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="Incidencias.ClaveEstatus" KIND="Data" EXPR="ClaveEstatus" CAPTION="ClaveEstatus" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="Incidencias.ClaveLocalidad" KIND="Data" EXPR="ClaveLocalidad" CAPTION="ClaveLocalidad" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="Incidencias.ClaveMunicipio" KIND="Data" EXPR="ClaveMunicipio" CAPTION="ClaveMunicipio" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="Incidencias.ClaveTipo" KIND="Data" EXPR="ClaveTipo" CAPTION="ClaveTipo" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="Incidencias.ClaveUsuario" KIND="Data" EXPR="ClaveUsuario" CAPTION="ClaveUsuario" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="Incidencias.Descripcion" KIND="Data" EXPR="Descripcion" CAPTION="Descripcion" TYPE="String" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="Incidencias.Direccion" KIND="Data" EXPR="Direccion" CAPTION="Direccion" TYPE="String" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="Incidencias.FechaEnvio" KIND="Data" EXPR="FechaEnvio" CAPTION="FechaEnvio" TYPE="DateTime" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>DateEqualPrecise,DateNotEqualPrecise,DateBeforePrecise,DateAfterPrecise,DatePeriodPrecise,MaximumOfAttr,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="Incidencias.FechaEnvioDependencia" KIND="Data" EXPR="FechaEnvioDependencia" CAPTION="FechaEnvioDependencia" TYPE="DateTime" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>DateEqualPrecise,DateNotEqualPrecise,DateBeforePrecise,DateAfterPrecise,DatePeriodPrecise,MaximumOfAttr,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="Incidencias.FechaNotificacion" KIND="Data" EXPR="FechaNotificacion" CAPTION="FechaNotificacion" TYPE="DateTime" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>DateEqualPrecise,DateNotEqualPrecise,DateBeforePrecise,DateAfterPrecise,DatePeriodPrecise,MaximumOfAttr,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="Incidencias.FechaSuceso" KIND="Data" EXPR="FechaSuceso" CAPTION="FechaSuceso" TYPE="DateTime" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>DateEqualPrecise,DateNotEqualPrecise,DateBeforePrecise,DateAfterPrecise,DatePeriodPrecise,MaximumOfAttr,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="Incidencias.Folio" KIND="Data" EXPR="Folio" CAPTION="Folio" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="Incidencias.FolioPadre" KIND="Data" EXPR="FolioPadre" CAPTION="FolioPadre" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="Incidencias.HoraRecepcion" KIND="Data" EXPR="HoraRecepcion" CAPTION="HoraRecepcion" TYPE="DateTime" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>DateEqualPrecise,DateNotEqualPrecise,DateBeforePrecise,DateAfterPrecise,DatePeriodPrecise,MaximumOfAttr,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="Incidencias.NumeroOficio" KIND="Data" EXPR="NumeroOficio" CAPTION="NumeroOficio" TYPE="String" SIZE="50" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="Incidencias.Prioridad" KIND="Data" EXPR="Prioridad" CAPTION="Prioridad" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="Incidencias.Referencias" KIND="Data" EXPR="Referencias" CAPTION="Referencias" TYPE="String" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="Incidencias.Telefono" KIND="Data" EXPR="Telefono" CAPTION="Telefono" TYPE="String" SIZE="25" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+    </ENTITY>
+  </ENTITIES>
+</DATAMODEL>
