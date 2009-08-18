@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Text;
-using System.Windows.Forms;
 using System.Reflection;
 using System.Xml;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
     public partial class SAIFrmBuscadorIncidencias : SAIFrmBase
     {
-        public string ConsultaGenerada { get; set; }
-
         public SAIFrmBuscadorIncidencias()
         {
             InitializeComponent();
@@ -30,7 +24,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
             if (en != null)
             {
-                var stmArchivo = string.Format("{0}{1}", Path.GetTempPath(), "modelo.xml");
+                var stmArchivo = string.Format("{0}{1}", Path.GetTempPath(), "modelo066.xml");
                 var xmlDocumento = new XmlDocument();
                 xmlDocumento.Load(en);
                 xmlDocumento.Save(stmArchivo);
@@ -48,18 +42,29 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void ModeloQuery_ColumnsChanged(object sender, Korzh.EasyQuery.ColumnsChangeEventArgs e)
         {
-            ConsultaGenerada = Consulta();
+            ActualizarResultado();
         }
 
         private void ModeloQuery_ConditionsChanged(object sender, Korzh.EasyQuery.ConditionsChangeEventArgs e)
         {
-            ConsultaGenerada = Consulta();
+            ActualizarResultado();
         }
 
-        private string Consulta()
+        private void ActualizarResultado()
         {
-            ModeloQuery.BuildSQL();
-            return QueryCondiciones.Query.Result.SQL ?? string.Empty;
+            try
+            {
+                ModeloQuery.BuildSQL();
+
+                ResultadoDS.Tables[0].Rows.Clear();
+                ResultadoDS.Tables[0].Columns.Clear();
+
+                var conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["CooperatorConnectionString"].ConnectionString);
+                var adaptador = new SqlDataAdapter(QueryColumnas.Query.Result.SQL, conexion);
+                adaptador.Fill(ResultadoDS, "Resultado");
+            }
+            catch (SqlException) { }
+            catch (Exception) { }
         }
     }
 }

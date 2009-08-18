@@ -33,14 +33,22 @@
             this.QueryCondiciones = new Korzh.EasyQuery.WinControls.QueryPanel();
             this.ModeloDatos = new Korzh.EasyQuery.DataModel();
             this.ModeloQuery = new Korzh.EasyQuery.Query();
+            this.ContenedorResultados = new System.Windows.Forms.Panel();
+            this.GridResultados = new System.Windows.Forms.DataGrid();
+            this.ResultadoDataTable = new System.Data.DataTable();
+            this.ResultadoDS = new System.Data.DataSet();
             this.ContenedorSplit.Panel1.SuspendLayout();
             this.ContenedorSplit.Panel2.SuspendLayout();
             this.ContenedorSplit.SuspendLayout();
+            this.ContenedorResultados.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.GridResultados)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ResultadoDataTable)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ResultadoDS)).BeginInit();
             this.SuspendLayout();
             // 
             // ContenedorSplit
             // 
-            this.ContenedorSplit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ContenedorSplit.Dock = System.Windows.Forms.DockStyle.Top;
             this.ContenedorSplit.Location = new System.Drawing.Point(0, 0);
             this.ContenedorSplit.Name = "ContenedorSplit";
             this.ContenedorSplit.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -52,8 +60,8 @@
             // ContenedorSplit.Panel2
             // 
             this.ContenedorSplit.Panel2.Controls.Add(this.QueryCondiciones);
-            this.ContenedorSplit.Size = new System.Drawing.Size(618, 392);
-            this.ContenedorSplit.SplitterDistance = 239;
+            this.ContenedorSplit.Size = new System.Drawing.Size(618, 251);
+            this.ContenedorSplit.SplitterDistance = 153;
             this.ContenedorSplit.TabIndex = 3;
             // 
             // QueryColumnas
@@ -91,7 +99,7 @@
             this.QueryColumnas.Model = null;
             this.QueryColumnas.Name = "QueryColumnas";
             this.QueryColumnas.Query = null;
-            this.QueryColumnas.Size = new System.Drawing.Size(618, 239);
+            this.QueryColumnas.Size = new System.Drawing.Size(618, 153);
             this.QueryColumnas.TabIndex = 0;
             this.QueryColumnas.TabStop = true;
             // 
@@ -129,7 +137,7 @@
             this.QueryCondiciones.Model = null;
             this.QueryCondiciones.Name = "QueryCondiciones";
             this.QueryCondiciones.Query = null;
-            this.QueryCondiciones.Size = new System.Drawing.Size(618, 149);
+            this.QueryCondiciones.Size = new System.Drawing.Size(618, 94);
             this.QueryCondiciones.TabIndex = 0;
             this.QueryCondiciones.TabStop = true;
             // 
@@ -154,17 +162,56 @@
             this.ModeloQuery.ColumnsChanged += new Korzh.EasyQuery.ColumnsChangedEventHandler(this.ModeloQuery_ColumnsChanged);
             this.ModeloQuery.ConditionsChanged += new Korzh.EasyQuery.ConditionsChangedEventHandler(this.ModeloQuery_ConditionsChanged);
             // 
+            // ContenedorResultados
+            // 
+            this.ContenedorResultados.Controls.Add(this.GridResultados);
+            this.ContenedorResultados.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ContenedorResultados.Location = new System.Drawing.Point(0, 251);
+            this.ContenedorResultados.Name = "ContenedorResultados";
+            this.ContenedorResultados.Size = new System.Drawing.Size(618, 180);
+            this.ContenedorResultados.TabIndex = 4;
+            // 
+            // GridResultados
+            // 
+            this.GridResultados.CaptionText = "Resultados";
+            this.GridResultados.DataMember = "";
+            this.GridResultados.DataSource = this.ResultadoDataTable;
+            this.GridResultados.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.GridResultados.HeaderForeColor = System.Drawing.SystemColors.ControlText;
+            this.GridResultados.Location = new System.Drawing.Point(0, 0);
+            this.GridResultados.Name = "GridResultados";
+            this.GridResultados.ReadOnly = true;
+            this.GridResultados.Size = new System.Drawing.Size(618, 180);
+            this.GridResultados.TabIndex = 2;
+            // 
+            // ResultadoDataTable
+            // 
+            this.ResultadoDataTable.TableName = "Resultado";
+            // 
+            // ResultadoDS
+            // 
+            this.ResultadoDS.DataSetName = "ResultadoDataSet";
+            this.ResultadoDS.Tables.AddRange(new System.Data.DataTable[] {
+            this.ResultadoDataTable});
+            // 
             // SAIFrmBuscadorIncidencias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(618, 414);
+            this.ClientSize = new System.Drawing.Size(618, 453);
+            this.Controls.Add(this.ContenedorResultados);
             this.Controls.Add(this.ContenedorSplit);
             this.Name = "SAIFrmBuscadorIncidencias";
+            this.Text = "SAI - Buscador de Incidencias";
             this.Load += new System.EventHandler(this.SAIFrmBuscadorIncidencias_Load);
             this.Controls.SetChildIndex(this.ContenedorSplit, 0);
+            this.Controls.SetChildIndex(this.ContenedorResultados, 0);
             this.ContenedorSplit.Panel1.ResumeLayout(false);
             this.ContenedorSplit.Panel2.ResumeLayout(false);
             this.ContenedorSplit.ResumeLayout(false);
+            this.ContenedorResultados.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.GridResultados)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ResultadoDataTable)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ResultadoDS)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -177,5 +224,9 @@
         private Korzh.EasyQuery.Query ModeloQuery;
         private Korzh.EasyQuery.WinControls.QueryColumnsPanel QueryColumnas;
         private Korzh.EasyQuery.WinControls.QueryPanel QueryCondiciones;
+        private System.Windows.Forms.Panel ContenedorResultados;
+        private System.Data.DataSet ResultadoDS;
+        private System.Data.DataTable ResultadoDataTable;
+        private System.Windows.Forms.DataGrid GridResultados;
     }
 }
