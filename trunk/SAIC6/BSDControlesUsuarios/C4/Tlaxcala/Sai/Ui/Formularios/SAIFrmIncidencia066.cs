@@ -36,7 +36,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
 
             //Se recupera la lista de las corporaciones
-            CorporacionList objListaCorporaciones = CorporacionMapper.Instance().GetAll();
+            CorporacionList objListaCorporaciones = this.ObtenCorporaciones();
             String[] arrCorporaciones = new String[objListaCorporaciones.Count];
 
             int i=0;
@@ -74,7 +74,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
 
             //Se recupera la lista de las corporaciones
-            CorporacionList objListaCorporaciones = CorporacionMapper.Instance().GetAll();
+            CorporacionList objListaCorporaciones = this.ObtenCorporaciones();
             String[] arrCorporaciones = new String[objListaCorporaciones.Count];
 
             int i = 0;
@@ -83,8 +83,28 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 arrCorporaciones[i] = objCorporacion.Descripcion;
                 i++;
             }
-
+            
             this.cklCorporacion.Items.AddRange(arrCorporaciones);
+
+            //Ahora se palomean las corporaciones a la que la incidencia está asociada:
+
+            CorporacionIncidenciaList lstCorporacionIncidencia = CorporacionIncidenciaMapper.Instance().GetByIncidencia(this._entIncidencia.Folio);
+
+            if (lstCorporacionIncidencia != null && lstCorporacionIncidencia.Count > 0)
+            {
+                for (int j=0;j< lstCorporacionIncidencia.Count ; j++)
+                {
+                    Corporacion entCorporacion = CorporacionMapper.Instance().GetOne(lstCorporacionIncidencia[j].ClaveCorporacion);
+
+                    for (i=0; i<this.cklCorporacion.Items.Count; i++)
+                    {
+                        if (this.cklCorporacion.Items[i].ToString() == entCorporacion.Descripcion)
+                        {
+                            this.cklCorporacion.SetItemChecked(j, true);
+                        }
+                    }
+                }
+            }
 
             this.cklCorporacion.CheckOnClick = true;
 
@@ -280,7 +300,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void GuardaCorporaciones()
         {
             IEnumerator myEnumerator;
-            CorporacionList ListaCorporaciones = CorporacionMapper.Instance().GetAll();
+            CorporacionList ListaCorporaciones = this.ObtenCorporaciones();
             Boolean blnTieneDatos = false;
             
             try
@@ -288,9 +308,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 try
                 {
 
-                if (this._entIncidencia == null)
-                    return;
+                    if (this._blnSeActivoClosed)
+                    {
+                        return;
+                    }
 
+                    if (this._entIncidencia == null)
+                    {
+                        return;
+                    }
                 this._entIncidencia.ClaveEstatus = 1;
                 
                 IncidenciaMapper.Instance().Save(this._entIncidencia);
@@ -377,6 +403,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
             catch (SAIExcepcion) { }
 
+        }
+
+        private CorporacionList ObtenCorporaciones()
+        {
+            return CorporacionMapper.Instance().GetBySQLQuery("SELECT [Clave],[Descripcion],[ClaveSistema],[UnidadesVirtuales],[Activo],[Zn] FROM [dbo].[Corporacion] Where Activo = true");
         }
 
         private void cklCorporacion_MouseUp(object sender, MouseEventArgs e)

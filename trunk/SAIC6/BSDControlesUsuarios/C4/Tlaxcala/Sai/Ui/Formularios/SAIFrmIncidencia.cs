@@ -315,6 +315,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="SoloLectura"> Indica si el formulario será de solo lectura </param>
         public SAIFrmIncidencia(Incidencia entIncidencia, Boolean SoloLectura)
         {
+           
             entIncidencia.ClaveEstado = 29;
             this._blnBloqueaEventos = true;
             InitializeComponent();
@@ -347,6 +348,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.ResumeLayout(false);
             this.InicializaListas();
             this._entIncidencia = entIncidencia;
+            this._entIncidencia.Activo = true;
             //Se actualiza la información de la incidencia en la lista de ventanas
             this.ActualizaVentanaIncidencias();
             //Se muestra la información de la incidencia en el formulario:

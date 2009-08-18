@@ -460,7 +460,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         this.dtpHoraLlegada.Enabled = false;
                         this.chkHoraLlegada.Checked = false;
                         this.dtpHoraLiberacion.Enabled = false;
-                        this.chkHoraLiberacion.Enabled = false;
+                        this.chkHoraLiberacion.Checked  = false;
 
                         if (this._despachoIncidencia != null)
                         {
