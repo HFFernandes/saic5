@@ -49,22 +49,19 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void btnVistaPrevia_Click(object sender, EventArgs e)
         {
-            var buscador = new SAIFrmBuscadorIncidencias();
-            buscador.Show();
-
-            //try
-            //{
-            //    if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_A))
-            //    {
-            //        saiReport1.reportControl.PrintPreviewOptions.Title = "Reporte de Incidencias Activas";
-            //        saiReport1.reportControl.PrintPreview(true);
-            //    }
-            //    else
-            //        throw new SAIExcepcion("No tiene los permisos suficientes para realizar esta acción.");
-            //}
-            //catch (SAIExcepcion)
-            //{
-            //}
+            try
+            {
+                if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_A))
+                {
+                    saiReport1.reportControl.PrintPreviewOptions.Title = "Reporte de Incidencias Activas";
+                    saiReport1.reportControl.PrintPreview(true);
+                }
+                else
+                    throw new SAIExcepcion("No tiene los permisos suficientes para realizar esta acción.");
+            }
+            catch (SAIExcepcion)
+            {
+            }
         }
 
         void reportControl_RowDblClick(object sender, AxXtremeReportControl._DReportControlEvents_RowDblClickEvent e)

@@ -152,6 +152,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
                     break;
                 case ID.CMD_PH:
+                    var buscador = new SAIFrmBuscadorIncidencias();
+                    MostrarEnSegundoMonitorSiEsPosible(buscador);
                     break;
                 case ID.CMD_RNC:
                     break;
