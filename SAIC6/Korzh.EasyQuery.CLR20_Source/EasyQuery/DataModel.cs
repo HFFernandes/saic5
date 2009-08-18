@@ -2758,9 +2758,12 @@ namespace Korzh.EasyQuery
             {
                 foreach (DataModel.OperatorGroup group in this)
                 {
-                    if (string.Compare(group.Name, groupName, true) == 0)
+                    if (group != null)
                     {
-                        return group;
+                        if (string.Compare(group.Name, groupName, true) == 0)
+                        {
+                            return group;
+                        }
                     }
                 }
                 return null;
