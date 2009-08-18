@@ -3495,6 +3495,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         protected void CambiaHabilitadoTipoIncidencia(Boolean blnHabilitado)
         {
             this.cmbTipoIncidencia.Enabled = blnHabilitado;
+            this.cmbTipoIncidencia.BlnEsRequerido = blnHabilitado;
         }
 
         /// <summary>
