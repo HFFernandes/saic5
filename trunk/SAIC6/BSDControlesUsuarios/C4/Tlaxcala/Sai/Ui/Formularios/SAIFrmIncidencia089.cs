@@ -78,7 +78,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     arrDepandencias[i] = entElementoDependencia.Descripcion;
                     i++;
                 }
-                this.cklDependencia.Items.AddRange(arrCorporaciones);
+                this.cklDependencia.Items.AddRange(arrDepandencias);
                 this.cklDependencia.CheckOnClick = true;
             }
             //Si la incidencia no es nula, se carga la información en los campos correspondientes:
@@ -99,11 +99,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
                 //Se palomean las dependencias relacionadas a la incidencia:
                 IncidenciaDependenciaList  lstIncidenciaDependencia = IncidenciaDependenciaMapper.Instance().GetByIncidencia(this._entIncidencia.Folio);
+                k = 0;
                 if (lstIncidenciaDependencia != null && lstIncidenciaDependencia.Count > 0)
                 {
                     for (j = 0; j < lstIncidenciaDependencia.Count; j++)
                     {
-                        Dependencia entDependencia = CorporacionMapper.Instance().GetOne(lstIncidenciaDependencia[j].ClaveDependencia);
+                        entDependencia = DependenciaMapper.Instance().GetOne(lstIncidenciaDependencia[j].ClaveDependencia);
 
                         for (i = 0; i < this.cklDependencia.Items.Count; i++)
                         {
@@ -143,19 +144,18 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             DependenciaList lstDependencias = new DependenciaList();
             DependenciaList ListaTodasDependencias = DependenciaMapper.Instance().GetAll();
             int y;
-            var myEnumerator;
-
+            
             if (ListaTodasDependencias == null || ListaTodasDependencias.Count == 0)
             {
                 return lstDependencias;
             }
-            myEnumerator = this.cklDependencia.CheckedIndices.GetEnumerator();
+            var myEnumerator = this.cklDependencia.CheckedIndices.GetEnumerator();
             while (myEnumerator.MoveNext() != false)
             {
                 y = (int)myEnumerator.Current;
                 foreach (Dependencia objDependencia in ListaTodasDependencias)
                 {
-                    if (this.cklCorporacion.Items[y].ToString() == objDependencia.Descripcion)
+                    if (this.cklDependencia.Items[y].ToString() == objDependencia.Descripcion)
                     {
                         lstDependencias.Add(objDependencia);
                     }
@@ -200,6 +200,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             return lstIncidenciaDependencia;
         }
 
+        /// <summary>
+        /// Toma los datos del formulario y los guarda en el objeto incidencia
+        /// </summary>
         private void RecuperaDatosEnIncidencia()
         {
             Boolean blnFechasEnvio = true;
@@ -298,7 +301,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             if (e.KeyCode == Keys.Enter)
             {
-                this.dtmFechaNotificacion.Focus();
+                //this.d.Focus();
             }
             this.SAIFrmIncidenciaKeyUp(e);
         }
@@ -318,7 +321,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             if (e.KeyCode == Keys.Enter)
             {
-                this.dtmFechaEnvioDependencia.Focus();
+                //this.dtmFechaEnvioDependencia.Focus();
             }
             this.SAIFrmIncidenciaKeyUp(e);
         }
