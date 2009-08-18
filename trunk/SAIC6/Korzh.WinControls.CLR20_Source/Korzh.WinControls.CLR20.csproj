@@ -1,0 +1,241 @@
+﻿<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C30DC470-7770-43C9-94B2-EC5628E100E8}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>Korzh.WinControls.CLR20</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Korzh</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>0.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib">
+      <Name>mscorlib</Name>
+      <HintPath>mscorlib.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+      <HintPath>System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+      <HintPath>System.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+      <HintPath>System.Windows.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.Xml</Name>
+      <HintPath>System.Xml.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\ActionEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\ActionEventHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\BeforeRollUpEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\BeforeRollUpEventHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\ButtonListXElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\ContentChangedEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\ContentChangedEventHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\DateTimeXElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\EditXElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\LabelXElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\ListBoxListControl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\ListControl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\ListXElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\MenuListControl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\Signals.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\StringTokenizer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\TextAdjustingEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\TextAdjustingEventHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\TextXElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\ValidateValueEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\ValidateValueEventHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\ValueItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\ValueItemList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\XElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\XElementList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\XElementsStore.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\XPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\XRow.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\XControls\XRowList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WinControls\MacButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WinControls\TextStorage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="WinControls\Korzh.snk" />
+    <EmbeddedResource Include="WinControls\XControls\XPanel.resx">
+      <DependentUpon>XPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinControls\XPanel.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

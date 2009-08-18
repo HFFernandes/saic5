@@ -1,0 +1,407 @@
+﻿<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0E56A153-3A5C-4D9B-9DF7-4326D5273E12}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>Korzh.EasyQuery.CLR20</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Korzh</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>0.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib">
+      <Name>mscorlib</Name>
+      <HintPath>mscorlib.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+      <HintPath>System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+      <HintPath>System.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+      <HintPath>System.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.Xml</Name>
+      <HintPath>System.Xml.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\AggrFuncExpr.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\AggrFuncExprCreator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\AggrFunction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\AggrFunctionList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\ChangeType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\ColumnAliasesUsage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\ColumnsChangedEventHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\ColumnsChangeEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\CompoundExpr.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\CompoundExprCreator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\ConditionsChangedEventHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\ConditionsChangeEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\ConstExpr.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\ConstExprCreator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\ConstListValueEditor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\ConstListValueEditorCreator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\ConstValueItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\ConstValueList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\CustomListValueEditor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\CustomListValueEditorCreator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\CustomValueEditor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\CustomValueEditorCreator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\DataKind.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\DataModel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\DataType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\DataTypeList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\DateTimeValueEditor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\DateTimeValueEditorCreator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\DateValueEditorCreator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\DbFieldInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\DbFieldInfoList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\DbGate.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\DbGateList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\DbInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\DbInfoList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\DbLinkInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\DbLinkInfoList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\DbParam.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\DbParameters.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\DbTableInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\DbTableInfoList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\DisplayFormatParser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\EntAttrProp.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\EntityAttrExpr.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\EntityAttrExprCreator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\EOLSymbol.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\Expression.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\ExprList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\IConnectionStringBuilderDlg.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\IDefaultValuesStorage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\IExpressionCreator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\IMacroValue.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\IValueEditorCreator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\ListBoxValueEditorCreator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\ListValueEditor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\LoginRequestEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\LoginRequestEventHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\MacroList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\MultiListBoxValueEditorCreator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\OrderByStyles.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\Query.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\QueryTextFormats.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\SortDirection.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\SortOrderChangedEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\SortOrderChangedEventHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\SqlFormats.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\SqlListValueEditor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\SqlListValueEditorCreator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\SqlOptions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\SqlSyntax.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\StringTokenizer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\SubQueryExpr.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\SubQueryExprCreator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\SubQueryValueEditor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\SubQueryValueEditorCreator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\TextStorage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\TextValueEditor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\TextValueEditorCreator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\TimeMacro.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\TimeMacroType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\TimeValueEditorCreator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\Utils.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\ValueEditor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EasyQuery\DataModel.bmp" />
+    <EmbeddedResource Include="EasyQuery\Query.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EasyQuery\DataModel.resx">
+      <DependentUpon>DataModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EasyQuery\Query.resx">
+      <DependentUpon>Query.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EasyQuery\Korzh.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>
