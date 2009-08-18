@@ -148,24 +148,31 @@
   <ItemGroup>
     <EmbeddedResource Include="EasyQuery\ModelEditor\AboutDlg.resx">
       <DependentUpon>AboutDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="EasyQuery\ModelEditor\DbItemsDlg.resx">
       <DependentUpon>DbItemsDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="EasyQuery\ModelEditor\LinkPropsDlg.resx">
       <DependentUpon>LinkPropsDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="EasyQuery\ModelEditor\ModelEditorForm.resx">
       <DependentUpon>ModelEditorForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="EasyQuery\ModelEditor\ModelPropsDlg.resx">
       <DependentUpon>ModelPropsDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="EasyQuery\ModelEditor\ProgressBarDlg.resx">
       <DependentUpon>ProgressBarDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="EasyQuery\ModelEditor\ValueEditorPropsDlg.resx">
       <DependentUpon>ValueEditorPropsDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

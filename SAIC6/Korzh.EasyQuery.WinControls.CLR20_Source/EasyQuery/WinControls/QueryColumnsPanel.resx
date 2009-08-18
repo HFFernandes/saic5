@@ -178,6 +178,6 @@
     <value>(lista vacia)</value>
   </data>
   <data name="CmdClickToAdd" xml:space="preserve">
-    <value>Clic aqui para agregar una nueva columna</value>
+    <value>Clic aquí para agregar una nueva columna</value>
   </data>
 </root>

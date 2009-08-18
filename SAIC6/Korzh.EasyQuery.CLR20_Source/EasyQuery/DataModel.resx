@@ -118,207 +118,207 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="opDateEqualPreciseFormat" xml:space="preserve">
-    <value>{expr1} [[is]] {expr2}</value>
+    <value>{expr1} [[sea]] {expr2}</value>
   </data>
   <data name="opDateBeforeSpecialCaption" xml:space="preserve">
-    <value>is before (special date)</value>
+    <value>sea antes (fecha especial)</value>
   </data>
   <data name="opDateNotEqualPreciseFormat" xml:space="preserve">
-    <value>{expr1} [[is not]] {expr2}</value>
+    <value>{expr1} [[no sea]] {expr2}</value>
   </data>
   <data name="opLessThanCaption" xml:space="preserve">
-    <value>is less than</value>
+    <value>sea menor que</value>
   </data>
   <data name="opNotContainsFormat" xml:space="preserve">
-    <value>{expr1} [[does not contain]] {expr2}</value>
+    <value>{expr1} [[no contenga]] {expr2}</value>
   </data>
   <data name="opNotStartsWithCaption" xml:space="preserve">
-    <value>does not start with</value>
+    <value>no empieze con</value>
   </data>
   <data name="opNotBetweenCaption" xml:space="preserve">
-    <value>is not between</value>
+    <value>no este entre</value>
   </data>
   <data name="opGreaterOrEqualCaption" xml:space="preserve">
-    <value>is greater than or equal to</value>
+    <value>sea mayor que o igual a</value>
   </data>
   <data name="opIsNullFormat" xml:space="preserve">
-    <value>{expr1} [[is null]] </value>
+    <value>{expr1} [[sea vacio]] </value>
   </data>
   <data name="opTimeNotEqualPreciseFormat" xml:space="preserve">
-    <value>{expr1} [[is not]] {expr2}</value>
+    <value>{expr1} [[no sea]] {expr2}</value>
   </data>
   <data name="opTimeAfterSpecialCaption" xml:space="preserve">
-    <value>is after (special time)</value>
+    <value>sea despues (tiempo especial)</value>
   </data>
   <data name="opMaximumOfAttrFormat" xml:space="preserve">
-    <value>{expr1} [[is equal to maximum of]] {expr2}</value>
+    <value>{expr1} [[sea igual al máximo de]] {expr2}</value>
   </data>
   <data name="opTimeNotEqualPreciseCaption" xml:space="preserve">
-    <value>is not (precise time)</value>
+    <value>no sea (precisar tiempo)</value>
   </data>
   <data name="opDateEqualPreciseCaption" xml:space="preserve">
-    <value>is (precise date)</value>
+    <value>sea (precisar fecha)</value>
   </data>
   <data name="opLessOrEqualCaption" xml:space="preserve">
-    <value>is less than or equal to</value>
+    <value>sea menor que o igual a</value>
   </data>
   <data name="opLessOrEqualFormat" xml:space="preserve">
-    <value>{expr1} [[is less than or equal to]] {expr2}</value>
+    <value>{expr1} [[sea menor que o igual a]] {expr2}</value>
   </data>
   <data name="opNotStartsWithFormat" xml:space="preserve">
-    <value>{expr1} [[does not start with]] {expr2}</value>
+    <value>{expr1} [[no empieze con]] {expr2}</value>
   </data>
   <data name="opDateBeforeSpecialFormat" xml:space="preserve">
-    <value>{expr1} [[is before]] {expr2}</value>
+    <value>{expr1} [[sea antes]] {expr2}</value>
   </data>
   <data name="opEqualFormat" xml:space="preserve">
-    <value>{expr1} [[is equal to]] {expr2}</value>
+    <value>{expr1} [[sea igual a]] {expr2}</value>
   </data>
   <data name="opNotContainsCaption" xml:space="preserve">
-    <value>does not contain</value>
+    <value>no contenga</value>
   </data>
   <data name="opTimeBeforeSpecialCaption" xml:space="preserve">
-    <value>is before (special time)</value>
+    <value>sea despues (tiempo especial)</value>
   </data>
   <data name="opTimeAfterPreciseFormat" xml:space="preserve">
-    <value>{expr1} [[is after]] {expr2}</value>
+    <value>{expr1} [[sea despues]] {expr2}</value>
   </data>
   <data name="opDatePeriodPreciseFormat" xml:space="preserve">
-    <value>{expr1} [[is between]] {expr2} and {expr3}</value>
+    <value>{expr1} [[este entre]] {expr2} y {expr3}</value>
   </data>
   <data name="opTimeAfterSpecialFormat" xml:space="preserve">
-    <value>{expr1} [[is after]] {expr2}</value>
+    <value>{expr1} [[sea despues]] {expr2}</value>
   </data>
   <data name="opIsNullCaption" xml:space="preserve">
-    <value>is null</value>
+    <value>sea vacio</value>
   </data>
   <data name="opDatePeriodPreciseCaption" xml:space="preserve">
-    <value>is between</value>
+    <value>este entre</value>
   </data>
   <data name="opNotBetweenFormat" xml:space="preserve">
-    <value>{expr1} [[is not between]] {expr2} and {expr3}</value>
+    <value>{expr1} [[no este entre]] {expr2} y {expr3}</value>
   </data>
   <data name="opTimeNotEqualSpecialCaption" xml:space="preserve">
-    <value>is not (special time)</value>
+    <value>no sea (tiempo especial)</value>
   </data>
   <data name="opStartsWithFormat" xml:space="preserve">
-    <value>{expr1} [[starts with]] {expr2}</value>
+    <value>{expr1} [[empieze con]] {expr2}</value>
   </data>
   <data name="opDateNotEqualPreciseCaption" xml:space="preserve">
-    <value>is not (precise date)</value>
+    <value>no sea (precisar fecha)</value>
   </data>
   <data name="opTimeBeforePreciseCaption" xml:space="preserve">
-    <value>is before (precise time)</value>
+    <value>sea antes (precisar tiempo)</value>
   </data>
   <data name="opDateBeforePreciseFormat" xml:space="preserve">
-    <value>{expr1} [[is before]] {expr2}</value>
+    <value>{expr1} [[sea antes]] {expr2}</value>
   </data>
   <data name="opInListCaption" xml:space="preserve">
-    <value>is in list</value>
+    <value>esta enlistado</value>
   </data>
   <data name="opTimeEqualSpecialCaption" xml:space="preserve">
-    <value>is (special time)</value>
+    <value>sea (tiempo especial)</value>
   </data>
   <data name="opDateAfterPreciseCaption" xml:space="preserve">
-    <value>is after (precise date)</value>
+    <value>sea despues (precisar fecha)</value>
   </data>
   <data name="opDateAfterSpecialFormat" xml:space="preserve">
-    <value>{expr1} [[is after]] {expr2}</value>
+    <value>{expr1} [[sea despues]] {expr2}</value>
   </data>
   <data name="opInListFormat" xml:space="preserve">
-    <value>{expr1} [[is in list]] {expr2}</value>
+    <value>{expr1} [[esta enlistado]] {expr2}</value>
   </data>
   <data name="opTimeAfterPreciseCaption" xml:space="preserve">
-    <value>is after (precise time)</value>
+    <value>sea despues (precisar tiempo)</value>
   </data>
   <data name="opNotEqualCaption" xml:space="preserve">
-    <value>is not equal to</value>
+    <value>no sea igual a</value>
   </data>
   <data name="opTimePeriodPreciseFormat" xml:space="preserve">
-    <value>{expr1} [[is between]] {expr2} and {expr3}</value>
+    <value>{expr1} [[este entre]] {expr2} y {expr3}</value>
   </data>
   <data name="opDateEqualSpecialFormat" xml:space="preserve">
-    <value>{expr1} [[is]] {expr2}</value>
+    <value>{expr1} [[sea]] {expr2}</value>
   </data>
   <data name="opDateNotEqualSpecialCaption" xml:space="preserve">
-    <value>is not (special date)</value>
+    <value>no sea (fecha especial)</value>
   </data>
   <data name="opMaximumOfAttrCaption" xml:space="preserve">
-    <value>is maximum of</value>
+    <value>sea máximo de</value>
   </data>
   <data name="opDateAfterPreciseFormat" xml:space="preserve">
-    <value>{expr1} [[is after]] {expr2}</value>
+    <value>{expr1} [[sea despues]] {expr2}</value>
   </data>
   <data name="opDateNotEqualSpecialFormat" xml:space="preserve">
-    <value>{expr1} [[is not]] {expr2}</value>
+    <value>{expr1} [[no sea]] {expr2}</value>
   </data>
   <data name="opDateBeforePreciseCaption" xml:space="preserve">
-    <value>is before (precise date)</value>
+    <value>sea antes (precisar fecha)</value>
   </data>
   <data name="opBetweenCaption" xml:space="preserve">
-    <value>is between</value>
+    <value>este entre</value>
   </data>
   <data name="opTimeBeforePreciseFormat" xml:space="preserve">
-    <value>{expr1} [[is before]] {expr2}</value>
+    <value>{expr1} [[sea antes]] {expr2}</value>
   </data>
   <data name="opNotInListCaption" xml:space="preserve">
-    <value>is not in list</value>
+    <value>no este enlistado</value>
   </data>
   <data name="opGreaterThanCaption" xml:space="preserve">
-    <value>is greater than</value>
+    <value>sea mayor que</value>
   </data>
   <data name="opNotInListFormat" xml:space="preserve">
-    <value>{expr1} [[is not in list]] {expr2}</value>
+    <value>{expr1} [[no este enlistado]] {expr2}</value>
   </data>
   <data name="opTimeBeforeSpecialFormat" xml:space="preserve">
-    <value>{expr1} [[is before]] {expr2}</value>
+    <value>{expr1} [[sea despues]] {expr2}</value>
   </data>
   <data name="opDateEqualSpecialCaption" xml:space="preserve">
-    <value>is (special date)</value>
+    <value>sea (fecha especial)</value>
   </data>
   <data name="opLessThanFormat" xml:space="preserve">
-    <value>{expr1} [[is less than]] {expr2}</value>
+    <value>{expr1} [[sea menor que]] {expr2}</value>
   </data>
   <data name="opTimePeriodPreciseCaption" xml:space="preserve">
-    <value>is between</value>
+    <value>este entre</value>
   </data>
   <data name="opStartsWithCaption" xml:space="preserve">
-    <value>starts with</value>
+    <value>empieze con</value>
   </data>
   <data name="opTimeEqualPreciseFormat" xml:space="preserve">
-    <value>{expr1} [[is]] {expr2}</value>
+    <value>{expr1} [[sea]] {expr2}</value>
   </data>
   <data name="opGreaterOrEqualFormat" xml:space="preserve">
-    <value>{expr1} [[is greater than or equal to]] {expr2}</value>
+    <value>{expr1} [[sea mayor que o igual a]] {expr2}</value>
   </data>
   <data name="opTimeEqualSpecialFormat" xml:space="preserve">
-    <value>{expr1} [[is]] {expr2}</value>
+    <value>{expr1} [[sea]] {expr2}</value>
   </data>
   <data name="opTimeEqualPreciseCaption" xml:space="preserve">
-    <value>is (precise time)</value>
+    <value>sea (precisar tiempo)</value>
   </data>
   <data name="opTimeNotEqualSpecialFormat" xml:space="preserve">
-    <value>{expr1} [[is not]] {expr2}</value>
+    <value>{expr1} [[no sea]] {expr2}</value>
   </data>
   <data name="opBetweenFormat" xml:space="preserve">
-    <value>{expr1} [[is between]] {expr2} and {expr3}</value>
+    <value>{expr1} [[este entre]] {expr2} y {expr3}</value>
   </data>
   <data name="opContainsCaption" xml:space="preserve">
-    <value>contains</value>
+    <value>contenga</value>
   </data>
   <data name="opGreaterThanFormat" xml:space="preserve">
-    <value>{expr1} [[is greater than]] {expr2}</value>
+    <value>{expr1} [[sea mayor que]] {expr2}</value>
   </data>
   <data name="opNotEqualFormat" xml:space="preserve">
-    <value>{expr1} [[is not equal to]] {expr2}</value>
+    <value>{expr1} [[no sea igual a]] {expr2}</value>
   </data>
   <data name="opContainsFormat" xml:space="preserve">
-    <value>{expr1} [[contains]] {expr2}</value>
+    <value>{expr1} [[contenga]] {expr2}</value>
   </data>
   <data name="opDateAfterSpecialCaption" xml:space="preserve">
-    <value>is after (special date)</value>
+    <value>sea despues (fecha especial)</value>
   </data>
   <data name="opEqualCaption" xml:space="preserve">
-    <value>is equal to</value>
+    <value>sea igual a</value>
   </data>
 </root>

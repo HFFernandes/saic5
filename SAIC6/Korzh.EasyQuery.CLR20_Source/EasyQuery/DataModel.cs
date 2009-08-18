@@ -92,7 +92,8 @@ namespace Korzh.EasyQuery
             entity.Attributes.Add(this.nullAttribute);
         }
 
-        protected DataModel(SerializationInfo info, StreamingContext context) : this()
+        protected DataModel(SerializationInfo info, StreamingContext context)
+            : this()
         {
             string xmlText = info.GetString("ModelXml");
             this.LoadFromString(xmlText);
@@ -109,30 +110,30 @@ namespace Korzh.EasyQuery
         public void AddDefaultOperators()
         {
             this.AddUpdateOperator("Equal", "", "{expr1} = {expr2}", "{expr1} [[is equal to]] {expr2}", DataKind.Scalar, CommonOperatorGroup);
-            this.AddUpdateOperator("NotEqual", "is not equal to", "{expr1} <> {expr2}", "{expr1} [[is not equal to]] {expr2}", DataKind.Scalar, CommonOperatorGroup);
-            this.AddUpdateOperator("LessThan", "is less than", "{expr1} < {expr2}", "{expr1} [[is less than]] {expr2}", DataKind.Scalar, CommonOperatorGroup);
-            this.AddUpdateOperator("LessOrEqual", "is less than or equal to", "{expr1} <= {expr2}", "{expr1} [[is less than or equal to]] {expr2}", DataKind.Scalar, CommonOperatorGroup);
-            this.AddUpdateOperator("GreaterThan", "is greater than", "{expr1} > {expr2}", "{expr1} [[is greater than]] {expr2}", DataKind.Scalar, CommonOperatorGroup);
-            this.AddUpdateOperator("GreaterOrEqual", "is greater than or equal to", "{expr1} >= {expr2}", "{expr1} [[is greater than or equal to]] {expr2}", DataKind.Scalar, CommonOperatorGroup);
-            this.AddUpdateOperator("IsNull", "is null", "{expr1} IS NULL", "{expr1} [[is null]]", DataKind.Scalar, CommonOperatorGroup);
-            this.AddUpdateOperator("IsNotNull", "is not null", "{expr1} IS NOT NULL", "{expr1} [[is not null]]", DataKind.Scalar, CommonOperatorGroup);
-            this.AddUpdateOperator("InList", "is in list", "{expr1} in ({expr2})", "{expr1} [[is in list]] {expr2}", DataKind.List, CommonOperatorGroup);
-            this.AddUpdateOperator("NotInList", "is not in list", "NOT ({expr1} in ({expr2}))", "{expr1} [[is not in list]] {expr2}", DataKind.List, CommonOperatorGroup);
-            this.AddUpdateOperator("Between", "is between", "{expr1} BETWEEN {expr2} AND {expr3}", "{expr1} [[is between]] {expr2} and {expr3}", DataKind.Scalar, CommonOperatorGroup);
-            this.AddUpdateOperator("NotBetween", "is not between", "NOT ({expr1} BETWEEN {expr2} AND {expr3})", "{expr1} [[is not between]] {expr2} and {expr3}", DataKind.Scalar, CommonOperatorGroup);
-            Operator @operator = this.AddUpdateOperator("StartsWith", "starts with", "{expr1} LIKE {expr2}", "{expr1} [[starts with]] {expr2}", DataKind.Scalar, StringOperatorGroup);
+            this.AddUpdateOperator("NotEqual", "no sea igual a", "{expr1} <> {expr2}", "{expr1} [[is not equal to]] {expr2}", DataKind.Scalar, CommonOperatorGroup);
+            this.AddUpdateOperator("LessThan", "sea menor que", "{expr1} < {expr2}", "{expr1} [[is less than]] {expr2}", DataKind.Scalar, CommonOperatorGroup);
+            this.AddUpdateOperator("LessOrEqual", "sea menor que o igual a", "{expr1} <= {expr2}", "{expr1} [[is less than or equal to]] {expr2}", DataKind.Scalar, CommonOperatorGroup);
+            this.AddUpdateOperator("GreaterThan", "sea mayor que", "{expr1} > {expr2}", "{expr1} [[is greater than]] {expr2}", DataKind.Scalar, CommonOperatorGroup);
+            this.AddUpdateOperator("GreaterOrEqual", "sea mayor que o igual a", "{expr1} >= {expr2}", "{expr1} [[is greater than or equal to]] {expr2}", DataKind.Scalar, CommonOperatorGroup);
+            this.AddUpdateOperator("IsNull", "sea vacio", "{expr1} IS NULL", "{expr1} [[is null]]", DataKind.Scalar, CommonOperatorGroup);
+            this.AddUpdateOperator("IsNotNull", "no sea vacio", "{expr1} IS NOT NULL", "{expr1} [[is not null]]", DataKind.Scalar, CommonOperatorGroup);
+            this.AddUpdateOperator("InList", "este enlistado", "{expr1} in ({expr2})", "{expr1} [[is in list]] {expr2}", DataKind.List, CommonOperatorGroup);
+            this.AddUpdateOperator("NotInList", "no este enlistado", "NOT ({expr1} in ({expr2}))", "{expr1} [[is not in list]] {expr2}", DataKind.List, CommonOperatorGroup);
+            this.AddUpdateOperator("Between", "este entre", "{expr1} BETWEEN {expr2} AND {expr3}", "{expr1} [[is between]] {expr2} and {expr3}", DataKind.Scalar, CommonOperatorGroup);
+            this.AddUpdateOperator("NotBetween", "no este entre", "NOT ({expr1} BETWEEN {expr2} AND {expr3})", "{expr1} [[is not between]] {expr2} and {expr3}", DataKind.Scalar, CommonOperatorGroup);
+            Operator @operator = this.AddUpdateOperator("StartsWith", "empieze con", "{expr1} LIKE {expr2}", "{expr1} [[starts with]] {expr2}", DataKind.Scalar, StringOperatorGroup);
             @operator.DefaultEditor = new TextValueEditor();
             @operator.ConstValueFormat = "{const}{ws}";
-            @operator = this.AddUpdateOperator("NotStartsWith", "does not start with", "NOT ({expr1} LIKE {expr2})", "{expr1} [[does not start with]] s{expr2}", DataKind.Scalar, StringOperatorGroup);
+            @operator = this.AddUpdateOperator("NotStartsWith", "no empieze con", "NOT ({expr1} LIKE {expr2})", "{expr1} [[does not start with]] s{expr2}", DataKind.Scalar, StringOperatorGroup);
             @operator.DefaultEditor = new TextValueEditor();
             @operator.ConstValueFormat = "{const}{ws}";
-            @operator = this.AddUpdateOperator("Contains", "contains", "{expr1} LIKE {expr2}", "{expr1}  [[contains]] {expr2}", DataKind.Scalar, StringOperatorGroup);
+            @operator = this.AddUpdateOperator("Contains", "contenga", "{expr1} LIKE {expr2}", "{expr1}  [[contains]] {expr2}", DataKind.Scalar, StringOperatorGroup);
             @operator.DefaultEditor = new TextValueEditor();
             @operator.ConstValueFormat = "{ws}{const}{ws}";
-            @operator = this.AddUpdateOperator("NotContains", "does not contain", "NOT ({expr1} LIKE {expr2})", "{expr1} [[does not contain]] {expr2}", DataKind.Scalar, StringOperatorGroup);
+            @operator = this.AddUpdateOperator("NotContains", "no contenga", "NOT ({expr1} LIKE {expr2})", "{expr1} [[does not contain]] {expr2}", DataKind.Scalar, StringOperatorGroup);
             @operator.DefaultEditor = new TextValueEditor();
             @operator.ConstValueFormat = "{ws}{const}{ws}";
-            this.AddUpdateOperator("InSubQuery", "in sub query", "{expr1} IN ({expr2})", "{expr1} [[in sub query]] {expr2}", DataKind.Query, CommonOperatorGroup).ExprDefType = DataType.Byte;
+            this.AddUpdateOperator("InSubQuery", "en subconsulta", "{expr1} IN ({expr2})", "{expr1} [[in sub query]] {expr2}", DataKind.Query, CommonOperatorGroup).ExprDefType = DataType.Byte;
             CustomListValueEditor editor = new CustomListValueEditor();
             editor.ListName = "SpecDateValues";
             DateTimeValueEditor editor2 = new DateTimeValueEditor();
@@ -141,54 +142,54 @@ namespace Korzh.EasyQuery
             editor3.ListName = "SpecTimeValues";
             DateTimeValueEditor editor4 = new DateTimeValueEditor();
             editor2.SubType = DataType.Time;
-            @operator = this.AddUpdateOperator("DateEqualSpecial", "is (special date)", "{expr1} = {expr2}", "{expr1} [[is]] {expr2}", DataKind.Scalar, TimeOperatorGroup);
+            @operator = this.AddUpdateOperator("DateEqualSpecial", "sea (fecha especial)", "{expr1} = {expr2}", "{expr1} [[is]] {expr2}", DataKind.Scalar, TimeOperatorGroup);
             @operator.DefaultEditor = editor;
             @operator.AppliedTypes.Remove(DataType.Time);
-            @operator = this.AddUpdateOperator("DateEqualPrecise", "is (precise date)", "{expr1} = {expr2}", "{expr1} [[is]] {expr2}", DataKind.Scalar, TimeOperatorGroup);
+            @operator = this.AddUpdateOperator("DateEqualPrecise", "sea (precisar fecha)", "{expr1} = {expr2}", "{expr1} [[is]] {expr2}", DataKind.Scalar, TimeOperatorGroup);
             @operator.DefaultEditor = editor2;
             @operator.AppliedTypes.Remove(DataType.Time);
-            @operator = this.AddUpdateOperator("DateNotEqualSpecial", "is not", "{expr1} <> {expr2}", "{expr1} [[is not]] {expr2}", DataKind.Scalar, TimeOperatorGroup);
+            @operator = this.AddUpdateOperator("DateNotEqualSpecial", "no sea", "{expr1} <> {expr2}", "{expr1} [[is not]] {expr2}", DataKind.Scalar, TimeOperatorGroup);
             @operator.DefaultEditor = editor;
             @operator.AppliedTypes.Remove(DataType.Time);
-            @operator = this.AddUpdateOperator("DateNotEqualPrecise", "is not", "{expr1} <> {expr2}", "{expr1} [[is not]] {expr2}", DataKind.Scalar, TimeOperatorGroup);
+            @operator = this.AddUpdateOperator("DateNotEqualPrecise", "no sea", "{expr1} <> {expr2}", "{expr1} [[is not]] {expr2}", DataKind.Scalar, TimeOperatorGroup);
             @operator.DefaultEditor = editor2;
             @operator.AppliedTypes.Remove(DataType.Time);
-            @operator = this.AddUpdateOperator("DateBeforeSpecial", "is before (special date)", "{expr1} < {expr2}", "{expr1} [[is before]] {expr2}", DataKind.Scalar, TimeOperatorGroup);
+            @operator = this.AddUpdateOperator("DateBeforeSpecial", "sea antes (fecha especial)", "{expr1} < {expr2}", "{expr1} [[is before]] {expr2}", DataKind.Scalar, TimeOperatorGroup);
             @operator.DefaultEditor = editor;
             @operator.AppliedTypes.Remove(DataType.Time);
-            @operator = this.AddUpdateOperator("DateBeforePrecise", "is before (precise date)", "{expr1} < {expr2}", "{expr1} [[is before]] {expr2}", DataKind.Scalar, TimeOperatorGroup);
+            @operator = this.AddUpdateOperator("DateBeforePrecise", "sea antes (precisar fecha)", "{expr1} < {expr2}", "{expr1} [[is before]] {expr2}", DataKind.Scalar, TimeOperatorGroup);
             @operator.DefaultEditor = editor2;
             @operator.AppliedTypes.Remove(DataType.Time);
-            @operator = this.AddUpdateOperator("DateAfterSpecial", "is after (special date)", "{expr1} >= {expr2}", "{expr1} [[is after]] {expr2}", DataKind.Scalar, TimeOperatorGroup);
+            @operator = this.AddUpdateOperator("DateAfterSpecial", "sea despues (fecha especial)", "{expr1} >= {expr2}", "{expr1} [[is after]] {expr2}", DataKind.Scalar, TimeOperatorGroup);
             @operator.DefaultEditor = editor;
             @operator.AppliedTypes.Remove(DataType.Time);
-            @operator = this.AddUpdateOperator("DateAfterPrecise", "is after (precise date)", "{expr1} >= {expr2}", "{expr1} [[is after]] {expr2}", DataKind.Scalar, TimeOperatorGroup);
+            @operator = this.AddUpdateOperator("DateAfterPrecise", "sea despues (precisar fecha)", "{expr1} >= {expr2}", "{expr1} [[is after]] {expr2}", DataKind.Scalar, TimeOperatorGroup);
             @operator.DefaultEditor = editor2;
             @operator.AppliedTypes.Remove(DataType.Time);
-            @operator = this.AddUpdateOperator("DatePeriodPrecise", "is between", "{expr1} BETWEEN {expr2} AND {expr3}", "{expr1} [[is between]] {expr2} and {expr3}", DataKind.Scalar, TimeOperatorGroup);
+            @operator = this.AddUpdateOperator("DatePeriodPrecise", "este entre", "{expr1} BETWEEN {expr2} AND {expr3}", "{expr1} [[is between]] {expr2} and {expr3}", DataKind.Scalar, TimeOperatorGroup);
             @operator.DefaultEditor = editor2;
             @operator.AppliedTypes.Remove(DataType.Time);
-            @operator = this.AddUpdateOperator("TimeBeforeSpecial", "is before (special time)", "{expr1} < {expr2}", "{expr1} [[is before]] {expr2}", DataKind.Scalar, TimeOperatorGroup);
+            @operator = this.AddUpdateOperator("TimeBeforeSpecial", "sea antes (tiempo especial)", "{expr1} < {expr2}", "{expr1} [[is before]] {expr2}", DataKind.Scalar, TimeOperatorGroup);
             @operator.DefaultEditor = editor3;
             @operator.AppliedTypes.Remove(DataType.Date);
             @operator.AppliedTypes.Remove(DataType.DateTime);
-            @operator = this.AddUpdateOperator("TimeBeforePrecise", "is before (precise time)", "{expr1} < {expr2}", "{expr1} [[is before]] {expr2}", DataKind.Scalar, TimeOperatorGroup);
+            @operator = this.AddUpdateOperator("TimeBeforePrecise", "sea antes (precisar tiempo)", "{expr1} < {expr2}", "{expr1} [[is before]] {expr2}", DataKind.Scalar, TimeOperatorGroup);
             @operator.DefaultEditor = editor4;
             @operator.AppliedTypes.Remove(DataType.Date);
             @operator.AppliedTypes.Remove(DataType.DateTime);
-            @operator = this.AddUpdateOperator("TimeAfterSpecial", "is after (special time)", "{expr1} >= {expr2}", "{expr1} [[is after]] {expr2}", DataKind.Scalar, TimeOperatorGroup);
+            @operator = this.AddUpdateOperator("TimeAfterSpecial", "sea despues (tiempo especial)", "{expr1} >= {expr2}", "{expr1} [[is after]] {expr2}", DataKind.Scalar, TimeOperatorGroup);
             @operator.DefaultEditor = editor3;
             @operator.AppliedTypes.Remove(DataType.Date);
             @operator.AppliedTypes.Remove(DataType.DateTime);
-            @operator = this.AddUpdateOperator("TimeAfterPrecise", "is after (precise time)", "{expr1} >= {expr2}", "{expr1} [[is after]] {expr2}", DataKind.Scalar, TimeOperatorGroup);
+            @operator = this.AddUpdateOperator("TimeAfterPrecise", "sea despues (precisar tiempo)", "{expr1} >= {expr2}", "{expr1} [[is after]] {expr2}", DataKind.Scalar, TimeOperatorGroup);
             @operator.DefaultEditor = editor4;
             @operator.AppliedTypes.Remove(DataType.Date);
             @operator.AppliedTypes.Remove(DataType.DateTime);
-            @operator = this.AddUpdateOperator("TimePeriodPrecise", "is between", "{expr1} BETWEEN {expr2} AND {expr3}", "{expr1} [[is between]] {expr2} and {expr3}", DataKind.Scalar, TimeOperatorGroup);
+            @operator = this.AddUpdateOperator("TimePeriodPrecise", "este entre", "{expr1} BETWEEN {expr2} AND {expr3}", "{expr1} [[is between]] {expr2} and {expr3}", DataKind.Scalar, TimeOperatorGroup);
             @operator.DefaultEditor = editor4;
             @operator.AppliedTypes.Remove(DataType.Date);
             @operator.AppliedTypes.Remove(DataType.DateTime);
-            @operator = this.AddUpdateOperator("MaximumOfAttr", "is maximum of", "{expr1} = (SELECT MAX({expr2.field}) from {expr2.table})", "{expr1} [[is maximum of]] {expr2}", DataKind.Attribute, OtherOperatorGroup);
+            @operator = this.AddUpdateOperator("MaximumOfAttr", "sea máximo de", "{expr1} = (SELECT MAX({expr2.field}) from {expr2.table})", "{expr1} [[is maximum of]] {expr2}", DataKind.Attribute, OtherOperatorGroup);
             @operator.AppliedTypes.Add(DataType.Date);
             @operator.AppliedTypes.Add(DataType.DateTime);
             @operator.AppliedTypes.Add(DataType.Time);
@@ -362,7 +363,7 @@ namespace Korzh.EasyQuery
             {
                 if (node.NodeType == XmlNodeType.Element)
                 {
-                    XmlElement element = this.findElementByName((XmlElement) node, name);
+                    XmlElement element = this.findElementByName((XmlElement)node, name);
                     if (element != null)
                     {
                         return element;
@@ -630,13 +631,13 @@ namespace Korzh.EasyQuery
                     else if (node.LocalName == str)
                     {
                         Entity entity2 = new Entity();
-                        this.LoadEntityNode(entity2, (XmlElement) node);
+                        this.LoadEntityNode(entity2, (XmlElement)node);
                         entity.SubEntities.Add(entity2);
                     }
                     else if (node.LocalName == str2)
                     {
                         EntityAttr entityAttr = new EntityAttr();
-                        this.LoadAttributeNode(entityAttr, (XmlElement) node);
+                        this.LoadAttributeNode(entityAttr, (XmlElement)node);
                         entity.Attributes.Add(entityAttr);
                     }
                 }
@@ -692,32 +693,32 @@ namespace Korzh.EasyQuery
                     {
                         if ((node.LocalName == "DBPARAMS") && this.StoreDbParams)
                         {
-                            this.LoadDbParamsNode((XmlElement) node);
+                            this.LoadDbParamsNode((XmlElement)node);
                             continue;
                         }
                         if (node.LocalName == "CUSTOMINFO")
                         {
-                            this.LoadDbParamsNode((XmlElement) node);
+                            this.LoadDbParamsNode((XmlElement)node);
                             continue;
                         }
                         if (node.LocalName == "TABLES")
                         {
-                            this.LoadTablesNode((XmlElement) node);
+                            this.LoadTablesNode((XmlElement)node);
                             continue;
                         }
                         if (node.LocalName == "LINKS")
                         {
-                            this.LoadLinksNode((XmlElement) node);
+                            this.LoadLinksNode((XmlElement)node);
                             continue;
                         }
                         if (node.LocalName == "OPERATORS")
                         {
-                            this.LoadOperatorsNode((XmlElement) node);
+                            this.LoadOperatorsNode((XmlElement)node);
                             continue;
                         }
                         if (node.LocalName == "ENTITIES")
                         {
-                            this.LoadEntitiesNode((XmlElement) node);
+                            this.LoadEntitiesNode((XmlElement)node);
                         }
                     }
                 }
@@ -868,7 +869,7 @@ namespace Korzh.EasyQuery
                         DataType unknown;
                         try
                         {
-                            unknown = (DataType) Enum.Parse(typeof(DataType), str3, true);
+                            unknown = (DataType)Enum.Parse(typeof(DataType), str3, true);
                         }
                         catch (Exception)
                         {
@@ -1188,7 +1189,7 @@ namespace Korzh.EasyQuery
             writer.WriteEndElement();
         }
 
-        [SecurityPermission(SecurityAction.LinkDemand, Flags=SecurityPermissionFlag.SerializationFormatter)]
+        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("ModelXml", this.SaveToString());
@@ -1366,7 +1367,7 @@ namespace Korzh.EasyQuery
             {
                 get
                 {
-                    return (DataModel.ValueEditorEntry) base[index];
+                    return (DataModel.ValueEditorEntry)base[index];
                 }
                 set
                 {
@@ -1678,11 +1679,11 @@ namespace Korzh.EasyQuery
                     {
                         str = "MULTILIST";
                     }
-                    else if ((defaultEditor is ConstListValueEditor) && (((ConstListValueEditor) defaultEditor).Values.Count > 30))
+                    else if ((defaultEditor is ConstListValueEditor) && (((ConstListValueEditor)defaultEditor).Values.Count > 30))
                     {
                         str = "LISTBOX";
                     }
-                    ((ListValueEditor) defaultEditor).ControlType = str;
+                    ((ListValueEditor)defaultEditor).ControlType = str;
                 }
                 if (defaultEditor == null)
                 {
@@ -1690,8 +1691,8 @@ namespace Korzh.EasyQuery
                     {
                         case Korzh.EasyQuery.DataType.Bool:
                             defaultEditor = new CustomListValueEditor();
-                            ((ListValueEditor) defaultEditor).ControlType = "MENU";
-                            ((CustomListValueEditor) defaultEditor).ListName = "BooleanValues";
+                            ((ListValueEditor)defaultEditor).ControlType = "MENU";
+                            ((CustomListValueEditor)defaultEditor).ListName = "BooleanValues";
                             goto Label_00FD;
 
                         case Korzh.EasyQuery.DataType.Date:
@@ -1705,7 +1706,7 @@ namespace Korzh.EasyQuery
             Label_00FD:
                 if ((defaultEditor != null) && (defaultEditor is DateTimeValueEditor))
                 {
-                    ((DateTimeValueEditor) defaultEditor).SubType = type;
+                    ((DateTimeValueEditor)defaultEditor).SubType = type;
                 }
                 return defaultEditor;
             }
@@ -1720,7 +1721,7 @@ namespace Korzh.EasyQuery
 
             public static DataModel.EntAttrKind StrToEntAttrKind(string s)
             {
-                return (DataModel.EntAttrKind) Enum.Parse(typeof(DataModel.EntAttrKind), s, true);
+                return (DataModel.EntAttrKind)Enum.Parse(typeof(DataModel.EntAttrKind), s, true);
             }
 
             public string Caption
@@ -1964,7 +1965,7 @@ namespace Korzh.EasyQuery
             {
                 get
                 {
-                    return (DataModel.EntityAttr) base[index];
+                    return (DataModel.EntityAttr)base[index];
                 }
             }
         }
@@ -1981,14 +1982,14 @@ namespace Korzh.EasyQuery
             public override int Add(object value)
             {
                 int index = base.Add(value);
-                this.OnEntityAttrInsertion((DataModel.EntityAttr) value, index);
+                this.OnEntityAttrInsertion((DataModel.EntityAttr)value, index);
                 return index;
             }
 
             public override void Insert(int index, object value)
             {
                 base.Insert(index, value);
-                this.OnEntityAttrInsertion((DataModel.EntityAttr) value, index);
+                this.OnEntityAttrInsertion((DataModel.EntityAttr)value, index);
             }
 
             protected virtual void OnEntityAttrInsertion(DataModel.EntityAttr entityAttr, int index)
@@ -2004,7 +2005,7 @@ namespace Korzh.EasyQuery
             {
                 get
                 {
-                    return (DataModel.Entity) base[index];
+                    return (DataModel.Entity)base[index];
                 }
             }
         }
@@ -2021,14 +2022,14 @@ namespace Korzh.EasyQuery
             public override int Add(object value)
             {
                 int index = base.Add(value);
-                this.OnEntityInsertion((DataModel.Entity) value, index);
+                this.OnEntityInsertion((DataModel.Entity)value, index);
                 return index;
             }
 
             public override void Insert(int index, object value)
             {
                 base.Insert(index, value);
-                this.OnEntityInsertion((DataModel.Entity) value, index);
+                this.OnEntityInsertion((DataModel.Entity)value, index);
             }
 
             protected virtual void OnEntityInsertion(DataModel.Entity entity, int index)
@@ -2043,7 +2044,8 @@ namespace Korzh.EasyQuery
 
         public class Error : Exception
         {
-            public Error(string message) : base(message)
+            public Error(string message)
+                : base(message)
             {
             }
         }
@@ -2095,7 +2097,7 @@ namespace Korzh.EasyQuery
 
             public static LinkType StrToLinkType(string s)
             {
-                return (LinkType) Enum.Parse(typeof(LinkType), s, true);
+                return (LinkType)Enum.Parse(typeof(LinkType), s, true);
             }
 
             public override string ToString()
@@ -2356,7 +2358,7 @@ namespace Korzh.EasyQuery
                 {
                     get
                     {
-                        return (DataModel.Link.Condition) base[index];
+                        return (DataModel.Link.Condition)base[index];
                     }
                 }
             }
@@ -2399,7 +2401,7 @@ namespace Korzh.EasyQuery
             {
                 get
                 {
-                    return (DataModel.Link) base[index];
+                    return (DataModel.Link)base[index];
                 }
             }
         }
@@ -2408,7 +2410,7 @@ namespace Korzh.EasyQuery
         {
             public override void Remove(object obj)
             {
-                ((DataModel.Link) obj).RemoveFromTables();
+                ((DataModel.Link)obj).RemoveFromTables();
                 base.Remove(obj);
             }
 
@@ -2458,7 +2460,8 @@ namespace Korzh.EasyQuery
                 this.appliedTypes.AddRange(Enum.GetValues(typeof(DataType)));
             }
 
-            public Operator(string id, string aCaption, string aExpr, string aDisplayFormat) : this()
+            public Operator(string id, string aCaption, string aExpr, string aDisplayFormat)
+                : this()
             {
                 this.ID = id;
                 this.Caption = aCaption;
@@ -2631,7 +2634,7 @@ namespace Korzh.EasyQuery
                 get
                 {
                     int index = this.displayFormat.IndexOf("[[");
-                    int num2 = this.displayFormat.IndexOf("]]", (int) (index + 2));
+                    int num2 = this.displayFormat.IndexOf("]]", (int)(index + 2));
                     string str = this.displayFormat.Substring(index + 2, (num2 - index) - 2).Trim();
                     if (!(str != ""))
                     {
@@ -2717,7 +2720,8 @@ namespace Korzh.EasyQuery
                 this.appliedTypes = new DataTypeList(appliedTypes);
             }
 
-            public OperatorGroup(string groupName, DataTypeList appliedTypes) : this(groupName, new DataType[0])
+            public OperatorGroup(string groupName, DataTypeList appliedTypes)
+                : this(groupName, new DataType[0])
             {
                 this.appliedTypes.InsertRange(0, appliedTypes);
             }
@@ -2750,7 +2754,8 @@ namespace Korzh.EasyQuery
 
         public class OperatorGroupList : ArrayList
         {
-            public OperatorGroupList(DataModel.OperatorGroup[] groups) : base(groups)
+            public OperatorGroupList(DataModel.OperatorGroup[] groups)
+                : base(groups)
             {
             }
 
@@ -2773,7 +2778,7 @@ namespace Korzh.EasyQuery
             {
                 get
                 {
-                    return (DataModel.OperatorGroup) base[index];
+                    return (DataModel.OperatorGroup)base[index];
                 }
                 set
                 {
@@ -2823,7 +2828,7 @@ namespace Korzh.EasyQuery
             {
                 get
                 {
-                    return (DataModel.Operator) base[index];
+                    return (DataModel.Operator)base[index];
                 }
             }
         }
@@ -2861,7 +2866,7 @@ namespace Korzh.EasyQuery
             {
                 get
                 {
-                    return (DataModel.Path) base[index];
+                    return (DataModel.Path)base[index];
                 }
             }
         }
@@ -3148,7 +3153,7 @@ namespace Korzh.EasyQuery
             {
                 get
                 {
-                    return (DataModel.Table) base[index];
+                    return (DataModel.Table)base[index];
                 }
             }
         }
@@ -3248,7 +3253,7 @@ namespace Korzh.EasyQuery
             {
                 get
                 {
-                    return (DataModel.TypeOperatorEntry) base[index];
+                    return (DataModel.TypeOperatorEntry)base[index];
                 }
                 set
                 {
