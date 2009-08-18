@@ -1,0 +1,31 @@
+<Configuration>
+  <SettingsComponent>
+    <string />
+    <integer>
+      <setting name="UsedSolutionBuilderID">0</setting>
+    </integer>
+    <boolean>
+      <setting name="SolutionAnalysisEnabled">False</setting>
+    </boolean>
+  </SettingsComponent>
+  <NAntValidationSettings>
+    <NAntPath value="" />
+  </NAntValidationSettings>
+  <RecentFiles>
+    <RecentFiles>
+      <File id="7E1D831B-E4A3-446B-B856-C3B45F4ED755/f:AssemblyInfo.cs" caret="0" scrollPosition="0|0" />
+      <File id="7E1D831B-E4A3-446B-B856-C3B45F4ED755/d:EasyQuery/d:DataGates/f:OdbcGate.cs" caret="0" scrollPosition="0|232" />
+      <File id="7E1D831B-E4A3-446B-B856-C3B45F4ED755/d:EasyQuery/d:DataGates/f:OleDbGate.cs" caret="0" scrollPosition="0|120" />
+      <File id="7E1D831B-E4A3-446B-B856-C3B45F4ED755/d:EasyQuery/d:DataGates/f:SqlClientGate.cs" caret="248" scrollPosition="0|0" />
+    </RecentFiles>
+    <RecentEdits />
+  </RecentFiles>
+  <UnitTestRunner>
+    <CustomStartDirectory>
+    </CustomStartDirectory>
+    <UseShadowCopy>True</UseShadowCopy>
+    <UseCustomFolder>False</UseCustomFolder>
+    <EnableUnitTesting>True</EnableUnitTesting>
+    <Providers />
+  </UnitTestRunner>
+</Configuration>
