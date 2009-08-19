@@ -75,7 +75,7 @@
             this.btnEliminar.Location = new System.Drawing.Point(391, 516);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
-            this.btnEliminar.TabIndex = 28;
+            this.btnEliminar.TabIndex = 11;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
             this.btnEliminar.Visible = false;
@@ -86,7 +86,7 @@
             this.btnAgregar.Location = new System.Drawing.Point(310, 516);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
-            this.btnAgregar.TabIndex = 27;
+            this.btnAgregar.TabIndex = 10;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
@@ -97,7 +97,7 @@
             this.btnModificar.Location = new System.Drawing.Point(229, 516);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
-            this.btnModificar.TabIndex = 26;
+            this.btnModificar.TabIndex = 9;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
@@ -108,7 +108,7 @@
             this.btnCerrar.Location = new System.Drawing.Point(497, 516);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(75, 23);
-            this.btnCerrar.TabIndex = 25;
+            this.btnCerrar.TabIndex = 12;
             this.btnCerrar.Text = "Cerrar";
             this.btnCerrar.UseVisualStyleBackColor = true;
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
@@ -119,7 +119,7 @@
             this.groupBox1.Location = new System.Drawing.Point(13, 74);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(559, 197);
-            this.groupBox1.TabIndex = 29;
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Organizaciones";
             // 
@@ -136,7 +136,7 @@
             this.gvOrganizaciones.Size = new System.Drawing.Size(546, 171);
             this.gvOrganizaciones.TabIndex = 0;
             this.gvOrganizaciones.TabStop = false;
-            this.gvOrganizaciones.SystemColorsChanged += new System.EventHandler(this.gvOrganizaciones_SystemColorsChanged);
+            this.gvOrganizaciones.SelectionChanged += new System.EventHandler(this.gvOrganizaciones_SelectionChanged);
             // 
             // gpbDatosGenerales
             // 
@@ -158,7 +158,7 @@
             this.gpbDatosGenerales.Location = new System.Drawing.Point(12, 277);
             this.gpbDatosGenerales.Name = "gpbDatosGenerales";
             this.gpbDatosGenerales.Size = new System.Drawing.Size(560, 233);
-            this.gpbDatosGenerales.TabIndex = 30;
+            this.gpbDatosGenerales.TabIndex = 0;
             this.gpbDatosGenerales.TabStop = false;
             this.gpbDatosGenerales.Text = "Datos Generales";
             // 
@@ -167,7 +167,7 @@
             this.btnLimpiar.Location = new System.Drawing.Point(479, 204);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpiar.TabIndex = 15;
+            this.btnLimpiar.TabIndex = 8;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
@@ -175,12 +175,13 @@
             // saiDdlClasificacion
             // 
             this.saiDdlClasificacion.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.saiDdlClasificacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.saiDdlClasificacion.FormattingEnabled = true;
             this.saiDdlClasificacion.Location = new System.Drawing.Point(109, 177);
             this.saiDdlClasificacion.Name = "saiDdlClasificacion";
             this.saiDdlClasificacion.Size = new System.Drawing.Size(228, 21);
             this.saiDdlClasificacion.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.saiDdlClasificacion.TabIndex = 14;
+            this.saiDdlClasificacion.TabIndex = 7;
             // 
             // saiTxtTelefono
             // 
@@ -189,7 +190,7 @@
             this.saiTxtTelefono.Name = "saiTxtTelefono";
             this.saiTxtTelefono.Size = new System.Drawing.Size(301, 20);
             this.saiTxtTelefono.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.saiTxtTelefono.TabIndex = 13;
+            this.saiTxtTelefono.TabIndex = 3;
             // 
             // saiTxtDireccion
             // 
@@ -198,7 +199,7 @@
             this.saiTxtDireccion.Name = "saiTxtDireccion";
             this.saiTxtDireccion.Size = new System.Drawing.Size(301, 20);
             this.saiTxtDireccion.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.saiTxtDireccion.TabIndex = 12;
+            this.saiTxtDireccion.TabIndex = 2;
             // 
             // saiTxtDireccionWeb
             // 
@@ -207,7 +208,7 @@
             this.saiTxtDireccionWeb.Name = "saiTxtDireccionWeb";
             this.saiTxtDireccionWeb.Size = new System.Drawing.Size(301, 20);
             this.saiTxtDireccionWeb.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.saiTxtDireccionWeb.TabIndex = 10;
+            this.saiTxtDireccionWeb.TabIndex = 6;
             // 
             // saiTxtEmail
             // 
@@ -216,7 +217,7 @@
             this.saiTxtEmail.Name = "saiTxtEmail";
             this.saiTxtEmail.Size = new System.Drawing.Size(301, 20);
             this.saiTxtEmail.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.saiTxtEmail.TabIndex = 9;
+            this.saiTxtEmail.TabIndex = 5;
             // 
             // saiTxtFax
             // 
@@ -225,7 +226,7 @@
             this.saiTxtFax.Name = "saiTxtFax";
             this.saiTxtFax.Size = new System.Drawing.Size(301, 20);
             this.saiTxtFax.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.saiTxtFax.TabIndex = 8;
+            this.saiTxtFax.TabIndex = 4;
             // 
             // saiTxtNombre
             // 
@@ -235,7 +236,7 @@
             this.saiTxtNombre.Name = "saiTxtNombre";
             this.saiTxtNombre.Size = new System.Drawing.Size(301, 20);
             this.saiTxtNombre.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.saiTxtNombre.TabIndex = 7;
+            this.saiTxtNombre.TabIndex = 1;
             // 
             // label7
             // 
@@ -243,7 +244,7 @@
             this.label7.Location = new System.Drawing.Point(18, 185);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(69, 13);
-            this.label7.TabIndex = 6;
+            this.label7.TabIndex = 0;
             this.label7.Text = "Clasificación:";
             // 
             // label6
@@ -252,7 +253,7 @@
             this.label6.Location = new System.Drawing.Point(18, 154);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(81, 13);
-            this.label6.TabIndex = 5;
+            this.label6.TabIndex = 0;
             this.label6.Text = "Direccion Web:";
             // 
             // label5
@@ -261,7 +262,7 @@
             this.label5.Location = new System.Drawing.Point(18, 128);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 13);
-            this.label5.TabIndex = 4;
+            this.label5.TabIndex = 0;
             this.label5.Text = "Email:";
             // 
             // label4
@@ -270,7 +271,7 @@
             this.label4.Location = new System.Drawing.Point(18, 102);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(27, 13);
-            this.label4.TabIndex = 3;
+            this.label4.TabIndex = 0;
             this.label4.Text = "Fax:";
             // 
             // label3
@@ -279,7 +280,7 @@
             this.label3.Location = new System.Drawing.Point(18, 76);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(52, 13);
-            this.label3.TabIndex = 2;
+            this.label3.TabIndex = 0;
             this.label3.Text = "Telefono:";
             // 
             // label2
@@ -288,7 +289,7 @@
             this.label2.Location = new System.Drawing.Point(18, 50);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 13);
-            this.label2.TabIndex = 1;
+            this.label2.TabIndex = 0;
             this.label2.Text = "Dirección:";
             // 
             // label1
@@ -304,6 +305,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCerrar;
             this.ClientSize = new System.Drawing.Size(584, 564);
             this.Controls.Add(this.gpbDatosGenerales);
             this.Controls.Add(this.groupBox1);
@@ -312,8 +314,9 @@
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.logoPicture);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmOrganizacion";
-            this.Text = "frmOrganizacion";
+            this.Text = "Organizaciones";
             this.Load += new System.EventHandler(this.frmOrganizacion_Load);
             this.Controls.SetChildIndex(this.logoPicture, 0);
             this.Controls.SetChildIndex(this.btnCerrar, 0);
