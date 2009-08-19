@@ -87,7 +87,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 try
                 {
-                    OrganizacionList organizacion = OrganizacionMapper.Instance().GetAll();
+                    var organizacion = OrganizacionMapper.Instance().GetAll();
                     foreach (var o in organizacion)
                     {
                         saiReport1.AgregarRegistro(null, o.Clave,

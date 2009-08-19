@@ -1,5 +1,4 @@
 ﻿using System.Windows.Forms;
-using BSD.C4.Tlaxcala.Sai.Interfaces;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
