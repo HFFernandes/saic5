@@ -191,7 +191,15 @@ namespace BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers
         }
 
 
-          
+        /// <summary>
+        /// Obtiene bitacora filtrado
+        /// </summary>
+        /// <param name="filtro"></param>
+        /// <returns></returns>
+        public BitacoraList GetFiltrado(System.String filtro)
+        {
+            return base.GetObjectListByAnyStoredProcedure(StoredProceduresPrefix() + "Bitacora_GetByFiltro", filtro);
+        }
 
 
 
