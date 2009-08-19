@@ -44,6 +44,10 @@
             this.logoPicture = new System.Windows.Forms.PictureBox();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.bnCancelar = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.ddlMunicipio = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.ddlEstado = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvUnidades)).BeginInit();
@@ -52,6 +56,10 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.ddlEstado);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.ddlMunicipio);
+            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.btnLimpiar);
             this.groupBox1.Controls.Add(this.saiTxtCodigo);
             this.groupBox1.Controls.Add(this.label2);
@@ -60,7 +68,7 @@
             this.groupBox1.Controls.Add(this.ddlCorporacion);
             this.groupBox1.Location = new System.Drawing.Point(12, 250);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(560, 124);
+            this.groupBox1.Size = new System.Drawing.Size(560, 180);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos Generales";
@@ -68,7 +76,7 @@
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(479, 95);
+            this.btnLimpiar.Location = new System.Drawing.Point(479, 151);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
             this.btnLimpiar.TabIndex = 4;
@@ -107,7 +115,7 @@
             // chkActivo
             // 
             this.chkActivo.AutoSize = true;
-            this.chkActivo.Location = new System.Drawing.Point(73, 85);
+            this.chkActivo.Location = new System.Drawing.Point(60, 139);
             this.chkActivo.Name = "chkActivo";
             this.chkActivo.Size = new System.Drawing.Size(56, 17);
             this.chkActivo.TabIndex = 3;
@@ -128,7 +136,7 @@
             this.btnModificar.Enabled = false;
             this.btnModificar.Image = ((System.Drawing.Image)(resources.GetObject("btnModificar.Image")));
             this.btnModificar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnModificar.Location = new System.Drawing.Point(227, 399);
+            this.btnModificar.Location = new System.Drawing.Point(227, 458);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
             this.btnModificar.TabIndex = 5;
@@ -141,7 +149,7 @@
             // 
             this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
             this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregar.Location = new System.Drawing.Point(308, 399);
+            this.btnAgregar.Location = new System.Drawing.Point(308, 458);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
             this.btnAgregar.TabIndex = 6;
@@ -189,7 +197,7 @@
             // 
             this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
             this.btnEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEliminar.Location = new System.Drawing.Point(389, 399);
+            this.btnEliminar.Location = new System.Drawing.Point(389, 458);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
             this.btnEliminar.TabIndex = 7;
@@ -201,7 +209,7 @@
             // 
             // bnCancelar
             // 
-            this.bnCancelar.Location = new System.Drawing.Point(497, 399);
+            this.bnCancelar.Location = new System.Drawing.Point(497, 458);
             this.bnCancelar.Name = "bnCancelar";
             this.bnCancelar.Size = new System.Drawing.Size(75, 23);
             this.bnCancelar.TabIndex = 8;
@@ -209,12 +217,50 @@
             this.bnCancelar.UseVisualStyleBackColor = true;
             this.bnCancelar.Click += new System.EventHandler(this.bnCancelar_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(19, 106);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Municipio:";
+            // 
+            // ddlMunicipio
+            // 
+            this.ddlMunicipio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlMunicipio.FormattingEnabled = true;
+            this.ddlMunicipio.Location = new System.Drawing.Point(139, 103);
+            this.ddlMunicipio.Name = "ddlMunicipio";
+            this.ddlMunicipio.Size = new System.Drawing.Size(198, 21);
+            this.ddlMunicipio.TabIndex = 6;
+            this.ddlMunicipio.SelectedIndexChanged += new System.EventHandler(this.ddlMunicipio_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Enabled = false;
+            this.label4.Location = new System.Drawing.Point(19, 79);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(43, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Estado:";
+            // 
+            // ddlEstado
+            // 
+            this.ddlEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlEstado.FormattingEnabled = true;
+            this.ddlEstado.Location = new System.Drawing.Point(139, 76);
+            this.ddlEstado.Name = "ddlEstado";
+            this.ddlEstado.Size = new System.Drawing.Size(198, 21);
+            this.ddlEstado.TabIndex = 8;
+            // 
             // frmUnidades
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(584, 447);
+            this.ClientSize = new System.Drawing.Size(584, 506);
             this.Controls.Add(this.bnCancelar);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.logoPicture);
@@ -260,5 +306,9 @@
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button bnCancelar;
         private System.Windows.Forms.Button btnLimpiar;
+        private System.Windows.Forms.ComboBox ddlMunicipio;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox ddlEstado;
+        private System.Windows.Forms.Label label4;
     }
 }

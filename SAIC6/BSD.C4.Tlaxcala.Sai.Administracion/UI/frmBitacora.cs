@@ -38,12 +38,37 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         }
 
         private void btnFiltrar_Click(object sender, EventArgs e)
-        {            
-            if (this.ddlOperacion.SelectedIndex > -1)
+        {
+            string sqlFiltro = string.Empty;
+            try
             {
-                string operacion = Convert.ToString(this.ddlOperacion.SelectedItem);
-                this.gvBitacora.DataSource = Mappers.BitacoraMapper.Instance().GetByOperacion(operacion);
+
+                if (this.chkOperacion.Checked)
+                {
+                    sqlFiltro = " Operacion = '" + this.ddlOperacion.SelectedItem + "' ";
+                }
+
+                if (sqlFiltro.Length > 0)
+                    sqlFiltro += " and ";
+
+                if (this.chkCatalogo.Checked)
+                {
+                    sqlFiltro += " NombreCatalogo = '" + this.ddlCatalogos.SelectedItem + "' ";
+                }
+
+                if (sqlFiltro.Length > 0)
+                {
+                    this.gvBitacora.DataSource = Mappers.BitacoraMapper.Instance().GetFiltrado(sqlFiltro);
+                }
+                else 
+                {
+                    throw new SAIExcepcion("Seleccione un filtro.");
+                }
             }
+            catch (SAIExcepcion)
+            { }
+
+
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -54,6 +79,45 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         private void Llenar()
         {
             //this.ddlCatalogos.Items.Add(new ComboItem("Usuarios", "Usuarios"));
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            this.ddlCatalogos.SelectedIndex = -1;
+            this.ddlOperacion.SelectedIndex = -1;
+
+            this.chkCatalogo.Checked = false;
+            this.chkOperacion.Checked = false;
+
+        }
+
+        private void ddlOperacion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.ddlOperacion.SelectedIndex > -1)
+                this.chkOperacion.Checked = true;
+            else
+                this.chkOperacion.Checked = false;
+        }
+
+        private void ddlCatalogos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.ddlCatalogos.SelectedIndex > -1)
+                this.chkCatalogo.Checked = true;
+            else
+                this.chkCatalogo.Checked = false;
+        }
+
+        private void chkOperacion_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!this.chkOperacion.Checked)
+                this.ddlOperacion.SelectedIndex = -1;
+        }
+
+        private void chkCatalogo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!this.chkCatalogo.Checked)
+                this.ddlCatalogos.SelectedIndex = -1;
+
         }
     }
 }

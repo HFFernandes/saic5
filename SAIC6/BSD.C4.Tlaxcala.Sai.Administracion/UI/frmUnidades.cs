@@ -59,27 +59,73 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             { }
         }
 
-        private object ObtieneValor(int indice)
+        private void LlenarEstado()
         {
-            return ((ComboItem)this.ddlCorporacion.Items[indice]).Valor;
+            try
+            {
+                try
+                {
+                    Entidades.EstadoList lstEstado = Mappers.EstadoMapper.Instance().GetAll();
+
+                    foreach (Entidades.Estado estado in lstEstado)
+                    {
+                        this.ddlEstado.Items.Add(new ComboItem(estado.Clave, estado.Nombre));
+                    }
+
+                    this.ddlMunicipio.DisplayMember = "Descripcion";
+                    this.ddlMunicipio.ValueMember = "Valor";
+                }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
+            }
+            catch (SAIExcepcion)
+            { }
         }
 
-        private string ObtieneDescripcion(int indice)
+        private void LlenarMunicipio()
         {
-            return ((ComboItem)this.ddlCorporacion.Items[indice]).Descripcion;
+            try
+            {
+                try
+                {
+                    Entidades.MunicipioList lstMunicipio = Mappers.MunicipioMapper.Instance().GetAll();
+
+                    foreach (Entidades.Municipio municipio in lstMunicipio)
+                    {
+                        this.ddlMunicipio.Items.Add(new ComboItem(municipio.Clave, municipio.Nombre));
+                    }
+
+                    this.ddlMunicipio.DisplayMember = "Descripcion";
+                    this.ddlMunicipio.ValueMember = "Valor";
+                }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
+            }
+            catch (SAIExcepcion)
+            { }
         }
 
-        private void SeleccionarComboItem(int Value)
+        private object ObtieneValor(ComboBox comboBox)
         {
-            foreach (ComboItem item in this.ddlCorporacion.Items)
+            return ((ComboItem)comboBox.Items[comboBox.SelectedIndex]).Valor;
+        }
+
+        private string ObtieneDescripcion(ComboBox comboBox)
+        {
+            return ((ComboItem)comboBox.Items[comboBox.SelectedIndex]).Descripcion;
+        }
+
+        private void SeleccionarComboItem(int Value, ComboBox comboBox)
+        {
+            foreach (ComboItem item in comboBox.Items)
             {
                 if (Convert.ToInt32(item.Valor) == Value)
                 {
-                    this.ddlCorporacion.SelectedItem = item;
+                    comboBox.SelectedItem = item;
                     break;
                 }
                 else
-                { this.ddlCorporacion.SelectedIndex = -1; }
+                { comboBox.SelectedIndex = -1; }
             }
         }
 
@@ -147,7 +193,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 try
                 {
                     Entidades.ListaUnidades newUnidad = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.ListaUnidades();
-                    newUnidad.ClaveCorporacion = Convert.ToInt32(this.ObtieneValor(this.ddlCorporacion.SelectedIndex)); // Convert.ToInt32(this.ddlCorporacion.SelectedValue);
+                    newUnidad.ClaveCorporacion = Convert.ToInt32(this.ObtieneValor(this.ddlCorporacion)); // Convert.ToInt32(this.ddlCorporacion.SelectedValue);
                     newUnidad.Codigo = saiTxtCodigo.Text;
                     newUnidad.Activo = this.chkActivo.Checked;
 
@@ -182,7 +228,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     int selectedRow = this.gvUnidades.CurrentCellAddress.Y;
                     int clave = Convert.ToInt32(this.gvUnidades.Rows[selectedRow].Cells["Clave"].Value);
                     Entidades.ListaUnidades updUnidad = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.ListaUnidades(clave);
-                    updUnidad.ClaveCorporacion = Convert.ToInt32(this.ObtieneValor(this.ddlCorporacion.SelectedIndex));
+                    updUnidad.ClaveCorporacion = Convert.ToInt32(this.ObtieneValor(this.ddlCorporacion));
                     updUnidad.Codigo = this.saiTxtCodigo.Text;
                     updUnidad.Activo = this.chkActivo.Checked;
 
@@ -276,7 +322,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     {
                         this.saiTxtCodigo.Text = Convert.ToString(this.gvUnidades.Rows[selectedRow].Cells["Codigo"].Value);
                         //this.ddlCorporacion.SelectedValue = this.gvUnidades.Rows[selectedRow].Cells["ClaveCorporacion"].Value;
-                        this.SeleccionarComboItem(Convert.ToInt32(this.gvUnidades.Rows[selectedRow].Cells["ClaveCorporacion"].Value));
+                        this.SeleccionarComboItem(Convert.ToInt32(this.gvUnidades.Rows[selectedRow].Cells["ClaveCorporacion"].Value), this.ddlCorporacion);
                         this.chkActivo.Checked = Convert.ToBoolean(this.gvUnidades.Rows[selectedRow].Cells["Activo"].Value);
                         this.btnEliminar.Visible = true;
                         this.btnModificar.Enabled = true;
@@ -293,6 +339,11 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             this.Limpiar();
+        }
+
+        private void ddlMunicipio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

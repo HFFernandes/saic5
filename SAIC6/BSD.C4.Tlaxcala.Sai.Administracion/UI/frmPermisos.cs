@@ -271,7 +271,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
                         bitacora.Descripcion = "Se agregaron Permisos al usuario: " + this.lblDatos.Text;
                         bitacora.FechaOperacion = DateTime.Today;
-                        bitacora.NombreCatalogo = "PermisoUsuario";
+                        bitacora.NombreCatalogo = "Permiso Usuario";
                         bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
                         bitacora.Operacion = "INSERT";
 
@@ -319,7 +319,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
                         bitacora.Descripcion = "Se agregaron Permisos al usuario: " + this.lblDatos.Text;
                         bitacora.FechaOperacion = DateTime.Today;
-                        bitacora.NombreCatalogo = "PermisoUsuario";
+                        bitacora.NombreCatalogo = "Permiso Usuario";
                         bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
                         bitacora.Operacion = "INSERT";
 
@@ -358,7 +358,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
                     bitacora.Descripcion = "Se quitaron permisos para el usuario: " + this.lblDatos.Text;
                     bitacora.FechaOperacion = DateTime.Today;
-                    bitacora.NombreCatalogo = "PermisoUsuario";
+                    bitacora.NombreCatalogo = "Permiso Usuario";
                     bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
                     bitacora.Operacion = "DELETE";
 

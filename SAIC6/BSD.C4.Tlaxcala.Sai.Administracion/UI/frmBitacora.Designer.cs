@@ -35,10 +35,10 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnCerrar = new System.Windows.Forms.Button();
             this.gpbFiltro = new System.Windows.Forms.GroupBox();
+            this.chkCatalogo = new System.Windows.Forms.CheckBox();
+            this.chkOperacion = new System.Windows.Forms.CheckBox();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.ddlCatalogos = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.dtpFecha = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.ddlOperacion = new System.Windows.Forms.ComboBox();
             this.btnFiltrar = new System.Windows.Forms.Button();
@@ -63,9 +63,9 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.gvBitacora);
-            this.groupBox2.Location = new System.Drawing.Point(12, 231);
+            this.groupBox2.Location = new System.Drawing.Point(12, 211);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(560, 241);
+            this.groupBox2.Size = new System.Drawing.Size(560, 274);
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Bitacora";
@@ -78,12 +78,12 @@
             this.gvBitacora.Location = new System.Drawing.Point(12, 19);
             this.gvBitacora.Name = "gvBitacora";
             this.gvBitacora.ReadOnly = true;
-            this.gvBitacora.Size = new System.Drawing.Size(542, 216);
+            this.gvBitacora.Size = new System.Drawing.Size(542, 249);
             this.gvBitacora.TabIndex = 13;
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(445, 123);
+            this.btnBuscar.Location = new System.Drawing.Point(445, 97);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(109, 23);
             this.btnBuscar.TabIndex = 1;
@@ -103,10 +103,10 @@
             // 
             // gpbFiltro
             // 
+            this.gpbFiltro.Controls.Add(this.chkCatalogo);
+            this.gpbFiltro.Controls.Add(this.chkOperacion);
             this.gpbFiltro.Controls.Add(this.btnLimpiar);
             this.gpbFiltro.Controls.Add(this.ddlCatalogos);
-            this.gpbFiltro.Controls.Add(this.label4);
-            this.gpbFiltro.Controls.Add(this.dtpFecha);
             this.gpbFiltro.Controls.Add(this.label3);
             this.gpbFiltro.Controls.Add(this.ddlOperacion);
             this.gpbFiltro.Controls.Add(this.btnFiltrar);
@@ -114,55 +114,63 @@
             this.gpbFiltro.Controls.Add(this.label1);
             this.gpbFiltro.Location = new System.Drawing.Point(12, 73);
             this.gpbFiltro.Name = "gpbFiltro";
-            this.gpbFiltro.Size = new System.Drawing.Size(560, 152);
+            this.gpbFiltro.Size = new System.Drawing.Size(560, 132);
             this.gpbFiltro.TabIndex = 14;
             this.gpbFiltro.TabStop = false;
             this.gpbFiltro.Text = "Filtro";
             this.gpbFiltro.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // chkCatalogo
+            // 
+            this.chkCatalogo.AutoSize = true;
+            this.chkCatalogo.Location = new System.Drawing.Point(277, 68);
+            this.chkCatalogo.Name = "chkCatalogo";
+            this.chkCatalogo.Size = new System.Drawing.Size(15, 14);
+            this.chkCatalogo.TabIndex = 11;
+            this.chkCatalogo.UseVisualStyleBackColor = true;
+            this.chkCatalogo.CheckedChanged += new System.EventHandler(this.chkCatalogo_CheckedChanged);
+            // 
+            // chkOperacion
+            // 
+            this.chkOperacion.AutoSize = true;
+            this.chkOperacion.Location = new System.Drawing.Point(277, 32);
+            this.chkOperacion.Name = "chkOperacion";
+            this.chkOperacion.Size = new System.Drawing.Size(15, 14);
+            this.chkOperacion.TabIndex = 10;
+            this.chkOperacion.UseVisualStyleBackColor = true;
+            this.chkOperacion.CheckedChanged += new System.EventHandler(this.chkOperacion_CheckedChanged);
+            // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(457, 94);
+            this.btnLimpiar.Location = new System.Drawing.Point(457, 68);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(97, 23);
             this.btnLimpiar.TabIndex = 9;
             this.btnLimpiar.Text = "Reestablecer";
             this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // ddlCatalogos
             // 
             this.ddlCatalogos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlCatalogos.FormattingEnabled = true;
             this.ddlCatalogos.Items.AddRange(new object[] {
-            "Usuarios",
-            "Permiso Usuario",
-            "Tipo Incidencia",
+            "Clasificacion Organizacion",
+            "Colonias",
             "Corporaciones",
-            "Unidades",
-            "Municipios",
+            "Dependencias",
             "Localidades",
-            "Colonias"});
+            "Municipios",
+            "Organizaciones",
+            "Permiso Usuario",
+            "Tipo Incidencias",
+            "Unidades",
+            "Usuario"});
             this.ddlCatalogos.Location = new System.Drawing.Point(81, 64);
             this.ddlCatalogos.Name = "ddlCatalogos";
             this.ddlCatalogos.Size = new System.Drawing.Size(189, 21);
             this.ddlCatalogos.TabIndex = 8;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 110);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(40, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Fecha:";
-            // 
-            // dtpFecha
-            // 
-            this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFecha.Location = new System.Drawing.Point(81, 104);
-            this.dtpFecha.Name = "dtpFecha";
-            this.dtpFecha.Size = new System.Drawing.Size(189, 20);
-            this.dtpFecha.TabIndex = 6;
+            this.ddlCatalogos.SelectedIndexChanged += new System.EventHandler(this.ddlCatalogos_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -185,10 +193,11 @@
             this.ddlOperacion.Name = "ddlOperacion";
             this.ddlOperacion.Size = new System.Drawing.Size(189, 21);
             this.ddlOperacion.TabIndex = 2;
+            this.ddlOperacion.SelectedIndexChanged += new System.EventHandler(this.ddlOperacion_SelectedIndexChanged);
             // 
             // btnFiltrar
             // 
-            this.btnFiltrar.Location = new System.Drawing.Point(364, 123);
+            this.btnFiltrar.Location = new System.Drawing.Point(364, 97);
             this.btnFiltrar.Name = "btnFiltrar";
             this.btnFiltrar.Size = new System.Drawing.Size(75, 23);
             this.btnFiltrar.TabIndex = 1;
@@ -245,9 +254,9 @@
         private System.Windows.Forms.Button btnFiltrar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox ddlCatalogos;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DateTimePicker dtpFecha;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnLimpiar;
+        private System.Windows.Forms.CheckBox chkCatalogo;
+        private System.Windows.Forms.CheckBox chkOperacion;
     }
 }
