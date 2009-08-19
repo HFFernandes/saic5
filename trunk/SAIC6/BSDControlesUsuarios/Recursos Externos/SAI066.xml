@@ -321,7 +321,7 @@
         <DESCRIPTION />
       </ATTR>
       <ATTR ID="Incidencias.FechaSuceso" KIND="Data" EXPR="FechaSuceso" CAPTION="Fecha y hora del suceso" TYPE="DateTime" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
-        <OPERATORS>DateEqualPrecise,DateNotEqualPrecise,DateBeforePrecise,DateAfterPrecise,DatePeriodPrecise,MaximumOfAttr,IsNull</OPERATORS>
+        <OPERATORS>DateEqualPrecise,DateNotEqualPrecise,DateBeforePrecise,DateAfterPrecise,DatePeriodPrecise,MaximumOfAttr,IsNull,IsNotNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
       </ATTR>
