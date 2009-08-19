@@ -180,8 +180,10 @@
             this.Controls.Add(this.grpDenunciante);
             this.Controls.Add(this.cklCorporacion);
             this.Controls.Add(this.label12);
+            this.Location = new System.Drawing.Point(0, 0);
             this.Name = "SAIFrmIncidencia066";
             this.Text = "SAIFrmIncidencia066";
+            this.Load += new System.EventHandler(this.SAIFrmIncidencia066_Load);
             this.Controls.SetChildIndex(this.lblTitulo, 0);
             this.Controls.SetChildIndex(this.label12, 0);
             this.Controls.SetChildIndex(this.cklCorporacion, 0);

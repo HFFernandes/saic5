@@ -321,8 +321,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 778);
             this.Controls.Add(this.groupBox2);
+            this.Location = new System.Drawing.Point(0, 0);
             this.Name = "SAIFrmIncidencia066Despacho";
             this.Text = "SAIFrmIncidencia066Despacho";
+            this.Load += new System.EventHandler(this.SAIFrmIncidencia066Despacho_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SAIFrmIncidencia066Despacho_KeyUp);
             this.Controls.SetChildIndex(this.groupBox2, 0);
             this.Controls.SetChildIndex(this.lblTitulo, 0);

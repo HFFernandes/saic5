@@ -3713,6 +3713,30 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 e.Handled = true;
         }
 
+        private void SAIFrmIncidencia_Load(object sender, EventArgs e)
+        {
+            if (!Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_NI))
+            {
+                foreach (Control objControl in this.Controls)
+                {
+                    if (objControl.GetType() == (new System.Windows.Forms.GroupBox()).GetType())
+                    {
+                        continue;
+                    }
+                    if (objControl.GetType().GetProperty("ReadOnly") != null)
+                    {
+                        objControl.GetType().GetProperty("ReadOnly").SetValue(objControl, true, null);
+                    }
+                    else
+                    {
+                        objControl.Enabled = false;
+                    }
+
+                }
+            }
+        }
+
+
       
 
         
