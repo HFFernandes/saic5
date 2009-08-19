@@ -45,7 +45,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     saiReport1.reportControl.PrintPreview(true);
                 }
                 else
-                    throw new SAIExcepcion("No tiene los permisos suficientes para realizar esta acción.");
+                    throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
             }
             catch (SAIExcepcion)
             {
@@ -56,7 +56,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             try
             {
-                if ((Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false) && Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_NI))
+                if (Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false)
                 {
                     //Recuperar el folio y generar una instancia de la entidad para
                     //pasarla al nuevo formulario
@@ -67,7 +67,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         incidenciaDespacho.Show(Aplicacion.frmComandos);
                     }
                 }
-                else if (Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_NI))
+                else
                 {
                     var incidencia = IncidenciaMapper.Instance().GetOne(Convert.ToInt32(e.row.Record[0].Value));
                     if (incidencia != null)
@@ -76,8 +76,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         incidenciaInfo.Show(Aplicacion.frmComandos);
                     }
                 }
-                else
-                    throw new SAIExcepcion("No tiene los permisos suficientes para realizar esta acción.");
             }
             catch (SAIExcepcion)
             {
@@ -96,7 +94,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             try
             {
-                if ((Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false) && Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_NI))
+                if (Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false)
                 {
                     //Recuperar el folio y generar una instancia de la entidad para
                     //pasarla al nuevo formulario
@@ -112,7 +110,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         }
                     }
                 }
-                else if (Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_NI))
+                else
                 {
                     for (int i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
                     {
@@ -126,8 +124,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         }
                     }
                 }
-                else
-                    throw new SAIExcepcion("No tiene los permisos suficientes para realizar esta acción.");
             }
             catch (SAIExcepcion)
             {
@@ -179,7 +175,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             }
 
                             //Ejecutar el stored procedure
-                            IncidenciaMapper.Instance().LigaIncidencia(Convert.ToInt32(folioPadre),"066");
+                            IncidenciaMapper.Instance().LigaIncidencia(Convert.ToInt32(folioPadre), "066");
                         }
                     }
                     catch (Exception ex)
@@ -211,6 +207,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             saiReport1.AgregarColumna(7, "Pendiente Desde", 200, true, true, true, false);
             saiReport1.AgregarColumna(8, "Nombre del Operador", 90, true, true, true, false);
             saiReport1.AgregarColumna(9, "Ligado a", 90, true, true, true, false);
+            saiReport1.AgregarColumna(10, "Prioridad", 20, false, true, true);
             ObtenerRegistros();
         }
 
@@ -298,7 +295,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                                                        totalCorporaciones.ToString(),
                                                                        ObtenerLapso(incidencia.HoraRecepcion),
                                                                        UsuarioMapper.Instance().GetOne(incidencia.ClaveUsuario).NombreUsuario,
-                                                                       incidencia.FolioPadre.ToString()));
+                                                                       incidencia.FolioPadre.ToString(),
+                                                                       TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Prioridad.ToString()));
                     }
                     else
                     {
@@ -379,6 +377,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     incidencia.FolioPadre.ToString() != string.Empty
                                         ? incidencia.Folio.ToString()
                                         : ID.STR_DESCONOCIDO;
+
+                                if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
+                                    saiReport1.reportControl.Records[itm.Record.Index][10].Value = TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Prioridad.ToString();
                             }
                         }
                     }
