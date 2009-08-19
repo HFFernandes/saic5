@@ -101,29 +101,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         break;
                     case ID.CMD_NI:
                         //Se pregunta qué es el usuario y a qué sistema entró:
-                        if (Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
-                            Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
-                        {
-
-                            //Código de prueba
-                            Sai.Dal.Rules.Entities.Incidencia entIncidencia = Sai.Dal.Rules.Mappers.IncidenciaMapper.Instance().GetOne(1000490);
-
-                            try
-                            {
-                                try
-                                {
-                                    SAIFrmIncidencia066Despacho frmIncidencia066Despacho = new SAIFrmIncidencia066Despacho(entIncidencia);
-                                    frmIncidencia066Despacho.Show(this);
-                                }
-                                catch (System.Exception ex)
-                                {
-                                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
-                                }
-                            }
-                            catch (SAIExcepcion) { }
-
-                        }
-                        else if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
+                        if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
                             Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
                         {
 
