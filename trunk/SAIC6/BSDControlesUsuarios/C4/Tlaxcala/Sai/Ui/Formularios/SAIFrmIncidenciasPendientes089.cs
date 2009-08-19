@@ -62,7 +62,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     if (incidencia != null)
                     {
                         var incidenciaInfo = new SAIFrmIncidencia089(incidencia);
-                        incidenciaInfo.Show();
+                        incidenciaInfo.Show(this);
                     }
                 }
                 else
@@ -181,7 +181,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 //para iniciar nuevamente el ciclo
                 lstIncidenciasTemporales.Clear();
                 foreach (var incidencia in (IncidenciaMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_INCIDENCIAS089,
-                                                                                (int)ESTATUSINCIDENCIAS.PENDIENTE, Aplicacion.UsuarioPersistencia.ObtenerClaveSistema())))) //vamos a la base para obtener los registros de estado pendiente y de la corporación del usuario
+                                                                                (int)ESTATUSINCIDENCIAS.PENDIENTE, Aplicacion.UsuarioPersistencia.ObtenerClaveSistema())))) //vamos a la base para obtener los registros de estado pendiente 
                 {
                     lstIncidenciasTemporales.Add(incidencia);
                     //verificamos que la incidencia no esté ya en la lista de incidencias registradas
