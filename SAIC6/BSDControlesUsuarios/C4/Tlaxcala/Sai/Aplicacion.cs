@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using BSD.C4.Tlaxcala.Sai.Ui.Controles;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
+using BSD.C4.Tlaxcala.Sai.Ui.Formularios;
 
 namespace BSD.C4.Tlaxcala.Sai
 {
@@ -15,6 +16,8 @@ namespace BSD.C4.Tlaxcala.Sai
         /// <remarks>Cada ventana Incidencia que se levente tiene que incluirse en esta lista</remarks>
         /// </summary>
         public static List<SAIWinSwitchItem> VentanasIncidencias = new List<SAIWinSwitchItem>();
+
+        public static SAIFrmComandos frmComandos;
 
         /// <summary>
         /// Método para la conversion de hexadecimal a decimal para los colores

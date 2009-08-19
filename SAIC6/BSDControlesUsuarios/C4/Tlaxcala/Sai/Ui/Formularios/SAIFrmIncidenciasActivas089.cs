@@ -62,7 +62,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     if (incidencia != null)
                     {
                         var incidenciaInfo = new SAIFrmIncidencia089(incidencia);
-                        incidenciaInfo.Show(this);
+                        incidenciaInfo.Show(Aplicacion.frmComandos);
                     }
                 }
                 else
