@@ -352,6 +352,9 @@
       <DependentUpon>SAIFrmIncidenciasActivas089.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <Content Include="SAI089.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="SuitePro.ResourceEs.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

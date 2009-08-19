@@ -19,7 +19,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             QueryColumnas.Query = ModeloQuery;
             QueryCondiciones.Query = ModeloQuery;
 
-            var strArchivo = Aplicacion.UsuarioPersistencia.strSistemaActual == "066" ? string.Format("{0}\\{1}", Environment.CurrentDirectory, "SAI066.xml") : string.Format("{0}{1}", Environment.CurrentDirectory, "SAI089.xml");
+            var strArchivo = Aplicacion.UsuarioPersistencia.strSistemaActual == "066" ? string.Format("{0}\\{1}", Environment.CurrentDirectory, "SAI066.xml") : string.Format("{0}\\{1}", Environment.CurrentDirectory, "SAI089.xml");
 
             try
             {
