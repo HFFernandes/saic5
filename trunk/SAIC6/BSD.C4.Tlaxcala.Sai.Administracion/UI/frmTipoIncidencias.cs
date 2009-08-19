@@ -217,7 +217,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
                     bitacora.Descripcion = "Se modifico el Tipo de Incidencia: " + updTipoIncidencia.Descripcion;
                     bitacora.FechaOperacion = DateTime.Today;
-                    bitacora.NombreCatalogo = "Tipo Incidencia";
+                    bitacora.NombreCatalogo = "Tipo Incidencias";
                     bitacora.Operacion = "UPDATE";
                     bitacora.ValorActual = this.saiTxtDescripcion.Text + ", " + this.txtClaveoperacion.Text;
                     bitacora.ValorAnterior = Convert.ToString(this.gvTipoIncidencias.Rows[this.ObtenerIndiceSeleccionado()].Cells["Descripcion"].Value);

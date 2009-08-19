@@ -87,6 +87,15 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             try
             {
                 Mappers.DependenciaMapper.Instance().Delete(Convert.ToInt32(this.gvDependencias.Rows[this.ObtieneIndiceSeleccionado()].Cells["Clave"].Value));
+
+                Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
+                bitacora.Descripcion = "Se elimino la Dependencia: " + Convert.ToString(this.gvDependencias.Rows[this.ObtieneIndiceSeleccionado()].Cells["Descripcion"].Value);
+                bitacora.FechaOperacion = DateTime.Today;
+                bitacora.NombreCatalogo = "Dependencias";
+                bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
+                bitacora.Operacion = "DELETE";
+
+                Mappers.BitacoraMapper.Instance().Insert(bitacora);
             }
             catch (SAIExcepcion)
             { }

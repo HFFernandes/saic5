@@ -208,7 +208,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
                     bitacora.Descripcion = "Se modifico la Colonia: " + updColonia.Nombre;
                     bitacora.FechaOperacion = DateTime.Today;
-                    bitacora.NombreCatalogo = "Colonia";
+                    bitacora.NombreCatalogo = "Colonias";
                     bitacora.Operacion = "UPDATE";
                     bitacora.ValorActual = this.saiTxtNombre.Text;
                     bitacora.ValorAnterior = Convert.ToString(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["Nombre"].Value);
