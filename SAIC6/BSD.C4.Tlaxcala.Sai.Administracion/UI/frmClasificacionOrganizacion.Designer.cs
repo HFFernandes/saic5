@@ -179,7 +179,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.logoPicture);
             this.Name = "frmClasificacionOrganizacion";
-            this.Text = "Clasificacion Organización";
+            this.Text = "Clasificacion de Organizaciones";
             this.Load += new System.EventHandler(this.frmClasificacionOrganizacion_Load);
             this.Controls.SetChildIndex(this.logoPicture, 0);
             this.Controls.SetChildIndex(this.groupBox1, 0);
