@@ -10,6 +10,8 @@ using BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
 using BSD.C4.Tlaxcala.Sai.Ui.Controles;
+using System.Collections;
+
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -124,7 +126,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 {
                                     this.dgvDependencias[3, k - 1].Value = lstIncidenciaDependencia[j].FechaNotificacion.Value;
                                 }
-                                this.dgvDependencias[4, k - 1].Value = lstIncidenciaDependencia[j].ClaveDependencia;
+                               
                             }
                         }
                     }
@@ -144,12 +146,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             DependenciaList lstDependencias = new DependenciaList();
             DependenciaList ListaTodasDependencias = DependenciaMapper.Instance().GetAll();
             int y;
+            IEnumerator myEnumerator;
             
             if (ListaTodasDependencias == null || ListaTodasDependencias.Count == 0)
             {
                 return lstDependencias;
             }
-            var myEnumerator = this.cklDependencia.CheckedIndices.GetEnumerator();
+            myEnumerator = this.cklDependencia.CheckedIndices.GetEnumerator();
             while (myEnumerator.MoveNext() != false)
             {
                 y = (int)myEnumerator.Current;
@@ -177,20 +180,48 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
             foreach(Dependencia entDependencia in ObtenDependenciasEnLista())
             {
+               
+
                 for (int i = 0; i < this.dgvDependencias.Rows.Count; i++)
                 {
-                    if (int.Parse(dgvDependencias[4, i].Value.ToString()) == entDependencia.Clave)
+                    if (dgvDependencias[0, i].Value == null)
                     {
-                        //La dependencia se encuentra en el grid
+                        continue;
+                    }
+
+                    if (int.Parse(dgvDependencias[0, i].Value.ToString()) == entDependencia.Clave)
+                    {
+                        //La IncidenciaDependencia se encuentra en el grid y la bd?
                         entIncidenciaDependencia = IncidenciaDependenciaMapper.Instance().GetOne(entDependencia.Clave, this._entIncidencia.Folio);
+
+                        if (entIncidenciaDependencia == null)
+                        {
+                            entIncidenciaDependencia = new IncidenciaDependencia();
+                            entIncidenciaDependencia.ClaveDependencia = entDependencia.Clave;
+                            entIncidenciaDependencia.Folio = this._entIncidencia.Folio;
+                        }
 
                         if (dgvDependencias[2, i].Value != null)
                         {
-                            entIncidenciaDependencia.FechaEnvioDependencia = DateTime.Parse(dgvDependencias[2, i].Value.ToString());
+                            try
+                            {
+                                entIncidenciaDependencia.FechaEnvioDependencia = DateTime.Parse(dgvDependencias[2, i].Value.ToString());
+                            }
+                            catch 
+                            {
+                                entIncidenciaDependencia.FechaEnvioDependencia = null;
+                            }
                         }
                         if (dgvDependencias[3, i].Value != null)
                         {
-                            entIncidenciaDependencia.FechaNotificacion  = DateTime.Parse(dgvDependencias[3, i].Value.ToString());
+                            try
+                            {
+                                entIncidenciaDependencia.FechaNotificacion = DateTime.Parse(dgvDependencias[3, i].Value.ToString());
+                            }
+                            catch
+                            {
+                                entIncidenciaDependencia.FechaNotificacion = null;
+                            }
                         }
                         lstIncidenciaDependencia.Add(entIncidenciaDependencia);
                     }
@@ -301,7 +332,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             if (e.KeyCode == Keys.Enter)
             {
-                //this.d.Focus();
+                this.cklDependencia.Focus();
             }
             this.SAIFrmIncidenciaKeyUp(e);
         }
@@ -321,13 +352,225 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             if (e.KeyCode == Keys.Enter)
             {
-                //this.dtmFechaEnvioDependencia.Focus();
+                this.txtNumeroOficio.Focus();
             }
             this.SAIFrmIncidenciaKeyUp(e);
         }
 
-        
+        /// <summary>
+        /// Guarda las las dependencias asociadas a la incidencia que se encuentran en la lista de dependencias palomeadas y actualiza el grid
+        /// </summary>
+        private void GuardaDependencias()
+        {
 
+           IncidenciaDependencia entIncidenciaDependencia;
+           IncidenciaDependenciaList lstIncidenciaDependencia;
+           DependenciaList lstDependencias =  this.ObtenDependenciasEnLista();
+           Boolean blnSeEncontro = false;
+           int intIndiceRenglon = 0;
+
+           if (lstDependencias == null || lstDependencias.Count ==0)
+           {
+               this.dgvDependencias.Rows.Clear();
+               IncidenciaDependenciaMapper.Instance().DeleteByIncidencia(this._entIncidencia.Folio);
+               return;
+           }
+
+            try
+            {
+                try
+                {
+                    this.dgvDependencias.Rows.Clear();
+                    foreach (Dependencia entDependencia in lstDependencias)
+                    {
+                        entIncidenciaDependencia = IncidenciaDependenciaMapper.Instance().GetOne(entDependencia.Clave, this._entIncidencia.Folio);
+                        if (entIncidenciaDependencia == null)
+                        {
+                            entIncidenciaDependencia = new IncidenciaDependencia(entDependencia.Clave, this._entIncidencia.Folio);
+                            IncidenciaDependenciaMapper.Instance().Insert(entIncidenciaDependencia);
+                        }
+                        this.dgvDependencias.Rows.Add();
+                        this.dgvDependencias[0, intIndiceRenglon].Value = entIncidenciaDependencia.ClaveDependencia;
+                        this.dgvDependencias[1, intIndiceRenglon].Value = entDependencia.Descripcion;
+                        if (entIncidenciaDependencia.FechaEnvioDependencia.HasValue)
+                        {
+                            this.dgvDependencias[2, intIndiceRenglon].Value = entIncidenciaDependencia.FechaEnvioDependencia;
+                        }
+                        if (entIncidenciaDependencia.FechaNotificacion.HasValue)
+                        {
+                            this.dgvDependencias[3, intIndiceRenglon].Value = entIncidenciaDependencia.FechaNotificacion;
+                        }
+
+                        intIndiceRenglon++;
+                    }
+                    //Ahora se borran las que se pudieron haber quitado en la lista:
+                    lstIncidenciaDependencia = IncidenciaDependenciaMapper.Instance().GetByIncidencia(this._entIncidencia.Folio);
+                    if (lstIncidenciaDependencia != null || lstIncidenciaDependencia.Count > 0)
+                    {
+                        foreach (IncidenciaDependencia objIncidenciaDependencia in lstIncidenciaDependencia)
+                        {
+                            blnSeEncontro = false;
+                            foreach (Dependencia entDependencia in lstDependencias)
+                            {
+                                if (entDependencia.Clave == objIncidenciaDependencia.ClaveDependencia)
+                                {
+                                    blnSeEncontro = true;
+                                    break;
+                                }
+                            }
+                            if (!blnSeEncontro)
+                            {
+                                IncidenciaDependenciaMapper.Instance().Delete(objIncidenciaDependencia);
+                            }
+                        }
+
+                    }
+
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
+            }
+            catch (SAIExcepcion) { }
+
+        }
+
+        private void cklDependencia_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (!this._blnSeActivoClosed)
+            {
+                this.GuardaDependencias();
+                base.RecuperaDatosEnIncidencia();
+                this.RecuperaDatosEnIncidencia();
+                this.GuardaIncidencia();
+            }
+        }
+
+        private void cklDependencia_Leave(object sender, EventArgs e)
+        {
+            if (!this._blnSeActivoClosed)
+            {
+                this.GuardaDependencias();
+                base.RecuperaDatosEnIncidencia();
+                this.RecuperaDatosEnIncidencia();
+                this.GuardaIncidencia();
+            }
+        }
+
+        private void cklDependencia_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.dgvDependencias.Focus();
+            }
+            this.SAIFrmIncidenciaKeyUp(e);
+        }
+
+        private void txtNumeroOficio_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.dgvDependencias.Focus();
+            }
+            this.SAIFrmIncidenciaKeyUp(e);
+        }
+
+        /// <summary>
+        /// Valida la información introducida en el grid y guarda los datos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dgvDependencias_CellValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            //IncidenciaDependencia entIncidenciaDependencia = null;
+
+            try
+            {
+                try
+                {
+                    if ((this.dgvDependencias[0, e.RowIndex].Value == null))
+                    {
+                    //    entIncidenciaDependencia = IncidenciaDependenciaMapper.Instance().GetOne(int.Parse(this.dgvDependencias[0, e.RowIndex].Value.ToString()), this._entIncidencia.Folio);
+                    //}
+                    //else
+                    //{
+                        
+                        //this.dgvDependencias.Rows.Remove(this.dgvDependencias.Rows[e.RowIndex]);
+                        return;
+                    }
+
+                    switch (e.ColumnIndex)
+                    {
+
+                        case 0: //Clave Dependencia
+                            break;
+                        case 1: //Descripción de dependencia
+                            Dependencia entDependencia = DependenciaMapper.Instance().GetOne(int.Parse(dgvDependencias[0, e.RowIndex].Value.ToString()));
+                            dgvDependencias[e.ColumnIndex, e.RowIndex].Value = entDependencia.Descripcion;
+                            return;
+                            break;
+                        case 2: //Fecha de Envio a dependencia
+                            DateTime dtmFecha;
+                            if (dgvDependencias[e.ColumnIndex, e.RowIndex].Value != null && dgvDependencias[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
+                            {
+                                try
+                                {
+                                    dtmFecha = DateTime.Parse(dgvDependencias[e.ColumnIndex, e.RowIndex].Value.ToString());
+                                    if (dtmFecha > DateTime.Today)
+                                    {
+                                        dgvDependencias.CurrentCell.Value = string.Empty;
+                                        throw new SAIExcepcion("La fecha de envío a dependencia no se encuentra en el formato correcto, debe de ser una fecha menor o igual al dia actual", this);
+                                    }
+                                    //entIncidenciaDependencia.FechaEnvioDependencia = dtmFecha;
+                                }
+                                catch
+                                {
+                                    dgvDependencias.CurrentCell.Value = string.Empty;
+                                    throw new SAIExcepcion("La fecha de envío a dependencia no se encuentra en el formato correcto, debe de ser una fecha menor o igual al dia actual", this);
+                                }
+                            }
+                            break;
+                        case 3: //Fecha de notificación de la dependencia
+                            if (dgvDependencias[e.ColumnIndex, e.RowIndex].Value != null && dgvDependencias[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
+                            {
+                                try
+                                {
+                                    dtmFecha = DateTime.Parse(dgvDependencias[e.ColumnIndex, e.RowIndex].Value.ToString());
+                                    if (dtmFecha > DateTime.Today)
+                                    {
+                                        dgvDependencias.CurrentCell.Value = string.Empty;
+                                        throw new SAIExcepcion("La fecha de envío a dependencia no se encuentra en el formato correcto, debe de ser una fecha menor o igual al dia actual", this);
+                                    }
+                                    //entIncidenciaDependencia.FechaEnvioDependencia = dtmFecha;
+                                }
+                                catch
+                                {
+                                    dgvDependencias.CurrentCell.Value = string.Empty;
+                                    throw new SAIExcepcion("La fecha de envío a dependencia no se encuentra en el formato correcto, debe de ser una fecha menor o igual al dia actual", this);
+                                }
+                            }
+                            break;
+                    
+                    }
+
+                    //IncidenciaDependenciaMapper.Instance().Save(entIncidenciaDependencia);
+                    base.RecuperaDatosEnIncidencia();
+                    this.RecuperaDatosEnIncidencia();
+                    this.GuardaIncidencia();
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
+            }
+            catch (SAIExcepcion) { }
+        }
+
+        private void SAIFrmIncidencia089_Load(object sender, EventArgs e)
+        {
+
+        }
       
     }
 }

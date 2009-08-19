@@ -407,7 +407,21 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private CorporacionList ObtenCorporaciones()
         {
-            return CorporacionMapper.Instance().GetBySQLQuery("SELECT [Clave],[Descripcion],[ClaveSistema],[UnidadesVirtuales],[Activo],[Zn] FROM [dbo].[Corporacion] Where Activo = true");
+            CorporacionList lstCorporaciones = new CorporacionList();
+            try
+            {
+                try
+                {
+                     lstCorporaciones = CorporacionMapper.Instance().GetBySQLQuery("SELECT [Clave],[Descripcion],[ClaveSistema],[UnidadesVirtuales],[Activo],[Zn] FROM [dbo].[Corporacion] Where Activo = true");
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
+            }
+            catch (SAIExcepcion) { }
+
+            return lstCorporaciones;
         }
 
         private void cklCorporacion_MouseUp(object sender, MouseEventArgs e)
