@@ -24,6 +24,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             if (dialogResult == DialogResult.OK)
             {
                 InitializeComponent();
+                Aplicacion.frmComandos = this;
+
                 SAIBarraComandos.DeleteAll(); //Se limpia la barra de comandos por si existiera alguno
                 SAIBarraComandos.EnableCustomization(true);
 
