@@ -52,7 +52,7 @@
             this.btnEliminar.Location = new System.Drawing.Point(391, 340);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
-            this.btnEliminar.TabIndex = 24;
+            this.btnEliminar.TabIndex = 5;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
             this.btnEliminar.Visible = false;
@@ -63,7 +63,7 @@
             this.btnAgregar.Location = new System.Drawing.Point(310, 340);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
-            this.btnAgregar.TabIndex = 23;
+            this.btnAgregar.TabIndex = 4;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
@@ -74,7 +74,7 @@
             this.btnModificar.Location = new System.Drawing.Point(229, 340);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
-            this.btnModificar.TabIndex = 22;
+            this.btnModificar.TabIndex = 3;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
@@ -85,7 +85,7 @@
             this.btnCerrar.Location = new System.Drawing.Point(497, 340);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(75, 23);
-            this.btnCerrar.TabIndex = 21;
+            this.btnCerrar.TabIndex = 6;
             this.btnCerrar.Text = "Cerrar";
             this.btnCerrar.UseVisualStyleBackColor = true;
             this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
@@ -98,7 +98,7 @@
             this.gbpDatosGenerales.Location = new System.Drawing.Point(12, 239);
             this.gbpDatosGenerales.Name = "gbpDatosGenerales";
             this.gbpDatosGenerales.Size = new System.Drawing.Size(560, 68);
-            this.gbpDatosGenerales.TabIndex = 20;
+            this.gbpDatosGenerales.TabIndex = 0;
             this.gbpDatosGenerales.TabStop = false;
             this.gbpDatosGenerales.Text = "Datos generales";
             // 
@@ -110,14 +110,14 @@
             this.saiTxtDescripcion.Name = "saiTxtDescripcion";
             this.saiTxtDescripcion.Size = new System.Drawing.Size(286, 20);
             this.saiTxtDescripcion.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.saiTxtDescripcion.TabIndex = 2;
+            this.saiTxtDescripcion.TabIndex = 1;
             // 
             // btnLimpiar
             // 
             this.btnLimpiar.Location = new System.Drawing.Point(479, 39);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpiar.TabIndex = 1;
+            this.btnLimpiar.TabIndex = 2;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
@@ -137,7 +137,7 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 73);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(560, 160);
-            this.groupBox1.TabIndex = 19;
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Clasificación de Organizaciones";
             // 
@@ -150,6 +150,7 @@
             this.gvClasificacionOrg.Location = new System.Drawing.Point(17, 19);
             this.gvClasificacionOrg.Name = "gvClasificacionOrg";
             this.gvClasificacionOrg.ReadOnly = true;
+            this.gvClasificacionOrg.RowHeadersVisible = false;
             this.gvClasificacionOrg.Size = new System.Drawing.Size(537, 135);
             this.gvClasificacionOrg.TabIndex = 0;
             this.gvClasificacionOrg.TabStop = false;
@@ -178,6 +179,7 @@
             this.Controls.Add(this.gbpDatosGenerales);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.logoPicture);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmClasificacionOrganizacion";
             this.Text = "Clasificacion de Organizaciones";
             this.Load += new System.EventHandler(this.frmClasificacionOrganizacion_Load);

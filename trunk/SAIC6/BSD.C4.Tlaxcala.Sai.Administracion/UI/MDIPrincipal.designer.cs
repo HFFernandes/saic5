@@ -44,8 +44,8 @@
             this.catalogoDeLocalidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.catalogoDeColoniasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.catalogoDeDependenciasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.catalogoClasificacionDeOrganizacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.catalogoDeOrganizacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.catalogoClasificacionDeOrganizacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuStripPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,8 +79,9 @@
             // 
             // bitacoraToolStripMenuItem
             // 
+            this.bitacoraToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("bitacoraToolStripMenuItem.Image")));
             this.bitacoraToolStripMenuItem.Name = "bitacoraToolStripMenuItem";
-            this.bitacoraToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.bitacoraToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.bitacoraToolStripMenuItem.Text = "Bitacora";
             this.bitacoraToolStripMenuItem.Click += new System.EventHandler(this.bitacoraToolStripMenuItem_Click);
             // 
@@ -88,7 +89,7 @@
             // 
             this.salirToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("salirToolStripMenuItem.Image")));
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.salirToolStripMenuItem.Text = "&Salir";
             this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
@@ -176,24 +177,27 @@
             // 
             // catalogoDeDependenciasToolStripMenuItem
             // 
+            this.catalogoDeDependenciasToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("catalogoDeDependenciasToolStripMenuItem.Image")));
             this.catalogoDeDependenciasToolStripMenuItem.Name = "catalogoDeDependenciasToolStripMenuItem";
             this.catalogoDeDependenciasToolStripMenuItem.Size = new System.Drawing.Size(292, 22);
             this.catalogoDeDependenciasToolStripMenuItem.Text = "Catalogo de Dependencias";
             this.catalogoDeDependenciasToolStripMenuItem.Click += new System.EventHandler(this.catalogoDeDependenciasToolStripMenuItem_Click);
             // 
-            // catalogoClasificacionDeOrganizacionesToolStripMenuItem
-            // 
-            this.catalogoClasificacionDeOrganizacionesToolStripMenuItem.Name = "catalogoClasificacionDeOrganizacionesToolStripMenuItem";
-            this.catalogoClasificacionDeOrganizacionesToolStripMenuItem.Size = new System.Drawing.Size(292, 22);
-            this.catalogoClasificacionDeOrganizacionesToolStripMenuItem.Text = "Catalogo Clasificacion de Organizaciones";
-            this.catalogoClasificacionDeOrganizacionesToolStripMenuItem.Click += new System.EventHandler(this.catalogoClasificacionDeOrganizacionesToolStripMenuItem_Click);
-            // 
             // catalogoDeOrganizacionesToolStripMenuItem
             // 
+            this.catalogoDeOrganizacionesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("catalogoDeOrganizacionesToolStripMenuItem.Image")));
             this.catalogoDeOrganizacionesToolStripMenuItem.Name = "catalogoDeOrganizacionesToolStripMenuItem";
             this.catalogoDeOrganizacionesToolStripMenuItem.Size = new System.Drawing.Size(292, 22);
             this.catalogoDeOrganizacionesToolStripMenuItem.Text = "Catalogo de Organizaciones";
             this.catalogoDeOrganizacionesToolStripMenuItem.Click += new System.EventHandler(this.catalogoDeOrganizacionesToolStripMenuItem_Click);
+            // 
+            // catalogoClasificacionDeOrganizacionesToolStripMenuItem
+            // 
+            this.catalogoClasificacionDeOrganizacionesToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("catalogoClasificacionDeOrganizacionesToolStripMenuItem.Image")));
+            this.catalogoClasificacionDeOrganizacionesToolStripMenuItem.Name = "catalogoClasificacionDeOrganizacionesToolStripMenuItem";
+            this.catalogoClasificacionDeOrganizacionesToolStripMenuItem.Size = new System.Drawing.Size(292, 22);
+            this.catalogoClasificacionDeOrganizacionesToolStripMenuItem.Text = "Catalogo Clasificacion de Organizaciones";
+            this.catalogoClasificacionDeOrganizacionesToolStripMenuItem.Click += new System.EventHandler(this.catalogoClasificacionDeOrganizacionesToolStripMenuItem_Click);
             // 
             // MDIPrincipal
             // 

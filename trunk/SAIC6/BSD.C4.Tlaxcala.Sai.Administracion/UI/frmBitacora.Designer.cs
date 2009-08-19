@@ -35,6 +35,7 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnCerrar = new System.Windows.Forms.Button();
             this.gpbFiltro = new System.Windows.Forms.GroupBox();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             this.ddlCatalogos = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dtpFecha = new System.Windows.Forms.DateTimePicker();
@@ -42,7 +43,6 @@
             this.ddlOperacion = new System.Windows.Forms.ComboBox();
             this.btnFiltrar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnLimpiar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.logoPicture)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvBitacora)).BeginInit();
@@ -120,6 +120,15 @@
             this.gpbFiltro.Text = "Filtro";
             this.gpbFiltro.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Location = new System.Drawing.Point(457, 94);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(97, 23);
+            this.btnLimpiar.TabIndex = 9;
+            this.btnLimpiar.Text = "Reestablecer";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            // 
             // ddlCatalogos
             // 
             this.ddlCatalogos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -196,15 +205,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Operacion:";
             // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.Location = new System.Drawing.Point(457, 94);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(97, 23);
-            this.btnLimpiar.TabIndex = 9;
-            this.btnLimpiar.Text = "Reestablecer";
-            this.btnLimpiar.UseVisualStyleBackColor = true;
-            // 
             // frmBitacora
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -215,6 +215,7 @@
             this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.logoPicture);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmBitacora";
             this.Text = "Bitacora";
             this.Load += new System.EventHandler(this.frmBitacora_Load);

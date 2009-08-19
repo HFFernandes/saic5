@@ -34,13 +34,13 @@
             this.gvDependencias = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.gbpDatosGenerales = new System.Windows.Forms.GroupBox();
+            this.saiTxtDependencia = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnCerrar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnLimpiar = new System.Windows.Forms.Button();
-            this.saiTxtDependencia = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.logoPicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvDependencias)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -94,6 +94,35 @@
             this.gbpDatosGenerales.TabStop = false;
             this.gbpDatosGenerales.Text = "Datos generales";
             // 
+            // saiTxtDependencia
+            // 
+            this.saiTxtDependencia.BlnEsRequerido = true;
+            this.saiTxtDependencia.ClrBackColorFoco = System.Drawing.Color.Empty;
+            this.saiTxtDependencia.Location = new System.Drawing.Point(100, 20);
+            this.saiTxtDependencia.Name = "saiTxtDependencia";
+            this.saiTxtDependencia.Size = new System.Drawing.Size(286, 20);
+            this.saiTxtDependencia.StrMensajeCampoRequerido = "El campo es requerido.";
+            this.saiTxtDependencia.TabIndex = 2;
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Location = new System.Drawing.Point(479, 39);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
+            this.btnLimpiar.TabIndex = 1;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(20, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(74, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Dependencia:";
+            // 
             // btnCerrar
             // 
             this.btnCerrar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
@@ -137,35 +166,6 @@
             this.btnEliminar.Visible = false;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(20, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Dependencia:";
-            // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.Location = new System.Drawing.Point(479, 39);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpiar.TabIndex = 1;
-            this.btnLimpiar.Text = "Limpiar";
-            this.btnLimpiar.UseVisualStyleBackColor = true;
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
-            // 
-            // saiTxtDependencia
-            // 
-            this.saiTxtDependencia.BlnEsRequerido = true;
-            this.saiTxtDependencia.ClrBackColorFoco = System.Drawing.Color.Empty;
-            this.saiTxtDependencia.Location = new System.Drawing.Point(100, 20);
-            this.saiTxtDependencia.Name = "saiTxtDependencia";
-            this.saiTxtDependencia.Size = new System.Drawing.Size(286, 20);
-            this.saiTxtDependencia.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.saiTxtDependencia.TabIndex = 2;
-            // 
             // frmDependecias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -179,8 +179,9 @@
             this.Controls.Add(this.gbpDatosGenerales);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.logoPicture);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmDependecias";
-            this.Text = "frmDependecias";
+            this.Text = "Dependecias";
             this.Load += new System.EventHandler(this.frmDependecias_Load);
             this.Controls.SetChildIndex(this.logoPicture, 0);
             this.Controls.SetChildIndex(this.groupBox1, 0);

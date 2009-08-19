@@ -11,6 +11,7 @@ using Objetos = BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects;
 using Mappers = BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using BSD.C4.Tlaxcala.Sai.Ui.Formularios;
 using System.Configuration;
+using BSD.C4.Tlaxcala.Sai.Administracion.Utilerias;
 
 namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 {
@@ -24,11 +25,31 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         private void frmOrganizacion_Load(object sender, EventArgs e)
         {
             this.LlenarGrid();
+            this.LlenarClasificacion();
+        }
+
+        private void LlenarClasificacion()
+        {
+            try
+            {
+                Entidades.ClasificacionOrganizacionList lstClasificacionOrg = Mappers.ClasificacionOrganizacionMapper.Instance().GetAll();
+
+                foreach (Entidades.ClasificacionOrganizacion ClasificacionOrg in lstClasificacionOrg)
+                {
+                    this.saiDdlClasificacion.Items.Add(new ComboItem(ClasificacionOrg.Clave, ClasificacionOrg.Descripcion));
+                }
+
+                this.saiDdlClasificacion.DisplayMember = "Descripcion";
+                this.saiDdlClasificacion.ValueMember = "Valor";
+
+            }
+            catch (SAIExcepcion)
+            { }
         }
 
         private void LlenarGrid()
         {
-            try 
+            try
             {
                 DataTable catOrganizacion = new DataTable("catOrganizacion");
                 catOrganizacion.Columns.Add(new DataColumn("Clave", Type.GetType("System.Int32")));
@@ -38,8 +59,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 catOrganizacion.Columns.Add(new DataColumn("Fax", Type.GetType("System.String")));
                 catOrganizacion.Columns.Add(new DataColumn("Email", Type.GetType("System.String")));
                 catOrganizacion.Columns.Add(new DataColumn("DireccionWeb", Type.GetType("System.String")));
-                catOrganizacion.Columns.Add(new DataColumn("ClaveClasificacion", Type.GetType("System.String")));
-                catOrganizacion.Columns.Add(new DataColumn("Clasificacion", Type.GetType("System.Int32")));
+                catOrganizacion.Columns.Add(new DataColumn("ClaveClasificacion", Type.GetType("System.Int32")));
+                catOrganizacion.Columns.Add(new DataColumn("Clasificacion", Type.GetType("System.String")));
 
                 Entidades.OrganizacionList lstOrganizacion = Mappers.OrganizacionMapper.Instance().GetAll();
 
@@ -56,28 +77,106 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 this.gvOrganizaciones.Columns["ClaveClasificacion"].Visible = false;
 
             }
-            catch(SAIExcepcion)
-            {}
+            catch (SAIExcepcion)
+            { }
         }
 
         private void Agregar()
         {
             try
             {
+                Entidades.Organizacion newOrganizacion = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Organizacion();
+                newOrganizacion.ClaveClasificacion = Convert.ToInt32(this.ObtieneValor(this.saiDdlClasificacion.SelectedIndex));
+                newOrganizacion.Dirección = this.saiTxtDireccion.Text;
+                newOrganizacion.DireccionWeb = this.saiTxtDireccionWeb.Text;
+                newOrganizacion.Email = this.saiTxtEmail.Text;
+                newOrganizacion.Fax = this.saiTxtFax.Text;
+                newOrganizacion.Nombre = this.saiTxtNombre.Text;
+                newOrganizacion.Telefono = this.saiTxtTelefono.Text;
 
+                Mappers.OrganizacionMapper.Instance().Insert(newOrganizacion);
+
+                Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
+                bitacora.Descripcion = "Se agrego la Organizacion: " + newOrganizacion.Nombre;
+                bitacora.FechaOperacion = DateTime.Today;
+                bitacora.NombreCatalogo = "Organizaciones";
+                bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
+                bitacora.Operacion = "INSERT";
+
+                Mappers.BitacoraMapper.Instance().Insert(bitacora);
             }
             catch (SAIExcepcion)
             { }
         }
 
         private void Modificar()
-        { }
+        {
+            try
+            {
+                Entidades.Organizacion updOrganizacion = Mappers.OrganizacionMapper.Instance().GetOne(Convert.ToInt32(this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["Clave"].Value));
+                updOrganizacion.ClaveClasificacion = Convert.ToInt32(this.ObtieneValor(this.saiDdlClasificacion.SelectedIndex));
+                updOrganizacion.Dirección = this.saiTxtDireccion.Text;
+                updOrganizacion.DireccionWeb = this.saiTxtDireccionWeb.Text;
+                updOrganizacion.Email = this.saiTxtEmail.Text;
+                updOrganizacion.Fax = this.saiTxtFax.Text;
+                updOrganizacion.Nombre = this.saiTxtNombre.Text;
+                updOrganizacion.Telefono = this.saiTxtTelefono.Text;
+
+                Mappers.OrganizacionMapper.Instance().Save(updOrganizacion);
+
+                Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
+                bitacora.Descripcion = "Se modifico la Organizacion: " + updOrganizacion.Nombre;
+                bitacora.FechaOperacion = DateTime.Today;
+                bitacora.NombreCatalogo = "Organizaciones";
+                bitacora.Operacion = "UPDATE";
+                bitacora.ValorActual = saiTxtNombre.Text + ", " + this.saiTxtDireccion.Text;
+                bitacora.ValorAnterior = Convert.ToString(this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["Nombre"].Value);
+                bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
+
+                Mappers.BitacoraMapper.Instance().Insert(bitacora);
+            }
+            catch (SAIExcepcion)
+            { }
+        }
 
         private void Eliminar()
-        { }
+        {
+            try
+            {
+                Mappers.OrganizacionMapper.Instance().Delete(Convert.ToInt32(this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["Clave"].Value));
+
+                Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
+                bitacora.Descripcion = "Se elimino la Organizacion: " + Convert.ToString(this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["Nombre"].Value);
+                bitacora.FechaOperacion = DateTime.Today;
+                bitacora.NombreCatalogo = "Organizaciones";
+                bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
+                bitacora.Operacion = "DELETE";
+
+                Mappers.BitacoraMapper.Instance().Insert(bitacora);
+            }
+            catch (SAIExcepcion)
+            { }
+        }
 
         private void Limpiar()
-        { }
+        {
+            foreach (DataGridViewRow row in this.gvOrganizaciones.Rows)
+            {
+                row.Selected = false;
+            }
+
+            this.btnAgregar.Enabled = true;
+            this.btnModificar.Enabled = false;
+            this.btnEliminar.Visible = false;
+
+            this.saiTxtDireccion.Text = string.Empty;
+            this.saiTxtDireccionWeb.Text = string.Empty;
+            this.saiTxtEmail.Text = string.Empty;
+            this.saiTxtFax.Text = string.Empty;
+            this.saiTxtNombre.Text = string.Empty;
+            this.saiTxtTelefono.Text = string.Empty;
+            this.saiDdlClasificacion.SelectedIndex = -1;
+        }
 
         private int ObtieneIndiceSeleccionado()
         {
@@ -101,7 +200,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            if(this.SAIProveedorValidacion.ValidarCamposRequeridos(this.gpbDatosGenerales))
+            if (this.SAIProveedorValidacion.ValidarCamposRequeridos(this.gpbDatosGenerales))
             {
                 this.Agregar();
                 this.LlenarGrid();
@@ -127,6 +226,11 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         private void gvOrganizaciones_SystemColorsChanged(object sender, EventArgs e)
         {
 
+
+        }
+
+        private void gvOrganizaciones_SelectionChanged(object sender, EventArgs e)
+        {
             try
             {
                 if (this.ObtieneIndiceSeleccionado() > -1)
@@ -137,7 +241,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     this.saiTxtFax.Text = Convert.ToString(this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["Fax"].Value);
                     this.saiTxtEmail.Text = Convert.ToString(this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["Email"].Value);
                     this.saiTxtDireccionWeb.Text = Convert.ToString(this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["DireccionWeb"].Value);
-
+                    this.SeleccionarComboItem(Convert.ToInt32(this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["ClaveClasificacion"].Value));
                     //this.saiDdlClasificacion.SelectedValue();
                     this.btnAgregar.Enabled = false;
                     this.btnEliminar.Visible = true;
@@ -148,9 +252,30 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             { }
         }
 
-      
+        private object ObtieneValor(int indice)
+        {
+            return ((ComboItem)this.saiDdlClasificacion.Items[indice]).Valor;
+        }
 
-    
+        private string ObtieneDescripcion(int indice)
+        {
+            return ((ComboItem)this.saiDdlClasificacion.Items[indice]).Descripcion;
+        }
+
+        private void SeleccionarComboItem(int Value)
+        {
+            foreach (ComboItem item in this.saiDdlClasificacion.Items)
+            {
+                if (Convert.ToInt32(item.Valor) == Value)
+                {
+                    this.saiDdlClasificacion.SelectedItem = item;
+                    break;
+                }
+                else
+                { this.saiDdlClasificacion.SelectedIndex = -1; }
+            }
+        }
+
 
     }
 }
