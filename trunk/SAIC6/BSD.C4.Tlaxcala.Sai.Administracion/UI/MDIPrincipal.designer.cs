@@ -45,6 +45,7 @@
             this.catalogoDeColoniasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.catalogoDeDependenciasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.catalogoClasificacionDeOrganizacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.catalogoDeOrganizacionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuStripPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -103,6 +104,7 @@
             this.catalogoDeLocalidadesToolStripMenuItem,
             this.catalogoDeColoniasToolStripMenuItem,
             this.catalogoDeDependenciasToolStripMenuItem,
+            this.catalogoDeOrganizacionesToolStripMenuItem,
             this.catalogoClasificacionDeOrganizacionesToolStripMenuItem});
             this.operacionesToolStripMenuItem.Name = "operacionesToolStripMenuItem";
             this.operacionesToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
@@ -186,6 +188,13 @@
             this.catalogoClasificacionDeOrganizacionesToolStripMenuItem.Text = "Catalogo Clasificacion de Organizaciones";
             this.catalogoClasificacionDeOrganizacionesToolStripMenuItem.Click += new System.EventHandler(this.catalogoClasificacionDeOrganizacionesToolStripMenuItem_Click);
             // 
+            // catalogoDeOrganizacionesToolStripMenuItem
+            // 
+            this.catalogoDeOrganizacionesToolStripMenuItem.Name = "catalogoDeOrganizacionesToolStripMenuItem";
+            this.catalogoDeOrganizacionesToolStripMenuItem.Size = new System.Drawing.Size(292, 22);
+            this.catalogoDeOrganizacionesToolStripMenuItem.Text = "Catalogo de Organizaciones";
+            this.catalogoDeOrganizacionesToolStripMenuItem.Click += new System.EventHandler(this.catalogoDeOrganizacionesToolStripMenuItem_Click);
+            // 
             // MDIPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -228,5 +237,6 @@
         private System.Windows.Forms.ToolStripMenuItem bitacoraToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem catalogoDeDependenciasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem catalogoClasificacionDeOrganizacionesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem catalogoDeOrganizacionesToolStripMenuItem;
     }
 }

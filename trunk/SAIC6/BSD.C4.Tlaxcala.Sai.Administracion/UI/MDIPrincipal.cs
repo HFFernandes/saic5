@@ -104,5 +104,12 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             frm_ClasificacionOrganizacion.MdiParent = this;
             frm_ClasificacionOrganizacion.Show();
         }
+
+        private void catalogoDeOrganizacionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmOrganizacion frm_Organizacion = new frmOrganizacion();
+            frm_Organizacion.MdiParent = this;
+            frm_Organizacion.Show();
+        }
     }
 }
