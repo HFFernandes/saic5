@@ -19,20 +19,28 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             QueryColumnas.Query = ModeloQuery;
             QueryCondiciones.Query = ModeloQuery;
 
-            var en =
-                Assembly.GetExecutingAssembly().GetManifestResourceStream(
-                    "BSD.C4.Tlaxcala.Sai.RecursosEmbebidos.SAI066.xml");
+            var strArchivo = Aplicacion.UsuarioPersistencia.strSistemaActual == "066" ? string.Format("{0}{1}", Environment.CurrentDirectory, "SAI066.xml") : string.Format("{0}{1}", Environment.CurrentDirectory, "SAI089.xml");
 
-            if (en != null)
+            try
             {
-                var stmArchivo = string.Format("{0}{1}", Path.GetTempPath(), "modelo066.xml");
-                var xmlDocumento = new XmlDocument();
-                xmlDocumento.Load(en);
-                xmlDocumento.Save(stmArchivo);
-
-                ModeloDatos.LoadFromFile(stmArchivo);
-                QueryColumnas.Activate();
-                QueryCondiciones.Activate();
+                try
+                {
+                    ModeloDatos.LoadFromFile(strArchivo);
+                    QueryColumnas.Activate();
+                    QueryCondiciones.Activate();
+                }
+                catch (FileNotFoundException)
+                {
+                    throw new SAIExcepcion("No se localizo el archivo de configuracion para los filtros de busqueda.");
+                }
+                catch (Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
+            }
+            catch (SAIExcepcion)
+            {
+                Close();
             }
         }
 
