@@ -65,6 +65,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
 
                 this._entCorporacionIncidencia = CorporacionIncidenciaMapper.Instance().GetOne(this._entIncidencia.Folio, this._entCorporacion.Clave);
+                this.txtHoraRecepcion.Text = this._entIncidencia.HoraRecepcion.ToString("hh:mm:ss");
 
                 //****Obtiene los datos del despacho****
                 DespachoIncidenciaList lstDespacho = DespachoIncidenciaMapper.Instance().GetByCorporacionIncidencia(this._entIncidencia.Folio, Aplicacion.UsuarioPersistencia.intCorporacion.Value);
@@ -128,7 +129,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.txtHoraDespacho.Focus();
                 }
                 //*********Carga los datos en el formulario*****
-                this.txtHoraRecepcion.Text  = this._entIncidencia.HoraRecepcion.ToString("hh:mm:ss");
+               
                 if (this._despachoIncidencia.HoraDespachada.HasValue)
                 {
                     this.txtHoraDespacho.Text = this._despachoIncidencia.HoraDespachada.Value.ToString("hh:mm:ss");
@@ -274,6 +275,34 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
             base.SAIFrmIncidenciaKeyUp(e);
 
+        }
+
+        //protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        //{
+
+        //   bool blnValor = base.ProcessCmdKey(ref msg, keyData);
+
+        //    if ((keyData == (Keys.LButton  | Keys.Back  | Keys.Control)))
+        //    {
+        //        if (this.Owner != null)
+        //        {
+        //            SAIFrmComandos frmPrincipal = (SAIFrmComandos)this.Owner;
+        //            frmPrincipal.MuestraSwitch();
+        //            this._blnCtrPresionado = false;
+        //        }
+        //    }
+
+           
+
+        //    return false;
+
+
+        //}
+
+        protected override void OnKeyUp(KeyEventArgs e)
+        {
+            this.SAIFrmIncidenciaKeyUp(e);
+            base.OnKeyUp(e);
         }
 
         private void dtpHoraLlegada_Leave(object sender, EventArgs e)
@@ -466,7 +495,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         {
                             this._despachoIncidencia.HoraLlegada = null;
                             this._despachoIncidencia.HoraLiberada = null;
+                            this._despachoIncidencia.HoraDespachada = DateTime.Now;
                             DespachoIncidenciaMapper.Instance().Save(this._despachoIncidencia);
+                            this.txtHoraDespacho.Text = this._despachoIncidencia.HoraDespachada.Value.ToString("hh:mm:ss");
                         }
 
                     }
@@ -505,6 +536,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         this._despachoIncidencia.ClaveCorporacion = this._entCorporacion.Clave;
                         this._despachoIncidencia.Folio = this._entIncidencia.Folio;
                         this._despachoIncidencia.ClaveUnidad = this._unidadAsignada.Clave;
+                        this._despachoIncidencia.HoraDespachada = DateTime.Now;
+                        this.txtHoraDespacho.Text = this._despachoIncidencia.HoraDespachada.Value.ToString("hh:mm:ss");
                         if (blnBorraUnidad)
                         {
                             this._despachoIncidencia.ClaveUnidadApoyo = null;
@@ -521,6 +554,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         {
                             this._despachoIncidencia.ClaveUnidadApoyo = null;
                         }
+                        this._despachoIncidencia.HoraDespachada = DateTime.Now;
+                        this.txtHoraDespacho.Text = this._despachoIncidencia.HoraDespachada.Value.ToString("hh:mm:ss");
+                       
                         DespachoIncidenciaMapper.Instance().Save(this._despachoIncidencia);
                         //La incidencia ahora es activa
                         this._entIncidencia.ClaveEstatus = 3;

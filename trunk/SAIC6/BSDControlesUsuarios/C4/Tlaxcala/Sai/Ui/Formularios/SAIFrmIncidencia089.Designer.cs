@@ -168,10 +168,10 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvDependencias.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvDependencias.Location = new System.Drawing.Point(97, 513);
+            this.dgvDependencias.Location = new System.Drawing.Point(32, 513);
             this.dgvDependencias.Name = "dgvDependencias";
             this.dgvDependencias.RowHeadersVisible = false;
-            this.dgvDependencias.Size = new System.Drawing.Size(485, 123);
+            this.dgvDependencias.Size = new System.Drawing.Size(550, 123);
             this.dgvDependencias.TabIndex = 32;
             this.dgvDependencias.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDependencias_CellValidated);
             // 
@@ -186,7 +186,7 @@
             this.Dependencia.HeaderText = "Dependencia";
             this.Dependencia.Name = "Dependencia";
             this.Dependencia.ReadOnly = true;
-            this.Dependencia.Width = 300;
+            this.Dependencia.Width = 350;
             // 
             // FechaEnvioDependencia
             // 
