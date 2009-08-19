@@ -3706,6 +3706,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.SAIFrmIncidenciaKeyUp(e);
         }
 
+        private void cmbCP_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //No permite introducir texto
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8)
+                e.Handled = true;
+        }
+
       
 
         

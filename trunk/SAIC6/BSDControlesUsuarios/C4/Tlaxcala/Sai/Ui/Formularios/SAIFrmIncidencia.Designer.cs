@@ -366,6 +366,7 @@
             this.cmbCP.SelectedIndexChanged += new System.EventHandler(this.cmbCP_SelectedIndexChanged);
             this.cmbCP.Leave += new System.EventHandler(this.cmbCP_Leave);
             this.cmbCP.Enter += new System.EventHandler(this.cmbCP_Enter);
+            this.cmbCP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbCP_KeyPress);
             this.cmbCP.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbCP_KeyUp);
             this.cmbCP.TextUpdate += new System.EventHandler(this.cmbCP_TextUpdate);
             this.cmbCP.TextChanged += new System.EventHandler(this.cmbCP_TextChanged);
@@ -1010,7 +1011,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1301, 778);
+            this.ClientSize = new System.Drawing.Size(1284, 778);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label10);
