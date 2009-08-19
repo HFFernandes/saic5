@@ -284,16 +284,29 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            this.Modificar();
-            this.LlenarGrid();
-            this.Limpiar();
+            if (this.SAIProveedorValidacion.ValidarCamposRequeridos(this.groupBox2))
+            {
+                this.Modificar();
+                this.LlenarGrid();
+                this.Limpiar();
+            }
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            this.Agregar();
-            this.LlenarGrid();
-            this.Limpiar();
+            if (this.ddlSistema.SelectedIndex > -1)
+            {
+                if (this.SAIProveedorValidacion.ValidarCamposRequeridos(this.groupBox2))
+                {
+                    this.Agregar();
+                    this.LlenarGrid();
+                    this.Limpiar();
+                }
+            }
+            else 
+            {
+                throw new SAIExcepcion("Seleccione un sistema");
+            }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
