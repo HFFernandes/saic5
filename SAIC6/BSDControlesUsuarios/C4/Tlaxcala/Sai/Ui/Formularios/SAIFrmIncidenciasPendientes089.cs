@@ -130,7 +130,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             }
 
                             //Ejecutar el stored procedure
-                            IncidenciaMapper.Instance().LigaIncidencia(Convert.ToInt32(folioPadre));
+                            IncidenciaMapper.Instance().LigaIncidencia(Convert.ToInt32(folioPadre),"089");
                         }
                     }
                     catch (Exception ex)
