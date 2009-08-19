@@ -1,8 +1,8 @@
 <DATAMODEL Version="5" Name="SAI" DefQuery="">
   <DESCRIPTION>Modelo del Sistema de Administracin de Incidencias</DESCRIPTION>
   <DBPARAMS>
-    <ConnectionString>Data Source=.\SQLEXPRESS;Integrated Security=SSPI; Initial Catalog=SAI_BD</ConnectionString>
-    <LoginPrompt>False</LoginPrompt>
+    <ConnectionString>Data Source=DAVID\SQLEXPRESS;Initial Catalog=SAI_BD;Integrated Security=False;User ID=sa;Password=1234567890;</ConnectionString>
+    <LoginPrompt>True</LoginPrompt>
     <GateClass>Korzh.EasyQuery.DataGates.SqlClientGate</GateClass>
   </DBPARAMS>
   <TABLES>
@@ -15,7 +15,7 @@
     <TABLE NAME="Municipio" ALIAS="Municipios" SCHEMA="dbo" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="" />
     <TABLE NAME="Localidad" ALIAS="Localidades" SCHEMA="dbo" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="" />
     <TABLE NAME="Usuario" ALIAS="Usuarios" SCHEMA="dbo" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="" />
-    <TABLE NAME="lstCorporacionesFolios" ALIAS="Corporaciones" SCHEMA="dbo" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="" />
+    <TABLE NAME="lstDependenciasFolios" ALIAS="Dependencias" SCHEMA="dbo" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="" />
   </TABLES>
   <LINKS>
     <LINK TABLE1="Tipos" TABLE2="Incidencias" TYPE="Inner" QF="False">
@@ -54,7 +54,7 @@
     <LINK TABLE1="Colonias" TABLE2="Codigos Postales" TYPE="Inner" QF="False">
       <CONDITION TYPE="FF" EXPR1="ClaveCodigoPostal" EXPR2="Clave" OP="=" />
     </LINK>
-    <LINK TABLE1="Corporaciones" TABLE2="Incidencias" TYPE="Inner" QF="False">
+    <LINK TABLE1="Incidencias" TABLE2="Dependencias" TYPE="Inner" QF="False">
       <CONDITION TYPE="FF" EXPR1="Folio" EXPR2="Folio" OP="=" />
     </LINK>
   </LINKS>
@@ -231,7 +231,7 @@
         <EDITORS>
           <DEFAULT TYPE="LIST">
             <VALUES>
-              <VALUE ID="2" TEXT="066" />
+              <VALUE ID="1" TEXT="089" />
             </VALUES>
           </DEFAULT>
         </EDITORS>
@@ -315,30 +315,27 @@
         <EDITORS />
         <DESCRIPTION />
       </ATTR>
-      <ATTR ID="Incidencias.Telefono" KIND="Data" EXPR="Telefono" CAPTION="Teléfono" TYPE="String" SIZE="25" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
-        <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
-        <EDITORS />
-        <DESCRIPTION />
-      </ATTR>
       <ATTR ID="Incidencias.FechaSuceso" KIND="Data" EXPR="FechaSuceso" CAPTION="Fecha del suceso" TYPE="DateTime" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
         <OPERATORS>DateEqualPrecise,DateNotEqualPrecise,DateBeforePrecise,DateAfterPrecise,DatePeriodPrecise,MaximumOfAttr,IsNull,IsNotNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
       </ATTR>
-    </ENTITY>
-    <ENTITY NAME="Corporaciones">
-      <USERDATA />
-      <ATTR ID="lstCorporacionesFolios.Folio" KIND="Data" EXPR="Folio" CAPTION="Folio" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Corporaciones">
-        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
-        <EDITORS />
-        <DESCRIPTION />
-      </ATTR>
-      <ATTR ID="lstCorporacionesFolios.Descripcion" KIND="Data" EXPR="Descripcion" CAPTION="Nombre de la corporación" TYPE="String" SIZE="50" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Corporaciones">
+      <ATTR ID="Incidencias.AliasDelincuente" KIND="Data" EXPR="AliasDelincuente" CAPTION="Alias del delincuente" TYPE="String" SIZE="250" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
         <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
       </ATTR>
-      <ATTR ID="lstCorporacionesFolios.Zn" KIND="Data" EXPR="Zn" CAPTION="Zona" TYPE="String" SIZE="15" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Corporaciones">
+      <ATTR ID="Incidencias.FechaEnvioDependencia" KIND="Data" EXPR="FechaEnvioDependencia" CAPTION="Fecha de envio a dependencia" TYPE="DateTime" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>DateEqualPrecise,DateNotEqualPrecise,DateBeforePrecise,DateAfterPrecise,DatePeriodPrecise,MaximumOfAttr,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="Incidencias.FechaNotificacion" KIND="Data" EXPR="FechaNotificacion" CAPTION="Fecha de notificación" TYPE="DateTime" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>DateEqualPrecise,DateNotEqualPrecise,DateBeforePrecise,DateAfterPrecise,DatePeriodPrecise,MaximumOfAttr,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="Incidencias.NumeroOficio" KIND="Data" EXPR="NumeroOficio" CAPTION="Número de oficio" TYPE="String" SIZE="50" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
         <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
@@ -454,6 +451,19 @@
         <DESCRIPTION />
       </ATTR>
       <ATTR ID="Usuario.NombreUsuario" KIND="Data" EXPR="NombreUsuario" CAPTION="Nombre de usuario" TYPE="String" SIZE="10" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Usuarios">
+        <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+    </ENTITY>
+    <ENTITY NAME="Dependencias">
+      <USERDATA />
+      <ATTR ID="Dependencias.Folio" KIND="Data" EXPR="Folio" CAPTION="Folio" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Dependencias">
+        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="Dependencias.Descripcion" KIND="Data" EXPR="Descripcion" CAPTION="Descripcion" TYPE="String" SIZE="50" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Dependencias">
         <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
