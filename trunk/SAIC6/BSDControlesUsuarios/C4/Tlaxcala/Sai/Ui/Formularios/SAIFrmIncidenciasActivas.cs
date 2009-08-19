@@ -68,7 +68,18 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             try
             {
-                if (Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_NI))
+                if ((Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false) && Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_NI))
+                {
+                    //Recuperar el folio y generar una instancia de la entidad para
+                    //pasarla al nuevo formulario
+                    var incidencia = IncidenciaMapper.Instance().GetOne(Convert.ToInt32(e.row.Record[0].Value));
+                    if (incidencia != null)
+                    {
+                        var incidenciaDespacho = new SAIFrmIncidencia066Despacho(incidencia);
+                        incidenciaDespacho.Show();
+                    }
+                }
+                else if (Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_NI))
                 {
                     var incidencia = IncidenciaMapper.Instance().GetOne(Convert.ToInt32(e.row.Record[0].Value));
                     if (incidencia != null)
@@ -97,7 +108,23 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             try
             {
-                if (Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_NI))
+                if ((Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false) && Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_NI))
+                {
+                    //Recuperar el folio y generar una instancia de la entidad para
+                    //pasarla al nuevo formulario
+                    for (int i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
+                    {
+                        var incidencia =
+                            IncidenciaMapper.Instance().GetOne(
+                                Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
+                        if (incidencia != null)
+                        {
+                            var incidenciaDespacho = new SAIFrmIncidencia066Despacho(incidencia);
+                            incidenciaDespacho.Show();
+                        }
+                    }
+                }
+                else if (Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_NI))
                 {
                     for (int i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
                     {

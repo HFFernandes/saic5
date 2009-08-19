@@ -260,47 +260,42 @@
         <EDITORS />
         <DESCRIPTION />
       </ATTR>
-      <ATTR ID="Incidencias.ClaveCodigoPostal" KIND="Data" EXPR="ClaveCodigoPostal" CAPTION="ClaveCodigoPostal" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+      <ATTR ID="Incidencias.ClaveCodigoPostal" KIND="Data" EXPR="ClaveCodigoPostal" CAPTION="ClaveCodigoPostal" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Incidencias">
         <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
       </ATTR>
-      <ATTR ID="Incidencias.ClaveColonia" KIND="Data" EXPR="ClaveColonia" CAPTION="ClaveColonia" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+      <ATTR ID="Incidencias.ClaveColonia" KIND="Data" EXPR="ClaveColonia" CAPTION="ClaveColonia" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Incidencias">
         <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
       </ATTR>
-      <ATTR ID="Incidencias.ClaveDenunciante" KIND="Data" EXPR="ClaveDenunciante" CAPTION="ClaveDenunciante" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+      <ATTR ID="Incidencias.ClaveEstado" KIND="Data" EXPR="ClaveEstado" CAPTION="ClaveEstado" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Incidencias">
         <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
       </ATTR>
-      <ATTR ID="Incidencias.ClaveEstado" KIND="Data" EXPR="ClaveEstado" CAPTION="ClaveEstado" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+      <ATTR ID="Incidencias.ClaveEstatus" KIND="Data" EXPR="ClaveEstatus" CAPTION="ClaveEstatus" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Incidencias">
         <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
       </ATTR>
-      <ATTR ID="Incidencias.ClaveEstatus" KIND="Data" EXPR="ClaveEstatus" CAPTION="ClaveEstatus" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="True" AGGR="False" TABLES="Incidencias">
+      <ATTR ID="Incidencias.ClaveLocalidad" KIND="Data" EXPR="ClaveLocalidad" CAPTION="ClaveLocalidad" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Incidencias">
         <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
       </ATTR>
-      <ATTR ID="Incidencias.ClaveLocalidad" KIND="Data" EXPR="ClaveLocalidad" CAPTION="ClaveLocalidad" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+      <ATTR ID="Incidencias.ClaveMunicipio" KIND="Data" EXPR="ClaveMunicipio" CAPTION="ClaveMunicipio" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Incidencias">
         <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
       </ATTR>
-      <ATTR ID="Incidencias.ClaveMunicipio" KIND="Data" EXPR="ClaveMunicipio" CAPTION="ClaveMunicipio" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+      <ATTR ID="Incidencias.ClaveTipo" KIND="Data" EXPR="ClaveTipo" CAPTION="ClaveTipo" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Incidencias">
         <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
       </ATTR>
-      <ATTR ID="Incidencias.ClaveTipo" KIND="Data" EXPR="ClaveTipo" CAPTION="ClaveTipo" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="True" AGGR="False" TABLES="Incidencias">
-        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
-        <EDITORS />
-        <DESCRIPTION />
-      </ATTR>
-      <ATTR ID="Incidencias.ClaveUsuario" KIND="Data" EXPR="ClaveUsuario" CAPTION="ClaveUsuario" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+      <ATTR ID="Incidencias.ClaveUsuario" KIND="Data" EXPR="ClaveUsuario" CAPTION="ClaveUsuario" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Incidencias">
         <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
@@ -338,7 +333,7 @@
         <EDITORS />
         <DESCRIPTION />
       </ATTR>
-      <ATTR ID="lstCorporacionesFolios.Folio" KIND="Data" EXPR="Folio" CAPTION="Folio" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="lstCorporacionesFolios">
+      <ATTR ID="lstCorporacionesFolios.Folio" KIND="Data" EXPR="Folio" CAPTION="Folio" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="lstCorporacionesFolios">
         <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
@@ -441,7 +436,7 @@
         <EDITORS />
         <DESCRIPTION />
       </ATTR>
-      <ATTR ID="Usuario.Despachador" KIND="Data" EXPR="Despachador" CAPTION="EsDespachador" TYPE="Bool" SIZE="0" QUOTE="False" UIC="True" UIR="False" UIS="True" UAL="True" AGGR="False" TABLES="Usuario">
+      <ATTR ID="Usuario.Despachador" KIND="Data" EXPR="Despachador" CAPTION="Es despachador" TYPE="Bool" SIZE="0" QUOTE="False" UIC="True" UIR="False" UIS="True" UAL="True" AGGR="False" TABLES="Usuario">
         <OPERATORS>InList</OPERATORS>
         <EDITORS>
           <DEFAULT TYPE="LIST">
@@ -453,12 +448,12 @@
         </EDITORS>
         <DESCRIPTION />
       </ATTR>
-      <ATTR ID="Usuario.NombrePropio" KIND="Data" EXPR="NombrePropio" CAPTION="Nombre de usuario" TYPE="String" SIZE="150" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Usuario">
+      <ATTR ID="Usuario.NombrePropio" KIND="Data" EXPR="NombrePropio" CAPTION="Nombre completo" TYPE="String" SIZE="150" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Usuario">
         <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
       </ATTR>
-      <ATTR ID="Usuario.NombreUsuario" KIND="Data" EXPR="NombreUsuario" CAPTION="Nombre completo" TYPE="String" SIZE="10" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Usuario">
+      <ATTR ID="Usuario.NombreUsuario" KIND="Data" EXPR="NombreUsuario" CAPTION="Nombre de usuario" TYPE="String" SIZE="10" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Usuario">
         <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
