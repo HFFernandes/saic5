@@ -37,10 +37,11 @@ namespace BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers
         /// Liga la información de las incidencias hijas a la incidencia padre
         /// </summary>
         /// <param name="Folio">Folio de la incidencia padre</param>
+        /// <param name="Sistema">Sistema 066 o 089</param>
         /// <remarks>Las incidencias hijas ya deben de tener en el campo FolioPadre el valor de la incidencia padre</remarks>
-        public void LigaIncidencia(System.Int32 Folio)
+        public void LigaIncidencia(System.Int32 Folio, String Sistema)
         {
-            Incidencia entIncidencia = base.GetObjectByAnyStoredProcedure(StoredProceduresPrefix() + "Incidencia_Liga", Folio);
+            Incidencia entIncidencia = base.GetObjectByAnyStoredProcedure(StoredProceduresPrefix() + "Incidencia_Liga", Folio, Sistema);
         }
 
 
