@@ -80,7 +80,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         private Boolean _blnSoloLectura;
 
+
         protected GroupBox _grpDenunciante =null;
+
 
         public delegate  void DelegadoActualizaLocalidades(LocalidadList lstLocalidades);
         public delegate void DelegadoLimpiaLocalidades();
@@ -1687,8 +1689,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 {
                     if (this._entIncidencia != null)
                     {
-                       
-                        IncidenciaMapper.Instance().Save(this._entIncidencia);
+                         if ((cmbTipoIncidencia.SelectedItem as TipoIncidencia).Descripcion.ToUpper().Contains("BROMA"))
+                            {
+                                //Se cambia a incidencia cancelada
+                                this._entIncidencia.ClaveEstatus = 5;
+                            }
+                         IncidenciaMapper.Instance().Save(this._entIncidencia);
                     }
                 }
                 catch (System.Exception ex)
@@ -1985,6 +1991,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     {
                         TipoIncidencia objTipo = (cmbTipoIncidencia.SelectedItem as TipoIncidencia);
 
+
+
                         if (objTipo.Descripcion.ToUpper().Contains("ROBO") && objTipo.Descripcion.ToUpper().Contains("VEHICULO") && !objTipo.Descripcion.ToUpper().Contains("ACCESORIOS"))
                         {
                             this.SuspendLayout();
@@ -1997,9 +2005,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                             {
 
-                                this.Height = 750;
-                                this.Width = 600;
-                                this.grpRoboVehiculo.Top = 455;
+                                this.Height = 830;
+                                this.Width = 620;
+                                this.grpRoboVehiculo.Top = 645;
                                
 
                             }
@@ -2026,9 +2034,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             this.grpRoboAccesorios.SuspendLayout();
                             if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                             {
-                                this.Height = 750;
-                                this.Width = 600;
-                                this.grpRoboAccesorios.Top = 455;
+                                this.Height = 830;
+                                this.Width = 620;
+                                this.grpRoboAccesorios.Top = 645;
                             }
                             else
                             {
@@ -2054,9 +2062,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                            
                             if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                             {
-                                this.Height = 750;
-                                this.Width = 600;
-                                this.grpExtravio.Top = 455;
+                                this.Height = 850;
+                                this.Width = 620;
+                                this.grpExtravio.Top = 645;
                             }
                             else
                             {
@@ -2077,7 +2085,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             this.grpRoboAccesorios.Visible = false;
                             if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                             {
-                                this.Height = 515;
+                                this.Height = 715;
                                 this.Width = 600;
                                
                             }
@@ -2114,27 +2122,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     this._grpDenunciante.Enabled = true;
                                 }
                             }
-                            if (objTipo.Descripcion.ToUpper().Contains("BROMA"))
-                            {
-                                //Se cambia a incidencia cerrada
-                                this._entIncidencia.ClaveEstatus = 5;
-                            }
-                            else
-                            {
-                                //Se verifica si tiene coorporación para ponerle estado 2:
-                                CorporacionIncidenciaList lstCorporacionIncidencia = CorporacionIncidenciaMapper.Instance().GetByIncidencia(this._entIncidencia.Folio);
-                                if (lstCorporacionIncidencia != null && lstCorporacionIncidencia.Count > 0)
-                                {
-                                    //Se cambia a pendiente
-                                    this._entIncidencia.ClaveEstatus = 2;
-                                }
-                                else
-                                {
-                                    //Se cambia a nueva incidencia
-                                    this._entIncidencia.ClaveEstatus = 1;
-                                }
-
-                            }
+                           
 
                         }
                         

@@ -123,11 +123,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
                     {
 
-                        if (Aplicacion.VentanasIncidencias.Count == 0)
-                        {
+                        //if (Aplicacion.VentanasIncidencias.Count == 0)
+                        //{
                             SAIFrmIncidencia066 frmIncidencia066 = new SAIFrmIncidencia066();
                             frmIncidencia066.Show(this);
-                        }
+                        //}
 
                     }
                     else if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label11 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.txtNumeroOficio = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
@@ -43,7 +44,6 @@
             this.Dependencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaEnvioDependencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaNotificacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClaveDependencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDependencias)).BeginInit();
             this.SuspendLayout();
             // 
@@ -75,6 +75,7 @@
             this.txtNumeroOficio.StrMensajeCampoRequerido = "El campo es requerido.";
             this.txtNumeroOficio.TabIndex = 26;
             this.txtNumeroOficio.Leave += new System.EventHandler(this.txtNumeroOficio_Leave);
+            this.txtNumeroOficio.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtNumeroOficio_KeyUp);
             // 
             // dtmFechaDocumento
             // 
@@ -144,22 +145,35 @@
             this.cklDependencia.Size = new System.Drawing.Size(485, 94);
             this.cklDependencia.StrMensajeCampoRequerido = "El campo es requerido.";
             this.cklDependencia.TabIndex = 31;
+            this.cklDependencia.MouseUp += new System.Windows.Forms.MouseEventHandler(this.cklDependencia_MouseUp);
+            this.cklDependencia.Leave += new System.EventHandler(this.cklDependencia_Leave);
+            this.cklDependencia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cklDependencia_KeyUp);
             // 
             // dgvDependencias
             // 
-            this.dgvDependencias.ClrBackColorFoco = System.Drawing.Color.Empty;
+            this.dgvDependencias.AllowUserToAddRows = false;
+            this.dgvDependencias.AllowUserToDeleteRows = false;
+            this.dgvDependencias.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.dgvDependencias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDependencias.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Clave,
             this.Dependencia,
             this.FechaEnvioDependencia,
-            this.FechaNotificacion,
-            this.ClaveDependencia});
+            this.FechaNotificacion});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDependencias.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDependencias.Location = new System.Drawing.Point(97, 513);
             this.dgvDependencias.Name = "dgvDependencias";
             this.dgvDependencias.RowHeadersVisible = false;
             this.dgvDependencias.Size = new System.Drawing.Size(485, 123);
             this.dgvDependencias.TabIndex = 32;
+            this.dgvDependencias.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDependencias_CellValidated);
             // 
             // Clave
             // 
@@ -171,6 +185,7 @@
             // 
             this.Dependencia.HeaderText = "Dependencia";
             this.Dependencia.Name = "Dependencia";
+            this.Dependencia.ReadOnly = true;
             this.Dependencia.Width = 300;
             // 
             // FechaEnvioDependencia
@@ -182,12 +197,6 @@
             // 
             this.FechaNotificacion.HeaderText = "Fecha de Notificación";
             this.FechaNotificacion.Name = "FechaNotificacion";
-            // 
-            // ClaveDependencia
-            // 
-            this.ClaveDependencia.HeaderText = "ClaveDependencia";
-            this.ClaveDependencia.Name = "ClaveDependencia";
-            this.ClaveDependencia.Visible = false;
             // 
             // SAIFrmIncidencia089
             // 
@@ -207,6 +216,7 @@
             this.Location = new System.Drawing.Point(0, 0);
             this.Name = "SAIFrmIncidencia089";
             this.Text = "SAIFrmIncidencia089";
+            this.Load += new System.EventHandler(this.SAIFrmIncidencia089_Load);
             this.Controls.SetChildIndex(this.lblTitulo, 0);
             this.Controls.SetChildIndex(this.label11, 0);
             this.Controls.SetChildIndex(this.label14, 0);
@@ -240,7 +250,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Dependencia;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaEnvioDependencia;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaNotificacion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClaveDependencia;
 
     }
 }
