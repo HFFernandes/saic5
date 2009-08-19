@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows.Forms;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
@@ -102,7 +103,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             saiReport1.AgregarColumna(3, "Tipo de Incidencia", 200, true, true, true, false);
             saiReport1.AgregarColumna(4, "Descripción", 200, true, true, true, false);
             saiReport1.AgregarColumna(5, "Localización", 200, true, false, true, false);
-            saiReport1.AgregarColumna(6, "Dependencia", 100, true, true, true, false);
+            saiReport1.AgregarColumna(6, "Dependencias", 100, true, true, true, false);
             saiReport1.AgregarColumna(7, "Número de Oficio", 100, true, true, true, false);
             saiReport1.AgregarColumna(8, "Nombre del Operador", 90, true, true, true, false);
             saiReport1.AgregarColumna(9, "Ligado a", 90, true, true, true, false);
@@ -125,7 +126,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 //para iniciar nuevamente el ciclo
                 lstIncidenciasTemporales.Clear();
                 foreach (var incidencia in (IncidenciaMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_INCIDENCIAS089,
-                                                                                (int)ESTATUSINCIDENCIAS.NUEVA, Aplicacion.UsuarioPersistencia.ObtenerClaveSistema())))) //vamos a la base para obtener los registros de estado pendiente y de la corporación del usuario
+                                                                                (int)ESTATUSINCIDENCIAS.PENDIENTE, Aplicacion.UsuarioPersistencia.ObtenerClaveSistema())))) //vamos a la base para obtener los registros de estado pendiente y de la corporación del usuario
                 {
                     lstIncidenciasTemporales.Add(incidencia);
                     //verificamos que la incidencia no esté ya en la lista de incidencias registradas
@@ -133,13 +134,23 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     if (!lstIncidenciasRegistradas.Contains(incidencia))
                     {
                         lstIncidenciasRegistradas.Add(incidencia);
+                        var dependencias = new StringBuilder();
+                        DependenciaMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_DEPENDENCIAS089, incidencia.Folio)).ForEach(delegate(Dependencia d)
+                                                                                                                                       {
+                                                                                                                                           if (d.Descripcion != string.Empty)
+                                                                                                                                           {
+                                                                                                                                               dependencias.Append(d.Descripcion);
+                                                                                                                                               dependencias.Append(",");
+                                                                                                                                           }
+                                                                                                                                       });
+
                         lstRegistrosReporte.Add(saiReport1.AgregarRegistro(null, incidencia.Folio,
                                                                        incidencia.Folio.ToString(),
                                                                        incidencia.HoraRecepcion.ToShortTimeString(),
                                                                        TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Descripcion,
                                                                        incidencia.Descripcion,
                                                                        incidencia.Direccion,
-                                                                       "dependencia",
+                                                                       dependencias.ToString().Trim().Length > 1 ? dependencias.ToString().Trim().Remove(dependencias.Length - 1) : string.Empty,
                                                                        incidencia.NumeroOficio,
                                                                        UsuarioMapper.Instance().GetOne(incidencia.ClaveUsuario).NombreUsuario,
                                                                        incidencia.FolioPadre.ToString()));
@@ -179,7 +190,19 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                             ? incidencia.Direccion
                                             : ID.STR_DESCONOCIDO;
 
-                                saiReport1.reportControl.Records[itm.Record.Index][6].Value ="dependencia";
+                                var dependencias = new StringBuilder();
+                                DependenciaMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_DEPENDENCIAS089, incidencia.Folio)).ForEach(delegate(Dependencia d)
+                                {
+                                    if (d.Descripcion != string.Empty)
+                                    {
+                                        dependencias.Append(d.Descripcion);
+                                        dependencias.Append(",");
+                                    }
+                                });
+                                saiReport1.reportControl.Records[itm.Record.Index][6].Value =
+                                    dependencias.ToString().Trim().Length > 1
+                                        ? dependencias.ToString().Trim().Remove(dependencias.Length - 1)
+                                        : ID.STR_DESCONOCIDO;
 
                                 if (!incidenciaTemp.NumeroOficio.Equals(incidencia.NumeroOficio))
                                     saiReport1.reportControl.Records[itm.Record.Index][7].Value =

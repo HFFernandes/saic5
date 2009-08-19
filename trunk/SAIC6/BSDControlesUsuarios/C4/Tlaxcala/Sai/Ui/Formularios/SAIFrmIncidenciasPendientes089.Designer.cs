@@ -36,7 +36,7 @@
             // tmrRegistros
             // 
             this.tmrRegistros.Enabled = true;
-            this.tmrRegistros.Interval = 1000;
+            this.tmrRegistros.Interval = 5000;
             this.tmrRegistros.Tick += new System.EventHandler(this.tmrRegistros_Tick);
             // 
             // saiReport1
@@ -44,7 +44,7 @@
             this.saiReport1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.saiReport1.Location = new System.Drawing.Point(0, 0);
             this.saiReport1.Name = "saiReport1";
-            this.saiReport1.Size = new System.Drawing.Size(647, 296);
+            this.saiReport1.Size = new System.Drawing.Size(647, 274);
             this.saiReport1.TabIndex = 0;
             // 
             // SAIFrmIncidenciasPendientes089
