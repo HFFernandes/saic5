@@ -134,6 +134,12 @@
     <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidencia066Despacho.Designer.cs">
       <DependentUpon>SAIFrmIncidencia066Despacho.cs</DependentUpon>
     </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidenciasActivas089.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidenciasActivas089.Designer.cs">
+      <DependentUpon>SAIFrmIncidenciasActivas089.cs</DependentUpon>
+    </Compile>
     <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidenciasPendientes089.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -335,6 +341,10 @@
     <EmbeddedResource Include="C4\Tlaxcala\Sai\RecursosEmbebidos\SAI066.xml" />
     <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmAgendaTelefonica.resx">
       <DependentUpon>SAIFrmAgendaTelefonica.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidenciasActivas089.resx">
+      <DependentUpon>SAIFrmIncidenciasActivas089.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Content Include="SuitePro.ResourceEs.xml">
