@@ -29,6 +29,10 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
         private void frmUnidades_Load(object sender, EventArgs e)
         {
+            this.LlenarEstado();
+            this.LlenarMunicipio();
+            this.ddlEstado.SelectedIndex = 0;
+
             SAIBarraEstado.SizingGrip = false;
             this.LlenarGrid();
             this.LlenarCorporaciones();
@@ -72,8 +76,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         this.ddlEstado.Items.Add(new ComboItem(estado.Clave, estado.Nombre));
                     }
 
-                    this.ddlMunicipio.DisplayMember = "Descripcion";
-                    this.ddlMunicipio.ValueMember = "Valor";
+                    this.ddlEstado.DisplayMember = "Descripcion";
+                    this.ddlEstado.ValueMember = "Valor";
                 }
                 catch (Exception ex)
                 { throw new SAIExcepcion(ex.Message); }
@@ -141,26 +145,28 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     catUbicacion.Columns.Add(new DataColumn("ClaveCorporacion", Type.GetType("System.Int32")));
                     catUbicacion.Columns.Add(new DataColumn("Corporacion", Type.GetType("System.String")));
                     catUbicacion.Columns.Add(new DataColumn("Activo", Type.GetType("System.Boolean")));
+                    catUbicacion.Columns.Add(new DataColumn("ClaveMunicipio", Type.GetType("System.Int32")));
+                    catUbicacion.Columns.Add(new DataColumn("Municipio", Type.GetType("System.String")));
 
-                    Entidades.ListaUnidadesList lstUnidades = Mappers.ListaUnidadesMapper.Instance().GetAll();
+                    Entidades.UnidadList lstUnidades = Mappers.UnidadMapper.Instance().GetAll();
 
-                    foreach (Entidades.ListaUnidades unidad in lstUnidades)
+                    foreach (Entidades.Unidad unidad in lstUnidades)
                     {
                         object[] registro = new object[] { unidad.Clave, unidad.Codigo, unidad.ClaveCorporacion,
-                       Mappers.CorporacionMapper.Instance().GetOne(unidad.ClaveCorporacion).Descripcion, unidad.Activo};
+                            Mappers.CorporacionMapper.Instance().GetOne(unidad.ClaveCorporacion).Descripcion, 
+                            unidad.Activo, unidad.ClaveMunicipio, Mappers.MunicipioMapper.Instance().GetOne(unidad.ClaveMunicipio.Value).Nombre };
                         catUbicacion.Rows.Add(registro);
                     }
-
 
                     this.gvUnidades.DataSource = catUbicacion;
                     this.gvUnidades.Columns["Clave"].Visible = false;
                     this.gvUnidades.Columns["ClaveCorporacion"].Visible = false;
+                    this.gvUnidades.Columns["ClaveMunicipio"].Visible = false;
                 }
                 catch (Exception ex)
                 {
                     throw new SAIExcepcion(ex.Message);
                 }
-
             }
             catch (SAIExcepcion)
             { }
@@ -192,12 +198,14 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             {
                 try
                 {
-                    Entidades.ListaUnidades newUnidad = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.ListaUnidades();
+                    Entidades.Unidad newUnidad = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Unidad();
+                    //Entidades.ListaUnidades newUnidad = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.ListaUnidades();
                     newUnidad.ClaveCorporacion = Convert.ToInt32(this.ObtieneValor(this.ddlCorporacion)); // Convert.ToInt32(this.ddlCorporacion.SelectedValue);
                     newUnidad.Codigo = saiTxtCodigo.Text;
                     newUnidad.Activo = this.chkActivo.Checked;
+                    newUnidad.ClaveMunicipio = Convert.ToInt32(this.ObtieneValor(this.ddlMunicipio));
 
-                    Mappers.ListaUnidadesMapper.Instance().Insert(newUnidad);
+                    Mappers.UnidadMapper.Instance().Insert(newUnidad);
 
                     Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
                     bitacora.Descripcion = "Se agrego la unidad: " + newUnidad.Codigo;
@@ -227,12 +235,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 {
                     int selectedRow = this.gvUnidades.CurrentCellAddress.Y;
                     int clave = Convert.ToInt32(this.gvUnidades.Rows[selectedRow].Cells["Clave"].Value);
-                    Entidades.ListaUnidades updUnidad = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.ListaUnidades(clave);
+                    Entidades.Unidad updUnidad = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Unidad(clave);
                     updUnidad.ClaveCorporacion = Convert.ToInt32(this.ObtieneValor(this.ddlCorporacion));
+                    updUnidad.ClaveMunicipio = Convert.ToInt32(this.ObtieneValor(this.ddlMunicipio));
                     updUnidad.Codigo = this.saiTxtCodigo.Text;
                     updUnidad.Activo = this.chkActivo.Checked;
 
-                    Mappers.ListaUnidadesMapper.Instance().Save(updUnidad);
+                    Mappers.UnidadMapper.Instance().Save(updUnidad);
 
                     Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
                     bitacora.Descripcion = "Se modifico la Unidad: " + updUnidad.Codigo;
@@ -263,7 +272,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     int selectedRow = this.gvUnidades.CurrentCellAddress.Y;
                     if (selectedRow > -1)
                     {
-                        Mappers.ListaUnidadesMapper.Instance().Delete(Convert.ToInt32(this.gvUnidades.Rows[selectedRow].Cells["Clave"].Value));
+                        Mappers.UnidadMapper.Instance().Delete(Convert.ToInt32(this.gvUnidades.Rows[selectedRow].Cells["Clave"].Value));
 
                         Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
                         bitacora.Descripcion = "Se elimino la Unidad: " + Convert.ToString(this.gvUnidades.Rows[selectedRow].Cells["Codigo"].Value);
@@ -274,7 +283,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     }
                     else { throw new SAIExcepcion("Seleccione la unidad que desea eliminar."); }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 { throw new SAIExcepcion("No puede eliminar la Unidad porque esta Asociada."); }
             }
             catch (SAIExcepcion)
@@ -323,6 +332,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         this.saiTxtCodigo.Text = Convert.ToString(this.gvUnidades.Rows[selectedRow].Cells["Codigo"].Value);
                         //this.ddlCorporacion.SelectedValue = this.gvUnidades.Rows[selectedRow].Cells["ClaveCorporacion"].Value;
                         this.SeleccionarComboItem(Convert.ToInt32(this.gvUnidades.Rows[selectedRow].Cells["ClaveCorporacion"].Value), this.ddlCorporacion);
+                        this.SeleccionarComboItem(Convert.ToInt32(this.gvUnidades.Rows[selectedRow].Cells["ClaveMunicipio"].Value), this.ddlMunicipio);
                         this.chkActivo.Checked = Convert.ToBoolean(this.gvUnidades.Rows[selectedRow].Cells["Activo"].Value);
                         this.btnEliminar.Visible = true;
                         this.btnModificar.Enabled = true;

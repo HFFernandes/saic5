@@ -31,6 +31,10 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUnidades));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ddlEstado = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.ddlMunicipio = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.saiTxtCodigo = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.label2 = new System.Windows.Forms.Label();
@@ -44,10 +48,6 @@
             this.logoPicture = new System.Windows.Forms.PictureBox();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.bnCancelar = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.ddlMunicipio = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.ddlEstado = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvUnidades)).BeginInit();
@@ -73,6 +73,45 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos Generales";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // ddlEstado
+            // 
+            this.ddlEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlEstado.Enabled = false;
+            this.ddlEstado.FormattingEnabled = true;
+            this.ddlEstado.Location = new System.Drawing.Point(139, 76);
+            this.ddlEstado.Name = "ddlEstado";
+            this.ddlEstado.Size = new System.Drawing.Size(198, 21);
+            this.ddlEstado.TabIndex = 8;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Enabled = false;
+            this.label4.Location = new System.Drawing.Point(19, 79);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(43, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Estado:";
+            // 
+            // ddlMunicipio
+            // 
+            this.ddlMunicipio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlMunicipio.FormattingEnabled = true;
+            this.ddlMunicipio.Location = new System.Drawing.Point(139, 103);
+            this.ddlMunicipio.Name = "ddlMunicipio";
+            this.ddlMunicipio.Size = new System.Drawing.Size(198, 21);
+            this.ddlMunicipio.TabIndex = 6;
+            this.ddlMunicipio.SelectedIndexChanged += new System.EventHandler(this.ddlMunicipio_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(19, 106);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(55, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Municipio:";
             // 
             // btnLimpiar
             // 
@@ -216,44 +255,6 @@
             this.bnCancelar.Text = "Cerrar";
             this.bnCancelar.UseVisualStyleBackColor = true;
             this.bnCancelar.Click += new System.EventHandler(this.bnCancelar_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 106);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Municipio:";
-            // 
-            // ddlMunicipio
-            // 
-            this.ddlMunicipio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlMunicipio.FormattingEnabled = true;
-            this.ddlMunicipio.Location = new System.Drawing.Point(139, 103);
-            this.ddlMunicipio.Name = "ddlMunicipio";
-            this.ddlMunicipio.Size = new System.Drawing.Size(198, 21);
-            this.ddlMunicipio.TabIndex = 6;
-            this.ddlMunicipio.SelectedIndexChanged += new System.EventHandler(this.ddlMunicipio_SelectedIndexChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Enabled = false;
-            this.label4.Location = new System.Drawing.Point(19, 79);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(43, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Estado:";
-            // 
-            // ddlEstado
-            // 
-            this.ddlEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlEstado.FormattingEnabled = true;
-            this.ddlEstado.Location = new System.Drawing.Point(139, 76);
-            this.ddlEstado.Name = "ddlEstado";
-            this.ddlEstado.Size = new System.Drawing.Size(198, 21);
-            this.ddlEstado.TabIndex = 8;
             // 
             // frmUnidades
             // 
