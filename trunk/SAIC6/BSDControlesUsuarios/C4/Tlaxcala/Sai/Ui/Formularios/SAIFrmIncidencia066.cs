@@ -100,7 +100,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     {
                         if (this.cklCorporacion.Items[i].ToString() == entCorporacion.Descripcion)
                         {
-                            this.cklCorporacion.SetItemChecked(j, true);
+                            this.cklCorporacion.SetItemChecked(i, true);
                         }
                     }
                 }
@@ -130,18 +130,18 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         ///<remarks>Según las corporaciones asociadas se hace el despacho de la incidencia </remarks>
         private void cklCorporacion_Leave(object sender, EventArgs e)
         {
-            try
-            {
-                try
-                {
-                    this.GuardaCorporaciones();
-                }
-                catch (System.Exception ex)
-                {
-                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
-                }
-            }
-            catch (SAIExcepcion) { }
+            //try
+            //{
+            //    try
+            //    {
+            //        this.GuardaCorporaciones();
+            //    }
+            //    catch (System.Exception ex)
+            //    {
+            //        throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+            //    }
+            //}
+            //catch (SAIExcepcion) { }
         }
 
         /// <summary>
@@ -282,7 +282,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 try
                 {
-                    this.GuardaCorporaciones();
+                    //this.GuardaCorporaciones();
                     this.GuardaDenunciante();
                     base.OnClosed(e);
                 }
@@ -302,11 +302,48 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             IEnumerator myEnumerator;
             CorporacionList ListaCorporaciones = this.ObtenCorporaciones();
             Boolean blnTieneDatos = false;
-            
+            CorporacionIncidenciaList lstCorporacionIncidencia;
+           
             try
             {
                 try
                 {
+                    //Se revisa si la incidncia ya tiene despacho, si es así, no se puede  modificar la infomración
+                    lstCorporacionIncidencia = CorporacionIncidenciaMapper.Instance().GetByIncidencia(this._entIncidencia.Folio);
+                    if (lstCorporacionIncidencia != null && lstCorporacionIncidencia.Count > 0)
+                    {
+                        foreach (CorporacionIncidencia entCorporacionIncidencia in lstCorporacionIncidencia)
+                        {
+                            if (DespachoIncidenciaMapper.Instance().GetByCorporacionIncidencia(this._entIncidencia.Folio, entCorporacionIncidencia.ClaveCorporacion).Count > 0)
+                            {
+
+                                for (int i = 0; i < this.cklCorporacion.Items.Count; i++)
+                                {
+                                   
+                                        this.cklCorporacion.SetItemChecked(i, false);
+                                    
+                                }
+
+                                for (int j = 0; j < lstCorporacionIncidencia.Count; j++)
+                                {
+                                    Corporacion entCorporacion = CorporacionMapper.Instance().GetOne(lstCorporacionIncidencia[j].ClaveCorporacion);
+
+                                    for (int i = 0; i < this.cklCorporacion.Items.Count; i++)
+                                    {
+                                        if (this.cklCorporacion.Items[i].ToString() == entCorporacion.Descripcion)
+                                        {
+                                            this.cklCorporacion.SetItemChecked(i, true);
+                                        }
+                                    }
+                                }
+
+                                throw new SAIExcepcion("No es posible modificar la información de las corporaciones asociadas, la incidencia ya está siendo despachada", this);
+
+
+
+                            }
+                        }
+                    }
 
                     if (this._blnSeActivoClosed)
                     {
@@ -369,9 +406,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 try
                 {
-                    if (this.txtNombreDenunciante.Text.Trim() != string.Empty || this.txtApellidoDenunciante.Text.Trim() != string.Empty
-                        || this.txtDenuncianteDireccion.Text.Trim() != string.Empty)
-                    {
+                   
                         
 
                         if (this._entIncidencia.ClaveDenunciante.HasValue)
@@ -394,7 +429,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         this._entIncidencia.ClaveDenunciante = objDenunciante.Clave;
 
 
-                    }
+                    
                 }
                 catch (System.Exception ex)
                 {
@@ -412,7 +447,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 try
                 {
-                     lstCorporaciones = CorporacionMapper.Instance().GetBySQLQuery("SELECT [Clave],[Descripcion],[ClaveSistema],[UnidadesVirtuales],[Activo],[Zn] FROM [dbo].[Corporacion] Where Activo = true");
+                     lstCorporaciones = CorporacionMapper.Instance().GetBySQLQuery("SELECT [Clave],[Descripcion],[ClaveSistema],[UnidadesVirtuales],[Activo],[Zn] FROM [dbo].[Corporacion] Where Activo = 1");
                 }
                 catch (System.Exception ex)
                 {

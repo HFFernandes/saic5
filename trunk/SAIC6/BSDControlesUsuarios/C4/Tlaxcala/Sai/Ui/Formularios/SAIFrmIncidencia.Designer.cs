@@ -216,6 +216,7 @@
             this.txtTelefono.TabIndex = 6;
             this.txtTelefono.Leave += new System.EventHandler(this.txtTelefono_Leave);
             this.txtTelefono.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtTelefono_KeyUp);
+            this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefono_KeyPress);
             // 
             // lblTipoIncidencia
             // 
@@ -302,6 +303,7 @@
             this.txtDescripcion.StrMensajeCampoRequerido = "El campo es requerido.";
             this.txtDescripcion.TabIndex = 21;
             this.txtDescripcion.Leave += new System.EventHandler(this.txtDescripcion_Leave);
+            this.txtDescripcion.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDescripcion_KeyUp);
             // 
             // cmbTipoIncidencia
             // 
@@ -980,6 +982,7 @@
             this.txtReferencias.StrMensajeCampoRequerido = "El campo es requerido.";
             this.txtReferencias.TabIndex = 20;
             this.txtReferencias.Leave += new System.EventHandler(this.txtReferencias_Leave);
+            this.txtReferencias.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtReferencias_KeyUp);
             // 
             // label10
             // 
@@ -1007,7 +1010,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1284, 778);
+            this.ClientSize = new System.Drawing.Size(1301, 778);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label10);
