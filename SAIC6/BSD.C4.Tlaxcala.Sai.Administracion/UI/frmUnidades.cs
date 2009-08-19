@@ -280,6 +280,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         bitacora.NombreCatalogo = "Unidades";
                         bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
                         bitacora.Operacion = "DELETE";
+
+                        Mappers.BitacoraMapper.Instance().Delete(bitacora);
                     }
                     else { throw new SAIExcepcion("Seleccione la unidad que desea eliminar."); }
                 }
