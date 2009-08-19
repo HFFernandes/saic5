@@ -53,7 +53,7 @@
             this.ClientSize = new System.Drawing.Size(647, 296);
             this.Controls.Add(this.saiReport1);
             this.Name = "SAIFrmIncidenciasPendientes089";
-            this.Text = "SAI - Incidencias 089";
+            this.Text = "SAI - Incidencias Pendientes 089";
             this.Load += new System.EventHandler(this.SAIFrmIncidenciasPendientes089_Load);
             this.Controls.SetChildIndex(this.saiReport1, 0);
             this.ResumeLayout(false);

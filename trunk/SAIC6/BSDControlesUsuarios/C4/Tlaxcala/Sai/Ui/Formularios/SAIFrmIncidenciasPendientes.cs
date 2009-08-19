@@ -136,11 +136,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void btnLigarIncidencias_Click(object sender, EventArgs e)
         {
-            //Actualizar el foliopadre, pero antes verificar que no este ligada
-            //organizar los nodos para desplegar el tree
-            //y verificar que al momento del despacho si es hijo se pase la incidencia
-            //del padre..para prevenir el despacho a una misma incidencia
-
             if (Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_P))
             {
                 try

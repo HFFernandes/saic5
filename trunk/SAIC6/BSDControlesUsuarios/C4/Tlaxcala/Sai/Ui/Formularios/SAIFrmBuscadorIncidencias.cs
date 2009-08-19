@@ -14,10 +14,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             InitializeComponent();
 
-            QueryColumnas.Model = this.ModeloDatos;
-            QueryCondiciones.Model = this.ModeloDatos;
-            QueryColumnas.Query = this.ModeloQuery;
-            QueryCondiciones.Query = this.ModeloQuery;
+            QueryColumnas.Model = ModeloDatos;
+            QueryCondiciones.Model = ModeloDatos;
+            QueryColumnas.Query = ModeloQuery;
+            QueryCondiciones.Query = ModeloQuery;
 
             var en =
                 Assembly.GetExecutingAssembly().GetManifestResourceStream(
@@ -73,7 +73,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
             catch (SAIExcepcion)
             {
-                base.Close();
+                Close();
             }
         }
     }
