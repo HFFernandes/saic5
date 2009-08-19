@@ -23,18 +23,52 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
         private void frmOrganizacion_Load(object sender, EventArgs e)
         {
-
+            this.LlenarGrid();
         }
 
         private void LlenarGrid()
         {
-            try { }
+            try 
+            {
+                DataTable catOrganizacion = new DataTable("catOrganizacion");
+                catOrganizacion.Columns.Add(new DataColumn("Clave", Type.GetType("System.Int32")));
+                catOrganizacion.Columns.Add(new DataColumn("Nombre", Type.GetType("System.String")));
+                catOrganizacion.Columns.Add(new DataColumn("Direccion", Type.GetType("System.String")));
+                catOrganizacion.Columns.Add(new DataColumn("Telefono", Type.GetType("System.String")));
+                catOrganizacion.Columns.Add(new DataColumn("Fax", Type.GetType("System.String")));
+                catOrganizacion.Columns.Add(new DataColumn("Email", Type.GetType("System.String")));
+                catOrganizacion.Columns.Add(new DataColumn("DireccionWeb", Type.GetType("System.String")));
+                catOrganizacion.Columns.Add(new DataColumn("ClaveClasificacion", Type.GetType("System.String")));
+                catOrganizacion.Columns.Add(new DataColumn("Clasificacion", Type.GetType("System.Int32")));
+
+                Entidades.OrganizacionList lstOrganizacion = Mappers.OrganizacionMapper.Instance().GetAll();
+
+                foreach (Entidades.Organizacion organizacion in lstOrganizacion)
+                {
+                    object[] registro = new object[] { organizacion.Clave, organizacion.Nombre, organizacion.Dirección,
+                        organizacion.Telefono, organizacion.Fax, organizacion.Email, organizacion.DireccionWeb,
+                        organizacion.ClaveClasificacion, Mappers.ClasificacionOrganizacionMapper.Instance().GetOne(organizacion.ClaveClasificacion).Descripcion };
+                    catOrganizacion.Rows.Add(registro);
+                }
+
+                this.gvOrganizaciones.DataSource = catOrganizacion;
+                this.gvOrganizaciones.Columns["Clave"].Visible = false;
+                this.gvOrganizaciones.Columns["ClaveClasificacion"].Visible = false;
+
+            }
             catch(SAIExcepcion)
             {}
         }
 
         private void Agregar()
-        { }
+        {
+            try
+            {
+
+            }
+            catch (SAIExcepcion)
+            { }
+        }
 
         private void Modificar()
         { }
@@ -67,16 +101,22 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            this.Agregar();
-            this.LlenarGrid();
-            this.Limpiar();
+            if(this.SAIProveedorValidacion.ValidarCamposRequeridos(this.gpbDatosGenerales))
+            {
+                this.Agregar();
+                this.LlenarGrid();
+                this.Limpiar();
+            }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            this.Modificar();
-            this.LlenarGrid();
-            this.Limpiar();
+            if (this.SAIProveedorValidacion.ValidarCamposRequeridos(this.gpbDatosGenerales))
+            {
+                this.Modificar();
+                this.LlenarGrid();
+                this.Limpiar();
+            }
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)

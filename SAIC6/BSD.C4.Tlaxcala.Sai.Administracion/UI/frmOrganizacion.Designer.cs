@@ -125,11 +125,17 @@
             // 
             // gvOrganizaciones
             // 
+            this.gvOrganizaciones.AllowUserToAddRows = false;
+            this.gvOrganizaciones.AllowUserToDeleteRows = false;
+            this.gvOrganizaciones.AllowUserToResizeRows = false;
             this.gvOrganizaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvOrganizaciones.Location = new System.Drawing.Point(7, 20);
             this.gvOrganizaciones.Name = "gvOrganizaciones";
+            this.gvOrganizaciones.ReadOnly = true;
+            this.gvOrganizaciones.RowHeadersVisible = false;
             this.gvOrganizaciones.Size = new System.Drawing.Size(546, 171);
             this.gvOrganizaciones.TabIndex = 0;
+            this.gvOrganizaciones.TabStop = false;
             this.gvOrganizaciones.SystemColorsChanged += new System.EventHandler(this.gvOrganizaciones_SystemColorsChanged);
             // 
             // gpbDatosGenerales
