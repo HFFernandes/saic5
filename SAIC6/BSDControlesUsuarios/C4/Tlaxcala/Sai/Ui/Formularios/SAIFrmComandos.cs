@@ -51,10 +51,25 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             switch (e.control.Id)
             {
                 case ID.CMD_A:
-                    if (Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
+                    if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                     {
-                        var activas = new SAIFrmIncidenciasActivas();
-                        MostrarEnSegundoMonitorSiEsPosible(activas);
+                        if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_A))
+                        {
+                            var activas089 = new SAIFrmIncidenciasActivas089();
+                            MostrarEnSegundoMonitorSiEsPosible(activas089);
+                        }
+                        else
+                            throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
+                    }
+                    else if (Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
+                    {
+                        if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_A))
+                        {
+                            var activas = new SAIFrmIncidenciasActivas();
+                            MostrarEnSegundoMonitorSiEsPosible(activas);
+                        }
+                        else
+                            throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
                     }
                     break;
                 case ID.CMD_AU:
@@ -64,36 +79,20 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     {
                         if (Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
                         {
-                            var unidades = new SAIFrmEstadoUnidades();
-                            MostrarEnSegundoMonitorSiEsPosible(unidades);
+                            if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_AU))
+                            {
+                                var unidades = new SAIFrmEstadoUnidades();
+                                MostrarEnSegundoMonitorSiEsPosible(unidades);
+                            }
+                            else
+                                throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
                         }
-                    }
-                    break;
-                case ID.CMD_BSC:
+                    }else
+                        throw new SAIExcepcion("La corporación a la cual pertenece no está configurada para manejar unidades fisicas.");
                     break;
                 case ID.CMD_CAN:
                     break;
-                case ID.CMD_DT:
-                    break;
-                case ID.CMD_FIN:
-                    break;
                 case ID.CMD_HI:
-                    break;
-                case ID.CMD_INF:
-                    break;
-                case ID.CMD_LAC:
-                    break;
-                case ID.CMD_MAP:
-                    break;
-                case ID.CMD_MIA:
-                    break;
-                case ID.CMD_MIP:
-                    break;
-                case ID.CMD_MN:
-                    break;
-                case ID.CMD_MUS:
-                    break;
-                case ID.CMD_N:
                     break;
                 case ID.CMD_NI:
                     //Se pregunta qué es el usuario y a qué sistema entró:
@@ -125,8 +124,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                         //if (Aplicacion.VentanasIncidencias.Count == 0)
                         //{
-                            SAIFrmIncidencia066 frmIncidencia066 = new SAIFrmIncidencia066();
-                            frmIncidencia066.Show(this);
+                        SAIFrmIncidencia066 frmIncidencia066 = new SAIFrmIncidencia066();
+                        frmIncidencia066.Show(this);
                         //}
 
                     }
@@ -142,47 +141,45 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 case ID.CMD_P:
                     if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                     {
-                        var pendientes = new SAIFrmIncidenciasPendientes089();
-                        MostrarEnSegundoMonitorSiEsPosible(pendientes);
+                        if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_P))
+                        {
+                            var pendientes = new SAIFrmIncidenciasPendientes089();
+                            MostrarEnSegundoMonitorSiEsPosible(pendientes);
+                        }
+                        else
+                            throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
                     }
                     else if (Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
                     {
-                        var pendientes = new SAIFrmIncidenciasPendientes();
-                        MostrarEnSegundoMonitorSiEsPosible(pendientes);
+                        if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_P))
+                        {
+                            var pendientes = new SAIFrmIncidenciasPendientes();
+                            MostrarEnSegundoMonitorSiEsPosible(pendientes);
+                        }
+                        else
+                            throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
                     }
                     break;
                 case ID.CMD_PH:
                     var buscador = new SAIFrmBuscadorIncidencias();
                     MostrarEnSegundoMonitorSiEsPosible(buscador);
                     break;
-                case ID.CMD_RNC:
-                    break;
                 case ID.CMD_RPH:
                     break;
                 case ID.CMD_S:
-                    break;
-                case ID.CMD_SDT:
                     break;
                 case ID.CMD_SIF:
                     break;
                 case ID.CMD_SLC:
                     break;
-                case ID.CMD_SS:
-                    break;
                 case ID.CMD_TEL:
-                    if(Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_TEL))
+                    if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_TEL))
                     {
                         var agenda = new SAIFrmAgendaTelefonica();
                         MostrarEnSegundoMonitorSiEsPosible(agenda);
                     }
                     break;
                 case ID.CMD_U:
-                    break;
-                case ID.CMD_UA:
-                    break;
-                case ID.CMD_UB:
-                    break;
-                case ID.CMD_V:
                     break;
                 default:
                     break;

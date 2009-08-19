@@ -64,7 +64,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     if (incidencia != null)
                     {
                         var incidenciaDespacho = new SAIFrmIncidencia066Despacho(incidencia);
-                        incidenciaDespacho.Show();
+                        incidenciaDespacho.Show(this);
                     }
                 }
                 else if (Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_NI))
@@ -73,7 +73,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     if (incidencia != null)
                     {
                         var incidenciaInfo = new SAIFrmIncidencia066(incidencia);
-                        incidenciaInfo.Show();
+                        incidenciaInfo.Show(this);
                     }
                 }
                 else
@@ -108,7 +108,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         if (incidencia != null)
                         {
                             var incidenciaDespacho = new SAIFrmIncidencia066Despacho(incidencia);
-                            incidenciaDespacho.Show();
+                            incidenciaDespacho.Show(this);
                         }
                     }
                 }
@@ -122,7 +122,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         if (incidencia != null)
                         {
                             var incidenciaInfo = new SAIFrmIncidencia066(incidencia);
-                            incidenciaInfo.Show();
+                            incidenciaInfo.Show(this);
                         }
                     }
                 }

@@ -133,6 +133,7 @@
         public const string STR_ESTATUSLIBRE = "Libre";
         public const string STR_ESTATUSLLEGADA = "Llegada";
         public const string STR_ESTATUSDESPACHADA = "Despachada";
+        public const string STR_SINPRIVILEGIOS = "No cuenta con los privilegios suficientes para realizar esta acción.";
 
         #endregion
 
