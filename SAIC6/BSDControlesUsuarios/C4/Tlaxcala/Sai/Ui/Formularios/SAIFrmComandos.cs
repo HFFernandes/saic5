@@ -100,6 +100,22 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     case ID.CMD_HI:
                         break;
                     case ID.CMD_NI:
+                        TipoIncidenciaList lstTipoIncidencias = new TipoIncidenciaList();
+
+                        if (Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
+                        {
+                            lstTipoIncidencias = TipoIncidenciaMapper.Instance().GetBySistema(2);
+                        }
+                        else
+                        {
+                            lstTipoIncidencias = TipoIncidenciaMapper.Instance().GetBySistema(1);
+                        }
+                        if (lstTipoIncidencias.Count == 0)
+                        {
+
+                            throw new SAIExcepcion("No es posible registrar incidencias, no existen tipos de incidencias cargados en el sistema, favor de contactar al administrador", this);
+
+                        }
                         //Se pregunta qué es el usuario y a qué sistema entró:
                         if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
                             Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
