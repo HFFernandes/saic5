@@ -98,6 +98,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             // btnLigarIncidencias
             // 
             this.btnLigarIncidencias.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnLigarIncidencias.Enabled = false;
             this.btnLigarIncidencias.Image = global::BSD.Properties.Resources.ligar_16;
             this.btnLigarIncidencias.ImageTransparentColor = System.Drawing.Color.Black;
             this.btnLigarIncidencias.Name = "btnLigarIncidencias";
