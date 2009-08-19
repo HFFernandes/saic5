@@ -170,6 +170,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 case ID.CMD_SS:
                     break;
                 case ID.CMD_TEL:
+                    if(Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_TEL))
+                    {
+                        var agenda = new SAIFrmAgendaTelefonica();
+                        MostrarEnSegundoMonitorSiEsPosible(agenda);
+                    }
                     break;
                 case ID.CMD_U:
                     break;

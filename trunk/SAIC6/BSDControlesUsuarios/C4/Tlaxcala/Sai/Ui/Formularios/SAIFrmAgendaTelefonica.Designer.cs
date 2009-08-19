@@ -28,18 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.saiReport1 = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIReport();
             this.SuspendLayout();
+            // 
+            // saiReport1
+            // 
+            this.saiReport1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.saiReport1.Location = new System.Drawing.Point(0, 0);
+            this.saiReport1.Name = "saiReport1";
+            this.saiReport1.Size = new System.Drawing.Size(647, 296);
+            this.saiReport1.TabIndex = 3;
             // 
             // SAIFrmAgendaTelefonica
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(541, 342);
+            this.ClientSize = new System.Drawing.Size(647, 296);
+            this.Controls.Add(this.saiReport1);
             this.Name = "SAIFrmAgendaTelefonica";
+            this.Text = "SAI - Agenda Telefónica";
+            this.Load += new System.EventHandler(this.SAIFrmAgendaTelefonica_Load);
+            this.Controls.SetChildIndex(this.saiReport1, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
+
+        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIReport saiReport1;
     }
 }
