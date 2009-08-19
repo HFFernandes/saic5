@@ -120,6 +120,9 @@
         public const string SQL_INCIDENCIAS089 =
            "SELECT Incidencia.* FROM Incidencia LEFT OUTER JOIN TipoIncidencia ON Incidencia.ClaveTipo = TipoIncidencia.Clave WHERE (Incidencia.ClaveEstatus = {0}) AND (TipoIncidencia.ClaveSistema={1}) AND (Incidencia.Activo=1) ORDER BY TipoIncidencia.Prioridad DESC";
 
+        public const string SQL_DEPENDENCIAS089 =
+            "SELECT Dependencia.* FROM Dependencia INNER JOIN IncidenciaDependencia ON Dependencia.Clave = IncidenciaDependencia.ClaveDependencia INNER JOIN Incidencia ON IncidenciaDependencia.Folio = Incidencia.Folio WHERE (Incidencia.Folio = {0})";
+
         #endregion
 
         #region Cadenas
