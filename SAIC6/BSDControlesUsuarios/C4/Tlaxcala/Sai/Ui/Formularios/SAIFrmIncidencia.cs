@@ -73,7 +73,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <summary>
         /// Lleva el estado del caso de la tecla control presionada.
         /// </summary>
-        private bool _blnCtrPresionado = false;
+        protected bool _blnCtrPresionado = false;
 
         /// <summary>
         /// Guarda el valor de solo lectura del formulario
@@ -380,18 +380,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             base.OnKeyUp(e);
         }
 
-        /// <summary>
-        /// Detecta cuando se presionó la tecla control
-        /// </summary>
-        /// <returns></returns>
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            if (keyData == (Keys.ControlKey | Keys.Control))
-            {
-                this._blnCtrPresionado = true;
-            }
-            return false;
-        }
+       
 
         /// <summary>
         /// Actualiza la ubicación del mapa cuando el formulario es activado
@@ -2086,16 +2075,37 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="e">Parámetros del evento</param>
         protected void SAIFrmIncidenciaKeyUp(KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Tab && this._blnCtrPresionado)
+            //if (e.KeyCode == Keys.Tab && this._blnCtrPresionado)
+            //{
+            //    if (this.Owner != null)
+            //    {
+            //        SAIFrmComandos frmPrincipal = (SAIFrmComandos)this.Owner;
+            //        frmPrincipal.MuestraSwitch();
+            //    }
+
+            //}
+            //this._blnCtrPresionado = false;
+        }
+
+        /// <summary>
+        /// Detecta cuando se presionó la tecla control
+        /// </summary>
+        /// <returns></returns>
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            //if (keyData == (Keys.ControlKey | Keys.Control))
+            //{
+            //    this._blnCtrPresionado = true;
+            //}
+            if ((keyData == (Keys.LButton | Keys.Back | Keys.Control)))
             {
                 if (this.Owner != null)
                 {
                     SAIFrmComandos frmPrincipal = (SAIFrmComandos)this.Owner;
                     frmPrincipal.MuestraSwitch();
                 }
-
             }
-            this._blnCtrPresionado = false;
+            return false;
         }
 
         /// <summary>
