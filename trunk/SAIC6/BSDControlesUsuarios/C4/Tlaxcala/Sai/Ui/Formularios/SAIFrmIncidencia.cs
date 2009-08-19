@@ -1700,13 +1700,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 {
                     if (this._entIncidencia != null)
                     {
-                        if (cmbTipoIncidencia.Items.Count ==0)
-                        {
-                           
-                            throw new SAIExcepcion("No es posible registrar incidencias, no existen tipos de incidencias cargados en el sistema, favor de contactar al administrador", this);
 
-                        }
-                         if ((cmbTipoIncidencia.SelectedItem as TipoIncidencia).Descripcion.ToUpper().Contains("BROMA"))
+                        if (cmbTipoIncidencia.SelectedItem!= null && (cmbTipoIncidencia.SelectedItem as TipoIncidencia).Descripcion.ToUpper().Contains("BROMA"))
                             {
                                 //Se cambia a incidencia cancelada
                                 this._entIncidencia.ClaveEstatus = 5;
