@@ -253,60 +253,65 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             //El try se puso porque en tiempo de diseño se genera una excepción cuando se abren los formularios hijos
             try
             {
-                this._blnBloqueaEventos = true;
-                
-                InitializeComponent();
-                if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
-                {
-                    this.Height = 515;
-                    this.Width = 600;
-                }
-                else
-                {
-                    this.Height = 630;
-                    this.Width = 600;
-                }
-                this.InicializaListas();
-                //****Crea una nueva incidencia, el formulario se abrió para insertar*******
-                this._entIncidencia.Referencias = string.Empty;
-                this._entIncidencia.Descripcion = string.Empty;
-                this._entIncidencia.Activo = true;
-                this._entIncidencia.HoraRecepcion = DateTime.Now;
-                this._entIncidencia.ClaveEstatus = 1;
-                this._entIncidencia.ClaveEstado = 29;
-                this._entIncidencia.ClaveUsuario = Aplicacion.UsuarioPersistencia.intClaveUsuario;
-                IncidenciaMapper.Instance().Insert(this._entIncidencia);
+               
+                    this._blnBloqueaEventos = true;
 
-                //*************************************************************************
-                //Se actualiza la información de la incidencia en la lista de ventanas
-                this.ActualizaVentanaIncidencias();
-                //Se muestra la información de la incidencia en el formulario:
-                this.InicializaCampos();
-                this.SuspendLayout();
-                if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
-                {
-                    this.lblDescripcionIncidencia.Text  = "Descripción de  \n la Denuncia:";
-                    this.lblTelefono.Visible = false;
-                    this.txtTelefono.Visible = false;
-                    this.lblTipoIncidencia.Left = lblTelefono.Left-5;
-                    this.cmbTipoIncidencia.Left = this.txtTelefono.Left;
-                    this.lblTipoIncidencia.Text = "Tipo de \n la Denuncia:";
-                    this.lblTipoIncidencia.Top -= 10;
+                    InitializeComponent();
+                    if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+                    {
+                        this.Height = 515;
+                        this.Width = 600;
+                    }
+                    else
+                    {
+                        this.Height = 630;
+                        this.Width = 600;
+                    }
+                    this.InicializaListas();
+
                     
+                    //****Crea una nueva incidencia, el formulario se abrió para insertar*******
+                    this._entIncidencia.Referencias = string.Empty;
+                    this._entIncidencia.Descripcion = string.Empty;
+                    this._entIncidencia.Activo = true;
+                    this._entIncidencia.HoraRecepcion = DateTime.Now;
+                    this._entIncidencia.ClaveEstatus = 1;
+                    this._entIncidencia.ClaveEstado = 29;
+                    this._entIncidencia.ClaveUsuario = Aplicacion.UsuarioPersistencia.intClaveUsuario;
+                    IncidenciaMapper.Instance().Insert(this._entIncidencia);
 
+                    //*************************************************************************
+                    //Se actualiza la información de la incidencia en la lista de ventanas
+                    this.ActualizaVentanaIncidencias();
+                    //Se muestra la información de la incidencia en el formulario:
+                    this.InicializaCampos();
+                    this.SuspendLayout();
+                    if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+                    {
+                        this.lblDescripcionIncidencia.Text = "Descripción de  \n la Denuncia:";
+                        this.lblTelefono.Visible = false;
+                        this.txtTelefono.Visible = false;
+                        this.lblTipoIncidencia.Left = lblTelefono.Left - 5;
+                        this.cmbTipoIncidencia.Left = this.txtTelefono.Left;
+                        this.lblTipoIncidencia.Text = "Tipo de \n la Denuncia:";
+                        this.lblTipoIncidencia.Top -= 10;
+
+
+                    }
+                    else
+                    {
+
+                        this.lblDescripcionIncidencia.Text = "Descripción de  \n la Incidencia:";
+                    }
+                    this.ResumeLayout(false);
+                    this._blnBloqueaEventos = false;
+
+                    Aplicacion.VentanasIncidencias.Add(new SAIWinSwitchItem(this._entIncidencia.Folio.ToString(), "", (this as Form)));
                 }
-                else
-                {
-                   
-                    this.lblDescripcionIncidencia.Text  = "Descripción de  \n la Incidencia:";
-                }
-                this.ResumeLayout(false);
-                this._blnBloqueaEventos = false;
-
-                Aplicacion.VentanasIncidencias.Add(new SAIWinSwitchItem(this._entIncidencia.Folio.ToString(),"",(this as Form)));
-
+                catch 
+                {           
             }
-            catch { }
+            
                
         }
 
@@ -1628,9 +1633,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 {
                     if (!base.SAIProveedorValidacion.ValidarCamposRequeridos(this) && !this._blnSoloLectura)
                     {
-                        e.Cancel = true;
-
-                        throw new SAIExcepcion("Debe de indicar el tipo de incidencia",this);
+                        
+                        if (cmbTipoIncidencia.Items.Count != 0)
+                        {
+                            e.Cancel = true;
+                            throw new SAIExcepcion("Debe de indicar el tipo de incidencia", this);
+                        }
                         return;
 
                     }
@@ -1692,6 +1700,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 {
                     if (this._entIncidencia != null)
                     {
+                        if (cmbTipoIncidencia.Items.Count ==0)
+                        {
+                           
+                            throw new SAIExcepcion("No es posible registrar incidencias, no existen tipos de incidencias cargados en el sistema, favor de contactar al administrador", this);
+
+                        }
                          if ((cmbTipoIncidencia.SelectedItem as TipoIncidencia).Descripcion.ToUpper().Contains("BROMA"))
                             {
                                 //Se cambia a incidencia cancelada
@@ -2128,10 +2142,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     {
                         TipoIncidencia objTipo = (cmbTipoIncidencia.SelectedItem as TipoIncidencia);
 
+                        
 
-
-                        if (objTipo.Descripcion.ToUpper().Contains("ROBO") && objTipo.Descripcion.ToUpper().Contains("VEHICULO") && !objTipo.Descripcion.ToUpper().Contains("ACCESORIOS"))
+                        if (objTipo.ClaveOperacion.Trim() == "2003")
                         {
+                            //Robo de vehículo totalidad
                             this.SuspendLayout();
                             this.grpExtravio.Visible = false;
                             this.grpRoboVehiculo.Visible = true;
@@ -2162,8 +2177,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             this.ResumeLayout(false);
                             this.PerformLayout();
                         }
-                        else if (objTipo.Descripcion.ToUpper().Contains("ROBO") && objTipo.Descripcion.ToUpper().Contains("ACCESORIOS"))
+                             
+
+                        else if (objTipo.ClaveOperacion.Trim() == "2004")
                         {
+                            //Robo de vehículo accesorios
                             this.SuspendLayout();
                             this.grpExtravio.Visible = false;
                             this.grpRoboVehiculo.Visible = false;
@@ -2190,8 +2208,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             this.PerformLayout();
 
                         }
-                        else if ((objTipo.Descripcion.ToUpper().Contains("EXTRAVÍO") && objTipo.Descripcion.ToUpper().Contains("PERSONA")) || (objTipo.Descripcion.ToUpper().Contains("EXTRAVIO") && objTipo.Descripcion.ToUpper().Contains("PERSONA")))
+                        else if (objTipo.ClaveOperacion.Trim() == "111")
                         {
+                            //Extravío de persona
                             this.SuspendLayout();
                             this.grpExtravio.Visible = true;
                             this.grpRoboVehiculo.Visible = false;
