@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Xml;
 using System.Data.SqlClient;
 using System.Configuration;
+using BSD.C4.Tlaxcala.Sai.Excepciones;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -54,17 +55,26 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             try
             {
-                ModeloQuery.BuildSQL();
+                try
+                {
+                    ModeloQuery.BuildSQL();
 
-                ResultadoDS.Tables[0].Rows.Clear();
-                ResultadoDS.Tables[0].Columns.Clear();
+                    ResultadoDS.Tables[0].Rows.Clear();
+                    ResultadoDS.Tables[0].Columns.Clear();
 
-                var conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["CooperatorConnectionString"].ConnectionString);
-                var adaptador = new SqlDataAdapter(QueryColumnas.Query.Result.SQL, conexion);
-                adaptador.Fill(ResultadoDS, "Resultado");
+                    var conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["CooperatorConnectionString"].ConnectionString);
+                    var adaptador = new SqlDataAdapter(QueryColumnas.Query.Result.SQL, conexion);
+                    adaptador.Fill(ResultadoDS, "Resultado");
+
+                    GridResultados.Refresh();
+                }
+                catch (SqlException ex) { throw new SAIExcepcion("Ha ocurrido un error al tratar de generar el filtro."); }
+                catch (Exception ex) { throw new SAIExcepcion("Ha ocurrido un error al tratar de generar el filtro."); }
             }
-            catch (SqlException) { }
-            catch (Exception) { }
+            catch (SAIExcepcion)
+            {
+                base.Close();
+            }
         }
     }
 }
