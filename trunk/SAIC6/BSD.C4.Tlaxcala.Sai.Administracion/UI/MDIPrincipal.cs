@@ -89,5 +89,20 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             frm_Bitacora.MdiParent = this;
             frm_Bitacora.Show();
         }
+
+        private void catalogoDeDependenciasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDependecias frm_Dependencias = new frmDependecias();
+            frm_Dependencias.MdiParent = this;
+            frm_Dependencias.Show();
+            
+        }
+
+        private void catalogoClasificacionDeOrganizacionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmClasificacionOrganizacion frm_ClasificacionOrganizacion = new frmClasificacionOrganizacion();
+            frm_ClasificacionOrganizacion.MdiParent = this;
+            frm_ClasificacionOrganizacion.Show();
+        }
     }
 }
