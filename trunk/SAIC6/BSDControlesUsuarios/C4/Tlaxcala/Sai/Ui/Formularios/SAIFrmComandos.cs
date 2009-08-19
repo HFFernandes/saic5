@@ -46,143 +46,150 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void SAIBarraComandos_Execute(object sender, AxXtremeCommandBars._DCommandBarsEvents_ExecuteEvent e)
         {
-            //Switch a partir del identificador del control en el cual
-            //se dio click
-            switch (e.control.Id)
+            try
             {
-                case ID.CMD_A:
-                    if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
-                    {
-                        if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_A))
+                //Switch a partir del identificador del control en el cual
+                //se dio click
+                switch (e.control.Id)
+                {
+                    case ID.CMD_A:
+                        if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                         {
-                            var activas089 = new SAIFrmIncidenciasActivas089();
-                            MostrarEnSegundoMonitorSiEsPosible(activas089);
-                        }
-                        else
-                            throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
-                    }
-                    else if (Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
-                    {
-                        if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_A))
-                        {
-                            var activas = new SAIFrmIncidenciasActivas();
-                            MostrarEnSegundoMonitorSiEsPosible(activas);
-                        }
-                        else
-                            throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
-                    }
-                    break;
-                case ID.CMD_AU:
-                    var corporacion =
-                        CorporacionMapper.Instance().GetOne(Aplicacion.UsuarioPersistencia.intCorporacion ?? -1);
-                    if (corporacion != null && corporacion.UnidadesVirtuales == false)
-                    {
-                        if (Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
-                        {
-                            if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_AU))
+                            if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_A))
                             {
-                                var unidades = new SAIFrmEstadoUnidades();
-                                MostrarEnSegundoMonitorSiEsPosible(unidades);
+                                var activas089 = new SAIFrmIncidenciasActivas089();
+                                MostrarEnSegundoMonitorSiEsPosible(activas089);
                             }
                             else
                                 throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
                         }
-                    }else
-                        throw new SAIExcepcion("La corporación a la cual pertenece no está configurada para manejar unidades fisicas.");
-                    break;
-                case ID.CMD_CAN:
-                    break;
-                case ID.CMD_HI:
-                    break;
-                case ID.CMD_NI:
-                    //Se pregunta qué es el usuario y a qué sistema entró:
-                    if (Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
-                        Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
-                    {
-
-                        //Código de prueba
-                        Sai.Dal.Rules.Entities.Incidencia entIncidencia = Sai.Dal.Rules.Mappers.IncidenciaMapper.Instance().GetOne(1000490);
-
-                        try
+                        else if (Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
                         {
+                            if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_A))
+                            {
+                                var activas = new SAIFrmIncidenciasActivas();
+                                MostrarEnSegundoMonitorSiEsPosible(activas);
+                            }
+                            else
+                                throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
+                        }
+                        break;
+                    case ID.CMD_AU:
+                        var corporacion =
+                            CorporacionMapper.Instance().GetOne(Aplicacion.UsuarioPersistencia.intCorporacion ?? -1);
+                        if (corporacion != null && corporacion.UnidadesVirtuales == false)
+                        {
+                            if (Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
+                            {
+                                if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_AU))
+                                {
+                                    var unidades = new SAIFrmEstadoUnidades();
+                                    MostrarEnSegundoMonitorSiEsPosible(unidades);
+                                }
+                                else
+                                    throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
+                            }
+                        }
+                        else
+                            throw new SAIExcepcion("La corporación a la cual pertenece no está configurada para manejar unidades fisicas.");
+                        break;
+                    case ID.CMD_CAN:
+                        break;
+                    case ID.CMD_HI:
+                        break;
+                    case ID.CMD_NI:
+                        //Se pregunta qué es el usuario y a qué sistema entró:
+                        if (Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
+                            Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
+                        {
+
+                            //Código de prueba
+                            Sai.Dal.Rules.Entities.Incidencia entIncidencia = Sai.Dal.Rules.Mappers.IncidenciaMapper.Instance().GetOne(1000490);
+
                             try
                             {
-                                SAIFrmIncidencia066Despacho frmIncidencia066Despacho = new SAIFrmIncidencia066Despacho(entIncidencia);
-                                frmIncidencia066Despacho.Show(this);
+                                try
+                                {
+                                    SAIFrmIncidencia066Despacho frmIncidencia066Despacho = new SAIFrmIncidencia066Despacho(entIncidencia);
+                                    frmIncidencia066Despacho.Show(this);
+                                }
+                                catch (System.Exception ex)
+                                {
+                                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                                }
                             }
-                            catch (System.Exception ex)
+                            catch (SAIExcepcion) { }
+
+                        }
+                        else if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
+                            Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
+                        {
+
+                            //if (Aplicacion.VentanasIncidencias.Count == 0)
+                            //{
+                            SAIFrmIncidencia066 frmIncidencia066 = new SAIFrmIncidencia066();
+                            frmIncidencia066.Show(this);
+                            //}
+
+                        }
+                        else if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
+                            Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+                        {
+
+                            SAIFrmIncidencia089 frmIncidencia089 = new SAIFrmIncidencia089();
+                            frmIncidencia089.Show(this);
+
+                        }
+                        break;
+                    case ID.CMD_P:
+                        if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+                        {
+                            if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_P))
                             {
-                                throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                                var pendientes = new SAIFrmIncidenciasPendientes089();
+                                MostrarEnSegundoMonitorSiEsPosible(pendientes);
                             }
+                            else
+                                throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
                         }
-                        catch (SAIExcepcion) { }
-
-                    }
-                    else if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
-                        Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
-                    {
-
-                        //if (Aplicacion.VentanasIncidencias.Count == 0)
-                        //{
-                        SAIFrmIncidencia066 frmIncidencia066 = new SAIFrmIncidencia066();
-                        frmIncidencia066.Show(this);
-                        //}
-
-                    }
-                    else if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
-                        Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
-                    {
-
-                        SAIFrmIncidencia089 frmIncidencia089 = new SAIFrmIncidencia089();
-                        frmIncidencia089.Show(this);
-
-                    }
-                    break;
-                case ID.CMD_P:
-                    if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
-                    {
-                        if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_P))
+                        else if (Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
                         {
-                            var pendientes = new SAIFrmIncidenciasPendientes089();
-                            MostrarEnSegundoMonitorSiEsPosible(pendientes);
+                            if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_P))
+                            {
+                                var pendientes = new SAIFrmIncidenciasPendientes();
+                                MostrarEnSegundoMonitorSiEsPosible(pendientes);
+                            }
+                            else
+                                throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
                         }
-                        else
-                            throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
-                    }
-                    else if (Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
-                    {
-                        if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_P))
+                        break;
+                    case ID.CMD_PH:
+                        var buscador = new SAIFrmBuscadorIncidencias();
+                        MostrarEnSegundoMonitorSiEsPosible(buscador);
+                        break;
+                    case ID.CMD_RPH:
+                        break;
+                    case ID.CMD_S:
+                        break;
+                    case ID.CMD_SIF:
+                        break;
+                    case ID.CMD_SLC:
+                        break;
+                    case ID.CMD_TEL:
+                        if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_TEL))
                         {
-                            var pendientes = new SAIFrmIncidenciasPendientes();
-                            MostrarEnSegundoMonitorSiEsPosible(pendientes);
+                            var agenda = new SAIFrmAgendaTelefonica();
+                            MostrarEnSegundoMonitorSiEsPosible(agenda);
                         }
-                        else
-                            throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
-                    }
-                    break;
-                case ID.CMD_PH:
-                    var buscador = new SAIFrmBuscadorIncidencias();
-                    MostrarEnSegundoMonitorSiEsPosible(buscador);
-                    break;
-                case ID.CMD_RPH:
-                    break;
-                case ID.CMD_S:
-                    break;
-                case ID.CMD_SIF:
-                    break;
-                case ID.CMD_SLC:
-                    break;
-                case ID.CMD_TEL:
-                    if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_TEL))
-                    {
-                        var agenda = new SAIFrmAgendaTelefonica();
-                        MostrarEnSegundoMonitorSiEsPosible(agenda);
-                    }
-                    break;
-                case ID.CMD_U:
-                    break;
-                default:
-                    break;
+                        break;
+                    case ID.CMD_U:
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch (SAIExcepcion)
+            {
             }
         }
 
