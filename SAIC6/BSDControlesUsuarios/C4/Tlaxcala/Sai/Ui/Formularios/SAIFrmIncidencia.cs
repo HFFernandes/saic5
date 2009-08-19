@@ -441,7 +441,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                         foreach (TipoIncidencia objTipoIncidencia in lstTipoIncidencias)
                         {
-                            objTipoIncidencia.Descripcion += " " + objTipoIncidencia.ClaveOperacion;
+                            objTipoIncidencia.Descripcion = objTipoIncidencia.ClaveOperacion + " " + objTipoIncidencia.Descripcion;
                         }
                         this.cmbTipoIncidencia.DataSource = lstTipoIncidencias;
                         this.cmbTipoIncidencia.DisplayMember = "Descripcion";
@@ -698,7 +698,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             {
                                 this.txtNombrePropietario.Text  = objPropietarioVehiculo.Nombre;
                                 this.txtDireccionPropietario.Text = objPropietarioVehiculo.Domicilio;
-                                this.txtTelefonoPropietario.Text = objPropietarioVehiculo.Telefono; 
+                                this.txtTelefonoPropietario.Text = objPropietarioVehiculo.Telefono;
+                                this._objPropietarioVehiculo = objPropietarioVehiculo;
                             }
                         }
                         VehiculoObject objVehiculo = VehiculoMapper.Instance().GetOne(objVehiculoRobado.ClaveVehiculo);
@@ -725,11 +726,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     if (lstRoboVehiculoAccesorios != null && lstRoboVehiculoAccesorios.Count > 0)
                     {
                         RoboVehiculoAccesorios entRoboVehiculoAccesorios = lstRoboVehiculoAccesorios[0];
+                        this._entRoboVehiculoAccesorios = entRoboVehiculoAccesorios;
+
                         if (entRoboVehiculoAccesorios.ClaveVehiculo.HasValue)
                         {
                             VehiculoObject objVehiculo = VehiculoMapper.Instance().GetOne(entRoboVehiculoAccesorios.ClaveVehiculo.Value);
                             this.txtAccesoriosPlacas.Text = objVehiculo.Placas;
                             this.txtAccesoriosSerie.Text = objVehiculo.NumeroSerie;
+                            this._objVeiculoAccesoriosRobado = objVehiculo;
                         }
                         this.txtAccesoriosRobados.Text = entRoboVehiculoAccesorios.AccesoriosRobados;
                         this.txtAccesoriosPersonaSePercato.Text = entRoboVehiculoAccesorios.SePercato;
@@ -769,7 +773,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     dgvVehiculoAccesorios[8, i - 1].Value = objVehiculoInv.SeñasParticulares;
                                     i++;
                                 }
-                                i++;
+                                
                             }
                         }
 
@@ -1565,6 +1569,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
 #endregion
 
+
+        private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+             //No permite introducir texto
+            if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8)
+                e.Handled = true;
+        }
+
         /// <summary>
         /// Manda el foco del campo teléfono al campo Tipo Incidencia cuando se presiona y se suelta la tecla intro
         /// </summary>
@@ -1576,6 +1588,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 this.cmbTipoIncidencia.Focus();
             }
+           
+
             this.SAIFrmIncidenciaKeyUp(e);
 
         }
@@ -1694,6 +1708,117 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 //Se cambia a incidencia cancelada
                                 this._entIncidencia.ClaveEstatus = 5;
                             }
+
+                         //Si existen objetos de propietario del vehículo, vehiculoaccesorios robados y accesorios robados, se guardan:
+
+                         if (this._objVeiculoAccesoriosRobado != null)
+                         {
+                             this._objVeiculoAccesoriosRobado.Placas = this.txtAccesoriosPlacas.Text;
+                             this._objVeiculoAccesoriosRobado.NumeroSerie = this.txtAccesoriosSerie.Text;
+                             try
+                             {
+                                 VehiculoMapper.Instance().Save(this._objVeiculoAccesoriosRobado);
+                             }
+                             catch { }
+                         }
+                         else if (this.txtAccesoriosPlacas.Text.Trim() != string.Empty ||
+                             this.txtAccesoriosSerie.Text.Trim() != string.Empty)
+                         {
+                             RoboVehiculoAccesoriosList lstRoboVehiculoAccesorios = RoboVehiculoAccesoriosMapper.Instance().GetByIncidencia(this._entIncidencia.Folio);
+
+                             if (lstRoboVehiculoAccesorios != null && lstRoboVehiculoAccesorios.Count > 0)
+                             {
+                                 RoboVehiculoAccesorios objRoboVehiculoAccesorios = lstRoboVehiculoAccesorios[0];
+                                 this._objVeiculoAccesoriosRobado = new VehiculoObject();
+                                 this._objVeiculoAccesoriosRobado.Placas = this.txtAccesoriosPlacas.Text;
+                                 this._objVeiculoAccesoriosRobado.NumeroSerie = this.txtAccesoriosSerie.Text;
+                                 VehiculoMapper.Instance().Insert(this._objVeiculoAccesoriosRobado);
+                                 objRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
+                                 try
+                                 {
+                                     RoboVehiculoAccesoriosMapper.Instance().Save(objRoboVehiculoAccesorios);
+                                 }
+                                 catch { }
+                             }
+
+                            
+
+                         }
+
+
+                         if (this._objPropietarioVehiculo != null)
+                         {
+                             this._objPropietarioVehiculo.Domicilio = this.txtNombrePropietario.Text;
+                             this._objPropietarioVehiculo.Nombre = this.txtNombrePropietario.Text;
+                             this._objPropietarioVehiculo.Telefono = this.txtTelefono.Text;
+
+                             try
+                             {
+                                 PropietarioVehiculoMapper.Instance().Save(this._objPropietarioVehiculo);
+                             }
+                             catch { }
+
+                         }
+                         else if (this.txtNombrePropietario.Text.Trim() != string.Empty ||
+                             this.txtNombrePropietario.Text.Trim() != string.Empty ||
+                             this.txtTelefono.Text != string.Empty)
+                         {
+                             VehiculoRobadoObjectList lstVehiculoRobado = VehiculoRobadoMapper.Instance().GetByIncidencia(this._entIncidencia.Folio);
+
+                             if (lstVehiculoRobado != null && lstVehiculoRobado.Count > 0)
+                             {
+                                 this._objPropietarioVehiculo = new PropietarioVehiculoObject();
+                                 this._objPropietarioVehiculo.Domicilio = this.txtNombrePropietario.Text;
+                                 this._objPropietarioVehiculo.Nombre = this.txtNombrePropietario.Text;
+                                 this._objPropietarioVehiculo.Telefono = this.txtTelefono.Text;
+
+                                 PropietarioVehiculoMapper.Instance().Insert(this._objPropietarioVehiculo);
+
+                                 foreach (VehiculoRobadoObject objVehiculoRobado in lstVehiculoRobado)
+                                 {
+                                     objVehiculoRobado.ClavePropietario = this._objPropietarioVehiculo.Clave;
+
+                                     try
+                                     {
+                                         VehiculoRobadoMapper.Instance().Save(objVehiculoRobado);
+                                     }
+                                     catch { }
+                                 }
+                             }
+
+                         }
+
+                         if (this._entRoboVehiculoAccesorios != null)
+                         {
+                             this._entRoboVehiculoAccesorios.AccesoriosRobados = this.txtAccesoriosRobados.Text;
+                             this._entRoboVehiculoAccesorios.SePercato = this.txtAccesoriosPersonaSePercato.Text;
+                             if (this.chkAccesoriosPercato.Checked)
+                             {
+                                 this._entRoboVehiculoAccesorios.FechaPercato = dtpAccesoriosFechaPercato.Value;
+                             }
+                             this._entRoboVehiculoAccesorios.DescripcionResponsables = this.txtAccesoriosResponsables.Text;
+                             try
+                             {
+                                 RoboVehiculoAccesoriosMapper.Instance().Save(this._entRoboVehiculoAccesorios);
+                             }
+                             catch { }
+                         }
+                         else if (this.txtAccesoriosRobados.Text.Trim() != string.Empty ||
+                             this.txtAccesoriosPersonaSePercato.Text.Trim() != string.Empty ||
+                             this.chkAccesoriosPercato.Checked ||
+                              this.txtAccesoriosResponsables.Text.Trim() != string.Empty)
+                         {
+                             this._entRoboVehiculoAccesorios = new RoboVehiculoAccesorios();
+                             this._entRoboVehiculoAccesorios.Folio = this._entIncidencia.Folio;
+                             this._entRoboVehiculoAccesorios.AccesoriosRobados = this.txtAccesoriosRobados.Text;
+                             this._entRoboVehiculoAccesorios.SePercato = this.txtAccesoriosPersonaSePercato.Text;
+                             if (this.chkAccesoriosPercato.Checked)
+                             {
+                                 this._entRoboVehiculoAccesorios.FechaPercato = dtpAccesoriosFechaPercato.Value;
+                             }
+                             this._entRoboVehiculoAccesorios.DescripcionResponsables = this.txtAccesoriosResponsables.Text;
+                             RoboVehiculoAccesoriosMapper.Instance().Insert(this._entRoboVehiculoAccesorios);
+                         }
                          IncidenciaMapper.Instance().Save(this._entIncidencia);
                     }
                 }
@@ -1756,6 +1881,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
                 this._entIncidencia.Descripcion = this.txtDescripcion.Text;
                 this._entIncidencia.Direccion = this.txtDireccion.Text;
+
+               
             }
            
         }
@@ -2005,7 +2132,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                             {
 
-                                this.Height = 830;
+                                this.Height = 870;
                                 this.Width = 620;
                                 this.grpRoboVehiculo.Top = 645;
                                
@@ -2034,7 +2161,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             this.grpRoboAccesorios.SuspendLayout();
                             if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                             {
-                                this.Height = 830;
+                                this.Height = 870;
                                 this.Width = 620;
                                 this.grpRoboAccesorios.Top = 645;
                             }
@@ -2062,7 +2189,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                            
                             if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                             {
-                                this.Height = 850;
+                                this.Height = 870;
                                 this.Width = 620;
                                 this.grpExtravio.Top = 645;
                             }
@@ -2328,6 +2455,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     if (this._entRoboVehiculoAccesorios == null)
                     {
                         this._entRoboVehiculoAccesorios = new RoboVehiculoAccesorios();
+                        this._entRoboVehiculoAccesorios.AccesoriosRobados = this.txtAccesoriosRobados.Text;
+
                         if (this.chkAccesoriosPercato.Checked)
                         {
                             this._entRoboVehiculoAccesorios.FechaPercato = this.dtpAccesoriosFechaPercato.Value;
@@ -2523,6 +2652,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     if (this._entRoboVehiculoAccesorios  == null)
                     {
                         this._entRoboVehiculoAccesorios = new RoboVehiculoAccesorios();
+
                         this._entRoboVehiculoAccesorios.AccesoriosRobados = this.txtAccesoriosRobados.Text;
                         this._entRoboVehiculoAccesorios.Folio = this._entIncidencia.Folio;
                         if (this._objVeiculoAccesoriosRobado != null)
@@ -2594,6 +2724,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     if (this._entRoboVehiculoAccesorios == null)
                     {
                         this._entRoboVehiculoAccesorios = new RoboVehiculoAccesorios();
+                        this._entRoboVehiculoAccesorios.AccesoriosRobados = this.txtAccesoriosRobados.Text;
                         this._entRoboVehiculoAccesorios.SePercato = this.txtAccesoriosPersonaSePercato.Text;
                         this._entRoboVehiculoAccesorios.Folio = this._entIncidencia.Folio;
                         if (this._objVeiculoAccesoriosRobado != null)
@@ -2662,6 +2793,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     if (this._entRoboVehiculoAccesorios == null)
                     {
                         this._entRoboVehiculoAccesorios = new RoboVehiculoAccesorios();
+                        this._entRoboVehiculoAccesorios.AccesoriosRobados = this.txtAccesoriosRobados.Text;
                         this._entRoboVehiculoAccesorios.FechaPercato = this.dtpAccesoriosFechaPercato.Value;
                         this._entRoboVehiculoAccesorios.Folio = this._entIncidencia.Folio;
                          if (this._objVeiculoAccesoriosRobado != null)
@@ -2731,6 +2863,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     if (this._entRoboVehiculoAccesorios == null)
                     {
                         this._entRoboVehiculoAccesorios = new RoboVehiculoAccesorios();
+                        this._entRoboVehiculoAccesorios.AccesoriosRobados = this.txtAccesoriosRobados.Text;
                         this._entRoboVehiculoAccesorios.DescripcionResponsables = this.txtAccesoriosResponsables.Text;
                         this._entRoboVehiculoAccesorios.Folio = this._entIncidencia.Folio;
                         if (this._objVeiculoAccesoriosRobado != null)
@@ -3552,6 +3685,20 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
             catch (SAIExcepcion) { }
         }
+
+        private void txtReferencias_KeyUp(object sender, KeyEventArgs e)
+        {
+            this.SAIFrmIncidenciaKeyUp(e);
+        }
+
+        private void txtDescripcion_KeyUp(object sender, KeyEventArgs e)
+        {
+            this.SAIFrmIncidenciaKeyUp(e);
+        }
+
+      
+
+        
 
        
     }
