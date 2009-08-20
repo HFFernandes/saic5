@@ -240,133 +240,141 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
             try
             {
-                //Limpiamos el listado donde se almacenan las incidencias cuyo estado sea activo
-                //para iniciar nuevamente el ciclo
-                lstIncidenciasTemporales.Clear();
-                if (Aplicacion.UsuarioPersistencia.blnEsDespachador == true)
+                try
                 {
-                    resIncidencias = IncidenciaMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_INCIDENCIASCORPORACION,
-                                                                                Aplicacion.UsuarioPersistencia.
-                                                                                    intCorporacion,
-                                                                                (int)ESTATUSINCIDENCIAS.ACTIVA));
-                }
-                else
-                {
-                    resIncidencias =
-                        IncidenciaMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_INCIDENCIAS,
-                                                                                (int)ESTATUSINCIDENCIAS.ACTIVA));
-                }
-
-                foreach (var incidencia in resIncidencias) //vamos a la base para obtener los registros de estado activo
-                {
-                    lstIncidenciasTemporales.Add(incidencia);
-                    //verificamos que la incidencia no esté ya en la lista de incidencias registradas
-                    //que de no estarlo la agregamos al listado tipado y al grid
-                    if (!lstIncidenciasRegistradas.Contains(incidencia))
+                    //Limpiamos el listado donde se almacenan las incidencias cuyo estado sea activo
+                    //para iniciar nuevamente el ciclo
+                    lstIncidenciasTemporales.Clear();
+                    if (Aplicacion.UsuarioPersistencia.blnEsDespachador == true)
                     {
-                        lstIncidenciasRegistradas.Add(incidencia);
-                        var corporaciones = new StringBuilder();
-
-                        CorporacionMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_CORPORACIONES, incidencia.Folio)).ForEach(delegate(Corporacion c)
-                        {
-                            corporaciones.Append(c.Descripcion);
-                            corporaciones.Append(",");
-                        });
-
-                        lstRegistrosReporte.Add(saiReport1.AgregarRegistro(null, incidencia.Folio,
-                                                                       incidencia.Telefono,
-                                                                       EstatusIncidenciaMapper.Instance().GetOne(incidencia.ClaveEstatus).Descripcion,
-                                                                       incidencia.HoraRecepcion.ToShortTimeString(),
-                                                                       incidencia.Direccion,
-                                                                       TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? 1).Descripcion,
-                                                                       corporaciones.ToString().Trim().Length > 1 ? corporaciones.ToString().Trim().Remove(corporaciones.Length - 1) : string.Empty,
-                                                                       incidencia.Folio.ToString(),
-                                                                       TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? 1).Prioridad.ToString()));
+                        resIncidencias = IncidenciaMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_INCIDENCIASCORPORACION,
+                                                                                    Aplicacion.UsuarioPersistencia.
+                                                                                        intCorporacion,
+                                                                                    (int)ESTATUSINCIDENCIAS.ACTIVA));
                     }
                     else
                     {
-                        //la incidencia ya existe en la colección,ahora la
-                        //buscamos y verificamos si algún registro cambio para su actualizacion
-                        var incidenciaTemp = lstIncidenciasRegistradas.Find(inc => inc.Folio == incidencia.Folio);
-                        if (incidenciaTemp != null)
+                        resIncidencias =
+                            IncidenciaMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_INCIDENCIAS,
+                                                                                    (int)ESTATUSINCIDENCIAS.ACTIVA));
+                    }
+
+                    foreach (var incidencia in resIncidencias) //vamos a la base para obtener los registros de estado activo
+                    {
+                        lstIncidenciasTemporales.Add(incidencia);
+                        //verificamos que la incidencia no esté ya en la lista de incidencias registradas
+                        //que de no estarlo la agregamos al listado tipado y al grid
+                        if (!lstIncidenciasRegistradas.Contains(incidencia))
                         {
-                            //contamos las columnas y los registros actuales para
-                            //delimitar la busqueda del Row
-                            var iCols = saiReport1.reportControl.Columns.Count;
-                            var iRows = saiReport1.reportControl.Rows.Count;
+                            lstIncidenciasRegistradas.Add(incidencia);
+                            var corporaciones = new StringBuilder();
 
-                            //buscamos el Row por el número único de folio para obtener su posición dentro del grid
-                            var itm = saiReport1.reportControl.Records.FindRecordItem(1, iRows, 1, iCols, 1, 1, incidencia.Folio.ToString(), XTPReportTextSearchParms.xtpReportTextSearchExactPhrase);
-                            if (itm != null && itm.Index >= 0)
+                            CorporacionMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_CORPORACIONES, incidencia.Folio)).ForEach(delegate(Corporacion c)
                             {
-                                //comparamos el valor anterior con el actual y si cambio entonces actualizamos
-                                if (!incidenciaTemp.Telefono.Equals(incidencia.Telefono))
-                                    saiReport1.reportControl.Records[itm.Record.Index][1].Value = incidencia.Telefono;
+                                corporaciones.Append(c.Descripcion);
+                                corporaciones.Append(",");
+                            });
 
-                                if (!incidenciaTemp.ClaveEstatus.Equals(incidencia.ClaveEstatus))
-                                    saiReport1.reportControl.Records[itm.Record.Index][2].Value =
-                                        EstatusIncidenciaMapper.Instance().GetOne(incidencia.ClaveEstatus).Descripcion;
+                            lstRegistrosReporte.Add(saiReport1.AgregarRegistro(null, incidencia.Folio,
+                                                                           incidencia.Telefono,
+                                                                           EstatusIncidenciaMapper.Instance().GetOne(incidencia.ClaveEstatus).Descripcion,
+                                                                           incidencia.HoraRecepcion.ToShortTimeString(),
+                                                                           incidencia.Direccion,
+                                                                           TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Descripcion,
+                                                                           corporaciones.ToString().Trim().Length > 1 ? corporaciones.ToString().Trim().Remove(corporaciones.Length - 1) : string.Empty,
+                                                                           incidencia.Folio.ToString(),
+                                                                           TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Prioridad.ToString()));
+                        }
+                        else
+                        {
+                            //la incidencia ya existe en la colección,ahora la
+                            //buscamos y verificamos si algún registro cambio para su actualizacion
+                            var incidenciaTemp = lstIncidenciasRegistradas.Find(inc => inc.Folio == incidencia.Folio);
+                            if (incidenciaTemp != null)
+                            {
+                                //contamos las columnas y los registros actuales para
+                                //delimitar la busqueda del Row
+                                var iCols = saiReport1.reportControl.Columns.Count;
+                                var iRows = saiReport1.reportControl.Rows.Count;
 
-                                if (!incidenciaTemp.HoraRecepcion.Equals(incidencia.HoraRecepcion))
-                                    saiReport1.reportControl.Records[itm.Record.Index][3].Value =
-                                        incidencia.HoraRecepcion.ToShortTimeString();
-
-                                if (!incidenciaTemp.Direccion.Equals(incidencia.Direccion))
-                                    saiReport1.reportControl.Records[itm.Record.Index][4].Value = incidencia.Direccion;
-
-                                if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
-                                    saiReport1.reportControl.Records[itm.Record.Index][5].Value =
-                                        TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? 1).Descripcion;
-
-                                var corporaciones = new StringBuilder();
-                                CorporacionMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_CORPORACIONES, incidencia.Folio)).ForEach(delegate(Corporacion c)
+                                //buscamos el Row por el número único de folio para obtener su posición dentro del grid
+                                var itm = saiReport1.reportControl.Records.FindRecordItem(1, iRows, 1, iCols, 1, 1, incidencia.Folio.ToString(), XTPReportTextSearchParms.xtpReportTextSearchExactPhrase);
+                                if (itm != null && itm.Index >= 0)
                                 {
-                                    corporaciones.Append(c.Descripcion);
-                                    corporaciones.Append(",");
-                                });
+                                    //comparamos el valor anterior con el actual y si cambio entonces actualizamos
+                                    if (!incidenciaTemp.Telefono.Equals(incidencia.Telefono))
+                                        saiReport1.reportControl.Records[itm.Record.Index][1].Value = incidencia.Telefono;
 
-                                saiReport1.reportControl.Records[itm.Record.Index][6].Value =
-                                    corporaciones.ToString().Trim().Length > 1
-                                        ? corporaciones.ToString().Trim().Remove(corporaciones.Length - 1)
-                                        : ID.STR_DESCONOCIDO;
+                                    if (!incidenciaTemp.ClaveEstatus.Equals(incidencia.ClaveEstatus))
+                                        saiReport1.reportControl.Records[itm.Record.Index][2].Value =
+                                            EstatusIncidenciaMapper.Instance().GetOne(incidencia.ClaveEstatus).Descripcion;
 
-                                if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
-                                    saiReport1.reportControl.Records[itm.Record.Index][8].Value = TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? 1).Prioridad.ToString();
+                                    if (!incidenciaTemp.HoraRecepcion.Equals(incidencia.HoraRecepcion))
+                                        saiReport1.reportControl.Records[itm.Record.Index][3].Value =
+                                            incidencia.HoraRecepcion.ToShortTimeString();
+
+                                    if (!incidenciaTemp.Direccion.Equals(incidencia.Direccion))
+                                        saiReport1.reportControl.Records[itm.Record.Index][4].Value = incidencia.Direccion;
+
+                                    if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
+                                        saiReport1.reportControl.Records[itm.Record.Index][5].Value =
+                                            TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Descripcion;
+
+                                    var corporaciones = new StringBuilder();
+                                    CorporacionMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_CORPORACIONES, incidencia.Folio)).ForEach(delegate(Corporacion c)
+                                    {
+                                        corporaciones.Append(c.Descripcion);
+                                        corporaciones.Append(",");
+                                    });
+
+                                    saiReport1.reportControl.Records[itm.Record.Index][6].Value =
+                                        corporaciones.ToString().Trim().Length > 1
+                                            ? corporaciones.ToString().Trim().Remove(corporaciones.Length - 1)
+                                            : ID.STR_DESCONOCIDO;
+
+                                    if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
+                                        saiReport1.reportControl.Records[itm.Record.Index][8].Value = TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Prioridad.ToString();
+                                }
                             }
                         }
                     }
-                }
 
-                foreach (var incidencia in lstIncidenciasRegistradas)
-                {
-                    //comprobar si la incidencia registrada existe en la incidencia temporal
-                    //para luego entonces determinar cuales deberan ser eliminadas del grid
-                    if (!lstIncidenciasTemporales.Contains(incidencia))
+                    foreach (var incidencia in lstIncidenciasRegistradas)
                     {
-                        lstIncidenciasPorRemover.Add(incidencia);
-                    }
-                }
-
-                //recorremos la colección de incidencias por remover
-                //y hacemos match contra el número único de folio para proceder
-                //a eliminar el registro del grid
-                foreach (var incidencia in lstIncidenciasPorRemover)
-                {
-                    foreach (var registro in lstRegistrosReporte)
-                    {
-                        if (Convert.ToInt32(registro.Tag) == incidencia.Folio)
+                        //comprobar si la incidencia registrada existe en la incidencia temporal
+                        //para luego entonces determinar cuales deberan ser eliminadas del grid
+                        if (!lstIncidenciasTemporales.Contains(incidencia))
                         {
-                            saiReport1.QuitarRegistro(registro);
+                            lstIncidenciasPorRemover.Add(incidencia);
                         }
                     }
-                    lstIncidenciasRegistradas.Remove(incidencia);
+
+                    //recorremos la colección de incidencias por remover
+                    //y hacemos match contra el número único de folio para proceder
+                    //a eliminar el registro del grid
+                    foreach (var incidencia in lstIncidenciasPorRemover)
+                    {
+                        foreach (var registro in lstRegistrosReporte)
+                        {
+                            if (Convert.ToInt32(registro.Tag) == incidencia.Folio)
+                            {
+                                saiReport1.QuitarRegistro(registro);
+                            }
+                        }
+                        lstIncidenciasRegistradas.Remove(incidencia);
+                    }
+                    lstIncidenciasPorRemover.Clear();   //limpiamos la colección para el nuevo ciclo
                 }
-                lstIncidenciasPorRemover.Clear();   //limpiamos la colección para el nuevo ciclo
+                catch (Exception ex)
+                {
+                    tmrRegistros.Enabled = false;
+                    throw new SAIExcepcion(
+                        "Ocurrio un error al tratar de obtener los registros. Solicite al administrador revisar los catálogos.");
+                }
             }
-            catch (Exception ex)
+            catch (SAIExcepcion)
             {
-                tmrRegistros.Enabled = false;
-                base.Close();
+                Close();
             }
         }
     }
