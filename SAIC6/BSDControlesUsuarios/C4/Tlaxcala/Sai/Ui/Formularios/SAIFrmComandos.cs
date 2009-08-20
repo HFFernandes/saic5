@@ -96,8 +96,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             throw new SAIExcepcion("La corporación a la cual pertenece no está configurada para manejar unidades fisicas.");
                         break;
                     case ID.CMD_CAN:
+                        throw new SAIExcepcion("Funcionalidad no implementada.");
                         break;
                     case ID.CMD_HI:
+                        throw new SAIExcepcion("Funcionalidad no implementada.");
                         break;
                     case ID.CMD_NI:
                         TipoIncidenciaList lstTipoIncidencias = new TipoIncidenciaList();
@@ -160,16 +162,37 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         }
                         break;
                     case ID.CMD_PH:
-                        var buscador = new SAIFrmBuscadorIncidencias();
-                        MostrarEnSegundoMonitorSiEsPosible(buscador);
+                        if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_PH))
+                        {
+                            var buscadorDir = new SAIFrmBuscadorIncidencias();
+                            buscadorDir.CargarConsulta(string.Format("{0}\\{1}", Environment.CurrentDirectory,
+                                                                     "ConsultaPH.xml"));
+                            MostrarEnSegundoMonitorSiEsPosible(buscadorDir);
+                        }
                         break;
                     case ID.CMD_RPH:
+                        if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_RPH))
+                        {
+                            var buscadorTel = new SAIFrmBuscadorIncidencias();
+                            buscadorTel.CargarConsulta(string.Format("{0}\\{1}", Environment.CurrentDirectory,
+                                                                     "ConsultaRPH.xml"));
+                            MostrarEnSegundoMonitorSiEsPosible(buscadorTel);
+                        }
                         break;
                     case ID.CMD_S:
+                        throw new SAIExcepcion("Funcionalidad no implementada.");
                         break;
                     case ID.CMD_SIF:
+                        throw new SAIExcepcion("Funcionalidad no implementada.");
                         break;
                     case ID.CMD_SLC:
+                        if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_SLC))
+                        {
+                            var buscadorLig = new SAIFrmBuscadorIncidencias();
+                            buscadorLig.CargarConsulta(string.Format("{0}\\{1}", Environment.CurrentDirectory,
+                                                                     "ConsultaSLC.xml"));
+                            MostrarEnSegundoMonitorSiEsPosible(buscadorLig);
+                        }
                         break;
                     case ID.CMD_TEL:
                         if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_TEL))
@@ -179,6 +202,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         }
                         break;
                     case ID.CMD_U:
+                        throw new SAIExcepcion("Funcionalidad no implementada.");
                         break;
                     default:
                         break;

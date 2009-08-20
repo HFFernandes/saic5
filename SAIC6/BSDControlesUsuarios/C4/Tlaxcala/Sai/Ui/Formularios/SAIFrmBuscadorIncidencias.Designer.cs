@@ -183,6 +183,7 @@
             this.GridResultados.ReadOnly = true;
             this.GridResultados.Size = new System.Drawing.Size(911, 203);
             this.GridResultados.TabIndex = 2;
+            this.GridResultados.DoubleClick += new System.EventHandler(this.GridResultados_DoubleClick);
             // 
             // ResultadoDataTable
             // 

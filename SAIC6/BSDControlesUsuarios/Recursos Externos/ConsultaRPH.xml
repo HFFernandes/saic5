@@ -1,0 +1,42 @@
+<query name="">
+  <description />
+  <columns>
+    <Column caption="Folio" sorting="None" sortindex="-1">
+      <expr class="ENTATTR" id="Incidencias.Folio" />
+    </Column>
+    <Column caption="Descripción" sorting="None" sortindex="-1">
+      <expr class="ENTATTR" id="Incidencias.Descripcion" />
+    </Column>
+    <Column caption="Dirección" sorting="None" sortindex="-1">
+      <expr class="ENTATTR" id="Incidencias.Direccion" />
+    </Column>
+    <Column caption="Municipio" sorting="None" sortindex="-1">
+      <expr class="ENTATTR" id="Municipio.Nombre" />
+    </Column>
+    <Column caption="Localidad" sorting="None" sortindex="-1">
+      <expr class="ENTATTR" id="Localidad.Nombre" />
+    </Column>
+    <Column caption="Referencias" sorting="None" sortindex="-1">
+      <expr class="ENTATTR" id="Incidencias.Referencias" />
+    </Column>
+    <Column caption="Número de Teléfono" sorting="None" sortindex="-1">
+      <expr class="ENTATTR" id="Incidencias.Telefono" />
+    </Column>
+    <Column caption="Tipo de Incidencia" sorting="None" sortindex="-1">
+      <expr class="ENTATTR" id="{Tipos de Incidencia}.Descripcion" />
+    </Column>
+    <Column caption="Operador" sorting="None" sortindex="-1">
+      <expr class="ENTATTR" id="Usuario.NombrePropio" />
+    </Column>
+  </columns>
+  <justsortedcolumns />
+  <conditions linking="All">
+    <Condition class="SMPL" enabled="True" ReadOnly="False">
+      <operator id="Equal" />
+      <expressions>
+        <expr class="ENTATTR" id="Incidencias.Telefono" />
+        <expr class="CONST" type="String" kind="Scalar" value="" text="[escribir valor]" />
+      </expressions>
+    </Condition>
+  </conditions>
+</query>

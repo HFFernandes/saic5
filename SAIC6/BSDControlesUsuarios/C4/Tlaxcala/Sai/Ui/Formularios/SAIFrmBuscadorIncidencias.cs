@@ -1,7 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Reflection;
-using System.Xml;
 using System.Data.SqlClient;
 using System.Configuration;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
@@ -44,11 +42,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
-        private void SAIFrmBuscadorIncidencias_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void ModeloQuery_ColumnsChanged(object sender, Korzh.EasyQuery.ColumnsChangeEventArgs e)
         {
             ActualizarResultado();
@@ -84,5 +77,38 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 Close();
             }
         }
+
+        public void CargarConsulta(string strPath)
+        {
+            try
+            {
+                try
+                {
+                    ModeloQuery.LoadFromFile(strPath);
+                }
+                catch (FileNotFoundException)
+                {
+                    throw new SAIExcepcion("No se localizo el archivo de configuracion para los filtros de busqueda.");
+                }
+                catch (Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
+            }
+            catch (SAIExcepcion)
+            {
+            }
+        }
+
+        private void SAIFrmBuscadorIncidencias_Load(object sender, EventArgs e)
+        {
+            //ModeloQuery.LoadFromFile(@"D:\Plantilla.xml");
+        }
+
+        private void GridResultados_DoubleClick(object sender, EventArgs e)
+        {
+            //ModeloQuery.SaveToFile(@"D:\C2.xml");
+        }
+
     }
 }
