@@ -1,60 +1,60 @@
 <DATAMODEL Version="5" Name="SAI" DefQuery="">
   <DESCRIPTION>Modelo del Sistema de Administracin de Incidencias</DESCRIPTION>
   <DBPARAMS>
-    <ConnectionString>User Id=sa;Pwd=1234567890;Persist Security Info=False;Initial Catalog=SAI_BD;Data Source=DAVID\SQLEXPRESS</ConnectionString>
+    <ConnectionString>Data Source=.\SQLEXPRESS;Integrated Security=SSPI; Initial Catalog=SAI_BD</ConnectionString>
     <LoginPrompt>False</LoginPrompt>
     <GateClass>Korzh.EasyQuery.DataGates.SqlClientGate</GateClass>
   </DBPARAMS>
   <TABLES>
     <TABLE NAME="TipoIncidencia" ALIAS="Tipos" SCHEMA="dbo" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="" />
     <TABLE NAME="EstatusIncidencia" ALIAS="Estatus" SCHEMA="dbo" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="" />
-    <TABLE NAME="Incidencia" ALIAS="Incidencias" SCHEMA="dbo" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="" />
-    <TABLE NAME="Colonia" ALIAS="Colonia" SCHEMA="dbo" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="" />
-    <TABLE NAME="CodigoPostal" ALIAS="Codigo Postal" SCHEMA="dbo" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="" />
-    <TABLE NAME="Estado" ALIAS="Estado" SCHEMA="dbo" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="" />
-    <TABLE NAME="Municipio" ALIAS="Municipio" SCHEMA="dbo" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="" />
-    <TABLE NAME="Localidad" ALIAS="Localidad" SCHEMA="dbo" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="" />
-    <TABLE NAME="Usuario" ALIAS="Usuario" SCHEMA="dbo" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="" />
-    <TABLE NAME="lstCorporacionesFolios" ALIAS="lstCorporacionesFolios" SCHEMA="dbo" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="" />
+    <TABLE NAME="Colonia" ALIAS="Colonias" SCHEMA="dbo" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="" />
+    <TABLE NAME="CodigoPostal" ALIAS="Codigos Postales" SCHEMA="dbo" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="" />
+    <TABLE NAME="Estado" ALIAS="Estados" SCHEMA="dbo" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="" />
+    <TABLE NAME="Municipio" ALIAS="Municipios" SCHEMA="dbo" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="" />
+    <TABLE NAME="Localidad" ALIAS="Localidades" SCHEMA="dbo" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="" />
+    <TABLE NAME="Usuario" ALIAS="Usuarios" SCHEMA="dbo" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="" />
+    <TABLE NAME="lstCorporacionesFolios" ALIAS="Corporaciones" SCHEMA="dbo" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="" />
+    <TABLE NAME="lstIncidencias066" ALIAS="Incidencias" SCHEMA="dbo" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="" />
   </TABLES>
   <LINKS>
-    <LINK TABLE1="Tipos" TABLE2="Incidencias" TYPE="Inner" QF="False">
-      <CONDITION TYPE="FF" EXPR1="Clave" EXPR2="ClaveTipo" OP="=" />
-    </LINK>
-    <LINK TABLE1="Estatus" TABLE2="Incidencias" TYPE="Inner" QF="False">
-      <CONDITION TYPE="FF" EXPR1="Clave" EXPR2="ClaveEstatus" OP="=" />
-    </LINK>
-    <LINK TABLE1="Incidencias" TABLE2="Codigo Postal" TYPE="Inner" QF="False">
-      <CONDITION TYPE="FF" EXPR1="ClaveCodigoPostal" EXPR2="Clave" OP="=" />
-    </LINK>
-    <LINK TABLE1="Incidencias" TABLE2="Estado" TYPE="Inner" QF="False">
+    <LINK TABLE1="Municipios" TABLE2="Estados" TYPE="Inner" QF="False">
       <CONDITION TYPE="FF" EXPR1="ClaveEstado" EXPR2="Clave" OP="=" />
     </LINK>
-    <LINK TABLE1="Incidencias" TABLE2="Municipio" TYPE="Inner" QF="False">
+    <LINK TABLE1="Localidades" TABLE2="Municipios" TYPE="Inner" QF="False">
       <CONDITION TYPE="FF" EXPR1="ClaveMunicipio" EXPR2="Clave" OP="=" />
     </LINK>
-    <LINK TABLE1="Incidencias" TABLE2="Colonia" TYPE="Inner" QF="False">
+    <LINK TABLE1="Colonias" TABLE2="Localidades" TYPE="Inner" QF="False">
+      <CONDITION TYPE="FF" EXPR1="ClaveLocalidad" EXPR2="Clave" OP="=" />
+    </LINK>
+    <LINK TABLE1="Colonias" TABLE2="Codigos Postales" TYPE="Inner" QF="False">
+      <CONDITION TYPE="FF" EXPR1="ClaveCodigoPostal" EXPR2="Clave" OP="=" />
+    </LINK>
+    <LINK TABLE1="Incidencias" TABLE2="Tipos" TYPE="Inner" QF="False">
+      <CONDITION TYPE="FF" EXPR1="ClaveTipo" EXPR2="Clave" OP="=" />
+    </LINK>
+    <LINK TABLE1="Incidencias" TABLE2="Estatus" TYPE="Inner" QF="False">
+      <CONDITION TYPE="FF" EXPR1="ClaveEstatus" EXPR2="Clave" OP="=" />
+    </LINK>
+    <LINK TABLE1="Incidencias" TABLE2="Codigos Postales" TYPE="Inner" QF="False">
+      <CONDITION TYPE="FF" EXPR1="ClaveCodigoPostal" EXPR2="Clave" OP="=" />
+    </LINK>
+    <LINK TABLE1="Incidencias" TABLE2="Estados" TYPE="Inner" QF="False">
+      <CONDITION TYPE="FF" EXPR1="ClaveEstado" EXPR2="Clave" OP="=" />
+    </LINK>
+    <LINK TABLE1="Incidencias" TABLE2="Municipios" TYPE="Inner" QF="False">
+      <CONDITION TYPE="FF" EXPR1="ClaveMunicipio" EXPR2="Clave" OP="=" />
+    </LINK>
+    <LINK TABLE1="Incidencias" TABLE2="Colonias" TYPE="Inner" QF="False">
       <CONDITION TYPE="FF" EXPR1="ClaveColonia" EXPR2="Clave" OP="=" />
     </LINK>
-    <LINK TABLE1="Incidencias" TABLE2="Localidad" TYPE="Inner" QF="False">
+    <LINK TABLE1="Incidencias" TABLE2="Localidades" TYPE="Inner" QF="False">
       <CONDITION TYPE="FF" EXPR1="ClaveLocalidad" EXPR2="Clave" OP="=" />
     </LINK>
-    <LINK TABLE1="Incidencias" TABLE2="Usuario" TYPE="Inner" QF="False">
+    <LINK TABLE1="Incidencias" TABLE2="Usuarios" TYPE="Inner" QF="False">
       <CONDITION TYPE="FF" EXPR1="ClaveUsuario" EXPR2="Clave" OP="=" />
     </LINK>
-    <LINK TABLE1="Municipio" TABLE2="Estado" TYPE="Inner" QF="False">
-      <CONDITION TYPE="FF" EXPR1="ClaveEstado" EXPR2="Clave" OP="=" />
-    </LINK>
-    <LINK TABLE1="Localidad" TABLE2="Municipio" TYPE="Inner" QF="False">
-      <CONDITION TYPE="FF" EXPR1="ClaveMunicipio" EXPR2="Clave" OP="=" />
-    </LINK>
-    <LINK TABLE1="Colonia" TABLE2="Localidad" TYPE="Inner" QF="False">
-      <CONDITION TYPE="FF" EXPR1="ClaveLocalidad" EXPR2="Clave" OP="=" />
-    </LINK>
-    <LINK TABLE1="Colonia" TABLE2="Codigo Postal" TYPE="Inner" QF="False">
-      <CONDITION TYPE="FF" EXPR1="ClaveCodigoPostal" EXPR2="Clave" OP="=" />
-    </LINK>
-    <LINK TABLE1="lstCorporacionesFolios" TABLE2="Incidencias" TYPE="Inner" QF="False">
+    <LINK TABLE1="Incidencias" TABLE2="Corporaciones" TYPE="Inner" QF="False">
       <CONDITION TYPE="FF" EXPR1="Folio" EXPR2="Folio" OP="=" />
     </LINK>
   </LINKS>
@@ -201,6 +201,84 @@
     </OPERATOR>
   </OPERATORS>
   <ENTITIES MAXID="1">
+    <ENTITY NAME="Incidencias">
+      <USERDATA />
+      <ATTR ID="lstIncidencias066.Folio" KIND="Data" EXPR="Folio" CAPTION="Folio" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="lstIncidencias066.FolioPadre" KIND="Data" EXPR="FolioPadre" CAPTION="Folio padre" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull,IsNotNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="lstIncidencias066.ClaveCodigoPostal" KIND="Data" EXPR="ClaveCodigoPostal" CAPTION="ClaveCodigoPostal" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="lstIncidencias066.ClaveColonia" KIND="Data" EXPR="ClaveColonia" CAPTION="ClaveColonia" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="lstIncidencias066.ClaveEstado" KIND="Data" EXPR="ClaveEstado" CAPTION="ClaveEstado" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="lstIncidencias066.ClaveEstatus" KIND="Data" EXPR="ClaveEstatus" CAPTION="ClaveEstatus" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="lstIncidencias066.ClaveLocalidad" KIND="Data" EXPR="ClaveLocalidad" CAPTION="ClaveLocalidad" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="lstIncidencias066.ClaveMunicipio" KIND="Data" EXPR="ClaveMunicipio" CAPTION="ClaveMunicipio" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="lstIncidencias066.ClaveTipo" KIND="Data" EXPR="ClaveTipo" CAPTION="ClaveTipo" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="lstIncidencias066.ClaveUsuario" KIND="Data" EXPR="ClaveUsuario" CAPTION="ClaveUsuario" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="lstIncidencias066.Descripcion" KIND="Data" EXPR="Descripcion" CAPTION="Descripción" TYPE="String" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="lstIncidencias066.Direccion" KIND="Data" EXPR="Direccion" CAPTION="Dirección" TYPE="String" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="lstIncidencias066.FechaSuceso" KIND="Data" EXPR="FechaSuceso" CAPTION="Fecha del suceso" TYPE="DateTime" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>DateEqualPrecise,DateNotEqualPrecise,DateBeforePrecise,DateAfterPrecise,DatePeriodPrecise,MaximumOfAttr,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="lstIncidencias066.Referencias" KIND="Data" EXPR="Referencias" CAPTION="Referencias" TYPE="String" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="lstIncidencias066.Telefono" KIND="Data" EXPR="Telefono" CAPTION="Teléfono" TYPE="String" SIZE="25" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
+        <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+    </ENTITY>
     <ENTITY NAME="Estatus de Incidencias">
       <USERDATA />
       <ATTR ID="{Estatus de Incidencias}.Clave" KIND="Data" EXPR="Clave" CAPTION="Clave" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Estatus">
@@ -248,97 +326,19 @@
         <DESCRIPTION />
       </ATTR>
     </ENTITY>
-    <ENTITY NAME="Incidencias">
-      <USERDATA />
-      <ATTR ID="Incidencias.Folio" KIND="Data" EXPR="Folio" CAPTION="Folio" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
-        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
-        <EDITORS />
-        <DESCRIPTION />
-      </ATTR>
-      <ATTR ID="Incidencias.FolioPadre" KIND="Data" EXPR="FolioPadre" CAPTION="Folio Padre" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
-        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
-        <EDITORS />
-        <DESCRIPTION />
-      </ATTR>
-      <ATTR ID="Incidencias.ClaveCodigoPostal" KIND="Data" EXPR="ClaveCodigoPostal" CAPTION="ClaveCodigoPostal" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Incidencias">
-        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
-        <EDITORS />
-        <DESCRIPTION />
-      </ATTR>
-      <ATTR ID="Incidencias.ClaveColonia" KIND="Data" EXPR="ClaveColonia" CAPTION="ClaveColonia" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Incidencias">
-        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
-        <EDITORS />
-        <DESCRIPTION />
-      </ATTR>
-      <ATTR ID="Incidencias.ClaveEstado" KIND="Data" EXPR="ClaveEstado" CAPTION="ClaveEstado" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Incidencias">
-        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
-        <EDITORS />
-        <DESCRIPTION />
-      </ATTR>
-      <ATTR ID="Incidencias.ClaveEstatus" KIND="Data" EXPR="ClaveEstatus" CAPTION="ClaveEstatus" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Incidencias">
-        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
-        <EDITORS />
-        <DESCRIPTION />
-      </ATTR>
-      <ATTR ID="Incidencias.ClaveLocalidad" KIND="Data" EXPR="ClaveLocalidad" CAPTION="ClaveLocalidad" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Incidencias">
-        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
-        <EDITORS />
-        <DESCRIPTION />
-      </ATTR>
-      <ATTR ID="Incidencias.ClaveMunicipio" KIND="Data" EXPR="ClaveMunicipio" CAPTION="ClaveMunicipio" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Incidencias">
-        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
-        <EDITORS />
-        <DESCRIPTION />
-      </ATTR>
-      <ATTR ID="Incidencias.ClaveTipo" KIND="Data" EXPR="ClaveTipo" CAPTION="ClaveTipo" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Incidencias">
-        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
-        <EDITORS />
-        <DESCRIPTION />
-      </ATTR>
-      <ATTR ID="Incidencias.ClaveUsuario" KIND="Data" EXPR="ClaveUsuario" CAPTION="ClaveUsuario" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Incidencias">
-        <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
-        <EDITORS />
-        <DESCRIPTION />
-      </ATTR>
-      <ATTR ID="Incidencias.Descripcion" KIND="Data" EXPR="Descripcion" CAPTION="Descripción" TYPE="String" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
-        <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
-        <EDITORS />
-        <DESCRIPTION />
-      </ATTR>
-      <ATTR ID="Incidencias.Direccion" KIND="Data" EXPR="Direccion" CAPTION="Dirección" TYPE="String" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
-        <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
-        <EDITORS />
-        <DESCRIPTION />
-      </ATTR>
-      <ATTR ID="Incidencias.Referencias" KIND="Data" EXPR="Referencias" CAPTION="Referencias" TYPE="String" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
-        <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
-        <EDITORS />
-        <DESCRIPTION />
-      </ATTR>
-      <ATTR ID="Incidencias.Telefono" KIND="Data" EXPR="Telefono" CAPTION="Teléfono" TYPE="String" SIZE="25" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
-        <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
-        <EDITORS />
-        <DESCRIPTION />
-      </ATTR>
-      <ATTR ID="Incidencias.FechaSuceso" KIND="Data" EXPR="FechaSuceso" CAPTION="Fecha y hora del suceso" TYPE="DateTime" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Incidencias">
-        <OPERATORS>DateEqualPrecise,DateNotEqualPrecise,DateBeforePrecise,DateAfterPrecise,DatePeriodPrecise,MaximumOfAttr,IsNull</OPERATORS>
-        <EDITORS />
-        <DESCRIPTION />
-      </ATTR>
-    </ENTITY>
     <ENTITY NAME="Corporaciones">
       <USERDATA />
-      <ATTR ID="lstCorporacionesFolios.Descripcion" KIND="Data" EXPR="Descripcion" CAPTION="Nombre de la corporación" TYPE="String" SIZE="50" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="lstCorporacionesFolios">
-        <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
-        <EDITORS />
-        <DESCRIPTION />
-      </ATTR>
-      <ATTR ID="lstCorporacionesFolios.Folio" KIND="Data" EXPR="Folio" CAPTION="Folio" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="lstCorporacionesFolios">
+      <ATTR ID="lstCorporacionesFolios.Folio" KIND="Data" EXPR="Folio" CAPTION="Folio" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Corporaciones">
         <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
       </ATTR>
-      <ATTR ID="lstCorporacionesFolios.Zn" KIND="Data" EXPR="Zn" CAPTION="Zona" TYPE="String" SIZE="15" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="lstCorporacionesFolios">
+      <ATTR ID="lstCorporacionesFolios.Descripcion" KIND="Data" EXPR="Descripcion" CAPTION="Nombre de la corporación" TYPE="String" SIZE="50" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Corporaciones">
+        <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="lstCorporacionesFolios.Zn" KIND="Data" EXPR="Zn" CAPTION="Zona" TYPE="String" SIZE="15" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Corporaciones">
         <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
@@ -346,12 +346,12 @@
     </ENTITY>
     <ENTITY NAME="Estado">
       <USERDATA />
-      <ATTR ID="Estado.Clave" KIND="Data" EXPR="Clave" CAPTION="Clave" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Estado">
+      <ATTR ID="Estado.Clave" KIND="Data" EXPR="Clave" CAPTION="Clave" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Estados">
         <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
       </ATTR>
-      <ATTR ID="Estado.Nombre" KIND="Data" EXPR="Nombre" CAPTION="Nombre" TYPE="String" SIZE="15" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Estado">
+      <ATTR ID="Estado.Nombre" KIND="Data" EXPR="Nombre" CAPTION="Nombre" TYPE="String" SIZE="15" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Estados">
         <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
@@ -359,17 +359,17 @@
     </ENTITY>
     <ENTITY NAME="Municipios">
       <USERDATA />
-      <ATTR ID="Municipio.Clave" KIND="Data" EXPR="Clave" CAPTION="Clave" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Municipio">
+      <ATTR ID="Municipio.Clave" KIND="Data" EXPR="Clave" CAPTION="Clave" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Municipios">
         <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
       </ATTR>
-      <ATTR ID="Municipio.ClaveEstado" KIND="Data" EXPR="ClaveEstado" CAPTION="Estado del municipio" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Municipio">
+      <ATTR ID="Municipio.ClaveEstado" KIND="Data" EXPR="ClaveEstado" CAPTION="Estado del municipio" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Municipios">
         <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
       </ATTR>
-      <ATTR ID="Municipio.Nombre" KIND="Data" EXPR="Nombre" CAPTION="Nombre" TYPE="String" SIZE="75" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Municipio">
+      <ATTR ID="Municipio.Nombre" KIND="Data" EXPR="Nombre" CAPTION="Nombre" TYPE="String" SIZE="75" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Municipios">
         <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
@@ -377,17 +377,17 @@
     </ENTITY>
     <ENTITY NAME="Localidades">
       <USERDATA />
-      <ATTR ID="Localidad.Clave" KIND="Data" EXPR="Clave" CAPTION="Clave" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Localidad">
+      <ATTR ID="Localidad.Clave" KIND="Data" EXPR="Clave" CAPTION="Clave" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Localidades">
         <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
       </ATTR>
-      <ATTR ID="Localidad.ClaveMunicipio" KIND="Data" EXPR="ClaveMunicipio" CAPTION="Municipio de la localidad" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Localidad">
+      <ATTR ID="Localidad.ClaveMunicipio" KIND="Data" EXPR="ClaveMunicipio" CAPTION="Municipio de la localidad" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Localidades">
         <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
       </ATTR>
-      <ATTR ID="Localidad.Nombre" KIND="Data" EXPR="Nombre" CAPTION="Nombre" TYPE="String" SIZE="75" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Localidad">
+      <ATTR ID="Localidad.Nombre" KIND="Data" EXPR="Nombre" CAPTION="Nombre" TYPE="String" SIZE="75" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Localidades">
         <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
@@ -395,12 +395,12 @@
     </ENTITY>
     <ENTITY NAME="Codigos Postales">
       <USERDATA />
-      <ATTR ID="CodigoPostal.Clave" KIND="Data" EXPR="Clave" CAPTION="Clave" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Codigo Postal">
+      <ATTR ID="CodigoPostal.Clave" KIND="Data" EXPR="Clave" CAPTION="Clave" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Codigos Postales">
         <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
       </ATTR>
-      <ATTR ID="CodigoPostal.Valor" KIND="Data" EXPR="Valor" CAPTION="Código" TYPE="String" SIZE="5" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Codigo Postal">
+      <ATTR ID="CodigoPostal.Valor" KIND="Data" EXPR="Valor" CAPTION="Código" TYPE="String" SIZE="5" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Codigos Postales">
         <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
@@ -408,22 +408,22 @@
     </ENTITY>
     <ENTITY NAME="Colonias">
       <USERDATA />
-      <ATTR ID="Colonia.Clave" KIND="Data" EXPR="Clave" CAPTION="Clave" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Colonia">
+      <ATTR ID="Colonia.Clave" KIND="Data" EXPR="Clave" CAPTION="Clave" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Colonias">
         <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
       </ATTR>
-      <ATTR ID="Colonia.ClaveCodigoPostal" KIND="Data" EXPR="ClaveCodigoPostal" CAPTION="Localidad del codigo postal" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Colonia">
+      <ATTR ID="Colonia.ClaveCodigoPostal" KIND="Data" EXPR="ClaveCodigoPostal" CAPTION="Localidad del codigo postal" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Colonias">
         <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
       </ATTR>
-      <ATTR ID="Colonia.ClaveLocalidad" KIND="Data" EXPR="ClaveLocalidad" CAPTION="Localidad de la colonia" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Colonia">
+      <ATTR ID="Colonia.ClaveLocalidad" KIND="Data" EXPR="ClaveLocalidad" CAPTION="Localidad de la colonia" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Colonias">
         <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
       </ATTR>
-      <ATTR ID="Colonia.Nombre" KIND="Data" EXPR="Nombre" CAPTION="Nombre" TYPE="String" SIZE="75" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Colonia">
+      <ATTR ID="Colonia.Nombre" KIND="Data" EXPR="Nombre" CAPTION="Nombre" TYPE="String" SIZE="75" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Colonias">
         <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
@@ -431,12 +431,12 @@
     </ENTITY>
     <ENTITY NAME="Usuarios">
       <USERDATA />
-      <ATTR ID="Usuario.Clave" KIND="Data" EXPR="Clave" CAPTION="Clave" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Usuario">
+      <ATTR ID="Usuario.Clave" KIND="Data" EXPR="Clave" CAPTION="Clave" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="False" UAL="False" AGGR="False" TABLES="Usuarios">
         <OPERATORS>Equal,Between,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,NotBetween,NotEqual,MaximumOfAttr,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
       </ATTR>
-      <ATTR ID="Usuario.Despachador" KIND="Data" EXPR="Despachador" CAPTION="Es despachador" TYPE="Bool" SIZE="0" QUOTE="False" UIC="True" UIR="False" UIS="True" UAL="True" AGGR="False" TABLES="Usuario">
+      <ATTR ID="Usuario.Despachador" KIND="Data" EXPR="Despachador" CAPTION="Es despachador" TYPE="Bool" SIZE="0" QUOTE="False" UIC="True" UIR="False" UIS="True" UAL="True" AGGR="False" TABLES="Usuarios">
         <OPERATORS>InList</OPERATORS>
         <EDITORS>
           <DEFAULT TYPE="LIST">
@@ -448,12 +448,12 @@
         </EDITORS>
         <DESCRIPTION />
       </ATTR>
-      <ATTR ID="Usuario.NombrePropio" KIND="Data" EXPR="NombrePropio" CAPTION="Nombre completo" TYPE="String" SIZE="150" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Usuario">
+      <ATTR ID="Usuario.NombrePropio" KIND="Data" EXPR="NombrePropio" CAPTION="Nombre completo" TYPE="String" SIZE="150" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Usuarios">
         <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />
       </ATTR>
-      <ATTR ID="Usuario.NombreUsuario" KIND="Data" EXPR="NombreUsuario" CAPTION="Nombre de usuario" TYPE="String" SIZE="10" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Usuario">
+      <ATTR ID="Usuario.NombreUsuario" KIND="Data" EXPR="NombreUsuario" CAPTION="Nombre de usuario" TYPE="String" SIZE="10" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" AGGR="False" TABLES="Usuarios">
         <OPERATORS>StartsWith,Contains,Equal,NotStartsWith,NotContains,NotEqual,InSubQuery,IsNull</OPERATORS>
         <EDITORS />
         <DESCRIPTION />

@@ -364,9 +364,6 @@
     <Content Include="map.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SAI066.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmAgendaTelefonica.resx">
       <DependentUpon>SAIFrmAgendaTelefonica.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -375,9 +372,8 @@
       <DependentUpon>SAIFrmIncidenciasActivas089.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Content Include="SAI089.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="SAI066.xml" />
+    <Content Include="SAI089.xml" />
     <Content Include="SuitePro.ResourceEs.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

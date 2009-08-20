@@ -110,5 +110,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             //ModeloQuery.SaveToFile(@"D:\C2.xml");
         }
 
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
+            ActualizarResultado();
+        }
+
     }
 }
