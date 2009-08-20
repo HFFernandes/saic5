@@ -1643,6 +1643,21 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                     }
 
+                    if (cmbTipoIncidencia.Enabled)
+                    {
+                        if (cmbTipoIncidencia.SelectedItem != null && (
+                           (cmbTipoIncidencia.SelectedItem as TipoIncidencia).ClaveOperacion.Trim() == "133"
+                            ||
+                            (cmbTipoIncidencia.SelectedItem as TipoIncidencia).ClaveOperacion.Trim() == "5047"
+                            )
+                            && this.txtTelefono.Text.Trim() == string.Empty
+                            )
+                        {
+                            e.Cancel = true;
+                            throw new SAIExcepcion("Debe de indicar el número de teléfono de la incidencia", this);
+                        }
+                    }
+
                     Mapa.Controlador.RevisaInstancias(this);
                 }
                 catch (System.Exception ex)
@@ -1701,10 +1716,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     if (this._entIncidencia != null)
                     {
 
-                        if (cmbTipoIncidencia.SelectedItem!= null && (cmbTipoIncidencia.SelectedItem as TipoIncidencia).Descripcion.ToUpper().Contains("BROMA"))
+                        if (cmbTipoIncidencia.SelectedItem!= null && (
+                           (cmbTipoIncidencia.SelectedItem as TipoIncidencia).ClaveOperacion.Trim() == "133"
+                            ||
+                            (cmbTipoIncidencia.SelectedItem as TipoIncidencia).ClaveOperacion.Trim() == "5047"
+                            ))
                             {
+                                this.txtDireccion.Text  = "SIN REGISTRO";
                                 //Se cambia a incidencia cancelada
-                                this._entIncidencia.ClaveEstatus = 5;
+                                 this._entIncidencia.ClaveEstatus = 5;
                             }
 
                          //Si existen objetos de propietario del vehículo, vehiculoaccesorios robados y accesorios robados, se guardan:
@@ -2272,6 +2292,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 {
                                     this._grpDenunciante.Enabled = true;
                                 }
+                            }
+                            if (objTipo.ClaveOperacion.Trim() == "5047" || objTipo.ClaveOperacion.Trim() == "133")
+                            {
+                                this.txtDireccion.Text  = "SIN REGISTRO";
                             }
                            
 
