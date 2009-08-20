@@ -11,6 +11,8 @@ using Objetos = BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects;
 using Mappers = BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
 using System.Configuration;
+using BSD.C4.Tlaxcala.Sai.Administracion.Utilerias;
+
 namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 {
     public partial class frmUsuarios : SAIFrmBase
@@ -24,9 +26,27 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             SAIBarraEstado.SizingGrip = false;
             SAIBarraEstado.TabIndex = 0;
+            this.LlenarCorporaciones();
             this.LlenarGrid();
             this.Limpiar();
-        }        
+        }
+
+        private void LlenarCorporaciones()
+        {
+            try
+            {
+                Entidades.CorporacionList lstCorporaciones = Mappers.CorporacionMapper.Instance().GetAll();
+                foreach (Entidades.Corporacion corporaciones in lstCorporaciones)
+                {
+                    this.ddlCorporaciones.Items.Add(new ComboItem(corporaciones.Clave, corporaciones.Descripcion));
+                }
+                
+                this.ddlCorporaciones.DisplayMember = "Descripcion";
+                this.ddlCorporaciones.ValueMember = "Clave";
+            }
+            catch (SAIExcepcion)
+            { }
+        }
 
         /// <summary>
         /// Llena el Grid de catalogo de usuarios
@@ -85,6 +105,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 {
                     row.Selected = false;
                 }
+                this.ddlCorporaciones.SelectedIndex = -1;
                 //Se limpian controles
                 this.txtUsuario.Text = "";
                 this.txtNombrePropio.Text = "";
@@ -108,26 +129,33 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// </summary>
         private void Agregar()
         {
-            try 
+            try
             {
                 /*try
                 {*/
-                    Entidades.Usuario newUsuario = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Usuario();
-                    newUsuario.NombrePropio = this.txtNombrePropio.Text;
-                    newUsuario.NombreUsuario = this.txtUsuario.Text;
-                    newUsuario.Contraseña = this.txtContrasena.Text;
-                    newUsuario.Despachador = this.rbDespachador.Checked ? true : false;
-                    newUsuario.Activo = this.chkActivado.Checked;
-                    Mappers.UsuarioMapper.Instance().Insert(newUsuario);
+                Entidades.Usuario newUsuario = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Usuario();
+                newUsuario.NombrePropio = this.txtNombrePropio.Text;
+                newUsuario.NombreUsuario = this.txtUsuario.Text;
+                newUsuario.Contraseña = this.txtContrasena.Text;
+                newUsuario.Despachador = this.rbDespachador.Checked ? true : false;
+                newUsuario.Activo = this.chkActivado.Checked;
+                Mappers.UsuarioMapper.Instance().Insert(newUsuario);
 
-                    Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
-                    bitacora.Descripcion = "Se agrego el usuario: "+ newUsuario.NombrePropio;
-                    bitacora.FechaOperacion = DateTime.Today;
-                    bitacora.NombreCatalogo = "Usuario";
-                    bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
-                    bitacora.Operacion = "INSERT";
-                
-                    Mappers.BitacoraMapper.Instance().Insert(bitacora);
+                Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
+                bitacora.Descripcion = "Se agrego el usuario: " + newUsuario.NombrePropio;
+                bitacora.FechaOperacion = DateTime.Today;
+                bitacora.NombreCatalogo = "Usuario";
+                bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
+                bitacora.Operacion = "INSERT";
+
+                Mappers.BitacoraMapper.Instance().Insert(bitacora);
+
+                //Mappers.UsuarioMapper.Instance()
+                Objetos.UsuarioCorporacionObject newUsuarioCorporacion = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects.UsuarioCorporacionObject();
+                newUsuarioCorporacion.ClaveCorporacion = Convert.ToInt32(this.ObtieneValor(this.ddlCorporaciones.SelectedIndex));
+                newUsuarioCorporacion.ClaveUsuario = Mappers.UsuarioMapper.Instance().GetByUsuario(newUsuario.NombreUsuario).Clave;
+
+                Mappers.UsuarioCorporacionMapper.Instance().Insert(newUsuarioCorporacion);
                 /*}
                 catch (Cooperator.Framework.Data.Exceptions.InvalidConnectionStringException)
                 {
@@ -137,7 +165,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 { }*/
             }
             catch (SAIExcepcion)
-            {  }
+            { }
         }
 
         /// <summary>
@@ -170,6 +198,12 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
 
                         Mappers.BitacoraMapper.Instance().Insert(bitacora);
+
+                        /*Objetos.UsuarioCorporacionObject updUsuarioCorporacion = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects.UsuarioCorporacionObject();
+                        updUsuarioCorporacion.ClaveCorporacion = Convert.ToInt32(this.ObtieneValor(this.ddlCorporaciones.SelectedIndex));
+                        updUsuarioCorporacion.ClaveUsuario = Mappers.UsuarioMapper.Instance().GetByUsuario(updUsuario.NombreUsuario).Clave;
+
+                        Mappers.UsuarioCorporacionMapper.Instance().Save(updUsuarioCorporacion);*/
                     }
                 }
                 catch (Cooperator.Framework.Data.Exceptions.NoRowAffectedException)
@@ -213,23 +247,35 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            //Valida los campos Obligatorios
-            if (SAIProveedorValidacion.ValidarCamposRequeridos(this.gpbDatosUsuario))
+            try
             {
-                this.Agregar();
-                this.LlenarGrid();
-                this.Limpiar();
+                //Valida los campos Obligatorios
+                if (SAIProveedorValidacion.ValidarCamposRequeridos(this.gpbDatosUsuario))
+                {
+                    if (this.ddlCorporaciones.SelectedIndex > -1)
+                    {
+                        this.Agregar();
+                        this.LlenarGrid();
+                        this.Limpiar();
+                    }
+                    else
+                    {
+                        throw new SAIExcepcion("Seleccione la corporacion.");
+                    }
+                }
             }
+            catch (SAIExcepcion)
+            { }
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            if (SAIProveedorValidacion.ValidarCamposRequeridos(this.gpbDatosUsuario))
-            {
+            /*if (SAIProveedorValidacion.ValidarCamposRequeridos(this.gpbDatosUsuario))
+            {*/
                 this.Modificar();
                 this.LlenarGrid();
                 this.Limpiar();
-            }
+            //}
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -284,6 +330,20 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         this.txtUsuario.Text = Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["NombreUsuario"].Value);
                         this.txtContrasena.Text = Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Contrasena"].Value);
                         this.chkActivado.Checked = Convert.ToBoolean(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Activo"].Value);
+
+                        int corporacion = 0;
+                        Objetos.UsuarioCorporacionObjectList lstUCorp = Mappers.UsuarioCorporacionMapper.Instance().GetByUsuario(Convert.ToInt32(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Clave"].Value));
+                        foreach(Objetos.UsuarioCorporacionObject usrCorp in lstUCorp )
+                        {
+                            corporacion =  usrCorp.ClaveCorporacion;
+
+                        }
+
+                        if (corporacion > 0)
+                        {
+                            this.SeleccionarComboItem(corporacion);
+                        }
+
                         if (Convert.ToBoolean(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Desp"].Value))
                         {
                             this.rbDespachador.Checked = true;
@@ -320,6 +380,30 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             this.Limpiar();
+        }
+
+        private object ObtieneValor(int indice)
+        {
+            return ((ComboItem)this.ddlCorporaciones.Items[indice]).Valor;
+        }
+
+        private string ObtieneDescripcion(int indice)
+        {
+            return ((ComboItem)this.ddlCorporaciones.Items[indice]).Descripcion;
+        }
+
+        private void SeleccionarComboItem(int Value)
+        {
+            foreach (ComboItem item in this.ddlCorporaciones.Items)
+            {
+                if (Convert.ToInt32(item.Valor) == Value)
+                {
+                    this.ddlCorporaciones.SelectedItem = item;
+                    break;
+                }
+                else
+                { this.ddlCorporaciones.SelectedIndex = -1; }
+            }
         }
     }
 }

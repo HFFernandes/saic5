@@ -38,6 +38,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.gpbDatosUsuario = new System.Windows.Forms.GroupBox();
+            this.ddlCorporaciones = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.chkActivado = new System.Windows.Forms.CheckBox();
             this.btnLimpiar = new System.Windows.Forms.Button();
@@ -92,10 +94,10 @@
             this.btnAgregar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
             this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregar.Location = new System.Drawing.Point(315, 500);
+            this.btnAgregar.Location = new System.Drawing.Point(315, 528);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
-            this.btnAgregar.TabIndex = 9;
+            this.btnAgregar.TabIndex = 10;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAgregar.UseVisualStyleBackColor = true;
@@ -130,6 +132,8 @@
             // 
             // gpbDatosUsuario
             // 
+            this.gpbDatosUsuario.Controls.Add(this.ddlCorporaciones);
+            this.gpbDatosUsuario.Controls.Add(this.label6);
             this.gpbDatosUsuario.Controls.Add(this.label4);
             this.gpbDatosUsuario.Controls.Add(this.chkActivado);
             this.gpbDatosUsuario.Controls.Add(this.btnLimpiar);
@@ -144,15 +148,33 @@
             this.gpbDatosUsuario.Controls.Add(this.txtContrasena);
             this.gpbDatosUsuario.Location = new System.Drawing.Point(6, 230);
             this.gpbDatosUsuario.Name = "gpbDatosUsuario";
-            this.gpbDatosUsuario.Size = new System.Drawing.Size(566, 243);
+            this.gpbDatosUsuario.Size = new System.Drawing.Size(566, 275);
             this.gpbDatosUsuario.TabIndex = 0;
             this.gpbDatosUsuario.TabStop = false;
             this.gpbDatosUsuario.Text = "Datos Generales";
             // 
+            // ddlCorporaciones
+            // 
+            this.ddlCorporaciones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ddlCorporaciones.FormattingEnabled = true;
+            this.ddlCorporaciones.Location = new System.Drawing.Point(108, 109);
+            this.ddlCorporaciones.Name = "ddlCorporaciones";
+            this.ddlCorporaciones.Size = new System.Drawing.Size(182, 21);
+            this.ddlCorporaciones.TabIndex = 4;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(11, 112);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(67, 13);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Corporacion:";
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(11, 124);
+            this.label4.Location = new System.Drawing.Point(11, 160);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(398, 13);
             this.label4.TabIndex = 0;
@@ -162,20 +184,20 @@
             // chkActivado
             // 
             this.chkActivado.AutoSize = true;
-            this.chkActivado.Location = new System.Drawing.Point(23, 150);
+            this.chkActivado.Location = new System.Drawing.Point(23, 186);
             this.chkActivado.Name = "chkActivado";
             this.chkActivado.Size = new System.Drawing.Size(68, 17);
-            this.chkActivado.TabIndex = 4;
+            this.chkActivado.TabIndex = 5;
             this.chkActivado.Text = "Activado";
             this.chkActivado.UseVisualStyleBackColor = true;
             // 
             // btnLimpiar
             // 
             this.btnLimpiar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnLimpiar.Location = new System.Drawing.Point(485, 214);
+            this.btnLimpiar.Location = new System.Drawing.Point(485, 246);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpiar.TabIndex = 7;
+            this.btnLimpiar.TabIndex = 8;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
@@ -183,7 +205,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(11, 187);
+            this.label5.Location = new System.Drawing.Point(11, 223);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(202, 13);
             this.label5.TabIndex = 0;
@@ -192,10 +214,10 @@
             // rbOperador
             // 
             this.rbOperador.AutoSize = true;
-            this.rbOperador.Location = new System.Drawing.Point(142, 207);
+            this.rbOperador.Location = new System.Drawing.Point(142, 243);
             this.rbOperador.Name = "rbOperador";
             this.rbOperador.Size = new System.Drawing.Size(69, 17);
-            this.rbOperador.TabIndex = 6;
+            this.rbOperador.TabIndex = 7;
             this.rbOperador.TabStop = true;
             this.rbOperador.Text = "Operador";
             this.rbOperador.UseVisualStyleBackColor = true;
@@ -203,10 +225,10 @@
             // rbDespachador
             // 
             this.rbDespachador.AutoSize = true;
-            this.rbDespachador.Location = new System.Drawing.Point(28, 207);
+            this.rbDespachador.Location = new System.Drawing.Point(28, 243);
             this.rbDespachador.Name = "rbDespachador";
             this.rbDespachador.Size = new System.Drawing.Size(89, 17);
-            this.rbDespachador.TabIndex = 5;
+            this.rbDespachador.TabIndex = 6;
             this.rbDespachador.TabStop = true;
             this.rbDespachador.Text = "Despachador";
             this.rbDespachador.UseVisualStyleBackColor = true;
@@ -243,10 +265,10 @@
             this.btnModificar.Enabled = false;
             this.btnModificar.Image = ((System.Drawing.Image)(resources.GetObject("btnModificar.Image")));
             this.btnModificar.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnModificar.Location = new System.Drawing.Point(234, 499);
+            this.btnModificar.Location = new System.Drawing.Point(234, 527);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
-            this.btnModificar.TabIndex = 8;
+            this.btnModificar.TabIndex = 9;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             this.btnModificar.UseVisualStyleBackColor = true;
@@ -257,10 +279,10 @@
             this.btnEliminar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminar.Image")));
             this.btnEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEliminar.Location = new System.Drawing.Point(396, 500);
+            this.btnEliminar.Location = new System.Drawing.Point(396, 528);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
-            this.btnEliminar.TabIndex = 10;
+            this.btnEliminar.TabIndex = 11;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnEliminar.UseVisualStyleBackColor = true;
@@ -281,10 +303,10 @@
             // btnCancelar
             // 
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Location = new System.Drawing.Point(497, 499);
+            this.btnCancelar.Location = new System.Drawing.Point(497, 527);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 11;
+            this.btnCancelar.TabIndex = 12;
             this.btnCancelar.Text = "Cerrar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -295,7 +317,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(584, 548);
+            this.ClientSize = new System.Drawing.Size(584, 575);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.logoPicture);
             this.Controls.Add(this.btnEliminar);
@@ -347,5 +369,7 @@
         private System.Windows.Forms.CheckBox chkActivado;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.ComboBox ddlCorporaciones;
+        private System.Windows.Forms.Label label6;
     }
 }
