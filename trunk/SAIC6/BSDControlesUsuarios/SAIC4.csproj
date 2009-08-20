@@ -111,7 +111,6 @@
     <Compile Include="C4\Tlaxcala\Sai\Dal\ReglaUsuarios.cs" />
     <Compile Include="C4\Tlaxcala\Sai\Excepciones\SAIExcepcion.cs" />
     <Compile Include="C4\Tlaxcala\Sai\ID.cs" />
-    <Compile Include="C4\Tlaxcala\Sai\Interfaces\IReacciones.cs" />
     <Compile Include="C4\Tlaxcala\Sai\Mapa\CCapa.cs" />
     <Compile Include="C4\Tlaxcala\Sai\Mapa\CEnums.cs" />
     <Compile Include="C4\Tlaxcala\Sai\Mapa\CError.cs" />
