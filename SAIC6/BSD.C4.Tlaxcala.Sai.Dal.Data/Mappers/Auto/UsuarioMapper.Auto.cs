@@ -217,8 +217,11 @@ reader.GetString(1),
 
 
         // GetOne By Objects and Params
-            
 
+        public Usuario GetByUsuario(System.String usuario)
+        {
+            return base.GetObjectByAnyStoredProcedure(StoredProceduresPrefix() + "Usuario_GetByUsuario", usuario);
+        }
 
         
 
