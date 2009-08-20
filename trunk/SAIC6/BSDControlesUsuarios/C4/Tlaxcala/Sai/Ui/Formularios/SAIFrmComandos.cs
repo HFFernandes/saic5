@@ -165,8 +165,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_PH))
                         {
                             var buscadorDir = new SAIFrmBuscadorIncidencias();
-                            buscadorDir.CargarConsulta(string.Format("{0}\\{1}", Environment.CurrentDirectory,
-                                                                     "ConsultaPH.xml"));
+                            //if (Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
+                            //    buscadorDir.CargarConsulta(string.Format("{0}\\{1}", Environment.CurrentDirectory,
+                            //                                             "ConsultaPH.xml"));
                             MostrarEnSegundoMonitorSiEsPosible(buscadorDir);
                         }
                         break;
@@ -174,8 +175,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_RPH))
                         {
                             var buscadorTel = new SAIFrmBuscadorIncidencias();
-                            buscadorTel.CargarConsulta(string.Format("{0}\\{1}", Environment.CurrentDirectory,
-                                                                     "ConsultaRPH.xml"));
+                            //if (Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
+                            //    buscadorTel.CargarConsulta(string.Format("{0}\\{1}", Environment.CurrentDirectory,
+                            //                                             "ConsultaRPH.xml"));
                             MostrarEnSegundoMonitorSiEsPosible(buscadorTel);
                         }
                         break;
@@ -189,8 +191,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_SLC))
                         {
                             var buscadorLig = new SAIFrmBuscadorIncidencias();
-                            buscadorLig.CargarConsulta(string.Format("{0}\\{1}", Environment.CurrentDirectory,
-                                                                     "ConsultaSLC.xml"));
+                            //if (Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
+                            //    buscadorLig.CargarConsulta(string.Format("{0}\\{1}", Environment.CurrentDirectory,
+                            //                                             "ConsultaSLC.xml"));
                             MostrarEnSegundoMonitorSiEsPosible(buscadorLig);
                         }
                         break;

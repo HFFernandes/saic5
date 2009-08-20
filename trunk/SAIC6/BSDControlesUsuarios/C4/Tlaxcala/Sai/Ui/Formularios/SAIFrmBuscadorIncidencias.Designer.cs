@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SAIFrmBuscadorIncidencias));
             this.ContenedorSplit = new System.Windows.Forms.SplitContainer();
             this.QueryColumnas = new Korzh.EasyQuery.WinControls.QueryColumnsPanel();
             this.QueryCondiciones = new Korzh.EasyQuery.WinControls.QueryPanel();
@@ -37,6 +38,8 @@
             this.GridResultados = new System.Windows.Forms.DataGrid();
             this.ResultadoDataTable = new System.Data.DataTable();
             this.ResultadoDS = new System.Data.DataSet();
+            this.barComandos = new System.Windows.Forms.ToolStrip();
+            this.btnActualizar = new System.Windows.Forms.ToolStripButton();
             this.ContenedorSplit.Panel1.SuspendLayout();
             this.ContenedorSplit.Panel2.SuspendLayout();
             this.ContenedorSplit.SuspendLayout();
@@ -44,12 +47,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.GridResultados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultadoDataTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultadoDS)).BeginInit();
+            this.barComandos.SuspendLayout();
             this.SuspendLayout();
             // 
             // ContenedorSplit
             // 
-            this.ContenedorSplit.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ContenedorSplit.Location = new System.Drawing.Point(0, 0);
+            this.ContenedorSplit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ContenedorSplit.Location = new System.Drawing.Point(3, 28);
             this.ContenedorSplit.Name = "ContenedorSplit";
             this.ContenedorSplit.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -60,8 +66,8 @@
             // ContenedorSplit.Panel2
             // 
             this.ContenedorSplit.Panel2.Controls.Add(this.QueryCondiciones);
-            this.ContenedorSplit.Size = new System.Drawing.Size(911, 251);
-            this.ContenedorSplit.SplitterDistance = 153;
+            this.ContenedorSplit.Size = new System.Drawing.Size(920, 277);
+            this.ContenedorSplit.SplitterDistance = 168;
             this.ContenedorSplit.TabIndex = 3;
             // 
             // QueryColumnas
@@ -99,7 +105,7 @@
             this.QueryColumnas.Model = null;
             this.QueryColumnas.Name = "QueryColumnas";
             this.QueryColumnas.Query = null;
-            this.QueryColumnas.Size = new System.Drawing.Size(911, 153);
+            this.QueryColumnas.Size = new System.Drawing.Size(920, 168);
             this.QueryColumnas.TabIndex = 0;
             this.QueryColumnas.TabStop = true;
             // 
@@ -137,7 +143,7 @@
             this.QueryCondiciones.Model = null;
             this.QueryCondiciones.Name = "QueryCondiciones";
             this.QueryCondiciones.Query = null;
-            this.QueryCondiciones.Size = new System.Drawing.Size(911, 94);
+            this.QueryCondiciones.Size = new System.Drawing.Size(920, 105);
             this.QueryCondiciones.TabIndex = 0;
             this.QueryCondiciones.TabStop = true;
             // 
@@ -164,11 +170,13 @@
             // 
             // ContenedorResultados
             // 
+            this.ContenedorResultados.Controls.Add(this.barComandos);
             this.ContenedorResultados.Controls.Add(this.GridResultados);
+            this.ContenedorResultados.Controls.Add(this.ContenedorSplit);
             this.ContenedorResultados.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ContenedorResultados.Location = new System.Drawing.Point(0, 251);
+            this.ContenedorResultados.Location = new System.Drawing.Point(0, 0);
             this.ContenedorResultados.Name = "ContenedorResultados";
-            this.ContenedorResultados.Size = new System.Drawing.Size(911, 203);
+            this.ContenedorResultados.Size = new System.Drawing.Size(926, 471);
             this.ContenedorResultados.TabIndex = 4;
             // 
             // GridResultados
@@ -176,12 +184,12 @@
             this.GridResultados.CaptionText = "Resultados";
             this.GridResultados.DataMember = "";
             this.GridResultados.DataSource = this.ResultadoDataTable;
-            this.GridResultados.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.GridResultados.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.GridResultados.HeaderForeColor = System.Drawing.SystemColors.ControlText;
-            this.GridResultados.Location = new System.Drawing.Point(0, 0);
+            this.GridResultados.Location = new System.Drawing.Point(0, 306);
             this.GridResultados.Name = "GridResultados";
             this.GridResultados.ReadOnly = true;
-            this.GridResultados.Size = new System.Drawing.Size(911, 203);
+            this.GridResultados.Size = new System.Drawing.Size(926, 165);
             this.GridResultados.TabIndex = 2;
             this.GridResultados.DoubleClick += new System.EventHandler(this.GridResultados_DoubleClick);
             // 
@@ -195,24 +203,47 @@
             this.ResultadoDS.Tables.AddRange(new System.Data.DataTable[] {
             this.ResultadoDataTable});
             // 
+            // barComandos
+            // 
+            this.barComandos.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.barComandos.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnActualizar});
+            this.barComandos.Location = new System.Drawing.Point(0, 0);
+            this.barComandos.Name = "barComandos";
+            this.barComandos.Size = new System.Drawing.Size(926, 25);
+            this.barComandos.TabIndex = 4;
+            // 
+            // btnActualizar
+            // 
+            this.btnActualizar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnActualizar.Image = ((System.Drawing.Image)(resources.GetObject("btnActualizar.Image")));
+            this.btnActualizar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(23, 22);
+            this.btnActualizar.Text = "Actualizar";
+            this.btnActualizar.ToolTipText = "Actualizar Consulta";
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
+            // 
             // SAIFrmBuscadorIncidencias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(911, 476);
+            this.ClientSize = new System.Drawing.Size(926, 493);
             this.Controls.Add(this.ContenedorResultados);
-            this.Controls.Add(this.ContenedorSplit);
+            this.MinimumSize = new System.Drawing.Size(934, 527);
             this.Name = "SAIFrmBuscadorIncidencias";
             this.Text = "SAI - Buscador de Incidencias";
             this.Load += new System.EventHandler(this.SAIFrmBuscadorIncidencias_Load);
-            this.Controls.SetChildIndex(this.ContenedorSplit, 0);
             this.Controls.SetChildIndex(this.ContenedorResultados, 0);
             this.ContenedorSplit.Panel1.ResumeLayout(false);
             this.ContenedorSplit.Panel2.ResumeLayout(false);
             this.ContenedorSplit.ResumeLayout(false);
             this.ContenedorResultados.ResumeLayout(false);
+            this.ContenedorResultados.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridResultados)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultadoDataTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultadoDS)).EndInit();
+            this.barComandos.ResumeLayout(false);
+            this.barComandos.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -229,5 +260,7 @@
         private System.Data.DataSet ResultadoDS;
         private System.Data.DataTable ResultadoDataTable;
         private System.Windows.Forms.DataGrid GridResultados;
+        private System.Windows.Forms.ToolStrip barComandos;
+        private System.Windows.Forms.ToolStripButton btnActualizar;
     }
 }
