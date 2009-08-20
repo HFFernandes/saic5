@@ -1,0 +1,18 @@
+!table
+!version 450
+!charset WindowsLatin1
+
+Definition Table
+  Type NATIVE Charset "WindowsLatin1"
+  Fields 11
+    ID_EDO Integer Index 1 ;
+    ESTADO Char (10) Index 2 ;
+    ID_MPIO Integer Index 3 ;
+    MUNICIPIO Char (40) Index 4 ;
+    LOCALIDAD Char (45) Index 5 ;
+    ID_LOCALIDAD Integer Index 6 ;
+    CONS_LOC Integer Index 7 ;
+    CP Integer Index 8 ;
+    CONS_CP Integer Index 9 ;
+    NOMBRE Char (120) Index 10 ;
+    ID Integer Index 11 ;
