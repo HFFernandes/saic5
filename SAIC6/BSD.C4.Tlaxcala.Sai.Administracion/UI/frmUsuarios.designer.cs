@@ -32,14 +32,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUsuarios));
             this.txtUsuario = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.txtNombrePropio = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
-            this.txtContrasena = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBoxMascara(this.components);
             this.btnAgregar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.gpbDatosUsuario = new System.Windows.Forms.GroupBox();
             this.ddlCorporaciones = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lblCorporacion = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.chkActivado = new System.Windows.Forms.CheckBox();
             this.btnLimpiar = new System.Windows.Forms.Button();
@@ -52,6 +51,9 @@
             this.btnEliminar = new System.Windows.Forms.Button();
             this.logoPicture = new System.Windows.Forms.PictureBox();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.tltUsuarios = new System.Windows.Forms.ToolTip(this.components);
+            this.saiTxtContrasena = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
+            this.lblUserExist = new System.Windows.Forms.Label();
             this.gpbDatosUsuario.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvUsuarios)).BeginInit();
@@ -63,10 +65,12 @@
             this.txtUsuario.BlnEsRequerido = true;
             this.txtUsuario.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtUsuario.Location = new System.Drawing.Point(108, 49);
+            this.txtUsuario.MaxLength = 10;
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(182, 20);
             this.txtUsuario.StrMensajeCampoRequerido = "El campo es requerido.";
             this.txtUsuario.TabIndex = 2;
+            this.txtUsuario.TextChanged += new System.EventHandler(this.txtUsuario_TextChanged);
             // 
             // txtNombrePropio
             // 
@@ -77,17 +81,6 @@
             this.txtNombrePropio.Size = new System.Drawing.Size(231, 20);
             this.txtNombrePropio.StrMensajeCampoRequerido = "El campo es requerido.";
             this.txtNombrePropio.TabIndex = 1;
-            // 
-            // txtContrasena
-            // 
-            this.txtContrasena.BlnEsRequerido = true;
-            this.txtContrasena.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.txtContrasena.Location = new System.Drawing.Point(108, 78);
-            this.txtContrasena.Name = "txtContrasena";
-            this.txtContrasena.PasswordChar = '*';
-            this.txtContrasena.Size = new System.Drawing.Size(182, 20);
-            this.txtContrasena.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtContrasena.TabIndex = 3;
             // 
             // btnAgregar
             // 
@@ -132,8 +125,10 @@
             // 
             // gpbDatosUsuario
             // 
+            this.gpbDatosUsuario.Controls.Add(this.lblUserExist);
+            this.gpbDatosUsuario.Controls.Add(this.saiTxtContrasena);
             this.gpbDatosUsuario.Controls.Add(this.ddlCorporaciones);
-            this.gpbDatosUsuario.Controls.Add(this.label6);
+            this.gpbDatosUsuario.Controls.Add(this.lblCorporacion);
             this.gpbDatosUsuario.Controls.Add(this.label4);
             this.gpbDatosUsuario.Controls.Add(this.chkActivado);
             this.gpbDatosUsuario.Controls.Add(this.btnLimpiar);
@@ -145,10 +140,9 @@
             this.gpbDatosUsuario.Controls.Add(this.txtUsuario);
             this.gpbDatosUsuario.Controls.Add(this.txtNombrePropio);
             this.gpbDatosUsuario.Controls.Add(this.label3);
-            this.gpbDatosUsuario.Controls.Add(this.txtContrasena);
             this.gpbDatosUsuario.Location = new System.Drawing.Point(6, 230);
             this.gpbDatosUsuario.Name = "gpbDatosUsuario";
-            this.gpbDatosUsuario.Size = new System.Drawing.Size(566, 275);
+            this.gpbDatosUsuario.Size = new System.Drawing.Size(566, 263);
             this.gpbDatosUsuario.TabIndex = 0;
             this.gpbDatosUsuario.TabStop = false;
             this.gpbDatosUsuario.Text = "Datos Generales";
@@ -157,24 +151,26 @@
             // 
             this.ddlCorporaciones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlCorporaciones.FormattingEnabled = true;
-            this.ddlCorporaciones.Location = new System.Drawing.Point(108, 109);
+            this.ddlCorporaciones.Location = new System.Drawing.Point(320, 139);
             this.ddlCorporaciones.Name = "ddlCorporaciones";
             this.ddlCorporaciones.Size = new System.Drawing.Size(182, 21);
             this.ddlCorporaciones.TabIndex = 4;
+            this.ddlCorporaciones.Visible = false;
             // 
-            // label6
+            // lblCorporacion
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(11, 112);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(67, 13);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "Corporacion:";
+            this.lblCorporacion.AutoSize = true;
+            this.lblCorporacion.Location = new System.Drawing.Point(247, 142);
+            this.lblCorporacion.Name = "lblCorporacion";
+            this.lblCorporacion.Size = new System.Drawing.Size(67, 13);
+            this.lblCorporacion.TabIndex = 8;
+            this.lblCorporacion.Text = "Corporacion:";
+            this.lblCorporacion.Visible = false;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(11, 160);
+            this.label4.Location = new System.Drawing.Point(11, 180);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(398, 13);
             this.label4.TabIndex = 0;
@@ -184,7 +180,7 @@
             // chkActivado
             // 
             this.chkActivado.AutoSize = true;
-            this.chkActivado.Location = new System.Drawing.Point(23, 186);
+            this.chkActivado.Location = new System.Drawing.Point(14, 206);
             this.chkActivado.Name = "chkActivado";
             this.chkActivado.Size = new System.Drawing.Size(68, 17);
             this.chkActivado.TabIndex = 5;
@@ -194,7 +190,7 @@
             // btnLimpiar
             // 
             this.btnLimpiar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnLimpiar.Location = new System.Drawing.Point(485, 246);
+            this.btnLimpiar.Location = new System.Drawing.Point(485, 231);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
             this.btnLimpiar.TabIndex = 8;
@@ -205,7 +201,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(11, 223);
+            this.label5.Location = new System.Drawing.Point(15, 120);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(202, 13);
             this.label5.TabIndex = 0;
@@ -214,7 +210,7 @@
             // rbOperador
             // 
             this.rbOperador.AutoSize = true;
-            this.rbOperador.Location = new System.Drawing.Point(142, 243);
+            this.rbOperador.Location = new System.Drawing.Point(109, 140);
             this.rbOperador.Name = "rbOperador";
             this.rbOperador.Size = new System.Drawing.Size(69, 17);
             this.rbOperador.TabIndex = 7;
@@ -225,13 +221,14 @@
             // rbDespachador
             // 
             this.rbDespachador.AutoSize = true;
-            this.rbDespachador.Location = new System.Drawing.Point(28, 243);
+            this.rbDespachador.Location = new System.Drawing.Point(14, 140);
             this.rbDespachador.Name = "rbDespachador";
             this.rbDespachador.Size = new System.Drawing.Size(89, 17);
             this.rbDespachador.TabIndex = 6;
             this.rbDespachador.TabStop = true;
             this.rbDespachador.Text = "Despachador";
             this.rbDespachador.UseVisualStyleBackColor = true;
+            this.rbDespachador.CheckedChanged += new System.EventHandler(this.rbDespachador_CheckedChanged);
             // 
             // groupBox2
             // 
@@ -311,6 +308,32 @@
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
+            // tltUsuarios
+            // 
+            this.tltUsuarios.Tag = "";
+            this.tltUsuarios.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.tltUsuarios.ToolTipTitle = "SAI";
+            // 
+            // saiTxtContrasena
+            // 
+            this.saiTxtContrasena.BlnEsRequerido = true;
+            this.saiTxtContrasena.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.saiTxtContrasena.Location = new System.Drawing.Point(108, 82);
+            this.saiTxtContrasena.MaxLength = 10;
+            this.saiTxtContrasena.Name = "saiTxtContrasena";
+            this.saiTxtContrasena.PasswordChar = '*';
+            this.saiTxtContrasena.Size = new System.Drawing.Size(182, 20);
+            this.saiTxtContrasena.StrMensajeCampoRequerido = "El campo es requerido.";
+            this.saiTxtContrasena.TabIndex = 9;
+            // 
+            // lblUserExist
+            // 
+            this.lblUserExist.AutoSize = true;
+            this.lblUserExist.Location = new System.Drawing.Point(317, 52);
+            this.lblUserExist.Name = "lblUserExist";
+            this.lblUserExist.Size = new System.Drawing.Size(0, 13);
+            this.lblUserExist.TabIndex = 10;
+            // 
             // frmUsuarios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -351,7 +374,6 @@
 
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox txtUsuario;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox txtNombrePropio;
-        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBoxMascara txtContrasena;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -370,6 +392,9 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.ComboBox ddlCorporaciones;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblCorporacion;
+        private System.Windows.Forms.ToolTip tltUsuarios;
+        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox saiTxtContrasena;
+        private System.Windows.Forms.Label lblUserExist;
     }
 }
