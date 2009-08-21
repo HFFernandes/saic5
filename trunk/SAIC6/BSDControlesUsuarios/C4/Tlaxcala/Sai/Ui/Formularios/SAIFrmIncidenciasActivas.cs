@@ -368,8 +368,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 catch (Exception ex)
                 {
                     tmrRegistros.Enabled = false;
-                    throw new SAIExcepcion(
-                        "Ocurrio un error al tratar de obtener los registros. Solicite al administrador revisar los catálogos.");
+                    throw new SAIExcepcion(ID.STR_ERROROBTENERREGISTROS);
                 }
             }
             catch (SAIExcepcion)

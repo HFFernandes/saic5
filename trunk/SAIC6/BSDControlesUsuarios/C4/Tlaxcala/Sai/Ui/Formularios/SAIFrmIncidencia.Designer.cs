@@ -142,7 +142,7 @@
             this.label1.Location = new System.Drawing.Point(1, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(79, 13);
-            this.label1.TabIndex = 1;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Fecha/Hora:";
             // 
             // lblFechaHora
@@ -152,7 +152,7 @@
             this.lblFechaHora.Location = new System.Drawing.Point(85, 10);
             this.lblFechaHora.Name = "lblFechaHora";
             this.lblFechaHora.Size = new System.Drawing.Size(0, 13);
-            this.lblFechaHora.TabIndex = 2;
+            this.lblFechaHora.TabIndex = 1;
             // 
             // label2
             // 
@@ -161,7 +161,7 @@
             this.label2.Location = new System.Drawing.Point(290, 10);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 13);
-            this.label2.TabIndex = 3;
+            this.label2.TabIndex = 2;
             this.label2.Text = "Operador:";
             // 
             // groupBox1
@@ -183,7 +183,7 @@
             this.lblOperador.Location = new System.Drawing.Point(360, 10);
             this.lblOperador.Name = "lblOperador";
             this.lblOperador.Size = new System.Drawing.Size(0, 13);
-            this.lblOperador.TabIndex = 4;
+            this.lblOperador.TabIndex = 3;
             // 
             // lblTitulo
             // 
@@ -202,7 +202,7 @@
             this.lblTelefono.Location = new System.Drawing.Point(6, 82);
             this.lblTelefono.Name = "lblTelefono";
             this.lblTelefono.Size = new System.Drawing.Size(52, 13);
-            this.lblTelefono.TabIndex = 5;
+            this.lblTelefono.TabIndex = 1;
             this.lblTelefono.Text = "Teléfono:";
             // 
             // txtTelefono
@@ -213,7 +213,7 @@
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(203, 20);
             this.txtTelefono.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtTelefono.TabIndex = 6;
+            this.txtTelefono.TabIndex = 2;
             this.txtTelefono.Leave += new System.EventHandler(this.txtTelefono_Leave);
             this.txtTelefono.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtTelefono_KeyUp);
             this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefono_KeyPress);
@@ -224,7 +224,7 @@
             this.lblTipoIncidencia.Location = new System.Drawing.Point(275, 82);
             this.lblTipoIncidencia.Name = "lblTipoIncidencia";
             this.lblTipoIncidencia.Size = new System.Drawing.Size(98, 13);
-            this.lblTipoIncidencia.TabIndex = 7;
+            this.lblTipoIncidencia.TabIndex = 3;
             this.lblTipoIncidencia.Text = "Tipo de Incidencia:";
             // 
             // label5
@@ -233,7 +233,7 @@
             this.label5.Location = new System.Drawing.Point(6, 108);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(55, 13);
-            this.label5.TabIndex = 9;
+            this.label5.TabIndex = 5;
             this.label5.Text = "Dirección:";
             // 
             // txtDireccion
@@ -243,7 +243,7 @@
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(517, 20);
             this.txtDireccion.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtDireccion.TabIndex = 10;
+            this.txtDireccion.TabIndex = 6;
             this.txtDireccion.Leave += new System.EventHandler(this.txtDireccion_Leave);
             this.txtDireccion.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDireccion_KeyUp);
             // 
@@ -253,7 +253,7 @@
             this.label6.Location = new System.Drawing.Point(6, 140);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(55, 13);
-            this.label6.TabIndex = 11;
+            this.label6.TabIndex = 7;
             this.label6.Text = "Municipio:";
             // 
             // label7
@@ -262,7 +262,7 @@
             this.label7.Location = new System.Drawing.Point(315, 138);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(56, 13);
-            this.label7.TabIndex = 13;
+            this.label7.TabIndex = 9;
             this.label7.Text = "Localidad:";
             // 
             // label8
@@ -271,7 +271,7 @@
             this.label8.Location = new System.Drawing.Point(29, 160);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(30, 13);
-            this.label8.TabIndex = 15;
+            this.label8.TabIndex = 11;
             this.label8.Text = "C.P.:";
             // 
             // label9
@@ -280,7 +280,7 @@
             this.label9.Location = new System.Drawing.Point(326, 162);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(47, 13);
-            this.label9.TabIndex = 17;
+            this.label9.TabIndex = 13;
             this.label9.Text = "Clolonia:";
             // 
             // lblDescripcionIncidencia
@@ -289,7 +289,7 @@
             this.lblDescripcionIncidencia.Location = new System.Drawing.Point(6, 271);
             this.lblDescripcionIncidencia.Name = "lblDescripcionIncidencia";
             this.lblDescripcionIncidencia.Size = new System.Drawing.Size(85, 26);
-            this.lblDescripcionIncidencia.TabIndex = 22;
+            this.lblDescripcionIncidencia.TabIndex = 17;
             this.lblDescripcionIncidencia.Text = "  Descripción \r\nde la Incidencia:";
             // 
             // txtDescripcion
@@ -301,7 +301,7 @@
             this.txtDescripcion.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtDescripcion.Size = new System.Drawing.Size(488, 90);
             this.txtDescripcion.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtDescripcion.TabIndex = 21;
+            this.txtDescripcion.TabIndex = 18;
             this.txtDescripcion.Leave += new System.EventHandler(this.txtDescripcion_Leave);
             this.txtDescripcion.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDescripcion_KeyUp);
             // 
@@ -316,7 +316,7 @@
             this.cmbTipoIncidencia.Name = "cmbTipoIncidencia";
             this.cmbTipoIncidencia.Size = new System.Drawing.Size(205, 21);
             this.cmbTipoIncidencia.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.cmbTipoIncidencia.TabIndex = 8;
+            this.cmbTipoIncidencia.TabIndex = 4;
             this.cmbTipoIncidencia.SelectedIndexChanged += new System.EventHandler(this.cmbTipoIncidencia_SelectedIndexChanged);
             this.cmbTipoIncidencia.Leave += new System.EventHandler(this.cmbTipoIncidencia_Leave);
             this.cmbTipoIncidencia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbTipoIncidencia_KeyUp);
@@ -331,7 +331,7 @@
             this.cmbLocalidad.Name = "cmbLocalidad";
             this.cmbLocalidad.Size = new System.Drawing.Size(205, 21);
             this.cmbLocalidad.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.cmbLocalidad.TabIndex = 14;
+            this.cmbLocalidad.TabIndex = 10;
             this.cmbLocalidad.SelectedIndexChanged += new System.EventHandler(this.cmbLocalidad_SelectedIndexChanged);
             this.cmbLocalidad.Leave += new System.EventHandler(this.cmbLocalidad_Leave);
             this.cmbLocalidad.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbLocalidad_KeyUp);
@@ -347,7 +347,7 @@
             this.cmbMunicipio.Name = "cmbMunicipio";
             this.cmbMunicipio.Size = new System.Drawing.Size(205, 21);
             this.cmbMunicipio.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.cmbMunicipio.TabIndex = 12;
+            this.cmbMunicipio.TabIndex = 8;
             this.cmbMunicipio.SelectedIndexChanged += new System.EventHandler(this.cmbMunicipio_SelectedIndexChanged);
             this.cmbMunicipio.CambiaMapa += new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox.DelegadoCambiaMapa(this.cmbMunicipio_CambiaMapa);
             // 
@@ -362,7 +362,7 @@
             this.cmbCP.Name = "cmbCP";
             this.cmbCP.Size = new System.Drawing.Size(205, 21);
             this.cmbCP.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.cmbCP.TabIndex = 16;
+            this.cmbCP.TabIndex = 12;
             this.cmbCP.SelectedIndexChanged += new System.EventHandler(this.cmbCP_SelectedIndexChanged);
             this.cmbCP.Leave += new System.EventHandler(this.cmbCP_Leave);
             this.cmbCP.Enter += new System.EventHandler(this.cmbCP_Enter);
@@ -381,7 +381,7 @@
             this.cmbColonia.Name = "cmbColonia";
             this.cmbColonia.Size = new System.Drawing.Size(205, 21);
             this.cmbColonia.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.cmbColonia.TabIndex = 18;
+            this.cmbColonia.TabIndex = 14;
             this.cmbColonia.SelectedIndexChanged += new System.EventHandler(this.cmbColonia_SelectedIndexChanged);
             this.cmbColonia.Leave += new System.EventHandler(this.cmbColonia_Leave);
             this.cmbColonia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbColonia_KeyUp);
@@ -393,7 +393,7 @@
             this.grpExtravio.Location = new System.Drawing.Point(638, 88);
             this.grpExtravio.Name = "grpExtravio";
             this.grpExtravio.Size = new System.Drawing.Size(572, 224);
-            this.grpExtravio.TabIndex = 22;
+            this.grpExtravio.TabIndex = 19;
             this.grpExtravio.TabStop = false;
             this.grpExtravio.Text = "Extravío de Persona";
             this.grpExtravio.Visible = false;
@@ -578,7 +578,7 @@
             this.grpRoboAccesorios.Location = new System.Drawing.Point(635, 536);
             this.grpRoboAccesorios.Name = "grpRoboAccesorios";
             this.grpRoboAccesorios.Size = new System.Drawing.Size(572, 224);
-            this.grpRoboAccesorios.TabIndex = 1;
+            this.grpRoboAccesorios.TabIndex = 21;
             this.grpRoboAccesorios.TabStop = false;
             this.grpRoboAccesorios.Text = "Robo Accesorios de Vehículo";
             this.grpRoboAccesorios.Visible = false;
@@ -591,7 +591,7 @@
             this.txtAccesoriosResponsables.Name = "txtAccesoriosResponsables";
             this.txtAccesoriosResponsables.Size = new System.Drawing.Size(404, 20);
             this.txtAccesoriosResponsables.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtAccesoriosResponsables.TabIndex = 12;
+            this.txtAccesoriosResponsables.TabIndex = 11;
             this.txtAccesoriosResponsables.Leave += new System.EventHandler(this.txtAccesoriosResponsables_Leave);
             this.txtAccesoriosResponsables.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtAccesoriosResponsables_KeyUp);
             // 
@@ -617,7 +617,7 @@
             this.dtpAccesoriosFechaPercato.Name = "dtpAccesoriosFechaPercato";
             this.dtpAccesoriosFechaPercato.Size = new System.Drawing.Size(115, 20);
             this.dtpAccesoriosFechaPercato.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.dtpAccesoriosFechaPercato.TabIndex = 10;
+            this.dtpAccesoriosFechaPercato.TabIndex = 9;
             this.dtpAccesoriosFechaPercato.Leave += new System.EventHandler(this.dtpAccesoriosFechaPercato_Leave);
             this.dtpAccesoriosFechaPercato.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dtpAccesoriosFechaPercato_KeyUp);
             // 
@@ -629,7 +629,7 @@
             this.txtAccesoriosPersonaSePercato.Name = "txtAccesoriosPersonaSePercato";
             this.txtAccesoriosPersonaSePercato.Size = new System.Drawing.Size(205, 20);
             this.txtAccesoriosPersonaSePercato.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtAccesoriosPersonaSePercato.TabIndex = 8;
+            this.txtAccesoriosPersonaSePercato.TabIndex = 7;
             this.txtAccesoriosPersonaSePercato.Leave += new System.EventHandler(this.txtAccesoriosPersonaSePercato_Leave);
             this.txtAccesoriosPersonaSePercato.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtAccesoriosPersonaSePercato_KeyUp);
             // 
@@ -641,7 +641,7 @@
             this.txtAccesoriosRobados.Name = "txtAccesoriosRobados";
             this.txtAccesoriosRobados.Size = new System.Drawing.Size(154, 20);
             this.txtAccesoriosRobados.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtAccesoriosRobados.TabIndex = 6;
+            this.txtAccesoriosRobados.TabIndex = 5;
             this.txtAccesoriosRobados.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtAccesoriosRobados_KeyUp);
             // 
             // txtAccesoriosSerie
@@ -652,7 +652,7 @@
             this.txtAccesoriosSerie.Name = "txtAccesoriosSerie";
             this.txtAccesoriosSerie.Size = new System.Drawing.Size(64, 20);
             this.txtAccesoriosSerie.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtAccesoriosSerie.TabIndex = 4;
+            this.txtAccesoriosSerie.TabIndex = 3;
             this.txtAccesoriosSerie.Leave += new System.EventHandler(this.txtAccesoriosSerie_Leave);
             this.txtAccesoriosSerie.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtAccesoriosSerie_KeyUp);
             // 
@@ -664,7 +664,7 @@
             this.txtAccesoriosPlacas.Name = "txtAccesoriosPlacas";
             this.txtAccesoriosPlacas.Size = new System.Drawing.Size(100, 20);
             this.txtAccesoriosPlacas.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtAccesoriosPlacas.TabIndex = 2;
+            this.txtAccesoriosPlacas.TabIndex = 1;
             this.txtAccesoriosPlacas.Leave += new System.EventHandler(this.txtAccesoriosPlacas_Leave);
             this.txtAccesoriosPlacas.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtAccesoriosPlacas_KeyUp);
             // 
@@ -674,7 +674,7 @@
             this.label20.Location = new System.Drawing.Point(4, 80);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(151, 13);
-            this.label20.TabIndex = 17;
+            this.label20.TabIndex = 10;
             this.label20.Text = "Descripción de Responsables:";
             // 
             // label16
@@ -683,7 +683,7 @@
             this.label16.Location = new System.Drawing.Point(299, 45);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(76, 26);
-            this.label16.TabIndex = 9;
+            this.label16.TabIndex = 8;
             this.label16.Text = "Fecha en que \r\nse percató:";
             // 
             // label15
@@ -692,7 +692,7 @@
             this.label15.Location = new System.Drawing.Point(8, 45);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(67, 26);
-            this.label15.TabIndex = 7;
+            this.label15.TabIndex = 6;
             this.label15.Text = "Persona que\r\n se percató:";
             // 
             // label14
@@ -701,7 +701,7 @@
             this.label14.Location = new System.Drawing.Point(298, 19);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(108, 13);
-            this.label14.TabIndex = 5;
+            this.label14.TabIndex = 4;
             this.label14.Text = "Accesorios Robados:";
             // 
             // label19
@@ -710,7 +710,7 @@
             this.label19.Location = new System.Drawing.Point(152, 19);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(69, 13);
-            this.label19.TabIndex = 3;
+            this.label19.TabIndex = 2;
             this.label19.Text = "No. de Serie:";
             // 
             // label18
@@ -728,7 +728,7 @@
             this.label17.Location = new System.Drawing.Point(9, 19);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(42, 13);
-            this.label17.TabIndex = 1;
+            this.label17.TabIndex = 0;
             this.label17.Text = "Placas:";
             // 
             // dgvVehiculoAccesorios
@@ -820,7 +820,7 @@
             this.grpRoboVehiculo.Location = new System.Drawing.Point(635, 306);
             this.grpRoboVehiculo.Name = "grpRoboVehiculo";
             this.grpRoboVehiculo.Size = new System.Drawing.Size(572, 224);
-            this.grpRoboVehiculo.TabIndex = 24;
+            this.grpRoboVehiculo.TabIndex = 20;
             this.grpRoboVehiculo.TabStop = false;
             this.grpRoboVehiculo.Text = "Robo de Vehículo";
             this.grpRoboVehiculo.Visible = false;
@@ -831,7 +831,7 @@
             this.label11.Location = new System.Drawing.Point(9, 19);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(117, 13);
-            this.label11.TabIndex = 1;
+            this.label11.TabIndex = 0;
             this.label11.Text = "Nombre del Propietario:";
             // 
             // txtTelefonoPropietario
@@ -852,7 +852,7 @@
             this.label13.Location = new System.Drawing.Point(323, 19);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(52, 13);
-            this.label13.TabIndex = 3;
+            this.label13.TabIndex = 2;
             this.label13.Text = "Teléfono:";
             // 
             // txtDireccionPropietario
@@ -863,7 +863,7 @@
             this.txtDireccionPropietario.Name = "txtDireccionPropietario";
             this.txtDireccionPropietario.Size = new System.Drawing.Size(436, 20);
             this.txtDireccionPropietario.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtDireccionPropietario.TabIndex = 6;
+            this.txtDireccionPropietario.TabIndex = 4;
             this.txtDireccionPropietario.Leave += new System.EventHandler(this.txtDireccionPropietario_Leave);
             // 
             // label12
@@ -872,7 +872,7 @@
             this.label12.Location = new System.Drawing.Point(6, 52);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(125, 13);
-            this.label12.TabIndex = 5;
+            this.label12.TabIndex = 3;
             this.label12.Text = "Dirección del Propietario:";
             // 
             // txtNombrePropietario
@@ -883,7 +883,7 @@
             this.txtNombrePropietario.Name = "txtNombrePropietario";
             this.txtNombrePropietario.Size = new System.Drawing.Size(187, 20);
             this.txtNombrePropietario.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtNombrePropietario.TabIndex = 2;
+            this.txtNombrePropietario.TabIndex = 1;
             this.txtNombrePropietario.Leave += new System.EventHandler(this.txtNombrePropietario_Leave);
             this.txtNombrePropietario.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtNombrePropietario_KeyUp);
             // 
@@ -922,7 +922,7 @@
             this.dgvVehiculo.Name = "dgvVehiculo";
             this.dgvVehiculo.RowHeadersVisible = false;
             this.dgvVehiculo.Size = new System.Drawing.Size(566, 119);
-            this.dgvVehiculo.TabIndex = 7;
+            this.dgvVehiculo.TabIndex = 5;
             this.dgvVehiculo.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVehiculo_CellValidated);
             this.dgvVehiculo.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvVehiculo_CellValidating);
             // 
@@ -981,7 +981,7 @@
             this.txtReferencias.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtReferencias.Size = new System.Drawing.Size(488, 85);
             this.txtReferencias.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtReferencias.TabIndex = 20;
+            this.txtReferencias.TabIndex = 16;
             this.txtReferencias.Leave += new System.EventHandler(this.txtReferencias_Leave);
             this.txtReferencias.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtReferencias_KeyUp);
             // 
@@ -991,7 +991,7 @@
             this.label10.Location = new System.Drawing.Point(6, 184);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(73, 13);
-            this.label10.TabIndex = 19;
+            this.label10.TabIndex = 15;
             this.label10.Text = "  Referencias:";
             // 
             // pictureBox1
@@ -1011,7 +1011,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1284, 778);
+            this.ClientSize = new System.Drawing.Size(1028, 746);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label10);

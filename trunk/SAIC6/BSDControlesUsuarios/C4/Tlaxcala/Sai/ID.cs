@@ -134,6 +134,7 @@
         public const string STR_ESTATUSLLEGADA = "Llegada";
         public const string STR_ESTATUSDESPACHADA = "Despachada";
         public const string STR_SINPRIVILEGIOS = "No cuenta con los privilegios suficientes para realizar esta acción.";
+        public const string STR_ERROROBTENERREGISTROS = "Ocurrio un error al tratar de obtener los registros. Solicite al administrador revisar los catálogos.";
 
         #endregion
 
@@ -146,5 +147,7 @@
         public static readonly uint COLOR_AZURE = (uint)Aplicacion.HexadecimalADecimal("F0FFFF");
 
         #endregion
+
+
     }
 }
