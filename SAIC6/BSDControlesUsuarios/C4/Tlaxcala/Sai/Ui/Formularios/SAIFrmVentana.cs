@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using BSD.C4.Tlaxcala.Sai.Ui.Controles;
 
@@ -16,7 +12,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             InitializeComponent(Elementos, Owner);
             this.winSwitch1.onClose += winSwitch1_onClose;
         }
-        
+
         private void winSwitch1_onClose()
         {
             this.Close();
@@ -24,7 +20,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         protected override void OnGotFocus(EventArgs e)
         {
-           this.winSwitch1.Focus();
+            this.winSwitch1.Focus();
         }
     }
 }

@@ -1,22 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-
-using System.Text;
 using System.Windows.Forms;
 using ActualMap;
-using ActualMap.Windows;   
+using ActualMap.Windows;
 using BSD.C4.Tlaxcala.Sai.Mapa;
-using CPw;   
-
+using CPw;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
-
 {
-
-   
 
     public partial class SAIFrmMapa : Form
     {
@@ -27,7 +19,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         public SAIFrmMapa(string XMLconf, string path)
         {
             InitializeComponent();
-            this.Size=new System.Drawing.Size(640,480);
+            this.Size = new System.Drawing.Size(640, 480);
             this.XMLconf = XMLconf;
             this.path = path;
         }
@@ -40,11 +32,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         }
 
         private void CMapa_Load(object sender, EventArgs e)
-        {            
+        {
             AgregarCapas();
             mapa.ZoomFull();
             mapa.Refresh();
-        }       
+        }
 
         private void AgregarCapas()
         {
@@ -52,10 +44,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 Layer layer;
                 String directorio = path;
-                CXML cxml = new CXML();               
+                CXML cxml = new CXML();
                 if ((mapXML = cxml.leerXML(XMLconf)) != null)
                 {
-                    for (int i = 0; i < mapXML.Count ; i++)
+                    for (int i = 0; i < mapXML.Count; i++)
                     {
                         switch (mapXML.Capas[i].Type.ToLower())
                         {
@@ -115,7 +107,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             leyenda.Populate(mapa);
         }
-       
+
 
         //Refresca el Mapa centrándolo en la COLONIA elegída
         public void Colonia(int id)
@@ -209,14 +201,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 ActualizaLbl(false);
                 CError.EscribeLog(ex);
-                MessageBox.Show(ex.ToString());                
+                MessageBox.Show(ex.ToString());
             }
         }
 
         //Refresca el Mapa centrándolo en la LOCALIDAD elegída
         public void Localidad(int id)
         {
-            try{
+            try
+            {
                 ActualizaLbl(true);
                 Recordset state;
                 state = mapa["LOCALIDAD"].SearchExpression("ID = \"" + id + "\"");
@@ -243,9 +236,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
-        public void UbicarNI(int id_colonia,int cp,int id_localidad,int id_municipio)
+        public void UbicarNI(int id_colonia, int cp, int id_localidad, int id_municipio)
         {
-            if (id_colonia > 0)            
+            if (id_colonia > 0)
                 Colonia(id_colonia);
             else
                 if (cp > 0)
@@ -257,7 +250,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         if (id_municipio > 0)
                             Municipio(id_municipio);
                         else
-                            CentrarEstado();                
+                            CentrarEstado();
         }
 
         public void CentrarEstado()
@@ -278,7 +271,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 if (mapXML.Capas[i].LayerName.ToUpper() != "MUNICIPIO")
                 {
-                    mapa[mapXML.Capas[i].LayerName].Visible = val;                    
+                    mapa[mapXML.Capas[i].LayerName].Visible = val;
                 }
             }
         }
@@ -321,7 +314,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void mnuFullExtend_Click(object sender, EventArgs e)
         {
             mapa.ZoomFull();
-            mapa.Refresh();            
+            mapa.Refresh();
             ActivarPanning();
         }
 
@@ -348,7 +341,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void BuscaDentroDe()
         {
-            
+
         }
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
@@ -358,7 +351,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void mapa_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void CMapa_Activated(object sender, EventArgs e)
@@ -373,8 +366,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         }
 
         private void ActualizaLbl(bool flag)
-        {            
-            lblUpdate.Location = new System.Drawing.Point(this.Size.Width/2,this.Size.Height/2);
+        {
+            lblUpdate.Location = new System.Drawing.Point(this.Size.Width / 2, this.Size.Height / 2);
             lblUpdate.Visible = flag;
         }
         private string Abrir()
