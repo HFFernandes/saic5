@@ -964,81 +964,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         }
 
-        /// <summary>
-        /// Guarda la incidencia con el municipio seleccionado
-        /// </summary>
-        /// <param name="sender">Objeto que ocasionó el evento</param>
-        /// <param name="e">Parámetros del evento</param>
-        private void cmbMunicipio_Leave(object sender, EventArgs e)
-        {
+        
 
-            try
-            {          
-                try
-                {
-                    if (this.cmbMunicipio.SelectedIndex == -1 || this.cmbMunicipio.Text.Trim() == string.Empty)
-                    {
-                        //var tr = new Thread(delegate()
-                        //{
-                        //    this.cmbLocalidad.Invoke(new DelegadoLimpiaLocalidades(LimpiaLocalidades));
-                        //    this.cmbColonia.Invoke(new DelegadoLimpiaColonias(LimpiaColonias));
-
-                        //}) { IsBackground = false };
-                        //tr.Start();
-                        this.LimpiaLocalidades();
-                        this.LimpiaColonias();
-                    }
-                    
-                    this.actualizaMapaUbicacion();
-                    if (!this._blnSeActivoClosed)
-                    {
-                        this.RecuperaDatosEnIncidencia();
-                        this.GuardaIncidencia();
-                    }
-                }
-                catch (System.Exception ex)
-                {
-                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
-                }
-            }
-            catch (SAIExcepcion) { }
-        }
-
-        /// <summary>
-        /// Actualiza el mapa cuando cambia el texto de la lista de municipios
-        /// </summary>
-        /// <param name="sender">Objeto que ocasionó el evento</param>
-        /// <param name="e">Parámetros del evento</param>
-        private void cmbMunicipio_TextUpdate(object sender, EventArgs e)
-        {
-            try
-            {
-                try
-                {
-                    this.actualizaMapaUbicacion();
-                }
-                catch (System.Exception ex)
-                {
-                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
-                }
-            }
-            catch (SAIExcepcion) { }
-        }
-
-        /// <summary>
-        /// Manda el foco del campo Municipio al campo Localidad cuando se presiona y se suelta la tecla intro
-        /// </summary>
-        /// <param name="sender">Objeto que ocasionó el evento</param>
-        /// <param name="e">Parámetros del evento</param>
-        private void cmbMunicipio_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.cmbLocalidad.Focus();
-            }
-            this.SAIFrmIncidenciaKeyUp(e);
-
-        }
+        
         #endregion
 
         #region Eventos del combo LOCALIDAD
@@ -1406,7 +1334,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             if (e.KeyCode == Keys.Enter)
             {
-                this.txtDescripcion.Focus();
+                this.txtReferencias.Focus();
             }
             this.SAIFrmIncidenciaKeyUp(e);
 
@@ -3772,6 +3700,65 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                 }
             }
+        }
+
+        private void cmbMunicipio_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.cmbLocalidad.Focus();
+            }
+            this.SAIFrmIncidenciaKeyUp(e);
+        }
+
+        private void cmbMunicipio_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                try
+                {
+                    if (this.cmbMunicipio.SelectedIndex == -1 || this.cmbMunicipio.Text.Trim() == string.Empty)
+                    {
+                        //var tr = new Thread(delegate()
+                        //{
+                        //    this.cmbLocalidad.Invoke(new DelegadoLimpiaLocalidades(LimpiaLocalidades));
+                        //    this.cmbColonia.Invoke(new DelegadoLimpiaColonias(LimpiaColonias));
+
+                        //}) { IsBackground = false };
+                        //tr.Start();
+                        this.LimpiaLocalidades();
+                        this.LimpiaColonias();
+                    }
+
+                    this.actualizaMapaUbicacion();
+                    if (!this._blnSeActivoClosed)
+                    {
+                        this.RecuperaDatosEnIncidencia();
+                        this.GuardaIncidencia();
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
+            }
+            catch (SAIExcepcion) { }
+        }
+
+        private void cmbMunicipio_TextUpdate(object sender, EventArgs e)
+        {
+            try
+            {
+                try
+                {
+                    this.actualizaMapaUbicacion();
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
+            }
+            catch (SAIExcepcion) { }
         }
 
 
