@@ -448,11 +448,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         if (usuario.NombreUsuario == this.txtUsuario.Text)
                         {
                             this.lblUserExist.Text = "El usuario ya existe favor indique otro.";
+                            this.btnAgregar.Enabled = false;
                             break;
                         }
                         else
                         {
                             this.lblUserExist.Text = string.Empty;
+                            this.btnAgregar.Enabled = true;
                         }
                     }
                 }
