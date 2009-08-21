@@ -24,8 +24,11 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
         private void frmUsuarios_Load(object sender, EventArgs e)
         {
+            this.tltUsuarios.SetToolTip(this.txtUsuario, "El usuario debe tener un maximo de 10 caracteres.");
+            this.tltUsuarios.SetToolTip(this.saiTxtContrasena, "La Contraseña debe tener un maximo de 10 caracteres.");
+            
             SAIBarraEstado.SizingGrip = false;
-            SAIBarraEstado.TabIndex = 0;
+            SAIBarraEstado.TabIndex = 0;            
             this.LlenarCorporaciones();
             this.LlenarGrid();
             this.Limpiar();
@@ -105,11 +108,12 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 {
                     row.Selected = false;
                 }
+                this.lblUserExist.Text = "";
                 this.ddlCorporaciones.SelectedIndex = -1;
                 //Se limpian controles
                 this.txtUsuario.Text = "";
                 this.txtNombrePropio.Text = "";
-                this.txtContrasena.Text = "";
+                this.saiTxtContrasena.Text = "";
                 this.rbOperador.Checked = true;
                 this.chkActivado.Checked = false;
                 this.txtNombrePropio.Focus();
@@ -136,7 +140,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 Entidades.Usuario newUsuario = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Usuario();
                 newUsuario.NombrePropio = this.txtNombrePropio.Text;
                 newUsuario.NombreUsuario = this.txtUsuario.Text;
-                newUsuario.Contraseña = this.txtContrasena.Text;
+                newUsuario.Contraseña = this.saiTxtContrasena.Text;
                 newUsuario.Despachador = this.rbDespachador.Checked ? true : false;
                 newUsuario.Activo = this.chkActivado.Checked;
                 Mappers.UsuarioMapper.Instance().Insert(newUsuario);
@@ -150,12 +154,21 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
                 Mappers.BitacoraMapper.Instance().Insert(bitacora);
 
-                //Mappers.UsuarioMapper.Instance()
-                Objetos.UsuarioCorporacionObject newUsuarioCorporacion = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects.UsuarioCorporacionObject();
-                newUsuarioCorporacion.ClaveCorporacion = Convert.ToInt32(this.ObtieneValor(this.ddlCorporaciones.SelectedIndex));
-                newUsuarioCorporacion.ClaveUsuario = Mappers.UsuarioMapper.Instance().GetByUsuario(newUsuario.NombreUsuario).Clave;
+                if (rbDespachador.Checked)
+                {
+                    if (this.ddlCorporaciones.SelectedIndex > -1)
+                    {
+                        Objetos.UsuarioCorporacionObject newUsuarioCorporacion = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects.UsuarioCorporacionObject();
+                        newUsuarioCorporacion.ClaveCorporacion = Convert.ToInt32(this.ObtieneValor(this.ddlCorporaciones.SelectedIndex));
+                        newUsuarioCorporacion.ClaveUsuario = Mappers.UsuarioMapper.Instance().GetByUsuario(newUsuario.NombreUsuario).Clave;
 
-                Mappers.UsuarioCorporacionMapper.Instance().Insert(newUsuarioCorporacion);
+                        Mappers.UsuarioCorporacionMapper.Instance().Insert(newUsuarioCorporacion);
+                    }
+                    else
+                    {
+                        throw new SAIExcepcion("Seleccione una corporacion para el despachador.");
+                    }
+                }
                 /*}
                 catch (Cooperator.Framework.Data.Exceptions.InvalidConnectionStringException)
                 {
@@ -183,7 +196,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         Entidades.Usuario updUsuario = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Usuario(clave);
                         updUsuario.NombrePropio = this.txtNombrePropio.Text;
                         updUsuario.NombreUsuario = this.txtUsuario.Text;
-                        updUsuario.Contraseña = this.txtContrasena.Text;
+                        updUsuario.Contraseña = this.saiTxtContrasena.Text;
                         updUsuario.Despachador = this.rbDespachador.Checked ? true : false;
                         updUsuario.Activo = this.chkActivado.Checked;
                         Mappers.UsuarioMapper.Instance().Save(updUsuario);
@@ -225,6 +238,15 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     //int selectedRow = this.gvUsuarios.CurrentCellAddress.Y;
                     if (this.ObtieneIndiceSeleccionado() > -1)
                     {
+                        Objetos.UsuarioCorporacionObjectList lstUsuCorp =  Mappers.UsuarioCorporacionMapper.Instance().GetAll();
+                        if (lstUsuCorp.Count > 0)
+                        {
+                            foreach (Objetos.UsuarioCorporacionObject usrCorp in lstUsuCorp)
+                            {
+                                Mappers.UsuarioCorporacionMapper.Instance().Delete(usrCorp.ClaveUsuario, usrCorp.ClaveCorporacion);
+                            }
+                        }
+
                         int clave = Convert.ToInt32(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Clave"].Value);
                         Mappers.UsuarioMapper.Instance().Delete(clave);
 
@@ -252,16 +274,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 //Valida los campos Obligatorios
                 if (SAIProveedorValidacion.ValidarCamposRequeridos(this.gpbDatosUsuario))
                 {
-                    if (this.ddlCorporaciones.SelectedIndex > -1)
-                    {
-                        this.Agregar();
-                        this.LlenarGrid();
-                        this.Limpiar();
-                    }
-                    else
-                    {
-                        throw new SAIExcepcion("Seleccione la corporacion.");
-                    }
+                    this.Agregar();
+                    this.LlenarGrid();
+                    this.Limpiar();
                 }
             }
             catch (SAIExcepcion)
@@ -328,7 +343,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         //Llena los controles con los datos del Datagrid
                         this.txtNombrePropio.Text = Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["NombrePropio"].Value);
                         this.txtUsuario.Text = Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["NombreUsuario"].Value);
-                        this.txtContrasena.Text = Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Contrasena"].Value);
+                        this.saiTxtContrasena.Text = Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Contrasena"].Value);
                         this.chkActivado.Checked = Convert.ToBoolean(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Activo"].Value);
 
                         int corporacion = 0;
@@ -358,6 +373,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         this.btnEliminar.Visible = true;
                         this.btnModificar.Enabled = true;
                         this.btnAgregar.Enabled = false;
+                        this.lblUserExist.Text = string.Empty;
                     }
                 }
                 catch (Exception ex)
@@ -404,6 +420,47 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 else
                 { this.ddlCorporaciones.SelectedIndex = -1; }
             }
+        }
+
+        private void rbDespachador_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.rbDespachador.Checked)
+            {
+                this.lblCorporacion.Visible = true;
+                this.ddlCorporaciones.Visible = true;
+            }
+            else 
+            {
+                this.lblCorporacion.Visible = false;
+                this.ddlCorporaciones.Visible = false;
+            }
+        }
+
+        private void txtUsuario_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                try
+                {
+                    Entidades.UsuarioList lstUsuarios = Mappers.UsuarioMapper.Instance().GetAll();
+                    foreach(Entidades.Usuario usuario in lstUsuarios)
+                    {
+                        if (usuario.NombreUsuario == this.txtUsuario.Text)
+                        {
+                            this.lblUserExist.Text = "El usuario ya existe favor indique otro.";
+                            break;
+                        }
+                        else
+                        {
+                            this.lblUserExist.Text = string.Empty;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
+            }
+            catch (SAIExcepcion)
+            { }
         }
     }
 }
