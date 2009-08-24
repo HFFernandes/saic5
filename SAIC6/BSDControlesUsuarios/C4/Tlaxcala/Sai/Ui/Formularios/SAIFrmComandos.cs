@@ -384,9 +384,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             if (Aplicacion.VentanasIncidencias.Count > 0)
             {
-                var objVentana = new SAIFrmVentana(Aplicacion.VentanasIncidencias, this);
-                objVentana.Left = 200;
-                objVentana.Top = 200;
+                var objVentana = new SAIFrmVentana(Aplicacion.VentanasIncidencias, this) {Left = 200, Top = 200};
                 objVentana.Show(this);
             }
         }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using XtremeReportControl;
-using System.Runtime.InteropServices;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 {
