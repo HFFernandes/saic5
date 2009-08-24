@@ -35,19 +35,19 @@
             this.ModeloDatos = new Korzh.EasyQuery.DataModel();
             this.ModeloQuery = new Korzh.EasyQuery.Query();
             this.ContenedorResultados = new System.Windows.Forms.Panel();
+            this.barComandos = new System.Windows.Forms.ToolStrip();
+            this.btnActualizar = new System.Windows.Forms.ToolStripButton();
             this.GridResultados = new System.Windows.Forms.DataGrid();
             this.ResultadoDataTable = new System.Data.DataTable();
             this.ResultadoDS = new System.Data.DataSet();
-            this.barComandos = new System.Windows.Forms.ToolStrip();
-            this.btnActualizar = new System.Windows.Forms.ToolStripButton();
             this.ContenedorSplit.Panel1.SuspendLayout();
             this.ContenedorSplit.Panel2.SuspendLayout();
             this.ContenedorSplit.SuspendLayout();
             this.ContenedorResultados.SuspendLayout();
+            this.barComandos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridResultados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultadoDataTable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultadoDS)).BeginInit();
-            this.barComandos.SuspendLayout();
             this.SuspendLayout();
             // 
             // ContenedorSplit
@@ -66,8 +66,8 @@
             // ContenedorSplit.Panel2
             // 
             this.ContenedorSplit.Panel2.Controls.Add(this.QueryCondiciones);
-            this.ContenedorSplit.Size = new System.Drawing.Size(920, 277);
-            this.ContenedorSplit.SplitterDistance = 168;
+            this.ContenedorSplit.Size = new System.Drawing.Size(920, 209);
+            this.ContenedorSplit.SplitterDistance = 126;
             this.ContenedorSplit.TabIndex = 3;
             // 
             // QueryColumnas
@@ -105,7 +105,7 @@
             this.QueryColumnas.Model = null;
             this.QueryColumnas.Name = "QueryColumnas";
             this.QueryColumnas.Query = null;
-            this.QueryColumnas.Size = new System.Drawing.Size(920, 168);
+            this.QueryColumnas.Size = new System.Drawing.Size(920, 126);
             this.QueryColumnas.TabIndex = 0;
             this.QueryColumnas.TabStop = true;
             // 
@@ -143,7 +143,7 @@
             this.QueryCondiciones.Model = null;
             this.QueryCondiciones.Name = "QueryCondiciones";
             this.QueryCondiciones.Query = null;
-            this.QueryCondiciones.Size = new System.Drawing.Size(920, 105);
+            this.QueryCondiciones.Size = new System.Drawing.Size(920, 79);
             this.QueryCondiciones.TabIndex = 0;
             this.QueryCondiciones.TabStop = true;
             // 
@@ -179,30 +179,6 @@
             this.ContenedorResultados.Size = new System.Drawing.Size(926, 471);
             this.ContenedorResultados.TabIndex = 4;
             // 
-            // GridResultados
-            // 
-            this.GridResultados.CaptionText = "Resultados";
-            this.GridResultados.DataMember = "";
-            this.GridResultados.DataSource = this.ResultadoDataTable;
-            this.GridResultados.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.GridResultados.HeaderForeColor = System.Drawing.SystemColors.ControlText;
-            this.GridResultados.Location = new System.Drawing.Point(0, 306);
-            this.GridResultados.Name = "GridResultados";
-            this.GridResultados.ReadOnly = true;
-            this.GridResultados.Size = new System.Drawing.Size(926, 165);
-            this.GridResultados.TabIndex = 2;
-            this.GridResultados.DoubleClick += new System.EventHandler(this.GridResultados_DoubleClick);
-            // 
-            // ResultadoDataTable
-            // 
-            this.ResultadoDataTable.TableName = "Resultado";
-            // 
-            // ResultadoDS
-            // 
-            this.ResultadoDS.DataSetName = "ResultadoDataSet";
-            this.ResultadoDS.Tables.AddRange(new System.Data.DataTable[] {
-            this.ResultadoDataTable});
-            // 
             // barComandos
             // 
             this.barComandos.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
@@ -224,6 +200,30 @@
             this.btnActualizar.ToolTipText = "Actualizar Consulta";
             this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
+            // GridResultados
+            // 
+            this.GridResultados.CaptionText = "Resultados";
+            this.GridResultados.DataMember = "";
+            this.GridResultados.DataSource = this.ResultadoDataTable;
+            this.GridResultados.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.GridResultados.HeaderForeColor = System.Drawing.SystemColors.ControlText;
+            this.GridResultados.Location = new System.Drawing.Point(0, 243);
+            this.GridResultados.Name = "GridResultados";
+            this.GridResultados.ReadOnly = true;
+            this.GridResultados.Size = new System.Drawing.Size(926, 228);
+            this.GridResultados.TabIndex = 2;
+            this.GridResultados.DoubleClick += new System.EventHandler(this.GridResultados_DoubleClick);
+            // 
+            // ResultadoDataTable
+            // 
+            this.ResultadoDataTable.TableName = "Resultado";
+            // 
+            // ResultadoDS
+            // 
+            this.ResultadoDS.DataSetName = "ResultadoDataSet";
+            this.ResultadoDS.Tables.AddRange(new System.Data.DataTable[] {
+            this.ResultadoDataTable});
+            // 
             // SAIFrmBuscadorIncidencias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -239,11 +239,11 @@
             this.ContenedorSplit.ResumeLayout(false);
             this.ContenedorResultados.ResumeLayout(false);
             this.ContenedorResultados.PerformLayout();
+            this.barComandos.ResumeLayout(false);
+            this.barComandos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridResultados)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultadoDataTable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultadoDS)).EndInit();
-            this.barComandos.ResumeLayout(false);
-            this.barComandos.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -29,7 +29,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
                 catch (FileNotFoundException)
                 {
-                    throw new SAIExcepcion("No se localizo el archivo de configuracion para los filtros de busqueda.");
+                    throw new SAIExcepcion(ID.STR_NOSELOCALIZOARCHIVO);
                 }
                 catch (Exception ex)
                 {
@@ -69,8 +69,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                     GridResultados.Refresh();
                 }
-                catch (SqlException ex) { throw new SAIExcepcion("Ha ocurrido un error al tratar de generar el filtro."); }
-                catch (Exception ex) { throw new SAIExcepcion("Ha ocurrido un error al tratar de generar el filtro."); }
+                catch (SqlException) { throw new SAIExcepcion(ID.STR_ERRORFILTRO); }
+                catch (Exception) { throw new SAIExcepcion(ID.STR_ERRORFILTRO); }
             }
             catch (SAIExcepcion)
             {
@@ -88,7 +88,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
                 catch (FileNotFoundException)
                 {
-                    throw new SAIExcepcion("No se localizo el archivo de configuracion para los filtros de busqueda.");
+                    throw new SAIExcepcion(ID.STR_NOSELOCALIZOARCHIVO);
                 }
                 catch (Exception ex)
                 {

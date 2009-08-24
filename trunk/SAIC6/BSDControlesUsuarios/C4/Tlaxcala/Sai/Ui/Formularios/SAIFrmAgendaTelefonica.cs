@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
-using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
