@@ -84,7 +84,7 @@ namespace BSD.C4.Tlaxcala.Sai
                 var permisoObjectList = PermisoMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_OBTENERPERMISOS, intClaveUsuario, intSubModulo, ObtenerClaveSistema()));
                 foreach (var o in permisoObjectList)
                 {
-                    if (o.Valor == 2)
+                    if (o.Valor.Equals(2))
                         return true;
                 }
 
@@ -101,7 +101,7 @@ namespace BSD.C4.Tlaxcala.Sai
                 var permisoObjectList = PermisoMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_OBTENERPERMISOS, intClaveUsuario, intSubModulo, ObtenerClaveSistema()));
                 foreach (var o in permisoObjectList)
                 {
-                    if (o.Valor == 4)
+                    if (o.Valor.Equals(4))
                         return true;
                 }
 
@@ -127,9 +127,6 @@ namespace BSD.C4.Tlaxcala.Sai
                         break;
                     case "089":
                         intClaveSistema = 1;
-                        break;
-                    case "ADM":
-                        intClaveSistema = 6;
                         break;
                     default:
                         intClaveSistema = null;

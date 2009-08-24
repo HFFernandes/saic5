@@ -12,12 +12,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             InitializeComponent();
 
             Width = Screen.GetWorkingArea(this).Width;
-            saiReport1.btnLigarIncidencias.Click += btnLigarIncidencias_Click;
-            saiReport1.btnDespacharIncidencias.Click += btnDespacharIncidencias_Click;
-            saiReport1.btnBajaUnidad.Click += btnBajaUnidad_Click;
-            saiReport1.btnAltaUnidad.Click += btnAltaUnidad_Click;
             saiReport1.btnVistaPrevia.Click += btnVistaPrevia_Click;
-            saiReport1.reportControl.RowDblClick += reportControl_RowDblClick;
         }
 
         void btnVistaPrevia_Click(object sender, EventArgs e)
@@ -37,29 +32,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
-        void reportControl_RowDblClick(object sender, AxXtremeReportControl._DReportControlEvents_RowDblClickEvent e)
-        {
-        }
-
-        void btnAltaUnidad_Click(object sender, EventArgs e)
-        {
-        }
-
-        void btnBajaUnidad_Click(object sender, EventArgs e)
-        {
-        }
-
-        void btnDespacharIncidencias_Click(object sender, EventArgs e)
-        {
-        }
-
-        void btnLigarIncidencias_Click(object sender, EventArgs e)
-        {
-        }
-
         private void SAIFrmAgendaTelefonica_Load(object sender, EventArgs e)
         {
-
             saiReport1.btnAltaUnidad.Visible = false;
             saiReport1.btnBajaUnidad.Visible = false;
             saiReport1.btnSeparador2.Visible = false;

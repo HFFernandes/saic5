@@ -6,7 +6,6 @@ using BSD.C4.Tlaxcala.Sai.Excepciones;
 using Microsoft.NetEnterpriseServers;
 using XtremeReportControl;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
-using System.Diagnostics;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -25,12 +24,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             var intReg = saiReport1.reportControl.EnableDragDrop("SAIC4:iUnidades",
                                           XTPReportDragDrop.xtpReportAllowDrag |
                                           XTPReportDragDrop.xtpReportAllowDrop);
-            saiReport1.btnLigarIncidencias.Click += btnLigarIncidencias_Click;
-            saiReport1.btnDespacharIncidencias.Click += btnDespacharIncidencias_Click;
             saiReport1.btnBajaUnidad.Click += btnBajaUnidad_Click;
             saiReport1.btnAltaUnidad.Click += btnAltaUnidad_Click;
             saiReport1.btnVistaPrevia.Click += btnVistaPrevia_Click;
-            saiReport1.reportControl.RowDblClick += reportControl_RowDblClick;
 
             lstUnidadesRegistradas = new List<Unidad>();
             lstUnidadesTemporales = new List<Unidad>();
@@ -55,10 +51,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
-        void reportControl_RowDblClick(object sender, AxXtremeReportControl._DReportControlEvents_RowDblClickEvent e)
-        {
-        }
-
         void btnAltaUnidad_Click(object sender, EventArgs e)
         {
             try
@@ -66,8 +58,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 if ((Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false) && Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_AU))
                 {
                     var agregarUnidad = new SAIFrmAgregarUnidad();
-                    var dialogResult = agregarUnidad.ShowDialog(this);
-                    if (dialogResult == DialogResult.OK) { }
+                    agregarUnidad.ShowDialog(this);
                 }
                 else
                     throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
@@ -118,14 +109,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (SAIExcepcion)
             {
             }
-        }
-
-        void btnDespacharIncidencias_Click(object sender, EventArgs e)
-        {
-        }
-
-        void btnLigarIncidencias_Click(object sender, EventArgs e)
-        {
         }
 
         private void tmrRegistros_Tick(object sender, EventArgs e)
