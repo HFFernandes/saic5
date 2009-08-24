@@ -135,6 +135,8 @@
         public const string STR_ESTATUSDESPACHADA = "Despachada";
         public const string STR_SINPRIVILEGIOS = "No cuenta con los privilegios suficientes para realizar esta acción.";
         public const string STR_ERROROBTENERREGISTROS = "Ocurrio un error al tratar de obtener los registros. Solicite al administrador revisar los catálogos.";
+        public const string STR_NOSELOCALIZOARCHIVO = "No se localizo el archivo de configuracion para los filtros de busqueda.";
+        public const string STR_ERRORFILTRO = "Ha ocurrido un error al tratar de generar el filtro.";
 
         #endregion
 
