@@ -24,8 +24,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             Width = Screen.GetWorkingArea(this).Width;
             saiReport1.btnLigarIncidencias.Click += btnLigarIncidencias_Click;
             saiReport1.btnDespacharIncidencias.Click += btnDespacharIncidencias_Click;
-            saiReport1.btnBajaUnidad.Click += btnBajaUnidad_Click;
-            saiReport1.btnAltaUnidad.Click += btnAltaUnidad_Click;
             saiReport1.btnVistaPrevia.Click += btnVistaPrevia_Click;
             saiReport1.reportControl.RowDblClick += reportControl_RowDblClick;
 
@@ -80,14 +78,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (SAIExcepcion)
             {
             }
-        }
-
-        void btnAltaUnidad_Click(object sender, EventArgs e)
-        {
-        }
-
-        void btnBajaUnidad_Click(object sender, EventArgs e)
-        {
         }
 
         void btnDespacharIncidencias_Click(object sender, EventArgs e)
@@ -317,7 +307,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 if (itm != null && itm.Index >= 0)
                                 {
                                     //comparamos el valor anterior con el actual y si cambio entonces actualizamos
-                                    if (!incidenciaTemp.HoraRecepcion.Equals(incidencia.HoraRecepcion))
+                                    //if (!incidenciaTemp.HoraRecepcion.Equals(incidencia.HoraRecepcion))
                                         saiReport1.reportControl.Records[itm.Record.Index][2].Value =
                                             incidencia.HoraRecepcion.ToShortTimeString();
 
@@ -359,7 +349,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                             ? corporaciones.ToString().Trim().Remove(corporaciones.Length - 1)
                                             : ID.STR_DESCONOCIDO;
 
-                                    if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
+                                    //if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
                                         saiReport1.reportControl.Records[itm.Record.Index][4].Value =
                                             TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Descripcion;
 
@@ -380,7 +370,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                             ? incidencia.Folio.ToString()
                                             : ID.STR_DESCONOCIDO;
 
-                                    if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
+                                    //if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
                                         saiReport1.reportControl.Records[itm.Record.Index][10].Value = TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Prioridad.ToString();
                                 }
                             }
