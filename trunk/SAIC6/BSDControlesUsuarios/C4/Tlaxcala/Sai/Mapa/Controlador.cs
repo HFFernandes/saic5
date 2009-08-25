@@ -18,7 +18,7 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
 
         private static void ActualizarMapa(EstructuraUbicacion objDatosUbicacion)
         {
-           
+
 
             //if (objDatosUbicacion.IdCodigoPostal.HasValue)
             //{
@@ -77,17 +77,17 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
                     _frmMapa.Invoke(new DelegadoActualizarMapa(ActualizarMapa), new object[] { objDatosUbicacion });
                 }
                 catch { }
-                              
 
-                
+
+
             }) { IsBackground = true };
             tr.Start();
 
-           
 
-           
-           //frmIncidencia.Focus();
-           
+
+
+            //frmIncidencia.Focus();
+
 
         }
 
@@ -121,13 +121,13 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
             //if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
             //    return;
 
-            if (Aplicacion.VentanasIncidencias.Count == 0 || (Aplicacion.VentanasIncidencias.Count == 1 && Aplicacion.VentanasIncidencias[0].Ventana  == (frmIncidencia as Form)))
+            if (Aplicacion.VentanasIncidencias.Count == 0 || (Aplicacion.VentanasIncidencias.Count == 1 && Aplicacion.VentanasIncidencias[0].Ventana == (frmIncidencia as Form)))
             {
                 _frmMapa.Close();
                 _frmMapa.Dispose();
                 _frmMapa = null;
             }
-          
+
         }
 
     }

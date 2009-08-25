@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-
-using System.Text;
 using System.IO;
 
 namespace BSD.C4.Tlaxcala.Sai.Mapa
 {
    public class CError
     {
-        public CError()
-        {
-        }
-        public static void EscribeLog(Object value)
+       public static void EscribeLog(Object value)
         {
             try
             {
