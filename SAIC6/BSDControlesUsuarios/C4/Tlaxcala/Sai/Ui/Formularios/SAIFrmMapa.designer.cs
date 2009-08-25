@@ -133,7 +133,6 @@
             // contenedorMapa.Panel2
             // 
             this.contenedorMapa.Panel2.Controls.Add(this.leyenda);
-            this.contenedorMapa.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
             this.contenedorMapa.Size = new System.Drawing.Size(592, 341);
             this.contenedorMapa.SplitterDistance = 450;
             this.contenedorMapa.TabIndex = 7;
@@ -196,7 +195,6 @@
             this.mapa.TabIndex = 1;
             this.mapa.ToolShape.FillColor = System.Drawing.Color.Transparent;
             this.mapa.ToolShape.LineColor = System.Drawing.Color.Red;
-            this.mapa.Click += new System.EventHandler(this.mapa_Click);
             // 
             // leyenda
             // 

@@ -12,21 +12,22 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
     public partial class SAIFrmMapa : Form
     {
-        //CCapa[] mapXML.Capas;
         CMapa mapXML;
         private string XMLconf;
         private string path;
+
         public SAIFrmMapa(string XMLconf, string path)
         {
             InitializeComponent();
-            this.Size = new System.Drawing.Size(640, 480);
+            this.Size = new Size(640, 480);
             this.XMLconf = XMLconf;
             this.path = path;
         }
+
         public SAIFrmMapa(string XMLconf, string path, int width, int height)
         {
             InitializeComponent();
-            this.Size = new System.Drawing.Size(width, height);
+            this.Size = new Size(width, height);
             this.XMLconf = XMLconf;
             this.path = path;
         }
@@ -43,8 +44,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             try
             {
                 Layer layer;
-                String directorio = path;
-                CXML cxml = new CXML();
+                var directorio = path;
+                var cxml = new CXML();
+
                 if ((mapXML = cxml.leerXML(XMLconf)) != null)
                 {
                     for (int i = 0; i < mapXML.Count; i++)
@@ -99,15 +101,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
             catch (Exception ex)
             {
-                CError.EscribeLog(ex);
+                //CError.EscribeLog(ex);
                 MessageBox.Show(ex.ToString());
             }
         }
+
         private void AgregarLeyenda()
         {
             leyenda.Populate(mapa);
         }
-
 
         //Refresca el Mapa centrándolo en la COLONIA elegída
         public void Colonia(int id)
@@ -115,19 +117,20 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             try
             {
                 ActualizaLbl(true);
-                Recordset state;
-                state = mapa["COLONIA"].SearchExpression("ID = \"" + id + "\"");
+                var state = mapa["COLONIA"].SearchExpression("ID = \"" + id + "\"");
                 if (!state.EOF)
                 {
                     OcultarCapas(true);
                     mapa.Extent = state.RecordExtent;
                     mapa.MapShapes.Clear();
-                    MapShape shape = mapa.MapShapes.Add(state.Shape);
-                    Symbol s = new Symbol();
-                    s.FillStyle = FillStyle.DiagonalCross;
-                    s.FillColor = Color.Yellow;
-                    s.LineColor = Color.Red;
-                    s.Size = 3;
+                    var shape = mapa.MapShapes.Add(state.Shape);
+                    var s = new Symbol
+                                {
+                                    FillStyle = FillStyle.DiagonalCross,
+                                    FillColor = Color.Yellow,
+                                    LineColor = Color.Red,
+                                    Size = 3
+                                };
                     shape.Symbol = s;
                     mapa.Refresh();
                 }
@@ -136,7 +139,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (Exception ex)
             {
                 ActualizaLbl(false);
-                CError.EscribeLog(ex);
+                //CError.EscribeLog(ex);
                 MessageBox.Show(ex.ToString());
             }
         }
@@ -147,19 +150,20 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             try
             {
                 ActualizaLbl(true);
-                Recordset state;
-                state = mapa["COLONIA"].SearchExpression("CP = \"" + id + "\"");
+                var state = mapa["COLONIA"].SearchExpression("CP = \"" + id + "\"");
                 if (!state.EOF)
                 {
                     OcultarCapas(true);
                     mapa.Extent = state.RecordExtent;
                     mapa.MapShapes.Clear();
-                    MapShape shape = mapa.MapShapes.Add(state.Shape);
-                    Symbol s = new Symbol();
-                    s.FillStyle = FillStyle.DiagonalCross;
-                    s.FillColor = Color.Yellow;
-                    s.LineColor = Color.Red;
-                    s.Size = 3;
+                    var shape = mapa.MapShapes.Add(state.Shape);
+                    var s = new Symbol
+                                {
+                                    FillStyle = FillStyle.DiagonalCross,
+                                    FillColor = Color.Yellow,
+                                    LineColor = Color.Red,
+                                    Size = 3
+                                };
                     shape.Symbol = s;
                     mapa.Refresh();
                 }
@@ -168,7 +172,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (Exception ex)
             {
                 ActualizaLbl(false);
-                CError.EscribeLog(ex);
+                //CError.EscribeLog(ex);
                 MessageBox.Show(ex.ToString());
             }
         }
@@ -179,19 +183,20 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             try
             {
                 ActualizaLbl(true);
-                Recordset state;
-                state = mapa["MUNICIPIO"].SearchExpression("ID = \"" + id + "\"");
+                var state = mapa["MUNICIPIO"].SearchExpression("ID = \"" + id + "\"");
                 if (!state.EOF)
                 {
                     OcultarCapas(true);
                     mapa.Extent = state.RecordExtent;
                     mapa.MapShapes.Clear();
-                    MapShape shape = mapa.MapShapes.Add(state.Shape);
-                    Symbol s = new Symbol();
-                    s.FillStyle = FillStyle.DiagonalCross;
-                    s.FillColor = Color.Yellow;
-                    s.LineColor = Color.Red;
-                    s.Size = 3;
+                    var shape = mapa.MapShapes.Add(state.Shape);
+                    var s = new Symbol
+                                {
+                                    FillStyle = FillStyle.DiagonalCross,
+                                    FillColor = Color.Yellow,
+                                    LineColor = Color.Red,
+                                    Size = 3
+                                };
                     shape.Symbol = s;
                     mapa.Refresh();
                 }
@@ -200,7 +205,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (Exception ex)
             {
                 ActualizaLbl(false);
-                CError.EscribeLog(ex);
+                //CError.EscribeLog(ex);
                 MessageBox.Show(ex.ToString());
             }
         }
@@ -211,18 +216,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             try
             {
                 ActualizaLbl(true);
-                Recordset state;
-                state = mapa["LOCALIDAD"].SearchExpression("ID = \"" + id + "\"");
+                var state = mapa["LOCALIDAD"].SearchExpression("ID = \"" + id + "\"");
                 if (!state.EOF)
                 {
                     OcultarCapas(true);
                     mapa.Extent = state.RecordExtent;
                     mapa.MapShapes.Clear();
-                    MapShape shape = mapa.MapShapes.Add(state.Shape);
-                    Symbol s = new Symbol();
-                    s.FillStyle = FillStyle.Invisible;
-                    s.LineColor = Color.Red;
-                    s.Size = 17;
+                    var shape = mapa.MapShapes.Add(state.Shape);
+                    var s = new Symbol { FillStyle = FillStyle.Invisible, LineColor = Color.Red, Size = 17 };
                     shape.Symbol = s;
                     mapa.Refresh();
                 }
@@ -231,7 +232,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (Exception ex)
             {
                 ActualizaLbl(false);
-                CError.EscribeLog(ex);
+                //CError.EscribeLog(ex);
                 MessageBox.Show(ex.ToString());
             }
         }
@@ -318,11 +319,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             ActivarPanning();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnLeyenda_Click(object sender, EventArgs e)
         {
             if (leyenda.Visible)
@@ -337,21 +333,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 btnLeyenda.ForeColor = Color.Blue;
                 contenedorMapa.Panel2Collapsed = false;
             }
-        }
-
-        private void BuscaDentroDe()
-        {
-
-        }
-
-        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void mapa_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void CMapa_Activated(object sender, EventArgs e)
@@ -370,6 +351,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             lblUpdate.Location = new System.Drawing.Point(this.Size.Width / 2, this.Size.Height / 2);
             lblUpdate.Visible = flag;
         }
+
         private string Abrir()
         {
             return new Ccpd().getPd();
