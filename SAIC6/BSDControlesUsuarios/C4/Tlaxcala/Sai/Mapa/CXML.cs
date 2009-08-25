@@ -1,28 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-
-using System.Text;
 using System.Xml;
-using System.IO;
-
 
 namespace BSD.C4.Tlaxcala.Sai.Mapa
 {
     public class CXML
     {
-        public CXML()
-        {
-        }
         public CMapa leerXML(string XMLstr)
-        {            
+        {
             try
             {
-                XmlDocument xDoc = new XmlDocument();
+                var xDoc = new XmlDocument();
                 xDoc.Load(XMLstr);
-                XmlNodeList mapaXML = xDoc.GetElementsByTagName("map");
-                XmlNodeList lista = ((XmlElement)mapaXML[0]).GetElementsByTagName("layer");
+
+                var mapaXML = xDoc.GetElementsByTagName("map");
+                var lista = ((XmlElement)mapaXML[0]).GetElementsByTagName("layer");
                 //CCapa[] capas;
-                CMapa mapa = new CMapa(lista.Count);                
+                var mapa = new CMapa(lista.Count);
                 //capas = new CCapa[lista.Count];
                 int n = 0;
                 XmlNodeList file, labelfield, layername, type, filltype, fillcolor, linestyle, linecolor, pointstyle, labelsize, size, showlabel, visible;
@@ -80,13 +73,13 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
                         mapa.Capas[n].Visible = true;
                     else
                         mapa.Capas[n].Visible = false;
-                    n++;                    
+                    n++;
                 }
                 mapa.Count = n;
                 return mapa;
             }
-                      
-            catch(Exception exp)
+
+            catch (Exception exp)
             {
                 CError.EscribeLog(exp);
                 return null;

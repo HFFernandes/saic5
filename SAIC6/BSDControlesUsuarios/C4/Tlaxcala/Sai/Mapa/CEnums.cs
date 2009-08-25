@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-
-using System.Text;
-using ActualMap;
+﻿using ActualMap;
 using System.Drawing;
 
 namespace BSD.C4.Tlaxcala.Sai.Mapa
 {
-   public class CEnums
+    public class CEnums
     {
-        public CEnums()
-        {
-        }
         public static LineStyle getLineStyle(string linestyle)
         {
-            LineStyle ls=LineStyle.Solid;//Valor por default
+            LineStyle ls;   //Valor por default
             switch (linestyle.ToLower())
             {
                 case "arrowboth":
@@ -71,9 +64,10 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
             }
             return ls;
         }
+
         public static FillStyle getFillStyle(string fillstyle)
         {
-            FillStyle fs = FillStyle.Solid;//Valor por default
+            FillStyle fs;//Valor por default
             switch (fillstyle.ToLower())
             {
                 case "bitmap":
@@ -112,12 +106,13 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
                 case "invisible":
                     fs = FillStyle.Invisible;
                     break;
-                default: 
+                default:
                     fs = FillStyle.Solid;
                     break;
             }
             return fs;
         }
+
         public static Color getColor(string color)
         {
             Color col;  //Valor por default
@@ -552,7 +547,7 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
 
         public static PointStyle getPointStyle(string pointstyle)
         {
-            PointStyle ps = PointStyle.Circle;//Valor por default
+            PointStyle ps;//Valor por default
             switch (pointstyle.ToLower())
             {
                 case "triangle":
@@ -593,7 +588,7 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
                     break;
                 case "circle":
                     ps = PointStyle.Circle;
-                    break;	
+                    break;
                 default:
                     ps = PointStyle.Circle;
                     break;

@@ -106,7 +106,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void GridResultados_DoubleClick(object sender, EventArgs e)
         {
-            //ModeloQuery.SaveToFile(@"D:\C2.xml");
+            ModeloQuery.SaveToFile(@"D:\nplantilla.xml");
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
