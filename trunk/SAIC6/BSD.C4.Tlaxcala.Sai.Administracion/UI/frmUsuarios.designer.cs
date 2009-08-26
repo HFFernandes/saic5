@@ -37,6 +37,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.gpbDatosUsuario = new System.Windows.Forms.GroupBox();
+            this.lblUserExist = new System.Windows.Forms.Label();
+            this.saiTxtContrasena = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.ddlCorporaciones = new System.Windows.Forms.ComboBox();
             this.lblCorporacion = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -52,8 +54,6 @@
             this.logoPicture = new System.Windows.Forms.PictureBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.tltUsuarios = new System.Windows.Forms.ToolTip(this.components);
-            this.saiTxtContrasena = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
-            this.lblUserExist = new System.Windows.Forms.Label();
             this.gpbDatosUsuario.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvUsuarios)).BeginInit();
@@ -147,6 +147,26 @@
             this.gpbDatosUsuario.TabStop = false;
             this.gpbDatosUsuario.Text = "Datos Generales";
             // 
+            // lblUserExist
+            // 
+            this.lblUserExist.AutoSize = true;
+            this.lblUserExist.Location = new System.Drawing.Point(317, 52);
+            this.lblUserExist.Name = "lblUserExist";
+            this.lblUserExist.Size = new System.Drawing.Size(0, 13);
+            this.lblUserExist.TabIndex = 10;
+            // 
+            // saiTxtContrasena
+            // 
+            this.saiTxtContrasena.BlnEsRequerido = true;
+            this.saiTxtContrasena.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.saiTxtContrasena.Location = new System.Drawing.Point(108, 82);
+            this.saiTxtContrasena.MaxLength = 10;
+            this.saiTxtContrasena.Name = "saiTxtContrasena";
+            this.saiTxtContrasena.PasswordChar = '*';
+            this.saiTxtContrasena.Size = new System.Drawing.Size(182, 20);
+            this.saiTxtContrasena.StrMensajeCampoRequerido = "El campo es requerido.";
+            this.saiTxtContrasena.TabIndex = 3;
+            // 
             // ddlCorporaciones
             // 
             this.ddlCorporaciones.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -154,7 +174,7 @@
             this.ddlCorporaciones.Location = new System.Drawing.Point(320, 139);
             this.ddlCorporaciones.Name = "ddlCorporaciones";
             this.ddlCorporaciones.Size = new System.Drawing.Size(182, 21);
-            this.ddlCorporaciones.TabIndex = 4;
+            this.ddlCorporaciones.TabIndex = 6;
             this.ddlCorporaciones.Visible = false;
             // 
             // lblCorporacion
@@ -163,7 +183,7 @@
             this.lblCorporacion.Location = new System.Drawing.Point(247, 142);
             this.lblCorporacion.Name = "lblCorporacion";
             this.lblCorporacion.Size = new System.Drawing.Size(67, 13);
-            this.lblCorporacion.TabIndex = 8;
+            this.lblCorporacion.TabIndex = 0;
             this.lblCorporacion.Text = "Corporacion:";
             this.lblCorporacion.Visible = false;
             // 
@@ -183,7 +203,7 @@
             this.chkActivado.Location = new System.Drawing.Point(14, 206);
             this.chkActivado.Name = "chkActivado";
             this.chkActivado.Size = new System.Drawing.Size(68, 17);
-            this.chkActivado.TabIndex = 5;
+            this.chkActivado.TabIndex = 7;
             this.chkActivado.Text = "Activado";
             this.chkActivado.UseVisualStyleBackColor = true;
             // 
@@ -213,7 +233,7 @@
             this.rbOperador.Location = new System.Drawing.Point(109, 140);
             this.rbOperador.Name = "rbOperador";
             this.rbOperador.Size = new System.Drawing.Size(69, 17);
-            this.rbOperador.TabIndex = 7;
+            this.rbOperador.TabIndex = 5;
             this.rbOperador.TabStop = true;
             this.rbOperador.Text = "Operador";
             this.rbOperador.UseVisualStyleBackColor = true;
@@ -224,7 +244,7 @@
             this.rbDespachador.Location = new System.Drawing.Point(14, 140);
             this.rbDespachador.Name = "rbDespachador";
             this.rbDespachador.Size = new System.Drawing.Size(89, 17);
-            this.rbDespachador.TabIndex = 6;
+            this.rbDespachador.TabIndex = 4;
             this.rbDespachador.TabStop = true;
             this.rbDespachador.Text = "Despachador";
             this.rbDespachador.UseVisualStyleBackColor = true;
@@ -313,26 +333,6 @@
             this.tltUsuarios.Tag = "";
             this.tltUsuarios.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.tltUsuarios.ToolTipTitle = "SAI";
-            // 
-            // saiTxtContrasena
-            // 
-            this.saiTxtContrasena.BlnEsRequerido = true;
-            this.saiTxtContrasena.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.saiTxtContrasena.Location = new System.Drawing.Point(108, 82);
-            this.saiTxtContrasena.MaxLength = 10;
-            this.saiTxtContrasena.Name = "saiTxtContrasena";
-            this.saiTxtContrasena.PasswordChar = '*';
-            this.saiTxtContrasena.Size = new System.Drawing.Size(182, 20);
-            this.saiTxtContrasena.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.saiTxtContrasena.TabIndex = 9;
-            // 
-            // lblUserExist
-            // 
-            this.lblUserExist.AutoSize = true;
-            this.lblUserExist.Location = new System.Drawing.Point(317, 52);
-            this.lblUserExist.Name = "lblUserExist";
-            this.lblUserExist.Size = new System.Drawing.Size(0, 13);
-            this.lblUserExist.TabIndex = 10;
             // 
             // frmUsuarios
             // 

@@ -22,6 +22,11 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Llena el grid con los tipos de incidencia, llena el catalogo de sistemas y limpia controles
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void frmTipoIncidencias_Load(object sender, EventArgs e)
         {
             SAIBarraEstado.SizingGrip = false;
@@ -30,6 +35,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             this.Limpiar();
         }
 
+        /// <summary>
+        /// Llena los tipos de incidencias en el grid
+        /// </summary>
         private void LlenarGrid()
         {
             try
@@ -65,6 +73,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             { }
         }
 
+        //Llena el combo con los sistemas disponibles
         private void LlenarSistemas()
         {
             try
@@ -89,17 +98,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             { }
         }
 
-        private void gvTipoIncidencias_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void gvTipoIncidencias_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        /// <summary>
+         /// <summary>
         /// Evento del DataGrid para obtener los datos que del regitro que se ha seleccionado
         /// </summary>
         /// <param name="sender"></param>
@@ -151,11 +150,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             this.ddlPrioridad.SelectedIndex = 0;
         }
 
-        private void gvTipoIncidencias_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
-        {
-
-        }
-
         #region ABC
 
         /// <summary>
@@ -175,8 +169,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     newTipoIncidencia.Prioridad = Convert.ToInt32(this.ddlPrioridad.SelectedItem);
                     Mappers.TipoIncidenciaMapper.Instance().Insert(newTipoIncidencia);
 
-                    //this.gvTipoIncidencias.CurrentRow.Selected = false;
-
+                    //Agrega operacion en bitacora
                     Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
                     bitacora.Descripcion = "Se agrego la incidencia: " + newTipoIncidencia.Descripcion;
                     bitacora.FechaOperacion = DateTime.Today;
@@ -222,7 +215,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     bitacora.ValorActual = this.saiTxtDescripcion.Text + ", " + this.txtClaveoperacion.Text;
                     bitacora.ValorAnterior = Convert.ToString(this.gvTipoIncidencias.Rows[this.ObtenerIndiceSeleccionado()].Cells["Descripcion"].Value);
                     bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
-
+                    //Agrega operacion en bitacora
                     Mappers.BitacoraMapper.Instance().Insert(bitacora);
                 }
                 catch (Exception ex)
@@ -252,7 +245,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         bitacora.NombreCatalogo = "Tipo Incidencias";
                         bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
                         bitacora.Operacion = "DELETE";
-
+                        //Agrega operacion en bitacora
                         Mappers.BitacoraMapper.Instance().Insert(bitacora);
                     }
                 }
@@ -264,34 +257,73 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         }
         #endregion
 
+        /// <summary>
+        /// Valida que haya sistema seleccionado y agrega el nuevo tipo de incidencia
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            bool abc = this.saiTxtDescripcion.BlnFueValido;
-            if (SAIProveedorValidacion.ValidarCamposRequeridos(this.groupBox1))
+            try
             {
-                this.Agregar();
-                this.LlenarGrid();
-            }
-            this.Limpiar();
-        }
-
-        private void btnModificar_Click(object sender, EventArgs e)
-        {
-            if (SAIProveedorValidacion.ValidarCamposRequeridos(this.groupBox1))
-            {
-                this.Modificar();
-                this.LlenarGrid();
+                //bool abc = this.saiTxtDescripcion.BlnFueValido;
+                if (this.ddlSistema.SelectedIndex > -1)
+                {
+                    if (SAIProveedorValidacion.ValidarCamposRequeridos(this.groupBox1))
+                    {
+                        this.Agregar();
+                        this.LlenarGrid();
+                    }
+                }
+                else
+                {
+                    throw new SAIExcepcion("Seleccione un sistema.");
+                }
                 this.Limpiar();
             }
+            catch (SAIExcepcion)
+            { }
         }
 
+        /// <summary>
+        /// Valida que haya sistema seleccionado y llama el metodo modificar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.ddlSistema.SelectedIndex > -1)
+                {
+                    if (SAIProveedorValidacion.ValidarCamposRequeridos(this.groupBox1))
+                    {
+                        this.Modificar();
+                        this.LlenarGrid();
+                        this.Limpiar();
+                    }
+                }
+                else { throw new SAIExcepcion("Seleccione un sistema."); }
+            }
+            catch (SAIExcepcion)
+            { }
+        }
+
+        /// <summary>
+        /// Cierra la ventana de tipos de incidencia
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
-            //this.btnModificar.Enabled = false;
-            //this.btnAgregar.Enabled = true;
         }
 
+        /// <summary>
+        /// LLama el metodo eliminar, actualiza el datagrid y limpia controles
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Desea eliminar el Tipo de Incidencia?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -302,26 +334,49 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             }
         }
 
+        /// <summary>
+        /// Limpia controles
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             this.Limpiar();
         }
 
+        /// <summary>
+        /// Obtiene el indice del registro seleccionado
+        /// </summary>
+        /// <returns></returns>
         private int ObtenerIndiceSeleccionado()
         {
             return this.gvTipoIncidencias.CurrentCellAddress.Y;
         }
 
+        /// <summary>
+        /// Obtiene el valor del elemento seleccionado
+        /// </summary>
+        /// <param name="indice">incice del elemento</param>
+        /// <returns>objeto con el valor del elmento seleccionaod</returns>
         private object ObtieneValor(int indice)
         {
             return ((ComboItem)this.ddlSistema.Items[indice]).Valor;
         }
 
+        /// <summary>
+        /// Obtiene la descripcion del elemeno seleccionado
+        /// </summary>
+        /// <param name="indice">indice del elemento seleccionado en el combobox</param>
+        /// <returns></returns>
         private string ObtieneDescripcion(int indice)
         {
             return ((ComboItem)this.ddlSistema.Items[indice]).Descripcion;
         }
 
+        /// <summary>
+        /// Selecciona un elemento del combobox
+        /// </summary>
+        /// <param name="Value">valor para determinar el elemento que se seleccionara</param>
         private void SeleccionarComboItem(int Value)
         {
             foreach (ComboItem item in this.ddlSistema.Items)
@@ -334,6 +389,28 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 else
                 { this.ddlSistema.SelectedIndex = -1; }
             }
+        }
+
+
+        /// <summary>
+        /// Valida solo aceptar numeros
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtClaveoperacion_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }            
         }
     }
 }
