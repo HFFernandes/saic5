@@ -1,0 +1,221 @@
+﻿<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{621D1685-1453-4693-B6DD-BECD29CDE266}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>Korzh.EasyQuery.WebControls.CLR20</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Korzh</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>0.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib">
+      <Name>mscorlib</Name>
+      <HintPath>mscorlib.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+      <HintPath>System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+      <HintPath>System.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web">
+      <Name>System.Web</Name>
+      <HintPath>System.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.Xml</Name>
+      <HintPath>System.Xml.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\WebControls\Properties\Resources.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\WebControls\ColumnRow.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\WebControls\CreateValueElementEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\WebControls\CreateValueElementEventHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\WebControls\IColumnRowCreator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\WebControls\ListRequestEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\WebControls\ListRequestEventHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\WebControls\QCPAppearance.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\WebControls\QueryColumnsPanel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\WebControls\QueryPanel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\WebControls\SortColumnsPanel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\WebControls\SqlExecuteEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\WebControls\SqlExecuteEventHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\WebControls\ValidateValueEventHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\WebControls\ValueRequestEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EasyQuery\WebControls\ValueRequestEventHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EasyQuery\WebControls\QueryColumnsPanel.bmp" />
+    <EmbeddedResource Include="EasyQuery\WebControls\QueryPanel.bmp" />
+    <EmbeddedResource Include="EasyQuery\WebControls\Resources\Watermark.gif" />
+    <EmbeddedResource Include="EasyQuery\WebControls\Resources\XDownButton.gif" />
+    <EmbeddedResource Include="EasyQuery\WebControls\Resources\XRowButton20x16.gif" />
+    <EmbeddedResource Include="EasyQuery\WebControls\Resources\XUpButton.gif" />
+    <EmbeddedResource Include="EasyQuery\WebControls\SortColumnsPanel.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EasyQuery\WebControls\Properties\Resources.resx">
+      <DependentUpon>Resources.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EasyQuery\WebControls\QueryColumnsPanel.resx">
+      <DependentUpon>QueryColumnsPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EasyQuery\WebControls\QueryPanel.resx">
+      <DependentUpon>QueryPanel.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Korzh.EasyQuery.CLR20_Source\Korzh.EasyQuery.CLR20.csproj">
+      <Project>{0E56A153-3A5C-4D9B-9DF7-4326D5273E12}</Project>
+      <Name>Korzh.EasyQuery.CLR20</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Korzh.WebControls.CLR20_Source\Korzh.WebControls.CLR20.csproj">
+      <Project>{C219F132-E466-4A8B-9D3A-6FD0CCD56C5A}</Project>
+      <Name>Korzh.WebControls.CLR20</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

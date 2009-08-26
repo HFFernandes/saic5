@@ -1,37 +1,50 @@
 <query name="">
-  <description />
-  <columns>
-    <Column caption="Folio" sorting="None" sortindex="-1">
-      <expr class="ENTATTR" id="Incidencias.Folio" />
-    </Column>
-    <Column caption="Ligado al Folio" sorting="Ascending" sortindex="0">
-      <expr class="ENTATTR" id="Incidencias.FolioPadre" />
-    </Column>
-    <Column caption="Descripción" sorting="None" sortindex="-1">
-      <expr class="ENTATTR" id="Incidencias.Descripcion" />
-    </Column>
-    <Column caption="Dirección" sorting="None" sortindex="-1">
-      <expr class="ENTATTR" id="Incidencias.Direccion" />
-    </Column>
-    <Column caption="Municipio" sorting="None" sortindex="-1">
-      <expr class="ENTATTR" id="Municipio.Nombre" />
-    </Column>
-    <Column caption="Localidad" sorting="None" sortindex="-1">
-      <expr class="ENTATTR" id="Localidad.Nombre" />
-    </Column>
-    <Column caption="Referencias" sorting="None" sortindex="-1">
-      <expr class="ENTATTR" id="Incidencias.Referencias" />
-    </Column>
-    <Column caption="Número de Teléfono" sorting="None" sortindex="-1">
-      <expr class="ENTATTR" id="Incidencias.Telefono" />
-    </Column>
-    <Column caption="Tipo de Incidencia" sorting="None" sortindex="-1">
-      <expr class="ENTATTR" id="{Tipos de Incidencia}.Descripcion" />
-    </Column>
-    <Column caption="Operador" sorting="None" sortindex="-1">
-      <expr class="ENTATTR" id="Usuario.NombrePropio" />
-    </Column>
-  </columns>
-  <justsortedcolumns />
-  <conditions linking="All" />
+    <description />
+    <columns>
+        <Column caption="Folio" sorting="Ascending" sortindex="0">
+            <expr class="ENTATTR" id="lstIncidencias066.Folio" />
+        </Column>
+        <Column caption="Folio Padre" sorting="None" sortindex="-1">
+            <expr class="ENTATTR" id="lstIncidencias066.FolioPadre" />
+        </Column>
+        <Column caption="DescripciÃ³n" sorting="None" sortindex="-1">
+            <expr class="ENTATTR" id="lstIncidencias066.Descripcion" />
+        </Column>
+        <Column caption="DirecciÃ³n" sorting="None" sortindex="-1">
+            <expr class="ENTATTR" id="lstIncidencias066.Direccion" />
+        </Column>
+        <Column caption="Referencias" sorting="None" sortindex="-1">
+            <expr class="ENTATTR" id="lstIncidencias066.Referencias" />
+        </Column>
+        <Column caption="TelÃ©fono" sorting="None" sortindex="-1">
+            <expr class="ENTATTR" id="lstIncidencias066.Telefono" />
+        </Column>
+        <Column caption="Municipio" sorting="None" sortindex="-1">
+            <expr class="ENTATTR" id="Municipio.Nombre" />
+        </Column>
+        <Column caption="Localidad" sorting="None" sortindex="-1">
+            <expr class="ENTATTR" id="Localidad.Nombre" />
+        </Column>
+        <Column caption="CÃ³digo Postal" sorting="None" sortindex="-1">
+            <expr class="ENTATTR" id="CodigoPostal.Valor" />
+        </Column>
+        <Column caption="Tipo de Incidente" sorting="None" sortindex="-1">
+            <expr class="ENTATTR" id="{Tipos de Incidencia}.Descripcion" />
+        </Column>
+        <Column caption="Fecha de Suceso" sorting="None" sortindex="-1">
+            <expr class="ENTATTR" id="lstIncidencias066.FechaSuceso" />
+        </Column>
+        <Column caption="Operador" sorting="None" sortindex="-1">
+            <expr class="ENTATTR" id="Usuario.NombrePropio" />
+        </Column>
+    </columns>
+    <justsortedcolumns />
+    <conditions linking="All">
+        <Condition class="SMPL" enabled="True" ReadOnly="False">
+            <operator id="IsNotNull" />
+            <expressions>
+                <expr class="ENTATTR" id="lstIncidencias066.FolioPadre" />
+            </expressions>
+        </Condition>
+    </conditions>
 </query>

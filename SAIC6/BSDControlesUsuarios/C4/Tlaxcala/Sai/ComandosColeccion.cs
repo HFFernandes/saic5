@@ -33,7 +33,7 @@ namespace BSD.C4.Tlaxcala.Sai
                            new Comando(ID.CMD_PH,"PH","Historial de incidentes con la misma dirección.",null,false,true),
                            //new Comando(ID.CMD_RNC,"RNC","",null,false,true),
                            new Comando(ID.CMD_RPH,"RPH","Historial de incidentes con el mismo número telefónico.",null,false,true),
-                           new Comando(ID.CMD_S,"S","",'S',false,true),
+                           //new Comando(ID.CMD_S,"S","",'S',false,true),
                            //new Comando(ID.CMD_SDT,"SDT","",null,false,true),
                            new Comando(ID.CMD_SIF,"SIF","Selección de incidentes por filtros definidos.",null,false,true),
                            new Comando(ID.CMD_SLC,"SLC","Consulta de incidentes ligados.",null,false,true),
