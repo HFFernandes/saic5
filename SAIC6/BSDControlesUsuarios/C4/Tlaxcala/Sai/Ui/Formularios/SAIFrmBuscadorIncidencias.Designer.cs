@@ -116,7 +116,7 @@
             this.QueryCondiciones.Appearance.ActiveBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.QueryCondiciones.Appearance.ActiveForeColor = System.Drawing.SystemColors.HighlightText;
             this.QueryCondiciones.Appearance.AdjustChildLevel = true;
-            this.QueryCondiciones.Appearance.AttrElementFormat = "{entity} {attr}";
+            this.QueryCondiciones.Appearance.AttrElementFormat = "{attr}";
             this.QueryCondiciones.Appearance.ButtonActiveBodyColor = System.Drawing.Color.Gray;
             this.QueryCondiciones.Appearance.ButtonActiveBorderColor = System.Drawing.Color.Black;
             this.QueryCondiciones.Appearance.ButtonClickBodyColor = System.Drawing.Color.White;
@@ -157,8 +157,8 @@
             // ModeloQuery
             // 
             this.ModeloQuery.FilePath = "";
-            this.ModeloQuery.Formats.DateFormat = "dd-MM-yyyy";
-            this.ModeloQuery.Formats.DateTimeFormat = "dd-MM-yyyy HH:mm:ss";
+            this.ModeloQuery.Formats.DateFormat = "MM-dd-yyyy";
+            this.ModeloQuery.Formats.DateTimeFormat = "MM-dd-yyyy HH:mm:ss";
             this.ModeloQuery.Formats.EOL = Korzh.EasyQuery.EOLSymbol.CRLF;
             this.ModeloQuery.Formats.OrderByStyle = Korzh.EasyQuery.OrderByStyles.Numbers;
             this.ModeloQuery.Formats.SqlSyntax = Korzh.EasyQuery.SqlSyntax.SQL2;
