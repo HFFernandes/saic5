@@ -67,16 +67,16 @@ namespace Korzh.WinControls.XControls
 
         protected internal virtual void AdjustSize()
         {
-            if ((this.ParentPanel == null) || !this.ParentPanel.Appearance.TuneElementSizes)
+            try
             {
-                if (this.ElementControl.Text == "")
+                if ((this.ParentPanel == null) || !this.ParentPanel.Appearance.TuneElementSizes)
                 {
-                    this.BasePanel.Width = 10;
+                    this.BasePanel.Width = this.ElementControl.Text == "" ? 10 : MeasureDisplayStringWidth(this.ElementControl.CreateGraphics(), this.ElementControl.Text, this.ElementControl.Font);
                 }
-                else
-                {
-                    this.BasePanel.Width = MeasureDisplayStringWidth(this.ElementControl.CreateGraphics(), this.ElementControl.Text, this.ElementControl.Font);
-                }
+            }
+            catch (Exception ex)
+            {
+                this.BasePanel.Width = 15;
             }
         }
 

@@ -10,6 +10,6 @@
 [assembly: System.Reflection.AssemblyCopyright("Korzh.com (c) 2005-2009")]
 [assembly: System.Reflection.AssemblyCompany("Korzh.com")]
 [assembly: System.Reflection.AssemblyConfiguration("")]
-[assembly: System.Reflection.AssemblyProduct("EasyQuery.NET (demo version)")]
+[assembly: System.Reflection.AssemblyProduct("EasyQuery.NET  ")]
 [assembly: System.Reflection.AssemblyDescription("EasyQuery.NET Windows Forms controls")]
 

@@ -69,7 +69,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                     GridResultados.Refresh();
                 }
-                catch (Exception) { throw new SAIExcepcion(ID.STR_ERRORFILTRO); }
+                catch (Exception ex) { throw new SAIExcepcion(ID.STR_ERRORFILTRO); }
             }
             catch (SAIExcepcion)
             {
@@ -101,7 +101,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void SAIFrmBuscadorIncidencias_Load(object sender, EventArgs e)
         {
-            //ModeloQuery.LoadFromFile(@"D:\Plantilla.xml");
+            ModeloQuery.LoadFromFile(@"D:\nplantilla.xml");
         }
 
         private void GridResultados_DoubleClick(object sender, EventArgs e)

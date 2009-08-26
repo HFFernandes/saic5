@@ -2,7 +2,7 @@
 
 [assembly: System.Reflection.AssemblyVersion("2.5.0.29")]
 [assembly: System.Reflection.AssemblyCopyright("(c) 2005-2009 Korzh.com")]
-[assembly: System.Reflection.AssemblyProduct("EasyQuery.NET (demo version)")]
+[assembly: System.Reflection.AssemblyProduct("EasyQuery.NET  ")]
 [assembly: System.Reflection.AssemblyCompany("Korzh.com")]
 [assembly: System.Reflection.AssemblyTrademark("")]
 [assembly: System.Runtime.CompilerServices.CompilationRelaxations(8)]

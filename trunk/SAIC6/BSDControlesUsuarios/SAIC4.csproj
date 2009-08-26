@@ -106,7 +106,9 @@
   <ItemGroup>
     <Compile Include="C4\Entrada.cs" />
     <Compile Include="C4\Tlaxcala\Sai\Aplicacion.cs" />
-    <Compile Include="C4\Tlaxcala\Sai\CallListener\Listener.cs" />
+    <Compile Include="C4\Tlaxcala\Sai\CallListener\Listener.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="C4\Tlaxcala\Sai\CallListener\PruebaListener.cs">
       <SubType>Form</SubType>
     </Compile>
