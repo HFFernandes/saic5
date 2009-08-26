@@ -12,34 +12,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             InitializeComponent();
 
-            QueryColumnas.Model = ModeloDatos;
-            QueryCondiciones.Model = ModeloDatos;
-            QueryColumnas.Query = ModeloQuery;
-            QueryCondiciones.Query = ModeloQuery;
-
-            var strArchivo = Aplicacion.UsuarioPersistencia.strSistemaActual == "066" ? string.Format("{0}\\{1}", Environment.CurrentDirectory, "SAI066.xml") : string.Format("{0}\\{1}", Environment.CurrentDirectory, "SAI089.xml");
-
-            try
-            {
-                try
-                {
-                    ModeloDatos.LoadFromFile(strArchivo);
-                    QueryColumnas.Activate();
-                    QueryCondiciones.Activate();
-                }
-                catch (FileNotFoundException)
-                {
-                    throw new SAIExcepcion(ID.STR_NOSELOCALIZOARCHIVO);
-                }
-                catch (Exception ex)
-                {
-                    throw new SAIExcepcion(ex.Message);
-                }
-            }
-            catch (SAIExcepcion)
-            {
-                Close();
-            }
+            CargarModelo();
         }
 
         private void ModeloQuery_ColumnsChanged(object sender, Korzh.EasyQuery.ColumnsChangeEventArgs e)
@@ -48,6 +21,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         }
 
         private void ModeloQuery_ConditionsChanged(object sender, Korzh.EasyQuery.ConditionsChangeEventArgs e)
+        {
+            ActualizarResultado();
+        }
+
+        private void btnActualizar_Click(object sender, EventArgs e)
         {
             ActualizarResultado();
         }
@@ -73,7 +51,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
             catch (SAIExcepcion)
             {
-                Close();
+                QueryColumnas.Model = null;
+                QueryCondiciones.Model = null;
+                CargarModelo();
             }
         }
 
@@ -99,20 +79,47 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
+        private void CargarModelo()
+        {
+            var strArchivo = Aplicacion.UsuarioPersistencia.strSistemaActual == "066" ? string.Format("{0}\\{1}", Environment.CurrentDirectory, "SAI066.xml") : string.Format("{0}\\{1}", Environment.CurrentDirectory, "SAI089.xml");
+
+            try
+            {
+                try
+                {
+                    ModeloDatos.LoadFromFile(strArchivo);
+
+                    QueryColumnas.Model = ModeloDatos;
+                    QueryCondiciones.Model = ModeloDatos;
+                    QueryColumnas.Query = ModeloQuery;
+                    QueryCondiciones.Query = ModeloQuery;
+
+                    QueryColumnas.Activate();
+                    QueryCondiciones.Activate();
+                }
+                catch (FileNotFoundException)
+                {
+                    throw new SAIExcepcion(ID.STR_NOSELOCALIZOARCHIVO);
+                }
+                catch (Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
+            }
+            catch (SAIExcepcion)
+            {
+                Close();
+            }
+        }
+
         private void SAIFrmBuscadorIncidencias_Load(object sender, EventArgs e)
         {
-            ModeloQuery.LoadFromFile(@"D:\nplantilla.xml");
+            //ModeloQuery.LoadFromFile(@"D:\nplantilla.xml");
         }
 
         private void GridResultados_DoubleClick(object sender, EventArgs e)
         {
-            ModeloQuery.SaveToFile(@"D:\nplantilla.xml");
+            //ModeloQuery.SaveToFile(@"D:\SLC.xml");
         }
-
-        private void btnActualizar_Click(object sender, EventArgs e)
-        {
-            ActualizarResultado();
-        }
-
     }
 }

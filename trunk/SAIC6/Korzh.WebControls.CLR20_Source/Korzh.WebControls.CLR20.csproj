@@ -1,0 +1,273 @@
+﻿<Project DefaultTargets="Build" ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C219F132-E466-4A8B-9D3A-6FD0CCD56C5A}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>Korzh.WebControls.CLR20</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Korzh</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>0.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib">
+      <Name>mscorlib</Name>
+      <HintPath>mscorlib.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+      <HintPath>System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+      <HintPath>System.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web">
+      <Name>System.Web</Name>
+      <HintPath>System.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.Xml</Name>
+      <HintPath>System.Xml.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\ActionEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\ActionEventHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\ButtonListXElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\ButtonXElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\ContentChangedEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\ContentChangedEventHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\DateTimeXElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\EditXElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\KorzhMenuListControl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\LabelListXElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\LabelXElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\ListControl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\ListXElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\MenuListControl.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\RowLinkLabel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\Signals.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\StringTokenizer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\TextAdjustingEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\TextAdjustingEventHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\TextXElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\ValidateValueEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\ValidateValueEventHandler.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\ValueItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\ValueItemList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\XElement.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\XElementList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\XElementsStore.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\XPanel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\XRow.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\XControls\XRowList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\Ajax.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\KorzhScriptPopupMenu.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\ScriptMenu.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\ScriptMenuItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\ScriptMenuItemList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\ScriptMenuStyle.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WebControls\ScriptPopupMenu.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\ScriptPopupMenuList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebControls\TextStorage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="WebControls\Resources\BlankImage.gif" />
+    <EmbeddedResource Include="WebControls\Resources\DateTimePicker.js" />
+    <EmbeddedResource Include="WebControls\Resources\KorzhWebScripts.js" />
+    <EmbeddedResource Include="WebControls\Resources\Picker.gif" />
+    <EmbeddedResource Include="WebControls\XPanel.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="WebControls\ScriptMenu.resx">
+      <DependentUpon>ScriptMenu.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

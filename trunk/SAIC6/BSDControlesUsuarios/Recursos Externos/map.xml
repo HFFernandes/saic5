@@ -1,49 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map>
-   
-
     <layer>
-          <file>municipio.TAB</file>
-    	  <layername>Municipio</layername>
-    		<labelfield>NOMBRE</labelfield>
-            <labelsize>10</labelsize>
-            <showlabel>true</showlabel>
-            <type>poly</type>
-            <fillstyle>UpwardDiagonal</fillstyle>
-            <fillcolor>LightGray</fillcolor>
-            <linestyle>Solid</linestyle>
-            <linecolor>Gray</linecolor>
-            <size>1</size>
-            <visible>true</visible>
+        <file>municipio.TAB</file>
+        <layername>MUNICIPIO</layername>
+        <labelfield>NOMBRE</labelfield>
+        <labelsize>10</labelsize>
+        <showlabel>true</showlabel>
+        <type>poly</type>
+        <fillstyle>UpwardDiagonal</fillstyle>
+        <fillcolor>LightGray</fillcolor>
+        <linestyle>Solid</linestyle>
+        <linecolor>Gray</linecolor>
+        <size>1</size>
+        <visible>true</visible>
     </layer>
     <layer>
-            <file>localidad.TAB</file>
-            <layername>Localidad</layername>
-            <labelfield>NOMBRE</labelfield>
-            <labelsize>10</labelsize>
-            <showlabel>true</showlabel>
-            <type>poly</type>
-            <fillstyle>UpwardDiagonal</fillstyle>
-            <fillcolor>LightGray</fillcolor>
-            <linestyle>Solid</linestyle>
-            <linecolor>Gray</linecolor>
-            <size>1</size>
-            <visible>true</visible>
+        <file>localidad.TAB</file>
+        <layername>LOCALIDAD</layername>
+        <labelfield>NOMBRE</labelfield>
+        <labelsize>10</labelsize>
+        <showlabel>true</showlabel>
+        <type>poly</type>
+        <fillstyle>UpwardDiagonal</fillstyle>
+        <fillcolor>LightGray</fillcolor>
+        <linestyle>Solid</linestyle>
+        <linecolor>Gray</linecolor>
+        <size>1</size>
+        <visible>true</visible>
     </layer>
     <layer>
-    		<file>colonia.TAB</file>
-    		<layername>Colonia</layername>
-    		<labelfield>NOMBRE</labelfield>
-            <labelsize>10</labelsize>
-            <showlabel>true</showlabel>
-            <type>poly</type>
-            <fillstyle>Solid</fillstyle>
-            <fillcolor>LightYellow</fillcolor>
-            <linestyle>Solid</linestyle>
-            <linecolor>LightGray</linecolor>
-            <size>10</size>
-            <visible>true</visible>
+        <file>colonia.TAB</file>
+        <layername>Colonia</layername>
+        <labelfield>NOMBRE</labelfield>
+        <labelsize>10</labelsize>
+        <showlabel>true</showlabel>
+        <type>poly</type>
+        <fillstyle>Solid</fillstyle>
+        <fillcolor>LightYellow</fillcolor>
+        <linestyle>Solid</linestyle>
+        <linecolor>LightGray</linecolor>
+        <size>2</size>
+        <visible>true</visible>
     </layer>
- 
-    
- </map>
+    <layer>
+        <file>MANZANA.TAB</file>
+        <layername>ID</layername>
+        <labelfield>NOMBRE</labelfield>
+        <labelsize>10</labelsize>
+        <showlabel>false</showlabel>
+        <type>poly</type>
+        <fillstyle>UpwardDiagonal</fillstyle>
+        <fillcolor>Lightyellow</fillcolor>
+        <linestyle>Solid</linestyle>
+        <linecolor>brown</linecolor>
+        <size>1</size>
+        <visible>true</visible>
+    </layer>
+    <layer>
+        <file>CALLE.TAB</file>
+        <layername>ID</layername>
+        <labelfield>NOMBRE</labelfield>
+        <labelsize>7</labelsize>
+        <showlabel>true</showlabel>
+        <type>line</type>
+        <fillstyle>UpwardDiagonal</fillstyle>
+        <fillcolor>LightGray</fillcolor>
+        <linestyle>Solid</linestyle>
+        <linecolor>Blue</linecolor>
+        <size>1</size>
+        <visible>true</visible>
+    </layer>
+</map>

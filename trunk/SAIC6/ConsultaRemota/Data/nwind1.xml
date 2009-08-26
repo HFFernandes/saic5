@@ -1,0 +1,514 @@
+<DATAMODEL Version="4" Name="" DefQuery="">
+  <DESCRIPTION />
+  <DBPARAMS>
+    <ConnectionString>Provider=Microsoft.Jet.OLEDB.4.0;Password="";User ID=Admin;Data Source=I:\eq_net\samples\Data\NWind\NWind.mdb;Mode=Share Deny None;Extended Properties="";Jet OLEDB:System database="";Jet OLEDB:Registry Path="";Jet OLEDB:Database Password="";Jet OLEDB:Engine Type=4;Jet OLEDB:Database Locking Mode=0;Jet OLEDB:Global Partial Bulk Ops=2;Jet OLEDB:Global Bulk Transactions=1;Jet OLEDB:New Database Password="";Jet OLEDB:Create System Database=False;Jet OLEDB:Encrypt Database=False;Jet OLEDB:Don't Copy Locale on Compact=False;Jet OLEDB:Compact Without Replica Repair=False;Jet OLEDB:SFP=False</ConnectionString>
+    <LoginPrompt>False</LoginPrompt>
+    <GateClass>Korzh.EasyQuery.DataGates.OleDbGate</GateClass>
+  </DBPARAMS>
+  <OPERATORS>
+    <OPERATOR ID="Equal" CAPTION="" EXPR="{expr1} = {expr2}" FORMAT="{expr1} [[is equal to]] {expr2}" KIND="Scalar" CASEINS="False" GROUP="Common operators">
+      <TYPES>String,WideString,Byte,Word,Int,Int64,Bool,Float,Currency,BCD,Autoinc,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+    </OPERATOR>
+    <OPERATOR ID="NotEqual" CAPTION="is not equal to" EXPR="{expr1} &lt;&gt; {expr2}" FORMAT="{expr1} [[is not equal to]] {expr2}" KIND="Scalar" CASEINS="False" GROUP="Common operators">
+      <TYPES>String,WideString,Byte,Word,Int,Int64,Bool,Float,Currency,BCD,Autoinc,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+    </OPERATOR>
+    <OPERATOR ID="LessThan" CAPTION="is less than" EXPR="{expr1} &lt; {expr2}" FORMAT="{expr1} [[is less than]] {expr2}" KIND="Scalar" CASEINS="False" GROUP="Common operators">
+      <TYPES>String,WideString,Byte,Word,Int,Int64,Bool,Float,Currency,BCD,Autoinc,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+    </OPERATOR>
+    <OPERATOR ID="LessOrEqual" CAPTION="is less than or equal to" EXPR="{expr1} &lt;= {expr2}" FORMAT="{expr1} [[is less than or equal to]] {expr2}" KIND="Scalar" CASEINS="False" GROUP="Common operators">
+      <TYPES>String,WideString,Byte,Word,Int,Int64,Bool,Float,Currency,BCD,Autoinc,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+    </OPERATOR>
+    <OPERATOR ID="GreaterThan" CAPTION="is greater than" EXPR="{expr1} &gt; {expr2}" FORMAT="{expr1} [[is greater than]] {expr2}" KIND="Scalar" CASEINS="False" GROUP="Common operators">
+      <TYPES>String,WideString,Byte,Word,Int,Int64,Bool,Float,Currency,BCD,Autoinc,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+    </OPERATOR>
+    <OPERATOR ID="GreaterOrEqual" CAPTION="is greater than or equal to" EXPR="{expr1} &gt;= {expr2}" FORMAT="{expr1} [[is greater than or equal to]] {expr2}" KIND="Scalar" CASEINS="False" GROUP="Common operators">
+      <TYPES>String,WideString,Byte,Word,Int,Int64,Bool,Float,Currency,BCD,Autoinc,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+    </OPERATOR>
+    <OPERATOR ID="IsNull" CAPTION="is null" EXPR="{expr1} IS NULL" FORMAT="{expr1} [[is null]]" KIND="Scalar" CASEINS="False" GROUP="Common operators">
+      <TYPES>String,WideString,Byte,Word,Int,Int64,Bool,Float,Currency,BCD,Autoinc,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+    </OPERATOR>
+    <OPERATOR ID="InList" CAPTION="is in list" EXPR="{expr1} in ({expr2})" FORMAT="{expr1} [[is in list]] {expr2}" KIND="List" CASEINS="False" GROUP="Common operators">
+      <TYPES>String,WideString,Byte,Word,Int,Int64,Bool,Float,Currency,BCD,Autoinc,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+    </OPERATOR>
+    <OPERATOR ID="NotInList" CAPTION="is not in list" EXPR="NOT ({expr1} in ({expr2}))" FORMAT="{expr1} [[is not in list]] {expr2}" KIND="List" CASEINS="False" GROUP="Common operators">
+      <TYPES>String,WideString,Byte,Word,Int,Int64,Bool,Float,Currency,BCD,Autoinc,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+    </OPERATOR>
+    <OPERATOR ID="StartsWith" CAPTION="starts with" EXPR="{expr1} LIKE {expr2}" FORMAT="{expr1} [[starts with]] {expr2}" KIND="Scalar" CASEINS="False" GROUP="String operators">
+      <TYPES>String,WideString,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="EDIT" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="NotStartsWith" CAPTION="does not start with" EXPR="NOT ({expr1} LIKE {expr2})" FORMAT="{expr1} [[does not start with]] s{expr2}" KIND="Scalar" CASEINS="False" GROUP="String operators">
+      <TYPES>String,WideString,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="EDIT" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="Contains" CAPTION="contains" EXPR="{expr1} LIKE {expr2}" FORMAT="{expr1}  [[contains]] {expr2}" KIND="Scalar" CASEINS="False" GROUP="String operators">
+      <TYPES>String,WideString,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="EDIT" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="NotContains" CAPTION="does not contain" EXPR="NOT ({expr1} LIKE {expr2})" FORMAT="{expr1} [[does not contain]] {expr2}" KIND="Scalar" CASEINS="False" GROUP="String operators">
+      <TYPES>String,WideString,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="EDIT" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="Between" CAPTION="is between" EXPR="{expr1} BETWEEN {expr2} AND {expr3}" FORMAT="{expr1} [[is between]] {expr2} and {expr3}" KIND="Scalar" CASEINS="False" GROUP="Common operators">
+      <TYPES>String,WideString,Byte,Word,Int,Int64,Bool,Float,Currency,BCD,Autoinc,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+    </OPERATOR>
+    <OPERATOR ID="NotBetween" CAPTION="is not between" EXPR="NOT ({expr1} BETWEEN {expr2} AND {expr3})" FORMAT="{expr1} [[is not between]] {expr2} and {expr3}" KIND="Scalar" CASEINS="False" GROUP="Common operators">
+      <TYPES>String,WideString,Byte,Word,Int,Int64,Bool,Float,Currency,BCD,Autoinc,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Unknown" />
+    </OPERATOR>
+    <OPERATOR ID="InSubQuery" CAPTION="in sub query" EXPR="{expr1} IN ({expr2})" FORMAT="{expr1} [[in sub query]] {expr2}" KIND="Query" CASEINS="False" GROUP="Common operators">
+      <TYPES>String,WideString,Byte,Word,Int,Int64,Bool,Float,Currency,BCD,Autoinc,Memo,FixedChar</TYPES>
+      <EXPRS DefType="Byte" />
+    </OPERATOR>
+    <OPERATOR ID="DateEqualSpecial" CAPTION="is (special date)" EXPR="{expr1} = {expr2}" FORMAT="{expr1} [[is]] {expr2}" KIND="Scalar" CASEINS="False" GROUP="Date/time operators">
+      <TYPES>Date,DateTime</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="CUSTOMLIST" NAME="SpecDateValues" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="DateEqualPrecise" CAPTION="is (precise date)" EXPR="{expr1} = {expr2}" FORMAT="{expr1} [[is]] {expr2}" KIND="Scalar" CASEINS="False" GROUP="Date/time operators">
+      <TYPES>Date,DateTime</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="DATETIME" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="DateNotEqualSpecial" CAPTION="is not" EXPR="{expr1} &lt;&gt; {expr2}" FORMAT="{expr1} [[is not]] {expr2}" KIND="Scalar" CASEINS="False" GROUP="Date/time operators">
+      <TYPES>Date,DateTime</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="CUSTOMLIST" NAME="SpecDateValues" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="DateNotEqualPrecise" CAPTION="is not" EXPR="{expr1} &lt;&gt; {expr2}" FORMAT="{expr1} [[is not]] {expr2}" KIND="Scalar" CASEINS="False" GROUP="Date/time operators">
+      <TYPES>Date,DateTime</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="DATETIME" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="DateBeforeSpecial" CAPTION="is before (special date)" EXPR="{expr1} &lt; {expr2}" FORMAT="{expr1} [[is before]] {expr2}" KIND="Scalar" CASEINS="False" GROUP="Date/time operators">
+      <TYPES>Date,DateTime</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="CUSTOMLIST" NAME="SpecDateValues" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="DateBeforePrecise" CAPTION="is before (precise date)" EXPR="{expr1} &lt; {expr2}" FORMAT="{expr1} [[is before]] {expr2}" KIND="Scalar" CASEINS="False" GROUP="Date/time operators">
+      <TYPES>Date,DateTime</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="DATETIME" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="DateAfterSpecial" CAPTION="is after (special date)" EXPR="{expr1} &gt;= {expr2}" FORMAT="{expr1} [[is after]] {expr2}" KIND="Scalar" CASEINS="False" GROUP="Date/time operators">
+      <TYPES>Date,DateTime</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="CUSTOMLIST" NAME="SpecDateValues" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="DateAfterPrecise" CAPTION="is after (precise date)" EXPR="{expr1} &gt;= {expr2}" FORMAT="{expr1} [[is after]] {expr2}" KIND="Scalar" CASEINS="False" GROUP="Date/time operators">
+      <TYPES>Date,DateTime</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="DATETIME" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="DatePeriodPrecise" CAPTION="is between" EXPR="{expr1} BETWEEN {expr2} AND {expr3}" FORMAT="{expr1} [[is between]] {expr2} and {expr3}" KIND="Scalar" CASEINS="False" GROUP="Date/time operators">
+      <TYPES>Date,DateTime</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="DATETIME" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="TimeBeforeSpecial" CAPTION="is before (special time)" EXPR="{expr1} &lt; {expr2}" FORMAT="{expr1} [[is before]] {expr2}" KIND="Scalar" CASEINS="False" GROUP="Date/time operators">
+      <TYPES>Time</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="CUSTOMLIST" NAME="SpecTimeValues" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="TimeBeforePrecise" CAPTION="is before (precise time)" EXPR="{expr1} &lt; {expr2}" FORMAT="{expr1} [[is before]] {expr2}" KIND="Scalar" CASEINS="False" GROUP="Date/time operators">
+      <TYPES>Time</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="DATETIME" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="TimeAfterSpecial" CAPTION="is after (special time)" EXPR="{expr1} &gt;= {expr2}" FORMAT="{expr1} [[is after]] {expr2}" KIND="Scalar" CASEINS="False" GROUP="Date/time operators">
+      <TYPES>Time</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="CUSTOMLIST" NAME="SpecTimeValues" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="TimeAfterPrecise" CAPTION="is after (precise time)" EXPR="{expr1} &gt;= {expr2}" FORMAT="{expr1} [[is after]] {expr2}" KIND="Scalar" CASEINS="False" GROUP="Date/time operators">
+      <TYPES>Time</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="DATETIME" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="TimePeriodPrecise" CAPTION="is between" EXPR="{expr1} BETWEEN {expr2} AND {expr3}" FORMAT="{expr1} [[is between]] {expr2} and {expr3}" KIND="Scalar" CASEINS="False" GROUP="Date/time operators">
+      <TYPES>Time</TYPES>
+      <EXPRS DefType="Unknown" />
+      <EDITORS>
+        <DEFAULT TYPE="DATETIME" />
+      </EDITORS>
+    </OPERATOR>
+    <OPERATOR ID="MaximumOfAttr" CAPTION="is maximum of" EXPR="{expr1} = (SELECT MAX({expr2.field}) from {expr2.table})" FORMAT="{expr1} [[is maximum of]] {expr2}" KIND="Attribute" CASEINS="False" GROUP="Other operators">
+      <TYPES>String,WideString,Byte,Word,Int,Int64,Bool,Float,Currency,BCD,Autoinc,Memo,FixedChar,Date,DateTime,Time</TYPES>
+      <EXPRS DefType="Unknown" />
+    </OPERATOR>
+  </OPERATORS>
+  <TABLES>
+    <TABLE NAME="Catalogs" ALIAS="Catalogs" SCHEMA="" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="497,8,110,160" />
+    <TABLE NAME="Categories" ALIAS="Categories" SCHEMA="" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="31,2,110,160" />
+    <TABLE NAME="Customers" ALIAS="Customers" SCHEMA="" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="165,0,110,160" />
+    <TABLE NAME="Employees" ALIAS="Employees" SCHEMA="" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="348,0,110,160" />
+    <TABLE NAME="Orders" ALIAS="Orders" SCHEMA="" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="348,184,110,160" />
+    <TABLE NAME="Products" ALIAS="Products" SCHEMA="" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="22,181,110,160" />
+    <TABLE NAME="Order Details" ALIAS="Order_Details" SCHEMA="" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="199,195,110,160" />
+    <TABLE NAME="Order Subtotals" ALIAS="Order_Subtotals" SCHEMA="" DB="" HINTS="" QUOTE="False" DSGNLAYOUT="490,182,110,160" />
+  </TABLES>
+  <LINKS>
+    <LINK TABLE1="Orders" TABLE2="Customers" TYPE="Left">
+      <CONDITION TYPE="FF" EXPR1="CustomerID" EXPR2="CustomerID" OP="=" />
+    </LINK>
+    <LINK TABLE1="Orders" TABLE2="Employees" TYPE="Inner">
+      <CONDITION TYPE="FF" EXPR1="EmployeeID" EXPR2="EmployeeID" OP="=" />
+    </LINK>
+    <LINK TABLE1="Products" TABLE2="Categories" TYPE="Inner">
+      <CONDITION TYPE="FF" EXPR1="CategoryID" EXPR2="CategoryID" OP="=" />
+    </LINK>
+    <LINK TABLE1="Order_Details" TABLE2="Orders" TYPE="Inner">
+      <CONDITION TYPE="FF" EXPR1="OrderID" EXPR2="OrderID" OP="=" />
+    </LINK>
+    <LINK TABLE1="Order_Details" TABLE2="Products" TYPE="Inner">
+      <CONDITION TYPE="FF" EXPR1="ProductID" EXPR2="ProductID" OP="=" />
+    </LINK>
+    <LINK TABLE1="Order_Subtotals" TABLE2="Orders" TYPE="Inner">
+      <CONDITION TYPE="FF" EXPR1="OrderID" EXPR2="OrderID" OP="=" />
+    </LINK>
+  </LINKS>
+  <ENTITIES MAXID="2">
+    <ENTITY NAME="Customer">
+      <USERDATA />
+      <ATTR ID="13" KIND="Data" EXPR="CompanyName" CAPTION="Company name" TYPE="WideString" SIZE="40" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Customers">
+        <OPERATORS>StartsWith,Contains,NotStartsWith,NotContains,InList,Equal,NotEqual,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="14" KIND="Data" EXPR="ContactName" CAPTION="Contact name" TYPE="WideString" SIZE="30" QUOTE="False" UIC="True" UIR="True" UIS="False" UAL="True" TABLES="Customers">
+        <OPERATORS>StartsWith,Contains,NotStartsWith,InList,NotInList,NotContains,Equal,NotEqual,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="15" KIND="Data" EXPR="ContactTitle" CAPTION="Contact title" TYPE="WideString" SIZE="30" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Customers">
+        <OPERATORS>StartsWith,Contains,NotStartsWith,InList,NotInList,NotContains,Equal,NotEqual,IsNull</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="11" KIND="Data" EXPR="Address" CAPTION="Company address" TYPE="WideString" SIZE="60" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Customers">
+        <OPERATORS>StartsWith,Contains,NotStartsWith,InList,NotInList,NotContains,Equal,NotEqual,IsNull</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="12" KIND="Data" EXPR="City" CAPTION="City" TYPE="WideString" SIZE="15" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Customers">
+        <OPERATORS>StartsWith,Contains,NotStartsWith,NotContains,Equal,NotEqual,IsNull</OPERATORS>
+        <EDITORS>
+          <DEFAULT TYPE="LIST">
+            <VALUES>
+              <VALUE ID="Kansas" TEXT="Kansas" />
+              <VALUE ID="NY" TEXT="New York" />
+            </VALUES>
+          </DEFAULT>
+        </EDITORS>
+      </ATTR>
+      <ATTR ID="16" KIND="Data" EXPR="Country" CAPTION="Country" TYPE="WideString" SIZE="15" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Customers">
+        <OPERATORS>Equal,NotEqual,InList,NotInList,IsNull</OPERATORS>
+        <EDITORS>
+          <DEFAULT TYPE="SQLLIST">
+            <SQL><![CDATA[SELECT DISTINCT Country, Country 
+FROM Customers
+]]></SQL>
+          </DEFAULT>
+        </EDITORS>
+      </ATTR>
+      <ATTR ID="18" KIND="Data" EXPR="Fax" CAPTION="Fax" TYPE="WideString" SIZE="24" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Customers">
+        <OPERATORS>Equal,NotEqual,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,IsNull,InList,NotInList,StartsWith,NotStartsWith,Contains,NotContains,Between,NotBetween</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="19" KIND="Data" EXPR="Phone" CAPTION="Phone" TYPE="WideString" SIZE="24" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Customers">
+        <OPERATORS>StartsWith,Contains,NotStartsWith,InList,NotInList,NotContains,Equal,NotEqual,IsNull</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="20" KIND="Data" EXPR="PostalCode" CAPTION="Postal Code" TYPE="WideString" SIZE="10" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Customers">
+        <OPERATORS>Equal,NotEqual,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,IsNull,InList,NotInList,StartsWith,NotStartsWith,Contains,NotContains,Between,NotBetween</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="21" KIND="Data" EXPR="Region" CAPTION="Region" TYPE="WideString" SIZE="15" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Customers">
+        <OPERATORS>Equal,NotEqual,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,IsNull,InList,NotInList,StartsWith,NotStartsWith,Contains,NotContains,Between,NotBetween</OPERATORS>
+        <EDITORS />
+      </ATTR>
+    </ENTITY>
+    <ENTITY NAME="Order">
+      <USERDATA />
+      <ATTR ID="Orders.CustomerID" KIND="Data" EXPR="CustomerID" CAPTION="Customer" TYPE="WideString" SIZE="5" QUOTE="False" UIC="True" UIR="False" UIS="True" UAL="True" TABLES="Orders">
+        <OPERATORS>Equal,NotEqual,InList,NotInList,IsNull</OPERATORS>
+        <EDITORS>
+          <DEFAULT TYPE="SQLLIST">
+            <SQL><![CDATA[SELECT CustomerID, CompanyName
+FROM Customers
+ORDER BY 2
+]]></SQL>
+          </DEFAULT>
+        </EDITORS>
+      </ATTR>
+      <ATTR ID="41" KIND="Data" EXPR="OrderDate" CAPTION="Date" TYPE="Date" SIZE="0" QUOTE="True" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Orders">
+        <OPERATORS>DateEqualSpecial,DateEqualPrecise,DateNotEqualSpecial,DateNotEqualPrecise,DateBeforeSpecial,DateBeforePrecise,DateAfterSpecial,DateAfterPrecise,DatePeriodPrecise,MaximumOfAttr,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="40" KIND="Data" EXPR="Freight" CAPTION="Freight" TYPE="Currency" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Orders">
+        <OPERATORS>LessThan,GreaterThan,LessOrEqual,GreaterOrEqual,Equal,NotEqual,NotInList,Between,NotBetween,IsNull</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="43" KIND="Data" EXPR="Paid" CAPTION="Paid" TYPE="Bool" SIZE="2" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Orders">
+        <OPERATORS>Equal,NotEqual,IsNull,InList,NotInList</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="44" KIND="Data" EXPR="RequiredDate" CAPTION="Required Date" TYPE="Date" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Orders">
+        <OPERATORS>DateEqualSpecial,DateEqualPrecise,DateNotEqualSpecial,DateNotEqualPrecise,DateBeforeSpecial,DateBeforePrecise,DateAfterSpecial,DateAfterPrecise,DatePeriodPrecise,MaximumOfAttr,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="49" KIND="Data" EXPR="ShippedDate" CAPTION="Shipped Time" TYPE="Time" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Orders">
+        <OPERATORS>TimeBeforeSpecial,TimeBeforePrecise,TimeAfterSpecial,TimeAfterPrecise,TimePeriodPrecise,MaximumOfAttr,IsNull</OPERATORS>
+        <EDITORS />
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="47" KIND="Data" EXPR="ShipCountry" CAPTION="Ship Country" TYPE="WideString" SIZE="15" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Orders">
+        <OPERATORS>Equal,NotEqual,InList,NotInList,IsNull</OPERATORS>
+        <EDITORS>
+          <DEFAULT TYPE="SQLLIST">
+            <SQL><![CDATA[SELECT DISTINCT ShipCountry, ShipCountry 
+FROM Orders
+]]></SQL>
+          </DEFAULT>
+        </EDITORS>
+        <DESCRIPTION />
+      </ATTR>
+      <ATTR ID="46" KIND="Data" EXPR="ShipCity" CAPTION="Ship City" TYPE="WideString" SIZE="15" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Orders">
+        <OPERATORS>StartsWith,Contains,NotStartsWith,InList,NotInList,NotContains,Equal,NotEqual,IsNull</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="45" KIND="Data" EXPR="ShipAddress" CAPTION="Ship Address" TYPE="WideString" SIZE="60" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Orders">
+        <OPERATORS>StartsWith,Contains,NotStartsWith,InList,NotInList,NotContains,Equal,NotEqual,IsNull</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="48" KIND="Data" EXPR="ShipName" CAPTION="Ship Name" TYPE="WideString" SIZE="40" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Orders">
+        <OPERATORS>StartsWith,Contains,NotStartsWith,InList,NotInList,NotContains,Equal,NotEqual,IsNull</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="50" KIND="Data" EXPR="ShipPostalCode" CAPTION="Ship Postal Code" TYPE="WideString" SIZE="10" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Orders">
+        <OPERATORS>Equal,NotEqual,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,IsNull,InList,NotInList,StartsWith,NotStartsWith,Contains,NotContains,Between,NotBetween</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="51" KIND="Data" EXPR="ShipRegion" CAPTION="Ship Region" TYPE="WideString" SIZE="15" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Orders">
+        <OPERATORS>Equal,InList,StartsWith,Contains,NotContains,NotStartsWith,NotInList,NotEqual,IsNull</OPERATORS>
+        <EDITORS>
+          <DEFAULT TYPE="CUSTOMLIST" NAME="ShipRegionList" />
+        </EDITORS>
+      </ATTR>
+      <ATTR ID="52" KIND="Data" EXPR="ShipVia" CAPTION="Ship Via" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="True" UAL="True" TABLES="Orders">
+        <OPERATORS>Equal,NotEqual,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,IsNull,InList,NotInList,Between,NotBetween</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="39" KIND="Data" EXPR="EmployeeID" CAPTION="EmployeeID" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="True" UAL="True" TABLES="Orders">
+        <OPERATORS>Equal,NotEqual,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,IsNull,InList,NotInList,Between,NotBetween</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="42" KIND="Data" EXPR="OrderID" CAPTION="OrderID" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="True" UIS="True" UAL="True" TABLES="Orders">
+        <OPERATORS>Equal,NotEqual,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,IsNull,InList,NotInList,Between,NotBetween</OPERATORS>
+        <EDITORS />
+      </ATTR>
+    </ENTITY>
+    <ENTITY NAME="Product">
+      <ATTR ID="58" KIND="Data" EXPR="ProductName" CAPTION="Name" TYPE="WideString" SIZE="40" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Products">
+        <OPERATORS>StartsWith,Contains,NotStartsWith,InList,NotInList,NotContains,Equal,NotEqual,IsNull</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="62" KIND="Data" EXPR="UnitPrice" CAPTION="Unit price" TYPE="Currency" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Products">
+        <OPERATORS>Equal,NotEqual,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,IsNull,InList,NotInList,Between,NotBetween</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="55" KIND="Data" EXPR="LastOrder" CAPTION="Last order date" TYPE="Date" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Products">
+        <OPERATORS>Equal,NotEqual,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,IsNull,InList,NotInList,Between,NotBetween</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="63" KIND="Data" EXPR="UnitsInStock" CAPTION="Units In Stock" TYPE="Word" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Products">
+        <OPERATORS>Equal,NotEqual,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,IsNull,InList,NotInList,Between,NotBetween</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="54" KIND="Data" EXPR="Discontinued" CAPTION="Discontinued" TYPE="Bool" SIZE="2" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Products">
+        <OPERATORS>Equal,NotEqual,IsNull,InList,NotInList</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="56" KIND="Data" EXPR="OnSale" CAPTION="OnSale" TYPE="Bool" SIZE="2" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Products">
+        <OPERATORS>Equal,NotEqual,IsNull,InList,NotInList</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="59" KIND="Data" EXPR="QuantityPerUnit" CAPTION="Quantity per unit" TYPE="WideString" SIZE="20" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Products">
+        <OPERATORS>Equal,NotEqual,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,IsNull,InList,NotInList,StartsWith,NotStartsWith,Contains,NotContains,Between,NotBetween</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="60" KIND="Data" EXPR="ReorderLevel" CAPTION="ReorderLevel" TYPE="Word" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Products">
+        <OPERATORS>Equal,NotEqual,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,IsNull,InList,NotInList,Between,NotBetween</OPERATORS>
+        <EDITORS>
+          <DEFAULT TYPE="LIST">
+            <VALUES>
+              <VALUE ID="0" TEXT="Low" />
+              <VALUE ID="1" TEXT="High" />
+            </VALUES>
+          </DEFAULT>
+        </EDITORS>
+      </ATTR>
+      <ATTR ID="61" KIND="Data" EXPR="SupplierID" CAPTION="SupplierID" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="True" UAL="True" TABLES="Products">
+        <OPERATORS>Equal,NotEqual,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,IsNull,InList,NotInList,Between,NotBetween</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="64" KIND="Data" EXPR="UnitsOnOrder" CAPTION="Units On Order" TYPE="Word" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Products">
+        <OPERATORS>Equal,NotEqual,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,IsNull,InList,NotInList,Between,NotBetween</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="53" KIND="Data" EXPR="CategoryID" CAPTION="Category" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="False" UIS="True" UAL="True" TABLES="Products">
+        <OPERATORS>Equal,NotEqual,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,IsNull,InList,NotInList,Between,NotBetween</OPERATORS>
+        <EDITORS>
+          <DEFAULT TYPE="LIST">
+            <VALUES>
+              <VALUE ID="1" TEXT="First" />
+              <VALUE ID="2" TEXT="Second" />
+            </VALUES>
+          </DEFAULT>
+        </EDITORS>
+      </ATTR>
+      <ATTR ID="57" KIND="Data" EXPR="ProductID" CAPTION="Product" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="False" UIS="True" UAL="True" TABLES="Products">
+        <OPERATORS>Equal,NotEqual,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,IsNull,InList,NotInList,Between,NotBetween</OPERATORS>
+        <EDITORS>
+          <DEFAULT TYPE="SQLLIST">
+            <SQL><![CDATA[SELECT ProductID, ProductName
+FROM Products
+]]></SQL>
+          </DEFAULT>
+        </EDITORS>
+      </ATTR>
+    </ENTITY>
+    <ENTITY NAME="Employee">
+      <ATTR ID="31" KIND="Data" EXPR="LastName" CAPTION="Last Name" TYPE="WideString" SIZE="20" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Employees">
+        <OPERATORS>StartsWith,Contains,NotStartsWith,InList,NotInList,NotContains,Equal,NotEqual,IsNull</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="28" KIND="Data" EXPR="FirstName" CAPTION="First Name" TYPE="WideString" SIZE="10" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Employees">
+        <OPERATORS>StartsWith,Contains,NotStartsWith,InList,NotInList,NotContains,Equal,NotEqual,IsNull</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="VEA_2" KIND="Virtual" EXPR="Employees.FirstName + ' ' + Employees.LastName" CAPTION="Full Name" TYPE="String" SIZE="40" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Employees">
+        <OPERATORS />
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="22" KIND="Data" EXPR="Address" CAPTION="Address" TYPE="WideString" SIZE="60" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Employees">
+        <OPERATORS>StartsWith,Contains,NotStartsWith,InList,NotInList,NotContains,Equal,NotEqual,IsNull</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="36" KIND="Data" EXPR="Title" CAPTION="Title" TYPE="WideString" SIZE="30" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Employees">
+        <OPERATORS>Equal,NotEqual,LessThan,StartsWith,LessOrEqual,GreaterThan,GreaterOrEqual,IsNull,InList,NotInList,NotStartsWith,Contains,NotContains,Between,NotBetween</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="29" KIND="Data" EXPR="HireDate" CAPTION="Hire Date" TYPE="Date" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Employees">
+        <OPERATORS>Equal,NotEqual,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,IsNull,InList,NotInList,Between,NotBetween</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="23" KIND="Data" EXPR="BirthDate" CAPTION="Birth Date" TYPE="Date" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Employees">
+        <OPERATORS>Equal,NotEqual,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,IsNull,InList,NotInList,Between,NotBetween</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="37" KIND="Data" EXPR="TitleOfCourtesy" CAPTION="TitleOfCourtesy" TYPE="WideString" SIZE="25" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Employees">
+        <OPERATORS>Equal,NotEqual,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,IsNull,InList,NotInList,StartsWith,NotStartsWith,Contains,NotContains,Between,NotBetween</OPERATORS>
+        <EDITORS>
+          <DEFAULT TYPE="LIST">
+            <VALUES>
+              <VALUE ID="Mr." TEXT="Mr." />
+              <VALUE ID="Mrs." TEXT="Mrs." />
+              <VALUE ID="Ms." TEXT="Ms." />
+            </VALUES>
+          </DEFAULT>
+        </EDITORS>
+      </ATTR>
+      <ATTR ID="25" KIND="Data" EXPR="Country" CAPTION="Country" TYPE="WideString" SIZE="15" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Employees">
+        <OPERATORS>StartsWith,Contains,NotStartsWith,InList,NotInList,NotContains,Equal,NotEqual,IsNull</OPERATORS>
+        <EDITORS>
+          <DEFAULT TYPE="SQLLIST">
+            <SQL><![CDATA[SELECT DISTINCT Country, Country 
+FROM Employees
+]]></SQL>
+          </DEFAULT>
+        </EDITORS>
+      </ATTR>
+      <ATTR ID="24" KIND="Data" EXPR="City" CAPTION="City" TYPE="WideString" SIZE="15" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Employees">
+        <OPERATORS>StartsWith,Contains,NotStartsWith,InList,NotInList,NotContains,Equal,NotEqual,IsNull</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="34" KIND="Data" EXPR="Region" CAPTION="Region" TYPE="WideString" SIZE="15" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Employees">
+        <OPERATORS>Equal,NotEqual,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,IsNull,InList,NotInList,StartsWith,NotStartsWith,Contains,NotContains,Between,NotBetween</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="33" KIND="Data" EXPR="PostalCode" CAPTION="PostalCode" TYPE="WideString" SIZE="10" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Employees">
+        <OPERATORS>Equal,NotEqual,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,IsNull,InList,NotInList,StartsWith,NotStartsWith,Contains,NotContains,Between,NotBetween</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="30" KIND="Data" EXPR="HomePhone" CAPTION="HomePhone" TYPE="WideString" SIZE="24" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Employees">
+        <OPERATORS>Equal,NotEqual,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,IsNull,InList,NotInList,StartsWith,NotStartsWith,Contains,NotContains,Between,NotBetween</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="27" KIND="Data" EXPR="Extension" CAPTION="Extension" TYPE="WideString" SIZE="4" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Employees">
+        <OPERATORS>Equal,NotEqual,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,IsNull,InList,NotInList,StartsWith,NotStartsWith,Contains,NotContains,Between,NotBetween</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="32" KIND="Data" EXPR="Notes" CAPTION="Notes" TYPE="WideString" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Employees">
+        <OPERATORS>Equal,NotEqual,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,IsNull,InList,NotInList,StartsWith,NotStartsWith,Contains,NotContains,Between,NotBetween</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="35" KIND="Data" EXPR="ReportsTo" CAPTION="ReportsTo" TYPE="Int" SIZE="0" QUOTE="False" UIC="True" UIR="True" UIS="True" UAL="True" TABLES="Employees">
+        <OPERATORS>Equal,NotEqual,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,IsNull,InList,NotInList,Between,NotBetween</OPERATORS>
+        <EDITORS />
+      </ATTR>
+      <ATTR ID="26" KIND="Data" EXPR="EmployeeID" CAPTION="EmployeeID" TYPE="Int" SIZE="0" QUOTE="False" UIC="False" UIR="False" UIS="True" UAL="True" TABLES="Employees">
+        <OPERATORS>Equal,NotEqual,LessThan,LessOrEqual,GreaterThan,GreaterOrEqual,IsNull,InList,NotInList,Between,NotBetween</OPERATORS>
+        <EDITORS />
+      </ATTR>
+    </ENTITY>
+  </ENTITIES>
+</DATAMODEL>
