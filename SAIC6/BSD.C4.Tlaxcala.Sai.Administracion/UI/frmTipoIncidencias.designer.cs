@@ -69,6 +69,7 @@
             this.saiTxtDescripcion.BlnEsRequerido = true;
             this.saiTxtDescripcion.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.saiTxtDescripcion.Location = new System.Drawing.Point(116, 23);
+            this.saiTxtDescripcion.MaxLength = 150;
             this.saiTxtDescripcion.Name = "saiTxtDescripcion";
             this.saiTxtDescripcion.Size = new System.Drawing.Size(294, 20);
             this.saiTxtDescripcion.StrMensajeCampoRequerido = "El campo es requerido.";
@@ -137,9 +138,11 @@
             // txtClaveoperacion
             // 
             this.txtClaveoperacion.Location = new System.Drawing.Point(116, 76);
+            this.txtClaveoperacion.MaxLength = 5;
             this.txtClaveoperacion.Name = "txtClaveoperacion";
             this.txtClaveoperacion.Size = new System.Drawing.Size(129, 20);
             this.txtClaveoperacion.TabIndex = 3;
+            this.txtClaveoperacion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtClaveoperacion_KeyPress);
             // 
             // label4
             // 
@@ -218,10 +221,7 @@
             this.gvTipoIncidencias.ReadOnly = true;
             this.gvTipoIncidencias.Size = new System.Drawing.Size(547, 111);
             this.gvTipoIncidencias.TabIndex = 0;
-            this.gvTipoIncidencias.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvTipoIncidencias_CellClick);
             this.gvTipoIncidencias.SelectionChanged += new System.EventHandler(this.gvTipoIncidencias_SelectionChanged);
-            this.gvTipoIncidencias.Click += new System.EventHandler(this.gvTipoIncidencias_Click);
-            this.gvTipoIncidencias.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.gvTipoIncidencias_RowStateChanged);
             // 
             // btnCancelar
             // 
