@@ -499,8 +499,8 @@ namespace Korzh.EasyQuery.WebControls
             this.addRow.RowControl.Visible = this.EditMode == EditModeKind.All;
             this.RefillPanelMenus();
             base.OnPreRender(e);
-            this.BackImageUrl = this.Page.ClientScript.GetWebResourceUrl(this.rsType,
-                                                                         "Korzh.EasyQuery.WebControls.Resources.Watermark.gif");
+            //this.BackImageUrl = this.Page.ClientScript.GetWebResourceUrl(this.rsType,
+            //                                                             "Korzh.EasyQuery.WebControls.Resources.Watermark.gif");
         }
 
         protected override void OnRowAdded(XRow row)
@@ -604,13 +604,13 @@ namespace Korzh.EasyQuery.WebControls
                                     "border-width:1px;border-style:Solid;color:Navy;background-color:Lavender;height:18px;width:{0};text-align:right;font-size:8pt;font-family:Verdana",
                                     this.Width.ToString()));
             writer.RenderBeginTag(HtmlTextWriterTag.Div);
-            writer.Write(" :: ");
-            writer.AddAttribute(HtmlTextWriterAttribute.Href, "http://devtools.korzh.com/eq/dotnet/");
+            //writer.Write(" :: ");
+            writer.AddAttribute(HtmlTextWriterAttribute.Href, "http://www.bsd.com");
             writer.AddAttribute(HtmlTextWriterAttribute.Target, "_blank");
             writer.RenderBeginTag(HtmlTextWriterTag.A);
-            writer.Write("Powered by EasyQuery.NET");
+            //writer.Write("Powered by EasyQuery.NET");
             writer.RenderEndTag();
-            writer.Write(" :: ");
+            //writer.Write(" :: ");
             writer.RenderEndTag();
             writer.RenderEndTag();
         }

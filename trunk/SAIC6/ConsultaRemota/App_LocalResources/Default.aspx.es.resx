@@ -129,10 +129,10 @@
     <value>False</value>
   </data>
   <data name="btnClear.Text" xml:space="preserve">
-    <value>Claro</value>
+    <value>Limpiar</value>
   </data>
   <data name="btnExportExcel.Text" xml:space="preserve">
-    <value>Exportación a Excel</value>
+    <value>Exportar a Excel</value>
   </data>
   <data name="btnLoad.Text" xml:space="preserve">
     <value>Cargar</value>
@@ -144,10 +144,10 @@
     <value>Actualización de resultados</value>
   </data>
   <data name="txtSubTitle" xml:space="preserve">
-    <value>De fácil consulta ad hoc constructor para su sitio web ASP.NET</value>
+    <value>De fácil consulta ...</value>
   </data>
   <data name="txtTitle" xml:space="preserve">
-    <value> EasyQuery.NET WebForms - página de demostración</value>
+    <value>Sistema de Administración de Incidencias</value>
   </data>
   <data name="txtColumnSorting" xml:space="preserve">
     <value>La columna de clasificación</value>

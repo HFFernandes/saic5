@@ -18,13 +18,13 @@ namespace ConsultaRemota
 
         protected void Session_Start(object sender, EventArgs e)
         {
-            //System.Globalization.CultureInfo ci = System.Threading.Thread.CurrentThread.CurrentUICulture;
-            //string lang = ci.ToString();
-            //if (lang.Length < 3)
-            //{
-            //    lang = System.Globalization.CultureInfo.CreateSpecificCulture(lang).ToString();
-            //}
-            //Session["currentLanguage"] = lang;
+            System.Globalization.CultureInfo ci = System.Threading.Thread.CurrentThread.CurrentUICulture;
+            string lang = ci.ToString();
+            if (lang.Length < 3)
+            {
+                lang = System.Globalization.CultureInfo.CreateSpecificCulture(lang).ToString();
+            }
+            Session["currentLanguage"] = lang;
 
             var path = AppDomain.CurrentDomain.BaseDirectory;
             path += "data\\nwind1.xml";

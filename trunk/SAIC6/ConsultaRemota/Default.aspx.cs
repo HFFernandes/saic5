@@ -40,13 +40,13 @@ namespace ConsultaRemota
         protected override void InitializeCulture()
         {
             base.InitializeCulture();
-            //string lang = (string)Session["currentLanguage"];
-            //Culture = lang;
-            //UICulture = lang;
+            string lang = (string)Session["currentLanguage"];
+            Culture = lang;
+            UICulture = lang;
 
-            //System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo(lang);
-            //System.Threading.Thread.CurrentThread.CurrentCulture = ci;
-            //System.Threading.Thread.CurrentThread.CurrentUICulture = ci;
+            System.Globalization.CultureInfo ci = new System.Globalization.CultureInfo(lang);
+            System.Threading.Thread.CurrentThread.CurrentCulture = ci;
+            System.Threading.Thread.CurrentThread.CurrentUICulture = ci;
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -81,8 +81,8 @@ namespace ConsultaRemota
 
             LabelVersion.Text = "Version: " + versionAttr.Version;
 
-            //EnableLinkButton(lnkBtnEng);
-            //EnableLinkButton(lnkBtnEsp);
+            EnableLinkButton(lnkBtnEng);
+            EnableLinkButton(lnkBtnEsp);
         }
 
         private void EnableLinkButton(LinkButton btn)
@@ -334,8 +334,8 @@ namespace ConsultaRemota
 
         protected void LangSwitch_Command(object sender, CommandEventArgs e)
         {
-            //Session["currentLanguage"] = e.CommandArgument;
-            //Response.Redirect(Request.Path, true);
+            Session["currentLanguage"] = e.CommandArgument;
+            Response.Redirect(Request.Path, true);
         }
     }
 }
