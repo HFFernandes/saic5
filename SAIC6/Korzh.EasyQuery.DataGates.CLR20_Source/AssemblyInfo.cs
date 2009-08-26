@@ -5,7 +5,7 @@
 [assembly: System.Reflection.AssemblyDelaySign(false)]
 [assembly: System.Reflection.AssemblyTrademark("")]
 [assembly: System.Reflection.AssemblyCopyright("Copyright (c) Korzh.com 2008-2009")]
-[assembly: System.Reflection.AssemblyProduct("EasyQuery.NET (demo version)")]
+[assembly: System.Reflection.AssemblyProduct("EasyQuery.NET  ")]
 [assembly: System.Reflection.AssemblyCompany("Korzh.com")]
 [assembly: System.Reflection.AssemblyConfiguration("")]
 [assembly: System.Reflection.AssemblyDescription("EasyQuery.NET DataGate classes")]
