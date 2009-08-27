@@ -53,16 +53,20 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
             //Se recupera la lista de las corporaciones
             CorporacionList objListaCorporaciones = this.ObtenCorporaciones();
-            String[] arrCorporaciones = new String[objListaCorporaciones.Count];
+            //String[] arrCorporaciones = new String[objListaCorporaciones.Count];
 
-            int i = 0;
-            foreach (Corporacion objCorporacion in objListaCorporaciones)
+            //int i = 0;
+            //foreach (Corporacion objCorporacion in objListaCorporaciones)
+            //{
+            //    arrCorporaciones[i] = objCorporacion.Descripcion;
+            //    i++;
+            //}
+
+            //this.cklCorporacion.Items.AddRange(arrCorporaciones);
+            foreach (var corporacion in objListaCorporaciones)
             {
-                arrCorporaciones[i] = objCorporacion.Descripcion;
-                i++;
+                cklCorporacion.Items.Add(corporacion.Descripcion);
             }
-
-            this.cklCorporacion.Items.AddRange(arrCorporaciones);
 
             this.cklCorporacion.CheckOnClick = true;
 
@@ -104,16 +108,20 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
             //Se recupera la lista de las corporaciones
             CorporacionList objListaCorporaciones = this.ObtenCorporaciones();
-            String[] arrCorporaciones = new String[objListaCorporaciones.Count];
+            //String[] arrCorporaciones = new String[objListaCorporaciones.Count];
 
-            int i = 0;
-            foreach (Corporacion objCorporacion in objListaCorporaciones)
+            //int i = 0;
+            //foreach (Corporacion objCorporacion in objListaCorporaciones)
+            //{
+            //    arrCorporaciones[i] = objCorporacion.Descripcion;
+            //    i++;
+            //}
+
+            //this.cklCorporacion.Items.AddRange(arrCorporaciones);
+            foreach (var corporacion in objListaCorporaciones)
             {
-                arrCorporaciones[i] = objCorporacion.Descripcion;
-                i++;
+                cklCorporacion.Items.Add(corporacion.Descripcion);
             }
-
-            this.cklCorporacion.Items.AddRange(arrCorporaciones);
 
             //Ahora se palomean las corporaciones a la que la incidencia está asociada:
 
@@ -125,7 +133,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 {
                     Corporacion entCorporacion = CorporacionMapper.Instance().GetOne(lstCorporacionIncidencia[j].ClaveCorporacion);
 
-                    for (i = 0; i < this.cklCorporacion.Items.Count; i++)
+                    for (int i = 0; i < this.cklCorporacion.Items.Count; i++)
                     {
                         if (this.cklCorporacion.Items[i].ToString() == entCorporacion.Descripcion)
                         {
@@ -332,15 +340,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="noTelefono">string, Número telefónico</param>
         public void ObtenerTitularLinea(string noTelefono)
         {
-            TelefonoTelmex DatosTitular = Mappers.TelefonoTelmexMapper.Instance()
-            .GetOneBySQLQuery(string.Format(ID.SQL_OBTENERINFOTITULARLINEA, noTelefono));
+            //TelefonoTelmex DatosTitular = Mappers.TelefonoTelmexMapper.Instance()
+            //.GetOneBySQLQuery(string.Format(ID.SQL_OBTENERINFOTITULARLINEA, noTelefono));
 
-            this.TextoTelefono = noTelefono;
-            this.txtNombreDenunciante.Text = DatosTitular.Nombre;
-            this.txtApellidoDenunciante.Text = string.Format("{0} {1}", DatosTitular.ApellidoPaterno,DatosTitular.ApellidoMaterno);
-            this.txtDenuncianteDireccion.Text = DatosTitular.Direccion;
-            CodigoPostal CodigoTitular=Mappers.CodigoPostalMapper.Instance().GetOneBySQLQuery(string.Format(ID.SQL_OBTENERCODIGOPOSTAL, DatosTitular.ClaveCodigoPostal));
-            this.TextoCodigoPostal = CodigoTitular.Valor;
+            //this.TextoTelefono = noTelefono;
+            //this.txtNombreDenunciante.Text = DatosTitular.Nombre;
+            //this.txtApellidoDenunciante.Text = string.Format("{0} {1}", DatosTitular.ApellidoPaterno,DatosTitular.ApellidoMaterno);
+            //this.txtDenuncianteDireccion.Text = DatosTitular.Direccion;
+            //CodigoPostal CodigoTitular=Mappers.CodigoPostalMapper.Instance().GetOneBySQLQuery(string.Format(ID.SQL_OBTENERCODIGOPOSTAL, DatosTitular.ClaveCodigoPostal));
+            //this.TextoCodigoPostal = CodigoTitular.Valor;
         }
 
         #endregion

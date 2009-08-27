@@ -71,47 +71,6 @@ namespace ConsultaRemota
             QueryPanel1.Query.ConditionsChanged -= query_ConditionsChanged;
         }
 
-        protected void LoadBtn_Click(object sender, EventArgs e)
-        {
-            //if (SavedQueryUpload.HasFile)
-            //{
-            //    try
-            //    {
-            //        // Initialize the reader.
-            //        System.IO.TextReader reader = new StreamReader(SavedQueryUpload.PostedFile.InputStream);
-
-            //        // Copy the byte array into a string.
-            //        string QueryText = reader.ReadToEnd();
-
-            //        reader.Close();
-
-            //        QueryPanel1.Query.LoadFromString(QueryText);
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        ErrorLabel.Text = "Error during loading: " + ex.Message;
-            //        ErrorLabel.Visible = true;
-            //    }
-            //}
-        }
-
-        protected void SaveBtn_Click(object sender, EventArgs e)
-        {
-            //Response.ClearHeaders();
-            //Response.ContentType = "text/xml";
-            //Response.Clear();
-
-            //Response.BufferOutput = true;
-            //Response.AddHeader("Content-Disposition", "attachment;filename=query.xml");
-
-            //string QueryText = QueryPanel1.Query.SaveToString();
-            //byte[] output = System.Text.UnicodeEncoding.UTF8.GetBytes(QueryText);
-
-            //Response.OutputStream.Write(output, 0, output.GetLength(0));
-
-            //Response.End();
-        }
-
         protected void query_ColumnsChanged(object sender, Korzh.EasyQuery.ColumnsChangeEventArgs e)
         {
             UpdateSql();
@@ -124,7 +83,7 @@ namespace ConsultaRemota
 
         protected void UpdateSql()
         {
-            //System.Threading.Thread.Sleep(1500);
+            System.Threading.Thread.Sleep(1000);
 
             var query = (Query)Session["Query"];
             try
@@ -144,10 +103,10 @@ namespace ConsultaRemota
 
         protected void ExportExcelBtn_Click(object sender, EventArgs e)
         {
-            ExportResultTo("text/csv", "result.txt");
+            ExportarResultados("text/csv", "result.txt");
         }
 
-        protected void ExportResultTo(string contentType, string fileName)
+        protected void ExportarResultados(string contentType, string fileName)
         {
             ResultDS.SelectCommand = consulta.Result.SQL;
             var view = (DataView)ResultDS.Select(DataSourceSelectArguments.Empty);
