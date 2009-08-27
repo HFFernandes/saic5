@@ -66,7 +66,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         private bool _blnCtrPresionado;
 
-        Listener TcpListener = new Listener();
+        /// <summary>
+        /// Monitor de actividad telefónica Asincrono
+        /// </summary>
+        SaiTcpClient TcpListener = new SaiTcpClient();
+
+        public delegate void DelegadoEscribirDato(string dato);
+
+        /// <summary>
+        /// Numero de telefono que manda el evento de telefonia.
+        /// </summary>
+        private string NoTelefono = string.Empty;
 
         #endregion
 
@@ -193,9 +203,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         private void IniciarMonitorLlamadas()
         {
-            TcpListener.Iniciar();
-            this.tmrMonitor.Enabled = true;
-            this.tmrMonitor.Start();
+            TcpListener.IniciarCliente();
+
         }
 
         /// <summary>
@@ -203,13 +212,19 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         private void DetenerMonitorLlamadas()
         {
-            TcpListener.Detener();
-            this.tmrMonitor.Stop();
-            this.tmrMonitor.Enabled = false;
+            TcpListener.DetenerCliente();
         }
 
-        
 
+        void EscribirMensaje(string mensaje)
+        {
+            this.tssInfo.Text = mensaje;
+        }
+
+        void EscribirDato(string dato)
+        {
+            this.NoTelefono = dato;
+        }
 
         #endregion
 
@@ -475,19 +490,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                 #region EVENTOS PARA MONITOR DE TCP
 
-                    private void tmrMonitor_Tick(object sender, EventArgs e)
-                    {
-                        //Mandamos a buscar conecciones pendientes por TCP
-                        TcpListener.BuscarDatos();
-                    }
-
+                   
                     void TcpListener_ListenerMessageDataEvent(object sender, FindMessageEventArgs e)
                     {
-
+                        this.Invoke(new DelegadoEscribirDato(EscribirMensaje), new object[] { e.Mensaje });
                     }
 
                     void TcpListener_ListenerFindDataEvent(object sender, FindDataEventArgs e)
                     {
+                        this.Invoke(new DelegadoEscribirDato(EscribirDato), new object[] { e.Datos });
+
                         var lstTipoIncidencias = new TipoIncidenciaList();
                         lstTipoIncidencias = Aplicacion.UsuarioPersistencia.strSistemaActual == "066" ? TipoIncidenciaMapper.Instance().GetBySistema(2) : TipoIncidenciaMapper.Instance().GetBySistema(1);
                         if (lstTipoIncidencias.Count == 0)
@@ -503,7 +515,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         {
 
                             
-                            var frmIncidencia066 = new SAIFrmIncidencia066(e.Datos);
+                            var frmIncidencia066 = new SAIFrmIncidencia066(this.NoTelefono);
                             frmIncidencia066.Show(this);                 
 
                         }
@@ -511,7 +523,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                         {
 
-                            var frmIncidencia089 = new SAIFrmIncidencia089(e.Datos);
+                            var frmIncidencia089 = new SAIFrmIncidencia089(this.NoTelefono);
                             frmIncidencia089.Show(this);
 
                         }
@@ -519,6 +531,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                 #endregion
 
+                    
         
 
         #endregion

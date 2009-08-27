@@ -28,7 +28,6 @@ namespace BSD.C4
                     Application.SetCompatibleTextRenderingDefault(false);
                     AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
                     Application.Run(new SAIFrmComandos());
-
                     mutex.ReleaseMutex();
                 }
                 else
