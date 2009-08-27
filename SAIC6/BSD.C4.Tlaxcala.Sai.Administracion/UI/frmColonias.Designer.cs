@@ -102,6 +102,7 @@
             // 
             // btnCancelar
             // 
+            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelar.Location = new System.Drawing.Point(497, 479);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
@@ -177,7 +178,6 @@
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos Generales";
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // saiClave
             // 
@@ -188,6 +188,7 @@
             this.saiClave.Size = new System.Drawing.Size(100, 20);
             this.saiClave.StrMensajeCampoRequerido = "El campo es requerido.";
             this.saiClave.TabIndex = 1;
+            this.saiClave.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.saiClave_KeyPress);
             // 
             // label6
             // 

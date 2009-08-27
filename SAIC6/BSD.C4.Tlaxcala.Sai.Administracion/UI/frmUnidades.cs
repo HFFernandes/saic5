@@ -22,11 +22,11 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             InitializeComponent();
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// Carga los catalogos de Municipio, corporaciones y estado, asi mismo carga las unidades en el grid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void frmUnidades_Load(object sender, EventArgs e)
         {
             this.LlenarEstado();
@@ -38,6 +38,10 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             this.LlenarCorporaciones();
         }
 
+
+        /// <summary>
+        /// Llena el combobox de Corporaciones
+        /// </summary>
         private void LlenarCorporaciones()
         {
             try
@@ -63,6 +67,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             { }
         }
 
+        /// <summary>
+        /// Llena el combobox de Estado (Solo Tlaxcala)
+        /// </summary>
         private void LlenarEstado()
         {
             try
@@ -70,12 +77,10 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 try
                 {
                     Entidades.EstadoList lstEstado = Mappers.EstadoMapper.Instance().GetAll();
-
                     foreach (Entidades.Estado estado in lstEstado)
                     {
                         this.ddlEstado.Items.Add(new ComboItem(estado.Clave, estado.Nombre));
                     }
-
                     this.ddlEstado.DisplayMember = "Descripcion";
                     this.ddlEstado.ValueMember = "Valor";
                 }
@@ -86,6 +91,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             { }
         }
 
+        /// <summary>
+        /// Llena el combobox de municipios
+        /// </summary>
         private void LlenarMunicipio()
         {
             try
@@ -109,16 +117,31 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             { }
         }
 
+        /// <summary>
+        /// Obtiene el valor del elemento seleccionado de un combobox
+        /// </summary>
+        /// <param name="comboBox">Combobox del cual se requiere el valor</param>
+        /// <returns>Objeto con el valor</returns>
         private object ObtieneValor(ComboBox comboBox)
         {
             return ((ComboItem)comboBox.Items[comboBox.SelectedIndex]).Valor;
         }
 
+        /// <summary>
+        /// Obtiene la descripcion de un elemento seleccionado
+        /// </summary>
+        /// <param name="comboBox">Combobox del cual se requiere la descripcion</param>
+        /// <returns>Objeto que representa la descripcion</returns>
         private string ObtieneDescripcion(ComboBox comboBox)
         {
             return ((ComboItem)comboBox.Items[comboBox.SelectedIndex]).Descripcion;
         }
 
+        /// <summary>
+        /// Selecciona un elemento de un Combobox que concuerde ocn el valor que recibe
+        /// </summary>
+        /// <param name="Value">Valor a seleccionar</param>
+        /// <param name="comboBox">Combobox al que se seleccionara un elemento</param>
         private void SeleccionarComboItem(int Value, ComboBox comboBox)
         {
             foreach (ComboItem item in comboBox.Items)
@@ -133,6 +156,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             }
         }
 
+        /// <summary>
+        /// Llena el DataGrid con el catalogo de Ubicaciones
+        /// </summary>
         private void LlenarGrid()
         {
             try
@@ -146,6 +172,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     catUbicacion.Columns.Add(new DataColumn("Corporacion", Type.GetType("System.String")));
                     catUbicacion.Columns.Add(new DataColumn("Activo", Type.GetType("System.Boolean")));
                     catUbicacion.Columns.Add(new DataColumn("ClaveMunicipio", Type.GetType("System.Int32")));
+                    //Se agrega esta columna para mostrar la descripcion del MUnicipio
                     catUbicacion.Columns.Add(new DataColumn("Municipio", Type.GetType("System.String")));
 
                     Entidades.UnidadList lstUnidades = Mappers.UnidadMapper.Instance().GetAll();
@@ -182,6 +209,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 row.Selected = false;
             }
             this.ddlCorporacion.SelectedIndex = -1;
+            this.ddlMunicipio.SelectedIndex = -1;
             this.saiTxtCodigo.Text = "";
             this.chkActivo.Checked = false;
             this.btnEliminar.Visible = false;
@@ -207,6 +235,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
                     Mappers.UnidadMapper.Instance().Insert(newUnidad);
 
+                    //Agrega en bitacora la operacion realizada
                     Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
                     bitacora.Descripcion = "Se agrego la unidad: " + newUnidad.Codigo;
                     bitacora.FechaOperacion = DateTime.Today;
@@ -242,7 +271,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     updUnidad.Activo = this.chkActivo.Checked;
 
                     Mappers.UnidadMapper.Instance().Save(updUnidad);
-
+                    //Agrega en bitacora la operacion realizada
                     Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
                     bitacora.Descripcion = "Se modifico la Unidad: " + updUnidad.Codigo;
                     bitacora.FechaOperacion = DateTime.Today;
@@ -293,20 +322,67 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         }
         #endregion
 
+        /// <summary>
+        /// Valida si hay corporacion seleccionada y municipio para poder modificar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            this.Modificar();
-            this.LlenarGrid();
-            this.Limpiar();
+            try
+            {
+                if (this.ddlCorporacion.SelectedIndex > -1)
+                {
+                    if (this.ddlMunicipio.SelectedIndex > -1)
+                    {
+                        this.Modificar();
+                        this.LlenarGrid();
+                        this.Limpiar();
+                    }
+                    else { throw new SAIExcepcion("Seleccione un Municipio."); }
+                }
+                else
+                {
+                    throw new SAIExcepcion("Seleccione una Coroporacion.");
+                }
+            }
+            catch (SAIExcepcion)
+            { }
         }
 
+        /// <summary>
+        /// Valida que haya corporacion seleccionada y municipio para poder agregar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            this.Agregar();
-            this.LlenarGrid();
-            this.Limpiar();
+            try
+            {
+                if (this.ddlCorporacion.SelectedIndex > -1)
+                {
+                    if (this.ddlMunicipio.SelectedIndex > -1)
+                    {
+                        this.Agregar();
+                        this.LlenarGrid();
+                        this.Limpiar();
+                    }
+                    else { throw new SAIExcepcion("Seleccione un Municipio."); }
+                }
+                else
+                {
+                    throw new SAIExcepcion("Seleccione una Coroporacion.");
+                }
+            }
+            catch (SAIExcepcion)
+            { }
         }
 
+        /// <summary>
+        /// Pregunta al usuario si desea eliminar la unidad seleccionada
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("¿Desea eliminar la Unidad?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -317,11 +393,21 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             }
         }
 
+        /// <summary>
+        /// Cierra la vantana de Unidades
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// Evento que obtiene los datos para su modificacion
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void gvUnidades_SelectionChanged(object sender, EventArgs e)
         {
             try 
@@ -348,14 +434,14 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             { } //this.SAIEtiquetaEstado.Text = ex.Message; }
         }
 
+        /// <summary>
+        /// Limpia los controles
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             this.Limpiar();
-        }
-
-        private void ddlMunicipio_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

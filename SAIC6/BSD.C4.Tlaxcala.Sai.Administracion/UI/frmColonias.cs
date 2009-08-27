@@ -21,6 +21,11 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Llena los datos correspondientes a cada control
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void frmColonias_Load(object sender, EventArgs e)
         {
             this.LlenarEstado();
@@ -30,6 +35,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             this.LlenarCodigoPostal();
         }
 
+        /// <summary>
+        /// Llena el combobox de Estado (Solo Tlaxcala)
+        /// </summary>
         private void LlenarEstado()
         {
             try
@@ -47,6 +55,10 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             { }
         }
 
+        /// <summary>
+        /// Llena el combobox de municipio
+        /// </summary>
+        /// <param name="idlocalidad"></param>
         private void LlenarMunicipio(int idlocalidad)
         {
             try
@@ -69,6 +81,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
         }
 
+        /// <summary>
+        /// Llena el Datagrid con los datos del catalogo de Colonias
+        /// </summary>
         private void LlenarGrid()
         {
             try
@@ -105,6 +120,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             { }
         }
 
+        /// <summary>
+        /// Llena el combobox de Localidades
+        /// </summary>
         private void LlenarLocalidad()
         {
             try 
@@ -118,6 +136,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             { }
         }
 
+        /// <summary>
+        /// Llena el combobox de Codigo Postal
+        /// </summary>
         private void LlenarCodigoPostal()
         {
             this.ddlCodigoPostal.Items.Clear();
@@ -264,19 +285,38 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
         #endregion
 
+        /// <summary>
+        /// Obtiene el inidce dle registro seleccionado
+        /// </summary>
+        /// <returns></returns>
         private int ObtenerIndiceSeleccionado()
         { return this.gvColonias.CurrentCellAddress.Y; }
 
+        /// <summary>
+        /// Llama el metodo Limpiar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             this.Limpiar();
         }
 
+        /// <summary>
+        /// Cierra la ventana de Colonias
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// Pregunta al usuario si se va eliminar el aColonia seleccionada
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("¿Esta seguro de eliminar la Colonia?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -286,6 +326,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 this.Limpiar();
             }
         }
+
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
@@ -309,35 +350,33 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             }
         }
 
-        
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
-        }
-
         private void gvColonias_SelectionChanged(object sender, EventArgs e)
         {
-            try 
+            try
             {
-                if (this.ObtenerIndiceSeleccionado() > -1)
+                try
                 {
-                    this.saiClave.Text = Convert.ToString(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveCartografia"].Value);
-                    this.saiTxtNombre.Text = Convert.ToString(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["Nombre"].Value);
-                    this.SeleccionarComboItem(Convert.ToInt32(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveCodigo"].Value));
-                    this.ddlLocalidad.SelectedValue = this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveLocalidad"].Value;
-                    this.LlenarMunicipio(Convert.ToInt32(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveLocalidad"].Value));
-                    this.btnModificar.Enabled = true;
-                    this.btnEliminar.Visible = true;
-                    this.btnAgregar.Enabled = false;
+                    if (this.ObtenerIndiceSeleccionado() > -1)
+                    {
+                        this.saiClave.Text = Convert.ToString(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveCartografia"].Value);
+                        this.saiTxtNombre.Text = Convert.ToString(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["Nombre"].Value);
+                        this.SeleccionarComboItem(Convert.ToInt32(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveCodigo"].Value));
+                        this.ddlLocalidad.SelectedValue = this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveLocalidad"].Value;
+                        this.LlenarMunicipio(Convert.ToInt32(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveLocalidad"].Value));
+                        this.btnModificar.Enabled = true;
+                        this.btnEliminar.Visible = true;
+                        this.btnAgregar.Enabled = false;
+                    }
                 }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
             }
-            catch (Exception ex)
+            catch (SAIExcepcion)
             { }
         }
 
         private void ddlCodigoPostal_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             if (Convert.ToString(this.ObtenerValor()) == "000")
             {
                 this.txtCP.Visible = true;
@@ -358,6 +397,10 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 return 0;
         }
 
+        /// <summary>
+        /// Selecciona un elemento del Combobox
+        /// </summary>
+        /// <param name="Value"></param>
         private void SeleccionarComboItem(int Value)
         {
             foreach (Utilerias.ComboItem item in this.ddlCodigoPostal.Items)
@@ -367,8 +410,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     this.ddlCodigoPostal.SelectedItem = item;
                     break;
                 }
-                /*else
-                { this.ddlCodigoPostal.SelectedIndex = -1; }*/
             }
         }
 
@@ -428,6 +469,25 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             return 0;
         }
 
-
+        /// <summary>
+        /// Valida que solo acepte digitos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void saiClave_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

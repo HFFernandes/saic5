@@ -21,6 +21,11 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             InitializeComponent();
         }
 
+        /// <summary>
+        /// llena combobox y Datatgrid con los datos correspondientes a cada control
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void frmLocalidades_Load(object sender, EventArgs e)
         {
             this.LlenarMunicipios();
@@ -29,6 +34,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             this.Limpiar();
         }
 
+        /// <summary>
+        /// Llena el datatgrid con los datos del catalogo de Localidades
+        /// </summary>
         private void LlenarGrid()
         {
             DataTable catLocalidades = new DataTable("catLocalidades");
@@ -58,6 +66,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             { }
         }
 
+        /// <summary>
+        /// Llena el combobox de Estados
+        /// </summary>
         private void LlenarEstados()
         {
             try
@@ -69,12 +80,15 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     this.ddlEstado.ValueMember = "Clave";
                 }
                 catch (Exception ex)
-                { }
+                { throw new SAIExcepcion(ex.Message); }
             }
             catch (SAIExcepcion)
             { }
         }
 
+        /// <summary>
+        /// Llena el combobox de Municipios
+        /// </summary>
         private void LlenarMunicipios()
         {
             try
@@ -94,6 +108,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
         #region ABC
 
+        /// <summary>
+        /// Agrega una nueva Localidad
+        /// </summary>
         private void Agregar()
         {
             try
@@ -107,6 +124,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     newLocalidad.ClaveLocalidadCartografia = this.txtClaveLocalidadCartografia.Text != string.Empty ? Convert.ToInt32(this.txtClaveLocalidadCartografia.Text) : 0;
                     Mappers.LocalidadMapper.Instance().Insert(newLocalidad);
 
+                    //Agrega operacion a bitacora
                     Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
                     bitacora.Descripcion = "Se agrego la Localidad: " + newLocalidad.Nombre;
                     bitacora.FechaOperacion = DateTime.Today;
@@ -123,6 +141,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             { }
         }
 
+        /// <summary>
+        /// Modifica datos de un Localidad (Deshabilitado)
+        /// </summary>
         private void Modificar()
         {
             try
@@ -154,6 +175,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             { }
         }
 
+        /// <summary>
+        /// Elimina una Localidad (Deshabilitado)
+        /// </summary>
         private void Eliminar()
         {
             try
@@ -178,6 +202,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             { }
         }
 
+        /// <summary>
+        /// Limpia los controles del fromulario de Localidades
+        /// </summary>
         private void Limpiar()
         {
             foreach (DataGridViewRow row in this.gvLocalidades.Rows)
@@ -194,64 +221,67 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
         #endregion
 
+        /// <summary>
+        /// Obtiene el indice del registro seleccionado
+        /// </summary>
+        /// <returns></returns>
         private int ObtenerIndiceSeleccionado()
         { return this.gvLocalidades.CurrentCellAddress.Y; }
 
-        private void btnModificar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (this.SAIProveedorValidacion.ValidarCamposRequeridos(this.groupBox2))
-                {
-                    this.Modificar();
-                    this.LlenarGrid();
-                    this.Limpiar();
-                }
-                else
-                {
-                    throw new SAIExcepcion("Capture todos los campos.");
-                }
-            }
-            catch (SAIExcepcion)
-            { }
-        }
-
+        /// <summary>
+        /// Valida que los campos esten correctos para poder Agregar y actualiza el Datagrid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             try
             {
-                if (this.SAIProveedorValidacion.ValidarCamposRequeridos(this.groupBox2))
+                if (this.ddlMunicipio.SelectedIndex > -1)
                 {
-                    this.Agregar();
-                    this.LlenarGrid();
-                    this.Limpiar();
+                    if (this.SAIProveedorValidacion.ValidarCamposRequeridos(this.groupBox2))
+                    {
+                        this.Agregar();
+                        this.LlenarGrid();
+                        this.Limpiar();
+                    }
+                    else
+                    {
+                        throw new SAIExcepcion("Capture todos los campos.");
+                    }
                 }
-                else 
-                {
-                    throw new SAIExcepcion("Capture todos los campos.");
-                }
+                else
+                { throw new SAIExcepcion("Seleccione un Municipio."); }
             }
             catch (SAIExcepcion)
             { }
         }
 
-        private void btnEliminar_Click(object sender, EventArgs e)
-        {
-            this.Eliminar();
-            this.LlenarGrid();
-            this.Limpiar();
-        }
-
+        /// <summary>
+        /// Llama el metodo Limpiar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             this.Limpiar();
         }
 
+        /// <summary>
+        /// Cierra la ventana de localidades
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// Evento que selecciona los datos correspondientes a la localidad seleccionada
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void gvLocalidades_SelectionChanged(object sender, EventArgs e)
         {
             try
@@ -272,6 +302,27 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             }
             catch (SAIExcepcion)
             { }
+        }
+
+        /// <summary>
+        /// Valida solo aceptar digitos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtClaveLocalidadCartografia_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
         }
     }
 }

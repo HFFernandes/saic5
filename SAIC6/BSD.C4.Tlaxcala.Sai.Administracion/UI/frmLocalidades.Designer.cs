@@ -64,7 +64,7 @@
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(301, 415);
+            this.btnAgregar.Location = new System.Drawing.Point(403, 416);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
             this.btnAgregar.TabIndex = 7;
@@ -134,6 +134,7 @@
             this.txtClaveLocalidadCartografia.Size = new System.Drawing.Size(156, 20);
             this.txtClaveLocalidadCartografia.StrMensajeCampoRequerido = "El campo es requerido.";
             this.txtClaveLocalidadCartografia.TabIndex = 4;
+            this.txtClaveLocalidadCartografia.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtClaveLocalidadCartografia_KeyPress);
             // 
             // label4
             // 

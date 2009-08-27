@@ -83,7 +83,6 @@
             this.gvMunicipios.Size = new System.Drawing.Size(548, 144);
             this.gvMunicipios.TabIndex = 0;
             this.gvMunicipios.TabStop = false;
-            this.gvMunicipios.SelectionChanged += new System.EventHandler(this.gvMunicipios_SelectionChanged);
             // 
             // gpbDatosGenerales
             // 
@@ -100,7 +99,6 @@
             this.gpbDatosGenerales.TabIndex = 0;
             this.gpbDatosGenerales.TabStop = false;
             this.gpbDatosGenerales.Text = "Datos Generales";
-            this.gpbDatosGenerales.Enter += new System.EventHandler(this.gpbDatosGenerales_Enter);
             // 
             // label3
             // 
@@ -120,6 +118,7 @@
             this.saiClave.Size = new System.Drawing.Size(100, 20);
             this.saiClave.StrMensajeCampoRequerido = "El campo es requerido.";
             this.saiClave.TabIndex = 1;
+            this.saiClave.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.saiClave_KeyPress);
             // 
             // ddlEstado
             // 
@@ -134,6 +133,7 @@
             // 
             this.saiTxtNombre.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.saiTxtNombre.Location = new System.Drawing.Point(115, 73);
+            this.saiTxtNombre.MaxLength = 75;
             this.saiTxtNombre.Name = "saiTxtNombre";
             this.saiTxtNombre.Size = new System.Drawing.Size(209, 20);
             this.saiTxtNombre.StrMensajeCampoRequerido = "El campo es requerido.";

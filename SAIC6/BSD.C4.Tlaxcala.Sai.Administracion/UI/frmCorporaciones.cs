@@ -22,11 +22,11 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             InitializeComponent();
         }
 
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// Llenado de Catalogo de corporaciones en grid y sistemas en combobox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void frmCorporaciones_Load(object sender, EventArgs e)
         {
             SAIBarraEstado.SizingGrip = false;
@@ -36,14 +36,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         }
 
         /// <summary>
-        /// Llenar el DtataGrid con el catalogo de Corporaciones
+        /// Llenar el DataGrid con el catalogo de Corporaciones
         /// </summary>
         private void LlenarGrid()
         {
             DataTable catCorporaciones = new DataTable("CatCorporaciones");
             try
             {
-
                 try
                 {
                     catCorporaciones.Columns.Add(new DataColumn("Clave", Type.GetType("System.Int32")));
@@ -73,28 +72,39 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             { }
         }
 
+        /// <summary>
+        /// Limpia los controles del formulario de Corporaciones
+        /// </summary>
         private void Limpiar()
         {
             try
             {
-                foreach (DataGridViewRow row in this.gvCorporaciones.Rows)
+                try
                 {
-                    row.Selected = false;
+                    foreach (DataGridViewRow row in this.gvCorporaciones.Rows)
+                    {
+                        row.Selected = false;
+                    }
+                    this.ddlSistema.SelectedIndex = -1;
+                    this.saiTxtDescripcion.Text = "";
+                    this.chkUnidadVirtual.Checked = false;
+                    this.chkActivo.Checked = false;
+                    this.btnEliminar.Visible = false;
+                    this.btnModificar.Enabled = false;
+                    this.btnLimpiar.Enabled = false;
+                    this.btnAgregar.Enabled = true;
+                    this.saiTxtZn.Text = string.Empty;
                 }
-                this.ddlSistema.SelectedIndex = -1;
-                this.saiTxtDescripcion.Text = "";
-                this.chkUnidadVirtual.Checked = false;
-                this.chkActivo.Checked = false;
-                this.btnEliminar.Visible = false;
-                this.btnModificar.Enabled = false;
-                this.btnLimpiar.Enabled = false;
-                this.btnAgregar.Enabled = true;
-                this.saiTxtZn.Text = string.Empty;
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
             }
-            catch (Exception ex)
-            { MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias"); }
+            catch (SAIExcepcion)
+            { }
         }
 
+        /// <summary>
+        /// Llena el catalogo de sistemas en el combobox
+        /// </summary>
         private void LlenarSistemas()
         {
             try
@@ -120,16 +130,30 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             { }
         }
 
+        /// <summary>
+        /// Obtiene el valor de un elemento seleccionado en el combobox
+        /// </summary>
+        /// <param name="indice">indice del elemento seleccionado</param>
+        /// <returns></returns>
         private object ObtieneValor(int indice)
         {
             return ((ComboItem)this.ddlSistema.Items[indice]).Valor;
         }
 
+        /// <summary>
+        /// Obtiene la descripcion del elemento seleccionado
+        /// </summary>
+        /// <param name="indice">indice del elemento a obtener la descripcion</param>
+        /// <returns></returns>
         private string ObtieneDescripcion(int indice)
         {
             return ((ComboItem)this.ddlSistema.Items[indice]).Descripcion;
         }
 
+        /// <summary>
+        /// Seleccionar un elemento dle combobox
+        /// </summary>
+        /// <param name="Value">valor del elemento a selaccionar</param>
         private void SeleccionarComboItem(int Value)
         {
             foreach (ComboItem item in this.ddlSistema.Items)
@@ -253,6 +277,11 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         }
         #endregion
 
+        /// <summary>
+        /// Llena los campos cuando se selecciona una corporacion
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void gvCorporaciones_SelectionChanged(object sender, EventArgs e)
         {
             try
@@ -263,7 +292,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     if (selectedRow > -1)
                     {
                         this.saiTxtDescripcion.Text = Convert.ToString(this.gvCorporaciones.Rows[selectedRow].Cells["Descripcion"].Value);
-                        //this.ddlSistema.SelectedValue = this.gvCorporaciones.Rows[selectedRow].Cells["ClaveSistema"].Value;
                         this.SeleccionarComboItem(Convert.ToInt32(this.gvCorporaciones.Rows[selectedRow].Cells["ClaveSistema"].Value));
                         this.chkActivo.Checked = Convert.ToBoolean(this.gvCorporaciones.Rows[selectedRow].Cells["Activo"].Value);
                         this.chkUnidadVirtual.Checked = Convert.ToBoolean(this.gvCorporaciones.Rows[selectedRow].Cells["UnidadesVirtuales"].Value);
@@ -272,7 +300,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         this.btnModificar.Enabled = true;
                         this.btnAgregar.Enabled = false;
                         this.btnLimpiar.Enabled = true;
-
                     }
                 }
                 catch (Exception ex)
@@ -282,6 +309,11 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             { }
         }
 
+        /// <summary>
+        /// Modifica los campos de una corporacion
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnModificar_Click(object sender, EventArgs e)
         {
             if (this.SAIProveedorValidacion.ValidarCamposRequeridos(this.groupBox2))
@@ -292,23 +324,38 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             }
         }
 
+        /// <summary>
+        /// Valida que se haya seleccionado un sistema para poder agregar una nueva corporacion
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            if (this.ddlSistema.SelectedIndex > -1)
+            try
             {
-                if (this.SAIProveedorValidacion.ValidarCamposRequeridos(this.groupBox2))
+                if (this.ddlSistema.SelectedIndex > -1)
                 {
-                    this.Agregar();
-                    this.LlenarGrid();
-                    this.Limpiar();
+                    if (this.SAIProveedorValidacion.ValidarCamposRequeridos(this.groupBox2))
+                    {
+                        this.Agregar();
+                        this.LlenarGrid();
+                        this.Limpiar();
+                    }
+                }
+                else
+                {
+                    throw new SAIExcepcion("Seleccione un sistema");
                 }
             }
-            else 
-            {
-                throw new SAIExcepcion("Seleccione un sistema");
-            }
+            catch (SAIExcepcion)
+            { }
         }
 
+        /// <summary>
+        /// Valida si se va eliminar la corporacion seleccionada
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("¿Desea Eliminar la corporaciòn?", "Sistema de Administracion de Incidencias", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -319,11 +366,21 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             }
         }
 
+        /// <summary>
+        /// Cierra la vantana de Corporaciones
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// Limpia controles de captura de la ventana de corporaciones
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             this.Limpiar();
