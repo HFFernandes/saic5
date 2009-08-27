@@ -118,69 +118,69 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CmdDeleteColumn" xml:space="preserve">
-    <value>Delete column</value>
+    <value>Eliminar columna</value>
   </data>
   <data name="HeaderTitle" xml:space="preserve">
-    <value>Title</value>
+    <value>Titulo</value>
   </data>
   <data name="ColTypeCompound" xml:space="preserve">
-    <value>Calculated</value>
+    <value>Calculado</value>
   </data>
   <data name="CmdNotSorted" xml:space="preserve">
-    <value>Not sorted</value>
+    <value>No ordenado</value>
   </data>
   <data name="MsgEmptyListValue" xml:space="preserve">
-    <value>[select value]</value>
+    <value>[seleccionar valor]</value>
   </data>
   <data name="ColTypeAggrFunc" xml:space="preserve">
-    <value>Aggregate function</value>
+    <value>Función de agregado</value>
   </data>
   <data name="CmdAscending" xml:space="preserve">
-    <value>Ascending</value>
+    <value>Ascendente</value>
   </data>
   <data name="MsgEmptyScalarValue" xml:space="preserve">
-    <value>[enter value]</value>
+    <value>[escribir valor]</value>
   </data>
   <data name="CmdDeleteSorting" xml:space="preserve">
-    <value>Delete sorting</value>
+    <value>Eliminar ordenamiento</value>
   </data>
   <data name="QCPRowButtonTitle" xml:space="preserve">
-    <value>Click here to see available operations</value>
+    <value>Clic aquí para ver las operaciones disponibles</value>
   </data>
   <data name="CmdMoveDown" xml:space="preserve">
-    <value>Move down</value>
+    <value>Mover abjo</value>
   </data>
   <data name="CmdMoveUp" xml:space="preserve">
-    <value>Move up</value>
+    <value>Mover arriba</value>
   </data>
   <data name="ColTypeSimple" xml:space="preserve">
     <value>Simple</value>
   </data>
   <data name="CmdGroupSort" xml:space="preserve">
-    <value>Sorting</value>
+    <value>Ordenamiento</value>
   </data>
   <data name="MsgOf" xml:space="preserve">
-    <value>of</value>
+    <value>de</value>
   </data>
   <data name="MsgAs" xml:space="preserve">
-    <value>as</value>
+    <value>como</value>
   </data>
   <data name="HeaderExpression" xml:space="preserve">
-    <value>Expression</value>
+    <value>Expresión</value>
   </data>
   <data name="CmdDescending" xml:space="preserve">
-    <value>Descending</value>
+    <value>Descendente</value>
   </data>
   <data name="ColTypeGroup" xml:space="preserve">
-    <value>Column type</value>
+    <value>Tipo de columna</value>
   </data>
   <data name="MsgEmptyList" xml:space="preserve">
-    <value>(empty list)</value>
+    <value>(lista vacia)</value>
   </data>
   <data name="HeaderSorting" xml:space="preserve">
-    <value>Sorting</value>
+    <value>Ordenamiento</value>
   </data>
   <data name="CmdClickToAdd" xml:space="preserve">
-    <value>Click here to add new column</value>
+    <value>Clic aquí para agregar nueva columna</value>
   </data>
 </root>
