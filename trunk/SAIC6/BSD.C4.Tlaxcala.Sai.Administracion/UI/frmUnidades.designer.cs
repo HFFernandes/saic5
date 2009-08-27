@@ -72,7 +72,6 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos Generales";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // ddlEstado
             // 
@@ -82,7 +81,7 @@
             this.ddlEstado.Location = new System.Drawing.Point(139, 76);
             this.ddlEstado.Name = "ddlEstado";
             this.ddlEstado.Size = new System.Drawing.Size(198, 21);
-            this.ddlEstado.TabIndex = 8;
+            this.ddlEstado.TabIndex = 3;
             // 
             // label4
             // 
@@ -91,7 +90,7 @@
             this.label4.Location = new System.Drawing.Point(19, 79);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(43, 13);
-            this.label4.TabIndex = 7;
+            this.label4.TabIndex = 0;
             this.label4.Text = "Estado:";
             // 
             // ddlMunicipio
@@ -101,8 +100,7 @@
             this.ddlMunicipio.Location = new System.Drawing.Point(139, 103);
             this.ddlMunicipio.Name = "ddlMunicipio";
             this.ddlMunicipio.Size = new System.Drawing.Size(198, 21);
-            this.ddlMunicipio.TabIndex = 6;
-            this.ddlMunicipio.SelectedIndexChanged += new System.EventHandler(this.ddlMunicipio_SelectedIndexChanged);
+            this.ddlMunicipio.TabIndex = 4;
             // 
             // label3
             // 
@@ -110,7 +108,7 @@
             this.label3.Location = new System.Drawing.Point(19, 106);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 13);
-            this.label3.TabIndex = 5;
+            this.label3.TabIndex = 0;
             this.label3.Text = "Municipio:";
             // 
             // btnLimpiar
@@ -118,7 +116,7 @@
             this.btnLimpiar.Location = new System.Drawing.Point(479, 151);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpiar.TabIndex = 4;
+            this.btnLimpiar.TabIndex = 6;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
@@ -128,6 +126,7 @@
             this.saiTxtCodigo.BlnEsRequerido = true;
             this.saiTxtCodigo.ClrBackColorFoco = System.Drawing.Color.Empty;
             this.saiTxtCodigo.Location = new System.Drawing.Point(139, 19);
+            this.saiTxtCodigo.MaxLength = 50;
             this.saiTxtCodigo.Name = "saiTxtCodigo";
             this.saiTxtCodigo.Size = new System.Drawing.Size(198, 20);
             this.saiTxtCodigo.StrMensajeCampoRequerido = "El campo es requerido.";
@@ -157,7 +156,7 @@
             this.chkActivo.Location = new System.Drawing.Point(60, 139);
             this.chkActivo.Name = "chkActivo";
             this.chkActivo.Size = new System.Drawing.Size(56, 17);
-            this.chkActivo.TabIndex = 3;
+            this.chkActivo.TabIndex = 5;
             this.chkActivo.Text = "Activo";
             this.chkActivo.UseVisualStyleBackColor = true;
             // 
@@ -178,7 +177,7 @@
             this.btnModificar.Location = new System.Drawing.Point(227, 458);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
-            this.btnModificar.TabIndex = 5;
+            this.btnModificar.TabIndex = 7;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnModificar.UseVisualStyleBackColor = true;
@@ -191,7 +190,7 @@
             this.btnAgregar.Location = new System.Drawing.Point(308, 458);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
-            this.btnAgregar.TabIndex = 6;
+            this.btnAgregar.TabIndex = 8;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAgregar.UseVisualStyleBackColor = true;
@@ -239,7 +238,7 @@
             this.btnEliminar.Location = new System.Drawing.Point(389, 458);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
-            this.btnEliminar.TabIndex = 7;
+            this.btnEliminar.TabIndex = 9;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnEliminar.UseVisualStyleBackColor = true;
@@ -251,7 +250,7 @@
             this.bnCancelar.Location = new System.Drawing.Point(497, 458);
             this.bnCancelar.Name = "bnCancelar";
             this.bnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.bnCancelar.TabIndex = 8;
+            this.bnCancelar.TabIndex = 10;
             this.bnCancelar.Text = "Cerrar";
             this.bnCancelar.UseVisualStyleBackColor = true;
             this.bnCancelar.Click += new System.EventHandler(this.bnCancelar_Click);

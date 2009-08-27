@@ -81,7 +81,6 @@
             this.chkUnidadVirtual.TabIndex = 5;
             this.chkUnidadVirtual.Text = "Unidades Virtuales";
             this.chkUnidadVirtual.UseVisualStyleBackColor = true;
-            this.chkUnidadVirtual.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
             // groupBox1
             // 
@@ -129,7 +128,7 @@
             this.groupBox2.Location = new System.Drawing.Point(12, 245);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(560, 159);
-            this.groupBox2.TabIndex = 5;
+            this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos Generales";
             // 
@@ -137,6 +136,7 @@
             // 
             this.saiTxtZn.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.saiTxtZn.Location = new System.Drawing.Point(110, 76);
+            this.saiTxtZn.MaxLength = 15;
             this.saiTxtZn.Name = "saiTxtZn";
             this.saiTxtZn.Size = new System.Drawing.Size(100, 20);
             this.saiTxtZn.StrMensajeCampoRequerido = "El campo es requerido.";
@@ -148,7 +148,7 @@
             this.label3.Location = new System.Drawing.Point(17, 79);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(23, 13);
-            this.label3.TabIndex = 8;
+            this.label3.TabIndex = 0;
             this.label3.Text = "Zn:";
             // 
             // btnLimpiar
@@ -167,6 +167,7 @@
             this.saiTxtDescripcion.BlnEsRequerido = true;
             this.saiTxtDescripcion.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.saiTxtDescripcion.Location = new System.Drawing.Point(110, 23);
+            this.saiTxtDescripcion.MaxLength = 50;
             this.saiTxtDescripcion.Name = "saiTxtDescripcion";
             this.saiTxtDescripcion.Size = new System.Drawing.Size(288, 20);
             this.saiTxtDescripcion.StrMensajeCampoRequerido = "El campo es requerido.";
@@ -178,7 +179,7 @@
             this.label2.Location = new System.Drawing.Point(17, 52);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 13);
-            this.label2.TabIndex = 5;
+            this.label2.TabIndex = 0;
             this.label2.Text = "Sistema:";
             // 
             // label1
@@ -187,7 +188,7 @@
             this.label1.Location = new System.Drawing.Point(17, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(66, 13);
-            this.label1.TabIndex = 4;
+            this.label1.TabIndex = 0;
             this.label1.Text = "Descripción:";
             // 
             // btnAgregar

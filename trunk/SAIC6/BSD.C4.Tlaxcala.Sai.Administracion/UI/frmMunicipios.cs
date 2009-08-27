@@ -21,15 +21,22 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Llena el Datagrid y combobox de estados
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void frmMunicipios_Load(object sender, EventArgs e)
         {
             this.SAIBarraEstado.SizingGrip = false;
             this.LlenarEstados();
             this.LlenarGrid();
             this.Limpiar();
-
         }
 
+        /// <summary>
+        /// Llena el Datagrid con el catalogo de Municipios
+        /// </summary>
         private void LlenarGrid()
         {
             try 
@@ -64,6 +71,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             { }
         }
 
+        /// <summary>
+        /// Llena el combobox xon el catalogo de Estados(Solo Tlaxcala)
+        /// </summary>
         private void LlenarEstados()
         {
             try
@@ -79,10 +89,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             }
             catch (SAIExcepcion)
             { }
-        }
-    
+        }    
 
         #region ABC
+
+        /// <summary>
+        /// Fauncion que agrega un nuevo municipio
+        /// </summary>
         private void Agregar()
         {
             try
@@ -94,7 +107,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     newMunicipio.ClaveEstado = Convert.ToInt32(this.ddlEstado.SelectedValue);
                     newMunicipio.Nombre = this.saiTxtNombre.Text;
                     Mappers.MunicipioMapper.Instance().Insert(newMunicipio);
-
+                    //Agrega operacion a bitacora
                     Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
                     bitacora.Descripcion = "Se agrego el Municipio: " + newMunicipio.Nombre;
                     bitacora.FechaOperacion = DateTime.Today;
@@ -111,6 +124,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             { }
         }
 
+        /// <summary>
+        /// Funcion que modifica un municipio existente (Deshabilitada)
+        /// </summary>
         private void Modificar()
         {
             try
@@ -131,6 +147,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             { }
         }
 
+        /// <summary>
+        /// Funcion que Elimina un Municipio existente (Deshabilitada)
+        /// </summary>
         private void Eliminar()
         {
             try
@@ -147,6 +166,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             { }
         }
 
+        /// <summary>
+        /// Limpia campos del formulario de Municipios
+        /// </summary>
         private void Limpiar()
         {
             this.saiClave.Text = string.Empty;
@@ -156,16 +178,31 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
         #endregion
 
+        /// <summary>
+        /// Llama  a la funcion Limpiar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             this.Limpiar();
         }
 
+        /// <summary>
+        /// Cierra la ventana de Municipios
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// Llama la funcion Modificar y actualiza el Datagrid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnModificar_Click(object sender, EventArgs e)
         {
             this.Modificar();
@@ -173,6 +210,11 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             this.Limpiar();
         }
 
+        /// <summary>
+        /// Llama a la funcion agregar y actualiza Datagrid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             if (this.SAIProveedorValidacion.ValidarCamposRequeridos(this.gpbDatosGenerales))
@@ -182,46 +224,35 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 this.Limpiar();
             }
         }
-        /*
-
-        private void btnEliminar_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("¿Esta seguro de eliminar el municipio?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                this.Eliminar();
-                this.LlenarGrid();
-                this.Limpiar();
-            }
-        }
-        */
+        
+        /// <summary>
+        /// Obtiene el indice del registro seleccionado
+        /// </summary>
+        /// <returns></returns>
         private int ObtenerIndiceSeleccionado()
         {
             return this.gvMunicipios.CurrentCellAddress.Y;
         }
 
-        private void gpbDatosGenerales_Enter(object sender, EventArgs e)
+        /// <summary>
+        /// Validado para que solo acepte digitos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void saiClave_KeyPress(object sender, KeyPressEventArgs e)
         {
-
-        }
-
-        private void gvMunicipios_SelectionChanged(object sender, EventArgs e)
-        {
-            /*try
+            if (Char.IsDigit(e.KeyChar))
             {
-                try
-                {
-                    if (this.ObtenerIndiceSeleccionado() > -1)
-                    {
-                        this.saiClave.Text = Convert.ToString(this.gvMunicipios.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveCartografia"].Value);
-                        this.saiTxtNombre.Text = Convert.ToString(this.gvMunicipios.Rows[this.ObtenerIndiceSeleccionado()].Cells["Nombre"].Value);
-                        //this.btnAgregar.Enabled = false;
-                    }
-                }
-                catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                e.Handled = false;
             }
-            catch (SAIExcepcion)
-            { }*/
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
         }
     }
 }
