@@ -45,6 +45,7 @@
             this.lbl2 = new System.Windows.Forms.Label();
             this.saiTxtS = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.lblS = new System.Windows.Forms.Label();
+            this.tmrMonitor = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.SAIBarraComandos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgAdministrador)).BeginInit();
             this.pnResumenIncidencias.SuspendLayout();
@@ -220,6 +221,10 @@
             this.lblS.TabIndex = 0;
             this.lblS.Text = "S";
             // 
+            // tmrMonitor
+            // 
+            this.tmrMonitor.Tick += new System.EventHandler(this.tmrMonitor_Tick);
+            // 
             // SAIFrmComandos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -263,5 +268,6 @@
         public BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox saiTxtPrioridad2;
         public BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox saiTxtPrioridad5;
         public BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox saiTxtPrioridad4;
+        private System.Windows.Forms.Timer tmrMonitor;
     }
 }

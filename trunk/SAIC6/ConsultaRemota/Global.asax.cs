@@ -31,8 +31,8 @@ namespace ConsultaRemota
             Session["DataModel"] = model;
 
             var query = new Korzh.EasyQuery.Query { Model = model };
-            query.Formats.DateFormat = "#yyyy-MM-dd#";
-            query.Formats.DateTimeFormat = "#yyyy-MM-dd hh:mm:ss#";
+            query.Formats.DateFormat = "#MM-dd-yyyy#";
+            query.Formats.DateTimeFormat = "#MM-dd-yyyy hh:mm:ss#";
             query.Formats.QuoteBool = false;
             query.Formats.QuoteTime = false;
             query.Formats.SqlQuote1 = '[';

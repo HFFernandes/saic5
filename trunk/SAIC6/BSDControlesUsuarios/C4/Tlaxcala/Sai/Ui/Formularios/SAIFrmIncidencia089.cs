@@ -11,13 +11,23 @@ using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
 using BSD.C4.Tlaxcala.Sai.Ui.Controles;
 using System.Collections;
+using Mappers = BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
     public partial class SAIFrmIncidencia089 : SAIFrmIncidencia
     {
-        public SAIFrmIncidencia089()
+
+
+
+        #region CONSTRUCTORES
+
+        /// <summary>
+        /// CONSTRUCTOR
+        /// </summary>
+        /// <param name="noTelefono">string,No. de telefono</param>
+        public SAIFrmIncidencia089(string noTelefono)
         {
             int intHeight = base.Height;
             int intWidth = base.Width;
@@ -34,6 +44,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 this.Text = this._entIncidencia.Folio.ToString();
             }
             this.InicializaCampos();
+
+            //Checamos si se paso algún número de telefono.
+            if (!string.IsNullOrEmpty(noTelefono))
+            {
+                //Obtenemos los datos de la linea.
+                this.ObtenerTitularLinea(noTelefono);
+            }
         }
 
         public SAIFrmIncidencia089(Incidencia EntIncidencia)
@@ -53,8 +70,32 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.CambiaHabilitadoTipoIncidencia(false);
             this.Text = this._entIncidencia.Folio.ToString();
             this.InicializaCampos();
-           
+
         }
+
+
+        #endregion
+
+        #region PROPIEDADES
+
+        #endregion
+
+        #region MÉTODOS
+
+        /// <summary>
+        /// Obtiene la información del titular de la linea.
+        /// </summary>
+        /// <param name="noTelefono">string, Número telefónico</param>
+        public void ObtenerTitularLinea(string noTelefono)
+        {
+            TelefonoTelmex DatosTitular = Mappers.TelefonoTelmexMapper.Instance()
+            .GetOneBySQLQuery(string.Format(ID.SQL_OBTENERINFOTITULARLINEA, noTelefono));
+
+            this.TextoTelefono = noTelefono;
+            CodigoPostal CodigoTitular = Mappers.CodigoPostalMapper.Instance().GetOneBySQLQuery(string.Format(ID.SQL_OBTENERCODIGOPOSTAL, DatosTitular.ClaveCodigoPostal));
+            this.TextoCodigoPostal = CodigoTitular.Valor;
+        }
+
 
         /// <summary>
         /// Carga las listas y la información de la incidencia en los controles del formulario
@@ -100,7 +141,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.chkFechaDocumento.Checked = false;
                 }
                 //Se palomean las dependencias relacionadas a la incidencia:
-                IncidenciaDependenciaList  lstIncidenciaDependencia = IncidenciaDependenciaMapper.Instance().GetByIncidencia(this._entIncidencia.Folio);
+                IncidenciaDependenciaList lstIncidenciaDependencia = IncidenciaDependenciaMapper.Instance().GetByIncidencia(this._entIncidencia.Folio);
                 k = 0;
                 if (lstIncidenciaDependencia != null && lstIncidenciaDependencia.Count > 0)
                 {
@@ -126,14 +167,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 {
                                     this.dgvDependencias[3, k - 1].Value = lstIncidenciaDependencia[j].FechaNotificacion.Value;
                                 }
-                               
+
                             }
                         }
                     }
                 }
-                
 
-            }          
+
+            }
         }
 
 
@@ -147,7 +188,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             DependenciaList ListaTodasDependencias = DependenciaMapper.Instance().GetAll();
             int y;
             IEnumerator myEnumerator;
-            
+
             if (ListaTodasDependencias == null || ListaTodasDependencias.Count == 0)
             {
                 return lstDependencias;
@@ -178,9 +219,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             IncidenciaDependencia entIncidenciaDependencia;
 
 
-            foreach(Dependencia entDependencia in ObtenDependenciasEnLista())
+            foreach (Dependencia entDependencia in ObtenDependenciasEnLista())
             {
-               
+
 
                 for (int i = 0; i < this.dgvDependencias.Rows.Count; i++)
                 {
@@ -207,7 +248,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             {
                                 entIncidenciaDependencia.FechaEnvioDependencia = DateTime.Parse(dgvDependencias[2, i].Value.ToString());
                             }
-                            catch 
+                            catch
                             {
                                 entIncidenciaDependencia.FechaEnvioDependencia = null;
                             }
@@ -271,8 +312,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         //Es incidencia cerrada
                         this._entIncidencia.ClaveEstatus = 4;
                     }
-                    
-                    
+
+
                 }
                 else
                 {
@@ -281,80 +322,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
                 this._entIncidencia.NumeroOficio = this.txtNumeroOficio.Text;
                 this._entIncidencia.AliasDelincuente = this.txtAlias.Text;
-               
+
             }
-        }
-      
-
-
-        private void chkFechaDocumento_CheckedChanged(object sender, EventArgs e)
-        {
-            this.dtmFechaDocumento.Enabled = !this.dtmFechaDocumento.Enabled;
-            if (!this._blnSeActivoClosed)
-            {
-                base.RecuperaDatosEnIncidencia();
-                this.RecuperaDatosEnIncidencia();
-                this.GuardaIncidencia();
-            }
-        }
-
-        private void dtmFechaDocumento_Leave(object sender, EventArgs e)
-        {
-            if (!this._blnSeActivoClosed)
-            {
-                base.RecuperaDatosEnIncidencia();
-                this.RecuperaDatosEnIncidencia();
-                this.GuardaIncidencia();
-            }
-        }
-
-      
-
-        private void txtNumeroOficio_Leave(object sender, EventArgs e)
-        {
-            if (!this._blnSeActivoClosed)
-            {
-                base.RecuperaDatosEnIncidencia();
-                this.RecuperaDatosEnIncidencia();
-                this.GuardaIncidencia();
-            }
-        }
-
-      
-        protected override void OnClosed(EventArgs e)
-        {
-            this.RecuperaDatosEnIncidencia();
-            base.OnClosed(e);
-        }
-
-      
-        private void dtmFechaDocumento_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.cklDependencia.Focus();
-            }
-            this.SAIFrmIncidenciaKeyUp(e);
-        }
-
-       
-        private void txtAlias_Leave(object sender, EventArgs e)
-        {
-            if (!this._blnSeActivoClosed)
-            {
-                base.RecuperaDatosEnIncidencia();
-                this.RecuperaDatosEnIncidencia();
-                this.GuardaIncidencia();
-            }
-        }
-
-        private void txtAlias_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.txtNumeroOficio.Focus();
-            }
-            this.SAIFrmIncidenciaKeyUp(e);
         }
 
         /// <summary>
@@ -363,18 +332,18 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void GuardaDependencias()
         {
 
-           IncidenciaDependencia entIncidenciaDependencia;
-           IncidenciaDependenciaList lstIncidenciaDependencia;
-           DependenciaList lstDependencias =  this.ObtenDependenciasEnLista();
-           Boolean blnSeEncontro = false;
-           int intIndiceRenglon = 0;
+            IncidenciaDependencia entIncidenciaDependencia;
+            IncidenciaDependenciaList lstIncidenciaDependencia;
+            DependenciaList lstDependencias = this.ObtenDependenciasEnLista();
+            Boolean blnSeEncontro = false;
+            int intIndiceRenglon = 0;
 
-           if (lstDependencias == null || lstDependencias.Count ==0)
-           {
-               this.dgvDependencias.Rows.Clear();
-               IncidenciaDependenciaMapper.Instance().DeleteByIncidencia(this._entIncidencia.Folio);
-               return;
-           }
+            if (lstDependencias == null || lstDependencias.Count == 0)
+            {
+                this.dgvDependencias.Rows.Clear();
+                IncidenciaDependenciaMapper.Instance().DeleteByIncidencia(this._entIncidencia.Folio);
+                return;
+            }
 
             try
             {
@@ -436,6 +405,76 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         }
 
+
+        #endregion
+
+        #region MANEJADORES DE EVENTOS
+
+        private void chkFechaDocumento_CheckedChanged(object sender, EventArgs e)
+        {
+            this.dtmFechaDocumento.Enabled = !this.dtmFechaDocumento.Enabled;
+            if (!this._blnSeActivoClosed)
+            {
+                base.RecuperaDatosEnIncidencia();
+                this.RecuperaDatosEnIncidencia();
+                this.GuardaIncidencia();
+            }
+        }
+
+        private void dtmFechaDocumento_Leave(object sender, EventArgs e)
+        {
+            if (!this._blnSeActivoClosed)
+            {
+                base.RecuperaDatosEnIncidencia();
+                this.RecuperaDatosEnIncidencia();
+                this.GuardaIncidencia();
+            }
+        }
+
+        private void txtNumeroOficio_Leave(object sender, EventArgs e)
+        {
+            if (!this._blnSeActivoClosed)
+            {
+                base.RecuperaDatosEnIncidencia();
+                this.RecuperaDatosEnIncidencia();
+                this.GuardaIncidencia();
+            }
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            this.RecuperaDatosEnIncidencia();
+            base.OnClosed(e);
+        }
+
+        private void dtmFechaDocumento_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.cklDependencia.Focus();
+            }
+            this.SAIFrmIncidenciaKeyUp(e);
+        }
+
+        private void txtAlias_Leave(object sender, EventArgs e)
+        {
+            if (!this._blnSeActivoClosed)
+            {
+                base.RecuperaDatosEnIncidencia();
+                this.RecuperaDatosEnIncidencia();
+                this.GuardaIncidencia();
+            }
+        }
+
+        private void txtAlias_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.txtNumeroOficio.Focus();
+            }
+            this.SAIFrmIncidenciaKeyUp(e);
+        }
+
         private void cklDependencia_MouseUp(object sender, MouseEventArgs e)
         {
             if (!this._blnSeActivoClosed)
@@ -483,7 +522,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="e"></param>
         private void dgvDependencias_CellValidated(object sender, DataGridViewCellEventArgs e)
         {
-            //IncidenciaDependencia entIncidenciaDependencia = null;
+           
 
             try
             {
@@ -491,12 +530,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 {
                     if ((this.dgvDependencias[0, e.RowIndex].Value == null))
                     {
-                    //    entIncidenciaDependencia = IncidenciaDependenciaMapper.Instance().GetOne(int.Parse(this.dgvDependencias[0, e.RowIndex].Value.ToString()), this._entIncidencia.Folio);
-                    //}
-                    //else
-                    //{
-                        
-                        //this.dgvDependencias.Rows.Remove(this.dgvDependencias.Rows[e.RowIndex]);
                         return;
                     }
 
@@ -522,7 +555,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                         dgvDependencias.CurrentCell.Value = string.Empty;
                                         throw new SAIExcepcion("La fecha de envío a dependencia no se encuentra en el formato correcto, debe de ser una fecha menor o igual al dia actual", this);
                                     }
-                                    //entIncidenciaDependencia.FechaEnvioDependencia = dtmFecha;
+                                    
                                 }
                                 catch
                                 {
@@ -542,7 +575,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                         dgvDependencias.CurrentCell.Value = string.Empty;
                                         throw new SAIExcepcion("La fecha de envío a dependencia no se encuentra en el formato correcto, debe de ser una fecha menor o igual al dia actual", this);
                                     }
-                                    //entIncidenciaDependencia.FechaEnvioDependencia = dtmFecha;
+                                    
                                 }
                                 catch
                                 {
@@ -551,10 +584,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 }
                             }
                             break;
-                    
+
                     }
 
-                    //IncidenciaDependenciaMapper.Instance().Save(entIncidenciaDependencia);
                     base.RecuperaDatosEnIncidencia();
                     this.RecuperaDatosEnIncidencia();
                     this.GuardaIncidencia();
@@ -589,6 +621,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
             }
         }
-      
+
+        #endregion
+
     }
 }

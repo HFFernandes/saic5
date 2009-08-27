@@ -317,6 +317,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="LazyLoad.config" />
+    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="AxXtremeCommandBars">

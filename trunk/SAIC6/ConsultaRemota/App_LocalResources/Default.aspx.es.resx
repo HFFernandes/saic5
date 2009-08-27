@@ -141,16 +141,16 @@
     <value>Guardar ...</value>
   </data>
   <data name="btnUpdateResult.Text" xml:space="preserve">
-    <value>Actualización de resultados</value>
+    <value>Actualizar</value>
   </data>
   <data name="txtSubTitle" xml:space="preserve">
-    <value>Consulta a 066</value>
+    <value>Consulta a emergencias 066</value>
   </data>
   <data name="txtTitle" xml:space="preserve">
     <value>Sistema de Administración de Incidencias</value>
   </data>
   <data name="txtColumnSorting" xml:space="preserve">
-    <value>La columna de clasificación</value>
+    <value>Columna de clasificación</value>
   </data>
   <data name="txtOperations" xml:space="preserve">
     <value>Operaciones</value>
@@ -162,7 +162,7 @@
     <value>Definición</value>
   </data>
   <data name="txtQueryDesc" xml:space="preserve">
-    <value>Consulta la descripción</value>
+    <value>Descripción</value>
   </data>
   <data name="txtQueryFile" xml:space="preserve">
     <value>Consulta de archivos</value>
