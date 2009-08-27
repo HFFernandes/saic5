@@ -50,13 +50,6 @@
                                                         <asp:Literal ID="txtTitle" runat="server" Text="<%$ Resources:txtTitle%>" />
                                                     </div>
                                                 </td>
-                                                <td style="vertical-align: top; text-align: right;">
-                                                    <asp:LinkButton ID="lnkBtnEng" runat="server" CommandName="LangSwitch" CommandArgument="en-US"
-                                                        OnCommand="LangSwitch_Command">English</asp:LinkButton>
-                                                    |
-                                                    <asp:LinkButton ID="lnkBtnEsp" runat="server" CommandName="LangSwitch" CommandArgument="es-ES"
-                                                        OnCommand="LangSwitch_Command">Spanish</asp:LinkButton>
-                                                </td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: left; height: 18px;">
@@ -96,13 +89,13 @@
                                             <td style="background-color: #FFFFFF; text-align: right; vertical-align: top">
                                                 <asp:UpdateProgress ID="UpdateProgressColumns" runat="server" AssociatedUpdatePanelID="UpdatePanelColumns">
                                                     <ProgressTemplate>
-                                                        <span style="font-weight: bold; font-size: 14px">Processing... </span>
+                                                        <span style="font-weight: bold; font-size: 14px">Procesando... </span>
                                                         <img src="imagenes/progressBar2.gif" alt="Progress Bar" />
                                                     </ProgressTemplate>
                                                 </asp:UpdateProgress>
                                                 <asp:UpdateProgress ID="UpdateProgressConditions" runat="server" AssociatedUpdatePanelID="UpdatePanelConditions">
                                                     <ProgressTemplate>
-                                                        <span style="font-weight: bold; font-size: 14px">Processing... </span>
+                                                        <span style="font-weight: bold; font-size: 14px">Procesando... </span>
                                                         <img src="imagenes/progressBar2.gif" alt="Progress Bar" />
                                                     </ProgressTemplate>
                                                 </asp:UpdateProgress>
@@ -130,17 +123,6 @@
                                                                             BorderStyle="Solid" ShowHeaders="True" CssClass="bodytext" ToolTip="Result Columns">
                                                                         </keqwc:QueryColumnsPanel>
                                                                     </td>
-                                                                    <td style="width: 1px">
-                                                                        &nbsp;
-                                                                    </td>
-                                                                    <td style="width: 40%">
-                                                                        <div class="title2">
-                                                                            <asp:Literal ID="txtColumnSoring" runat="server" Text="<%$ Resources:txtColumnSorting%>" />
-                                                                        </div>
-                                                                        <keqwc:SortColumnsPanel ID="SortColumnsPanel1" runat="server" Height="150px" ToolTip="Columns Sorting">
-                                                                        </keqwc:SortColumnsPanel>
-                                                                        
-                                                                    </td>
                                                                 </tr>
                                                             </table>
                                                         </ContentTemplate>
@@ -163,8 +145,8 @@
                                                     <asp:UpdatePanel ID="UpdatePanelConditions" runat="server">
                                                         <ContentTemplate>
                                                             <keqwc:QueryPanel ID="QueryPanel1" runat="server" Height="160px" Width="100%" BorderWidth="1px"
-                                                                ScrollBars="Auto" OnSqlExecute="QueryPanel1_SqlExecute" CssClass="bodytext" OnListRequest="QueryPanel1_ListRequest"
-                                                                OnCreateValueElement="QueryPanel1_CreateValueElement" Appearance-ScriptMenuStyle-ItemMinWidth="160"
+                                                                ScrollBars="Auto" CssClass="bodytext" 
+                                                                Appearance-ScriptMenuStyle-ItemMinWidth="160"
                                                                 Appearance-ScriptMenuStyle-BackColor="#FFE0C0" UseListCache="True">
                                                             </keqwc:QueryPanel>
                                                         </ContentTemplate>
@@ -196,10 +178,6 @@
                                                         </div>
                                                     </td>
                                                     <td style="height: 22px">
-                                                        &nbsp;&nbsp;
-                                                        <asp:Button ID="btnUpdateResult" runat="server" OnClick="UpdateResultBtn_Click" Text="Update Result"
-                                                            Width="112px" Height="20px" CssClass="btn" meta:resourcekey="btnUpdateResult" />
-                                                        &nbsp;&nbsp;
                                                         <asp:Button ID="btnExportExcel" runat="server" OnClick="ExportExcelBtn_Click" Text="Export to Excel"
                                                             Width="112px" Height="20px" CssClass="btn" meta:resourcekey="btnExportExcel" />
                                                     </td>
@@ -246,8 +224,9 @@
     </table>
     <div style="text-align: center; padding: 10 0 30 0;">
         &nbsp;© Copyright 2009. <a href="http://www.bsd.com" target="_blank">BSD.com</a></div>
-    <asp:AccessDataSource ID="ResultDS" runat="server" DataFile="~/data/NWind1.mdb">
-    </asp:AccessDataSource>
+    <%--<asp:AccessDataSource ID="ResultDS" runat="server" >
+    </asp:AccessDataSource>--%>
+    <asp:SqlDataSource ID="ResultDS" runat="server" ConnectionString="Data Source=.\SQLEXPRESS;Integrated Security=SSPI; Initial Catalog=SAI_BD" />
     &nbsp; &nbsp;
     </form>
 </body>
