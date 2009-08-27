@@ -364,7 +364,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
                     lstIncidenciasPorRemover.Clear();   //limpiamos la colección para el nuevo ciclo
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     tmrRegistros.Enabled = false;
                     throw new SAIExcepcion(ID.STR_ERROROBTENERREGISTROS);
