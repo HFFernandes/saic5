@@ -25,8 +25,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Llena el grid con los tipos de incidencia, llena el catalogo de sistemas y limpia controles
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void frmTipoIncidencias_Load(object sender, EventArgs e)
         {
             SAIBarraEstado.SizingGrip = false;
@@ -101,8 +99,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
          /// <summary>
         /// Evento del DataGrid para obtener los datos que del regitro que se ha seleccionado
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void gvTipoIncidencias_SelectionChanged(object sender, EventArgs e)
         {
             try
@@ -260,8 +256,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Valida que haya sistema seleccionado y agrega el nuevo tipo de incidencia
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             try
@@ -288,8 +282,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Valida que haya sistema seleccionado y llama el metodo modificar
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnModificar_Click(object sender, EventArgs e)
         {
             try
@@ -312,8 +304,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Cierra la ventana de tipos de incidencia
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -322,8 +312,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// LLama el metodo eliminar, actualiza el datagrid y limpia controles
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Desea eliminar el Tipo de Incidencia?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -337,8 +325,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Limpia controles
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             this.Limpiar();
@@ -347,7 +333,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Obtiene el indice del registro seleccionado
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Indice</returns>
         private int ObtenerIndiceSeleccionado()
         {
             return this.gvTipoIncidencias.CurrentCellAddress.Y;
@@ -367,7 +353,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// Obtiene la descripcion del elemeno seleccionado
         /// </summary>
         /// <param name="indice">indice del elemento seleccionado en el combobox</param>
-        /// <returns></returns>
+        /// <returns>Objeto que representa la descripcion</returns>
         private string ObtieneDescripcion(int indice)
         {
             return ((ComboItem)this.ddlSistema.Items[indice]).Descripcion;
@@ -391,12 +377,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             }
         }
 
-
         /// <summary>
         /// Valida solo aceptar numeros
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void txtClaveoperacion_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (Char.IsDigit(e.KeyChar))

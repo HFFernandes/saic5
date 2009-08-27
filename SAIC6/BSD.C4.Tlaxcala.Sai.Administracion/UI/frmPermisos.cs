@@ -22,10 +22,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         }
 
         /// <summary>
-        /// Evento Load del formulario donde se llenan el catalogo de usuarios y los permisos correspondinetes de cada sistema
+        /// Llama los metodos LlenarGrid, LlenarTreeView y Limpiar
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void frmPermisos_Load(object sender, EventArgs e)
         {
             SAIBarraEstado.SizingGrip = false;
@@ -101,8 +99,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Se activa cada que seleccionan un registro o se pulsa sobre alguna celda
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void gvUsuarios_SelectionChanged(object sender, EventArgs e)
         {
             //se limpia el TreeView
@@ -179,7 +175,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Se cargan los permisos que tiene el usuario y se seleccionan en el treeview
         /// </summary>
-        /// <param name="claveUsuario"></param>
+        /// <param name="claveUsuario">Clave del usuario</param>
         private void CargarPermisos(int claveUsuario)
         {
             bool expander = false;
@@ -231,8 +227,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Expande y selecciona o deselecciona los nodos hijo
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void trvwPermisos_AfterCheck(object sender, TreeViewEventArgs e)
         {
             TreeNode nodo = e.Node;
@@ -469,8 +463,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Cierra el formulario
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();

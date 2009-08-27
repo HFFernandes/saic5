@@ -25,8 +25,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Llenado de Catalogo de corporaciones en grid y sistemas en combobox
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void frmCorporaciones_Load(object sender, EventArgs e)
         {
             SAIBarraEstado.SizingGrip = false;
@@ -134,7 +132,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// Obtiene el valor de un elemento seleccionado en el combobox
         /// </summary>
         /// <param name="indice">indice del elemento seleccionado</param>
-        /// <returns></returns>
+        /// <returns>Objeto que representa el valor</returns>
         private object ObtieneValor(int indice)
         {
             return ((ComboItem)this.ddlSistema.Items[indice]).Valor;
@@ -144,7 +142,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// Obtiene la descripcion del elemento seleccionado
         /// </summary>
         /// <param name="indice">indice del elemento a obtener la descripcion</param>
-        /// <returns></returns>
+        /// <returns>Objeto que representa la descripcion</returns>
         private string ObtieneDescripcion(int indice)
         {
             return ((ComboItem)this.ddlSistema.Items[indice]).Descripcion;
@@ -280,8 +278,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Llena los campos cuando se selecciona una corporacion
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void gvCorporaciones_SelectionChanged(object sender, EventArgs e)
         {
             try
@@ -312,8 +308,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Modifica los campos de una corporacion
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnModificar_Click(object sender, EventArgs e)
         {
             if (this.SAIProveedorValidacion.ValidarCamposRequeridos(this.groupBox2))
@@ -327,8 +321,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Valida que se haya seleccionado un sistema para poder agregar una nueva corporacion
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             try
@@ -354,8 +346,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Valida si se va eliminar la corporacion seleccionada
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("¿Desea Eliminar la corporaciòn?", "Sistema de Administracion de Incidencias", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -369,8 +359,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Cierra la vantana de Corporaciones
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -379,8 +367,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Limpia controles de captura de la ventana de corporaciones
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             this.Limpiar();

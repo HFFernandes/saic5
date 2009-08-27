@@ -21,76 +21,77 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// Deshabilitar el poder cambiar el tamaño de la ventana
+        /// </summary>
         private void frmBitacora_Load(object sender, EventArgs e)
         {
             SAIBarraEstado.SizingGrip = false;
         }
-
+        /// <summary>
+        /// Busca todos los registros en Bitacora
+        /// </summary>
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             this.gvBitacora.DataSource = Mappers.BitacoraMapper.Instance().GetAll();
         }
-
+        /// <summary>
+        /// Cierra la ventana de Bitacora
+        /// </summary>
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
+        /// <summary>
+        /// Genera Filtro de datos y muestra resultado
+        /// </summary>
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
             string sqlFiltro = string.Empty;
             try
             {
-
-                if (this.chkOperacion.Checked)
+                try
                 {
-                    sqlFiltro = " Operacion = '" + this.ddlOperacion.SelectedItem + "' ";
-                }
+                    if (this.chkOperacion.Checked)
+                    {
+                        sqlFiltro = " Operacion = '" + this.ddlOperacion.SelectedItem + "' ";
+                    }
+                    if (sqlFiltro.Length > 0)
+                        sqlFiltro += " and ";
 
-                if (sqlFiltro.Length > 0)
-                    sqlFiltro += " and ";
-
-                if (this.chkCatalogo.Checked)
-                {
-                    sqlFiltro += " NombreCatalogo = '" + this.ddlCatalogos.SelectedItem + "' ";
+                    if (this.chkCatalogo.Checked)
+                    {
+                        sqlFiltro += " NombreCatalogo = '" + this.ddlCatalogos.SelectedItem + "' ";
+                    }
+                    if (sqlFiltro.Length > 0)
+                    {
+                        this.gvBitacora.DataSource = Mappers.BitacoraMapper.Instance().GetFiltrado(sqlFiltro);
+                    }
+                    else
+                    {
+                        throw new SAIExcepcion("Seleccione un filtro.");
+                    }
                 }
-
-                if (sqlFiltro.Length > 0)
-                {
-                    this.gvBitacora.DataSource = Mappers.BitacoraMapper.Instance().GetFiltrado(sqlFiltro);
-                }
-                else 
-                {
-                    throw new SAIExcepcion("Seleccione un filtro.");
-                }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
             }
             catch (SAIExcepcion)
             { }
-
-
         }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Llenar()
-        {
-            //this.ddlCatalogos.Items.Add(new ComboItem("Usuarios", "Usuarios"));
-        }
-
+        
+        /// <summary>
+        /// Limpia filtros
+        /// </summary>
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             this.ddlCatalogos.SelectedIndex = -1;
             this.ddlOperacion.SelectedIndex = -1;
-
             this.chkCatalogo.Checked = false;
             this.chkOperacion.Checked = false;
-
         }
-
+        /// <summary>
+        /// Activa Check para filtrar
+        /// </summary>
         private void ddlOperacion_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.ddlOperacion.SelectedIndex > -1)
@@ -98,7 +99,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             else
                 this.chkOperacion.Checked = false;
         }
-
+        /// <summary>
+        /// Activa Check para filtrar
+        /// </summary>
         private void ddlCatalogos_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.ddlCatalogos.SelectedIndex > -1)
@@ -106,18 +109,21 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             else
                 this.chkCatalogo.Checked = false;
         }
-
+        /// <summary>
+        /// Deselecciona Combobox Operacion si se desactiva check
+        /// </summary>
         private void chkOperacion_CheckedChanged(object sender, EventArgs e)
         {
             if (!this.chkOperacion.Checked)
                 this.ddlOperacion.SelectedIndex = -1;
         }
-
+        /// <summary>
+        /// Deselecciona Combobox Catalogos si se desactiva check
+        /// </summary>
         private void chkCatalogo_CheckedChanged(object sender, EventArgs e)
         {
             if (!this.chkCatalogo.Checked)
                 this.ddlCatalogos.SelectedIndex = -1;
-
         }
     }
 }

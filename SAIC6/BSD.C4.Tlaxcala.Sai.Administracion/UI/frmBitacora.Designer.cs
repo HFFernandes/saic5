@@ -118,7 +118,6 @@
             this.gpbFiltro.TabIndex = 14;
             this.gpbFiltro.TabStop = false;
             this.gpbFiltro.Text = "Filtro";
-            this.gpbFiltro.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // chkCatalogo
             // 
