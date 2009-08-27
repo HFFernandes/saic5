@@ -23,11 +23,142 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
     /// </summary>
     public partial class SAIFrmIncidencia : SAIFrmBase
     {
+
+
+        #region CONSTRUCTORES
+
+        /// <summary>
+        /// Constructor del formulario SIAFrmIncidencia, se ejecuta cuando se registra una incidencia nueva
+        /// <remarks>El constructor inserta una nueva incidencia en la base de datos y muestra su información en el formulario</remarks>
+        /// </summary>
+        public SAIFrmIncidencia()
+        {
+            //El try se puso porque en tiempo de diseño se genera una excepción cuando se abren los formularios hijos
+            try
+            {
+
+                this._blnBloqueaEventos = true;
+
+                InitializeComponent();
+                if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+                {
+                    this.Height = 515;
+                    this.Width = 600;
+                }
+                else
+                {
+                    this.Height = 630;
+                    this.Width = 600;
+                }
+                this.InicializaListas();
+
+
+                //****Crea una nueva incidencia, el formulario se abrió para insertar*******
+                this._entIncidencia.Referencias = string.Empty;
+                this._entIncidencia.Descripcion = string.Empty;
+                this._entIncidencia.Activo = true;
+                this._entIncidencia.HoraRecepcion = DateTime.Now;
+                this._entIncidencia.ClaveEstatus = 1;
+                this._entIncidencia.ClaveEstado = 29;
+                this._entIncidencia.ClaveUsuario = Aplicacion.UsuarioPersistencia.intClaveUsuario;
+                IncidenciaMapper.Instance().Insert(this._entIncidencia);
+
+                //*************************************************************************
+                //Se actualiza la información de la incidencia en la lista de ventanas
+                this.ActualizaVentanaIncidencias();
+                //Se muestra la información de la incidencia en el formulario:
+                this.InicializaCampos();
+                this.SuspendLayout();
+                if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+                {
+                    this.lblDescripcionIncidencia.Text = "Descripción de  \n la Denuncia:";
+                    this.lblTelefono.Visible = false;
+                    this.txtTelefono.Visible = false;
+                    this.lblTipoIncidencia.Left = lblTelefono.Left - 5;
+                    this.cmbTipoIncidencia.Left = this.txtTelefono.Left;
+                    this.lblTipoIncidencia.Text = "Tipo de \n la Denuncia:";
+                    this.lblTipoIncidencia.Top -= 10;
+
+
+                }
+                else
+                {
+
+                    this.lblDescripcionIncidencia.Text = "Descripción de  \n la Incidencia:";
+                }
+                this.ResumeLayout(false);
+                this._blnBloqueaEventos = false;
+
+                Aplicacion.VentanasIncidencias.Add(new SAIWinSwitchItem(this._entIncidencia.Folio.ToString(), "", (this as Form)));
+            }
+            catch
+            {
+            }
+
+
+        }
+
+        /// <summary>
+        /// Constructor que toma la entidad incidencia que se va a mostrar en el formulario
+        /// </summary>
+        /// <param name="entIncidencia">Entidad incidencia que contiene los valores para mostrar</param>
+        /// <param name="SoloLectura"> Indica si el formulario será de solo lectura </param>
+        public SAIFrmIncidencia(Incidencia entIncidencia, Boolean SoloLectura)
+        {
+
+            entIncidencia.ClaveEstado = 29;
+            this._blnBloqueaEventos = true;
+            InitializeComponent();
+            if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+            {
+                this.Height = 515;
+                this.Width = 600;
+            }
+            else
+            {
+                this.Height = 630;
+                this.Width = 600;
+            }
+            this.SuspendLayout();
+            if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+            {
+                this.lblDescripcionIncidencia.Text = "Descripción de  \n la Denuncia:";
+                this.lblTelefono.Visible = false;
+                this.txtTelefono.Visible = false;
+                this.lblTipoIncidencia.Left = lblTelefono.Left - 5;
+                this.cmbTipoIncidencia.Left = this.txtTelefono.Left;
+                this.lblTipoIncidencia.Text = "Tipo de \n la Denuncia:";
+                this.lblTipoIncidencia.Top -= 10;
+            }
+            else
+            {
+                this.lblDescripcionIncidencia.Text = "Descripción de  \n la Incidencia:";
+            }
+
+            this.ResumeLayout(false);
+            this.InicializaListas();
+            this._entIncidencia = entIncidencia;
+            this._entIncidencia.Activo = true;
+            //Se actualiza la información de la incidencia en la lista de ventanas
+            this.ActualizaVentanaIncidencias();
+            //Se muestra la información de la incidencia en el formulario:
+            this.InicializaCampos();
+            this._blnBloqueaEventos = false;
+            Aplicacion.VentanasIncidencias.Add(new SAIWinSwitchItem(this._entIncidencia.Folio.ToString(), "", (this as Form)));
+            this.SoloLectura = SoloLectura;
+            this.cmbTipoIncidencia.BlnEsRequerido = false;
+        }
+
+
+        #endregion
+
+        #region VARIABLES
+
         /// <summary>
         /// Guarda la referencia a la entidad Incidencia que se maneja en el formulario
         /// </summary>
         protected Incidencia _entIncidencia = new Incidencia();
-        
+
         /// <summary>
         /// Bandera que indica si se va a limpiar el combo de colonias, lo cual se hace sólo cuando cambia el código postal
         /// </summary>
@@ -81,18 +212,86 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private Boolean _blnSoloLectura;
 
 
-        protected GroupBox _grpDenunciante =null;
+        protected GroupBox _grpDenunciante = null;
 
+        #endregion
 
-        public delegate  void DelegadoActualizaLocalidades(LocalidadList lstLocalidades);
-        public delegate void DelegadoLimpiaLocalidades();
-        public delegate void DelegadoActualizaCodigosPostales(CodigoPostalList  lstCodigosPostales);
-        public delegate void DelegadoLimpiaCodigosPostales();
-        public delegate void DelegadoActualizaColonias(ColoniaList lstColonias);
-        public delegate void DelegadoLimpiaColonias();
-        public delegate void DelegadoLimpiaTextoCodigPostal();
-        public delegate void DelegadoSeleccionaCodigoPostal(Object objElemento);
-        public delegate void DelegadoLimpiaTextoColonia();
+        #region PROPIEDADES
+
+        /// <summary>
+        /// Obtiene o establece el valor que indica si el formulario será de solo lectura
+        /// </summary>
+        /// <remarks>Cuando esta propiedad es verdadera, los controles hijos del formulario se convierten a solo lectura</remarks>
+        public Boolean SoloLectura
+        {
+            get { return this._blnSoloLectura; }
+            set
+            {
+                this._blnSoloLectura = value;
+
+                if (value)
+                {
+                    foreach (Control objControl in this.Controls)
+                    {
+                        if (objControl.GetType() == (new System.Windows.Forms.GroupBox()).GetType())
+                        {
+                            continue;
+                        }
+                        if (objControl.GetType().GetProperty("ReadOnly") != null)
+                        {
+                            objControl.GetType().GetProperty("ReadOnly").SetValue(objControl, true, null);
+                        }
+                        else
+                        {
+                            objControl.Enabled = false;
+                        }
+
+                    }
+                }
+                else
+                {
+                    foreach (Control objControl in this.Controls)
+                    {
+                        if (objControl.GetType() == (new System.Windows.Forms.GroupBox()).GetType())
+                        {
+                            continue;
+                        }
+                        if (objControl.GetType().GetProperty("ReadOnly") != null)
+                        {
+                            objControl.GetType().GetProperty("ReadOnly").SetValue(objControl, false, null);
+                        }
+                        else
+                        {
+                            objControl.Enabled = true;
+                        }
+
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Establece el texto del combo de código postal.
+        /// </summary>
+        public string TextoCodigoPostal
+        {
+            set
+            {
+                this.cmbCP.Text = value;
+            }
+        }
+
+        public string TextoTelefono
+        {
+            set
+            {
+                this.txtTelefono.Text = value;
+            }
+        }
+
+        #endregion
+
+        #region MÉTODOS
 
         /// <summary>
         /// Actualiza el combo de localidades 
@@ -146,7 +345,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             this.cmbCP.SelectedIndex = -1;
             this.cmbCP.SelectedItem = objElemento;
-                                   
+
         }
 
         /// <summary>
@@ -192,224 +391,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         }
 
         /// <summary>
-        /// Obtiene o establece el valor que indica si el formulario será de solo lectura
-        /// </summary>
-        /// <remarks>Cuando esta propiedad es verdadera, los controles hijos del formulario se convierten a solo lectura</remarks>
-        public Boolean  SoloLectura 
-        {
-            get { return this._blnSoloLectura; } 
-            set 
-            {
-                this._blnSoloLectura = value;
-
-                if (value)
-                {
-                    foreach (Control objControl in this.Controls)
-                    {
-                        if (objControl.GetType() == (new System.Windows.Forms.GroupBox()).GetType())
-                        {
-                            continue;
-                        }
-                        if (objControl.GetType().GetProperty("ReadOnly") != null)
-                        {
-                            objControl.GetType().GetProperty("ReadOnly").SetValue(objControl, true, null);
-                        }
-                        else
-                        {
-                            objControl.Enabled = false;
-                        }
-                        
-                    }
-                }
-                else
-                {
-                    foreach (Control objControl in this.Controls)
-                    {
-                        if (objControl.GetType() == (new System.Windows.Forms.GroupBox()).GetType())
-                        {
-                            continue;
-                        }
-                        if (objControl.GetType().GetProperty("ReadOnly") != null)
-                        {
-                            objControl.GetType().GetProperty("ReadOnly").SetValue(objControl, false, null);
-                        }
-                        else
-                        {
-                            objControl.Enabled = true;
-                        }
-
-                    }
-                }
-            } 
-        }
-
-
-        /// <summary>
-        /// Constructor del formulario SIAFrmIncidencia, se ejecuta cuando se registra una incidencia nueva
-        /// <remarks>El constructor inserta una nueva incidencia en la base de datos y muestra su información en el formulario</remarks>
-        /// </summary>
-        public SAIFrmIncidencia()
-        {
-            //El try se puso porque en tiempo de diseño se genera una excepción cuando se abren los formularios hijos
-            try
-            {
-               
-                    this._blnBloqueaEventos = true;
-
-                    InitializeComponent();
-                    if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
-                    {
-                        this.Height = 515;
-                        this.Width = 600;
-                    }
-                    else
-                    {
-                        this.Height = 630;
-                        this.Width = 600;
-                    }
-                    this.InicializaListas();
-
-                    
-                    //****Crea una nueva incidencia, el formulario se abrió para insertar*******
-                    this._entIncidencia.Referencias = string.Empty;
-                    this._entIncidencia.Descripcion = string.Empty;
-                    this._entIncidencia.Activo = true;
-                    this._entIncidencia.HoraRecepcion = DateTime.Now;
-                    this._entIncidencia.ClaveEstatus = 1;
-                    this._entIncidencia.ClaveEstado = 29;
-                    this._entIncidencia.ClaveUsuario = Aplicacion.UsuarioPersistencia.intClaveUsuario;
-                    IncidenciaMapper.Instance().Insert(this._entIncidencia);
-
-                    //*************************************************************************
-                    //Se actualiza la información de la incidencia en la lista de ventanas
-                    this.ActualizaVentanaIncidencias();
-                    //Se muestra la información de la incidencia en el formulario:
-                    this.InicializaCampos();
-                    this.SuspendLayout();
-                    if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
-                    {
-                        this.lblDescripcionIncidencia.Text = "Descripción de  \n la Denuncia:";
-                        this.lblTelefono.Visible = false;
-                        this.txtTelefono.Visible = false;
-                        this.lblTipoIncidencia.Left = lblTelefono.Left - 5;
-                        this.cmbTipoIncidencia.Left = this.txtTelefono.Left;
-                        this.lblTipoIncidencia.Text = "Tipo de \n la Denuncia:";
-                        this.lblTipoIncidencia.Top -= 10;
-
-
-                    }
-                    else
-                    {
-
-                        this.lblDescripcionIncidencia.Text = "Descripción de  \n la Incidencia:";
-                    }
-                    this.ResumeLayout(false);
-                    this._blnBloqueaEventos = false;
-
-                    Aplicacion.VentanasIncidencias.Add(new SAIWinSwitchItem(this._entIncidencia.Folio.ToString(), "", (this as Form)));
-                }
-                catch 
-                {           
-            }
-            
-               
-        }
-
-        /// <summary>
-        /// Constructor que toma la entidad incidencia que se va a mostrar en el formulario
-        /// </summary>
-        /// <param name="entIncidencia">Entidad incidencia que contiene los valores para mostrar</param>
-        /// <param name="SoloLectura"> Indica si el formulario será de solo lectura </param>
-        public SAIFrmIncidencia(Incidencia entIncidencia, Boolean SoloLectura)
-        {
-           
-            entIncidencia.ClaveEstado = 29;
-            this._blnBloqueaEventos = true;
-            InitializeComponent();
-            if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
-            {
-                this.Height = 515;
-                this.Width = 600;
-            }
-            else
-            {
-                this.Height = 630;
-                this.Width = 600;
-            }
-            this.SuspendLayout();
-            if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
-            {
-                this.lblDescripcionIncidencia.Text  = "Descripción de  \n la Denuncia:";
-                this.lblTelefono.Visible = false;
-                this.txtTelefono.Visible = false;
-                this.lblTipoIncidencia.Left = lblTelefono.Left - 5;
-                this.cmbTipoIncidencia.Left = this.txtTelefono.Left;
-                this.lblTipoIncidencia.Text = "Tipo de \n la Denuncia:";
-                this.lblTipoIncidencia.Top -= 10;
-            }
-            else
-            {
-                this.lblDescripcionIncidencia.Text  = "Descripción de  \n la Incidencia:";
-            }
-
-            this.ResumeLayout(false);
-            this.InicializaListas();
-            this._entIncidencia = entIncidencia;
-            this._entIncidencia.Activo = true;
-            //Se actualiza la información de la incidencia en la lista de ventanas
-            this.ActualizaVentanaIncidencias();
-            //Se muestra la información de la incidencia en el formulario:
-            this.InicializaCampos();
-            this._blnBloqueaEventos = false;
-            Aplicacion.VentanasIncidencias.Add(new SAIWinSwitchItem(this._entIncidencia.Folio.ToString(), "", (this as Form)));
-            this.SoloLectura = SoloLectura;
-            this.cmbTipoIncidencia.BlnEsRequerido = false;
-        }
-
-        /// <summary>
-        /// Hace la llamada a la función de la ventana Owner para mostrar el control switch
-        /// </summary>
-        /// <param name="e"></param>
-        protected override void OnKeyUp(KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Tab && this._blnCtrPresionado)
-            {
-                if (this.Owner != null)
-                {
-                    SAIFrmComandos frmPrincipal = (SAIFrmComandos)this.Owner;
-                    frmPrincipal.MuestraSwitch();
-                }
-
-            }
-            this._blnCtrPresionado = false;
-            base.OnKeyUp(e);
-        }
-
-       
-
-        /// <summary>
-        /// Actualiza la ubicación del mapa cuando el formulario es activado
-        /// </summary>
-        /// <param name="e"></param>
-        protected override void OnActivated(EventArgs e)
-        {
-            try
-            {
-                try
-                {
-                    base.OnActivated(e);
-                    this.actualizaMapaUbicacion();
-                    this._blnSeActivoClosed = false;
-                }
-                catch (System.Exception ex)
-                {
-                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
-                }
-            }
-            catch (SAIExcepcion) { }
-        }
-
-        /// <summary>
         /// Llena la lista para mostrar los tipos de incidencias y municipios
         /// </summary>
         private void InicializaListas()
@@ -430,43 +411,43 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     {
                         lstTipoIncidencias = TipoIncidenciaMapper.Instance().GetBySistema(1);
                     }
-                        
-                        lstMunicipios = MunicipioMapper.Instance().GetAll();
 
-                        foreach (TipoIncidencia objTipoIncidencia in lstTipoIncidencias)
-                        {
-                            objTipoIncidencia.Descripcion = objTipoIncidencia.ClaveOperacion + " " + objTipoIncidencia.Descripcion;
-                        }
-                        this.cmbTipoIncidencia.DataSource = lstTipoIncidencias;
-                        this.cmbTipoIncidencia.DisplayMember = "Descripcion";
-                        this.cmbTipoIncidencia.ValueMember = "Clave";
+                    lstMunicipios = MunicipioMapper.Instance().GetAll();
 
-                        //int j = 0;
-                        //foreach(Object objTipoIncidencia in cmbTipoIncidencia.Items)
-                        //{
-                        //    //for (j = 0; j < objTipoIncidencia.GetType().GetProperties().Length; j++)
-                        //    //{
-                        //    //    if (objElemento.GetType().GetProperties()[j].Name == "Descripcion")
-                        //    //    {
-                        //    //        break;
-                        //    //    }
-                        //    //}                        
-                        //    objTipoIncidencia.GetType().GetProperty("Descripcion").SetValue
-                        //        (objTipoIncidencia,
-                        //         objTipoIncidencia.GetType().GetProperty("Descripcion").GetValue(objTipoIncidencia,null).ToString() + " " +
-                        //         objTipoIncidencia.GetType().GetProperty("ClaveOperacion").GetValue(objTipoIncidencia,null).ToString(),null);
+                    foreach (TipoIncidencia objTipoIncidencia in lstTipoIncidencias)
+                    {
+                        objTipoIncidencia.Descripcion = objTipoIncidencia.ClaveOperacion + " " + objTipoIncidencia.Descripcion;
+                    }
+                    this.cmbTipoIncidencia.DataSource = lstTipoIncidencias;
+                    this.cmbTipoIncidencia.DisplayMember = "Descripcion";
+                    this.cmbTipoIncidencia.ValueMember = "Clave";
 
-                        //}
+                    //int j = 0;
+                    //foreach(Object objTipoIncidencia in cmbTipoIncidencia.Items)
+                    //{
+                    //    //for (j = 0; j < objTipoIncidencia.GetType().GetProperties().Length; j++)
+                    //    //{
+                    //    //    if (objElemento.GetType().GetProperties()[j].Name == "Descripcion")
+                    //    //    {
+                    //    //        break;
+                    //    //    }
+                    //    //}                        
+                    //    objTipoIncidencia.GetType().GetProperty("Descripcion").SetValue
+                    //        (objTipoIncidencia,
+                    //         objTipoIncidencia.GetType().GetProperty("Descripcion").GetValue(objTipoIncidencia,null).ToString() + " " +
+                    //         objTipoIncidencia.GetType().GetProperty("ClaveOperacion").GetValue(objTipoIncidencia,null).ToString(),null);
 
-                        this.cmbMunicipio.DataSource = lstMunicipios;
-                        this.cmbMunicipio.DisplayMember = "Nombre";
-                        this.cmbMunicipio.ValueMember = "Clave";
+                    //}
 
-                        this.cmbMunicipio.SelectedIndex = -1;
-                        this.cmbMunicipio.Text = string.Empty;
+                    this.cmbMunicipio.DataSource = lstMunicipios;
+                    this.cmbMunicipio.DisplayMember = "Nombre";
+                    this.cmbMunicipio.ValueMember = "Clave";
+
+                    this.cmbMunicipio.SelectedIndex = -1;
+                    this.cmbMunicipio.Text = string.Empty;
 
 
-                       }
+                }
                 catch (System.Exception ex)
                 {
                     throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
@@ -545,96 +526,96 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             }
 
 
-                                //Se ubica la localidad
-                                foreach (Object elemento in this.cmbLocalidad.Items)
+                            //Se ubica la localidad
+                            foreach (Object elemento in this.cmbLocalidad.Items)
+                            {
+
+                                if (this._entIncidencia.ClaveLocalidad.Value == (elemento as Localidad).Clave)
                                 {
-                                    
-                                    if (this._entIncidencia.ClaveLocalidad.Value == (elemento as Localidad ).Clave)
-                                    {
-                                        this.cmbLocalidad.SelectedIndex = -1;
-                                        this.cmbLocalidad.SelectedItem = elemento;
-                                        break;
-                                    }
+                                    this.cmbLocalidad.SelectedIndex = -1;
+                                    this.cmbLocalidad.SelectedItem = elemento;
+                                    break;
                                 }
+                            }
 
-                                if (this._entIncidencia.ClaveCodigoPostal.HasValue)
+                            if (this._entIncidencia.ClaveCodigoPostal.HasValue)
+                            {
+                                //Se recuperan los códigos postales del municipio
+                                for (i = 0; i < objListaLocalidades.Count; i++)
                                 {
-                                    //Se recuperan los códigos postales del municipio
-                                    for (i = 0; i < objListaLocalidades.Count; i++)
+                                    objListaColonias = ColoniaMapper.Instance().GetByLocalidad(objListaLocalidades[i].Clave);
+                                    for (int j = 0; j < objListaColonias.Count; j++)
                                     {
-                                        objListaColonias = ColoniaMapper.Instance().GetByLocalidad(objListaLocalidades[i].Clave);
-                                        for (int j = 0; j < objListaColonias.Count; j++)
+                                        if (objListaColonias[j].ClaveCodigoPostal.HasValue)
                                         {
-                                            if (objListaColonias[j].ClaveCodigoPostal.HasValue)
+                                            entCodigoPostal = CodigoPostalMapper.Instance().GetOne(objListaColonias[j].ClaveCodigoPostal.Value);
+                                            blnExisteCodigoPostal = false;
+                                            //Se revisa que el código postal no exista en la lista
+                                            for (int k = 0; k < objListaCodigosPostales.Count; k++)
                                             {
-                                                entCodigoPostal = CodigoPostalMapper.Instance().GetOne(objListaColonias[j].ClaveCodigoPostal.Value);
-                                                blnExisteCodigoPostal = false;
-                                                //Se revisa que el código postal no exista en la lista
-                                                for (int k = 0; k < objListaCodigosPostales.Count; k++)
+                                                if (objListaCodigosPostales[k].Valor == entCodigoPostal.Valor)
                                                 {
-                                                    if (objListaCodigosPostales[k].Valor == entCodigoPostal.Valor)
-                                                    {
-                                                        blnExisteCodigoPostal = true;
-                                                        break;
-                                                    }
-                                                }
-
-                                                if (!blnExisteCodigoPostal)
-                                                {
-                                                    objListaCodigosPostales.Add(entCodigoPostal);
+                                                    blnExisteCodigoPostal = true;
+                                                    break;
                                                 }
                                             }
-                                        }
-                                    }
-                                    if (objListaCodigosPostales.Count > 0)
-                                    {
-                                        this.cmbCP.DataSource = objListaCodigosPostales;
-                                        this.cmbCP.DisplayMember = "Valor";
-                                        this.cmbCP.ValueMember = "Clave";
-                                        this.cmbCP.SelectedIndex = -1;
-                                        
 
-                                         //Se el código postal
-                                        foreach (Object elemento in this.cmbCP.Items)
-                                        {
-                                            
-                                            if (this._entIncidencia.ClaveCodigoPostal.Value == (elemento as CodigoPostal ).Clave)
+                                            if (!blnExisteCodigoPostal)
                                             {
-                                                this.cmbCP.SelectedIndex = -1;
-                                                this.cmbCP.SelectedItem = elemento;
-                                                break;
+                                                objListaCodigosPostales.Add(entCodigoPostal);
                                             }
                                         }
                                     }
                                 }
-                                if (this._entIncidencia.ClaveColonia.HasValue)
+                                if (objListaCodigosPostales.Count > 0)
                                 {
-                                    objListaColonias = ColoniaMapper.Instance().GetByLocalidad(this._entIncidencia.ClaveColonia.Value);
-                                    if (objListaColonias != null)
+                                    this.cmbCP.DataSource = objListaCodigosPostales;
+                                    this.cmbCP.DisplayMember = "Valor";
+                                    this.cmbCP.ValueMember = "Clave";
+                                    this.cmbCP.SelectedIndex = -1;
+
+
+                                    //Se el código postal
+                                    foreach (Object elemento in this.cmbCP.Items)
                                     {
-                                        this.cmbColonia.DataSource = objListaColonias;
-                                        this.cmbColonia.DisplayMember = "Valor";
-                                        this.cmbColonia.ValueMember = "Clave";
-                                        this.cmbColonia.SelectedIndex = -1;
 
-                                        //Se ubica la colonia
-                                        foreach (Object elemento in this.cmbColonia.Items)
+                                        if (this._entIncidencia.ClaveCodigoPostal.Value == (elemento as CodigoPostal).Clave)
                                         {
-                                            if (this._entIncidencia.ClaveColonia.Value == (elemento as Colonia).Clave)
-                                            {
-                                                this.cmbColonia.SelectedIndex = -1;
-                                                this.cmbColonia.SelectedItem = elemento;
-                                                break;
-                                            }
+                                            this.cmbCP.SelectedIndex = -1;
+                                            this.cmbCP.SelectedItem = elemento;
+                                            break;
                                         }
-
-
                                     }
                                 }
                             }
-                            
-                            this.actualizaMapaUbicacion();
+                            if (this._entIncidencia.ClaveColonia.HasValue)
+                            {
+                                objListaColonias = ColoniaMapper.Instance().GetByLocalidad(this._entIncidencia.ClaveColonia.Value);
+                                if (objListaColonias != null)
+                                {
+                                    this.cmbColonia.DataSource = objListaColonias;
+                                    this.cmbColonia.DisplayMember = "Valor";
+                                    this.cmbColonia.ValueMember = "Clave";
+                                    this.cmbColonia.SelectedIndex = -1;
+
+                                    //Se ubica la colonia
+                                    foreach (Object elemento in this.cmbColonia.Items)
+                                    {
+                                        if (this._entIncidencia.ClaveColonia.Value == (elemento as Colonia).Clave)
+                                        {
+                                            this.cmbColonia.SelectedIndex = -1;
+                                            this.cmbColonia.SelectedItem = elemento;
+                                            break;
+                                        }
+                                    }
+
+
+                                }
+                            }
                         }
+
+                        this.actualizaMapaUbicacion();
+                    }
                     //Terminan los datos de la ubicación
                     this.txtReferencias.Text = this._entIncidencia.Referencias;
                     this.txtDescripcion.Text = this._entIncidencia.Descripcion;
@@ -643,7 +624,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     i = 1;
                     foreach (PersonaExtraviada entPersonaExtraviada in lstPersonasExtraviadas)
                     {
-                        
+
                         dgvPersonaExtraviada.Rows.Add();
 
                         dgvPersonaExtraviada[0, i - 1].Value = entPersonaExtraviada.Clave;
@@ -674,7 +655,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         dgvPersonaExtraviada[19, i - 1].Value = entPersonaExtraviada.Vestimenta;
                         dgvPersonaExtraviada[20, i - 1].Value = entPersonaExtraviada.Destino;
                         dgvPersonaExtraviada[21, i - 1].Value = entPersonaExtraviada.Caracteristicas;
-                        
+
                         i++;
 
                     }
@@ -683,14 +664,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     i = 1;
                     foreach (VehiculoRobadoObject objVehiculoRobado in lstVehiculosRobados)
                     {
-                       
+
 
                         if (objVehiculoRobado.ClavePropietario.HasValue)
                         {
                             PropietarioVehiculoObject objPropietarioVehiculo = PropietarioVehiculoMapper.Instance().GetOne(objVehiculoRobado.ClavePropietario.Value);
                             if (objPropietarioVehiculo != null)
                             {
-                                this.txtNombrePropietario.Text  = objPropietarioVehiculo.Nombre;
+                                this.txtNombrePropietario.Text = objPropietarioVehiculo.Nombre;
                                 this.txtDireccionPropietario.Text = objPropietarioVehiculo.Domicilio;
                                 this.txtTelefonoPropietario.Text = objPropietarioVehiculo.Telefono;
                                 this._objPropietarioVehiculo = objPropietarioVehiculo;
@@ -700,19 +681,19 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         if (objVehiculo != null)
                         {
                             dgvVehiculo.Rows.Add();
-                            dgvVehiculo[0,i-1].Value = objVehiculo.Clave;
-                            dgvVehiculo[1,i-1].Value = objVehiculo.Marca;
-                            dgvVehiculo[2,i-1].Value = objVehiculo.Tipo;
-                            dgvVehiculo[3,i-1].Value = objVehiculo.Modelo;
-                            dgvVehiculo[4,i-1].Value = objVehiculo.Placas;
-                            dgvVehiculo[5,i-1].Value = objVehiculo.Color;
-                            dgvVehiculo[6,i-1].Value = objVehiculo.NumeroMotor;
-                            dgvVehiculo[7,i-1].Value = objVehiculo.NumeroSerie;
-                            dgvVehiculo[8,i-1].Value = objVehiculo.SeñasParticulares;
+                            dgvVehiculo[0, i - 1].Value = objVehiculo.Clave;
+                            dgvVehiculo[1, i - 1].Value = objVehiculo.Marca;
+                            dgvVehiculo[2, i - 1].Value = objVehiculo.Tipo;
+                            dgvVehiculo[3, i - 1].Value = objVehiculo.Modelo;
+                            dgvVehiculo[4, i - 1].Value = objVehiculo.Placas;
+                            dgvVehiculo[5, i - 1].Value = objVehiculo.Color;
+                            dgvVehiculo[6, i - 1].Value = objVehiculo.NumeroMotor;
+                            dgvVehiculo[7, i - 1].Value = objVehiculo.NumeroSerie;
+                            dgvVehiculo[8, i - 1].Value = objVehiculo.SeñasParticulares;
                             i++;
                         }
 
-                       
+
                     }
                     //Datos de robo de accesorios de vehiculo
                     //-Se revisa si la incidencia tiene un registro en RoboVehiculoAccesorios:
@@ -750,7 +731,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         if (lstRoboVehiculosInv != null && lstRoboVehiculosInv.Count > 0)
                         {
                             i = 1;
-                            foreach(RoboVehiculoAccesoriosVehiculoInvolucradoObject objRoboVehiculoInv in lstRoboVehiculosInv)
+                            foreach (RoboVehiculoAccesoriosVehiculoInvolucradoObject objRoboVehiculoInv in lstRoboVehiculosInv)
                             {
                                 VehiculoObject objVehiculoInv = VehiculoMapper.Instance().GetOne(objRoboVehiculoInv.ClaveVehiculo);
                                 if (objVehiculoInv != null)
@@ -767,7 +748,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     dgvVehiculoAccesorios[8, i - 1].Value = objVehiculoInv.SeñasParticulares;
                                     i++;
                                 }
-                                
+
                             }
                         }
 
@@ -783,7 +764,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
             catch (SAIExcepcion) { }
 
-           
+
         }
 
 
@@ -826,6 +807,319 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         }
 
+        /// <summary>
+        /// Recupera los datos de la incidencia que están en el formulario y los guarda en la BD.
+        /// </summary>
+        protected void GuardaIncidencia()
+        {
+            try
+            {
+                try
+                {
+                    if (this._entIncidencia != null)
+                    {
+
+                        if (cmbTipoIncidencia.SelectedItem != null && (
+                           (cmbTipoIncidencia.SelectedItem as TipoIncidencia).ClaveOperacion.Trim() == "133"
+                            ||
+                            (cmbTipoIncidencia.SelectedItem as TipoIncidencia).ClaveOperacion.Trim() == "5047"
+                            ))
+                        {
+                            this.txtDireccion.Text = "SIN REGISTRO";
+                            //Se cambia a incidencia cancelada
+                            this._entIncidencia.ClaveEstatus = 5;
+                        }
+
+                        //Si existen objetos de propietario del vehículo, vehiculoaccesorios robados y accesorios robados, se guardan:
+
+                        if (this._objVeiculoAccesoriosRobado != null)
+                        {
+                            this._objVeiculoAccesoriosRobado.Placas = this.txtAccesoriosPlacas.Text;
+                            this._objVeiculoAccesoriosRobado.NumeroSerie = this.txtAccesoriosSerie.Text;
+                            try
+                            {
+                                VehiculoMapper.Instance().Save(this._objVeiculoAccesoriosRobado);
+                            }
+                            catch { }
+                        }
+                        else if (this.txtAccesoriosPlacas.Text.Trim() != string.Empty ||
+                            this.txtAccesoriosSerie.Text.Trim() != string.Empty)
+                        {
+                            RoboVehiculoAccesoriosList lstRoboVehiculoAccesorios = RoboVehiculoAccesoriosMapper.Instance().GetByIncidencia(this._entIncidencia.Folio);
+
+                            if (lstRoboVehiculoAccesorios != null && lstRoboVehiculoAccesorios.Count > 0)
+                            {
+                                RoboVehiculoAccesorios objRoboVehiculoAccesorios = lstRoboVehiculoAccesorios[0];
+                                this._objVeiculoAccesoriosRobado = new VehiculoObject();
+                                this._objVeiculoAccesoriosRobado.Placas = this.txtAccesoriosPlacas.Text;
+                                this._objVeiculoAccesoriosRobado.NumeroSerie = this.txtAccesoriosSerie.Text;
+                                VehiculoMapper.Instance().Insert(this._objVeiculoAccesoriosRobado);
+                                objRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
+                                try
+                                {
+                                    RoboVehiculoAccesoriosMapper.Instance().Save(objRoboVehiculoAccesorios);
+                                }
+                                catch { }
+                            }
+
+
+
+                        }
+
+
+                        if (this._objPropietarioVehiculo != null)
+                        {
+                            this._objPropietarioVehiculo.Domicilio = this.txtNombrePropietario.Text;
+                            this._objPropietarioVehiculo.Nombre = this.txtNombrePropietario.Text;
+                            this._objPropietarioVehiculo.Telefono = this.txtTelefono.Text;
+
+                            try
+                            {
+                                PropietarioVehiculoMapper.Instance().Save(this._objPropietarioVehiculo);
+                            }
+                            catch { }
+
+                        }
+                        else if (this.txtNombrePropietario.Text.Trim() != string.Empty ||
+                            this.txtNombrePropietario.Text.Trim() != string.Empty ||
+                            this.txtTelefono.Text != string.Empty)
+                        {
+                            VehiculoRobadoObjectList lstVehiculoRobado = VehiculoRobadoMapper.Instance().GetByIncidencia(this._entIncidencia.Folio);
+
+                            if (lstVehiculoRobado != null && lstVehiculoRobado.Count > 0)
+                            {
+                                this._objPropietarioVehiculo = new PropietarioVehiculoObject();
+                                this._objPropietarioVehiculo.Domicilio = this.txtNombrePropietario.Text;
+                                this._objPropietarioVehiculo.Nombre = this.txtNombrePropietario.Text;
+                                this._objPropietarioVehiculo.Telefono = this.txtTelefono.Text;
+
+                                PropietarioVehiculoMapper.Instance().Insert(this._objPropietarioVehiculo);
+
+                                foreach (VehiculoRobadoObject objVehiculoRobado in lstVehiculoRobado)
+                                {
+                                    objVehiculoRobado.ClavePropietario = this._objPropietarioVehiculo.Clave;
+
+                                    try
+                                    {
+                                        VehiculoRobadoMapper.Instance().Save(objVehiculoRobado);
+                                    }
+                                    catch { }
+                                }
+                            }
+
+                        }
+
+                        if (this._entRoboVehiculoAccesorios != null)
+                        {
+                            this._entRoboVehiculoAccesorios.AccesoriosRobados = this.txtAccesoriosRobados.Text;
+                            this._entRoboVehiculoAccesorios.SePercato = this.txtAccesoriosPersonaSePercato.Text;
+                            if (this.chkAccesoriosPercato.Checked)
+                            {
+                                this._entRoboVehiculoAccesorios.FechaPercato = dtpAccesoriosFechaPercato.Value;
+                            }
+                            this._entRoboVehiculoAccesorios.DescripcionResponsables = this.txtAccesoriosResponsables.Text;
+                            try
+                            {
+                                RoboVehiculoAccesoriosMapper.Instance().Save(this._entRoboVehiculoAccesorios);
+                            }
+                            catch { }
+                        }
+                        else if (this.txtAccesoriosRobados.Text.Trim() != string.Empty ||
+                            this.txtAccesoriosPersonaSePercato.Text.Trim() != string.Empty ||
+                            this.chkAccesoriosPercato.Checked ||
+                             this.txtAccesoriosResponsables.Text.Trim() != string.Empty)
+                        {
+                            this._entRoboVehiculoAccesorios = new RoboVehiculoAccesorios();
+                            this._entRoboVehiculoAccesorios.Folio = this._entIncidencia.Folio;
+                            this._entRoboVehiculoAccesorios.AccesoriosRobados = this.txtAccesoriosRobados.Text;
+                            this._entRoboVehiculoAccesorios.SePercato = this.txtAccesoriosPersonaSePercato.Text;
+                            if (this.chkAccesoriosPercato.Checked)
+                            {
+                                this._entRoboVehiculoAccesorios.FechaPercato = dtpAccesoriosFechaPercato.Value;
+                            }
+                            this._entRoboVehiculoAccesorios.DescripcionResponsables = this.txtAccesoriosResponsables.Text;
+                            RoboVehiculoAccesoriosMapper.Instance().Insert(this._entRoboVehiculoAccesorios);
+                        }
+                        IncidenciaMapper.Instance().Save(this._entIncidencia);
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
+            }
+            catch (SAIExcepcion) { }
+        }
+
+        /// <summary>
+        /// Lee los datos del formulario y escribe la información en el objeto de incidencia
+        /// </summary>
+        protected void RecuperaDatosEnIncidencia()
+        {
+            if (this._entIncidencia != null)
+            {
+                if (this.cmbMunicipio.SelectedIndex == -1 || this.cmbMunicipio.Text.Trim() == string.Empty)
+                {
+                    this._entIncidencia.ClaveMunicipio = null;
+                }
+                else
+                {
+                    this._entIncidencia.ClaveMunicipio = this._objUbicacion.IdMunicipio;
+                }
+                if (this.cmbLocalidad.SelectedIndex == -1 || this.cmbLocalidad.Text.Trim() == string.Empty)
+                {
+                    this._entIncidencia.ClaveLocalidad = null;
+                }
+                else
+                {
+                    this._entIncidencia.ClaveLocalidad = this._objUbicacion.IdLocalidad;
+                }
+                if (this.cmbColonia.SelectedIndex == -1 || this.cmbColonia.Text.Trim() == string.Empty)
+                {
+                    this._entIncidencia.ClaveColonia = null;
+                }
+                else
+                {
+                    this._entIncidencia.ClaveColonia = this._objUbicacion.IdColonia;
+                }
+                if (this.cmbCP.SelectedIndex == -1 || this.cmbCP.Text.Trim() == string.Empty)
+                {
+                    this._entIncidencia.ClaveCodigoPostal = null;
+                }
+                else
+                {
+                    this._entIncidencia.ClaveCodigoPostal = this._objUbicacion.IdCodigoPostal;
+                }
+                this._entIncidencia.Telefono = this.txtTelefono.Text;
+                if (this.cmbTipoIncidencia.SelectedIndex != -1 && this.cmbTipoIncidencia.Text.Trim() != string.Empty)
+                {
+                    this._entIncidencia.ClaveTipo = (this.cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave;
+
+                }
+                else
+                {
+                    this._entIncidencia.ClaveTipo = null;
+                }
+                this._entIncidencia.Descripcion = this.txtDescripcion.Text;
+                this._entIncidencia.Direccion = this.txtDireccion.Text;
+
+
+            }
+
+        }
+
+        /// <summary>
+        /// Actualiza el mapa con los datos de la ubicación del formulario actuales
+        /// </summary>
+        private void actualizaMapaUbicacion()
+        {
+
+            if (this.cmbMunicipio.SelectedIndex == -1 || this.cmbMunicipio.Text.Trim() == string.Empty)
+            {
+                this._objUbicacion.IdMunicipio = null;
+            }
+            else
+            {
+                this._objUbicacion.IdMunicipio = int.Parse((this.cmbMunicipio.SelectedItem as Municipio).Clave.ToString());
+
+            }
+
+            if (this.cmbLocalidad.SelectedIndex == -1 || this.cmbLocalidad.Text.Trim() == string.Empty)
+            {
+                this._objUbicacion.IdLocalidad = null;
+            }
+            else
+            {
+                this._objUbicacion.IdLocalidad = (this.cmbLocalidad.SelectedItem as Localidad).Clave;
+            }
+
+            if (this.cmbColonia.SelectedIndex == -1 || this.cmbColonia.Text.Trim() == string.Empty)
+            {
+                this._objUbicacion.IdColonia = null;
+            }
+            else
+            {
+                this._objUbicacion.IdColonia = (this.cmbColonia.SelectedItem as Colonia).Clave;
+
+            }
+
+            if (this.cmbCP.SelectedIndex == -1 || this.cmbCP.Text.Trim() == string.Empty)
+            {
+                this._objUbicacion.IdCodigoPostal = null;
+            }
+            else
+            {
+                this._objUbicacion.IdCodigoPostal = (this.cmbCP.SelectedItem as CodigoPostal).Clave;
+
+            }
+
+
+            Mapa.Controlador.MuestraMapa(this._objUbicacion, this);
+        }
+
+        #endregion
+
+        #region DELEGADOS
+
+        public delegate void DelegadoActualizaLocalidades(LocalidadList lstLocalidades);
+        public delegate void DelegadoLimpiaLocalidades();
+        public delegate void DelegadoActualizaCodigosPostales(CodigoPostalList lstCodigosPostales);
+        public delegate void DelegadoLimpiaCodigosPostales();
+        public delegate void DelegadoActualizaColonias(ColoniaList lstColonias);
+        public delegate void DelegadoLimpiaColonias();
+        public delegate void DelegadoLimpiaTextoCodigPostal();
+        public delegate void DelegadoSeleccionaCodigoPostal(Object objElemento);
+        public delegate void DelegadoLimpiaTextoColonia();
+
+        #endregion
+
+        #region MANEJADORES DE EVENTOS
+
+        /// <summary>
+        /// Hace la llamada a la función de la ventana Owner para mostrar el control switch
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnKeyUp(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Tab && this._blnCtrPresionado)
+            {
+                if (this.Owner != null)
+                {
+                    SAIFrmComandos frmPrincipal = (SAIFrmComandos)this.Owner;
+                    frmPrincipal.MuestraSwitch();
+                }
+
+            }
+            this._blnCtrPresionado = false;
+            base.OnKeyUp(e);
+        }
+
+
+
+        /// <summary>
+        /// Actualiza la ubicación del mapa cuando el formulario es activado
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnActivated(EventArgs e)
+        {
+            try
+            {
+                try
+                {
+                    base.OnActivated(e);
+                    this.actualizaMapaUbicacion();
+                    this._blnSeActivoClosed = false;
+                }
+                catch (System.Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                }
+            }
+            catch (SAIExcepcion) { }
+        }
+
+
+
         #region Eventos del combo MUNICIPIO
 
 
@@ -834,7 +1128,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         private void cmbMunicipio_CambiaMapa()
         {
-            this.cmbMunicipioRefrescaControles();   
+            this.cmbMunicipioRefrescaControles();
         }
 
         /// <summary>
@@ -871,12 +1165,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     //    this.cmbCP.Invoke(new DelegadoLimpiaCodigosPostales(LimpiaCodigosPostales));
 
                     //}) { IsBackground = false };
-                    
+
                     //tr1.Start();
                     this.LimpiaLocalidades();
                     this.LimpiaColonias();
                     this.LimpiaCodigosPostales();
-                    
+
                     if (this.cmbMunicipio.SelectedItem == null)
                     {
                         this.Cursor = Cursors.Default;
@@ -937,7 +1231,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
                     this._blnBloqueaEventos = false;
                     this.actualizaMapaUbicacion();
-                    
+
                 }
                 catch (System.Exception ex)
                 {
@@ -949,7 +1243,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 this.Cursor = Cursors.Default;
             }
-        
+
         }
 
         /// <summary>
@@ -960,16 +1254,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void cmbMunicipio_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            this.cmbMunicipioRefrescaControles();    
+            this.cmbMunicipioRefrescaControles();
 
         }
 
-        
 
-        
+
+
         #endregion
 
         #region Eventos del combo LOCALIDAD
+
         /// <summary>
         /// Recupera las colonias de la localidad seleccionada
         /// </summary>
@@ -977,7 +1272,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="e">Parámetros del evento</param>
         private void cmbLocalidad_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+
             ColoniaList lstColonias;
 
             try
@@ -991,14 +1286,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                     this._blnBloqueaEventos = true;
 
-
-
-                    //var tr = new Thread(delegate()
-                    //{
-                    //    this.cmbColonia.Invoke(new DelegadoLimpiaColonias(LimpiaColonias));
-
-                    //}) { IsBackground = false };
-                    //tr.Start();
                     this.LimpiaColonias();
 
                     if (this.cmbLocalidad.SelectedItem != null)
@@ -1012,16 +1299,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                     if (lstColonias != null)
                     {
-
-                       //Actualiza colonias
-                       //limpia el texto del codigo postal
-                        //var tr2 = new Thread(delegate()
-                        //{
-                        //    this.cmbColonia.Invoke(new DelegadoActualizaColonias (ActualizaColonias),new object[]{lstColonias});
-                        //    this.cmbCP.Invoke(new DelegadoLimpiaTextoCodigPostal(LimpiaTextoCodigoPostal));
-
-                        //}) { IsBackground = false };
-                        //tr2.Start();
                         this.ActualizaColonias(lstColonias);
                         this.LimpiaTextoCodigoPostal();
                     }
@@ -1036,7 +1313,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
             }
             catch (SAIExcepcion) { }
-           
+
         }
 
         /// <summary>
@@ -1149,7 +1426,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             {
                                 if ((objElemento as CodigoPostal).Clave == entColonia.ClaveCodigoPostal)
                                 {
-                                    
+
                                     this._blnLimpiarColonias = false;
                                     //selecciona codigo postal
                                     //var tr = new Thread(delegate()
@@ -1183,7 +1460,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
             }
             catch (SAIExcepcion) { }
-          
+
         }
 
         /// <summary>
@@ -1234,18 +1511,18 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 lstColonias = ColoniaMapper.Instance().GetByLocalidad(entLoc.Clave);
                                 if (lstColonias.Count > 0)
                                 {
-                                   //var tr = new Thread(delegate()
-                                   // {
-                                   //     this.cmbCP.Invoke(new DelegadoActualizaColonias(ActualizaColonias), new object[] { lstColonias });
+                                    //var tr = new Thread(delegate()
+                                    // {
+                                    //     this.cmbCP.Invoke(new DelegadoActualizaColonias(ActualizaColonias), new object[] { lstColonias });
 
-                                   // }) { IsBackground = false };
-                                   // tr.Start();
+                                    // }) { IsBackground = false };
+                                    // tr.Start();
                                     this.ActualizaColonias(lstColonias);
 
                                 }
                                 else
                                 {
-                                    
+
                                     //var tr2 = new Thread(delegate()
                                     //{
                                     //    this.cmbColonia.Invoke(new DelegadoLimpiaColonias(LimpiaColonias));
@@ -1269,9 +1546,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         }
                         else if (entColonia != null)
                         {
-                             if (entColonia.ClaveCodigoPostal.HasValue)
+                            if (entColonia.ClaveCodigoPostal.HasValue)
                             {
-                               foreach (var objElemento in this.cmbCP.Items)
+                                foreach (var objElemento in this.cmbCP.Items)
                                 {
                                     if ((objElemento as CodigoPostal).Clave == entColonia.ClaveCodigoPostal)
                                     {
@@ -1396,14 +1673,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                     if (this.cmbCP.SelectedIndex != -1 && this.cmbCP.Text.Trim() != string.Empty)
                     {
-                        this._entIncidencia.ClaveCodigoPostal  = (this.cmbCP.SelectedItem as CodigoPostal).Clave;
+                        this._entIncidencia.ClaveCodigoPostal = (this.cmbCP.SelectedItem as CodigoPostal).Clave;
                     }
                     else
                     {
                         this._entIncidencia.ClaveCodigoPostal = null;
                     }
 
-                   
+
 
                     this.actualizaMapaUbicacion();
                 }
@@ -1489,12 +1766,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this._blnLimpiarColonias = true;
         }
 
-#endregion
+        #endregion
 
 
         private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
         {
-             //No permite introducir texto
+            //No permite introducir texto
             if ((e.KeyChar < 48 || e.KeyChar > 57) && e.KeyChar != 8)
                 e.Handled = true;
         }
@@ -1510,7 +1787,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 this.cmbTipoIncidencia.Focus();
             }
-           
+
 
             this.SAIFrmIncidenciaKeyUp(e);
 
@@ -1546,8 +1823,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.SAIFrmIncidenciaKeyUp(e);
 
         }
-               
-       
+
+
         /// <summary>
         /// Valida los controles obligatorios del formulario y cierra el mapa en caso de que ya no existan
         /// más instancias del formulario en memoria.
@@ -1561,7 +1838,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 {
                     if (!base.SAIProveedorValidacion.ValidarCamposRequeridos(this) && !this._blnSoloLectura)
                     {
-                        
+
                         if (cmbTipoIncidencia.Items.Count != 0)
                         {
                             e.Cancel = true;
@@ -1613,9 +1890,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         this.GuardaIncidencia();
                     }
                     catch { }
-                   
+
                     base.OnClosed(e);
-                    foreach(SAIWinSwitchItem objVentanaSwitch in Aplicacion.VentanasIncidencias)
+                    foreach (SAIWinSwitchItem objVentanaSwitch in Aplicacion.VentanasIncidencias)
                     {
                         if (this == objVentanaSwitch.Ventana)
                         {
@@ -1632,255 +1909,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (SAIExcepcion) { }
         }
 
-        /// <summary>
-        /// Recupera los datos de la incidencia que están en el formulario y los guarda en la BD.
-        /// </summary>
-        protected  void GuardaIncidencia()
-        {
-            try
-            { 
-                try
-                {
-                    if (this._entIncidencia != null)
-                    {
 
-                        if (cmbTipoIncidencia.SelectedItem!= null && (
-                           (cmbTipoIncidencia.SelectedItem as TipoIncidencia).ClaveOperacion.Trim() == "133"
-                            ||
-                            (cmbTipoIncidencia.SelectedItem as TipoIncidencia).ClaveOperacion.Trim() == "5047"
-                            ))
-                            {
-                                this.txtDireccion.Text  = "SIN REGISTRO";
-                                //Se cambia a incidencia cancelada
-                                 this._entIncidencia.ClaveEstatus = 5;
-                            }
-
-                         //Si existen objetos de propietario del vehículo, vehiculoaccesorios robados y accesorios robados, se guardan:
-
-                         if (this._objVeiculoAccesoriosRobado != null)
-                         {
-                             this._objVeiculoAccesoriosRobado.Placas = this.txtAccesoriosPlacas.Text;
-                             this._objVeiculoAccesoriosRobado.NumeroSerie = this.txtAccesoriosSerie.Text;
-                             try
-                             {
-                                 VehiculoMapper.Instance().Save(this._objVeiculoAccesoriosRobado);
-                             }
-                             catch { }
-                         }
-                         else if (this.txtAccesoriosPlacas.Text.Trim() != string.Empty ||
-                             this.txtAccesoriosSerie.Text.Trim() != string.Empty)
-                         {
-                             RoboVehiculoAccesoriosList lstRoboVehiculoAccesorios = RoboVehiculoAccesoriosMapper.Instance().GetByIncidencia(this._entIncidencia.Folio);
-
-                             if (lstRoboVehiculoAccesorios != null && lstRoboVehiculoAccesorios.Count > 0)
-                             {
-                                 RoboVehiculoAccesorios objRoboVehiculoAccesorios = lstRoboVehiculoAccesorios[0];
-                                 this._objVeiculoAccesoriosRobado = new VehiculoObject();
-                                 this._objVeiculoAccesoriosRobado.Placas = this.txtAccesoriosPlacas.Text;
-                                 this._objVeiculoAccesoriosRobado.NumeroSerie = this.txtAccesoriosSerie.Text;
-                                 VehiculoMapper.Instance().Insert(this._objVeiculoAccesoriosRobado);
-                                 objRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
-                                 try
-                                 {
-                                     RoboVehiculoAccesoriosMapper.Instance().Save(objRoboVehiculoAccesorios);
-                                 }
-                                 catch { }
-                             }
-
-                            
-
-                         }
-
-
-                         if (this._objPropietarioVehiculo != null)
-                         {
-                             this._objPropietarioVehiculo.Domicilio = this.txtNombrePropietario.Text;
-                             this._objPropietarioVehiculo.Nombre = this.txtNombrePropietario.Text;
-                             this._objPropietarioVehiculo.Telefono = this.txtTelefono.Text;
-
-                             try
-                             {
-                                 PropietarioVehiculoMapper.Instance().Save(this._objPropietarioVehiculo);
-                             }
-                             catch { }
-
-                         }
-                         else if (this.txtNombrePropietario.Text.Trim() != string.Empty ||
-                             this.txtNombrePropietario.Text.Trim() != string.Empty ||
-                             this.txtTelefono.Text != string.Empty)
-                         {
-                             VehiculoRobadoObjectList lstVehiculoRobado = VehiculoRobadoMapper.Instance().GetByIncidencia(this._entIncidencia.Folio);
-
-                             if (lstVehiculoRobado != null && lstVehiculoRobado.Count > 0)
-                             {
-                                 this._objPropietarioVehiculo = new PropietarioVehiculoObject();
-                                 this._objPropietarioVehiculo.Domicilio = this.txtNombrePropietario.Text;
-                                 this._objPropietarioVehiculo.Nombre = this.txtNombrePropietario.Text;
-                                 this._objPropietarioVehiculo.Telefono = this.txtTelefono.Text;
-
-                                 PropietarioVehiculoMapper.Instance().Insert(this._objPropietarioVehiculo);
-
-                                 foreach (VehiculoRobadoObject objVehiculoRobado in lstVehiculoRobado)
-                                 {
-                                     objVehiculoRobado.ClavePropietario = this._objPropietarioVehiculo.Clave;
-
-                                     try
-                                     {
-                                         VehiculoRobadoMapper.Instance().Save(objVehiculoRobado);
-                                     }
-                                     catch { }
-                                 }
-                             }
-
-                         }
-
-                         if (this._entRoboVehiculoAccesorios != null)
-                         {
-                             this._entRoboVehiculoAccesorios.AccesoriosRobados = this.txtAccesoriosRobados.Text;
-                             this._entRoboVehiculoAccesorios.SePercato = this.txtAccesoriosPersonaSePercato.Text;
-                             if (this.chkAccesoriosPercato.Checked)
-                             {
-                                 this._entRoboVehiculoAccesorios.FechaPercato = dtpAccesoriosFechaPercato.Value;
-                             }
-                             this._entRoboVehiculoAccesorios.DescripcionResponsables = this.txtAccesoriosResponsables.Text;
-                             try
-                             {
-                                 RoboVehiculoAccesoriosMapper.Instance().Save(this._entRoboVehiculoAccesorios);
-                             }
-                             catch { }
-                         }
-                         else if (this.txtAccesoriosRobados.Text.Trim() != string.Empty ||
-                             this.txtAccesoriosPersonaSePercato.Text.Trim() != string.Empty ||
-                             this.chkAccesoriosPercato.Checked ||
-                              this.txtAccesoriosResponsables.Text.Trim() != string.Empty)
-                         {
-                             this._entRoboVehiculoAccesorios = new RoboVehiculoAccesorios();
-                             this._entRoboVehiculoAccesorios.Folio = this._entIncidencia.Folio;
-                             this._entRoboVehiculoAccesorios.AccesoriosRobados = this.txtAccesoriosRobados.Text;
-                             this._entRoboVehiculoAccesorios.SePercato = this.txtAccesoriosPersonaSePercato.Text;
-                             if (this.chkAccesoriosPercato.Checked)
-                             {
-                                 this._entRoboVehiculoAccesorios.FechaPercato = dtpAccesoriosFechaPercato.Value;
-                             }
-                             this._entRoboVehiculoAccesorios.DescripcionResponsables = this.txtAccesoriosResponsables.Text;
-                             RoboVehiculoAccesoriosMapper.Instance().Insert(this._entRoboVehiculoAccesorios);
-                         }
-                         IncidenciaMapper.Instance().Save(this._entIncidencia);
-                    }
-                }
-                catch (System.Exception ex)
-                {
-                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
-                }
-            }
-            catch (SAIExcepcion) { }
-        }
-
-        /// <summary>
-        /// Lee los datos del formulario y escribe la información en el objeto de incidencia
-        /// </summary>
-        protected void RecuperaDatosEnIncidencia()
-        {
-            if (this._entIncidencia != null)
-            {
-                if (this.cmbMunicipio.SelectedIndex == -1 || this.cmbMunicipio.Text.Trim() == string.Empty)
-                {
-                    this._entIncidencia.ClaveMunicipio = null;
-                }
-                else
-                {
-                    this._entIncidencia.ClaveMunicipio = this._objUbicacion.IdMunicipio;
-                }
-                if (this.cmbLocalidad.SelectedIndex == -1 || this.cmbLocalidad.Text.Trim() == string.Empty)
-                {
-                    this._entIncidencia.ClaveLocalidad = null;
-                }
-                else
-                {
-                    this._entIncidencia.ClaveLocalidad = this._objUbicacion.IdLocalidad;
-                }
-                if (this.cmbColonia.SelectedIndex == -1 || this.cmbColonia.Text.Trim() == string.Empty)
-                {
-                    this._entIncidencia.ClaveColonia = null;
-                }
-                else
-                {
-                    this._entIncidencia.ClaveColonia = this._objUbicacion.IdColonia;
-                }
-                if (this.cmbCP.SelectedIndex == -1 || this.cmbCP.Text.Trim() == string.Empty)
-                {
-                    this._entIncidencia.ClaveCodigoPostal = null;
-                }
-                else
-                {
-                    this._entIncidencia.ClaveCodigoPostal = this._objUbicacion.IdCodigoPostal;
-                }
-                this._entIncidencia.Telefono = this.txtTelefono.Text;
-                if (this.cmbTipoIncidencia.SelectedIndex != -1 && this.cmbTipoIncidencia.Text.Trim() != string.Empty)
-                {
-                    this._entIncidencia.ClaveTipo = (this.cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave;
-
-                }
-                else
-                {
-                    this._entIncidencia.ClaveTipo = null;
-                }
-                this._entIncidencia.Descripcion = this.txtDescripcion.Text;
-                this._entIncidencia.Direccion = this.txtDireccion.Text;
-
-               
-            }
-           
-        }
-        
-        /// <summary>
-        /// Actualiza el mapa con los datos de la ubicación del formulario actuales
-        /// </summary>
-        private void actualizaMapaUbicacion()
-        {
-            
-               if (this.cmbMunicipio.SelectedIndex == -1 || this.cmbMunicipio.Text.Trim() == string.Empty)
-                {
-                    this._objUbicacion.IdMunicipio = null;
-                }
-                else
-                {
-                    this._objUbicacion.IdMunicipio = int.Parse((this.cmbMunicipio.SelectedItem as Municipio).Clave.ToString());
-                   
-                }
-
-                if (this.cmbLocalidad.SelectedIndex == -1 || this.cmbLocalidad.Text.Trim() == string.Empty)
-                {
-                    this._objUbicacion.IdLocalidad = null;
-                }
-                else
-                {
-                    this._objUbicacion.IdLocalidad = (this.cmbLocalidad.SelectedItem as Localidad).Clave;
-                }
-
-                if (this.cmbColonia.SelectedIndex == -1 || this.cmbColonia.Text.Trim() == string.Empty)
-                {
-                    this._objUbicacion.IdColonia = null;
-                }
-                else
-                {
-                    this._objUbicacion.IdColonia = (this.cmbColonia.SelectedItem as Colonia).Clave;
-                   
-                }
-
-                if (this.cmbCP.SelectedIndex == -1 || this.cmbCP.Text.Trim() == string.Empty)
-                {
-                    this._objUbicacion.IdCodigoPostal = null;
-                }
-                else
-                {
-                    this._objUbicacion.IdCodigoPostal = (this.cmbCP.SelectedItem as CodigoPostal).Clave;
-                    
-                }
-            
-
-            Mapa.Controlador.MuestraMapa(this._objUbicacion, this);
-        }
 
         /// <summary>
         /// Guarda la incidencia con el teléfono actualizado
@@ -1893,7 +1922,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 try
                 {
-                    this._entIncidencia.Telefono  = this.txtTelefono.Text;
+                    this._entIncidencia.Telefono = this.txtTelefono.Text;
                     if (!this._blnSeActivoClosed)
                     {
                         this.GuardaIncidencia();
@@ -1920,7 +1949,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 {
                     if (this.cmbTipoIncidencia.SelectedIndex != -1 && this.cmbTipoIncidencia.Text.Trim() != string.Empty)
                     {
-                        this._entIncidencia.ClaveTipo = (this.cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave; 
+                        this._entIncidencia.ClaveTipo = (this.cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave;
                     }
                     else
                     {
@@ -1986,7 +2015,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 try
                 {
-                    this._entIncidencia.Direccion  = this.txtDireccion.Text;
+                    this._entIncidencia.Direccion = this.txtDireccion.Text;
                     if (!this._blnSeActivoClosed)
                     {
                         this.GuardaIncidencia();
@@ -2024,7 +2053,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
             catch (SAIExcepcion) { }
         }
-        
+
         /// <summary>
         /// Muestra la ventana para hacer el switch entre incidencias abiertas en caso de que Ctrl+tab estén presionados
         /// </summary>
@@ -2085,7 +2114,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     {
                         TipoIncidencia objTipo = (cmbTipoIncidencia.SelectedItem as TipoIncidencia);
 
-                        
+
 
                         if (objTipo.ClaveOperacion.Trim() == "2003")
                         {
@@ -2095,7 +2124,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             this.grpRoboVehiculo.Visible = true;
                             this.grpRoboAccesorios.Visible = false;
 
-                           
+
                             this.grpRoboAccesorios.SuspendLayout();
                             if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                             {
@@ -2103,7 +2132,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 this.Height = 870;
                                 this.Width = 620;
                                 this.grpRoboVehiculo.Top = 645;
-                               
+
 
                             }
                             else
@@ -2111,7 +2140,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 this.Height = 830;
                                 this.Width = 600;
                                 this.grpRoboVehiculo.Top = 534;
-                            
+
                             }
                             this.grpRoboVehiculo.Left = 10;
                             this.grpRoboVehiculo.Refresh();
@@ -2120,7 +2149,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             this.ResumeLayout(false);
                             this.PerformLayout();
                         }
-                             
+
 
                         else if (objTipo.ClaveOperacion.Trim() == "2004")
                         {
@@ -2128,7 +2157,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             this.SuspendLayout();
                             this.grpExtravio.Visible = false;
                             this.grpRoboVehiculo.Visible = false;
-                            
+
                             this.grpRoboAccesorios.SuspendLayout();
                             if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                             {
@@ -2158,7 +2187,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             this.grpExtravio.Visible = true;
                             this.grpRoboVehiculo.Visible = false;
                             this.grpRoboAccesorios.Visible = false;
-                           
+
                             if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                             {
                                 this.Height = 870;
@@ -2186,13 +2215,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             {
                                 this.Height = 715;
                                 this.Width = 600;
-                               
+
                             }
                             else
                             {
                                 this.Height = 630;
                                 this.Width = 600;
-                               
+
                             }
                             this.ResumeLayout(false);
                             this.PerformLayout();
@@ -2223,12 +2252,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             }
                             if (objTipo.ClaveOperacion.Trim() == "5047" || objTipo.ClaveOperacion.Trim() == "133")
                             {
-                                this.txtDireccion.Text  = "SIN REGISTRO";
+                                this.txtDireccion.Text = "SIN REGISTRO";
                             }
-                           
+
 
                         }
-                        
+
 
                     }
                 }
@@ -2247,7 +2276,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="e">Parámetros del evento</param>
         private void dgvPersonaExtraviada_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            
+
         }
 
         /// <summary>
@@ -2336,7 +2365,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     if (this._objPropietarioVehiculo == null)
                     {
                         this._objPropietarioVehiculo = new PropietarioVehiculoObject();
-                        this._objPropietarioVehiculo.Telefono  = this.txtTelefono.Text;
+                        this._objPropietarioVehiculo.Telefono = this.txtTelefono.Text;
                         PropietarioVehiculoMapper.Instance().Insert(this._objPropietarioVehiculo);
                     }
                     else
@@ -2413,7 +2442,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="e">Parámetros del evento</param>
         private void dgvVehiculo_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-           
+
         }
 
         /// <summary>
@@ -2519,19 +2548,19 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         VehiculoMapper.Instance().Insert(this._objVeiculoAccesoriosRobado);
                         if (this._entRoboVehiculoAccesorios != null)
                         {
-                          this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
+                            this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
                         }
                     }
                     else
                     {
                         if (this._entRoboVehiculoAccesorios != null)
                         {
-                          this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
+                            this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
                         }
                         this._objVeiculoAccesoriosRobado.Placas = this.txtAccesoriosPlacas.Text;
                         VehiculoMapper.Instance().Save(this._objVeiculoAccesoriosRobado);
                     }
-                   
+
                 }
                 catch (System.Exception ex)
                 {
@@ -2573,18 +2602,18 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         this._objVeiculoAccesoriosRobado.NumeroSerie = this.txtAccesoriosSerie.Text;
                         VehiculoMapper.Instance().Insert(this._objVeiculoAccesoriosRobado);
 
-                       if (this._entRoboVehiculoAccesorios != null)
+                        if (this._entRoboVehiculoAccesorios != null)
                         {
-                          this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
-                          RoboVehiculoAccesoriosMapper.Instance().Save(this._entRoboVehiculoAccesorios);
+                            this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
+                            RoboVehiculoAccesoriosMapper.Instance().Save(this._entRoboVehiculoAccesorios);
                         }
                     }
                     else
                     {
                         if (this._entRoboVehiculoAccesorios != null)
                         {
-                          this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
-                          RoboVehiculoAccesoriosMapper.Instance().Save(this._entRoboVehiculoAccesorios);
+                            this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
+                            RoboVehiculoAccesoriosMapper.Instance().Save(this._entRoboVehiculoAccesorios);
                         }
                         this._objVeiculoAccesoriosRobado.NumeroSerie = this.txtAccesoriosSerie.Text;
                         VehiculoMapper.Instance().Save(this._objVeiculoAccesoriosRobado);
@@ -2625,7 +2654,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 try
                 {
-                    if (this._entRoboVehiculoAccesorios  == null)
+                    if (this._entRoboVehiculoAccesorios == null)
                     {
                         this._entRoboVehiculoAccesorios = new RoboVehiculoAccesorios();
 
@@ -2634,7 +2663,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         if (this._objVeiculoAccesoriosRobado != null)
                         {
                             this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
-                            
+
                         }
                         RoboVehiculoAccesoriosMapper.Instance().Insert(this._entRoboVehiculoAccesorios);
                         for (int i = 0; i < this.dgvVehiculoAccesorios.Rows.Count; i++)
@@ -2649,17 +2678,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             }
                             catch { }
 
-                        }   
+                        }
                     }
                     else
                     {
                         if (this._objVeiculoAccesoriosRobado != null)
                         {
                             this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
-                         }
+                        }
                         this._entRoboVehiculoAccesorios.AccesoriosRobados = this.txtAccesoriosRobados.Text;
                         RoboVehiculoAccesoriosMapper.Instance().Save(this._entRoboVehiculoAccesorios);
-                    
+
                     }
 
                 }
@@ -2708,7 +2737,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
                         }
                         RoboVehiculoAccesoriosMapper.Instance().Insert(this._entRoboVehiculoAccesorios);
-                        for (int i = 0; i < this.dgvVehiculoAccesorios.Rows.Count;i++ )
+                        for (int i = 0; i < this.dgvVehiculoAccesorios.Rows.Count; i++)
                         {
                             try
                             {
@@ -2724,7 +2753,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
                     else
                     {
-                         if (this._objVeiculoAccesoriosRobado != null)
+                        if (this._objVeiculoAccesoriosRobado != null)
                         {
                             this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
                         }
@@ -2772,7 +2801,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         this._entRoboVehiculoAccesorios.AccesoriosRobados = this.txtAccesoriosRobados.Text;
                         this._entRoboVehiculoAccesorios.FechaPercato = this.dtpAccesoriosFechaPercato.Value;
                         this._entRoboVehiculoAccesorios.Folio = this._entIncidencia.Folio;
-                         if (this._objVeiculoAccesoriosRobado != null)
+                        if (this._objVeiculoAccesoriosRobado != null)
                         {
                             this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
                         }
@@ -2794,7 +2823,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
                     else
                     {
-                         if (this._objVeiculoAccesoriosRobado != null)
+                        if (this._objVeiculoAccesoriosRobado != null)
                         {
                             this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
                         }
@@ -2864,7 +2893,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
                     else
                     {
-                         if (this._objVeiculoAccesoriosRobado != null)
+                        if (this._objVeiculoAccesoriosRobado != null)
                         {
                             this._entRoboVehiculoAccesorios.ClaveVehiculo = this._objVeiculoAccesoriosRobado.Clave;
                         }
@@ -2888,7 +2917,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="e">Parámetros del evento</param>
         private void dgvVehiculoAccesorios_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-           
+
         }
 
         /// <summary>
@@ -2919,7 +2948,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
 
                 entPersonaExtraviada.FechaExtravio = DateTime.Now;
-                
+
                 switch (e.ColumnIndex)
                 {
                     case 0: //Calve
@@ -2928,9 +2957,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         break;
                     case 2: //Nombre
                         String strNombre;
-                        if (dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                        if (dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                         {
-                            strNombre = dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString();
+                            strNombre = dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString();
                             strNombre = strNombre.ToUpper();
                             if (strNombre.Length > 250)
                             {
@@ -2943,11 +2972,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         break;
                     case 3: //Edad
                         int intEdad;
-                        if (dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                        if (dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                         {
                             try
                             {
-                                intEdad = int.Parse(dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString());
+                                intEdad = int.Parse(dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString());
                                 if (intEdad <= 0)
                                 {
                                     dgvPersonaExtraviada.CurrentCell.Value = string.Empty;
@@ -2967,9 +2996,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         break;
                     case 4: //Sexo
                         String strSexo;
-                        if (dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                        if (dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                         {
-                            strSexo = dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString();
+                            strSexo = dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString();
                             strSexo = strSexo.ToUpper();
                             if (strSexo != "F" && strSexo != "M")
                             {
@@ -2985,11 +3014,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         break;
                     case 5://Estatura
                         float fltEstatura;
-                        if (dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                        if (dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                         {
                             try
                             {
-                                fltEstatura = float.Parse(dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString());
+                                fltEstatura = float.Parse(dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString());
                                 if (fltEstatura <= 0)
                                 {
                                     dgvPersonaExtraviada.CurrentCell.Value = string.Empty;
@@ -3010,10 +3039,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         break;
                     case 6: //Parentesco
 
-                        if (dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                        if (dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                         {
                             String strParentesco;
-                            strParentesco = dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString();
+                            strParentesco = dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString();
                             strParentesco = strParentesco.ToUpper();
                             if (strParentesco.Length > 15)
                             {
@@ -3026,11 +3055,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         break;
                     case 7://Fecha de extravío
                         DateTime dtmFecha;
-                        if (dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                        if (dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                         {
                             try
                             {
-                                dtmFecha = DateTime.Parse(dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString());
+                                dtmFecha = DateTime.Parse(dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString());
                                 if (dtmFecha > DateTime.Today)
                                 {
                                     dgvPersonaExtraviada.CurrentCell.Value = string.Empty;
@@ -3049,10 +3078,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         break;
                     case 8:// Tez
 
-                        if (dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                        if (dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                         {
                             String strTez;
-                            strTez = dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString();
+                            strTez = dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString();
                             strTez = strTez.ToUpper();
                             if (strTez.Length > 50)
                             {
@@ -3065,10 +3094,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         break;
                     case 9://Tipo cabello
 
-                        if (dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                        if (dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                         {
                             String strTipoCabello;
-                            strTipoCabello = dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString();
+                            strTipoCabello = dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString();
                             strTipoCabello = strTipoCabello.ToUpper();
                             if (strTipoCabello.Length > 15)
                             {
@@ -3081,10 +3110,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         break;
                     case 10://Color cabello
 
-                        if (dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                        if (dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                         {
                             String strColorCabello;
-                            strColorCabello = dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString();
+                            strColorCabello = dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString();
                             strColorCabello = strColorCabello.ToUpper();
                             if (strColorCabello.Length > 15)
                             {
@@ -3097,10 +3126,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         break;
                     case 11://Largo cabello
 
-                        if (dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                        if (dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                         {
                             String strLargoCabello;
-                            strLargoCabello = dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString();
+                            strLargoCabello = dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString();
                             strLargoCabello = strLargoCabello.ToUpper();
                             if (strLargoCabello.Length > 15)
                             {
@@ -3113,10 +3142,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         break;
                     case 12://Frente
 
-                        if (dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                        if (dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                         {
                             String strFrente;
-                            strFrente = dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString();
+                            strFrente = dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString();
                             strFrente = strFrente.ToUpper();
                             if (strFrente.Length > 15)
                             {
@@ -3130,10 +3159,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         break;
                     case 13://Cejas
 
-                        if (dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                        if (dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                         {
                             String strCejas;
-                            strCejas = dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString();
+                            strCejas = dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString();
                             if (strCejas.Length > 15)
                             {
                                 strCejas = strCejas.Substring(0, 15);
@@ -3145,10 +3174,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         break;
                     case 14:// Color de ojos
 
-                        if (dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                        if (dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                         {
                             String strColorOjos;
-                            strColorOjos = dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString();
+                            strColorOjos = dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString();
                             strColorOjos = strColorOjos.ToUpper();
                             if (strColorOjos.Length > 15)
                             {
@@ -3161,10 +3190,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         break;
                     case 15:// tamaño de boca
 
-                        if (dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                        if (dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                         {
                             String strTamañoBoca;
-                            strTamañoBoca = dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString();
+                            strTamañoBoca = dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString();
                             strTamañoBoca = strTamañoBoca.ToUpper();
                             if (strTamañoBoca.Length > 15)
                             {
@@ -3176,10 +3205,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                         break;
                     case 16:// labios
-                        if (dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                        if (dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                         {
                             String strLabios;
-                            strLabios = dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString();
+                            strLabios = dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString();
                             strLabios = strLabios.ToUpper();
                             if (strLabios.Length > 15)
                             {
@@ -3190,10 +3219,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         }
                         break;
                     case 17:// vestimenta
-                        if (dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                        if (dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                         {
                             String strVestimenta;
-                            strVestimenta = dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString();
+                            strVestimenta = dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString();
                             strVestimenta = strVestimenta.ToUpper();
                             if (strVestimenta.Length > 250)
                             {
@@ -3204,10 +3233,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         }
                         break;
                     case 18:// destino
-                        if (dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                        if (dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                         {
                             String strDestino;
-                            strDestino = dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString();
+                            strDestino = dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString();
                             strDestino = strDestino.ToUpper();
                             if (strDestino.Length > 250)
                             {
@@ -3218,10 +3247,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         }
                         break;
                     case 19:// caracteristicas
-                        if (dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                        if (dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value != null && dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                         {
                             String strCaracteristicas;
-                            strCaracteristicas = dgvPersonaExtraviada[e.ColumnIndex,e.RowIndex].Value.ToString();
+                            strCaracteristicas = dgvPersonaExtraviada[e.ColumnIndex, e.RowIndex].Value.ToString();
                             strCaracteristicas = strCaracteristicas.ToUpper();
                             if (strCaracteristicas.Length > 250)
                             {
@@ -3288,10 +3317,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             break;
                         case 1: //Marca
 
-                            if (dgvVehiculo[e.ColumnIndex,e.RowIndex].Value != null && dgvVehiculo[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                            if (dgvVehiculo[e.ColumnIndex, e.RowIndex].Value != null && dgvVehiculo[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                             {
                                 String strMarca;
-                                strMarca = dgvVehiculo[e.ColumnIndex,e.RowIndex].Value.ToString();
+                                strMarca = dgvVehiculo[e.ColumnIndex, e.RowIndex].Value.ToString();
                                 if (strMarca.Length > 50)
                                 {
                                     strMarca = strMarca.Substring(0, 50);
@@ -3302,10 +3331,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             }
                             break;
                         case 2://Tipo
-                            if (dgvVehiculo[e.ColumnIndex,e.RowIndex].Value != null && dgvVehiculo[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                            if (dgvVehiculo[e.ColumnIndex, e.RowIndex].Value != null && dgvVehiculo[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                             {
                                 String strTipo;
-                                strTipo = dgvVehiculo[e.ColumnIndex,e.RowIndex].Value.ToString();
+                                strTipo = dgvVehiculo[e.ColumnIndex, e.RowIndex].Value.ToString();
                                 if (strTipo.Length > 50)
                                 {
                                     strTipo = strTipo.Substring(0, 50);
@@ -3316,10 +3345,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             }
                             break;
                         case 3://Modelo
-                            if (dgvVehiculo[e.ColumnIndex,e.RowIndex].Value != null && dgvVehiculo[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                            if (dgvVehiculo[e.ColumnIndex, e.RowIndex].Value != null && dgvVehiculo[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                             {
                                 String strModelo;
-                                strModelo = dgvVehiculo[e.ColumnIndex,e.RowIndex].Value.ToString();
+                                strModelo = dgvVehiculo[e.ColumnIndex, e.RowIndex].Value.ToString();
                                 if (strModelo.Length > 50)
                                 {
                                     strModelo = strModelo.Substring(0, 50);
@@ -3330,10 +3359,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             }
                             break;
                         case 4://Color
-                            if (dgvVehiculo[e.ColumnIndex,e.RowIndex].Value != null && dgvVehiculo[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                            if (dgvVehiculo[e.ColumnIndex, e.RowIndex].Value != null && dgvVehiculo[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                             {
                                 String strColor;
-                                strColor = dgvVehiculo[e.ColumnIndex,e.RowIndex].Value.ToString();
+                                strColor = dgvVehiculo[e.ColumnIndex, e.RowIndex].Value.ToString();
                                 if (strColor.Length > 50)
                                 {
                                     strColor = strColor.Substring(0, 50);
@@ -3359,10 +3388,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             }
                             break;
                         case 7://Número de Serie
-                            if (dgvVehiculo[e.ColumnIndex,e.RowIndex].Value != null && dgvVehiculo[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                            if (dgvVehiculo[e.ColumnIndex, e.RowIndex].Value != null && dgvVehiculo[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                             {
                                 String strNumeroSerie;
-                                strNumeroSerie = dgvVehiculo[e.ColumnIndex,e.RowIndex].Value.ToString();
+                                strNumeroSerie = dgvVehiculo[e.ColumnIndex, e.RowIndex].Value.ToString();
                                 if (strNumeroSerie.Length > 50)
                                 {
                                     strNumeroSerie = strNumeroSerie.Substring(0, 50);
@@ -3373,10 +3402,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             }
                             break;
                         case 8://Señas Particulares
-                            if (dgvVehiculo[e.ColumnIndex,e.RowIndex].Value != null && dgvVehiculo[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                            if (dgvVehiculo[e.ColumnIndex, e.RowIndex].Value != null && dgvVehiculo[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                             {
                                 String strSeñasParticulares;
-                                strSeñasParticulares = dgvVehiculo[e.ColumnIndex,e.RowIndex].Value.ToString();
+                                strSeñasParticulares = dgvVehiculo[e.ColumnIndex, e.RowIndex].Value.ToString();
                                 if (strSeñasParticulares.Length > 250)
                                 {
                                     strSeñasParticulares = strSeñasParticulares.Substring(0, 250);
@@ -3458,10 +3487,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             break;
                         case 1: //Marca
 
-                            if (dgvVehiculoAccesorios[e.ColumnIndex,e.RowIndex].Value != null && dgvVehiculoAccesorios[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                            if (dgvVehiculoAccesorios[e.ColumnIndex, e.RowIndex].Value != null && dgvVehiculoAccesorios[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                             {
                                 String strMarca;
-                                strMarca = dgvVehiculoAccesorios[e.ColumnIndex,e.RowIndex].Value.ToString();
+                                strMarca = dgvVehiculoAccesorios[e.ColumnIndex, e.RowIndex].Value.ToString();
                                 if (strMarca.Length > 50)
                                 {
                                     strMarca = strMarca.Substring(0, 50);
@@ -3472,10 +3501,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             }
                             break;
                         case 2://Tipo
-                            if (dgvVehiculoAccesorios[e.ColumnIndex,e.RowIndex].Value != null && dgvVehiculoAccesorios[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                            if (dgvVehiculoAccesorios[e.ColumnIndex, e.RowIndex].Value != null && dgvVehiculoAccesorios[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                             {
                                 String strTipo;
-                                strTipo = dgvVehiculoAccesorios[e.ColumnIndex,e.RowIndex].Value.ToString();
+                                strTipo = dgvVehiculoAccesorios[e.ColumnIndex, e.RowIndex].Value.ToString();
                                 if (strTipo.Length > 50)
                                 {
                                     strTipo = strTipo.Substring(0, 50);
@@ -3486,10 +3515,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             }
                             break;
                         case 3://Modelo
-                            if (dgvVehiculoAccesorios[e.ColumnIndex,e.RowIndex].Value != null && dgvVehiculoAccesorios[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                            if (dgvVehiculoAccesorios[e.ColumnIndex, e.RowIndex].Value != null && dgvVehiculoAccesorios[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                             {
                                 String strModelo;
-                                strModelo = dgvVehiculoAccesorios[e.ColumnIndex,e.RowIndex].Value.ToString();
+                                strModelo = dgvVehiculoAccesorios[e.ColumnIndex, e.RowIndex].Value.ToString();
                                 if (strModelo.Length > 50)
                                 {
                                     strModelo = strModelo.Substring(0, 50);
@@ -3500,10 +3529,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             }
                             break;
                         case 4://Color
-                            if (dgvVehiculoAccesorios[e.ColumnIndex,e.RowIndex].Value != null && dgvVehiculoAccesorios[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                            if (dgvVehiculoAccesorios[e.ColumnIndex, e.RowIndex].Value != null && dgvVehiculoAccesorios[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                             {
                                 String strColor;
-                                strColor = dgvVehiculoAccesorios[e.ColumnIndex,e.RowIndex].Value.ToString();
+                                strColor = dgvVehiculoAccesorios[e.ColumnIndex, e.RowIndex].Value.ToString();
                                 if (strColor.Length > 50)
                                 {
                                     strColor = strColor.Substring(0, 50);
@@ -3528,10 +3557,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             }
                             break;
                         case 7://Número de Serie
-                            if (dgvVehiculoAccesorios[e.ColumnIndex,e.RowIndex].Value != null && dgvVehiculoAccesorios[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                            if (dgvVehiculoAccesorios[e.ColumnIndex, e.RowIndex].Value != null && dgvVehiculoAccesorios[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                             {
                                 String strNumeroSerie;
-                                strNumeroSerie = dgvVehiculoAccesorios[e.ColumnIndex,e.RowIndex].Value.ToString();
+                                strNumeroSerie = dgvVehiculoAccesorios[e.ColumnIndex, e.RowIndex].Value.ToString();
                                 if (strNumeroSerie.Length > 50)
                                 {
                                     strNumeroSerie = strNumeroSerie.Substring(0, 50);
@@ -3542,10 +3571,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             }
                             break;
                         case 8://Señas Particulares
-                            if (dgvVehiculoAccesorios[e.ColumnIndex,e.RowIndex].Value != null && dgvVehiculoAccesorios[e.ColumnIndex,e.RowIndex].Value.ToString().Trim() != string.Empty)
+                            if (dgvVehiculoAccesorios[e.ColumnIndex, e.RowIndex].Value != null && dgvVehiculoAccesorios[e.ColumnIndex, e.RowIndex].Value.ToString().Trim() != string.Empty)
                             {
                                 String strSeñasParticulares;
-                                strSeñasParticulares = dgvVehiculoAccesorios[e.ColumnIndex,e.RowIndex].Value.ToString();
+                                strSeñasParticulares = dgvVehiculoAccesorios[e.ColumnIndex, e.RowIndex].Value.ToString();
                                 if (strSeñasParticulares.Length > 250)
                                 {
                                     strSeñasParticulares = strSeñasParticulares.Substring(0, 250);
@@ -3602,64 +3631,69 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="e"></param>
         private void cmbCP_TextChanged(object sender, EventArgs e)
         {
-            ColoniaList lstColonias;
-            CodigoPostalList lstCodigoPostal;
-            Localidad entLocalidad;
-            LocalidadList lstLocalidades;
 
-            if (this._blnBloqueaEventos)
+            if(this.cmbCP.Text.Length==5)
             {
-                return;
-            }
+                ColoniaList lstColonias;
+                CodigoPostalList lstCodigoPostal;
+                Localidad entLocalidad;
+                LocalidadList lstLocalidades;
 
-            try
-            {
+                if (this._blnBloqueaEventos)
+                {
+                    return;
+                }
+
                 try
                 {
-                    if (this.cmbCP.Text.Trim() != string.Empty)
+                    try
                     {
-                        lstCodigoPostal = CodigoPostalMapper.Instance().GetBySQLQuery("Select Clave, Valor from CodigoPostal where Valor = '" + this.cmbCP.Text + "'");
-                        if (lstCodigoPostal != null && lstCodigoPostal.Count > 0)
-                        {
-                            lstColonias = ColoniaMapper.Instance().GetByCodigoPostal(lstCodigoPostal[0].Clave);
-                           
-                            if (lstColonias != null && lstColonias.Count > 0)
+                        
+                            lstCodigoPostal = CodigoPostalMapper.Instance().GetBySQLQuery("Select Clave, Valor from CodigoPostal where Valor = '" + this.cmbCP.Text + "'");
+                            if (lstCodigoPostal != null && lstCodigoPostal.Count > 0)
                             {
-                                this._blnBloqueaEventos = true;
-                                this.ActualizaColonias(lstColonias);
-                                entLocalidad =  LocalidadMapper.Instance().GetOne(lstColonias[0].ClaveLocalidad);
-                                lstLocalidades = LocalidadMapper.Instance().GetByMunicipio(entLocalidad.ClaveMunicipio);
-                                this.ActualizaLocalidades(lstLocalidades);
-                                foreach (Object objElemento in this.cmbLocalidad.Items)
+                                lstColonias = ColoniaMapper.Instance().GetByCodigoPostal(lstCodigoPostal[0].Clave);
+
+                                if (lstColonias != null && lstColonias.Count > 0)
                                 {
-                                    if ((objElemento as Localidad).Clave == entLocalidad.Clave)
+                                    this._blnBloqueaEventos = true;
+                                    this.ActualizaColonias(lstColonias);
+                                    entLocalidad = LocalidadMapper.Instance().GetOne(lstColonias[0].ClaveLocalidad);
+                                    lstLocalidades = LocalidadMapper.Instance().GetByMunicipio(entLocalidad.ClaveMunicipio);
+                                    this.ActualizaLocalidades(lstLocalidades);
+                                    foreach (Object objElemento in this.cmbLocalidad.Items)
                                     {
-                                        this.cmbLocalidad.SelectedItem = objElemento;
-                                        break;
+                                        if ((objElemento as Localidad).Clave == entLocalidad.Clave)
+                                        {
+                                            this.cmbLocalidad.SelectedItem = objElemento;
+                                            break;
+                                        }
                                     }
-                                }
-                                foreach (Object objElemento in this.cmbMunicipio.Items)
-                                {
-                                    if ((objElemento as Municipio).Clave == entLocalidad.ClaveMunicipio)
+                                    foreach (Object objElemento in this.cmbMunicipio.Items)
                                     {
-                                        this.cmbMunicipio.SelectedItem = objElemento;
-                                        break;
+                                        if ((objElemento as Municipio).Clave == entLocalidad.ClaveMunicipio)
+                                        {
+                                            this.cmbMunicipio.SelectedItem = objElemento;
+                                            break;
+                                        }
                                     }
-                                }
 
 
-                                this._blnBloqueaEventos = false;
+                                    this._blnBloqueaEventos = false;
+                                }
                             }
-                        }
+                        
+                        this.actualizaMapaUbicacion();
                     }
-                    this.actualizaMapaUbicacion();
+                    catch (System.Exception ex)
+                    {
+                        throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                    }
                 }
-                catch (System.Exception ex)
-                {
-                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
-                }
+                catch (SAIExcepcion) { }
             }
-            catch (SAIExcepcion) { }
+
+            
         }
 
         private void txtReferencias_KeyUp(object sender, KeyEventArgs e)
@@ -3719,13 +3753,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 {
                     if (this.cmbMunicipio.SelectedIndex == -1 || this.cmbMunicipio.Text.Trim() == string.Empty)
                     {
-                        //var tr = new Thread(delegate()
-                        //{
-                        //    this.cmbLocalidad.Invoke(new DelegadoLimpiaLocalidades(LimpiaLocalidades));
-                        //    this.cmbColonia.Invoke(new DelegadoLimpiaColonias(LimpiaColonias));
-
-                        //}) { IsBackground = false };
-                        //tr.Start();
                         this.LimpiaLocalidades();
                         this.LimpiaColonias();
                     }
@@ -3762,9 +3789,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         }
 
 
-      
-
-        
+        #endregion
 
        
     }

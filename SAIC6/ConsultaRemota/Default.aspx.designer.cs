@@ -233,6 +233,5 @@ namespace ConsultaRemota
 
         protected global::Korzh.EasyQuery.WebControls.QueryPanel QueryPanel1;
         protected global::Korzh.EasyQuery.WebControls.QueryColumnsPanel QueryColumnsPanel1;
-        protected Korzh.EasyQuery.WebControls.SortColumnsPanel SortColumnsPanel1;
     }
 }

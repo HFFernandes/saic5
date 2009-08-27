@@ -4,20 +4,21 @@ using System.Text;
 using System.Drawing;
 using System.Web.UI;
 using Korzh.EasyQuery;
+using System.Diagnostics;
 
 namespace ConsultaRemota
 {
     public partial class _Default : Page
     {
         private string baseDataPath;
-        private DataModel model;
-        private Query query;
+        private DataModel modelo;
+        private Query consulta;
 
         protected void Page_Init(object sender, EventArgs e)
         {
             baseDataPath = MapPath("./data");
-            model = (DataModel)Session["DataModel"];
-            query = (Query)Session["Query"];
+            modelo = (DataModel)Session["DataModel"];
+            consulta = (Query)Session["Query"];
         }
 
         protected override void InitializeCulture()
@@ -40,23 +41,23 @@ namespace ConsultaRemota
                 var queryName = Page.Request.QueryString.Get("query");
                 if (queryName != null)
                 {
-                    query.LoadFromFile(baseDataPath + "\\" + queryName + ".xml");
+                    consulta.LoadFromFile(baseDataPath + "\\" + queryName + ".xml");
                 }
             }
 
-            model.ReloadResources();
-            model.UpdateOperatorsTexts();
+            modelo.ReloadResources();
+            modelo.UpdateOperatorsTexts();
 
             QueryPanel1.BackColor = Color.White;
-            QueryPanel1.Model = model;
-            QueryPanel1.Query = query;
+            QueryPanel1.Model = modelo;
+            QueryPanel1.Query = consulta;
 
             QueryColumnsPanel1.BackColor = Color.White;
             QueryColumnsPanel1.Model = QueryPanel1.Model;
             QueryColumnsPanel1.Query = QueryPanel1.Query;
 
-            query.ColumnsChanged += query_ColumnsChanged;
-            query.ConditionsChanged += query_ConditionsChanged;
+            consulta.ColumnsChanged += query_ColumnsChanged;
+            consulta.ConditionsChanged += query_ConditionsChanged;
 
             var versionAttr =
                 (System.Reflection.AssemblyFileVersionAttribute)Attribute.GetCustomAttribute(QueryPanel1.GetType().Assembly, typeof(System.Reflection.AssemblyFileVersionAttribute));
@@ -123,20 +124,20 @@ namespace ConsultaRemota
 
         protected void UpdateSql()
         {
-            System.Threading.Thread.Sleep(1500);
+            //System.Threading.Thread.Sleep(1500);
 
             var query = (Query)Session["Query"];
             try
             {
                 query.BuildSQL();
-                var formats = new QueryTextFormats {UseHtml = true, UseMathSymbolsForOperators = true};
-                //Literal1.Text = query.GetConditionsText(formats);
+                var formats = new QueryTextFormats { UseHtml = true, UseMathSymbolsForOperators = true };
+                Debug.WriteLine(query.GetConditionsText(formats));
                 ResultDS.SelectCommand = query.Result.SQL;
                 ResultDS.Select(DataSourceSelectArguments.Empty);
                 ResultLabel.Visible = false;
                 ResultGrid.Visible = true;
             }
-            catch
+            catch (Exception)
             {
             }
         }
@@ -148,7 +149,7 @@ namespace ConsultaRemota
 
         protected void ExportResultTo(string contentType, string fileName)
         {
-            ResultDS.SelectCommand = query.Result.SQL;
+            ResultDS.SelectCommand = consulta.Result.SQL;
             var view = (DataView)ResultDS.Select(DataSourceSelectArguments.Empty);
             if (view == null) return;
             var result = new StringBuilder("");
@@ -158,8 +159,8 @@ namespace ConsultaRemota
                 int i = 0;
                 foreach (DataColumn col in view.Table.Columns)
                 {
-                    object obj = row[i];
-                    string s = obj == null ? string.Empty : obj.ToString();
+                    var obj = row[i];
+                    var s = obj == null ? string.Empty : obj.ToString();
                     if (i > 0) result.Append(',');
                     result.Append("\"" + ConvertToCSV(s) + "\"");
                     i++;
@@ -173,10 +174,8 @@ namespace ConsultaRemota
             Response.BufferOutput = true;
             Response.AddHeader("Content-Disposition", "attachment;filename=" + fileName);
 
-            byte[] output = System.Text.UnicodeEncoding.UTF8.GetBytes(result.ToString());
-
+            var output = Encoding.UTF8.GetBytes(result.ToString());
             Response.OutputStream.Write(output, 0, output.GetLength(0));
-
             Response.End();
         }
 
