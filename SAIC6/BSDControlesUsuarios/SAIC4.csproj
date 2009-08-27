@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{FF9562EF-1FA0-49B7-B8B6-80D41CEBAC19}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -106,15 +106,7 @@
   <ItemGroup>
     <Compile Include="C4\Entrada.cs" />
     <Compile Include="C4\Tlaxcala\Sai\Aplicacion.cs" />
-    <Compile Include="C4\Tlaxcala\Sai\CallListener\Listener.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="C4\Tlaxcala\Sai\CallListener\PruebaListener.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="C4\Tlaxcala\Sai\CallListener\PruebaListener.Designer.cs">
-      <DependentUpon>PruebaListener.cs</DependentUpon>
-    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\CallListener\SaiTcpClient.cs" />
     <Compile Include="C4\Tlaxcala\Sai\Comando.cs" />
     <Compile Include="C4\Tlaxcala\Sai\ComandosColeccion.cs" />
     <Compile Include="C4\Tlaxcala\Sai\Dal\ReglaUsuarios.cs" />
@@ -374,10 +366,6 @@
     <Content Include="map.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="C4\Tlaxcala\Sai\CallListener\PruebaListener.resx">
-      <DependentUpon>PruebaListener.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmAgendaTelefonica.resx">
       <DependentUpon>SAIFrmAgendaTelefonica.cs</DependentUpon>
       <SubType>Designer</SubType>

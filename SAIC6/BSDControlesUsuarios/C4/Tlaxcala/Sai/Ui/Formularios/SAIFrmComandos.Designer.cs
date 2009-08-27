@@ -45,10 +45,12 @@
             this.lbl2 = new System.Windows.Forms.Label();
             this.saiTxtS = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.lblS = new System.Windows.Forms.Label();
-            this.tmrMonitor = new System.Windows.Forms.Timer(this.components);
+            this.stComandos = new System.Windows.Forms.StatusStrip();
+            this.tssInfo = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.SAIBarraComandos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgAdministrador)).BeginInit();
             this.pnResumenIncidencias.SuspendLayout();
+            this.stComandos.SuspendLayout();
             this.SuspendLayout();
             // 
             // SAIBarraComandos
@@ -221,15 +223,28 @@
             this.lblS.TabIndex = 0;
             this.lblS.Text = "S";
             // 
-            // tmrMonitor
+            // stComandos
             // 
-            this.tmrMonitor.Tick += new System.EventHandler(this.tmrMonitor_Tick);
+            this.stComandos.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tssInfo});
+            this.stComandos.Location = new System.Drawing.Point(0, 61);
+            this.stComandos.Name = "stComandos";
+            this.stComandos.Size = new System.Drawing.Size(126, 22);
+            this.stComandos.TabIndex = 3;
+            this.stComandos.Text = "statusStrip1";
+            // 
+            // tssInfo
+            // 
+            this.tssInfo.Name = "tssInfo";
+            this.tssInfo.Size = new System.Drawing.Size(32, 17);
+            this.tssInfo.Text = "Listo";
             // 
             // SAIFrmComandos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(327, 83);
+            this.Controls.Add(this.stComandos);
             this.Controls.Add(this.pnResumenIncidencias);
             this.Controls.Add(this.imgAdministrador);
             this.Controls.Add(this.SAIBarraComandos);
@@ -247,7 +262,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.imgAdministrador)).EndInit();
             this.pnResumenIncidencias.ResumeLayout(false);
             this.pnResumenIncidencias.PerformLayout();
+            this.stComandos.ResumeLayout(false);
+            this.stComandos.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -268,6 +286,7 @@
         public BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox saiTxtPrioridad2;
         public BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox saiTxtPrioridad5;
         public BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox saiTxtPrioridad4;
-        private System.Windows.Forms.Timer tmrMonitor;
+        private System.Windows.Forms.StatusStrip stComandos;
+        private System.Windows.Forms.ToolStripStatusLabel tssInfo;
     }
 }
