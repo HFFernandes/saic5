@@ -215,7 +215,6 @@
             this.Name = "MDIPrincipal";
             this.Text = "SAI Administración";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.MDIPrincipal_Load);
             this.mnuStripPrincipal.ResumeLayout(false);
             this.mnuStripPrincipal.PerformLayout();
             this.ResumeLayout(false);

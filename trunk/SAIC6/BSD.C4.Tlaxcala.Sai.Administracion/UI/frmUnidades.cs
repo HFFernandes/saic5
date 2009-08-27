@@ -25,8 +25,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Carga los catalogos de Municipio, corporaciones y estado, asi mismo carga las unidades en el grid
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void frmUnidades_Load(object sender, EventArgs e)
         {
             this.LlenarEstado();
@@ -37,7 +35,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             this.LlenarGrid();
             this.LlenarCorporaciones();
         }
-
 
         /// <summary>
         /// Llena el combobox de Corporaciones
@@ -325,8 +322,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Valida si hay corporacion seleccionada y municipio para poder modificar
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnModificar_Click(object sender, EventArgs e)
         {
             try
@@ -353,8 +348,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Valida que haya corporacion seleccionada y municipio para poder agregar
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             try
@@ -381,8 +374,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Pregunta al usuario si desea eliminar la unidad seleccionada
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("¿Desea eliminar la Unidad?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -396,8 +387,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Cierra la vantana de Unidades
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void bnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -406,8 +395,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Evento que obtiene los datos para su modificacion
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void gvUnidades_SelectionChanged(object sender, EventArgs e)
         {
             try 
@@ -437,8 +424,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Limpia los controles
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             this.Limpiar();

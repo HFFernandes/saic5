@@ -107,6 +107,7 @@
             this.saiTxtDescripcion.BlnEsRequerido = true;
             this.saiTxtDescripcion.ClrBackColorFoco = System.Drawing.Color.Empty;
             this.saiTxtDescripcion.Location = new System.Drawing.Point(100, 20);
+            this.saiTxtDescripcion.MaxLength = 250;
             this.saiTxtDescripcion.Name = "saiTxtDescripcion";
             this.saiTxtDescripcion.Size = new System.Drawing.Size(286, 20);
             this.saiTxtDescripcion.StrMensajeCampoRequerido = "El campo es requerido.";
@@ -171,6 +172,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCerrar;
             this.ClientSize = new System.Drawing.Size(584, 388);
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnAgregar);

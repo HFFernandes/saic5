@@ -24,8 +24,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Llena los datos correspondientes a cada control
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void frmColonias_Load(object sender, EventArgs e)
         {
             this.LlenarEstado();
@@ -56,9 +54,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         }
 
         /// <summary>
-        /// Llena el combobox de municipio
+        /// Llena el combobox de municipio dependiendo de la localidad seleccionada
         /// </summary>
-        /// <param name="idlocalidad"></param>
+        /// <param name="idlocalidad">Id Localidad</param>
         private void LlenarMunicipio(int idlocalidad)
         {
             try
@@ -161,11 +159,12 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             }
             catch (SAIExcepcion)
             { }
-
         }
 
         #region ABC
-
+        /// <summary>
+        /// Agrega una nueva Colonia
+        /// </summary>
         private void Agregar()
         {
             try
@@ -202,7 +201,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             catch (SAIExcepcion)
             { }
         }
-
+        /// <summary>
+        /// Modifica datos de una Colonia
+        /// </summary>
         private void Modificar()
         {
             try
@@ -243,7 +244,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             catch (SAIExcepcion)
             { }
         }
-
+        /// <summary>
+        /// Elimina una colonia existente
+        /// </summary>
         private void Eliminar()
         {
             try
@@ -267,7 +270,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             catch (SAIExcepcion)
             { }
         }
-
+        /// <summary>
+        /// Limpia los controles del formulario de Colonias
+        /// </summary>
         private void Limpiar()
         {
             foreach (DataGridViewRow row in this.gvColonias.Rows)
@@ -288,15 +293,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Obtiene el inidce dle registro seleccionado
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Inidce</returns>
         private int ObtenerIndiceSeleccionado()
         { return this.gvColonias.CurrentCellAddress.Y; }
 
         /// <summary>
         /// Llama el metodo Limpiar
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             this.Limpiar();
@@ -305,8 +308,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Cierra la ventana de Colonias
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -315,8 +316,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Pregunta al usuario si se va eliminar el aColonia seleccionada
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("¿Esta seguro de eliminar la Colonia?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -327,7 +326,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             }
         }
 
-
+        /// <summary>
+        /// Valida datos obligatorios y llama metodo agregar, Actualiza Datagrid
+        /// </summary>
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             if (this.SAIProveedorValidacion.ValidarCamposRequeridos(this.groupBox2))
@@ -339,6 +340,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             }
         }
 
+        /// <summary>
+        /// Valida campos requeridos y llama metodo modificar, Actualiza Datagrid
+        /// </summary>
         private void btnModificar_Click(object sender, EventArgs e)
         {
             if (this.SAIProveedorValidacion.ValidarCamposRequeridos(this.groupBox2))
@@ -349,7 +353,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 this.Limpiar();
             }
         }
-
+        /// <summary>
+        /// Obtiene datos de una colonia seleccionada
+        /// </summary>
         private void gvColonias_SelectionChanged(object sender, EventArgs e)
         {
             try
@@ -375,6 +381,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             { }
         }
 
+        /// <summary>
+        /// Muestra control para capturar nuevo CP, si la opcion seleccionada es Otro...
+        /// </summary>
         private void ddlCodigoPostal_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Convert.ToString(this.ObtenerValor()) == "000")
@@ -388,7 +397,10 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 this.lblOtro.Visible = false;
             }
         }
-
+        /// <summary>
+        /// Obtiene valor del Codigo postal seleccionado
+        /// </summary>
+        /// <returns></returns>
         private object ObtenerValor()
         {
             if (this.ddlCodigoPostal.SelectedItem != null)
@@ -400,7 +412,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Selecciona un elemento del Combobox
         /// </summary>
-        /// <param name="Value"></param>
+        /// <param name="Value">Selecciona un elemento del Combobox de Codigp Postal</param>
         private void SeleccionarComboItem(int Value)
         {
             foreach (Utilerias.ComboItem item in this.ddlCodigoPostal.Items)
@@ -414,10 +426,10 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         }
 
         /// <summary>
-        /// Obtiene la clave del codigo postal
+        /// Obtiene la clave del codigo postal, si no existe el cp se agrega al catalogo
         /// </summary>
         /// <param name="cp">Especifica el cp que no esta en la lista</param>
-        /// <returns></returns>
+        /// <returns>Valor(Clave) del CP seleccionado </returns>
         private int ObtenerCodigoPostal(string cp)
         {
             try
@@ -440,13 +452,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                             max = codigoPostal.Clave;
                     }
                     
-                    if (!existe)
+                    if (!existe) //Si no existe CP en el catalogo loa grega
                     {
                         Entidades.CodigoPostal newCP = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.CodigoPostal();
-                        newCP.Clave = max + 1;
+                        newCP.Clave = max + 1; //Genera id para el codigo postal, [se hace asi de esta forma porque no se establecio un identity]
                         newCP.Valor = cp;
                         Mappers.CodigoPostalMapper.Instance().Insert(newCP);
-
+                        
                         Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
                         bitacora.Descripcion = "Se agrego el Codigo Postal: " + newCP.Valor;
                         bitacora.FechaOperacion = DateTime.Today;
@@ -455,7 +467,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         bitacora.Operacion = "INSERT";
 
                         Mappers.BitacoraMapper.Instance().Insert(bitacora);
-
 
                         return newCP.Clave;
                     }
@@ -472,8 +483,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Valida que solo acepte digitos
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void saiClave_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (Char.IsDigit(e.KeyChar))

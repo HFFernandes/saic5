@@ -24,8 +24,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Llena el Datagrid y combobox de estados
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void frmMunicipios_Load(object sender, EventArgs e)
         {
             this.SAIBarraEstado.SizingGrip = false;
@@ -181,8 +179,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Llama  a la funcion Limpiar
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             this.Limpiar();
@@ -191,8 +187,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Cierra la ventana de Municipios
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -201,8 +195,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Llama la funcion Modificar y actualiza el Datagrid
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnModificar_Click(object sender, EventArgs e)
         {
             this.Modificar();
@@ -213,8 +205,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Llama a la funcion agregar y actualiza Datagrid
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             if (this.SAIProveedorValidacion.ValidarCamposRequeridos(this.gpbDatosGenerales))
@@ -228,7 +218,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Obtiene el indice del registro seleccionado
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Indice</returns>
         private int ObtenerIndiceSeleccionado()
         {
             return this.gvMunicipios.CurrentCellAddress.Y;
@@ -237,8 +227,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Validado para que solo acepte digitos
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void saiClave_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (Char.IsDigit(e.KeyChar))

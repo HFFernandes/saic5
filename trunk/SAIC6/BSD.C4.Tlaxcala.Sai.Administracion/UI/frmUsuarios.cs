@@ -23,7 +23,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         }
 
         /// <summary>
-        /// Evento Load del formulario, se cargan catalogos y se agregan tooltips
+        /// Llama el metodo LlenarCorporaciones, LlenarGrid y Limpiar
         /// </summary>
         private void frmUsuarios_Load(object sender, EventArgs e)
         {
@@ -180,13 +180,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         throw new SAIExcepcion("Seleccione una corporacion para el despachador.");
                     }
                 }
-                /*}
-                catch (Cooperator.Framework.Data.Exceptions.InvalidConnectionStringException)
-                {
-                    throw new SAIExcepcion("No es posible conectarse a la BD, la cadena de conexion es erronea, consute con el Administrador del sistema;");
-                }
-                catch (Cooperator.Framework.Data.Exceptions.NoRowAffectedException)
-                { }*/
             }
             catch (SAIExcepcion)
             { }
@@ -224,12 +217,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
 
                         Mappers.BitacoraMapper.Instance().Insert(bitacora);
-
-                        /*Objetos.UsuarioCorporacionObject updUsuarioCorporacion = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects.UsuarioCorporacionObject();
-                        updUsuarioCorporacion.ClaveCorporacion = Convert.ToInt32(this.ObtieneValor(this.ddlCorporaciones.SelectedIndex));
-                        updUsuarioCorporacion.ClaveUsuario = Mappers.UsuarioMapper.Instance().GetByUsuario(updUsuario.NombreUsuario).Clave;
-
-                        Mappers.UsuarioCorporacionMapper.Instance().Save(updUsuarioCorporacion);*/
                     }
                 }//Esta exepcion se atrapa para que no muestre error alguno (es un bug del cooperator)
                 catch (Cooperator.Framework.Data.Exceptions.NoRowAffectedException)
@@ -310,8 +297,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Evento Click del boton Modificar que referencia alas funciones modificar, llenargrid y limpiar
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnModificar_Click(object sender, EventArgs e)
         {
             this.Modificar();
@@ -324,8 +309,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// incidencias y permisos (eliminando solo permisos) y hace referencia a las funciones eliminar, llenargrid 
         /// y limpiar
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             try
@@ -342,7 +325,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     if (MessageBox.Show("Desea Eliminar el usuario", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         //se obtiene el usuario selelcionado
-
                         //se obtienen todos los permisos del usuario, en caso de tener
                         Objetos.PermisoUsuarioObjectList lstPermisos = Mappers.PermisoUsuarioMapper.Instance().GetByUsuario(usrSelected);
                         //si tiene permisos el usuario
@@ -453,18 +435,24 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Obtiene el indice del registro seleccionado del datagrid
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Indice</returns>
         private int ObtieneIndiceSeleccionado()
         {
             return this.gvUsuarios.CurrentCellAddress.Y;
         }
 
+        /// <summary>
+        /// Cierra la ventana de Usuarios
+        /// </summary>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             //Cierra el formulario
             this.Close();
         }
 
+        /// <summary>
+        /// Llama el metodo Limpiar
+        /// </summary>
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             //limpia controles
@@ -534,8 +522,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Evento TextChanged se valida que el usuario capturado no exista
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void txtUsuario_TextChanged(object sender, EventArgs e)
         {
             try

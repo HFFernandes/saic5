@@ -185,8 +185,10 @@
             // 
             // saiTxtTelefono
             // 
+            this.saiTxtTelefono.BlnEsRequerido = true;
             this.saiTxtTelefono.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.saiTxtTelefono.Location = new System.Drawing.Point(109, 73);
+            this.saiTxtTelefono.MaxLength = 250;
             this.saiTxtTelefono.Name = "saiTxtTelefono";
             this.saiTxtTelefono.Size = new System.Drawing.Size(301, 20);
             this.saiTxtTelefono.StrMensajeCampoRequerido = "El campo es requerido.";
@@ -194,8 +196,10 @@
             // 
             // saiTxtDireccion
             // 
+            this.saiTxtDireccion.BlnEsRequerido = true;
             this.saiTxtDireccion.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.saiTxtDireccion.Location = new System.Drawing.Point(109, 47);
+            this.saiTxtDireccion.MaxLength = 250;
             this.saiTxtDireccion.Name = "saiTxtDireccion";
             this.saiTxtDireccion.Size = new System.Drawing.Size(301, 20);
             this.saiTxtDireccion.StrMensajeCampoRequerido = "El campo es requerido.";
@@ -205,6 +209,7 @@
             // 
             this.saiTxtDireccionWeb.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.saiTxtDireccionWeb.Location = new System.Drawing.Point(109, 151);
+            this.saiTxtDireccionWeb.MaxLength = 250;
             this.saiTxtDireccionWeb.Name = "saiTxtDireccionWeb";
             this.saiTxtDireccionWeb.Size = new System.Drawing.Size(301, 20);
             this.saiTxtDireccionWeb.StrMensajeCampoRequerido = "El campo es requerido.";
@@ -214,6 +219,7 @@
             // 
             this.saiTxtEmail.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.saiTxtEmail.Location = new System.Drawing.Point(109, 125);
+            this.saiTxtEmail.MaxLength = 25;
             this.saiTxtEmail.Name = "saiTxtEmail";
             this.saiTxtEmail.Size = new System.Drawing.Size(301, 20);
             this.saiTxtEmail.StrMensajeCampoRequerido = "El campo es requerido.";
@@ -223,6 +229,7 @@
             // 
             this.saiTxtFax.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.saiTxtFax.Location = new System.Drawing.Point(109, 99);
+            this.saiTxtFax.MaxLength = 50;
             this.saiTxtFax.Name = "saiTxtFax";
             this.saiTxtFax.Size = new System.Drawing.Size(301, 20);
             this.saiTxtFax.StrMensajeCampoRequerido = "El campo es requerido.";
@@ -233,6 +240,7 @@
             this.saiTxtNombre.BlnEsRequerido = true;
             this.saiTxtNombre.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.saiTxtNombre.Location = new System.Drawing.Point(109, 21);
+            this.saiTxtNombre.MaxLength = 75;
             this.saiTxtNombre.Name = "saiTxtNombre";
             this.saiTxtNombre.Size = new System.Drawing.Size(301, 20);
             this.saiTxtNombre.StrMensajeCampoRequerido = "El campo es requerido.";

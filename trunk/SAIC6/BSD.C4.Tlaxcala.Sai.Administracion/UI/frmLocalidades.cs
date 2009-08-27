@@ -24,8 +24,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// llena combobox y Datatgrid con los datos correspondientes a cada control
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void frmLocalidades_Load(object sender, EventArgs e)
         {
             this.LlenarMunicipios();
@@ -224,15 +222,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Obtiene el indice del registro seleccionado
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Indice</returns>
         private int ObtenerIndiceSeleccionado()
         { return this.gvLocalidades.CurrentCellAddress.Y; }
 
         /// <summary>
         /// Valida que los campos esten correctos para poder Agregar y actualiza el Datagrid
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             try
@@ -260,8 +256,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Llama el metodo Limpiar
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             this.Limpiar();
@@ -270,8 +264,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Cierra la ventana de localidades
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -280,8 +272,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Evento que selecciona los datos correspondientes a la localidad seleccionada
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void gvLocalidades_SelectionChanged(object sender, EventArgs e)
         {
             try
@@ -307,8 +297,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <summary>
         /// Valida solo aceptar digitos
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void txtClaveLocalidadCartografia_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (Char.IsDigit(e.KeyChar))
