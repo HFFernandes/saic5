@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections;
-using System.Configuration;
-using System.Data;
 using System.Web;
-using System.Web.Security;
-using System.Web.SessionState;
 
 namespace ConsultaRemota
 {
-    public class Global : System.Web.HttpApplication
+    public class Global : HttpApplication
     {
 
         protected void Application_Start(object sender, EventArgs e)
@@ -18,16 +13,17 @@ namespace ConsultaRemota
 
         protected void Session_Start(object sender, EventArgs e)
         {
-            System.Globalization.CultureInfo ci = System.Threading.Thread.CurrentThread.CurrentUICulture;
-            string lang = ci.ToString();
+            var ci = System.Threading.Thread.CurrentThread.CurrentUICulture;
+            var lang = ci.ToString();
+
             if (lang.Length < 3)
             {
                 lang = System.Globalization.CultureInfo.CreateSpecificCulture(lang).ToString();
             }
-            Session["currentLanguage"] = lang;
 
+            Session["currentLanguage"] = lang;
             var path = AppDomain.CurrentDomain.BaseDirectory;
-            path += "data\\nwind1.xml";
+            path += "data\\SAI066.xml";
 
             var model = new Korzh.EasyQuery.DataModel { UseResourcesForOperators = true };
 

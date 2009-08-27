@@ -8,11 +8,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ConsultaRemota {
-    
-    
-    public partial class _Default {
-        
+namespace ConsultaRemota
+{
+
+
+    public partial class _Default
+    {
+
         /// <summary>
         /// Form1 control.
         /// </summary>
@@ -21,7 +23,7 @@ namespace ConsultaRemota {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm Form1;
-        
+
         /// <summary>
         /// ScriptManager1 control.
         /// </summary>
@@ -30,7 +32,7 @@ namespace ConsultaRemota {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.ScriptManager ScriptManager1;
-        
+
         /// <summary>
         /// txtTitle control.
         /// </summary>
@@ -39,7 +41,7 @@ namespace ConsultaRemota {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal txtTitle;
-        
+
         /// <summary>
         /// lnkBtnEng control.
         /// </summary>
@@ -48,7 +50,7 @@ namespace ConsultaRemota {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkBtnEng;
-        
+
         /// <summary>
         /// lnkBtnEsp control.
         /// </summary>
@@ -57,7 +59,7 @@ namespace ConsultaRemota {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkBtnEsp;
-        
+
         /// <summary>
         /// txtSubTitle control.
         /// </summary>
@@ -66,7 +68,7 @@ namespace ConsultaRemota {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal txtSubTitle;
-        
+
         /// <summary>
         /// LabelVersion control.
         /// </summary>
@@ -75,7 +77,7 @@ namespace ConsultaRemota {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LabelVersion;
-        
+
         /// <summary>
         /// ErrorLabel control.
         /// </summary>
@@ -84,7 +86,7 @@ namespace ConsultaRemota {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label ErrorLabel;
-        
+
         /// <summary>
         /// txtQueryDef control.
         /// </summary>
@@ -93,7 +95,7 @@ namespace ConsultaRemota {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal txtQueryDef;
-        
+
         /// <summary>
         /// UpdateProgressColumns control.
         /// </summary>
@@ -102,7 +104,7 @@ namespace ConsultaRemota {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress UpdateProgressColumns;
-        
+
         /// <summary>
         /// UpdateProgressConditions control.
         /// </summary>
@@ -111,7 +113,7 @@ namespace ConsultaRemota {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress UpdateProgressConditions;
-        
+
         /// <summary>
         /// UpdatePanelColumns control.
         /// </summary>
@@ -120,7 +122,7 @@ namespace ConsultaRemota {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanelColumns;
-        
+
         /// <summary>
         /// txtResultColumns control.
         /// </summary>
@@ -129,7 +131,7 @@ namespace ConsultaRemota {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal txtResultColumns;
-        
+
         /// <summary>
         /// txtColumnSoring control.
         /// </summary>
@@ -138,7 +140,7 @@ namespace ConsultaRemota {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal txtColumnSoring;
-        
+
         /// <summary>
         /// txtQueryConditions control.
         /// </summary>
@@ -147,7 +149,7 @@ namespace ConsultaRemota {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal txtQueryConditions;
-        
+
         /// <summary>
         /// UpdatePanelConditions control.
         /// </summary>
@@ -156,7 +158,7 @@ namespace ConsultaRemota {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanelConditions;
-        
+
         /// <summary>
         /// UpdatePanel2 control.
         /// </summary>
@@ -165,7 +167,7 @@ namespace ConsultaRemota {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
-        
+
         /// <summary>
         /// txtResult control.
         /// </summary>
@@ -174,7 +176,7 @@ namespace ConsultaRemota {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal txtResult;
-        
+
         /// <summary>
         /// btnUpdateResult control.
         /// </summary>
@@ -183,7 +185,7 @@ namespace ConsultaRemota {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnUpdateResult;
-        
+
         /// <summary>
         /// btnExportExcel control.
         /// </summary>
@@ -192,7 +194,7 @@ namespace ConsultaRemota {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnExportExcel;
-        
+
         /// <summary>
         /// ResultLabel control.
         /// </summary>
@@ -201,7 +203,7 @@ namespace ConsultaRemota {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label ResultLabel;
-        
+
         /// <summary>
         /// PanelResult control.
         /// </summary>
@@ -210,7 +212,7 @@ namespace ConsultaRemota {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel PanelResult;
-        
+
         /// <summary>
         /// ResultGrid control.
         /// </summary>
@@ -219,7 +221,7 @@ namespace ConsultaRemota {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView ResultGrid;
-        
+
         /// <summary>
         /// ResultDS control.
         /// </summary>
@@ -227,7 +229,7 @@ namespace ConsultaRemota {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.AccessDataSource ResultDS;
+        protected global::System.Web.UI.WebControls.SqlDataSource ResultDS;
 
         protected global::Korzh.EasyQuery.WebControls.QueryPanel QueryPanel1;
         protected global::Korzh.EasyQuery.WebControls.QueryColumnsPanel QueryColumnsPanel1;

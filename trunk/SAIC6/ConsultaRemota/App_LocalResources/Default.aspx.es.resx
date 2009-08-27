@@ -132,7 +132,7 @@
     <value>Limpiar</value>
   </data>
   <data name="btnExportExcel.Text" xml:space="preserve">
-    <value>Exportar a Excel</value>
+    <value>Exportar</value>
   </data>
   <data name="btnLoad.Text" xml:space="preserve">
     <value>Cargar</value>
@@ -144,7 +144,7 @@
     <value>Actualización de resultados</value>
   </data>
   <data name="txtSubTitle" xml:space="preserve">
-    <value>De fácil consulta ...</value>
+    <value>Consulta a 066</value>
   </data>
   <data name="txtTitle" xml:space="preserve">
     <value>Sistema de Administración de Incidencias</value>
@@ -156,10 +156,10 @@
     <value>Operaciones</value>
   </data>
   <data name="txtQueryConditions" xml:space="preserve">
-    <value>Consulta condiciones</value>
+    <value>Condiciones</value>
   </data>
   <data name="txtQueryDef" xml:space="preserve">
-    <value>Query definition</value>
+    <value>Definición</value>
   </data>
   <data name="txtQueryDesc" xml:space="preserve">
     <value>Consulta la descripción</value>
@@ -171,6 +171,6 @@
     <value>Resultados</value>
   </data>
   <data name="txtResultColumns" xml:space="preserve">
-    <value>Los resultados de las columnas</value>
+    <value>Registros</value>
   </data>
 </root>

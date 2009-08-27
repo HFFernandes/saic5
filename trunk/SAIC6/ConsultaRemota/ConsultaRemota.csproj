@@ -57,9 +57,6 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\nwind1.mdb">
-    </Content>
-    <Content Include="Data\nwind1.xml" />
     <Content Include="Default.aspx" />
     <Content Include="Estilos.css" />
     <Content Include="Global.asax" />
@@ -93,6 +90,7 @@
     <Content Include="App_LocalResources\Default.aspx.resx">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Data\SAI066.xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

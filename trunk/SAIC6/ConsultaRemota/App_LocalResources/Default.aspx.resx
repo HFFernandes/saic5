@@ -144,10 +144,10 @@
     <value>Update result</value>
   </data>
   <data name="txtSubTitle" xml:space="preserve">
-    <value>User-friendly ad-hoc query builder for your ASP.NET web-site</value>
+    <value>Easy query buider...</value>
   </data>
   <data name="txtTitle" xml:space="preserve">
-    <value>EasyQuery.NET WebForms demo page</value>
+    <value>Administration System</value>
   </data>
   <data name="txtColumnSorting" xml:space="preserve">
     <value>Column sorting</value>
