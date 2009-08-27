@@ -118,45 +118,45 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AddConditionInto" xml:space="preserve">
-    <value>Add new condition</value>
+    <value>Agregar nueva condición</value>
   </data>
   <data name="ClickToAdd" xml:space="preserve">
-    <value>Click here to add new condition</value>
+    <value>Clic aquí para agregar nueva condición</value>
   </data>
   <data name="PredicateTitle" xml:space="preserve">
-    <value>&lt;lt&gt;of the following apply</value>
+    <value>&lt;lt&gt;condición de lo siguiente aplique</value>
   </data>
   <data name="MsgEmptyListValue" xml:space="preserve">
-    <value>[select value]</value>
+    <value>[seleccionar valor]</value>
   </data>
   <data name="MsgEmptyScalarValue" xml:space="preserve">
-    <value>[enter value]</value>
+    <value>[escribir valor]</value>
   </data>
   <data name="AddPredicateInto" xml:space="preserve">
-    <value>Open new bracket</value>
+    <value>Abrir nuevo parentesis</value>
   </data>
   <data name="CmdAddPredicateAfter" xml:space="preserve">
-    <value>Open new bracket after current</value>
+    <value>Abrir nuevo parentesis despues del actual</value>
   </data>
   <data name="RootPredicateTitle" xml:space="preserve">
-    <value>Select records where &lt;lt&gt;of the following apply</value>
+    <value>Seleccionar registros donde &lt;lt&gt;condición de lo siguiente aplique</value>
   </data>
   <data name="LinkTypeAll" xml:space="preserve">
-    <value>all</value>
+    <value>toda</value>
   </data>
   <data name="LinkTypeAny" xml:space="preserve">
-    <value>any</value>
+    <value>cualquier</value>
   </data>
   <data name="QPRowButtonTitle" xml:space="preserve">
-    <value>Click here to see available operations</value>
+    <value>Clic aquí para ver las operaciones disponibles</value>
   </data>
   <data name="MsgEmptyList" xml:space="preserve">
-    <value>(empty list)</value>
+    <value>(lista vacia)</value>
   </data>
   <data name="CmdAddConditionAfter" xml:space="preserve">
-    <value>Add new condition after current</value>
+    <value>Agregar nueva condición despues de la actual</value>
   </data>
   <data name="CmdDeleteRow" xml:space="preserve">
-    <value>Delete current row</value>
+    <value>Eliminar renglón actual</value>
   </data>
 </root>
