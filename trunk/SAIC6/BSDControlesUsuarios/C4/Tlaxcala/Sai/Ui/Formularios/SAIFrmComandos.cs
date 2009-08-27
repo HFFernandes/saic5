@@ -51,12 +51,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 Left = (Screen.PrimaryScreen.WorkingArea.Right - Width);
 
                 //Se crean los eventos para el monitor de Avaya
-                this.TcpListener.ListenerFindDataEvent += new EventHandler<FindDataEventArgs>(TcpListener_ListenerFindDataEvent);
-                this.TcpListener.ListenerMessageDataEvent += new EventHandler<FindMessageEventArgs>(TcpListener_ListenerMessageDataEvent);
+                //this.TcpListener.ListenerFindDataEvent += new EventHandler<FindDataEventArgs>(TcpListener_ListenerFindDataEvent);
+                //this.TcpListener.ListenerMessageDataEvent += new EventHandler<FindMessageEventArgs>(TcpListener_ListenerMessageDataEvent);
             }
         }
 
-        
+
         #endregion
 
         #region VARIABLES
@@ -182,7 +182,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             return false;
         }
 
-       
+
 
         /// <summary>
         /// Esta función se manda a llamar desde los demás formularios para mostrar la ventana del switch
@@ -442,8 +442,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 //Iniciamos el monitor del agente de Avaya
                 this.IniciarMonitorLlamadas();
 
-                
-               
+
+
 
             }
         }
@@ -464,10 +464,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     //Cerramos la aplicación.
                     Application.Exit();
                 }
-                    
+
                 else
                 {
-                    
+
                     e.Cancel = true;
                 }
             }
@@ -486,57 +486,63 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             _blnCtrPresionado = false;
         }
 
-        
 
-                #region EVENTOS PARA MONITOR DE TCP
 
-                   
-                    void TcpListener_ListenerMessageDataEvent(object sender, FindMessageEventArgs e)
-                    {
-                        this.Invoke(new DelegadoEscribirDato(EscribirMensaje), new object[] { e.Mensaje });
-                    }
+        #region EVENTOS PARA MONITOR DE TCP
 
-                    void TcpListener_ListenerFindDataEvent(object sender, FindDataEventArgs e)
-                    {
-                        this.Invoke(new DelegadoEscribirDato(EscribirDato), new object[] { e.Datos });
 
-                        var lstTipoIncidencias = new TipoIncidenciaList();
-                        lstTipoIncidencias = Aplicacion.UsuarioPersistencia.strSistemaActual == "066" ? TipoIncidenciaMapper.Instance().GetBySistema(2) : TipoIncidenciaMapper.Instance().GetBySistema(1);
-                        if (lstTipoIncidencias.Count == 0)
-                        {
+        void TcpListener_ListenerMessageDataEvent(object sender, FindMessageEventArgs e)
+        {
+            this.Invoke(new DelegadoEscribirDato(EscribirMensaje), new object[] { e.Mensaje });
+        }
 
-                            throw new SAIExcepcion("No es posible registrar incidencias, no existen tipos de incidencias cargados en el sistema, favor de contactar al administrador", this);
+        void TcpListener_ListenerFindDataEvent(object sender, FindDataEventArgs e)
+        {
+            this.Invoke(new DelegadoEscribirDato(EscribirDato), new object[] { e.Datos });
 
-                        }
+            var lstTipoIncidencias = new TipoIncidenciaList();
+            lstTipoIncidencias = Aplicacion.UsuarioPersistencia.strSistemaActual == "066" ? TipoIncidenciaMapper.Instance().GetBySistema(2) : TipoIncidenciaMapper.Instance().GetBySistema(1);
+            if (lstTipoIncidencias.Count == 0)
+            {
 
-                        //Se pregunta qué es el usuario y a qué sistema entró:
-                        if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
-                            Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
-                        {
+                throw new SAIExcepcion("No es posible registrar incidencias, no existen tipos de incidencias cargados en el sistema, favor de contactar al administrador", this);
 
-                            
-                            var frmIncidencia066 = new SAIFrmIncidencia066(this.NoTelefono);
-                            frmIncidencia066.Show(this);                 
+            }
 
-                        }
-                        else if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
-                            Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
-                        {
+            //Se pregunta qué es el usuario y a qué sistema entró:
+            if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
+                Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
+            {
 
-                            var frmIncidencia089 = new SAIFrmIncidencia089(this.NoTelefono);
-                            frmIncidencia089.Show(this);
 
-                        }
-                    }
+                //var frmIncidencia066 = new SAIFrmIncidencia066(e.Datos);
+                //frmIncidencia066.Show(this);                 
 
-                #endregion
+                var frmIncidencia066 = new SAIFrmIncidencia066(this.NoTelefono);
+                frmIncidencia066.Show(this);
 
-                    
-        
+            }
+            else if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
+                Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+            {
+
+                //var frmIncidencia089 = new SAIFrmIncidencia089(e.Datos);
+                //frmIncidencia089.Show(this);
+
+                var frmIncidencia089 = new SAIFrmIncidencia089(this.NoTelefono);
+                frmIncidencia089.Show(this);
+
+            }
+        }
 
         #endregion
 
-        
+
+
+
+        #endregion
+
+
 
     }
 }
