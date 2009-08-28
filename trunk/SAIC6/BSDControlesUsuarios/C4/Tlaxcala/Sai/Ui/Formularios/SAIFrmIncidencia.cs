@@ -572,11 +572,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             if (_entIncidencia.ClaveColonia.HasValue)
                             {
                                 objListaColonias =
-                                    ColoniaMapper.Instance().GetByCodigoPostal(_entIncidencia.ClaveCodigoPostal ?? -1);
+                                    ColoniaMapper.Instance().GetByCodigoPostal(_entIncidencia.ClaveCodigoPostal ?? 0);
                                 if (objListaColonias != null)
                                 {
                                     cmbColonia.DataSource = objListaColonias;
-                                    cmbColonia.DisplayMember = "Valor";
+                                    cmbColonia.DisplayMember = "Nombre";
                                     cmbColonia.ValueMember = "Clave";
                                     cmbColonia.SelectedIndex = -1;
 
@@ -1065,15 +1065,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         #region DELEGADOS
 
-        public delegate void DelegadoActualizaLocalidades(LocalidadList lstLocalidades);
-        public delegate void DelegadoLimpiaLocalidades();
-        public delegate void DelegadoActualizaCodigosPostales(CodigoPostalList lstCodigosPostales);
-        public delegate void DelegadoLimpiaCodigosPostales();
-        public delegate void DelegadoActualizaColonias(ColoniaList lstColonias);
-        public delegate void DelegadoLimpiaColonias();
-        public delegate void DelegadoLimpiaTextoCodigPostal();
-        public delegate void DelegadoSeleccionaCodigoPostal(Object objElemento);
-        public delegate void DelegadoLimpiaTextoColonia();
+        //public delegate void DelegadoActualizaLocalidades(LocalidadList lstLocalidades);
+        //public delegate void DelegadoLimpiaLocalidades();
+        //public delegate void DelegadoActualizaCodigosPostales(CodigoPostalList lstCodigosPostales);
+        //public delegate void DelegadoLimpiaCodigosPostales();
+        //public delegate void DelegadoActualizaColonias(ColoniaList lstColonias);
+        //public delegate void DelegadoLimpiaColonias();
+        //public delegate void DelegadoLimpiaTextoCodigPostal();
+        //public delegate void DelegadoSeleccionaCodigoPostal(Object objElemento);
+        //public delegate void DelegadoLimpiaTextoColonia();
 
         #endregion
 
@@ -1144,7 +1144,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             ColoniaList objListaColonias;
             CodigoPostalList objListaCodigosPostales = new CodigoPostalList();
             CodigoPostal entCodigoPostal;
-            Boolean blnExisteCodigoPostal;
+            bool blnExisteCodigoPostal;
             //Thread tr1;
             //Thread tr2;
             //Thread tr3;
