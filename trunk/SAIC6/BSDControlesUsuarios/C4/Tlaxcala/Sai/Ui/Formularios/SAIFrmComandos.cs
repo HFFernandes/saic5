@@ -51,8 +51,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 Left = (Screen.PrimaryScreen.WorkingArea.Right - Width);
 
                 //Se crean los eventos para el monitor de Avaya
-                //this.TcpListener.ListenerFindDataEvent += new EventHandler<FindDataEventArgs>(TcpListener_ListenerFindDataEvent);
-                //this.TcpListener.ListenerMessageDataEvent += new EventHandler<FindMessageEventArgs>(TcpListener_ListenerMessageDataEvent);
+                this.TcpListener.ListenerFindDataEvent += new EventHandler<FindDataEventArgs>(TcpListener_ListenerFindDataEvent);
+                this.TcpListener.ListenerMessageDataEvent += new EventHandler<FindMessageEventArgs>(TcpListener_ListenerMessageDataEvent);
             }
         }
 
@@ -343,6 +343,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_PH))
                         {
                             var buscadorDir = new SAIFrmBuscadorIncidencias();
+                            buscadorDir.CargarConsulta(string.Format("{0}\\{1}", Environment.CurrentDirectory, "ConsultaPH.xml"));
                             MostrarEnSegundoMonitorSiEsPosible(buscadorDir);
                         }
                         break;
@@ -350,6 +351,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_RPH))
                         {
                             var buscadorTel = new SAIFrmBuscadorIncidencias();
+                            buscadorTel.CargarConsulta(string.Format("{0}\\{1}", Environment.CurrentDirectory, "ConsultaRPH.xml"));
                             MostrarEnSegundoMonitorSiEsPosible(buscadorTel);
                         }
                         break;
@@ -363,6 +365,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_SLC))
                         {
                             var buscadorLig = new SAIFrmBuscadorIncidencias();
+                            buscadorLig.CargarConsulta(string.Format("{0}\\{1}", Environment.CurrentDirectory, "ConsultaSLC.xml"));
                             MostrarEnSegundoMonitorSiEsPosible(buscadorLig);
                         }
                         break;
@@ -440,7 +443,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
 
                 //Iniciamos el monitor del agente de Avaya
-                this.IniciarMonitorLlamadas();
+                //this.IniciarMonitorLlamadas();
 
 
 

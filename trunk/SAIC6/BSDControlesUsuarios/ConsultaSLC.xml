@@ -7,16 +7,16 @@
         <Column caption="Folio Padre" sorting="None" sortindex="-1">
             <expr class="ENTATTR" id="lstIncidencias066.FolioPadre" />
         </Column>
-        <Column caption="DescripciÃ³n" sorting="None" sortindex="-1">
+        <Column caption="Descripcion" sorting="None" sortindex="-1">
             <expr class="ENTATTR" id="lstIncidencias066.Descripcion" />
         </Column>
-        <Column caption="DirecciÃ³n" sorting="None" sortindex="-1">
+        <Column caption="Direccion" sorting="None" sortindex="-1">
             <expr class="ENTATTR" id="lstIncidencias066.Direccion" />
         </Column>
         <Column caption="Referencias" sorting="None" sortindex="-1">
             <expr class="ENTATTR" id="lstIncidencias066.Referencias" />
         </Column>
-        <Column caption="TelÃ©fono" sorting="None" sortindex="-1">
+        <Column caption="Telefono" sorting="None" sortindex="-1">
             <expr class="ENTATTR" id="lstIncidencias066.Telefono" />
         </Column>
         <Column caption="Municipio" sorting="None" sortindex="-1">
@@ -25,7 +25,7 @@
         <Column caption="Localidad" sorting="None" sortindex="-1">
             <expr class="ENTATTR" id="Localidad.Nombre" />
         </Column>
-        <Column caption="CÃ³digo Postal" sorting="None" sortindex="-1">
+        <Column caption="Codigo Postal" sorting="None" sortindex="-1">
             <expr class="ENTATTR" id="CodigoPostal.Valor" />
         </Column>
         <Column caption="Tipo de Incidente" sorting="None" sortindex="-1">

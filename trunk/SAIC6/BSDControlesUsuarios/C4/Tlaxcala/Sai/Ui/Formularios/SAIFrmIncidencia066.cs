@@ -73,7 +73,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this._grpDenunciante = this.grpDenunciante;
 
             //Checamos si se paso algún número de telefono.
-            if(!string.IsNullOrEmpty(noTelefono))
+            if (!string.IsNullOrEmpty(noTelefono))
             {
                 //Obtenemos los datos de la linea.
                 this.ObtenerTitularLinea(noTelefono);
@@ -81,7 +81,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         }
 
-        
+
         /// <summary>
         /// CONSTRUCTOR
         /// </summary>
@@ -158,7 +158,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.CambiaHabilitadoTipoIncidencia(false);
 
         }
-            
+
 
         #endregion
 
@@ -553,6 +553,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
 
         #endregion
- 
+
     }
 }

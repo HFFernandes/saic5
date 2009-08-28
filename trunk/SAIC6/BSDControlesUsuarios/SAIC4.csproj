@@ -309,7 +309,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="LazyLoad.config" />
-    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="AxXtremeCommandBars">
@@ -361,6 +360,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ConsultaSLC.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CTIConfiguracion.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="jar_cti_cte01.jar">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\Ecsjtapia.jar">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\javax.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="map.xml">

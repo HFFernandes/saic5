@@ -33,6 +33,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 _blnBloqueaEventos = true;
 
                 InitializeComponent();
+
                 if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                 {
                     Height = 515;
@@ -43,6 +44,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     Height = 630;
                     Width = 600;
                 }
+
                 InicializaListas();
 
 
@@ -95,8 +97,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// Constructor que toma la entidad incidencia que se va a mostrar en el formulario
         /// </summary>
         /// <param name="entIncidencia">Entidad incidencia que contiene los valores para mostrar</param>
-        /// <param name="SoloLectura"> Indica si el formulario será de solo lectura </param>
-        public SAIFrmIncidencia(Incidencia entIncidencia, Boolean SoloLectura)
+        /// <param name="sololectura"> Indica si el formulario será de solo lectura </param>
+        public SAIFrmIncidencia(Incidencia entIncidencia, Boolean sololectura)
         {
 
             entIncidencia.ClaveEstado = 29;
@@ -138,7 +140,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             InicializaCampos();
             _blnBloqueaEventos = false;
             Aplicacion.VentanasIncidencias.Add(new SAIWinSwitchItem(_entIncidencia.Folio.ToString(), "", (this as Form)));
-            SoloLectura = SoloLectura;
+            SoloLectura = sololectura;
             cmbTipoIncidencia.BlnEsRequerido = false;
         }
 
@@ -360,7 +362,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             cmbColonia.DisplayMember = "Nombre";
             cmbColonia.ValueMember = "Clave";
             cmbColonia.SelectedIndex = -1;
-            cmbColonia.Text = String.Empty;
+            cmbColonia.Text = string.Empty;
 
 
         }
@@ -388,25 +390,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         private void InicializaListas()
         {
-
-            TipoIncidenciaList lstTipoIncidencias;
-            MunicipioList lstMunicipios;
-
             try
             {
                 try
                 {
-                    if (Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
-                    {
-                        lstTipoIncidencias = TipoIncidenciaMapper.Instance().GetBySistema(2);
-                    }
-                    else
-                    {
-                        lstTipoIncidencias = TipoIncidenciaMapper.Instance().GetBySistema(1);
-                    }
+                    TipoIncidenciaList lstTipoIncidencias = Aplicacion.UsuarioPersistencia.strSistemaActual == "066" ? TipoIncidenciaMapper.Instance().GetBySistema(2) : TipoIncidenciaMapper.Instance().GetBySistema(1);
 
-                    
-                    foreach (TipoIncidencia objTipoIncidencia in lstTipoIncidencias)
+                    foreach (var objTipoIncidencia in lstTipoIncidencias)
                     {
                         objTipoIncidencia.Descripcion = objTipoIncidencia.ClaveOperacion + " " + objTipoIncidencia.Descripcion;
                     }
@@ -431,13 +421,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                     //}
 
-                    lstMunicipios = MunicipioMapper.Instance().GetAll();
+                    var lstMunicipios = MunicipioMapper.Instance().GetAll();
                     cmbMunicipio.DataSource = lstMunicipios;
                     cmbMunicipio.DisplayMember = "Nombre";
                     cmbMunicipio.ValueMember = "Clave";
 
                     cmbMunicipio.SelectedIndex = -1;
-                    cmbMunicipio.Text = string.Empty;
+                    //cmbMunicipio.Text = string.Empty;
 
 
                 }
@@ -461,7 +451,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             ColoniaList objListaColonias;
             CodigoPostalList objListaCodigosPostales = new CodigoPostalList();
             CodigoPostal entCodigoPostal;
-            Boolean blnExisteCodigoPostal = false;
+            bool blnExisteCodigoPostal = false;
             int i;
 
             try
@@ -581,7 +571,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             }
                             if (_entIncidencia.ClaveColonia.HasValue)
                             {
-                                objListaColonias = ColoniaMapper.Instance().GetByLocalidad(_entIncidencia.ClaveColonia.Value);
+                                objListaColonias =
+                                    ColoniaMapper.Instance().GetByCodigoPostal(_entIncidencia.ClaveCodigoPostal ?? -1);
                                 if (objListaColonias != null)
                                 {
                                     cmbColonia.DataSource = objListaColonias;
@@ -610,140 +601,163 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     //Terminan los datos de la ubicación
                     txtReferencias.Text = _entIncidencia.Referencias;
                     txtDescripcion.Text = _entIncidencia.Descripcion;
-                    //Datos de Extravio de persona
-                    PersonaExtraviadaList lstPersonasExtraviadas = PersonaExtraviadaMapper.Instance().GetByIncidencia(_entIncidencia.Folio);
-                    i = 1;
-                    foreach (PersonaExtraviada entPersonaExtraviada in lstPersonasExtraviadas)
+
+                    if (_entIncidencia.TipoIncidenciaEntity.ClaveOperacion == "111")
                     {
-
-                        dgvPersonaExtraviada.Rows.Add();
-
-                        dgvPersonaExtraviada[0, i - 1].Value = entPersonaExtraviada.Clave;
-                        dgvPersonaExtraviada[1, i - 1].Value = entPersonaExtraviada.Folio;
-                        dgvPersonaExtraviada[2, i - 1].Value = entPersonaExtraviada.Nombre;
-                        if (entPersonaExtraviada.Edad.HasValue)
+                        //Datos de Extravio de persona
+                        PersonaExtraviadaList lstPersonasExtraviadas =
+                            PersonaExtraviadaMapper.Instance().GetByIncidencia(_entIncidencia.Folio);
+                        i = 1;
+                        foreach (PersonaExtraviada entPersonaExtraviada in lstPersonasExtraviadas)
                         {
-                            dgvPersonaExtraviada[3, i - 1].Value = entPersonaExtraviada.Edad;
-                        }
-                        dgvPersonaExtraviada[4, i - 1].Value = entPersonaExtraviada.Sexo;
-                        if (entPersonaExtraviada.Estatura.HasValue)
-                        {
-                            dgvPersonaExtraviada[5, i - 1].Value = entPersonaExtraviada.Estatura;
-                        }
-                        dgvPersonaExtraviada[6, i - 1].Value = entPersonaExtraviada.Parentesco;
-                        dgvPersonaExtraviada[7, i - 1].Value = entPersonaExtraviada.FechaExtravio.ToString("dd/MM/aaaa");
-                        dgvPersonaExtraviada[8, i - 1].Value = entPersonaExtraviada.Tez;
-                        dgvPersonaExtraviada[9, i - 1].Value = entPersonaExtraviada.TipoCabello;
-                        dgvPersonaExtraviada[10, i - 1].Value = entPersonaExtraviada.ColorCabello;
-                        dgvPersonaExtraviada[11, i - 1].Value = entPersonaExtraviada.LargoCabello;
-                        dgvPersonaExtraviada[12, i - 1].Value = entPersonaExtraviada.Frente;
-                        dgvPersonaExtraviada[13, i - 1].Value = entPersonaExtraviada.Cejas;
-                        dgvPersonaExtraviada[14, i - 1].Value = entPersonaExtraviada.OjosColor;
-                        dgvPersonaExtraviada[15, i - 1].Value = entPersonaExtraviada.OjosForma;
-                        dgvPersonaExtraviada[16, i - 1].Value = entPersonaExtraviada.NarizForma;
-                        dgvPersonaExtraviada[17, i - 1].Value = entPersonaExtraviada.BocaTamaño;
-                        dgvPersonaExtraviada[18, i - 1].Value = entPersonaExtraviada.Labios;
-                        dgvPersonaExtraviada[19, i - 1].Value = entPersonaExtraviada.Vestimenta;
-                        dgvPersonaExtraviada[20, i - 1].Value = entPersonaExtraviada.Destino;
-                        dgvPersonaExtraviada[21, i - 1].Value = entPersonaExtraviada.Caracteristicas;
 
-                        i++;
+                            dgvPersonaExtraviada.Rows.Add();
 
-                    }
-                    //Datos de robo de vehículo
-                    VehiculoRobadoObjectList lstVehiculosRobados = VehiculoRobadoMapper.Instance().GetByIncidencia(_entIncidencia.Folio);
-                    i = 1;
-                    foreach (VehiculoRobadoObject objVehiculoRobado in lstVehiculosRobados)
-                    {
-
-
-                        if (objVehiculoRobado.ClavePropietario.HasValue)
-                        {
-                            PropietarioVehiculoObject objPropietarioVehiculo = PropietarioVehiculoMapper.Instance().GetOne(objVehiculoRobado.ClavePropietario.Value);
-                            if (objPropietarioVehiculo != null)
+                            dgvPersonaExtraviada[0, i - 1].Value = entPersonaExtraviada.Clave;
+                            dgvPersonaExtraviada[1, i - 1].Value = entPersonaExtraviada.Folio;
+                            dgvPersonaExtraviada[2, i - 1].Value = entPersonaExtraviada.Nombre;
+                            if (entPersonaExtraviada.Edad.HasValue)
                             {
-                                txtNombrePropietario.Text = objPropietarioVehiculo.Nombre;
-                                txtDireccionPropietario.Text = objPropietarioVehiculo.Domicilio;
-                                txtTelefonoPropietario.Text = objPropietarioVehiculo.Telefono;
-                                _objPropietarioVehiculo = objPropietarioVehiculo;
+                                dgvPersonaExtraviada[3, i - 1].Value = entPersonaExtraviada.Edad;
                             }
-                        }
-                        VehiculoObject objVehiculo = VehiculoMapper.Instance().GetOne(objVehiculoRobado.ClaveVehiculo);
-                        if (objVehiculo != null)
-                        {
-                            dgvVehiculo.Rows.Add();
-                            dgvVehiculo[0, i - 1].Value = objVehiculo.Clave;
-                            dgvVehiculo[1, i - 1].Value = objVehiculo.Marca;
-                            dgvVehiculo[2, i - 1].Value = objVehiculo.Tipo;
-                            dgvVehiculo[3, i - 1].Value = objVehiculo.Modelo;
-                            dgvVehiculo[4, i - 1].Value = objVehiculo.Placas;
-                            dgvVehiculo[5, i - 1].Value = objVehiculo.Color;
-                            dgvVehiculo[6, i - 1].Value = objVehiculo.NumeroMotor;
-                            dgvVehiculo[7, i - 1].Value = objVehiculo.NumeroSerie;
-                            dgvVehiculo[8, i - 1].Value = objVehiculo.SeñasParticulares;
+                            dgvPersonaExtraviada[4, i - 1].Value = entPersonaExtraviada.Sexo;
+                            if (entPersonaExtraviada.Estatura.HasValue)
+                            {
+                                dgvPersonaExtraviada[5, i - 1].Value = entPersonaExtraviada.Estatura;
+                            }
+                            dgvPersonaExtraviada[6, i - 1].Value = entPersonaExtraviada.Parentesco;
+                            dgvPersonaExtraviada[7, i - 1].Value =
+                                entPersonaExtraviada.FechaExtravio.ToString("dd/MM/aaaa");
+                            dgvPersonaExtraviada[8, i - 1].Value = entPersonaExtraviada.Tez;
+                            dgvPersonaExtraviada[9, i - 1].Value = entPersonaExtraviada.TipoCabello;
+                            dgvPersonaExtraviada[10, i - 1].Value = entPersonaExtraviada.ColorCabello;
+                            dgvPersonaExtraviada[11, i - 1].Value = entPersonaExtraviada.LargoCabello;
+                            dgvPersonaExtraviada[12, i - 1].Value = entPersonaExtraviada.Frente;
+                            dgvPersonaExtraviada[13, i - 1].Value = entPersonaExtraviada.Cejas;
+                            dgvPersonaExtraviada[14, i - 1].Value = entPersonaExtraviada.OjosColor;
+                            dgvPersonaExtraviada[15, i - 1].Value = entPersonaExtraviada.OjosForma;
+                            dgvPersonaExtraviada[16, i - 1].Value = entPersonaExtraviada.NarizForma;
+                            dgvPersonaExtraviada[17, i - 1].Value = entPersonaExtraviada.BocaTamaño;
+                            dgvPersonaExtraviada[18, i - 1].Value = entPersonaExtraviada.Labios;
+                            dgvPersonaExtraviada[19, i - 1].Value = entPersonaExtraviada.Vestimenta;
+                            dgvPersonaExtraviada[20, i - 1].Value = entPersonaExtraviada.Destino;
+                            dgvPersonaExtraviada[21, i - 1].Value = entPersonaExtraviada.Caracteristicas;
+
                             i++;
+
                         }
-
-
                     }
-                    //Datos de robo de accesorios de vehiculo
-                    //-Se revisa si la incidencia tiene un registro en RoboVehiculoAccesorios:
-                    RoboVehiculoAccesoriosList lstRoboVehiculoAccesorios = RoboVehiculoAccesoriosMapper.Instance().GetByIncidencia(_entIncidencia.Folio);
-                    if (lstRoboVehiculoAccesorios != null && lstRoboVehiculoAccesorios.Count > 0)
+
+                    if (_entIncidencia.TipoIncidenciaEntity.ClaveOperacion == "2003")
                     {
-                        RoboVehiculoAccesorios entRoboVehiculoAccesorios = lstRoboVehiculoAccesorios[0];
-                        _entRoboVehiculoAccesorios = entRoboVehiculoAccesorios;
+                        //Datos de robo de vehículo
+                        VehiculoRobadoObjectList lstVehiculosRobados =
+                            VehiculoRobadoMapper.Instance().GetByIncidencia(_entIncidencia.Folio);
+                        i = 1;
+                        foreach (VehiculoRobadoObject objVehiculoRobado in lstVehiculosRobados)
+                        {
 
-                        if (entRoboVehiculoAccesorios.ClaveVehiculo.HasValue)
-                        {
-                            VehiculoObject objVehiculo = VehiculoMapper.Instance().GetOne(entRoboVehiculoAccesorios.ClaveVehiculo.Value);
-                            txtAccesoriosPlacas.Text = objVehiculo.Placas;
-                            txtAccesoriosSerie.Text = objVehiculo.NumeroSerie;
-                            _objVeiculoAccesoriosRobado = objVehiculo;
-                        }
-                        txtAccesoriosRobados.Text = entRoboVehiculoAccesorios.AccesoriosRobados;
-                        txtAccesoriosPersonaSePercato.Text = entRoboVehiculoAccesorios.SePercato;
-                        if (entRoboVehiculoAccesorios.FechaPercato.HasValue)
-                        {
-                            dtpAccesoriosFechaPercato.Value = entRoboVehiculoAccesorios.FechaPercato.Value;
-                            dtpAccesoriosFechaPercato.Enabled = true;
-                            chkAccesoriosPercato.Checked = true;
-                        }
-                        else
-                        {
-                            dtpAccesoriosFechaPercato.Enabled = false;
-                            chkAccesoriosPercato.Checked = false;
-                        }
-                        txtAccesoriosResponsables.Text = entRoboVehiculoAccesorios.DescripcionResponsables;
 
-                        //Se revisa si hay vehículos involucrados
-                        RoboVehiculoAccesoriosVehiculoInvolucradoObjectList lstRoboVehiculosInv = RoboVehiculoAccesoriosVehiculoInvolucradoMapper.Instance().GetByRoboVehiculoAccesorios(entRoboVehiculoAccesorios.Clave);
-
-                        if (lstRoboVehiculosInv != null && lstRoboVehiculosInv.Count > 0)
-                        {
-                            i = 1;
-                            foreach (RoboVehiculoAccesoriosVehiculoInvolucradoObject objRoboVehiculoInv in lstRoboVehiculosInv)
+                            if (objVehiculoRobado.ClavePropietario.HasValue)
                             {
-                                VehiculoObject objVehiculoInv = VehiculoMapper.Instance().GetOne(objRoboVehiculoInv.ClaveVehiculo);
-                                if (objVehiculoInv != null)
+                                PropietarioVehiculoObject objPropietarioVehiculo =
+                                    PropietarioVehiculoMapper.Instance().GetOne(objVehiculoRobado.ClavePropietario.Value);
+                                if (objPropietarioVehiculo != null)
                                 {
-                                    dgvVehiculoAccesorios.Rows.Add();
-                                    dgvVehiculoAccesorios[0, i - 1].Value = objVehiculoInv.Clave;
-                                    dgvVehiculoAccesorios[1, i - 1].Value = objVehiculoInv.Marca;
-                                    dgvVehiculoAccesorios[2, i - 1].Value = objVehiculoInv.Tipo;
-                                    dgvVehiculoAccesorios[3, i - 1].Value = objVehiculoInv.Modelo;
-                                    dgvVehiculoAccesorios[4, i - 1].Value = objVehiculoInv.Placas;
-                                    dgvVehiculoAccesorios[5, i - 1].Value = objVehiculoInv.Color;
-                                    dgvVehiculoAccesorios[6, i - 1].Value = objVehiculoInv.NumeroMotor;
-                                    dgvVehiculoAccesorios[7, i - 1].Value = objVehiculoInv.NumeroSerie;
-                                    dgvVehiculoAccesorios[8, i - 1].Value = objVehiculoInv.SeñasParticulares;
-                                    i++;
+                                    txtNombrePropietario.Text = objPropietarioVehiculo.Nombre;
+                                    txtDireccionPropietario.Text = objPropietarioVehiculo.Domicilio;
+                                    txtTelefonoPropietario.Text = objPropietarioVehiculo.Telefono;
+                                    _objPropietarioVehiculo = objPropietarioVehiculo;
                                 }
+                            }
+                            VehiculoObject objVehiculo =
+                                VehiculoMapper.Instance().GetOne(objVehiculoRobado.ClaveVehiculo);
+                            if (objVehiculo != null)
+                            {
+                                dgvVehiculo.Rows.Add();
+                                dgvVehiculo[0, i - 1].Value = objVehiculo.Clave;
+                                dgvVehiculo[1, i - 1].Value = objVehiculo.Marca;
+                                dgvVehiculo[2, i - 1].Value = objVehiculo.Tipo;
+                                dgvVehiculo[3, i - 1].Value = objVehiculo.Modelo;
+                                dgvVehiculo[4, i - 1].Value = objVehiculo.Placas;
+                                dgvVehiculo[5, i - 1].Value = objVehiculo.Color;
+                                dgvVehiculo[6, i - 1].Value = objVehiculo.NumeroMotor;
+                                dgvVehiculo[7, i - 1].Value = objVehiculo.NumeroSerie;
+                                dgvVehiculo[8, i - 1].Value = objVehiculo.SeñasParticulares;
+                                i++;
+                            }
 
+
+                        }
+                    }
+
+
+                    if (_entIncidencia.TipoIncidenciaEntity.ClaveOperacion == "2004")
+                    {
+                        //Datos de robo de accesorios de vehiculo
+                        //-Se revisa si la incidencia tiene un registro en RoboVehiculoAccesorios:
+                        RoboVehiculoAccesoriosList lstRoboVehiculoAccesorios =
+                            RoboVehiculoAccesoriosMapper.Instance().GetByIncidencia(_entIncidencia.Folio);
+                        if (lstRoboVehiculoAccesorios != null && lstRoboVehiculoAccesorios.Count > 0)
+                        {
+                            RoboVehiculoAccesorios entRoboVehiculoAccesorios = lstRoboVehiculoAccesorios[0];
+                            _entRoboVehiculoAccesorios = entRoboVehiculoAccesorios;
+
+                            if (entRoboVehiculoAccesorios.ClaveVehiculo.HasValue)
+                            {
+                                VehiculoObject objVehiculo =
+                                    VehiculoMapper.Instance().GetOne(entRoboVehiculoAccesorios.ClaveVehiculo.Value);
+                                txtAccesoriosPlacas.Text = objVehiculo.Placas;
+                                txtAccesoriosSerie.Text = objVehiculo.NumeroSerie;
+                                _objVeiculoAccesoriosRobado = objVehiculo;
+                            }
+                            txtAccesoriosRobados.Text = entRoboVehiculoAccesorios.AccesoriosRobados;
+                            txtAccesoriosPersonaSePercato.Text = entRoboVehiculoAccesorios.SePercato;
+                            if (entRoboVehiculoAccesorios.FechaPercato.HasValue)
+                            {
+                                dtpAccesoriosFechaPercato.Value = entRoboVehiculoAccesorios.FechaPercato.Value;
+                                dtpAccesoriosFechaPercato.Enabled = true;
+                                chkAccesoriosPercato.Checked = true;
+                            }
+                            else
+                            {
+                                dtpAccesoriosFechaPercato.Enabled = false;
+                                chkAccesoriosPercato.Checked = false;
+                            }
+                            txtAccesoriosResponsables.Text = entRoboVehiculoAccesorios.DescripcionResponsables;
+
+                            //Se revisa si hay vehículos involucrados
+                            RoboVehiculoAccesoriosVehiculoInvolucradoObjectList lstRoboVehiculosInv =
+                                RoboVehiculoAccesoriosVehiculoInvolucradoMapper.Instance().GetByRoboVehiculoAccesorios(
+                                    entRoboVehiculoAccesorios.Clave);
+
+                            if (lstRoboVehiculosInv != null && lstRoboVehiculosInv.Count > 0)
+                            {
+                                i = 1;
+                                foreach (
+                                    RoboVehiculoAccesoriosVehiculoInvolucradoObject objRoboVehiculoInv in
+                                        lstRoboVehiculosInv)
+                                {
+                                    VehiculoObject objVehiculoInv =
+                                        VehiculoMapper.Instance().GetOne(objRoboVehiculoInv.ClaveVehiculo);
+                                    if (objVehiculoInv != null)
+                                    {
+                                        dgvVehiculoAccesorios.Rows.Add();
+                                        dgvVehiculoAccesorios[0, i - 1].Value = objVehiculoInv.Clave;
+                                        dgvVehiculoAccesorios[1, i - 1].Value = objVehiculoInv.Marca;
+                                        dgvVehiculoAccesorios[2, i - 1].Value = objVehiculoInv.Tipo;
+                                        dgvVehiculoAccesorios[3, i - 1].Value = objVehiculoInv.Modelo;
+                                        dgvVehiculoAccesorios[4, i - 1].Value = objVehiculoInv.Placas;
+                                        dgvVehiculoAccesorios[5, i - 1].Value = objVehiculoInv.Color;
+                                        dgvVehiculoAccesorios[6, i - 1].Value = objVehiculoInv.NumeroMotor;
+                                        dgvVehiculoAccesorios[7, i - 1].Value = objVehiculoInv.NumeroSerie;
+                                        dgvVehiculoAccesorios[8, i - 1].Value = objVehiculoInv.SeñasParticulares;
+                                        i++;
+                                    }
+
+                                }
                             }
                         }
-
-
                     }
                     txtDireccion.Text = _entIncidencia.Direccion;
 
@@ -1141,7 +1155,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 {
                     Cursor = Cursors.WaitCursor;
 
-                    if (_blnBloqueaEventos == true)
+                    if (_blnBloqueaEventos)
                     {
                         Cursor = Cursors.Default;
                         return;
