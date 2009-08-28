@@ -13,11 +13,11 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.Utilerias
         /// <summary>
         /// Descripcion
         /// </summary>
-        protected string _descripcion;
+        private string _descripcion;
         /// <summary>
         /// Valor
         /// </summary>
-        protected object _value;
+        private object _value;
         #endregion
 
         #region Constructores
@@ -58,8 +58,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.Utilerias
         /// </summary>
         public string Descripcion
         {
-            get { return this._descripcion; }
-            set { this._descripcion = value; }
+            get { return _descripcion; }
+            set { _descripcion = value; }
         }
     }
 }

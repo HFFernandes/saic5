@@ -112,31 +112,24 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// </summary>
         private void Limpiar()
         {
-            try
+            //Se deselecciona registro del datagrid
+            foreach (DataGridViewRow row in this.gvUsuarios.Rows)
             {
-                //Se deselecciona registro del datagrid
-                foreach (DataGridViewRow row in this.gvUsuarios.Rows)
-                {
-                    row.Selected = false;
-                }
-                this.lblUserExist.Text = "";
-                this.ddlCorporaciones.SelectedIndex = -1;
-                //Se limpian controles
-                this.txtUsuario.Text = "";
-                this.txtNombrePropio.Text = "";
-                this.saiTxtContrasena.Text = "";
-                this.rbOperador.Checked = true;
-                this.chkActivado.Checked = false;
-                this.txtNombrePropio.Focus();
-                //Se ocultan los botones de eliminar y modificar
-                this.btnEliminar.Visible = false;
-                this.btnModificar.Enabled = false;
-                this.btnAgregar.Enabled = true;
+                row.Selected = false;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Sistema de Administración de Incidencias)");
-            }
+            this.lblUserExist.Text = "";
+            this.ddlCorporaciones.SelectedIndex = -1;
+            //Se limpian controles
+            this.txtUsuario.Text = "";
+            this.txtNombrePropio.Text = "";
+            this.saiTxtContrasena.Text = "";
+            this.rbOperador.Checked = true;
+            this.chkActivado.Checked = false;
+            this.txtNombrePropio.Focus();
+            //Se ocultan los botones de eliminar y modificar
+            this.btnEliminar.Visible = false;
+            this.btnModificar.Enabled = false;
+            this.btnAgregar.Enabled = true;
         }
 
         /// <summary>
@@ -213,6 +206,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         bitacora.NombreCatalogo = "Usuario";
                         bitacora.Operacion = "UPDATE";
                         bitacora.ValorActual = this.txtNombrePropio.Text + ", " + this.txtUsuario.Text;
+                        
                         bitacora.ValorAnterior = Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["NombreUsuario"].Value);
                         bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
 
