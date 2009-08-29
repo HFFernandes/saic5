@@ -1,8 +1,10 @@
 ﻿using System;
-using System.Data;
+using System.Configuration;
+using System.IO;
 using System.Text;
 using System.Drawing;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using Korzh.EasyQuery;
 using System.Diagnostics;
 
@@ -36,6 +38,7 @@ namespace ConsultaRemota
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            ResultDS.ConnectionString = ConfigurationManager.ConnectionStrings["SAI_Conn"].ConnectionString;
             if (!Page.IsPostBack)
             {
                 var queryName = Page.Request.QueryString.Get("query");
@@ -71,12 +74,12 @@ namespace ConsultaRemota
             QueryPanel1.Query.ConditionsChanged -= query_ConditionsChanged;
         }
 
-        protected void query_ColumnsChanged(object sender, Korzh.EasyQuery.ColumnsChangeEventArgs e)
+        protected void query_ColumnsChanged(object sender, ColumnsChangeEventArgs e)
         {
             UpdateSql();
         }
 
-        protected void query_ConditionsChanged(object sender, Korzh.EasyQuery.ConditionsChangeEventArgs e)
+        protected void query_ConditionsChanged(object sender, ConditionsChangeEventArgs e)
         {
             UpdateSql();
         }
@@ -103,46 +106,33 @@ namespace ConsultaRemota
 
         protected void ExportExcelBtn_Click(object sender, EventArgs e)
         {
-            ExportarResultados("text/csv", "result.txt");
+            ExportGridView();
         }
 
-        protected void ExportarResultados(string contentType, string fileName)
+        private void ExportGridView()
         {
-            ResultDS.SelectCommand = consulta.Result.SQL;
-            var view = (DataView)ResultDS.Select(DataSourceSelectArguments.Empty);
-            if (view == null) return;
-            var result = new StringBuilder("");
+            var sb = new StringBuilder();
+            var sw = new StringWriter(sb);
+            var htw = new HtmlTextWriter(sw);
 
-            foreach (DataRowView row in view)
-            {
-                int i = 0;
-                foreach (DataColumn col in view.Table.Columns)
-                {
-                    var obj = row[i];
-                    var s = obj == null ? string.Empty : obj.ToString();
-                    if (i > 0) result.Append(',');
-                    result.Append("\"" + ConvertToCSV(s) + "\"");
-                    i++;
-                }
-                result.Append(Environment.NewLine);
-            }
-
-            Response.ClearHeaders();
+            var page = new Page();
+            var form = new HtmlForm();
+            ResultGrid.EnableViewState = false;
+            page.EnableEventValidation = false;
+            // Realiza las inicializaciones de la instancia de la clase Page que requieran los diseñadores RAD.
+            page.DesignerInitialize();
+            page.Controls.Add(form);
+            form.Controls.Add(ResultGrid);
+            page.RenderControl(htw);
             Response.Clear();
-            Response.ContentType = contentType;
-            Response.BufferOutput = true;
-            Response.AddHeader("Content-Disposition", "attachment;filename=" + fileName);
-
-            var output = Encoding.UTF8.GetBytes(result.ToString());
-            Response.OutputStream.Write(output, 0, output.GetLength(0));
+            Response.Buffer = true;
+            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            //Response.ContentType = "application/vnd.ms-excel";
+            Response.AddHeader("Content-Disposition", "attachment;filename=data.xls");
+            Response.Charset = "UTF-8";
+            Response.ContentEncoding = Encoding.Default;
+            Response.Write(sb.ToString());
             Response.End();
-        }
-
-        protected string ConvertToCSV(string s)
-        {
-            var result = s.Replace(",", "\\,");
-            result = result.Replace("\"", "\\\"");
-            return result;
         }
     }
 }
