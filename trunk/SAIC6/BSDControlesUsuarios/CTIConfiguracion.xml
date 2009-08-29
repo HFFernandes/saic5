@@ -3,7 +3,7 @@
 <cadenaAES>AVAYA#SWITCH1#CSTA#AESC4TLAX</cadenaAES>
 <usuarioAES>cmapi</usuarioAES>
 <pwdAES>Cmapi01.</pwdAES>
-<extensionFisica>10704</extensionFisica>
-<puertoTCP>9998</puertoTCP>
+<extensionFisica>10000</extensionFisica>
+<puertoTCP>9999</puertoTCP>
 <Debug>0</Debug>
 </CTI>

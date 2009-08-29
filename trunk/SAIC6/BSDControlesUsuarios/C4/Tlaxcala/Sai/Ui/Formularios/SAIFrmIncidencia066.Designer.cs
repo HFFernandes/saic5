@@ -184,10 +184,10 @@
             this.Name = "SAIFrmIncidencia066";
             this.Text = "SAIFrmIncidencia066";
             this.Load += new System.EventHandler(this.SAIFrmIncidencia066_Load);
-            this.Controls.SetChildIndex(this.lblTitulo, 0);
-            this.Controls.SetChildIndex(this.label12, 0);
-            this.Controls.SetChildIndex(this.cklCorporacion, 0);
-            this.Controls.SetChildIndex(this.grpDenunciante, 0);
+            //this.Controls.SetChildIndex(this.lblTitulo, 0);
+            //this.Controls.SetChildIndex(this.label12, 0);
+            //this.Controls.SetChildIndex(this.cklCorporacion, 0);
+            //this.Controls.SetChildIndex(this.grpDenunciante, 0);
             this.grpDenunciante.ResumeLayout(false);
             this.grpDenunciante.PerformLayout();
             this.ResumeLayout(false);

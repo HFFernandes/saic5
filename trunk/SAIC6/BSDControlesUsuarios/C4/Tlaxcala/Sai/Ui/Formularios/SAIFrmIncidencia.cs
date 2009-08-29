@@ -282,6 +282,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 txtTelefono.Text = value;
             }
+            get
+            {
+                return txtTelefono.Text;
+            }
         }
 
         #endregion
@@ -404,22 +408,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     cmbTipoIncidencia.DisplayMember = "Descripcion";
                     cmbTipoIncidencia.ValueMember = "Clave";
 
-                    //int j = 0;
-                    //foreach(Object objTipoIncidencia in cmbTipoIncidencia.Items)
-                    //{
-                    //    //for (j = 0; j < objTipoIncidencia.GetType().GetProperties().Length; j++)
-                    //    //{
-                    //    //    if (objElemento.GetType().GetProperties()[j].Name == "Descripcion")
-                    //    //    {
-                    //    //        break;
-                    //    //    }
-                    //    //}                        
-                    //    objTipoIncidencia.GetType().GetProperty("Descripcion").SetValue
-                    //        (objTipoIncidencia,
-                    //         objTipoIncidencia.GetType().GetProperty("Descripcion").GetValue(objTipoIncidencia,null).ToString() + " " +
-                    //         objTipoIncidencia.GetType().GetProperty("ClaveOperacion").GetValue(objTipoIncidencia,null).ToString(),null);
-
-                    //}
+                   
 
                     var lstMunicipios = MunicipioMapper.Instance().GetAll();
                     cmbMunicipio.DataSource = lstMunicipios;

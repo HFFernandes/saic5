@@ -11,6 +11,12 @@ namespace BSD.C4.Tlaxcala.Sai
     /// </summary>
     public static class Aplicacion
     {
+
+        /// <summary>
+        /// Contiene los numero de telefono que estan siendo atendidos actualmente.
+        /// </summary>
+        public static List<string> LlamadasActuales = new List<string>();
+
         /// <summary>
         /// Lista de elementos que tienen la referencia hacia los formularios que se van abriendo
         /// <remarks>Cada ventana Incidencia que se levente tiene que incluirse en esta lista</remarks>
