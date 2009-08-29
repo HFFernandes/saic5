@@ -377,7 +377,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         }
                         break;
                     case ID.CMD_U:
-                        throw new SAIExcepcion("Funcionalidad no implementada.");
+                        //throw new SAIExcepcion("Funcionalidad no implementada.");
+                        SAIFrmDespacho des=new SAIFrmDespacho();
+                        des.Show();
                         break;
                     default:
                         break;
