@@ -40,7 +40,7 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        <img style="border: 0" src="imagenes/logo_ico.jpg" alt="title" />
+                                        <img style="border: 0" src="imagenes/tlaxcala_logotipo.gif" alt="title" />
                                     </td>
                                     <td style="width: 100%">
                                         <table cellspacing="0" cellpadding="0" style="width: 100%; border: 0">
@@ -145,8 +145,7 @@
                                                     <asp:UpdatePanel ID="UpdatePanelConditions" runat="server">
                                                         <ContentTemplate>
                                                             <keqwc:QueryPanel ID="QueryPanel1" runat="server" Height="160px" Width="100%" BorderWidth="1px"
-                                                                ScrollBars="Auto" CssClass="bodytext" 
-                                                                Appearance-ScriptMenuStyle-ItemMinWidth="160"
+                                                                ScrollBars="Auto" CssClass="bodytext" Appearance-ScriptMenuStyle-ItemMinWidth="160"
                                                                 Appearance-ScriptMenuStyle-BackColor="#FFE0C0" UseListCache="True">
                                                             </keqwc:QueryPanel>
                                                         </ContentTemplate>
@@ -193,7 +192,7 @@
                                                         <td valign="top">
                                                             <asp:Label ID="ResultLabel" runat="server" Text="Label" Visible="False" Font-Bold="True"
                                                                 ForeColor="Maroon" Height="4px" Width="15px"></asp:Label>
-                                                            <asp:Panel ID="PanelResult" runat="server" Height="200px" Width="100%" ScrollBars="Auto">
+                                                            <asp:Panel ID="PanelResult" runat="server" Height="100%" Width="100%" ScrollBars="Auto">
                                                                 <asp:GridView ID="ResultGrid" runat="server" DataSourceID="ResultDS" Font-Size="XX-Small"
                                                                     ForeColor="Black" CellPadding="4" GridLines="Vertical" BackColor="White" BorderColor="#DEDFDE"
                                                                     BorderStyle="None" BorderWidth="1px">
@@ -224,9 +223,7 @@
     </table>
     <div style="text-align: center; padding: 10 0 30 0;">
         &nbsp;© Copyright 2009. <a href="http://www.bsd.com" target="_blank">BSD.com</a></div>
-    <%--<asp:AccessDataSource ID="ResultDS" runat="server" >
-    </asp:AccessDataSource>--%>
-    <asp:SqlDataSource ID="ResultDS" runat="server" ConnectionString="Data Source=.\SQLEXPRESS;Integrated Security=SSPI; Initial Catalog=SAI_BD" />
+    <asp:SqlDataSource ID="ResultDS" runat="server" />
     &nbsp; &nbsp;
     </form>
 </body>

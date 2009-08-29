@@ -135,7 +135,7 @@
             // lblMunicipio
             // 
             this.lblMunicipio.AutoSize = true;
-            this.lblMunicipio.Location = new System.Drawing.Point(8, 116);
+            this.lblMunicipio.Location = new System.Drawing.Point(8, 111);
             this.lblMunicipio.Name = "lblMunicipio";
             this.lblMunicipio.Size = new System.Drawing.Size(55, 13);
             this.lblMunicipio.TabIndex = 6;
@@ -144,7 +144,7 @@
             // lblLocalidad
             // 
             this.lblLocalidad.AutoSize = true;
-            this.lblLocalidad.Location = new System.Drawing.Point(8, 142);
+            this.lblLocalidad.Location = new System.Drawing.Point(8, 134);
             this.lblLocalidad.Name = "lblLocalidad";
             this.lblLocalidad.Size = new System.Drawing.Size(56, 13);
             this.lblLocalidad.TabIndex = 8;
@@ -155,7 +155,7 @@
             this.saiTxtMunicipio.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.saiTxtMunicipio.ClrBackColorFoco = System.Drawing.Color.Empty;
             this.saiTxtMunicipio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saiTxtMunicipio.Location = new System.Drawing.Point(70, 116);
+            this.saiTxtMunicipio.Location = new System.Drawing.Point(70, 111);
             this.saiTxtMunicipio.Name = "saiTxtMunicipio";
             this.saiTxtMunicipio.ReadOnly = true;
             this.saiTxtMunicipio.Size = new System.Drawing.Size(469, 13);
@@ -168,7 +168,7 @@
             this.saiTxtLocalidad.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.saiTxtLocalidad.ClrBackColorFoco = System.Drawing.Color.Empty;
             this.saiTxtLocalidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saiTxtLocalidad.Location = new System.Drawing.Point(70, 142);
+            this.saiTxtLocalidad.Location = new System.Drawing.Point(70, 134);
             this.saiTxtLocalidad.Name = "saiTxtLocalidad";
             this.saiTxtLocalidad.ReadOnly = true;
             this.saiTxtLocalidad.Size = new System.Drawing.Size(286, 13);
@@ -179,7 +179,7 @@
             // lblCodigoPostal
             // 
             this.lblCodigoPostal.AutoSize = true;
-            this.lblCodigoPostal.Location = new System.Drawing.Point(362, 142);
+            this.lblCodigoPostal.Location = new System.Drawing.Point(362, 134);
             this.lblCodigoPostal.Name = "lblCodigoPostal";
             this.lblCodigoPostal.Size = new System.Drawing.Size(75, 13);
             this.lblCodigoPostal.TabIndex = 10;
@@ -190,7 +190,7 @@
             this.saiTxtCodigoPostal.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.saiTxtCodigoPostal.ClrBackColorFoco = System.Drawing.Color.Empty;
             this.saiTxtCodigoPostal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saiTxtCodigoPostal.Location = new System.Drawing.Point(443, 142);
+            this.saiTxtCodigoPostal.Location = new System.Drawing.Point(443, 134);
             this.saiTxtCodigoPostal.Name = "saiTxtCodigoPostal";
             this.saiTxtCodigoPostal.ReadOnly = true;
             this.saiTxtCodigoPostal.Size = new System.Drawing.Size(96, 13);
@@ -201,7 +201,7 @@
             // lblColonia
             // 
             this.lblColonia.AutoSize = true;
-            this.lblColonia.Location = new System.Drawing.Point(8, 168);
+            this.lblColonia.Location = new System.Drawing.Point(8, 157);
             this.lblColonia.Name = "lblColonia";
             this.lblColonia.Size = new System.Drawing.Size(45, 13);
             this.lblColonia.TabIndex = 12;
@@ -212,7 +212,7 @@
             this.saiTxtColonia.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.saiTxtColonia.ClrBackColorFoco = System.Drawing.Color.Empty;
             this.saiTxtColonia.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saiTxtColonia.Location = new System.Drawing.Point(70, 168);
+            this.saiTxtColonia.Location = new System.Drawing.Point(70, 157);
             this.saiTxtColonia.Name = "saiTxtColonia";
             this.saiTxtColonia.ReadOnly = true;
             this.saiTxtColonia.Size = new System.Drawing.Size(469, 13);
@@ -223,7 +223,7 @@
             // lblReferencia
             // 
             this.lblReferencia.AutoSize = true;
-            this.lblReferencia.Location = new System.Drawing.Point(8, 194);
+            this.lblReferencia.Location = new System.Drawing.Point(8, 180);
             this.lblReferencia.Name = "lblReferencia";
             this.lblReferencia.Size = new System.Drawing.Size(64, 13);
             this.lblReferencia.TabIndex = 14;
@@ -233,7 +233,7 @@
             // 
             this.saiTxtReferencia.ClrBackColorFoco = System.Drawing.Color.Empty;
             this.saiTxtReferencia.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saiTxtReferencia.Location = new System.Drawing.Point(11, 210);
+            this.saiTxtReferencia.Location = new System.Drawing.Point(11, 196);
             this.saiTxtReferencia.Multiline = true;
             this.saiTxtReferencia.Name = "saiTxtReferencia";
             this.saiTxtReferencia.ReadOnly = true;
@@ -246,7 +246,7 @@
             // lblDescripcion
             // 
             this.lblDescripcion.AutoSize = true;
-            this.lblDescripcion.Location = new System.Drawing.Point(8, 260);
+            this.lblDescripcion.Location = new System.Drawing.Point(8, 245);
             this.lblDescripcion.Name = "lblDescripcion";
             this.lblDescripcion.Size = new System.Drawing.Size(63, 13);
             this.lblDescripcion.TabIndex = 16;
@@ -256,7 +256,7 @@
             // 
             this.saiTxtDescripcion.ClrBackColorFoco = System.Drawing.Color.Empty;
             this.saiTxtDescripcion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saiTxtDescripcion.Location = new System.Drawing.Point(11, 276);
+            this.saiTxtDescripcion.Location = new System.Drawing.Point(11, 261);
             this.saiTxtDescripcion.Multiline = true;
             this.saiTxtDescripcion.Name = "saiTxtDescripcion";
             this.saiTxtDescripcion.ReadOnly = true;
@@ -268,25 +268,25 @@
             // 
             // gprUnidadPrincipal
             // 
-            this.gprUnidadPrincipal.Location = new System.Drawing.Point(11, 358);
+            this.gprUnidadPrincipal.Location = new System.Drawing.Point(11, 343);
             this.gprUnidadPrincipal.Name = "gprUnidadPrincipal";
-            this.gprUnidadPrincipal.Size = new System.Drawing.Size(253, 70);
+            this.gprUnidadPrincipal.Size = new System.Drawing.Size(259, 70);
             this.gprUnidadPrincipal.TabIndex = 18;
             this.gprUnidadPrincipal.TabStop = false;
             this.gprUnidadPrincipal.Text = "Unidad Asignada";
             // 
             // gprUnidadApoyo
             // 
-            this.gprUnidadApoyo.Location = new System.Drawing.Point(286, 358);
+            this.gprUnidadApoyo.Location = new System.Drawing.Point(280, 343);
             this.gprUnidadApoyo.Name = "gprUnidadApoyo";
-            this.gprUnidadApoyo.Size = new System.Drawing.Size(253, 70);
+            this.gprUnidadApoyo.Size = new System.Drawing.Size(259, 70);
             this.gprUnidadApoyo.TabIndex = 19;
             this.gprUnidadApoyo.TabStop = false;
             this.gprUnidadApoyo.Text = "Unidad de Apoyo";
             // 
             // axComentarios
             // 
-            this.axComentarios.Location = new System.Drawing.Point(11, 434);
+            this.axComentarios.Location = new System.Drawing.Point(11, 419);
             this.axComentarios.Name = "axComentarios";
             this.axComentarios.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axComentarios.OcxState")));
             this.axComentarios.Size = new System.Drawing.Size(528, 172);
@@ -300,7 +300,7 @@
             this.saiTmpHoraLlegada.CustomFormat = "hh:mm";
             this.saiTmpHoraLlegada.Enabled = false;
             this.saiTmpHoraLlegada.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.saiTmpHoraLlegada.Location = new System.Drawing.Point(292, 629);
+            this.saiTmpHoraLlegada.Location = new System.Drawing.Point(292, 615);
             this.saiTmpHoraLlegada.Name = "saiTmpHoraLlegada";
             this.saiTmpHoraLlegada.ShowUpDown = true;
             this.saiTmpHoraLlegada.Size = new System.Drawing.Size(97, 20);
@@ -313,7 +313,7 @@
             this.saiTmpHoraLiberacion.CustomFormat = "hh:mm";
             this.saiTmpHoraLiberacion.Enabled = false;
             this.saiTmpHoraLiberacion.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.saiTmpHoraLiberacion.Location = new System.Drawing.Point(421, 629);
+            this.saiTmpHoraLiberacion.Location = new System.Drawing.Point(421, 615);
             this.saiTmpHoraLiberacion.Name = "saiTmpHoraLiberacion";
             this.saiTmpHoraLiberacion.ShowUpDown = true;
             this.saiTmpHoraLiberacion.Size = new System.Drawing.Size(97, 20);
@@ -323,7 +323,7 @@
             // chkHoraLiberacion
             // 
             this.chkHoraLiberacion.AutoSize = true;
-            this.chkHoraLiberacion.Location = new System.Drawing.Point(524, 633);
+            this.chkHoraLiberacion.Location = new System.Drawing.Point(524, 619);
             this.chkHoraLiberacion.Name = "chkHoraLiberacion";
             this.chkHoraLiberacion.Size = new System.Drawing.Size(15, 14);
             this.chkHoraLiberacion.TabIndex = 30;
@@ -332,7 +332,7 @@
             // chkHoraLlegada
             // 
             this.chkHoraLlegada.AutoSize = true;
-            this.chkHoraLlegada.Location = new System.Drawing.Point(395, 633);
+            this.chkHoraLlegada.Location = new System.Drawing.Point(395, 619);
             this.chkHoraLlegada.Name = "chkHoraLlegada";
             this.chkHoraLlegada.Size = new System.Drawing.Size(15, 14);
             this.chkHoraLlegada.TabIndex = 27;
@@ -341,7 +341,7 @@
             // saiTxtHoraRecepcion
             // 
             this.saiTxtHoraRecepcion.ClrBackColorFoco = System.Drawing.Color.Empty;
-            this.saiTxtHoraRecepcion.Location = new System.Drawing.Point(11, 629);
+            this.saiTxtHoraRecepcion.Location = new System.Drawing.Point(11, 615);
             this.saiTxtHoraRecepcion.Name = "saiTxtHoraRecepcion";
             this.saiTxtHoraRecepcion.ReadOnly = true;
             this.saiTxtHoraRecepcion.Size = new System.Drawing.Size(97, 20);
@@ -351,7 +351,7 @@
             // saiTxtHoraDespacho
             // 
             this.saiTxtHoraDespacho.ClrBackColorFoco = System.Drawing.Color.Empty;
-            this.saiTxtHoraDespacho.Location = new System.Drawing.Point(118, 629);
+            this.saiTxtHoraDespacho.Location = new System.Drawing.Point(118, 615);
             this.saiTxtHoraDespacho.Name = "saiTxtHoraDespacho";
             this.saiTxtHoraDespacho.ReadOnly = true;
             this.saiTxtHoraDespacho.Size = new System.Drawing.Size(97, 20);
@@ -361,7 +361,7 @@
             // lblHoraRecepcion
             // 
             this.lblHoraRecepcion.AutoSize = true;
-            this.lblHoraRecepcion.Location = new System.Drawing.Point(8, 613);
+            this.lblHoraRecepcion.Location = new System.Drawing.Point(8, 599);
             this.lblHoraRecepcion.Name = "lblHoraRecepcion";
             this.lblHoraRecepcion.Size = new System.Drawing.Size(100, 13);
             this.lblHoraRecepcion.TabIndex = 21;
@@ -370,7 +370,7 @@
             // lblHoraDespacho
             // 
             this.lblHoraDespacho.AutoSize = true;
-            this.lblHoraDespacho.Location = new System.Drawing.Point(115, 613);
+            this.lblHoraDespacho.Location = new System.Drawing.Point(115, 599);
             this.lblHoraDespacho.Name = "lblHoraDespacho";
             this.lblHoraDespacho.Size = new System.Drawing.Size(97, 13);
             this.lblHoraDespacho.TabIndex = 23;
@@ -379,7 +379,7 @@
             // lblHoraLlegada
             // 
             this.lblHoraLlegada.AutoSize = true;
-            this.lblHoraLlegada.Location = new System.Drawing.Point(289, 613);
+            this.lblHoraLlegada.Location = new System.Drawing.Point(289, 599);
             this.lblHoraLlegada.Name = "lblHoraLlegada";
             this.lblHoraLlegada.Size = new System.Drawing.Size(86, 13);
             this.lblHoraLlegada.TabIndex = 25;
@@ -388,7 +388,7 @@
             // lblHoraLiberacion
             // 
             this.lblHoraLiberacion.AutoSize = true;
-            this.lblHoraLiberacion.Location = new System.Drawing.Point(418, 613);
+            this.lblHoraLiberacion.Location = new System.Drawing.Point(418, 599);
             this.lblHoraLiberacion.Name = "lblHoraLiberacion";
             this.lblHoraLiberacion.Size = new System.Drawing.Size(97, 13);
             this.lblHoraLiberacion.TabIndex = 28;
@@ -410,7 +410,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(551, 656);
+            this.ClientSize = new System.Drawing.Size(551, 642);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.axComentarios);
             this.Controls.Add(this.lblHoraLiberacion);

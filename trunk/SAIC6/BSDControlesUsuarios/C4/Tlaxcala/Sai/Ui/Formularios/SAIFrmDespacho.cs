@@ -24,7 +24,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             Columna = axComentarios.Columns.Add(0, "Comentarios", 250, true);
             Columna = axComentarios.Columns.Add(1, "Despachador", 100, true);
             Columna.EditOptions.AllowEdit = false;
-            Columna.EditOptions.ConstraintEdit = true;
+            //Columna.EditOptions.ConstraintEdit = true;
 
             Registro = axComentarios.HeaderRecords.Add();
             Item = Registro.AddItem(string.Empty);
@@ -72,6 +72,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 RegistroActual = axComentarios.Records.Insert(0);
                 Item = RegistroActual.AddItem(strComentario);
                 Item = RegistroActual.AddItem(strDespachador);
+                Item = RegistroActual.AddItem("sed");
             }
         }
 
