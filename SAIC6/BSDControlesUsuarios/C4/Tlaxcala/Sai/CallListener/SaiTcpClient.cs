@@ -39,16 +39,12 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
                 //Iniciamos el Listener del TCP
                 this.objTcpListener.Start();
 
-                //Inicializamos el SubProceso.
-                AsyncWorker = new BackgroundWorker();
-                AsyncWorker.WorkerSupportsCancellation = true;
-                AsyncWorker.WorkerReportsProgress = true;
-                AsyncWorker.DoWork += new DoWorkEventHandler(AsyncWorker_DoWork);
+                
 
             }
-            catch(Exception ex)
+            catch
             {
-                this.FindMessajeEvent("Error al Inicializar listener : "+ex.Message);
+                
             }
 
             
@@ -56,7 +52,7 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
 
         
 
-        
+
         #endregion
 
         #region VARIABLES
@@ -84,7 +80,7 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
         /// <summary>
         /// Cliente de conexiones para TCP.
         /// </summary>
-        TcpClient objTcpClient;
+        private   TcpClient objTcpClient;
 
         /// <summary>
         /// Para escuchar las conexiones de TCP.
@@ -94,16 +90,9 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
         /// <summary>
         /// Para obtener el NetworkStream que manda el agente de Avaya.
         /// </summary>
-        NetworkStream netStream;
-
-        public AsyncCallback pfnCallBack;
-
-        System.Windows.Forms.Timer monitor = new System.Windows.Forms.Timer();
-
-        BackgroundWorker AsyncWorker;
+        private   NetworkStream netStream;
 
         
-
         #endregion
 
         #region MÉTODOS
@@ -112,52 +101,55 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
         /// Inicia la aplicación .jar
         /// </summary>
         /// <param name="nombreAplicacion"></param>
-        private void Shell(string nombreAplicacion)
+        private   void Shell(string nombreAplicacion)
         {
             try
             {
-                Process process = new Process(); //creamos un proceso
-                process.EnableRaisingEvents = true;
-                process.StartInfo.FileName = nombreAplicacion;
-                process.StartInfo.Arguments = "java -jar";
-                process.Start();  //ejecutamos el programa
+                Process process = new Process();
+
+                process.EnableRaisingEvents = false;
+
+                process.StartInfo.CreateNoWindow = true;
+
+                process.StartInfo.UseShellExecute = false;
+
+                process.StartInfo.WorkingDirectory = Application.StartupPath;
+
+                process.StartInfo.FileName = @"C:\Program Files\Java\jre6\bin\java.exe";
+
+                process.StartInfo.Arguments = "-jar jar_cti_cte01.jar";
+
+                process.Start();
                 
-                this.FindMessajeEvent("Inició .jar...");
+                FindMessajeEvent("Inició .jar...");
             }
             catch(Exception ex)
             {
-                this.FindMessajeEvent("Error al iniciar .jar :" + ex.Message);
+                FindMessajeEvent("Error al iniciar .jar :" + ex.Message);
             }
             
         }
 
         /// <summary>
-        /// Inicia el Listener para Caller Id.
+        /// Inicia el sub proceso que inicia el agente de Avaya.
         /// </summary>
-        public void IniciarCliente()
+        public   void IniciarCliente()
         {
             try
             {
                 //Iniciamos el .jar (Aplicación agente de Avaya)
                 Shell(aplicacionAgente);
 
-                //Abrimos la conexión con el Agente Avaya
+
                 objTcpClient = objTcpListener.AcceptTcpClient();
 
-                //Escuchamos el puerto de forma asincrona.
-                this.AsyncWorker.RunWorkerAsync();
-
-               
             }
             catch (SocketException se)
             {
                 this.FindMessajeEvent(se.Message);
             }
-           
         }
 
-
-        
         /// <summary>
         /// Recibe los datos que vienen por TCP.
         /// </summary>
@@ -184,22 +176,29 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
                         {
                             string datosAgente = returndata.Split("@".ToCharArray())[1];
                             datosAgente = datosAgente.Substring(0, datosAgente.IndexOf('%'));
-                            this.FindMessajeEvent(string.Format("En extensión :{0}", datosAgente));
+                            FindMessajeEvent(string.Format("En extensión :{0}", datosAgente));
                         }
                         //Obtenemos el No de telefono de la llamada entrante.
                         if (returndata.Contains("&"))
                         {
                             string datosLlamada = returndata.Split("&".ToCharArray())[1];
-                            datosLlamada = datosLlamada.Substring(0, datosLlamada.IndexOf('&'));
-                            //Mandamos el telefono obtenido
-                            this.FindDataEvent(datosLlamada);
+                            datosLlamada = datosLlamada.Substring(0, datosLlamada.IndexOf('%'));
+                            if (!Aplicacion.LlamadasActuales.Contains(datosLlamada))
+                            {
+                                //Guardamos la llamada entrante.
+                                Aplicacion.LlamadasActuales.Add(datosLlamada);
+
+                                //Mandamos el telefono obtenido
+                                FindDataEvent(datosLlamada);
+                            }
+                            
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                this.FindMessajeEvent("Error al obtener datos : " + ex.Message);
+                FindMessajeEvent("Error al obtener datos : " + ex.Message);
 
             }
 
@@ -209,18 +208,16 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
         /// <summary>
         /// Envia el mensaje para cerrar el Agente de Avaya.
         /// </summary>
-        public void DetenerCliente()
+        public   void DetenerCliente()
         {
             try
             {
-                //Detebemos el monitor asincrono.
-                this.AsyncWorker.CancelAsync();
 
+               
                 //Mandamos el comando que interpreta el .jar para detenerse.
                 string responseString = "Exit%";
                 Byte[] sendBytes = Encoding.ASCII.GetBytes(responseString);
                 netStream.Write(sendBytes, 0, sendBytes.Length);
-                
 
                 this.FindMessajeEvent("Se envió deneter agente");
                 
@@ -264,7 +261,7 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
         /// </summary>
         public event EventHandler<FindDataEventArgs> ListenerFindDataEvent;
 
-        public void FindDataEvent(string val)
+        protected   void FindDataEvent(string val)
         {
             EventHandler<FindDataEventArgs> temp = ListenerFindDataEvent;
             if (temp != null)
@@ -276,19 +273,16 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
         /// </summary>
         public event EventHandler<FindMessageEventArgs> ListenerMessageDataEvent;
 
-        public void FindMessajeEvent(string msg)
+        protected   void FindMessajeEvent(string msg)
         {
             EventHandler<FindMessageEventArgs> temp = ListenerMessageDataEvent;
             if (temp != null)
                 temp(this, new FindMessageEventArgs(msg));
         }
 
-        void AsyncWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            this.BuscarDatos();
-        }
-        
+       
 
+       
         #endregion
 
     }

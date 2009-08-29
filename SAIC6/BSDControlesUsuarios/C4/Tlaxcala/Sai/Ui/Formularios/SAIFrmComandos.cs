@@ -51,8 +51,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 Left = (Screen.PrimaryScreen.WorkingArea.Right - Width);
 
                 //Se crean los eventos para el monitor de Avaya
-                this.TcpListener.ListenerFindDataEvent += new EventHandler<FindDataEventArgs>(TcpListener_ListenerFindDataEvent);
-                this.TcpListener.ListenerMessageDataEvent += new EventHandler<FindMessageEventArgs>(TcpListener_ListenerMessageDataEvent);
+                //this.TcpListener.ListenerFindDataEvent += new EventHandler<FindDataEventArgs>(TcpListener_ListenerFindDataEvent);
+                //this.TcpListener.ListenerMessageDataEvent += new EventHandler<FindMessageEventArgs>(TcpListener_ListenerMessageDataEvent);
             }
         }
 
@@ -69,7 +69,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <summary>
         /// Monitor de actividad telefónica Asincrono
         /// </summary>
-        SaiTcpClient TcpListener = new SaiTcpClient();
+        private SaiTcpClient TcpListener = new SaiTcpClient();
 
         public delegate void DelegadoEscribirDato(string dato);
 
@@ -201,9 +201,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <summary>
         /// Inicia el monitor para el Agente de Avaya
         /// </summary>
-        private void IniciarMonitorLlamadas()
+        private  void IniciarMonitorLlamadas()
         {
             TcpListener.IniciarCliente();
+            this.Monitor.Enabled = true;
+            this.Monitor.Start();
 
         }
 
@@ -212,6 +214,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         private void DetenerMonitorLlamadas()
         {
+            this.Monitor.Stop();
+            this.Monitor.Enabled = false;
             TcpListener.DetenerCliente();
         }
 
@@ -224,6 +228,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         void EscribirDato(string dato)
         {
             this.NoTelefono = dato;
+            this.tssInfo.Text = string.Format("Última llamada : {0} ",dato);
         }
 
         #endregion
@@ -301,11 +306,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
                         {
 
-                            //if (Aplicacion.VentanasIncidencias.Count == 0)
-                            //{
-                            var frmIncidencia066 = new SAIFrmIncidencia066(string.Empty);
-                            frmIncidencia066.Show(this);
-                            //}
+                            SAIFrmAltaIncidencia066 frmAltaIncidencia = new SAIFrmAltaIncidencia066(string.Empty);
+                            frmAltaIncidencia.Show(this);
+                            //var frmIncidencia066 = new SAIFrmIncidencia066(string.Empty);
+                            //frmIncidencia066.Show(this);
+                            
 
                         }
                         else if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
@@ -445,7 +450,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
 
                 //Iniciamos el monitor del agente de Avaya
-                //this.IniciarMonitorLlamadas();
+               // this.IniciarMonitorLlamadas();
 
 
 
@@ -498,7 +503,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void TcpListener_ListenerMessageDataEvent(object sender, FindMessageEventArgs e)
         {
-            this.Invoke(new DelegadoEscribirDato(EscribirMensaje), new object[] { e.Mensaje });
+           this.Invoke(new DelegadoEscribirDato(EscribirMensaje), new object[] { e.Mensaje });
         }
 
         void TcpListener_ListenerFindDataEvent(object sender, FindDataEventArgs e)
@@ -519,21 +524,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
             {
 
-
-                //var frmIncidencia066 = new SAIFrmIncidencia066(e.Datos);
-                //frmIncidencia066.Show(this);                 
-
                 var frmIncidencia066 = new SAIFrmIncidencia066(this.NoTelefono);
-                frmIncidencia066.Show(this);
+                frmIncidencia066.Show();
 
             }
             else if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
                 Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
             {
-
-                //var frmIncidencia089 = new SAIFrmIncidencia089(e.Datos);
-                //frmIncidencia089.Show(this);
-
                 var frmIncidencia089 = new SAIFrmIncidencia089(this.NoTelefono);
                 frmIncidencia089.Show(this);
 
@@ -542,12 +539,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         #endregion
 
+        private void Monitor_Tick(object sender, EventArgs e)
+        {
+            TcpListener.BuscarDatos();
+        }
+
+        
+
 
 
 
         #endregion
-
-
 
     }
 }

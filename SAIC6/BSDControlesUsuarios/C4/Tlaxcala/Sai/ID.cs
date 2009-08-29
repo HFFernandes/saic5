@@ -123,7 +123,7 @@
         public const string SQL_DEPENDENCIAS089 =
             "SELECT Dependencia.* FROM Dependencia INNER JOIN IncidenciaDependencia ON Dependencia.Clave = IncidenciaDependencia.ClaveDependencia INNER JOIN Incidencia ON IncidenciaDependencia.Folio = Incidencia.Folio WHERE (Incidencia.Folio = {0})";
 
-        public const string SQL_OBTENERINFOTITULARLINEA = "SELECT TelefonoTelmex.* FROM TelefonoTelmex WHERE Telefono={0}";
+        public const string SQL_OBTENERINFOTITULARLINEA = "SELECT TelefonoTelmex.* FROM TelefonoTelmex WHERE Telefono='{0}'";
 
         public const string SQL_OBTENERCODIGOPOSTAL = "SELECT * FROM CodigoPostal WHERE Clave={0}";
 

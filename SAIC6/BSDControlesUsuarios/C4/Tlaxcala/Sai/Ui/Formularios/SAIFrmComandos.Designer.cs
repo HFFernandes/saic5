@@ -47,6 +47,7 @@
             this.lblS = new System.Windows.Forms.Label();
             this.stComandos = new System.Windows.Forms.StatusStrip();
             this.tssInfo = new System.Windows.Forms.ToolStripStatusLabel();
+            this.Monitor = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.SAIBarraComandos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgAdministrador)).BeginInit();
             this.pnResumenIncidencias.SuspendLayout();
@@ -239,6 +240,10 @@
             this.tssInfo.Size = new System.Drawing.Size(32, 17);
             this.tssInfo.Text = "Listo";
             // 
+            // Monitor
+            // 
+            this.Monitor.Tick += new System.EventHandler(this.Monitor_Tick);
+            // 
             // SAIFrmComandos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -288,5 +293,6 @@
         public BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox saiTxtPrioridad4;
         private System.Windows.Forms.StatusStrip stComandos;
         private System.Windows.Forms.ToolStripStatusLabel tssInfo;
+        private System.Windows.Forms.Timer Monitor;
     }
 }

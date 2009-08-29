@@ -340,15 +340,19 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="noTelefono">string, Número telefónico</param>
         public void ObtenerTitularLinea(string noTelefono)
         {
-            //TelefonoTelmex DatosTitular = Mappers.TelefonoTelmexMapper.Instance()
-            //.GetOneBySQLQuery(string.Format(ID.SQL_OBTENERINFOTITULARLINEA, noTelefono));
+            if(!string.IsNullOrEmpty(noTelefono))
+            {
+                TelefonoTelmex DatosTitular = Mappers.TelefonoTelmexMapper.Instance()
+                .GetOneBySQLQuery(string.Format(ID.SQL_OBTENERINFOTITULARLINEA, noTelefono));
 
-            //this.TextoTelefono = noTelefono;
-            //this.txtNombreDenunciante.Text = DatosTitular.Nombre;
-            //this.txtApellidoDenunciante.Text = string.Format("{0} {1}", DatosTitular.ApellidoPaterno,DatosTitular.ApellidoMaterno);
-            //this.txtDenuncianteDireccion.Text = DatosTitular.Direccion;
-            //CodigoPostal CodigoTitular=Mappers.CodigoPostalMapper.Instance().GetOneBySQLQuery(string.Format(ID.SQL_OBTENERCODIGOPOSTAL, DatosTitular.ClaveCodigoPostal));
-            //this.TextoCodigoPostal = CodigoTitular.Valor;
+                this.TextoTelefono = noTelefono;
+                this.txtNombreDenunciante.Text = DatosTitular.Nombre;
+                this.txtApellidoDenunciante.Text = string.Format("{0} {1}", DatosTitular.ApellidoPaterno, DatosTitular.ApellidoMaterno);
+                this.txtDenuncianteDireccion.Text = DatosTitular.Direccion;
+                CodigoPostal CodigoTitular = Mappers.CodigoPostalMapper.Instance().GetOneBySQLQuery(string.Format(ID.SQL_OBTENERCODIGOPOSTAL, DatosTitular.ClaveCodigoPostal));
+                this.TextoCodigoPostal = CodigoTitular.Valor;
+            }
+            
         }
 
         #endregion
@@ -513,6 +517,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 {
                     //this.GuardaCorporaciones();
                     this.GuardaDenunciante();
+                    Aplicacion.LlamadasActuales.Remove(this.TextoTelefono);
                     base.OnClosed(e);
                 }
                 catch (System.Exception ex)
