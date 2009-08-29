@@ -137,6 +137,12 @@
     <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmAgregarUnidad.Designer.cs">
       <DependentUpon>SAIFrmAgregarUnidad.cs</DependentUpon>
     </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmAltaIncidencia066.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmAltaIncidencia066.Designer.cs">
+      <DependentUpon>SAIFrmAltaIncidencia066.cs</DependentUpon>
+    </Compile>
     <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmBuscadorIncidencias.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -401,6 +407,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmAgendaTelefonica.resx">
       <DependentUpon>SAIFrmAgendaTelefonica.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmAltaIncidencia066.resx">
+      <DependentUpon>SAIFrmAltaIncidencia066.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmDependencias089.resx">
