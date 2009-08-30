@@ -309,23 +309,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 try
                 {
-                    this.RecuperaDatosEnIncidencia();
-                    /*_Incidencia089.Activo = true;
-                    _Incidencia089.AliasDelincuente = this.txtAliasDelincuente.Text;
-                    _Incidencia089.ClaveCodigoPostal = ((Entidades.CodigoPostal)this.cbxCP.SelectedItem).Clave;
-                    _Incidencia089.ClaveColonia = ((Entidades.Colonia)this.cbxColonia.SelectedItem).Clave;
-                    _Incidencia089.ClaveDenunciante = 0;
-                    _Incidencia089.ClaveLocalidad = ((Entidades.Localidad)this.cbxLocalidad.SelectedItem).Clave;
-                    _Incidencia089.ClaveMunicipio = ((Entidades.Municipio)this.cbxMunicipio.SelectedItem).Clave;
-                    _Incidencia089.ClaveTipo = 0;
-                    _Incidencia089.Descripcion = this.txtDescripcionDenuncia.Text;
-                    _Incidencia089.Direccion = this.txtDireccion.Text;
-                    
-                    _Incidencia089.HoraRecepcion = DateTime.Now;
-                    _Incidencia089.NumeroOficio = this.txtOficioEnvio.Text;
-                    _Incidencia089.Referencias = this.txtReferencias.Text;
-                    _Incidencia089.TipoIncidenciaEntity = (this.cbxTipoDenuncia.SelectedItem as Entidades.TipoIncidencia);
-                    */
+                    this.RecuperaDatosEnIncidencia();                    
                     Mappers.IncidenciaMapper.Instance().Save(_Incidencia089);
                 }
                 catch(Exception ex)
@@ -338,6 +322,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void button1_Click(object sender, EventArgs e)
         {
+            this.ActualizarIncidencia();
             SAIFrmDependencias089 frmDependencias = new SAIFrmDependencias089(this._Incidencia089.Folio);
             frmDependencias.ShowDialog();
         }
@@ -464,7 +449,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void cbxTipoDenuncia_Leave(object sender, EventArgs e)
         {
-            this.ActualizarIncidencia();
+            //this.ActualizarIncidencia();
         }
 
         private void chkFechaDoc_CheckedChanged(object sender, EventArgs e)
@@ -475,14 +460,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
             else 
             {
-                this.dtpFechaDoc.Enabled = true;
+                this.dtpFechaDoc.Enabled = false;
             }
         }
 
         private void dtpFechaDoc_ValueChanged(object sender, EventArgs e)
         {
             _Incidencia089.FechaDocumento = this.dtpFechaDoc.Value;
-            this.ActualizarIncidencia();
+            //this.ActualizarIncidencia();
         }
 
         /// <summary>
@@ -537,7 +522,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 this._Incidencia089.Descripcion = this.txtDescripcionDenuncia.Text;
                 this._Incidencia089.Direccion = txtDireccion.Text;
                 this._Incidencia089.Referencias = this.txtReferencias.Text;
+                this._Incidencia089.AliasDelincuente = this.txtAliasDelincuente.Text;
+                this._Incidencia089.NumeroOficio = this.txtOficioEnvio.Text;
             }
+        }
+
+        private void SAIFrm089_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.ActualizarIncidencia();
         }
 
 
