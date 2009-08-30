@@ -215,6 +215,11 @@ namespace BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers
             return base.GetOne(new Dependencia(Clave));
         }
 
+        public Dependencia GetByDescripcion(System.String nombre)
+        {
+            return base.GetObjectByAnyStoredProcedure(StoredProceduresPrefix() + "Dependencia_GetByDescripcion", nombre);
+        }
+
 
         // GetOne By Objects and Params
             
