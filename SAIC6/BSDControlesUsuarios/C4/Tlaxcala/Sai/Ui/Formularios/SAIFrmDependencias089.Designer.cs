@@ -95,6 +95,7 @@
             this.Name = "SAIFrmDependencias089";
             this.Text = "SAIFrmDependencias089";
             this.Load += new System.EventHandler(this.SAIFrmDependencias089_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SAIFrmDependencias089_FormClosing);
             this.Controls.SetChildIndex(this.gvDependencias, 0);
             this.Controls.SetChildIndex(this.groupBox1, 0);
             this.Controls.SetChildIndex(this.btnCerrar, 0);
