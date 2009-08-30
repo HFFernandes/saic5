@@ -58,7 +58,6 @@
             this.dtpFechaDoc = new System.Windows.Forms.DateTimePicker();
             this.chkFechaDoc = new System.Windows.Forms.CheckBox();
             this.btnDependencias = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -203,6 +202,8 @@
             this.cbxTipoDenuncia.Size = new System.Drawing.Size(300, 21);
             this.cbxTipoDenuncia.StrMensajeCampoRequerido = "El campo es requerido.";
             this.cbxTipoDenuncia.TabIndex = 1;
+            this.cbxTipoDenuncia.SelectedIndexChanged += new System.EventHandler(this.cbxTipoDenuncia_SelectedIndexChanged);
+            this.cbxTipoDenuncia.Leave += new System.EventHandler(this.cbxTipoDenuncia_Leave);
             this.cbxTipoDenuncia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cbxTipoDenuncia_KeyUp);
             // 
             // txtDireccion
@@ -213,6 +214,8 @@
             this.txtDireccion.Size = new System.Drawing.Size(490, 20);
             this.txtDireccion.StrMensajeCampoRequerido = "El campo es requerido.";
             this.txtDireccion.TabIndex = 2;
+            this.txtDireccion.TextChanged += new System.EventHandler(this.txtDireccion_TextChanged);
+            this.txtDireccion.Leave += new System.EventHandler(this.txtDireccion_Leave);
             this.txtDireccion.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDireccion_KeyUp);
             // 
             // txtReferencias
@@ -225,6 +228,8 @@
             this.txtReferencias.Size = new System.Drawing.Size(490, 85);
             this.txtReferencias.StrMensajeCampoRequerido = "El campo es requerido.";
             this.txtReferencias.TabIndex = 7;
+            this.txtReferencias.TextChanged += new System.EventHandler(this.txtReferencias_TextChanged);
+            this.txtReferencias.Leave += new System.EventHandler(this.txtReferencias_Leave);
             // 
             // txtDescripcionDenuncia
             // 
@@ -260,12 +265,14 @@
             // cbxMunicipio
             // 
             this.cbxMunicipio.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.cbxMunicipio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxMunicipio.FormattingEnabled = true;
             this.cbxMunicipio.Location = new System.Drawing.Point(82, 154);
             this.cbxMunicipio.Name = "cbxMunicipio";
             this.cbxMunicipio.Size = new System.Drawing.Size(200, 21);
             this.cbxMunicipio.StrMensajeCampoRequerido = "El campo es requerido.";
             this.cbxMunicipio.TabIndex = 3;
+            this.cbxMunicipio.SelectedIndexChanged += new System.EventHandler(this.cbxMunicipio_SelectedIndexChanged);
             this.cbxMunicipio.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cbxMunicipio_KeyUp);
             // 
             // cbxCP
@@ -277,28 +284,36 @@
             this.cbxCP.Size = new System.Drawing.Size(200, 21);
             this.cbxCP.StrMensajeCampoRequerido = "El campo es requerido.";
             this.cbxCP.TabIndex = 5;
+            this.cbxCP.SelectedIndexChanged += new System.EventHandler(this.cbxCP_SelectedIndexChanged);
+            this.cbxCP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbxCP_KeyPress);
             this.cbxCP.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cbxCP_KeyUp);
+            this.cbxCP.TextUpdate += new System.EventHandler(this.cbxCP_TextUpdate);
+            this.cbxCP.TextChanged += new System.EventHandler(this.cbxCP_TextChanged);
             // 
             // cbxLocalidad
             // 
             this.cbxLocalidad.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.cbxLocalidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxLocalidad.FormattingEnabled = true;
             this.cbxLocalidad.Location = new System.Drawing.Point(372, 154);
             this.cbxLocalidad.Name = "cbxLocalidad";
             this.cbxLocalidad.Size = new System.Drawing.Size(200, 21);
             this.cbxLocalidad.StrMensajeCampoRequerido = "El campo es requerido.";
             this.cbxLocalidad.TabIndex = 4;
+            this.cbxLocalidad.SelectedIndexChanged += new System.EventHandler(this.cbxLocalidad_SelectedIndexChanged);
             this.cbxLocalidad.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cbxLocalidad_KeyUp);
             // 
             // cbxColonia
             // 
             this.cbxColonia.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.cbxColonia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxColonia.FormattingEnabled = true;
             this.cbxColonia.Location = new System.Drawing.Point(372, 181);
             this.cbxColonia.Name = "cbxColonia";
             this.cbxColonia.Size = new System.Drawing.Size(200, 21);
             this.cbxColonia.StrMensajeCampoRequerido = "El campo es requerido.";
             this.cbxColonia.TabIndex = 6;
+            this.cbxColonia.SelectedIndexChanged += new System.EventHandler(this.cbxColonia_SelectedIndexChanged);
             this.cbxColonia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cbxColonia_KeyUp);
             // 
             // lblFechaDocumento
@@ -312,11 +327,13 @@
             // 
             // dtpFechaDoc
             // 
+            this.dtpFechaDoc.Enabled = false;
             this.dtpFechaDoc.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFechaDoc.Location = new System.Drawing.Point(436, 416);
             this.dtpFechaDoc.Name = "dtpFechaDoc";
             this.dtpFechaDoc.Size = new System.Drawing.Size(115, 20);
             this.dtpFechaDoc.TabIndex = 11;
+            this.dtpFechaDoc.ValueChanged += new System.EventHandler(this.dtpFechaDoc_ValueChanged);
             // 
             // chkFechaDoc
             // 
@@ -326,6 +343,7 @@
             this.chkFechaDoc.Size = new System.Drawing.Size(15, 14);
             this.chkFechaDoc.TabIndex = 52;
             this.chkFechaDoc.UseVisualStyleBackColor = true;
+            this.chkFechaDoc.CheckedChanged += new System.EventHandler(this.chkFechaDoc_CheckedChanged);
             // 
             // btnDependencias
             // 
@@ -337,21 +355,11 @@
             this.btnDependencias.UseVisualStyleBackColor = true;
             this.btnDependencias.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(385, 475);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 54;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
             // SAIFrm089
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 566);
-            this.Controls.Add(this.button2);
+            this.ClientSize = new System.Drawing.Size(584, 531);
             this.Controls.Add(this.btnDependencias);
             this.Controls.Add(this.chkFechaDoc);
             this.Controls.Add(this.dtpFechaDoc);
@@ -409,7 +417,6 @@
             this.Controls.SetChildIndex(this.dtpFechaDoc, 0);
             this.Controls.SetChildIndex(this.chkFechaDoc, 0);
             this.Controls.SetChildIndex(this.btnDependencias, 0);
-            this.Controls.SetChildIndex(this.button2, 0);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -448,6 +455,5 @@
         private System.Windows.Forms.DateTimePicker dtpFechaDoc;
         private System.Windows.Forms.CheckBox chkFechaDoc;
         private System.Windows.Forms.Button btnDependencias;
-        private System.Windows.Forms.Button button2;
     }
 }
