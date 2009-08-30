@@ -33,6 +33,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             InitializeComponent();
             _Incidencia089 = entIncidencia;
+            this.LlenarDatosIncidencia();
         }
 
         private void SAIFrm089_Load(object sender, EventArgs e)
@@ -163,6 +164,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.cbxMunicipio.DataSource = Mappers.MunicipioMapper.Instance().GetAll();
                     this.cbxMunicipio.DisplayMember = "Nombre";
                     this.cbxMunicipio.ValueMember = "Clave";
+                    this.cbxColonia.SelectedIndex = -1;
                 }
                 catch (Exception ex)
                 { throw new SAIExcepcion(ex.Message); }
@@ -190,7 +192,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (SAIExcepcion)
             { }
         }
-
+        /// <summary>
+        /// Llena Las localidades por colonia
+        /// </summary>
+        /// <param name="iColonia"></param>
         private void LlenarLocalidadesPorColonia(int iColonia)
         {
             try
@@ -238,8 +243,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 try
                 {
                     this.cbxColonia.DataSource = Mappers.ColoniaMapper.Instance().GetByCodigoPostal(iCp);
-                    this.cbxColonia.DisplayMember = "Clave";
-                    this.cbxColonia.ValueMember = "Nombre";
+                    this.cbxColonia.DisplayMember = "Nombre";
+                    this.cbxColonia.ValueMember = "Clave";
                 }
                 catch (Exception ex)
                 { throw new SAIExcepcion(ex.Message); }
@@ -320,25 +325,53 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
  
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Actualiza la dependencia Activa y muestra la ventana modal de Dependencias
+        /// </summary>
+        private void btnDependencias_Click(object sender, EventArgs e)
         {
             this.ActualizarIncidencia();
-            SAIFrmDependencias089 frmDependencias = new SAIFrmDependencias089(this._Incidencia089.Folio);
+            SAIFrmDependencias089 frmDependencias = new SAIFrmDependencias089(this._Incidencia089);
             frmDependencias.ShowDialog();
         }
         /// <summary>
         /// Llena los controles con los datos de una incidencia
         /// </summary>
         private void LlenarDatosIncidencia()
-        { }
-
+        {
+            try
+            {
+                try 
+                {
+                    this.txtDireccion.Text = this._Incidencia089.Direccion;
+                    this.txtReferencias.Text = this._Incidencia089.Referencias;
+                    this.txtDescripcionDenuncia.Text = this._Incidencia089.Descripcion;
+                    this.txtAliasDelincuente.Text = this._Incidencia089.AliasDelincuente;
+                    this.txtOficioEnvio.Text = this._Incidencia089.NumeroOficio;
+                    if (this._Incidencia089.FechaDocumento.HasValue)
+                    {
+                        this.dtpFechaDoc.Value = this._Incidencia089.FechaDocumento.Value;
+                        this.chkFechaDoc.Checked = true;
+                    }
+                    else
+                    {
+                        this.chkFechaDoc.Checked = false;
+                        this.dtpFechaDoc.Value = DateTime.Now;
+                    }
+                }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
+            }
+            catch (SAIExcepcion)
+            { }
+        }
         /// <summary>
         /// Se ejecuta cuando se selecciona un municipio
         /// </summary>
         private void cbxMunicipio_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LlenarLocalidadesPorMunicipio(((Entidades.Municipio)this.cbxMunicipio.SelectedItem).Clave);
-            this.cbxLocalidad.Focus();
+            //LlenarLocalidadesPorMunicipio(((Entidades.Municipio)this.cbxMunicipio.SelectedItem).Clave);
+            //this.cbxLocalidad.Focus();
         }
 
         /// <summary>
@@ -358,13 +391,19 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             //this.LlenarColoniasPorCP(((Entidades.CodigoPostal)this.cbxCP.SelectedItem).Clave);
             this.txtReferencias.Focus();
         }
-
+        /// <summary>
+        /// Se ejecuta cuando se selecciona una Colonia
+        /// </summary>
         private void cbxColonia_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.SeleccionaCP(((Entidades.Colonia)this.cbxColonia.SelectedItem).ClaveCodigoPostal.Value);
             this.cbxCP.Focus();
         }
 
+        /// <summary>
+        /// Selecciona un CP
+        /// </summary>
+        /// <param name="cpSelect">Valor del CP que se quiere seleccionar</param>
         private void SeleccionaCP(int cpSelect)
         {
             foreach (Entidades.CodigoPostal cpItem in this.cbxCP.Items)
@@ -373,7 +412,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.cbxCP.SelectedItem = cpItem;
             }
         }
-
+        /// <summary>
+        /// Se ejecuta cuando se captura un Codigo Postal
+        /// </summary>
         private void cbxCP_TextChanged(object sender, EventArgs e)
         {
             try 
@@ -381,17 +422,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 Entidades.CodigoPostalList lstCodigoPostal = Mappers.CodigoPostalMapper.Instance().GetBySQLQuery("Select Clave, Valor from CodigoPostal where Valor = '" + this.cbxCP.Text + "'");
                 if (lstCodigoPostal.Count > 0)
                 {
-                    this.LlenarColoniasPorCP(lstCodigoPostal[0].Clave);
-                    
+                    this.LlenarColoniasPorCP(lstCodigoPostal[0].Clave);                    
                 }
-
             }
             catch(SAIExcepcion)
             {}
-        }
-
-        
-
+        }        
+        /// <summary>
+        /// Valida que solo se captren numeros al Capturar el Codigo Postal
+        /// </summary>
         private void cbxCP_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (Char.IsDigit(e.KeyChar))
@@ -407,32 +446,24 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 e.Handled = true;
             }
         }
-
-        private void cbxCP_TextUpdate(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtReferencias_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// Actualiza los datos de la incidencia cuando se ha capturado las referencias
+        /// </summary>
         private void txtReferencias_Leave(object sender, EventArgs e)
         {
             this.ActualizarIncidencia();
         }
-
-        private void txtDireccion_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
+        // <summary>
+        /// Actualiza los datos de la incidencia cuando se ha capturado la direccion
+        /// </summary>
         private void txtDireccion_Leave(object sender, EventArgs e)
         {
             this.ActualizarIncidencia();
         }
 
+        /// <summary>
+        /// Verifica que el tipo de Denuncia, si es broma se actualiza el Estatus a Cancelado
+        /// </summary>
         private void cbxTipoDenuncia_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbxTipoDenuncia.SelectedItem != null && (
@@ -442,16 +473,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             ))
             {
                 txtDireccion.Text = "SIN REGISTRO";
-                //Se cambia a incidencia cancelada
                 this._Incidencia089.ClaveEstatus = 5;
+                this.ActualizarIncidencia();
             }
         }
-
-        private void cbxTipoDenuncia_Leave(object sender, EventArgs e)
-        {
-            //this.ActualizarIncidencia();
-        }
-
+        /// <summary>
+        /// Ocurre cuando se activa o desactiva el check de Fecha Documento, activando o desactivando el control Fecha Documento
+        /// </summary>
         private void chkFechaDoc_CheckedChanged(object sender, EventArgs e)
         {
             if (this.chkFechaDoc.Checked)
@@ -461,9 +489,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             else 
             {
                 this.dtpFechaDoc.Enabled = false;
+                this._Incidencia089.FechaDocumento = new Nullable<DateTime>();
             }
         }
-
+        /// <summary>
+        /// Se asigna fecha del documento del Oficio
+        /// </summary>
         private void dtpFechaDoc_ValueChanged(object sender, EventArgs e)
         {
             _Incidencia089.FechaDocumento = this.dtpFechaDoc.Value;
@@ -526,10 +557,37 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 this._Incidencia089.NumeroOficio = this.txtOficioEnvio.Text;
             }
         }
-
+        // <summary>
+        /// Actualiza los datos de la incidencia cuando se cierra formulario
+        /// </summary>
         private void SAIFrm089_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.ActualizarIncidencia();
+        }
+        /// <summary>
+        /// Si se captura un numero de oficio se actualiza el estatus a Pendiente
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtOficioEnvio_Leave(object sender, EventArgs e)
+        {
+            if (this.txtOficioEnvio.Text != string.Empty)
+            {
+                this._Incidencia089.ClaveEstatus = 2;
+                this.ActualizarIncidencia();
+            }
+        }
+
+        private void txtOficioEnvio_TextChanged(object sender, EventArgs e)
+        {
+            if (this.txtOficioEnvio.Text != string.Empty)
+            {
+                this.btnDependencias.Enabled = true;
+            }
+            else
+            {
+                this.btnDependencias.Enabled = false;
+            }
         }
 
 
