@@ -159,7 +159,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             }                            
                         }
                     }
-                    this.LlenarGridView(9);
+                    this.LlenarGridView(_iFolio);
                 }
                 catch (Exception ex)
                 {
@@ -246,6 +246,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         }
 
         private void gvDependencias_CellLeave(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void gvDependencias_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
 
         }        
