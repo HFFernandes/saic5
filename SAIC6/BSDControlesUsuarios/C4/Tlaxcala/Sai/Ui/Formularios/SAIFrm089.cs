@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using Mappers = BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using Entidades = BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
+using BSD.C4.Tlaxcala.Sai.Mapa;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -588,6 +589,51 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 this.btnDependencias.Enabled = false;
             }
+        }
+
+        private void actualizaMapaUbicacion()
+        {
+
+            if (cbxMunicipio.SelectedIndex == -1 || cbxMunicipio.Text.Trim() == string.Empty)
+            {
+                _objUbicacion.IdMunicipio = null;
+            }
+            else
+            {
+                _objUbicacion.IdMunicipio = int.Parse((cbxMunicipio.SelectedItem as Entidades.Municipio).Clave.ToString());
+
+            }
+
+            if (cbxLocalidad.SelectedIndex == -1 || cbxLocalidad.Text.Trim() == string.Empty)
+            {
+                _objUbicacion.IdLocalidad = null;
+            }
+            else
+            {
+                _objUbicacion.IdLocalidad = (cbxLocalidad.SelectedItem as Entidades.Localidad).Clave;
+            }
+
+            if (cbxColonia.SelectedIndex == -1 || cbxColonia.Text.Trim() == string.Empty)
+            {
+                _objUbicacion.IdColonia = null;
+            }
+            else
+            {
+                _objUbicacion.IdColonia = (cbxColonia.SelectedItem as Entidades.Colonia).Clave;
+
+            }
+
+            if (cbxCP.SelectedIndex == -1 || cbxCP.Text.Trim() == string.Empty)
+            {
+                _objUbicacion.IdCodigoPostal = null;
+            }
+            else
+            {
+                _objUbicacion.IdCodigoPostal = (cbxCP.SelectedItem as Entidades.CodigoPostal).Clave;
+
+            }
+
+            //Mapa.Controlador.MuestraMapa(_objUbicacion);
         }
 
 
