@@ -203,7 +203,6 @@
             this.cbxTipoDenuncia.StrMensajeCampoRequerido = "El campo es requerido.";
             this.cbxTipoDenuncia.TabIndex = 1;
             this.cbxTipoDenuncia.SelectedIndexChanged += new System.EventHandler(this.cbxTipoDenuncia_SelectedIndexChanged);
-            this.cbxTipoDenuncia.Leave += new System.EventHandler(this.cbxTipoDenuncia_Leave);
             this.cbxTipoDenuncia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cbxTipoDenuncia_KeyUp);
             // 
             // txtDireccion
@@ -214,7 +213,6 @@
             this.txtDireccion.Size = new System.Drawing.Size(490, 20);
             this.txtDireccion.StrMensajeCampoRequerido = "El campo es requerido.";
             this.txtDireccion.TabIndex = 2;
-            this.txtDireccion.TextChanged += new System.EventHandler(this.txtDireccion_TextChanged);
             this.txtDireccion.Leave += new System.EventHandler(this.txtDireccion_Leave);
             this.txtDireccion.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtDireccion_KeyUp);
             // 
@@ -228,7 +226,6 @@
             this.txtReferencias.Size = new System.Drawing.Size(490, 85);
             this.txtReferencias.StrMensajeCampoRequerido = "El campo es requerido.";
             this.txtReferencias.TabIndex = 7;
-            this.txtReferencias.TextChanged += new System.EventHandler(this.txtReferencias_TextChanged);
             this.txtReferencias.Leave += new System.EventHandler(this.txtReferencias_Leave);
             // 
             // txtDescripcionDenuncia
@@ -246,6 +243,7 @@
             // 
             this.txtAliasDelincuente.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtAliasDelincuente.Location = new System.Drawing.Point(107, 390);
+            this.txtAliasDelincuente.MaxLength = 50;
             this.txtAliasDelincuente.Name = "txtAliasDelincuente";
             this.txtAliasDelincuente.Size = new System.Drawing.Size(175, 20);
             this.txtAliasDelincuente.StrMensajeCampoRequerido = "El campo es requerido.";
@@ -256,10 +254,13 @@
             // 
             this.txtOficioEnvio.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtOficioEnvio.Location = new System.Drawing.Point(107, 419);
+            this.txtOficioEnvio.MaxLength = 50;
             this.txtOficioEnvio.Name = "txtOficioEnvio";
             this.txtOficioEnvio.Size = new System.Drawing.Size(175, 20);
             this.txtOficioEnvio.StrMensajeCampoRequerido = "El campo es requerido.";
             this.txtOficioEnvio.TabIndex = 10;
+            this.txtOficioEnvio.TextChanged += new System.EventHandler(this.txtOficioEnvio_TextChanged);
+            this.txtOficioEnvio.Leave += new System.EventHandler(this.txtOficioEnvio_Leave);
             this.txtOficioEnvio.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtOficioEnvio_KeyUp);
             // 
             // cbxMunicipio
@@ -287,7 +288,6 @@
             this.cbxCP.SelectedIndexChanged += new System.EventHandler(this.cbxCP_SelectedIndexChanged);
             this.cbxCP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbxCP_KeyPress);
             this.cbxCP.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cbxCP_KeyUp);
-            this.cbxCP.TextUpdate += new System.EventHandler(this.cbxCP_TextUpdate);
             this.cbxCP.TextChanged += new System.EventHandler(this.cbxCP_TextChanged);
             // 
             // cbxLocalidad
@@ -347,13 +347,14 @@
             // 
             // btnDependencias
             // 
+            this.btnDependencias.Enabled = false;
             this.btnDependencias.Location = new System.Drawing.Point(466, 475);
             this.btnDependencias.Name = "btnDependencias";
             this.btnDependencias.Size = new System.Drawing.Size(106, 23);
             this.btnDependencias.TabIndex = 53;
             this.btnDependencias.Text = "Dependencias...";
             this.btnDependencias.UseVisualStyleBackColor = true;
-            this.btnDependencias.Click += new System.EventHandler(this.button1_Click);
+            this.btnDependencias.Click += new System.EventHandler(this.btnDependencias_Click);
             // 
             // SAIFrm089
             // 
