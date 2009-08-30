@@ -161,7 +161,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             // 
             this.txtFiltroRegistros.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtFiltroRegistros.Name = "txtFiltroRegistros";
-            this.txtFiltroRegistros.Size = new System.Drawing.Size(100, 25);
+            this.txtFiltroRegistros.Size = new System.Drawing.Size(150, 25);
             this.txtFiltroRegistros.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtFiltroRegistros_KeyUp);
             // 
             // reportContenedor

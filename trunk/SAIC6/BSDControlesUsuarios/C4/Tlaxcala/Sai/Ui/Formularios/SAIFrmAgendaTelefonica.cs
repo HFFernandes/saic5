@@ -25,7 +25,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     saiReport1.reportControl.PrintPreview(true);
                 }
                 else
-                    throw new SAIExcepcion("No tiene los permisos suficientes para realizar esta acción.");
+                    throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
             }
             catch (SAIExcepcion)
             {

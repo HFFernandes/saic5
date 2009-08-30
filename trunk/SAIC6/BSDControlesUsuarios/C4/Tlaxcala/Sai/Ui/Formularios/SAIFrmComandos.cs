@@ -383,7 +383,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         break;
                     case ID.CMD_U:
                         //throw new SAIExcepcion("Funcionalidad no implementada.");
-                        SAIFrmDespacho des=new SAIFrmDespacho();
+                        Incidencia incidencia = IncidenciaMapper.Instance().GetOne(45);
+                        SAIFrmDespacho des=new SAIFrmDespacho(incidencia);
                         des.Show();
                         break;
                     default:

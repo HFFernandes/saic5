@@ -132,16 +132,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             saiReport1.btnDespacharIncidencias.Visible = false;
 
             //Falta mostrar la prioridad del incidente
-            saiReport1.AgregarColumna(0, "ID", 20, false, false, false, false);
+            saiReport1.AgregarColumna(0, "ID", 20, false, false);
             saiReport1.AgregarColumna(1, "Folio", 150, true, true, true, true);
-            saiReport1.AgregarColumna(2, "Hora de Entrada", 100, true, true, true, false);
-            saiReport1.AgregarColumna(3, "Tipo de Incidencia", 200, true, true, true, false);
-            saiReport1.AgregarColumna(4, "Descripción", 200, true, true, true, false);
-            saiReport1.AgregarColumna(5, "Localización", 200, true, false, true, false);
-            saiReport1.AgregarColumna(6, "Dependencias", 100, true, true, true, false);
-            saiReport1.AgregarColumna(7, "Número de Oficio", 100, true, true, true, false);
-            saiReport1.AgregarColumna(8, "Nombre del Operador", 90, true, true, true, false);
-            saiReport1.AgregarColumna(9, "Ligado a", 90, true, true, true, false);
+            saiReport1.AgregarColumna(2, "Hora de Entrada", 100, true, true, true);
+            saiReport1.AgregarColumna(3, "Tipo de Incidencia", 200, true, true, true);
+            saiReport1.AgregarColumna(4, "Descripción", 200, true, true, true);
+            saiReport1.AgregarColumna(5, "Localización", 200, true, false, true);
+            saiReport1.AgregarColumna(6, "Dependencias", 100, true, true, true);
+            saiReport1.AgregarColumna(7, "Número de Oficio", 100, true, true, true);
+            saiReport1.AgregarColumna(8, "Nombre del Operador", 90, true, true, true);
+            saiReport1.AgregarColumna(9, "Ligado a", 90, true, true, true);
             saiReport1.AgregarColumna(10, "Prioridad", 20, false, true, true);
             ObtenerRegistros();
         }
@@ -185,14 +185,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             lstRegistrosReporte.Add(saiReport1.AgregarRegistro(null, incidencia.Folio,
                                                                            incidencia.Folio.ToString(),
                                                                            incidencia.HoraRecepcion.ToShortTimeString(),
-                                                                           TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Descripcion,
+                                                                           incidencia.ClaveTipo !=null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Descripcion : ID.STR_DESCONOCIDO,
                                                                            incidencia.Descripcion,
                                                                            incidencia.Direccion,
                                                                            dependencias.ToString().Trim().Length > 1 ? dependencias.ToString().Trim().Remove(dependencias.Length - 1) : string.Empty,
                                                                            incidencia.NumeroOficio,
                                                                            UsuarioMapper.Instance().GetOne(incidencia.ClaveUsuario).NombreUsuario,
                                                                            incidencia.FolioPadre.ToString(),
-                                                                           TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Prioridad.ToString()));
+                                                                           incidencia.ClaveTipo !=null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Prioridad.ToString():ID.STR_DESCONOCIDO));
                         }
                         else
                         {
@@ -216,8 +216,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                             incidencia.HoraRecepcion.ToShortTimeString();
 
                                     //if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
-                                        saiReport1.reportControl.Records[itm.Record.Index][3].Value =
-                                            TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Descripcion;
+                                        saiReport1.reportControl.Records[itm.Record.Index][3].Value =incidencia.ClaveTipo !=null ? 
+                                            TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Descripcion : ID.STR_DESCONOCIDO;
 
                                     //if (!incidenciaTemp.Descripcion.Equals(incidencia.Descripcion))
                                         saiReport1.reportControl.Records[itm.Record.Index][4].Value = incidencia.Descripcion != string.Empty
@@ -255,7 +255,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                             : ID.STR_DESCONOCIDO;
 
                                     //if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
-                                        saiReport1.reportControl.Records[itm.Record.Index][10].Value = TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Prioridad.ToString();
+                                    saiReport1.reportControl.Records[itm.Record.Index][10].Value = incidencia.ClaveTipo !=null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Prioridad.ToString():ID.STR_DESCONOCIDO;
                                 }
                             }
                         }

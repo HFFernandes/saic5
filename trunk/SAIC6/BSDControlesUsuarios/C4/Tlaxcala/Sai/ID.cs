@@ -127,11 +127,13 @@
 
         public const string SQL_OBTENERCODIGOPOSTAL = "SELECT * FROM CodigoPostal WHERE Clave={0}";
 
+        public const string SQL_OBTENERDESPACHOS2 = "SELECT * FROM DespachoIncidencia WHERE Folio={0}";
+
         #endregion
 
         #region Cadenas
 
-        public const string STR_DESCONOCIDO = "(desconocido)";
+        public const string STR_DESCONOCIDO = "(sin registro)";
         public const string STR_NOMBREAPLICATIVO = "Sistema de Administración de Incidencias.";
         public const string STR_TITULOERROR = "Error en la aplicación.";
         public const string STR_ESTATUSLIBRE = "Libre";
@@ -141,7 +143,7 @@
         public const string STR_ERROROBTENERREGISTROS = "Ocurrio un error al tratar de obtener los registros. Solicite al administrador revisar los catálogos.";
         public const string STR_NOSELOCALIZOARCHIVO = "No se localizo el archivo de configuracion para los filtros de busqueda.";
         public const string STR_ERRORFILTRO = "Ha ocurrido un error al tratar de generar el filtro.";
-        public const string STR_NUEVOCOMENTARIO = "Agregar nuevo comentario";
+        public const string STR_NUEVOCOMENTARIO = "Inserte aquí su nuevo comentario";
 
         #endregion
 
@@ -149,8 +151,8 @@
 
         public static readonly uint COLOR_VERDE = (uint)Aplicacion.HexadecimalADecimal("ADFF2F");
         public static readonly uint COLOR_NARANJA = (uint)Aplicacion.HexadecimalADecimal("FFA500");
-        public static readonly uint COLOR_ROJO = (uint)Aplicacion.HexadecimalADecimal("CD5C5C");
-        public static readonly uint COLOR_AMARILLO = (uint)Aplicacion.HexadecimalADecimal("FFFF00");
+        public static readonly uint COLOR_ROJO = (uint)Aplicacion.HexadecimalADecimal("FF0099");
+        public static readonly uint COLOR_AMARILLO = (uint)Aplicacion.HexadecimalADecimal("FFFF99");
         public static readonly uint COLOR_AZURE = (uint)Aplicacion.HexadecimalADecimal("F0FFFF");
 
         #endregion

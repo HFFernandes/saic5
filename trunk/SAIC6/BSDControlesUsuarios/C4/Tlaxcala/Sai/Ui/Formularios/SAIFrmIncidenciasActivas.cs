@@ -35,8 +35,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             Width = Screen.GetWorkingArea(this).Width;
             saiReport1.btnLigarIncidencias.Click += btnLigarIncidencias_Click;
             saiReport1.btnDespacharIncidencias.Click += btnDespacharIncidencias_Click;
-            saiReport1.btnBajaUnidad.Click += btnBajaUnidad_Click;
-            saiReport1.btnAltaUnidad.Click += btnAltaUnidad_Click;
             saiReport1.btnVistaPrevia.Click += btnVistaPrevia_Click;
             saiReport1.reportControl.RowDblClick += reportControl_RowDblClick;
 
@@ -91,14 +89,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (SAIExcepcion)
             {
             }
-        }
-
-        void btnAltaUnidad_Click(object sender, EventArgs e)
-        {
-        }
-
-        void btnBajaUnidad_Click(object sender, EventArgs e)
-        {
         }
 
         void btnDespacharIncidencias_Click(object sender, EventArgs e)
@@ -208,15 +198,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             saiReport1.btnDespacharIncidencias.Visible = false;
 
             //Definir las columnas del listado y obtener los registros
-            saiReport1.AgregarColumna(0, "ID", 20, false, false, false, false);
-            saiReport1.AgregarColumna(1, "No de Teléfono", 100, true, true, true, false);
-            saiReport1.AgregarColumna(2, "Status", 100, true, true, true, false);
-            saiReport1.AgregarColumna(3, "Hora de Entrada", 100, true, true, true, false);
+            saiReport1.AgregarColumna(0, "ID", 20, false, false);
+            saiReport1.AgregarColumna(1, "No de Teléfono", 100, true, true, true);
+            saiReport1.AgregarColumna(2, "Status", 100, true, true, true);
+            saiReport1.AgregarColumna(3, "Hora de Entrada", 100, true, true, true);
             saiReport1.AgregarColumna(4, "Ubicación", 250, true, true, true, false, true, 2);
-            saiReport1.AgregarColumna(5, "Tipo de Incidencia", 250, true, true, true, false);
-            saiReport1.AgregarColumna(6, "Dividido En", 70, true, true, true, false);
-            saiReport1.AgregarColumna(7, "Folio", 150, true, true, true, false);
-            saiReport1.AgregarColumna(8, "Prioridad", 20, false, true, true, false);
+            saiReport1.AgregarColumna(5, "Tipo de Incidencia", 250, true, true, true);
+            saiReport1.AgregarColumna(6, "Dividido En", 70, true, true, true);
+            saiReport1.AgregarColumna(7, "Folio", 150, true, true, true);
+            saiReport1.AgregarColumna(8, "Prioridad", 20, false, true, true);
             ObtenerRegistros();
         }
 
@@ -279,10 +269,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                                                            EstatusIncidenciaMapper.Instance().GetOne(incidencia.ClaveEstatus).Descripcion,
                                                                            incidencia.HoraRecepcion.ToShortTimeString(),
                                                                            incidencia.Direccion,
-                                                                           TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Descripcion,
+                                                                           incidencia.ClaveTipo != null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Descripcion : ID.STR_DESCONOCIDO,
                                                                            corporaciones.ToString().Trim().Length > 1 ? corporaciones.ToString().Trim().Remove(corporaciones.Length - 1) : string.Empty,
                                                                            incidencia.Folio.ToString(),
-                                                                           TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Prioridad.ToString()));
+                                                                           incidencia.ClaveTipo != null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Prioridad.ToString() : ID.STR_DESCONOCIDO));
                         }
                         else
                         {
@@ -302,22 +292,22 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 {
                                     //comparamos el valor anterior con el actual y si cambio entonces actualizamos
                                     //if (!incidenciaTemp.Telefono.Equals(incidencia.Telefono))
-                                        saiReport1.reportControl.Records[itm.Record.Index][1].Value = incidencia.Telefono;
+                                    saiReport1.reportControl.Records[itm.Record.Index][1].Value = incidencia.Telefono;
 
                                     //if (!incidenciaTemp.ClaveEstatus.Equals(incidencia.ClaveEstatus))
-                                        saiReport1.reportControl.Records[itm.Record.Index][2].Value =
-                                            EstatusIncidenciaMapper.Instance().GetOne(incidencia.ClaveEstatus).Descripcion;
+                                    saiReport1.reportControl.Records[itm.Record.Index][2].Value =
+                                        EstatusIncidenciaMapper.Instance().GetOne(incidencia.ClaveEstatus).Descripcion;
 
                                     //if (!incidenciaTemp.HoraRecepcion.Equals(incidencia.HoraRecepcion))
-                                        saiReport1.reportControl.Records[itm.Record.Index][3].Value =
-                                            incidencia.HoraRecepcion.ToShortTimeString();
+                                    saiReport1.reportControl.Records[itm.Record.Index][3].Value =
+                                        incidencia.HoraRecepcion.ToShortTimeString();
 
                                     //if (!incidenciaTemp.Direccion.Equals(incidencia.Direccion))
-                                        saiReport1.reportControl.Records[itm.Record.Index][4].Value = incidencia.Direccion;
+                                    saiReport1.reportControl.Records[itm.Record.Index][4].Value = incidencia.Direccion;
 
                                     //if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
-                                        saiReport1.reportControl.Records[itm.Record.Index][5].Value =
-                                            TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Descripcion;
+                                    saiReport1.reportControl.Records[itm.Record.Index][5].Value = incidencia.ClaveTipo != null ?
+                                        TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Descripcion : ID.STR_DESCONOCIDO;
 
                                     var corporaciones = new StringBuilder();
                                     CorporacionMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_CORPORACIONES, incidencia.Folio)).ForEach(delegate(Corporacion c)
@@ -332,7 +322,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                             : ID.STR_DESCONOCIDO;
 
                                     //if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
-                                        saiReport1.reportControl.Records[itm.Record.Index][8].Value = TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Prioridad.ToString();
+                                    saiReport1.reportControl.Records[itm.Record.Index][8].Value = incidencia.ClaveTipo != null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Prioridad.ToString() : ID.STR_DESCONOCIDO;
                                 }
                             }
                         }
@@ -364,7 +354,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
                     lstIncidenciasPorRemover.Clear();   //limpiamos la colección para el nuevo ciclo
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     tmrRegistros.Enabled = false;
                     throw new SAIExcepcion(ID.STR_ERROROBTENERREGISTROS);

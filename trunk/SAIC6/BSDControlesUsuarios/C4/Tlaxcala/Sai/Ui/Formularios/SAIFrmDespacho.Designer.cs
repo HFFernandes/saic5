@@ -49,7 +49,11 @@
             this.lblDescripcion = new System.Windows.Forms.Label();
             this.saiTxtDescripcion = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.gprUnidadPrincipal = new System.Windows.Forms.GroupBox();
+            this.pnlUnidadPrincipal = new System.Windows.Forms.Panel();
+            this.lbUnidadPrincipal = new System.Windows.Forms.Label();
             this.gprUnidadApoyo = new System.Windows.Forms.GroupBox();
+            this.pnlUnidadApoyo = new System.Windows.Forms.Panel();
+            this.lblUnidadApoyo = new System.Windows.Forms.Label();
             this.axComentarios = new AxXtremeReportControl.AxReportControl();
             this.saiTmpHoraLlegada = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITimePicker(this.components);
             this.saiTmpHoraLiberacion = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITimePicker(this.components);
@@ -61,9 +65,13 @@
             this.lblHoraDespacho = new System.Windows.Forms.Label();
             this.lblHoraLlegada = new System.Windows.Forms.Label();
             this.lblHoraLiberacion = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.picLogotipo = new System.Windows.Forms.PictureBox();
+            this.gprUnidadPrincipal.SuspendLayout();
+            this.pnlUnidadPrincipal.SuspendLayout();
+            this.gprUnidadApoyo.SuspendLayout();
+            this.pnlUnidadApoyo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axComentarios)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogotipo)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTelefono
@@ -86,7 +94,6 @@
             this.saiTxtTelefono.Size = new System.Drawing.Size(135, 13);
             this.saiTxtTelefono.StrMensajeCampoRequerido = "El campo es requerido.";
             this.saiTxtTelefono.TabIndex = 1;
-            this.saiTxtTelefono.Text = "1234567890";
             // 
             // lblTipoIncidencia
             // 
@@ -108,7 +115,6 @@
             this.saiTxtTipoIncidencia.Size = new System.Drawing.Size(224, 13);
             this.saiTxtTipoIncidencia.StrMensajeCampoRequerido = "El campo es requerido.";
             this.saiTxtTipoIncidencia.TabIndex = 3;
-            this.saiTxtTipoIncidencia.Text = "ROBO DE VEHICULO";
             // 
             // lblDireccion
             // 
@@ -130,7 +136,6 @@
             this.saiTxtDireccion.Size = new System.Drawing.Size(469, 13);
             this.saiTxtDireccion.StrMensajeCampoRequerido = "El campo es requerido.";
             this.saiTxtDireccion.TabIndex = 5;
-            this.saiTxtDireccion.Text = "VALLE DE GUADIANA 156 INT 103";
             // 
             // lblMunicipio
             // 
@@ -161,7 +166,6 @@
             this.saiTxtMunicipio.Size = new System.Drawing.Size(469, 13);
             this.saiTxtMunicipio.StrMensajeCampoRequerido = "El campo es requerido.";
             this.saiTxtMunicipio.TabIndex = 7;
-            this.saiTxtMunicipio.Text = "ECATEPEC DE MORELOS";
             // 
             // saiTxtLocalidad
             // 
@@ -174,7 +178,6 @@
             this.saiTxtLocalidad.Size = new System.Drawing.Size(286, 13);
             this.saiTxtLocalidad.StrMensajeCampoRequerido = "El campo es requerido.";
             this.saiTxtLocalidad.TabIndex = 9;
-            this.saiTxtLocalidad.Text = "ESTADO DE MEXICO";
             // 
             // lblCodigoPostal
             // 
@@ -196,7 +199,6 @@
             this.saiTxtCodigoPostal.Size = new System.Drawing.Size(96, 13);
             this.saiTxtCodigoPostal.StrMensajeCampoRequerido = "El campo es requerido.";
             this.saiTxtCodigoPostal.TabIndex = 11;
-            this.saiTxtCodigoPostal.Text = "55280";
             // 
             // lblColonia
             // 
@@ -218,7 +220,6 @@
             this.saiTxtColonia.Size = new System.Drawing.Size(469, 13);
             this.saiTxtColonia.StrMensajeCampoRequerido = "El campo es requerido.";
             this.saiTxtColonia.TabIndex = 13;
-            this.saiTxtColonia.Text = "VALLE DE ARAGON 3A SECCION";
             // 
             // lblReferencia
             // 
@@ -241,7 +242,6 @@
             this.saiTxtReferencia.Size = new System.Drawing.Size(528, 47);
             this.saiTxtReferencia.StrMensajeCampoRequerido = "El campo es requerido.";
             this.saiTxtReferencia.TabIndex = 15;
-            this.saiTxtReferencia.Text = "A UN COSTADO DE LA TIENDA SORIANA";
             // 
             // lblDescripcion
             // 
@@ -264,10 +264,10 @@
             this.saiTxtDescripcion.Size = new System.Drawing.Size(528, 76);
             this.saiTxtDescripcion.StrMensajeCampoRequerido = "El campo es requerido.";
             this.saiTxtDescripcion.TabIndex = 17;
-            this.saiTxtDescripcion.Text = resources.GetString("saiTxtDescripcion.Text");
             // 
             // gprUnidadPrincipal
             // 
+            this.gprUnidadPrincipal.Controls.Add(this.pnlUnidadPrincipal);
             this.gprUnidadPrincipal.Location = new System.Drawing.Point(11, 343);
             this.gprUnidadPrincipal.Name = "gprUnidadPrincipal";
             this.gprUnidadPrincipal.Size = new System.Drawing.Size(259, 70);
@@ -275,14 +275,59 @@
             this.gprUnidadPrincipal.TabStop = false;
             this.gprUnidadPrincipal.Text = "Unidad Asignada";
             // 
+            // pnlUnidadPrincipal
+            // 
+            this.pnlUnidadPrincipal.AllowDrop = true;
+            this.pnlUnidadPrincipal.Controls.Add(this.lbUnidadPrincipal);
+            this.pnlUnidadPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlUnidadPrincipal.Location = new System.Drawing.Point(3, 16);
+            this.pnlUnidadPrincipal.Name = "pnlUnidadPrincipal";
+            this.pnlUnidadPrincipal.Size = new System.Drawing.Size(253, 51);
+            this.pnlUnidadPrincipal.TabIndex = 0;
+            this.pnlUnidadPrincipal.DragOver += new System.Windows.Forms.DragEventHandler(this.pnlUnidadPrincipal_DragOver);
+            this.pnlUnidadPrincipal.DragDrop += new System.Windows.Forms.DragEventHandler(this.pnlUnidadPrincipal_DragDrop);
+            // 
+            // lbUnidadPrincipal
+            // 
+            this.lbUnidadPrincipal.AutoEllipsis = true;
+            this.lbUnidadPrincipal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbUnidadPrincipal.Location = new System.Drawing.Point(3, 27);
+            this.lbUnidadPrincipal.Name = "lbUnidadPrincipal";
+            this.lbUnidadPrincipal.Size = new System.Drawing.Size(247, 16);
+            this.lbUnidadPrincipal.TabIndex = 0;
+            this.lbUnidadPrincipal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // gprUnidadApoyo
             // 
+            this.gprUnidadApoyo.Controls.Add(this.pnlUnidadApoyo);
             this.gprUnidadApoyo.Location = new System.Drawing.Point(280, 343);
             this.gprUnidadApoyo.Name = "gprUnidadApoyo";
             this.gprUnidadApoyo.Size = new System.Drawing.Size(259, 70);
             this.gprUnidadApoyo.TabIndex = 19;
             this.gprUnidadApoyo.TabStop = false;
             this.gprUnidadApoyo.Text = "Unidad de Apoyo";
+            // 
+            // pnlUnidadApoyo
+            // 
+            this.pnlUnidadApoyo.AllowDrop = true;
+            this.pnlUnidadApoyo.Controls.Add(this.lblUnidadApoyo);
+            this.pnlUnidadApoyo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlUnidadApoyo.Location = new System.Drawing.Point(3, 16);
+            this.pnlUnidadApoyo.Name = "pnlUnidadApoyo";
+            this.pnlUnidadApoyo.Size = new System.Drawing.Size(253, 51);
+            this.pnlUnidadApoyo.TabIndex = 0;
+            this.pnlUnidadApoyo.DragOver += new System.Windows.Forms.DragEventHandler(this.pnlUnidadApoyo_DragOver);
+            this.pnlUnidadApoyo.DragDrop += new System.Windows.Forms.DragEventHandler(this.pnlUnidadApoyo_DragDrop);
+            // 
+            // lblUnidadApoyo
+            // 
+            this.lblUnidadApoyo.AutoEllipsis = true;
+            this.lblUnidadApoyo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUnidadApoyo.Location = new System.Drawing.Point(3, 27);
+            this.lblUnidadApoyo.Name = "lblUnidadApoyo";
+            this.lblUnidadApoyo.Size = new System.Drawing.Size(247, 16);
+            this.lblUnidadApoyo.TabIndex = 0;
+            this.lblUnidadApoyo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // axComentarios
             // 
@@ -328,6 +373,7 @@
             this.chkHoraLiberacion.Size = new System.Drawing.Size(15, 14);
             this.chkHoraLiberacion.TabIndex = 30;
             this.chkHoraLiberacion.UseVisualStyleBackColor = true;
+            this.chkHoraLiberacion.CheckedChanged += new System.EventHandler(this.chkHoraLiberacion_CheckedChanged);
             // 
             // chkHoraLlegada
             // 
@@ -337,6 +383,7 @@
             this.chkHoraLlegada.Size = new System.Drawing.Size(15, 14);
             this.chkHoraLlegada.TabIndex = 27;
             this.chkHoraLlegada.UseVisualStyleBackColor = true;
+            this.chkHoraLlegada.CheckedChanged += new System.EventHandler(this.chkHoraLlegada_CheckedChanged);
             // 
             // saiTxtHoraRecepcion
             // 
@@ -394,24 +441,24 @@
             this.lblHoraLiberacion.TabIndex = 28;
             this.lblHoraLiberacion.Text = "Hora de Liberación";
             // 
-            // pictureBox1
+            // picLogotipo
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.White;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pictureBox1.ErrorImage = null;
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(551, 50);
-            this.pictureBox1.TabIndex = 32;
-            this.pictureBox1.TabStop = false;
+            this.picLogotipo.BackColor = System.Drawing.Color.White;
+            this.picLogotipo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.picLogotipo.ErrorImage = null;
+            this.picLogotipo.Image = ((System.Drawing.Image)(resources.GetObject("picLogotipo.Image")));
+            this.picLogotipo.Location = new System.Drawing.Point(0, 0);
+            this.picLogotipo.Name = "picLogotipo";
+            this.picLogotipo.Size = new System.Drawing.Size(551, 50);
+            this.picLogotipo.TabIndex = 32;
+            this.picLogotipo.TabStop = false;
             // 
             // SAIFrmDespacho
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(551, 642);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.picLogotipo);
             this.Controls.Add(this.axComentarios);
             this.Controls.Add(this.lblHoraLiberacion);
             this.Controls.Add(this.lblHoraLlegada);
@@ -449,8 +496,12 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SAI - Despacho de Incidencia";
             this.Load += new System.EventHandler(this.SAIFrmDespacho_Load);
+            this.gprUnidadPrincipal.ResumeLayout(false);
+            this.pnlUnidadPrincipal.ResumeLayout(false);
+            this.gprUnidadApoyo.ResumeLayout(false);
+            this.pnlUnidadApoyo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.axComentarios)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogotipo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -489,6 +540,10 @@
         private System.Windows.Forms.Label lblHoraDespacho;
         private System.Windows.Forms.Label lblHoraLlegada;
         private System.Windows.Forms.Label lblHoraLiberacion;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox picLogotipo;
+        private System.Windows.Forms.Panel pnlUnidadPrincipal;
+        private System.Windows.Forms.Panel pnlUnidadApoyo;
+        private System.Windows.Forms.Label lbUnidadPrincipal;
+        private System.Windows.Forms.Label lblUnidadApoyo;
     }
 }

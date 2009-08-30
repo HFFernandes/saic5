@@ -60,6 +60,7 @@
     <Compile Include="Entities\Auto\Municipio.Auto.cs" />
     <Compile Include="Entities\Auto\Organizacion.Auto.cs" />
     <Compile Include="Entities\Auto\PersonaExtraviada.Auto.cs" />
+    <Compile Include="Entities\Auto\RoboAccesorios.Auto.cs" />
     <Compile Include="Entities\Auto\RoboVehiculoAccesorios.Auto.cs" />
     <Compile Include="Entities\Auto\TelefonoTelmex.Auto.cs" />
     <Compile Include="Entities\Auto\Unidad.Auto.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Entities\Municipio.cs" />
     <Compile Include="Entities\Organizacion.cs" />
     <Compile Include="Entities\PersonaExtraviada.cs" />
+    <Compile Include="Entities\RoboAccesorios.cs" />
     <Compile Include="Entities\RoboVehiculoAccesorios.cs" />
     <Compile Include="Entities\TelefonoTelmex.cs" />
     <Compile Include="Entities\Unidad.cs" />
@@ -93,8 +95,8 @@
     <Compile Include="Objects\Auto\PermisoUsuarioObject.Auto.cs" />
     <Compile Include="Objects\Auto\PersonaExtraviadaObject.Auto.cs" />
     <Compile Include="Objects\Auto\PropietarioVehiculoObject.Auto.cs" />
+    <Compile Include="Objects\Auto\RoboAccesoriosObject.Auto.cs" />
     <Compile Include="Objects\Auto\RoboVehiculoAccesoriosObject.Auto.cs" />
-    <Compile Include="Objects\Auto\RoboVehiculoAccesoriosVehiculoInvolucradoObject.Auto.cs" />
     <Compile Include="Objects\Auto\TelefonoTelmexObject.Auto.cs" />
     <Compile Include="Objects\Auto\UnidadObject.Auto.cs" />
     <Compile Include="Objects\Auto\UsuarioCorporacionObject.Auto.cs" />
@@ -136,8 +138,8 @@
     <Compile Include="Objects\PermisoUsuarioObject.cs" />
     <Compile Include="Objects\PersonaExtraviadaObject.cs" />
     <Compile Include="Objects\PropietarioVehiculoObject.cs" />
+    <Compile Include="Objects\RoboAccesoriosObject.cs" />
     <Compile Include="Objects\RoboVehiculoAccesoriosObject.cs" />
-    <Compile Include="Objects\RoboVehiculoAccesoriosVehiculoInvolucradoObject.cs" />
     <Compile Include="Objects\SistemaObject.cs" />
     <Compile Include="Objects\Auto\SistemaObject.Auto.cs" />
     <Compile Include="Entities\Submodulo.cs" />

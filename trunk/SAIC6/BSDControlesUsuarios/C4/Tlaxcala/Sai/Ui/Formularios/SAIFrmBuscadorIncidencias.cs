@@ -47,7 +47,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                     GridResultados.Refresh();
                 }
-                catch (Exception ex) { throw new SAIExcepcion(ID.STR_ERRORFILTRO); }
+                catch (Exception) { throw new SAIExcepcion(ID.STR_ERRORFILTRO); }
             }
             catch (SAIExcepcion)
             {
