@@ -12,7 +12,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
     public partial class SAIFrmIncidenciasPendientes : SAIFrmBase
     {
-        //TODO: LOS incidentes ligados desaparecen del listado sin poder despacharse
         private List<Incidencia> lstIncidenciasRegistradas;
         private List<Incidencia> lstIncidenciasTemporales;
         private List<Incidencia> lstIncidenciasPorRemover;
@@ -187,16 +186,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             saiReport1.btnDespacharIncidencias.Visible = Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false;
 
             //Falta mostrar la prioridad del incidente
-            saiReport1.AgregarColumna(0, "ID", 20, false, false, false, false);
+            saiReport1.AgregarColumna(0, "ID", 20, false, false);
             saiReport1.AgregarColumna(1, "Folio", 150, true, true, true, true);
-            saiReport1.AgregarColumna(2, "Hora de Entrada", 100, true, true, true, false);
-            saiReport1.AgregarColumna(3, "Corporación", 150, true, true, true, false);
-            saiReport1.AgregarColumna(4, "Tipo de Incidencia", 250, true, true, true, false);
-            saiReport1.AgregarColumna(5, "Zn", 70, true, true, true, false);
-            saiReport1.AgregarColumna(6, "Dividido En", 70, true, false, true, false);
-            saiReport1.AgregarColumna(7, "Pendiente Desde", 200, true, true, true, false);
-            saiReport1.AgregarColumna(8, "Nombre del Operador", 90, true, true, true, false);
-            saiReport1.AgregarColumna(9, "Ligado a", 90, true, true, true, false);
+            saiReport1.AgregarColumna(2, "Hora de Entrada", 100, true, true, true);
+            saiReport1.AgregarColumna(3, "Corporación", 150, true, true, true);
+            saiReport1.AgregarColumna(4, "Tipo de Incidencia", 250, true, true, true);
+            saiReport1.AgregarColumna(5, "Zn", 70, true, true, true);
+            saiReport1.AgregarColumna(6, "Dividido En", 70, false, false);
+            saiReport1.AgregarColumna(7, "Pendiente Desde", 200, true, true, true);
+            saiReport1.AgregarColumna(8, "Nombre del Operador", 90, true, true, true);
+            saiReport1.AgregarColumna(9, "Ligado a", 90, true, true, true);
             saiReport1.AgregarColumna(10, "Prioridad", 20, false, true, true);
             ObtenerRegistros();
         }
@@ -245,7 +244,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             lstIncidenciasRegistradas.Add(incidencia);
                             var corporaciones = new StringBuilder();
                             var zonas = new StringBuilder();
-                            var totalCorporaciones = 0;
+                            //var totalCorporaciones = 0;
 
                             CorporacionMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_CORPORACIONES,
                                                                                      incidencia.Folio)).ForEach(
@@ -274,21 +273,21 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                         }
                                     }
 
-                                    if (c.Descripcion != string.Empty)
-                                        totalCorporaciones += 1;
+                                    //if (c.Descripcion != string.Empty)
+                                    //    totalCorporaciones += 1;
                                 });
 
                             lstRegistrosReporte.Add(saiReport1.AgregarRegistro(null, incidencia.Folio,
                                                                            incidencia.Folio.ToString(),
                                                                            incidencia.HoraRecepcion.ToShortTimeString(),
                                                                            corporaciones.ToString().Trim().Length > 1 ? corporaciones.ToString().Trim().Remove(corporaciones.Length - 1) : string.Empty,
-                                                                           TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Descripcion,
+                                                                           incidencia.ClaveTipo != null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Descripcion : ID.STR_DESCONOCIDO,
                                                                            zonas.ToString().Trim().Length > 1 ? zonas.ToString().Trim().Remove(zonas.Length - 1) : string.Empty,
-                                                                           totalCorporaciones.ToString(),
+                                                                           ID.STR_DESCONOCIDO /*totalCorporaciones.ToString()*/,
                                                                            ObtenerLapso(incidencia.HoraRecepcion),
                                                                            UsuarioMapper.Instance().GetOne(incidencia.ClaveUsuario).NombreUsuario,
                                                                            incidencia.FolioPadre.ToString(),
-                                                                           TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Prioridad.ToString()));
+                                                                           incidencia.ClaveTipo != null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Prioridad.ToString() : ID.STR_DESCONOCIDO));
                         }
                         else
                         {
@@ -308,12 +307,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 {
                                     //comparamos el valor anterior con el actual y si cambio entonces actualizamos
                                     //if (!incidenciaTemp.HoraRecepcion.Equals(incidencia.HoraRecepcion))
-                                        saiReport1.reportControl.Records[itm.Record.Index][2].Value =
-                                            incidencia.HoraRecepcion.ToShortTimeString();
+                                    saiReport1.reportControl.Records[itm.Record.Index][2].Value =
+                                        incidencia.HoraRecepcion.ToShortTimeString();
 
                                     var corporaciones = new StringBuilder();
                                     var zonas = new StringBuilder();
-                                    var totalCorporaciones = 0;
+                                    //var totalCorporaciones = 0;
 
                                     CorporacionMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_CORPORACIONES, incidencia.Folio)).ForEach(delegate(Corporacion c)
                                     {
@@ -340,8 +339,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                             }
                                         }
 
-                                        if (c.Descripcion != string.Empty)
-                                            totalCorporaciones += 1;
+                                        //if (c.Descripcion != string.Empty)
+                                        //    totalCorporaciones += 1;
                                     });
 
                                     saiReport1.reportControl.Records[itm.Record.Index][3].Value =
@@ -350,16 +349,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                             : ID.STR_DESCONOCIDO;
 
                                     //if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
-                                        saiReport1.reportControl.Records[itm.Record.Index][4].Value =
-                                            TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Descripcion;
+                                    saiReport1.reportControl.Records[itm.Record.Index][4].Value = incidencia.ClaveTipo != null ?
+                                        TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Descripcion : ID.STR_DESCONOCIDO;
 
                                     saiReport1.reportControl.Records[itm.Record.Index][5].Value =
                                         zonas.ToString().Trim().Length > 1
                                             ? zonas.ToString().Trim().Remove(zonas.Length - 1)
                                             : ID.STR_DESCONOCIDO;
 
-                                    saiReport1.reportControl.Records[itm.Record.Index][6].Value =
-                                        totalCorporaciones.ToString();
+                                    //saiReport1.reportControl.Records[itm.Record.Index][6].Value =
+                                    //    totalCorporaciones.ToString();
                                     saiReport1.reportControl.Records[itm.Record.Index][7].Value = ObtenerLapso(incidencia.HoraRecepcion);
 
                                     var lapso = DateTime.Now.Subtract(incidencia.HoraRecepcion);
@@ -371,7 +370,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                             : ID.STR_DESCONOCIDO;
 
                                     //if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
-                                        saiReport1.reportControl.Records[itm.Record.Index][10].Value = TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Prioridad.ToString();
+                                    saiReport1.reportControl.Records[itm.Record.Index][10].Value = incidencia.ClaveTipo != null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Prioridad.ToString() : ID.STR_DESCONOCIDO;
                                 }
                             }
                         }

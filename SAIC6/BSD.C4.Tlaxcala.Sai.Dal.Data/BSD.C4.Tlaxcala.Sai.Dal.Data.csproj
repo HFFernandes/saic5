@@ -72,8 +72,8 @@
     <Compile Include="Gateways\Auto\PermisoUsuarioGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\PersonaExtraviadaGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\PropietarioVehiculoGateway.Auto.cs" />
+    <Compile Include="Gateways\Auto\RoboAccesoriosGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\RoboVehiculoAccesoriosGateway.Auto.cs" />
-    <Compile Include="Gateways\Auto\RoboVehiculoAccesoriosVehiculoInvolucradoGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\SubmoduloGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\TelefonoTelmexGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\UnidadGateway.Auto.cs" />
@@ -94,8 +94,8 @@
     <Compile Include="Gateways\PermisoUsuarioGateway.cs" />
     <Compile Include="Gateways\PersonaExtraviadaGateway.cs" />
     <Compile Include="Gateways\PropietarioVehiculoGateway.cs" />
+    <Compile Include="Gateways\RoboAccesoriosGateway.cs" />
     <Compile Include="Gateways\RoboVehiculoAccesoriosGateway.cs" />
-    <Compile Include="Gateways\RoboVehiculoAccesoriosVehiculoInvolucradoGateway.cs" />
     <Compile Include="Gateways\SubmoduloGateway.cs" />
     <Compile Include="Gateways\TelefonoTelmexGateway.cs" />
     <Compile Include="Gateways\UnidadGateway.cs" />
@@ -117,8 +117,8 @@
     <Compile Include="Mappers\Auto\PermisoUsuarioMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\PersonaExtraviadaMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\PropietarioVehiculoMapper.Auto.cs" />
+    <Compile Include="Mappers\Auto\RoboAccesoriosMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\RoboVehiculoAccesoriosMapper.Auto.cs" />
-    <Compile Include="Mappers\Auto\RoboVehiculoAccesoriosVehiculoInvolucradoMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\SubmoduloMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\TelefonoTelmexMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\UnidadMapper.Auto.cs" />
@@ -167,8 +167,8 @@
     <Compile Include="Mappers\PermisoUsuarioMapper.cs" />
     <Compile Include="Mappers\PersonaExtraviadaMapper.cs" />
     <Compile Include="Mappers\PropietarioVehiculoMapper.cs" />
+    <Compile Include="Mappers\RoboAccesoriosMapper.cs" />
     <Compile Include="Mappers\RoboVehiculoAccesoriosMapper.cs" />
-    <Compile Include="Mappers\RoboVehiculoAccesoriosVehiculoInvolucradoMapper.cs" />
     <Compile Include="Mappers\SistemaMapper.cs" />
     <Compile Include="Mappers\Auto\SistemaMapper.Auto.cs" />
     <Compile Include="Gateways\SistemaGateway.cs" />

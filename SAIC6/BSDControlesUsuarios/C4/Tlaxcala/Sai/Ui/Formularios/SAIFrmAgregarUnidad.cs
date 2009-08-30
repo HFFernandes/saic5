@@ -24,21 +24,24 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         var unidad = UnidadMapper.Instance().GetOneBySQLQuery(string.Format(ID.SQL_VERIFICARUNIDAD, saiTxtUnidad.Text.Trim()));
                         if (unidad == null)
                         {
-                            UnidadMapper.Instance().Insert(new Unidad
+                            if (Aplicacion.UsuarioPersistencia.intCorporacion != null)
                             {
-                                Activo = true,
-                                ClaveCorporacion = Aplicacion.UsuarioPersistencia.intCorporacion ?? -1,
-                                Codigo = saiTxtUnidad.Text
-                            });
+                                UnidadMapper.Instance().Insert(new Unidad
+                                                                   {
+                                                                       Activo = true,
+                                                                       ClaveCorporacion = Aplicacion.UsuarioPersistencia.intCorporacion ?? -1,
+                                                                       Codigo = saiTxtUnidad.Text
+                                                                   });
 
-                            DialogResult = DialogResult.OK;
-                            Close();
+                                DialogResult = DialogResult.OK;
+                                Close();
+                            }
                         }
                         else
-                        {
-                            throw new Exception("La unidad ya existe para su corporación. Probablemente no este activa, consulte con el Administrador.");
-                        }
+                            throw new SAIExcepcion("La unidad ya existe para su corporación. Probablemente no este activa, consulte con el Administrador.");
                     }
+                    else
+                        throw new SAIExcepcion("Existen campos requeridos vacios.");
                 }
                 catch (Exception ex)
                 {
