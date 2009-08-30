@@ -47,7 +47,6 @@
             this.gvDependencias.Size = new System.Drawing.Size(448, 173);
             this.gvDependencias.TabIndex = 0;
             this.gvDependencias.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvDependencias_CellValueChanged);
-            this.gvDependencias.CellLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvDependencias_CellLeave);
             this.gvDependencias.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.gvDependencias_CellValidated);
             // 
             // chklstDependencias
