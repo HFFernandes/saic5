@@ -230,7 +230,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SAIFrmDependencias089 frmDependencias = new SAIFrmDependencias089();
+            SAIFrmDependencias089 frmDependencias = new SAIFrmDependencias089(9);
             frmDependencias.ShowDialog();
         }
 
