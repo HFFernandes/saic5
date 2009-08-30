@@ -14,23 +14,25 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
     public partial class SAIFrmDependencias089 : SAIFrmBase
     {
-        protected int _iFolio;
+        //protected int _iFolio;
+        protected Entidades.Incidencia _entIncidencia089;
 
         public SAIFrmDependencias089()
         {
             InitializeComponent();
         }
 
-        public SAIFrmDependencias089(int iFolio)
+        public SAIFrmDependencias089(Entidades.Incidencia _Incidencia089)
         {
             this.InitializeComponent();
-            _iFolio = iFolio;
+            this._entIncidencia089 = _Incidencia089;
+            //_iFolio = iFolio;
         }
 
         private void SAIFrmDependencias089_Load(object sender, EventArgs e)
         {
             this.SAIBarraEstado.SizingGrip = false;
-            this.LlenarGridView(_iFolio);
+            this.LlenarGridView(this._entIncidencia089.Folio);
             this.LlenarDependencias();            
         }
 
@@ -95,6 +97,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     dtDependencias.Rows.Add(registro);
                 }
             }
+            else
+            {
+                this._entIncidencia089.ClaveEstatus = 2;
+                Mappers.IncidenciaMapper.Instance().Save(this._entIncidencia089);
+            }
 
             this.gvDependencias.DataSource = dtDependencias;
             this.gvDependencias.Columns["ClaveDependencia"].Visible = false;
@@ -121,8 +128,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             Entidades.Dependencia dependencia = Mappers.DependenciaMapper.Instance().GetByDescripcion(Convert.ToString(this.chklstDependencias.Items[indexSel]));
                             Entidades.IncidenciaDependencia newInsDependencia = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.IncidenciaDependencia();
                             newInsDependencia.ClaveDependencia = dependencia.Clave;
-                            newInsDependencia.Folio = _iFolio;
+                            newInsDependencia.Folio = this._entIncidencia089.Folio;
                             Mappers.IncidenciaDependenciaMapper.Instance().Insert(newInsDependencia);
+
+                            this._entIncidencia089.ClaveEstatus = 3;
+                            Mappers.IncidenciaMapper.Instance().Save(this._entIncidencia089);
                         }
                         else
                         {
@@ -141,8 +151,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 Entidades.Dependencia dependencia = Mappers.DependenciaMapper.Instance().GetByDescripcion(Convert.ToString(this.chklstDependencias.Items[indexSel]));
                                 Entidades.IncidenciaDependencia newInsDependencia = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.IncidenciaDependencia();
                                 newInsDependencia.ClaveDependencia = dependencia.Clave;
-                                newInsDependencia.Folio = _iFolio;
+                                newInsDependencia.Folio = this._entIncidencia089.Folio;
                                 Mappers.IncidenciaDependenciaMapper.Instance().Insert(newInsDependencia);
+
+                                this._entIncidencia089.ClaveEstatus = 3;
+                                Mappers.IncidenciaMapper.Instance().Save(this._entIncidencia089);
                             }
                         }
                     }
@@ -153,13 +166,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         {
                             if (Convert.ToString(rowGv.Cells["Dependencia"].Value) == dependencia.Descripcion)
                             {
-                                Entidades.IncidenciaDependencia delInsDependencia = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.IncidenciaDependencia(dependencia.Clave, _iFolio);
+                                Entidades.IncidenciaDependencia delInsDependencia = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.IncidenciaDependencia(dependencia.Clave, this._entIncidencia089.Folio);
                                 Mappers.IncidenciaDependenciaMapper.Instance().Delete(delInsDependencia); 
                                 break;
                             }                            
                         }
                     }
-                    this.LlenarGridView(_iFolio);
+                    this.LlenarGridView(this._entIncidencia089.Folio);
                 }
                 catch (Exception ex)
                 {
@@ -174,6 +187,46 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void ChecarParaActualizarEstatus()
+        {
+            try 
+            {
+                try 
+                {
+                    bool bCompleto = false;
+                    foreach (DataGridViewRow row in this.gvDependencias.Rows)
+                    {
+                        if (row.Cells["FechaEnvioDependencia"].Value != DBNull.Value && Convert.ToString(row.Cells["FechaEnvioDependencia"].Value) != string.Empty)
+                        {
+                            bCompleto = true;
+                        }
+                        else 
+                        {
+                            bCompleto = false;
+                        }
+
+                        if (row.Cells["FechaNotificacion"].Value != DBNull.Value && Convert.ToString(row.Cells["FechaNotificacion"].Value) != string.Empty)
+                        {
+                            bCompleto = true;
+                        }
+                        else
+                        {
+                            bCompleto = false;
+                        }
+                    }
+                    if (bCompleto)
+                    {
+                        this._entIncidencia089.ClaveEstatus = 4;
+                        Mappers.IncidenciaMapper.Instance().Save(this._entIncidencia089);
+                    }
+                }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message, this); }
+            }
+            catch (SAIExcepcion)
+            { }
         }
 
         private void gvDependencias_CellValidated(object sender, DataGridViewCellEventArgs e)
@@ -255,6 +308,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
             catch (SAIExcepcion)
             { }
+        }
+
+        private void SAIFrmDependencias089_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.ChecarParaActualizarEstatus();
         }
     }
 }
