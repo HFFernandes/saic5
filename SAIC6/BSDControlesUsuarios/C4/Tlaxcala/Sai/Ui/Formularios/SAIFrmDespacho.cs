@@ -98,29 +98,29 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     break;
                 case "2004":
                     //robo vehiculo accesorios
-                    var vehiculoAccesorios =
-                        RoboVehiculoAccesoriosMapper.Instance().GetByIncidencia(incidencia.Folio);
-                    if (vehiculoAccesorios.Count > 0)
-                    {
-                        foreach (var a in vehiculoAccesorios)
-                        {
-                            var accesorios = RoboVehiculoAccesoriosMapper.Instance().GetOne(a.Clave);
-                            if (accesorios != null)
-                            {
-                                datosAdicionales.AppendFormat("\nAccesorios Robados: {0}\n",
-                                                              accesorios.AccesoriosRobados != string.Empty
-                                                                  ? accesorios.AccesoriosRobados
-                                                                  : ID.STR_DESCONOCIDO);
-                                datosAdicionales.AppendFormat("Se percató: {0}\n", accesorios.SePercato != string.Empty ? accesorios.SePercato : ID.STR_DESCONOCIDO);
-                                datosAdicionales.AppendFormat("Descripción Responsables: {0}\n",
-                                                              accesorios.DescripcionResponsables != string.Empty
-                                                                  ? accesorios.DescripcionResponsables
-                                                                  : ID.STR_DESCONOCIDO);
-                            }
-                        }
-                    }
-                    else
-                        datosAdicionales.Append(ID.STR_DESCONOCIDO);
+                    //var vehiculoAccesorios =
+                    //    RoboVehiculoAccesoriosMapper.Instance().GetByIncidencia(incidencia.Folio);
+                    //if (vehiculoAccesorios.Count > 0)
+                    //{
+                    //    foreach (var a in vehiculoAccesorios)
+                    //    {
+                    //        var accesorios = RoboVehiculoAccesoriosMapper.Instance().GetOne(a.Clave);
+                    //        if (accesorios != null)
+                    //        {
+                    //            datosAdicionales.AppendFormat("\nAccesorios Robados: {0}\n",
+                    //                                          accesorios.AccesoriosRobados != string.Empty
+                    //                                              ? accesorios.AccesoriosRobados
+                    //                                              : ID.STR_DESCONOCIDO);
+                    //            datosAdicionales.AppendFormat("Se percató: {0}\n", accesorios.SePercato != string.Empty ? accesorios.SePercato : ID.STR_DESCONOCIDO);
+                    //            datosAdicionales.AppendFormat("Descripción Responsables: {0}\n",
+                    //                                          accesorios.DescripcionResponsables != string.Empty
+                    //                                              ? accesorios.DescripcionResponsables
+                    //                                              : ID.STR_DESCONOCIDO);
+                    //        }
+                    //    }
+                    //}
+                    //else
+                    //    datosAdicionales.Append(ID.STR_DESCONOCIDO);
                     break;
                 default:
                     datosAdicionales.Append(ID.STR_DESCONOCIDO);
