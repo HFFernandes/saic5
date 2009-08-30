@@ -178,9 +178,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void gvDependencias_CellValidated(object sender, DataGridViewCellEventArgs e)
         {
+            
+        }
+
+        private void gvDependencias_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
             try
             {
-
                 switch (e.ColumnIndex)
                 {
                     case 3:
@@ -197,10 +201,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 else
                                 {
                                     Entidades.IncidenciaDependencia updInsDependencia = Mappers.IncidenciaDependenciaMapper.Instance().GetOne(Convert.ToInt32(this.gvDependencias["ClaveDependencia", e.RowIndex].Value), Convert.ToInt32(this.gvDependencias["Folio", e.RowIndex].Value)); ;
-                                    if (this.gvDependencias["FechaEnvioDependencia", e.RowIndex].Value != DBNull.Value)
+                                    if (this.gvDependencias["FechaEnvioDependencia", e.RowIndex].Value != DBNull.Value && Convert.ToString(this.gvDependencias["FechaEnvioDependencia", e.RowIndex].Value) != string.Empty)
                                         updInsDependencia.FechaEnvioDependencia = Convert.ToDateTime(this.gvDependencias["FechaEnvioDependencia", e.RowIndex].Value);
-                                    if (this.gvDependencias["FechaNotificacion", e.RowIndex].Value != DBNull.Value)
+                                    else
+                                        updInsDependencia.FechaEnvioDependencia = new Nullable<DateTime>();
+                                    if (this.gvDependencias["FechaNotificacion", e.RowIndex].Value != DBNull.Value && Convert.ToString(this.gvDependencias["FechaNotificacion", e.RowIndex].Value) != string.Empty)
                                         updInsDependencia.FechaNotificacion = Convert.ToDateTime(this.gvDependencias["FechaNotificacion", e.RowIndex].Value);
+                                    else
+                                        updInsDependencia.FechaNotificacion = new Nullable<DateTime>();
                                     Mappers.IncidenciaDependenciaMapper.Instance().Save(updInsDependencia);
                                 }
                             }
@@ -225,10 +233,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 else
                                 {
                                     Entidades.IncidenciaDependencia updInsDependencia = Mappers.IncidenciaDependenciaMapper.Instance().GetOne(Convert.ToInt32(this.gvDependencias["ClaveDependencia", e.RowIndex].Value), Convert.ToInt32(this.gvDependencias["Folio", e.RowIndex].Value)); ;
-                                    if (this.gvDependencias["FechaEnvioDependencia", e.RowIndex].Value != DBNull.Value)
+                                    if (this.gvDependencias["FechaEnvioDependencia", e.RowIndex].Value != DBNull.Value && Convert.ToString(this.gvDependencias["FechaEnvioDependencia", e.RowIndex].Value) != string.Empty)
                                         updInsDependencia.FechaEnvioDependencia = Convert.ToDateTime(this.gvDependencias["FechaEnvioDependencia", e.RowIndex].Value);
-                                    if (this.gvDependencias["FechaNotificacion", e.RowIndex].Value != DBNull.Value)
+                                    else
+                                        updInsDependencia.FechaEnvioDependencia = new Nullable<DateTime>();
+                                    if (this.gvDependencias["FechaNotificacion", e.RowIndex].Value != DBNull.Value && Convert.ToString(this.gvDependencias["FechaNotificacion", e.RowIndex].Value) != string.Empty)
                                         updInsDependencia.FechaNotificacion = Convert.ToDateTime(this.gvDependencias["FechaNotificacion", e.RowIndex].Value);
+                                    else
+                                        updInsDependencia.FechaNotificacion = new Nullable<DateTime>();
                                     Mappers.IncidenciaDependenciaMapper.Instance().Save(updInsDependencia);
                                 }
                             }
@@ -244,15 +256,5 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (SAIExcepcion)
             { }
         }
-
-        private void gvDependencias_CellLeave(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void gvDependencias_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }        
     }
 }
