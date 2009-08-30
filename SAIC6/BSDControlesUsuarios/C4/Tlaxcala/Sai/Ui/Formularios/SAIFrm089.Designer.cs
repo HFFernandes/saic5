@@ -350,7 +350,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(584, 566);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btnDependencias);
@@ -379,6 +378,7 @@
             this.Controls.Add(this.lblTipoDenuncia);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "SAIFrm089";
             this.Text = "Denuncias 089";
