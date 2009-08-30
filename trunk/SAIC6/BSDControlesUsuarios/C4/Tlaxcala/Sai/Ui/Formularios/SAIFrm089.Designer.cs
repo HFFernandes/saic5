@@ -391,6 +391,7 @@
             this.Name = "SAIFrm089";
             this.Text = "Denuncias 089";
             this.Load += new System.EventHandler(this.SAIFrm089_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SAIFrm089_FormClosing);
             this.Controls.SetChildIndex(this.pictureBox1, 0);
             this.Controls.SetChildIndex(this.groupBox1, 0);
             this.Controls.SetChildIndex(this.lblTipoDenuncia, 0);
