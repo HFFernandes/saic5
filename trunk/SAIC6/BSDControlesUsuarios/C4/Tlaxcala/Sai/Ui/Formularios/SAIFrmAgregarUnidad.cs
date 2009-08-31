@@ -29,7 +29,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 UnidadMapper.Instance().Insert(new Unidad
                                                                    {
                                                                        Activo = true,
-                                                                       ClaveCorporacion = Aplicacion.UsuarioPersistencia.intCorporacion ?? -1,
+                                                                       ClaveCorporacion = Aplicacion.UsuarioPersistencia.intCorporacion.Value,
                                                                        Codigo = saiTxtUnidad.Text
                                                                    });
 
