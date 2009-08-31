@@ -26,6 +26,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             this.InitializeComponent();
             this._entIncidencia089 = _Incidencia089;
+            this.Text = Convert.ToString(this._entIncidencia089.Folio);
             //_iFolio = iFolio;
         }
 
@@ -33,7 +34,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             this.SAIBarraEstado.SizingGrip = false;
             this.LlenarGridView(this._entIncidencia089.Folio);
-            this.LlenarDependencias();            
+            this.LlenarDependencias();
+            
+            this.BringToFront();
         }
 
         private void LlenarDependencias()
