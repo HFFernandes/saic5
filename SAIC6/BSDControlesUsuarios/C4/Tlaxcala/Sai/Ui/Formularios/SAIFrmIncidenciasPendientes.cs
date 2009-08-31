@@ -60,7 +60,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     var incidencia = IncidenciaMapper.Instance().GetOne(Convert.ToInt32(e.row.Record[0].Value));
                     if (incidencia != null)
                     {
-                        var incidenciaDespacho = new SAIFrmIncidencia066Despacho(incidencia);
+                        var incidenciaDespacho = new SAIFrmDespacho(incidencia);
                         incidenciaDespacho.Show(Aplicacion.frmComandos);
                     }
                 }
@@ -69,7 +69,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     var incidencia = IncidenciaMapper.Instance().GetOne(Convert.ToInt32(e.row.Record[0].Value));
                     if (incidencia != null)
                     {
-                        var incidenciaInfo = new SAIFrmIncidencia066(incidencia);
+                        var incidenciaInfo = new SAIFrmDespacho(incidencia);
                         incidenciaInfo.Show(Aplicacion.frmComandos);
                     }
                 }
@@ -94,7 +94,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
                         if (incidencia != null)
                         {
-                            var incidenciaDespacho = new SAIFrmIncidencia066Despacho(incidencia);
+                            var incidenciaDespacho = new SAIFrmDespacho(incidencia);
                             incidenciaDespacho.Show(Aplicacion.frmComandos);
                         }
                     }
@@ -108,8 +108,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
                         if (incidencia != null)
                         {
-                            var incidenciaInfo = new SAIFrmIncidencia066(incidencia);
-                            incidenciaInfo.Show(Aplicacion.frmComandos);
+                            //var incidenciaInfo = new SAIFrmIncidencia066(incidencia);
+                            //incidenciaInfo.Show(Aplicacion.frmComandos);
                         }
                     }
                 }
@@ -203,7 +203,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void tmrRegistros_Tick(object sender, EventArgs e)
         {
             ObtenerRegistros();
-            saiReport1.reportControl.Redraw();
+            //saiReport1.reportControl.Redraw();
+            saiReport1.reportControl.Populate();
 
             saiReport1.btnLigarIncidencias.Enabled = saiReport1.reportControl.SelectedRows.Count > 1;
             saiReport1.btnDespacharIncidencias.Enabled = saiReport1.reportControl.SelectedRows.Count >= 1;
@@ -281,13 +282,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                                                            incidencia.Folio.ToString(),
                                                                            incidencia.HoraRecepcion.ToShortTimeString(),
                                                                            corporaciones.ToString().Trim().Length > 1 ? corporaciones.ToString().Trim().Remove(corporaciones.Length - 1) : string.Empty,
-                                                                           incidencia.ClaveTipo != null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Descripcion : ID.STR_DESCONOCIDO,
+                                                                           incidencia.ClaveTipo != null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo.Value).Descripcion : ID.STR_DESCONOCIDO,
                                                                            zonas.ToString().Trim().Length > 1 ? zonas.ToString().Trim().Remove(zonas.Length - 1) : string.Empty,
                                                                            ID.STR_DESCONOCIDO /*totalCorporaciones.ToString()*/,
                                                                            ObtenerLapso(incidencia.HoraRecepcion),
                                                                            UsuarioMapper.Instance().GetOne(incidencia.ClaveUsuario).NombreUsuario,
                                                                            incidencia.FolioPadre.ToString(),
-                                                                           incidencia.ClaveTipo != null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Prioridad.ToString() : ID.STR_DESCONOCIDO));
+                                                                           incidencia.ClaveTipo != null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo.Value).Prioridad.ToString() : ID.STR_DESCONOCIDO));
                         }
                         else
                         {
@@ -350,7 +351,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                                     //if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
                                     saiReport1.reportControl.Records[itm.Record.Index][4].Value = incidencia.ClaveTipo != null ?
-                                        TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Descripcion : ID.STR_DESCONOCIDO;
+                                        TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo.Value).Descripcion : ID.STR_DESCONOCIDO;
 
                                     saiReport1.reportControl.Records[itm.Record.Index][5].Value =
                                         zonas.ToString().Trim().Length > 1
@@ -370,7 +371,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                             : ID.STR_DESCONOCIDO;
 
                                     //if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
-                                    saiReport1.reportControl.Records[itm.Record.Index][10].Value = incidencia.ClaveTipo != null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Prioridad.ToString() : ID.STR_DESCONOCIDO;
+                                    saiReport1.reportControl.Records[itm.Record.Index][10].Value = incidencia.ClaveTipo != null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo.Value).Prioridad.ToString() : ID.STR_DESCONOCIDO;
                                 }
                             }
                         }
@@ -401,6 +402,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         lstIncidenciasRegistradas.Remove(incidencia);
                     }
                     lstIncidenciasPorRemover.Clear();   //limpiamos la colección para el nuevo ciclo
+
+                    //ordenamiento
+                    if (SAIChkOrdenarPrioridad.Checked)
+                    {
+                        saiReport1.reportControl.SortOrder.Add(saiReport1.reportControl.Columns[10]);
+                        //saiReport1.reportControl.Populate();
+                    }
                 }
                 catch (Exception)
                 {

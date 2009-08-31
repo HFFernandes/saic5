@@ -56,8 +56,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 var incidencia = IncidenciaMapper.Instance().GetOne(Convert.ToInt32(e.row.Record[0].Value));
                 if (incidencia != null)
                 {
-                    var incidenciaInfo = new SAIFrmIncidencia089(incidencia);
-                    incidenciaInfo.Show(Aplicacion.frmComandos);
+                    //var incidenciaInfo = new SAIFrmIncidencia089(incidencia);
+                    //incidenciaInfo.Show(Aplicacion.frmComandos);
                 }
             }
             catch (SAIExcepcion)
@@ -185,14 +185,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             lstRegistrosReporte.Add(saiReport1.AgregarRegistro(null, incidencia.Folio,
                                                                            incidencia.Folio.ToString(),
                                                                            incidencia.HoraRecepcion.ToShortTimeString(),
-                                                                           incidencia.ClaveTipo !=null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Descripcion : ID.STR_DESCONOCIDO,
+                                                                           incidencia.ClaveTipo !=null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo.Value).Descripcion : ID.STR_DESCONOCIDO,
                                                                            incidencia.Descripcion,
                                                                            incidencia.Direccion,
                                                                            dependencias.ToString().Trim().Length > 1 ? dependencias.ToString().Trim().Remove(dependencias.Length - 1) : string.Empty,
                                                                            incidencia.NumeroOficio,
                                                                            UsuarioMapper.Instance().GetOne(incidencia.ClaveUsuario).NombreUsuario,
                                                                            incidencia.FolioPadre.ToString(),
-                                                                           incidencia.ClaveTipo !=null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Prioridad.ToString():ID.STR_DESCONOCIDO));
+                                                                           incidencia.ClaveTipo !=null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo.Value).Prioridad.ToString():ID.STR_DESCONOCIDO));
                         }
                         else
                         {
@@ -217,7 +217,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                                     //if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
                                         saiReport1.reportControl.Records[itm.Record.Index][3].Value =incidencia.ClaveTipo !=null ? 
-                                            TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Descripcion : ID.STR_DESCONOCIDO;
+                                            TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo.Value).Descripcion : ID.STR_DESCONOCIDO;
 
                                     //if (!incidenciaTemp.Descripcion.Equals(incidencia.Descripcion))
                                         saiReport1.reportControl.Records[itm.Record.Index][4].Value = incidencia.Descripcion != string.Empty
@@ -255,7 +255,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                             : ID.STR_DESCONOCIDO;
 
                                     //if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
-                                    saiReport1.reportControl.Records[itm.Record.Index][10].Value = incidencia.ClaveTipo !=null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Prioridad.ToString():ID.STR_DESCONOCIDO;
+                                    saiReport1.reportControl.Records[itm.Record.Index][10].Value = incidencia.ClaveTipo !=null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo.Value).Prioridad.ToString():ID.STR_DESCONOCIDO;
                                 }
                             }
                         }

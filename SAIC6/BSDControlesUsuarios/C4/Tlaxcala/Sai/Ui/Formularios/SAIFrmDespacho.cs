@@ -17,33 +17,39 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private ReportColumn _columna;
         private ReportRecordItem _item;
         private ReportRecord _registroActual;
+
         private Unidad _unidadAsignada;
         private Unidad _unidadApoyo;
         private DespachoIncidencia _despachoIncidencia;
-
-        public SAIFrmDespacho()
-        {
-            InitializeComponent();
-            ConfigurarGrid();
-        }
+        private Corporacion _entCorporacion;
+        private CorporacionIncidencia _entCorporacionIncidencia;
+        private Incidencia _incidencia;
+        private bool _blnComentarioNuevo;
 
         public SAIFrmDespacho(Incidencia incidencia)
         {
             InitializeComponent();
             ConfigurarGrid();
 
+            _incidencia = incidencia;
+            _entCorporacion = Aplicacion.UsuarioPersistencia.intCorporacion != null ?
+                CorporacionMapper.Instance().GetOne(Aplicacion.UsuarioPersistencia.intCorporacion.Value) : null;
+            _entCorporacionIncidencia = _entCorporacion != null ?
+                CorporacionIncidenciaMapper.Instance().GetOne(incidencia.Folio, _entCorporacion.Clave) : null;
+
             saiTxtTelefono.Text = incidencia.Telefono;
             saiTxtTipoIncidencia.Text = incidencia.TipoIncidenciaEntity.Descripcion;
             saiTxtDireccion.Text = incidencia.Direccion;
-            saiTxtMunicipio.Text = incidencia.ClaveMunicipio != null ? MunicipioMapper.Instance().GetOne(incidencia.ClaveMunicipio ?? -1).Nombre : ID.STR_DESCONOCIDO;
-            saiTxtLocalidad.Text = incidencia.ClaveLocalidad != null ? LocalidadMapper.Instance().GetOne(incidencia.ClaveLocalidad ?? -1).Nombre : ID.STR_DESCONOCIDO;
-            saiTxtCodigoPostal.Text = incidencia.ClaveCodigoPostal != null ? CodigoPostalMapper.Instance().GetOne(incidencia.ClaveCodigoPostal ?? -1).Valor : ID.STR_DESCONOCIDO;
-            saiTxtColonia.Text = incidencia.ClaveColonia != null ? ColoniaMapper.Instance().GetOne(incidencia.ClaveColonia ?? 0).Nombre : ID.STR_DESCONOCIDO;
+            saiTxtMunicipio.Text = incidencia.ClaveMunicipio != null ? MunicipioMapper.Instance().GetOne(incidencia.ClaveMunicipio.Value).Nombre : ID.STR_DESCONOCIDO;
+            saiTxtLocalidad.Text = incidencia.ClaveLocalidad != null ? LocalidadMapper.Instance().GetOne(incidencia.ClaveLocalidad.Value).Nombre : ID.STR_DESCONOCIDO;
+            saiTxtCodigoPostal.Text = incidencia.ClaveCodigoPostal != null ? CodigoPostalMapper.Instance().GetOne(incidencia.ClaveCodigoPostal.Value).Valor : ID.STR_DESCONOCIDO;
+            saiTxtColonia.Text = incidencia.ClaveColonia != null ? ColoniaMapper.Instance().GetOne(incidencia.ClaveColonia.Value).Nombre : ID.STR_DESCONOCIDO;
             saiTxtReferencia.Text = incidencia.Referencias;
 
             var datosAdicionales = new StringBuilder();
             switch (incidencia.TipoIncidenciaEntity.ClaveOperacion)
             {
+                //TODO: No hacer el switch por la clave operación ya que puede cambiar
                 case "111":
                     //personas extraviadas
                     var personasExtraviadas = PersonaExtraviadaMapper.Instance().GetByIncidencia(incidencia.Folio);
@@ -128,7 +134,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
 
             var descripcionGral = new StringBuilder();
-            descripcionGral.AppendFormat("{0}\n Información Adicional a la descripción:{1}", incidencia.Descripcion, datosAdicionales);
+            descripcionGral.AppendFormat("{0}", incidencia.Descripcion);
+            descripcionGral.AppendLine();
+            descripcionGral.AppendFormat("Información Adicional a la descripción:{0}", datosAdicionales);
             saiTxtDescripcion.Text = descripcionGral.ToString();
 
             //Obtener detalledespachoincidencia
@@ -139,10 +147,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             //cargar unidades,etc
             if (_despachoIncidencia != null)
             {
-                lbUnidadPrincipal.Text = _despachoIncidencia.ClaveUnidad != null ? UnidadMapper.Instance().GetOne(_despachoIncidencia.ClaveUnidad ?? -1).Codigo : ID.STR_DESCONOCIDO;
-                lblUnidadApoyo.Text = _despachoIncidencia.ClaveUnidadApoyo != null ? UnidadMapper.Instance().GetOne(_despachoIncidencia.ClaveUnidadApoyo ?? -1).Codigo : ID.STR_DESCONOCIDO;
-                saiTxtHoraRecepcion.Text = incidencia.HoraRecepcion.ToString();
-                saiTxtHoraDespacho.Text = _despachoIncidencia.HoraDespachada.ToString();
+                lblUnidadPrincipal.Text = _despachoIncidencia.ClaveUnidad != null ? UnidadMapper.Instance().GetOne(_despachoIncidencia.ClaveUnidad.Value).Codigo : ID.STR_DESCONOCIDO;
+                _unidadAsignada = _despachoIncidencia.ClaveUnidad != null ? UnidadMapper.Instance().GetOne(_despachoIncidencia.ClaveUnidad.Value) : null;
+                lblUnidadApoyo.Text = _despachoIncidencia.ClaveUnidadApoyo != null ? UnidadMapper.Instance().GetOne(_despachoIncidencia.ClaveUnidadApoyo.Value).Codigo : ID.STR_DESCONOCIDO;
+                _unidadApoyo = _despachoIncidencia.ClaveUnidadApoyo != null ? UnidadMapper.Instance().GetOne(_despachoIncidencia.ClaveUnidadApoyo.Value) : null;
+
+                saiTxtHoraRecepcion.Text = incidencia.HoraRecepcion.ToShortTimeString();
+                saiTxtHoraDespacho.Text = _despachoIncidencia.HoraDespachada.Value.ToShortTimeString();
                 if (_despachoIncidencia.HoraLlegada != null)
                     saiTmpHoraLlegada.Value = _despachoIncidencia.HoraLlegada.Value;
                 if (_despachoIncidencia.HoraLiberada != null)
@@ -157,9 +168,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         AgregarRegistro(comentario.Descripcion, UsuarioMapper.Instance().GetOne(comentario.ClaveUsuario).NombreUsuario);
                     }
 
+                    _blnComentarioNuevo = false;
                     axComentarios.Populate();
                 }
             }
+            Text = string.Format("{0} del Folio {1}", Text, incidencia.Folio);
         }
 
         private void SAIFrmDespacho_Load(object sender, EventArgs e)
@@ -203,6 +216,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             var strComentario = Convert.ToString(_registroActual[0].Value);
             if (strComentario != ID.STR_NUEVOCOMENTARIO)
             {
+                _blnComentarioNuevo = true;
                 AgregarRegistro(strComentario, Aplicacion.UsuarioPersistencia.strNombreUsuario);
 
                 LimpiarEncabezado(true);
@@ -218,6 +232,45 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 _registroActual = axComentarios.Records.Insert(0);
                 _item = _registroActual.AddItem(strComentario);
                 _item = _registroActual.AddItem(strDespachador);
+
+                if (_despachoIncidencia == null)
+                {
+                    if (_entCorporacionIncidencia == null)
+                    {
+                        _entCorporacionIncidencia = new CorporacionIncidencia
+                        {
+                            Folio = _incidencia.Folio,
+                            ClaveCorporacion = _entCorporacion.Clave
+                        };
+                        CorporacionIncidenciaMapper.Instance().Insert(_entCorporacionIncidencia);
+                    }
+
+                    _despachoIncidencia = new DespachoIncidencia
+                    {
+                        ClaveUsuario = Aplicacion.UsuarioPersistencia.intClaveUsuario,
+                        ClaveCorporacion = _entCorporacion.Clave,
+                        Folio = _incidencia.Folio,
+                        HoraDespachada = DateTime.Now
+                    };
+
+                    DespachoIncidenciaMapper.Instance().Insert(_despachoIncidencia);
+                    _incidencia.ClaveEstatus = 3;
+                    IncidenciaMapper.Instance().Save(_incidencia);
+                }
+
+                //guardar comentarios
+                if (_blnComentarioNuevo)
+                {
+                    var _detalle = new DetalleDespachoIncidencia
+                                                          {
+                                                              ClaveDespacho = _despachoIncidencia.Clave,
+                                                              ClaveUsuario = Aplicacion.UsuarioPersistencia.intClaveUsuario,
+                                                              Descripcion = strComentario.Trim(),
+                                                              HoraRegistro = DateTime.Now
+                                                          };
+                    DetalleDespachoIncidenciaMapper.Instance().Insert(_detalle);
+                }
+
             }
         }
 
@@ -253,10 +306,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 try
                 {
-                    int intClaveUnidadDropped = Convert.ToInt32(RegresaValorDrop(e).ToString());
+                    var intClaveUnidadDropped = Convert.ToInt32(RegresaValorDrop(e).ToString());
+                    if (_unidadAsignada != null && _unidadAsignada.Clave == intClaveUnidadDropped)
+                    {
+                        MessageBox.Show("Esta unidad ya fue asignada.", "SAI C4");
+                        e.Effect = DragDropEffects.None;
+                        return;
+                    }
+
                     if (_unidadAsignada != null)
                     {
-                        if (MessageBox.Show("La incidencia ya tiene una unidad asignada ¿Desea reemplazarla?", "SAI C4",
+                        if (MessageBox.Show("La incidencia ya tiene una unidad asignada, ¿Desea reemplazarla?", "SAI C4",
                                             MessageBoxButtons.YesNo) == DialogResult.No)
                         {
                             e.Effect = DragDropEffects.None;
@@ -264,20 +324,70 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         }
                     }
 
+                    var blnBorraUnidad = false;
                     if (_unidadApoyo != null && _unidadApoyo.Clave == intClaveUnidadDropped)
                     {
                         if (MessageBox.Show(
-                                "La unidad que trata de asignar ya se encuentra como unidad de apoyo de la incidencia  ¿Desea reemplazarla?",
+                                "La unidad que trata de asignar ya se encuentra como unidad de apoyo, ¿Desea reemplazarla?",
                                 "SAI C4", MessageBoxButtons.YesNo) == DialogResult.No)
                         {
                             e.Effect = DragDropEffects.None;
                             return;
                         }
-                    }
 
+                        _unidadApoyo = null;
+                        lblUnidadApoyo.Text = ID.STR_DESCONOCIDO;
+                        blnBorraUnidad = true;
+                    }
                     _unidadAsignada = UnidadMapper.Instance().GetOne(intClaveUnidadDropped);
 
+                    if (_despachoIncidencia == null)
+                    {
+                        if (_entCorporacionIncidencia == null)
+                        {
+                            _entCorporacionIncidencia = new CorporacionIncidencia
+                                                            {
+                                                                Folio = _incidencia.Folio,
+                                                                ClaveCorporacion = _entCorporacion.Clave
+                                                            };
+                            CorporacionIncidenciaMapper.Instance().Insert(_entCorporacionIncidencia);
+                        }
 
+                        _despachoIncidencia = new DespachoIncidencia
+                                                  {
+                                                      ClaveUsuario = Aplicacion.UsuarioPersistencia.intClaveUsuario,
+                                                      ClaveCorporacion = _entCorporacion.Clave,
+                                                      Folio = _incidencia.Folio,
+                                                      ClaveUnidad = _unidadAsignada.Clave,
+                                                      HoraDespachada = DateTime.Now
+                                                  };
+                        saiTxtHoraDespacho.Text = _despachoIncidencia.HoraDespachada.Value.ToShortTimeString();
+
+                        if (blnBorraUnidad)
+                        {
+                            _despachoIncidencia.ClaveUnidadApoyo = null;
+                        }
+
+                        DespachoIncidenciaMapper.Instance().Insert(_despachoIncidencia);
+                        _incidencia.ClaveEstatus = 3;
+                        IncidenciaMapper.Instance().Save(_incidencia);
+                    }
+                    else
+                    {
+                        _despachoIncidencia.ClaveUnidad = _unidadAsignada.Clave;
+                        if (blnBorraUnidad)
+                        {
+                            _despachoIncidencia.ClaveUnidadApoyo = null;
+                        }
+                        _despachoIncidencia.HoraDespachada = DateTime.Now;
+                        saiTxtHoraDespacho.Text = _despachoIncidencia.HoraDespachada.Value.ToShortTimeString();
+
+                        DespachoIncidenciaMapper.Instance().Save(_despachoIncidencia);
+                        _incidencia.ClaveEstatus = 3;
+                        IncidenciaMapper.Instance().Save(_incidencia);
+                    }
+
+                    lblUnidadPrincipal.Text = string.Format("{0}", _unidadAsignada.Codigo);
                 }
                 catch (Exception)
                 {
@@ -299,7 +409,72 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void pnlUnidadApoyo_DragDrop(object sender, DragEventArgs e)
         {
+            try
+            {
+                try
+                {
+                    var intClaveUnidadDropped = int.Parse(RegresaValorDrop(e).ToString());
+                    if (_unidadApoyo != null && _unidadApoyo.Clave == intClaveUnidadDropped)
+                    {
+                        MessageBox.Show("Esta unidad de apoyo ya fue asignada.", "SAI C4");
+                        e.Effect = DragDropEffects.None;
+                        return;
+                    }
 
+
+                    if (_unidadAsignada != null && _unidadAsignada.Clave == intClaveUnidadDropped)
+                    {
+                        MessageBox.Show("La unidad que trata de asignar como unidad de apoyo ya se encuentra como unidad principal.", "SAI C4");
+                        e.Effect = DragDropEffects.None;
+                        return;
+                    }
+
+                    if (_unidadApoyo != null)
+                    {
+                        if (MessageBox.Show("La incidencia ya tiene una unidad de apoyo asignada, ¿Desea reemplazarla?", "SAI C4", MessageBoxButtons.YesNo) == DialogResult.No)
+                        {
+                            e.Effect = DragDropEffects.None;
+                            return;
+                        }
+                    }
+
+                    _unidadApoyo = UnidadMapper.Instance().GetOne(intClaveUnidadDropped);
+                    if (_despachoIncidencia == null)
+                    {
+                        if (_entCorporacionIncidencia == null)
+                        {
+                            _entCorporacionIncidencia = new CorporacionIncidencia
+                                                            {
+                                                                Folio = _incidencia.Folio,
+                                                                ClaveCorporacion = _entCorporacion.Clave
+                                                            };
+                            CorporacionIncidenciaMapper.Instance().Insert(_entCorporacionIncidencia);
+                        }
+
+                        _despachoIncidencia = new DespachoIncidencia
+                                                  {
+                                                      ClaveUsuario = Aplicacion.UsuarioPersistencia.intClaveUsuario,
+                                                      ClaveCorporacion = _entCorporacion.Clave,
+                                                      Folio = _incidencia.Folio,
+                                                      ClaveUnidadApoyo = _unidadApoyo.Clave
+                                                  };
+
+                        DespachoIncidenciaMapper.Instance().Insert(_despachoIncidencia);
+                    }
+                    else
+                    {
+                        _despachoIncidencia.ClaveUnidadApoyo = _unidadApoyo.Clave;
+                        DespachoIncidenciaMapper.Instance().Save(_despachoIncidencia);
+                    }
+
+                    lblUnidadApoyo.Text = string.Format("{0}", _unidadApoyo.Codigo);
+                }
+                catch (Exception)
+                {
+                    throw new SAIExcepcion("Ocurrio un error al tratar de obtener la unidad.");
+                }
+            }
+            catch (SAIExcepcion) { }
         }
 
         private void pnlUnidadApoyo_DragOver(object sender, DragEventArgs e)
@@ -312,7 +487,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private object RegresaValorDrop(DragEventArgs e)
         {
-
             var res = (MemoryStream)e.Data.GetData("SAIC4:iUnidades");
             if (res != null)
             {
@@ -321,6 +495,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
 
             return null;
+        }
+
+        private void axComentarios_RequestEdit(object sender, AxXtremeReportControl._DReportControlEvents_RequestEditEvent e)
+        {
+            e.cancel = !axComentarios.Navigator.CurrentFocusInHeadersRows;
         }
     }
 }

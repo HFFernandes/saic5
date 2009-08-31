@@ -50,7 +50,7 @@
             this.saiTxtDescripcion = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.gprUnidadPrincipal = new System.Windows.Forms.GroupBox();
             this.pnlUnidadPrincipal = new System.Windows.Forms.Panel();
-            this.lbUnidadPrincipal = new System.Windows.Forms.Label();
+            this.lblUnidadPrincipal = new System.Windows.Forms.Label();
             this.gprUnidadApoyo = new System.Windows.Forms.GroupBox();
             this.pnlUnidadApoyo = new System.Windows.Forms.Panel();
             this.lblUnidadApoyo = new System.Windows.Forms.Label();
@@ -278,7 +278,7 @@
             // pnlUnidadPrincipal
             // 
             this.pnlUnidadPrincipal.AllowDrop = true;
-            this.pnlUnidadPrincipal.Controls.Add(this.lbUnidadPrincipal);
+            this.pnlUnidadPrincipal.Controls.Add(this.lblUnidadPrincipal);
             this.pnlUnidadPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlUnidadPrincipal.Location = new System.Drawing.Point(3, 16);
             this.pnlUnidadPrincipal.Name = "pnlUnidadPrincipal";
@@ -287,15 +287,15 @@
             this.pnlUnidadPrincipal.DragOver += new System.Windows.Forms.DragEventHandler(this.pnlUnidadPrincipal_DragOver);
             this.pnlUnidadPrincipal.DragDrop += new System.Windows.Forms.DragEventHandler(this.pnlUnidadPrincipal_DragDrop);
             // 
-            // lbUnidadPrincipal
+            // lblUnidadPrincipal
             // 
-            this.lbUnidadPrincipal.AutoEllipsis = true;
-            this.lbUnidadPrincipal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbUnidadPrincipal.Location = new System.Drawing.Point(3, 27);
-            this.lbUnidadPrincipal.Name = "lbUnidadPrincipal";
-            this.lbUnidadPrincipal.Size = new System.Drawing.Size(247, 16);
-            this.lbUnidadPrincipal.TabIndex = 0;
-            this.lbUnidadPrincipal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblUnidadPrincipal.AutoEllipsis = true;
+            this.lblUnidadPrincipal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUnidadPrincipal.Location = new System.Drawing.Point(3, 27);
+            this.lblUnidadPrincipal.Name = "lblUnidadPrincipal";
+            this.lblUnidadPrincipal.Size = new System.Drawing.Size(247, 16);
+            this.lblUnidadPrincipal.TabIndex = 0;
+            this.lblUnidadPrincipal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // gprUnidadApoyo
             // 
@@ -338,6 +338,7 @@
             this.axComentarios.TabIndex = 20;
             this.axComentarios.MouseDownEvent += new AxXtremeReportControl._DReportControlEvents_MouseDownEventHandler(this.axComentarios_MouseDownEvent);
             this.axComentarios.KeyUpEvent += new AxXtremeReportControl._DReportControlEvents_KeyUpEventHandler(this.axComentarios_KeyUpEvent);
+            this.axComentarios.RequestEdit += new AxXtremeReportControl._DReportControlEvents_RequestEditEventHandler(this.axComentarios_RequestEdit);
             // 
             // saiTmpHoraLlegada
             // 
@@ -543,7 +544,7 @@
         private System.Windows.Forms.PictureBox picLogotipo;
         private System.Windows.Forms.Panel pnlUnidadPrincipal;
         private System.Windows.Forms.Panel pnlUnidadApoyo;
-        private System.Windows.Forms.Label lbUnidadPrincipal;
+        private System.Windows.Forms.Label lblUnidadPrincipal;
         private System.Windows.Forms.Label lblUnidadApoyo;
     }
 }

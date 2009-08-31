@@ -72,7 +72,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     var incidencia = IncidenciaMapper.Instance().GetOne(Convert.ToInt32(e.row.Record[0].Value));
                     if (incidencia != null)
                     {
-                        var incidenciaDespacho = new SAIFrmIncidencia066Despacho(incidencia);
+                        var incidenciaDespacho = new SAIFrmDespacho(incidencia);
                         incidenciaDespacho.Show(Aplicacion.frmComandos);
                     }
                 }
@@ -81,7 +81,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     var incidencia = IncidenciaMapper.Instance().GetOne(Convert.ToInt32(e.row.Record[0].Value));
                     if (incidencia != null)
                     {
-                        var incidenciaInfo = new SAIFrmIncidencia066(incidencia);
+                        var incidenciaInfo = new SAIFrmDespacho(incidencia);
                         incidenciaInfo.Show(Aplicacion.frmComandos);
                     }
                 }
@@ -106,7 +106,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
                         if (incidencia != null)
                         {
-                            var incidenciaDespacho = new SAIFrmIncidencia066Despacho(incidencia);
+                            var incidenciaDespacho = new SAIFrmDespacho(incidencia);
                             incidenciaDespacho.Show(Aplicacion.frmComandos);
                         }
                     }
@@ -120,8 +120,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
                         if (incidencia != null)
                         {
-                            var incidenciaInfo = new SAIFrmIncidencia066(incidencia);
-                            incidenciaInfo.Show(Aplicacion.frmComandos);
+                            //var incidenciaInfo = new SAIFrmIncidencia066(incidencia);
+                            //incidenciaInfo.Show(Aplicacion.frmComandos);
                         }
                     }
                 }
@@ -200,7 +200,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             //Definir las columnas del listado y obtener los registros
             saiReport1.AgregarColumna(0, "ID", 20, false, false);
             saiReport1.AgregarColumna(1, "No de Teléfono", 100, true, true, true);
-            saiReport1.AgregarColumna(2, "Status", 100, true, true, true);
+            saiReport1.AgregarColumna(2, "Status", 100, true, false, false);
             saiReport1.AgregarColumna(3, "Hora de Entrada", 100, true, true, true);
             saiReport1.AgregarColumna(4, "Ubicación", 250, true, true, true, false, true, 2);
             saiReport1.AgregarColumna(5, "Tipo de Incidencia", 250, true, true, true);
@@ -269,10 +269,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                                                            EstatusIncidenciaMapper.Instance().GetOne(incidencia.ClaveEstatus).Descripcion,
                                                                            incidencia.HoraRecepcion.ToShortTimeString(),
                                                                            incidencia.Direccion,
-                                                                           incidencia.ClaveTipo != null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Descripcion : ID.STR_DESCONOCIDO,
+                                                                           incidencia.ClaveTipo != null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo.Value).Descripcion : ID.STR_DESCONOCIDO,
                                                                            corporaciones.ToString().Trim().Length > 1 ? corporaciones.ToString().Trim().Remove(corporaciones.Length - 1) : string.Empty,
                                                                            incidencia.Folio.ToString(),
-                                                                           incidencia.ClaveTipo != null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Prioridad.ToString() : ID.STR_DESCONOCIDO));
+                                                                           incidencia.ClaveTipo != null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo.Value).Prioridad.ToString() : ID.STR_DESCONOCIDO));
                         }
                         else
                         {
@@ -307,7 +307,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                                     //if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
                                     saiReport1.reportControl.Records[itm.Record.Index][5].Value = incidencia.ClaveTipo != null ?
-                                        TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Descripcion : ID.STR_DESCONOCIDO;
+                                        TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo.Value).Descripcion : ID.STR_DESCONOCIDO;
 
                                     var corporaciones = new StringBuilder();
                                     CorporacionMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_CORPORACIONES, incidencia.Folio)).ForEach(delegate(Corporacion c)
@@ -322,7 +322,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                             : ID.STR_DESCONOCIDO;
 
                                     //if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
-                                    saiReport1.reportControl.Records[itm.Record.Index][8].Value = incidencia.ClaveTipo != null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo ?? -1).Prioridad.ToString() : ID.STR_DESCONOCIDO;
+                                    saiReport1.reportControl.Records[itm.Record.Index][8].Value = incidencia.ClaveTipo != null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo.Value).Prioridad.ToString() : ID.STR_DESCONOCIDO;
                                 }
                             }
                         }
