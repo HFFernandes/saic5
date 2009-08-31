@@ -66,6 +66,9 @@
             this.lblHoraLlegada = new System.Windows.Forms.Label();
             this.lblHoraLiberacion = new System.Windows.Forms.Label();
             this.picLogotipo = new System.Windows.Forms.PictureBox();
+            this.cmdQuitarUP = new System.Windows.Forms.Button();
+            this.cmdQuitarUA = new System.Windows.Forms.Button();
+            this.toolTips = new System.Windows.Forms.ToolTip(this.components);
             this.gprUnidadPrincipal.SuspendLayout();
             this.pnlUnidadPrincipal.SuspendLayout();
             this.gprUnidadApoyo.SuspendLayout();
@@ -267,6 +270,7 @@
             // 
             // gprUnidadPrincipal
             // 
+            this.gprUnidadPrincipal.Controls.Add(this.cmdQuitarUP);
             this.gprUnidadPrincipal.Controls.Add(this.pnlUnidadPrincipal);
             this.gprUnidadPrincipal.Location = new System.Drawing.Point(11, 343);
             this.gprUnidadPrincipal.Name = "gprUnidadPrincipal";
@@ -291,7 +295,7 @@
             // 
             this.lblUnidadPrincipal.AutoEllipsis = true;
             this.lblUnidadPrincipal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUnidadPrincipal.Location = new System.Drawing.Point(3, 27);
+            this.lblUnidadPrincipal.Location = new System.Drawing.Point(3, 29);
             this.lblUnidadPrincipal.Name = "lblUnidadPrincipal";
             this.lblUnidadPrincipal.Size = new System.Drawing.Size(247, 16);
             this.lblUnidadPrincipal.TabIndex = 0;
@@ -299,6 +303,7 @@
             // 
             // gprUnidadApoyo
             // 
+            this.gprUnidadApoyo.Controls.Add(this.cmdQuitarUA);
             this.gprUnidadApoyo.Controls.Add(this.pnlUnidadApoyo);
             this.gprUnidadApoyo.Location = new System.Drawing.Point(280, 343);
             this.gprUnidadApoyo.Name = "gprUnidadApoyo";
@@ -323,7 +328,7 @@
             // 
             this.lblUnidadApoyo.AutoEllipsis = true;
             this.lblUnidadApoyo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUnidadApoyo.Location = new System.Drawing.Point(3, 27);
+            this.lblUnidadApoyo.Location = new System.Drawing.Point(3, 29);
             this.lblUnidadApoyo.Name = "lblUnidadApoyo";
             this.lblUnidadApoyo.Size = new System.Drawing.Size(247, 16);
             this.lblUnidadApoyo.TabIndex = 0;
@@ -454,6 +459,30 @@
             this.picLogotipo.TabIndex = 32;
             this.picLogotipo.TabStop = false;
             // 
+            // cmdQuitarUP
+            // 
+            this.cmdQuitarUP.Location = new System.Drawing.Point(238, 8);
+            this.cmdQuitarUP.Name = "cmdQuitarUP";
+            this.cmdQuitarUP.Size = new System.Drawing.Size(18, 15);
+            this.cmdQuitarUP.TabIndex = 1;
+            this.cmdQuitarUP.Text = "w";
+            this.cmdQuitarUP.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTips.SetToolTip(this.cmdQuitarUP, "Eliminar esta asignación.");
+            this.cmdQuitarUP.UseVisualStyleBackColor = true;
+            this.cmdQuitarUP.Click += new System.EventHandler(this.cmdQuitarUP_Click);
+            // 
+            // cmdQuitarUA
+            // 
+            this.cmdQuitarUA.Location = new System.Drawing.Point(238, 8);
+            this.cmdQuitarUA.Name = "cmdQuitarUA";
+            this.cmdQuitarUA.Size = new System.Drawing.Size(18, 15);
+            this.cmdQuitarUA.TabIndex = 1;
+            this.cmdQuitarUA.Text = "w";
+            this.cmdQuitarUA.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTips.SetToolTip(this.cmdQuitarUA, "Eliminar esta asignación.");
+            this.cmdQuitarUA.UseVisualStyleBackColor = true;
+            this.cmdQuitarUA.Click += new System.EventHandler(this.cmdQuitarUA_Click);
+            // 
             // SAIFrmDespacho
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -546,5 +575,8 @@
         private System.Windows.Forms.Panel pnlUnidadApoyo;
         private System.Windows.Forms.Label lblUnidadPrincipal;
         private System.Windows.Forms.Label lblUnidadApoyo;
+        private System.Windows.Forms.Button cmdQuitarUP;
+        private System.Windows.Forms.Button cmdQuitarUA;
+        private System.Windows.Forms.ToolTip toolTips;
     }
 }

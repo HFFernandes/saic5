@@ -245,6 +245,12 @@
     <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIniciarSesion.Designer.cs">
       <DependentUpon>SAIFrmIniciarSesion.cs</DependentUpon>
     </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmUnidades.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmUnidades.Designer.cs">
+      <DependentUpon>SAIFrmUnidades.cs</DependentUpon>
+    </Compile>
     <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmVentana.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -423,6 +429,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidenciasActivas089.resx">
       <DependentUpon>SAIFrmIncidenciasActivas089.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmUnidades.resx">
+      <DependentUpon>SAIFrmUnidades.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Content Include="SAI066.xml" />

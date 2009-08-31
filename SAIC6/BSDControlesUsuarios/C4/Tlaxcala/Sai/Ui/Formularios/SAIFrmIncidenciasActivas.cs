@@ -218,7 +218,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void tmrRegistros_Tick(object sender, EventArgs e)
         {
             ObtenerRegistros();
-            saiReport1.reportControl.Redraw();
+            //saiReport1.reportControl.Redraw();
+            saiReport1.reportControl.Populate();
 
             saiReport1.btnLigarIncidencias.Enabled = saiReport1.reportControl.SelectedRows.Count > 1;
         }
@@ -353,6 +354,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         lstIncidenciasRegistradas.Remove(incidencia);
                     }
                     lstIncidenciasPorRemover.Clear();   //limpiamos la colección para el nuevo ciclo
+
+                    //ordenamiento
+                    if (SAIChkOrdenarPrioridad.Checked)
+                        saiReport1.reportControl.SortOrder.Add(saiReport1.reportControl.Columns[8]);
                 }
                 catch (Exception)
                 {

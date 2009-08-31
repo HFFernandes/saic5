@@ -25,6 +25,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private CorporacionIncidencia _entCorporacionIncidencia;
         private Incidencia _incidencia;
         private bool _blnComentarioNuevo;
+        private int intEstatusAnterior; 
 
         public SAIFrmDespacho(Incidencia incidencia)
         {
@@ -155,9 +156,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 saiTxtHoraRecepcion.Text = incidencia.HoraRecepcion.ToShortTimeString();
                 saiTxtHoraDespacho.Text = _despachoIncidencia.HoraDespachada.Value.ToShortTimeString();
                 if (_despachoIncidencia.HoraLlegada != null)
+                {
                     saiTmpHoraLlegada.Value = _despachoIncidencia.HoraLlegada.Value;
+                    chkHoraLlegada.Enabled = true;
+                }
                 if (_despachoIncidencia.HoraLiberada != null)
+                {
                     saiTmpHoraLiberacion.Value = _despachoIncidencia.HoraLiberada.Value;
+                    chkHoraLiberacion.Enabled = true;
+                }
+                intEstatusAnterior = _incidencia.ClaveEstatus;
 
                 var comentariosDespacho =
                     DetalleDespachoIncidenciaMapper.Instance().GetByDespachoIncidencia(_despachoIncidencia.Clave);
@@ -500,6 +508,24 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void axComentarios_RequestEdit(object sender, AxXtremeReportControl._DReportControlEvents_RequestEditEvent e)
         {
             e.cancel = !axComentarios.Navigator.CurrentFocusInHeadersRows;
+        }
+
+        private void cmdQuitarUP_Click(object sender, EventArgs e)
+        {
+            _unidadAsignada = null;
+            lblUnidadPrincipal.Text = ID.STR_DESCONOCIDO;
+
+            _despachoIncidencia.ClaveUnidad = null;
+            DespachoIncidenciaMapper.Instance().Save(_despachoIncidencia);
+        }
+
+        private void cmdQuitarUA_Click(object sender, EventArgs e)
+        {
+            _unidadApoyo = null;
+            lblUnidadApoyo.Text = ID.STR_DESCONOCIDO;
+
+            _despachoIncidencia.ClaveUnidadApoyo = null;
+            DespachoIncidenciaMapper.Instance().Save(_despachoIncidencia);
         }
     }
 }

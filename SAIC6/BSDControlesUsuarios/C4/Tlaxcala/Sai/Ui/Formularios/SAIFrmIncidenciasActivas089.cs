@@ -56,8 +56,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 var incidencia = IncidenciaMapper.Instance().GetOne(Convert.ToInt32(e.row.Record[0].Value));
                 if (incidencia != null)
                 {
-                    //var incidenciaInfo = new SAIFrmIncidencia089(incidencia);
-                    //incidenciaInfo.Show(Aplicacion.frmComandos);
+                    var incidenciaInfo = new SAIFrm089(incidencia);
+                    incidenciaInfo.Show(Aplicacion.frmComandos);
                 }
             }
             catch (SAIExcepcion)
@@ -278,6 +278,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         lstIncidenciasRegistradas.Remove(incidencia);
                     }
                     lstIncidenciasPorRemover.Clear();   //limpiamos la colección para el nuevo ciclo
+
+                    //ordenamiento
+                    if (SAIChkOrdenarPrioridad.Checked)
+                        saiReport1.reportControl.SortOrder.Add(saiReport1.reportControl.Columns[10]);
                 }
                 catch (Exception)
                 {
@@ -294,7 +298,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void tmrRegistros_Tick(object sender, EventArgs e)
         {
             ObtenerRegistros();
-            saiReport1.reportControl.Redraw();
+            //saiReport1.reportControl.Redraw();
+            saiReport1.reportControl.Populate();
 
             saiReport1.btnLigarIncidencias.Enabled = saiReport1.reportControl.SelectedRows.Count > 1;
         }

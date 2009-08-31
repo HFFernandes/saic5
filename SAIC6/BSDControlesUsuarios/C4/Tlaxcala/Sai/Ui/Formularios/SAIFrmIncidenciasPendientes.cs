@@ -405,10 +405,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                     //ordenamiento
                     if (SAIChkOrdenarPrioridad.Checked)
-                    {
                         saiReport1.reportControl.SortOrder.Add(saiReport1.reportControl.Columns[10]);
-                        //saiReport1.reportControl.Populate();
-                    }
                 }
                 catch (Exception)
                 {
