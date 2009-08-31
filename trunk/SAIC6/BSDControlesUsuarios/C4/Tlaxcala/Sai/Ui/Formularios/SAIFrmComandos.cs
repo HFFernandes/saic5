@@ -16,6 +16,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
     public partial class SAIFrmComandos : Form
     {
+        private SAIFrmUnidades unidadesDO;
 
         #region CONSTRUCTOR
 
@@ -39,6 +40,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 //en su ejecución
                 SAIBarraComandos.Customization += SAIBarraComandos_Customization;
                 SAIBarraComandos.Execute += SAIBarraComandos_Execute;
+                SAIBarraComandos.UpdateEvent += SAIBarraComandos_UpdateEvent;
                 SAIBarraComandos.GlobalSettings.ResourceFile = Environment.CurrentDirectory +
                                                                "\\SuitePro.ResourceES.xml";
                 SAIBarraComandos.KeyBindings.AllowDoubleKeyShortcuts = true;
@@ -55,7 +57,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 //this.TcpListener.ListenerMessageDataEvent += new EventHandler<FindMessageEventArgs>(TcpListener_ListenerMessageDataEvent);
             }
         }
-
 
         #endregion
 
@@ -182,8 +183,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             return false;
         }
 
-
-
         /// <summary>
         /// Esta función se manda a llamar desde los demás formularios para mostrar la ventana del switch
         /// </summary>
@@ -266,8 +265,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         }
                         break;
                     case ID.CMD_AU:
-                        var corporacion =
-                            CorporacionMapper.Instance().GetOne(Aplicacion.UsuarioPersistencia.intCorporacion ?? -1);
+                        var corporacion = Aplicacion.UsuarioPersistencia.intCorporacion !=null ? 
+                            CorporacionMapper.Instance().GetOne(Aplicacion.UsuarioPersistencia.intCorporacion.Value) : null;
                         if (corporacion != null && corporacion.UnidadesVirtuales == false)
                         {
                             if (Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
@@ -317,7 +316,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
                         {
 
-                            var frmIncidencia089 = new SAIFrmIncidencia089(string.Empty);
+                            var frmIncidencia089 = new SAIFrm089();
                             frmIncidencia089.Show(this);
 
                         }
@@ -383,9 +382,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         break;
                     case ID.CMD_U:
                         //throw new SAIExcepcion("Funcionalidad no implementada.");
-                        Incidencia incidencia = IncidenciaMapper.Instance().GetOne(45);
-                        SAIFrmDespacho des=new SAIFrmDespacho(incidencia);
-                        des.Show();
+                        //Incidencia incidencia = IncidenciaMapper.Instance().GetOne(42);
+                        //SAIFrmDespacho des=new SAIFrmDespacho(incidencia);
+                        //des.Show();
+                        unidadesDO=new SAIFrmUnidades();
+                        unidadesDO.Show();
                         break;
                     default:
                         break;
@@ -393,6 +394,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
             catch (SAIExcepcion)
             {
+            }
+        }
+
+        void SAIBarraComandos_UpdateEvent(object sender, AxXtremeCommandBars._DCommandBarsEvents_UpdateEvent e)
+        {
+            switch (e.control.Id)
+            {
+                case ID.CMD_U:
+                    //e.control.Checked = SAIFrmUnidades.ActiveForm.
+                    break;
             }
         }
 
@@ -453,9 +464,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 //Iniciamos el monitor del agente de Avaya
                // this.IniciarMonitorLlamadas();
 
-
-
-
             }
         }
 
@@ -497,10 +505,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             _blnCtrPresionado = false;
         }
 
-
-
         #region EVENTOS PARA MONITOR DE TCP
-
 
         void TcpListener_ListenerMessageDataEvent(object sender, FindMessageEventArgs e)
         {
@@ -525,15 +530,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
             {
 
-                var frmIncidencia066 = new SAIFrmIncidencia066(this.NoTelefono);
-                frmIncidencia066.Show();
+                //var frmIncidencia066 = new SAIFrmIncidencia066(this.NoTelefono);
+                //frmIncidencia066.Show();
 
             }
             else if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
                 Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
             {
-                var frmIncidencia089 = new SAIFrmIncidencia089(this.NoTelefono);
-                frmIncidencia089.Show(this);
+                //var frmIncidencia089 = new SAIFrmIncidencia089(this.NoTelefono);
+                //frmIncidencia089.Show(this);
 
             }
         }
@@ -544,11 +549,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             TcpListener.BuscarDatos();
         }
-
-        
-
-
-
 
         #endregion
 

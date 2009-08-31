@@ -11,6 +11,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         public SAIFrmAgregarUnidad()
         {
             InitializeComponent();
+            
+            saiTxtUnidad.Focus();
+            cmdAceptar.Focus();
         }
 
         private void cmdAceptar_Click(object sender, EventArgs e)
