@@ -36,7 +36,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.LlenarGridView(this._entIncidencia089.Folio);
             this.LlenarDependencias();
             
-            this.BringToFront();
+            //this.BringToFront();
         }
 
         private void LlenarDependencias()
