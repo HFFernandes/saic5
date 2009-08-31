@@ -397,16 +397,18 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void btnDependencias_Click(object sender, EventArgs e)
         {
             this.ActualizarIncidencia();
-            if (this.OwnedForms.Length == 0)
-            {
+            /*if (this.OwnedForms.Length == 0)
+            {*/
                 SAIFrmDependencias089 frmDependencias = new SAIFrmDependencias089(this._Incidencia089);
-                frmDependencias.Show(this);
-                frmDependencias.Focus();
-            }
-            else 
+                frmDependencias.TopMost = true;
+                frmDependencias.ShowDialog(this);
+                
+                //frmDependencias.Focus();
+            //}
+            /*else 
             {
                 this.OwnedForms[0].Focus();
-            }
+            }*/
         }
         /// <summary>
         /// Llena los controles con los datos de una incidencia
