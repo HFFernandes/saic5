@@ -82,13 +82,27 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
 
             }) { IsBackground = true };
             tr.Start();
-
-
-
-
             //frmIncidencia.Focus();
-
-
+        }
+        /// <summary>
+        /// Muestra el mapa con la información del formulario que lo manda a llamar
+        /// </summary>
+        public static void MuestraMapa(EstructuraUbicacion objDatosUbicacion)
+        {
+            if (_frmMapa == null)
+            {
+                _frmMapa = new SAIFrmMapa(ConfigurationSettings.AppSettings["XmlCartografia"], Application.StartupPath + @"\");
+                _frmMapa.Show();
+            }
+            tr = new Thread(delegate()
+            {
+                try
+                {
+                    _frmMapa.Invoke(new DelegadoActualizarMapa(ActualizarMapa), new object[] { objDatosUbicacion });
+                }
+                catch { }
+            }) { IsBackground = true };
+            tr.Start();
         }
 
         /// <summary>
