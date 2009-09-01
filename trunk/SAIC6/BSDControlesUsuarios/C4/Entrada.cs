@@ -25,7 +25,7 @@ namespace BSD.C4
                     Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
 
                     Application.EnableVisualStyles();
-                    Application.SetCompatibleTextRenderingDefault(false);
+                    //Application.SetCompatibleTextRenderingDefault(false);
                     AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
                     Application.Run(new SAIFrmComandos());
                     mutex.ReleaseMutex();

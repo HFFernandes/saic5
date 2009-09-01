@@ -375,7 +375,7 @@
             this.saiTmpHoraLlegada.CustomFormat = "hh:mm";
             this.saiTmpHoraLlegada.Enabled = false;
             this.saiTmpHoraLlegada.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.saiTmpHoraLlegada.Location = new System.Drawing.Point(292, 615);
+            this.saiTmpHoraLlegada.Location = new System.Drawing.Point(292, 617);
             this.saiTmpHoraLlegada.Name = "saiTmpHoraLlegada";
             this.saiTmpHoraLlegada.ShowUpDown = true;
             this.saiTmpHoraLlegada.Size = new System.Drawing.Size(97, 20);
@@ -390,7 +390,7 @@
             this.saiTmpHoraLiberacion.CustomFormat = "hh:mm";
             this.saiTmpHoraLiberacion.Enabled = false;
             this.saiTmpHoraLiberacion.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.saiTmpHoraLiberacion.Location = new System.Drawing.Point(421, 615);
+            this.saiTmpHoraLiberacion.Location = new System.Drawing.Point(421, 617);
             this.saiTmpHoraLiberacion.Name = "saiTmpHoraLiberacion";
             this.saiTmpHoraLiberacion.ShowUpDown = true;
             this.saiTmpHoraLiberacion.Size = new System.Drawing.Size(97, 20);
@@ -402,7 +402,7 @@
             // chkHoraLiberacion
             // 
             this.chkHoraLiberacion.AutoSize = true;
-            this.chkHoraLiberacion.Location = new System.Drawing.Point(524, 619);
+            this.chkHoraLiberacion.Location = new System.Drawing.Point(524, 621);
             this.chkHoraLiberacion.Name = "chkHoraLiberacion";
             this.chkHoraLiberacion.Size = new System.Drawing.Size(15, 14);
             this.chkHoraLiberacion.TabIndex = 30;
@@ -412,7 +412,7 @@
             // chkHoraLlegada
             // 
             this.chkHoraLlegada.AutoSize = true;
-            this.chkHoraLlegada.Location = new System.Drawing.Point(395, 619);
+            this.chkHoraLlegada.Location = new System.Drawing.Point(395, 621);
             this.chkHoraLlegada.Name = "chkHoraLlegada";
             this.chkHoraLlegada.Size = new System.Drawing.Size(15, 14);
             this.chkHoraLlegada.TabIndex = 27;
@@ -422,7 +422,7 @@
             // saiTxtHoraRecepcion
             // 
             this.saiTxtHoraRecepcion.ClrBackColorFoco = System.Drawing.Color.Empty;
-            this.saiTxtHoraRecepcion.Location = new System.Drawing.Point(11, 615);
+            this.saiTxtHoraRecepcion.Location = new System.Drawing.Point(11, 617);
             this.saiTxtHoraRecepcion.Name = "saiTxtHoraRecepcion";
             this.saiTxtHoraRecepcion.ReadOnly = true;
             this.saiTxtHoraRecepcion.Size = new System.Drawing.Size(97, 20);
@@ -432,7 +432,7 @@
             // saiTxtHoraDespacho
             // 
             this.saiTxtHoraDespacho.ClrBackColorFoco = System.Drawing.Color.Empty;
-            this.saiTxtHoraDespacho.Location = new System.Drawing.Point(118, 615);
+            this.saiTxtHoraDespacho.Location = new System.Drawing.Point(118, 617);
             this.saiTxtHoraDespacho.Name = "saiTxtHoraDespacho";
             this.saiTxtHoraDespacho.ReadOnly = true;
             this.saiTxtHoraDespacho.Size = new System.Drawing.Size(97, 20);
@@ -491,7 +491,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(551, 642);
+            this.ClientSize = new System.Drawing.Size(551, 647);
             this.Controls.Add(this.picLogotipo);
             this.Controls.Add(this.axComentarios);
             this.Controls.Add(this.lblHoraLiberacion);

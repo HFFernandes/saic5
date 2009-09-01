@@ -100,12 +100,12 @@
         public const string SQL_OBTENERPERMISOS =
                 "SELECT Permiso.* FROM PermisoUsuario INNER JOIN Permiso ON PermisoUsuario.ClavePermiso = Permiso.Clave WHERE (PermisoUsuario.ClaveUsuario = {0}) AND (PermisoUsuario.ClaveSubmodulo = {1}) AND (PermisoUsuario.ClaveSistema={2})";
 
-        public const string SQL_OBTENERUSUARIO = "SELECT * FROM Usuario WHERE (NombreUsuario='{0}') AND (Activo=1)";
+        public const string SQL_OBTENERUSUARIO = "SELECT TOP 1 * FROM Usuario WHERE (NombreUsuario='{0}') AND (Activo=1)";
 
         public const string SQL_OBTENERSISTEMAS = "SELECT DISTINCT Sistema.* FROM Sistema INNER JOIN PermisoUsuario ON Sistema.Clave = PermisoUsuario.ClaveSistema INNER JOIN Submodulo ON PermisoUsuario.ClaveSubmodulo = Submodulo.Clave WHERE (PermisoUsuario.ClaveUsuario = {0})";
 
         public const string SQL_AUTENTICARUSUARIO =
-            "SELECT * FROM Usuario WHERE (NombreUsuario='{0}') AND (Contraseña='{1}')";
+            "SELECT TOP 1 * FROM Usuario WHERE (NombreUsuario='{0}') AND (Contraseña='{1}')";
 
         public const string SQL_VERIFICARUNIDAD = "SELECT Unidad.* FROM Unidad WHERE (Codigo='{0}')";
 
@@ -144,6 +144,7 @@
         public const string STR_NOSELOCALIZOARCHIVO = "No se localizo el archivo de configuracion para los filtros de busqueda.";
         public const string STR_ERRORFILTRO = "Ha ocurrido un error al tratar de generar el filtro.";
         public const string STR_NUEVOCOMENTARIO = "Inserte aquí su nuevo comentario";
+        public const string STR_UNIDADVIRTUAL = "Virtual";
 
         #endregion
 

@@ -19,7 +19,6 @@ namespace BSD.C4.Tlaxcala.Sai.Dal
         {
             var sistemas = new List<string>();
             var usuario = UsuarioMapper.Instance().GetOneBySQLQuery(string.Format(ID.SQL_OBTENERUSUARIO, strNombreUsuario));
-
             if (usuario != null)
             {
                 //Existe un usuario con las credenciales proporcionadas
