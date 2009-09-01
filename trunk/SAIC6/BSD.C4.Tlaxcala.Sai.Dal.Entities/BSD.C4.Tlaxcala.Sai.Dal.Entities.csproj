@@ -85,6 +85,7 @@
     <Compile Include="Objects\Auto\ClasificacionOrganizacionObject.Auto.cs" />
     <Compile Include="Objects\Auto\CodigoPostalObject.Auto.cs" />
     <Compile Include="Objects\Auto\ColoniaObject.Auto.cs" />
+    <Compile Include="Objects\Auto\CoordenadaObject.Auto.cs" />
     <Compile Include="Objects\Auto\CorporacionObject.Auto.cs" />
     <Compile Include="Objects\Auto\DependenciaObject.Auto.cs" />
     <Compile Include="Objects\Auto\EstadoObject.Auto.cs" />
@@ -108,6 +109,7 @@
     <Compile Include="Objects\ColoniaObject.cs" />
     <Compile Include="Entities\CorporacionIncidencia.cs" />
     <Compile Include="Entities\Auto\CorporacionIncidencia.Auto.cs" />
+    <Compile Include="Objects\CoordenadaObject.cs" />
     <Compile Include="Objects\CorporacionIncidenciaObject.cs" />
     <Compile Include="Objects\Auto\CorporacionIncidenciaObject.Auto.cs" />
     <Compile Include="Objects\CorporacionObject.cs" />

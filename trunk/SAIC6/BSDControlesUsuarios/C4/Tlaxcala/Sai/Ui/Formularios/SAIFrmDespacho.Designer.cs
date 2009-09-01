@@ -49,9 +49,11 @@
             this.lblDescripcion = new System.Windows.Forms.Label();
             this.saiTxtDescripcion = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.gprUnidadPrincipal = new System.Windows.Forms.GroupBox();
+            this.cmdQuitarUP = new System.Windows.Forms.Button();
             this.pnlUnidadPrincipal = new System.Windows.Forms.Panel();
             this.lblUnidadPrincipal = new System.Windows.Forms.Label();
             this.gprUnidadApoyo = new System.Windows.Forms.GroupBox();
+            this.cmdQuitarUA = new System.Windows.Forms.Button();
             this.pnlUnidadApoyo = new System.Windows.Forms.Panel();
             this.lblUnidadApoyo = new System.Windows.Forms.Label();
             this.axComentarios = new AxXtremeReportControl.AxReportControl();
@@ -66,8 +68,6 @@
             this.lblHoraLlegada = new System.Windows.Forms.Label();
             this.lblHoraLiberacion = new System.Windows.Forms.Label();
             this.picLogotipo = new System.Windows.Forms.PictureBox();
-            this.cmdQuitarUP = new System.Windows.Forms.Button();
-            this.cmdQuitarUA = new System.Windows.Forms.Button();
             this.toolTips = new System.Windows.Forms.ToolTip(this.components);
             this.gprUnidadPrincipal.SuspendLayout();
             this.pnlUnidadPrincipal.SuspendLayout();
@@ -279,6 +279,18 @@
             this.gprUnidadPrincipal.TabStop = false;
             this.gprUnidadPrincipal.Text = "Unidad Asignada";
             // 
+            // cmdQuitarUP
+            // 
+            this.cmdQuitarUP.Location = new System.Drawing.Point(238, 8);
+            this.cmdQuitarUP.Name = "cmdQuitarUP";
+            this.cmdQuitarUP.Size = new System.Drawing.Size(18, 15);
+            this.cmdQuitarUP.TabIndex = 1;
+            this.cmdQuitarUP.Text = "w";
+            this.cmdQuitarUP.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTips.SetToolTip(this.cmdQuitarUP, "Eliminar esta asignación.");
+            this.cmdQuitarUP.UseVisualStyleBackColor = true;
+            this.cmdQuitarUP.Click += new System.EventHandler(this.cmdQuitarUP_Click);
+            // 
             // pnlUnidadPrincipal
             // 
             this.pnlUnidadPrincipal.AllowDrop = true;
@@ -311,6 +323,18 @@
             this.gprUnidadApoyo.TabIndex = 19;
             this.gprUnidadApoyo.TabStop = false;
             this.gprUnidadApoyo.Text = "Unidad de Apoyo";
+            // 
+            // cmdQuitarUA
+            // 
+            this.cmdQuitarUA.Location = new System.Drawing.Point(238, 8);
+            this.cmdQuitarUA.Name = "cmdQuitarUA";
+            this.cmdQuitarUA.Size = new System.Drawing.Size(18, 15);
+            this.cmdQuitarUA.TabIndex = 1;
+            this.cmdQuitarUA.Text = "w";
+            this.cmdQuitarUA.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTips.SetToolTip(this.cmdQuitarUA, "Eliminar esta asignación.");
+            this.cmdQuitarUA.UseVisualStyleBackColor = true;
+            this.cmdQuitarUA.Click += new System.EventHandler(this.cmdQuitarUA_Click);
             // 
             // pnlUnidadApoyo
             // 
@@ -357,6 +381,8 @@
             this.saiTmpHoraLlegada.Size = new System.Drawing.Size(97, 20);
             this.saiTmpHoraLlegada.StrMensajeCampoRequerido = "El campo es requerido.";
             this.saiTmpHoraLlegada.TabIndex = 26;
+            this.saiTmpHoraLlegada.ValueChanged += new System.EventHandler(this.saiTmpHoraLlegada_ValueChanged);
+            this.saiTmpHoraLlegada.KeyUp += new System.Windows.Forms.KeyEventHandler(this.saiTmpHoraLlegada_KeyUp);
             // 
             // saiTmpHoraLiberacion
             // 
@@ -370,6 +396,8 @@
             this.saiTmpHoraLiberacion.Size = new System.Drawing.Size(97, 20);
             this.saiTmpHoraLiberacion.StrMensajeCampoRequerido = "El campo es requerido.";
             this.saiTmpHoraLiberacion.TabIndex = 29;
+            this.saiTmpHoraLiberacion.ValueChanged += new System.EventHandler(this.saiTmpHoraLiberacion_ValueChanged);
+            this.saiTmpHoraLiberacion.KeyUp += new System.Windows.Forms.KeyEventHandler(this.saiTmpHoraLiberacion_KeyUp);
             // 
             // chkHoraLiberacion
             // 
@@ -458,30 +486,6 @@
             this.picLogotipo.Size = new System.Drawing.Size(551, 50);
             this.picLogotipo.TabIndex = 32;
             this.picLogotipo.TabStop = false;
-            // 
-            // cmdQuitarUP
-            // 
-            this.cmdQuitarUP.Location = new System.Drawing.Point(238, 8);
-            this.cmdQuitarUP.Name = "cmdQuitarUP";
-            this.cmdQuitarUP.Size = new System.Drawing.Size(18, 15);
-            this.cmdQuitarUP.TabIndex = 1;
-            this.cmdQuitarUP.Text = "w";
-            this.cmdQuitarUP.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.toolTips.SetToolTip(this.cmdQuitarUP, "Eliminar esta asignación.");
-            this.cmdQuitarUP.UseVisualStyleBackColor = true;
-            this.cmdQuitarUP.Click += new System.EventHandler(this.cmdQuitarUP_Click);
-            // 
-            // cmdQuitarUA
-            // 
-            this.cmdQuitarUA.Location = new System.Drawing.Point(238, 8);
-            this.cmdQuitarUA.Name = "cmdQuitarUA";
-            this.cmdQuitarUA.Size = new System.Drawing.Size(18, 15);
-            this.cmdQuitarUA.TabIndex = 1;
-            this.cmdQuitarUA.Text = "w";
-            this.cmdQuitarUA.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.toolTips.SetToolTip(this.cmdQuitarUA, "Eliminar esta asignación.");
-            this.cmdQuitarUA.UseVisualStyleBackColor = true;
-            this.cmdQuitarUA.Click += new System.EventHandler(this.cmdQuitarUA_Click);
             // 
             // SAIFrmDespacho
             // 

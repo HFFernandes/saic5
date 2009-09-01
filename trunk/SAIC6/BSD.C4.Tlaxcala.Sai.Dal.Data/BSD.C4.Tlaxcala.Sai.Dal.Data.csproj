@@ -62,6 +62,7 @@
     <Compile Include="Gateways\Auto\ClasificacionOrganizacionGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\CodigoPostalGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\ColoniaGateway.Auto.cs" />
+    <Compile Include="Gateways\Auto\CoordenadaGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\CorporacionGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\DependenciaGateway.Auto.cs" />
     <Compile Include="Gateways\Auto\EstadoGateway.Auto.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Gateways\ClasificacionOrganizacionGateway.cs" />
     <Compile Include="Gateways\CodigoPostalGateway.cs" />
     <Compile Include="Gateways\ColoniaGateway.cs" />
+    <Compile Include="Gateways\CoordenadaGateway.cs" />
     <Compile Include="Gateways\CorporacionGateway.cs" />
     <Compile Include="Gateways\DependenciaGateway.cs" />
     <Compile Include="Gateways\EstadoGateway.cs" />
@@ -107,6 +109,7 @@
     <Compile Include="Mappers\Auto\ClasificacionOrganizacionMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\CodigoPostalMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\ColoniaMapper.Auto.cs" />
+    <Compile Include="Mappers\Auto\CoordenadaMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\CorporacionMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\DependenciaMapper.Auto.cs" />
     <Compile Include="Mappers\Auto\EstadoMapper.Auto.cs" />
@@ -129,6 +132,7 @@
     <Compile Include="Mappers\ClasificacionOrganizacionMapper.cs" />
     <Compile Include="Mappers\CodigoPostalMapper.cs" />
     <Compile Include="Mappers\ColoniaMapper.cs" />
+    <Compile Include="Mappers\CoordenadaMapper.cs" />
     <Compile Include="Mappers\CorporacionIncidenciaMapper.cs" />
     <Compile Include="Mappers\Auto\CorporacionIncidenciaMapper.Auto.cs" />
     <Compile Include="Gateways\CorporacionIncidenciaGateway.cs" />
