@@ -30,8 +30,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             InitializeComponent();
 
-            //Inicializamos la capacidad de la colección a 3 por ser 089,066 y Administrador
-            sistemas = new List<string>(3);
+            //Inicializamos la capacidad de la colección a 2 por ser 089,066
+            sistemas = new List<string>(2);
         }
 
         /// <summary>
@@ -48,8 +48,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="strItem">Elemento enviado por el delegado</param>
         private void AgregarItem(string strItem)
         {
-            saiCmbSistema.Items.Add(strItem);
             saiCmbSistema.Enabled = true;
+            saiCmbSistema.Items.Add(strItem);
             saiCmbSistema.SelectedIndex = 0;
         }
 
@@ -100,20 +100,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                      {
                                          saiCmbSistema.Invoke(new DelegadoLimpiarCombo(LimpiarCombo));
 
-                                         if (saiTxtUsuario.Text.Length >= 5)
+                                         if (saiTxtUsuario.Text.Length < 5) return;
+                                         sistemas = Aplicacion.removerDuplicados(ReglaUsuarios.ObtenerSistemas(saiTxtUsuario.Text.Trim(), saiTxtContraseña.Text.Trim()));
+
+                                         if (sistemas.Count < 1) return;
+                                         saiCmbSistema.Invoke(new DelegadoLimpiarCombo(LimpiarCombo));
+                                         foreach (var s in sistemas)
                                          {
-                                             sistemas = Aplicacion.removerDuplicados(ReglaUsuarios.ObtenerSistemas(saiTxtUsuario.Text.Trim(), saiTxtContraseña.Text.Trim()));
-                                             if (sistemas != null && sistemas.Count >= 1)
-                                             {
-                                                 saiCmbSistema.Invoke(new DelegadoLimpiarCombo(LimpiarCombo));
-                                                 foreach (var s in sistemas)
-                                                 {
-                                                     saiCmbSistema.Invoke(new DelegadoAgregarItem(AgregarItem),
-                                                                          new object[] { s });
-                                                 }
-                                                 Aplicacion.UsuarioPersistencia.strSistemas = sistemas.ToArray();
-                                             }
+                                             saiCmbSistema.Invoke(new DelegadoAgregarItem(AgregarItem),
+                                                                  new object[] { s });
                                          }
+                                         Aplicacion.UsuarioPersistencia.strSistemas = sistemas.ToArray();
                                      }) { IsBackground = true };
             tr.Start();
         }

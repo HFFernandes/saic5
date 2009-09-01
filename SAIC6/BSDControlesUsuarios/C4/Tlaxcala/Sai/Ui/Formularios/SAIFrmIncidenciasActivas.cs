@@ -206,7 +206,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             saiReport1.AgregarColumna(5, "Tipo de Incidencia", 250, true, true, true);
             saiReport1.AgregarColumna(6, "Dividido En", 70, true, true, true);
             saiReport1.AgregarColumna(7, "Folio", 150, true, true, true);
-            saiReport1.AgregarColumna(8, "Prioridad", 20, false, true, true);
+            saiReport1.AgregarColumna(8, "Prioridad", 20, true, true, true);
             ObtenerRegistros();
         }
 
@@ -218,8 +218,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void tmrRegistros_Tick(object sender, EventArgs e)
         {
             ObtenerRegistros();
-            //saiReport1.reportControl.Redraw();
-            saiReport1.reportControl.Populate();
+            saiReport1.reportControl.Redraw();
+            //saiReport1.reportControl.Populate();
 
             saiReport1.btnLigarIncidencias.Enabled = saiReport1.reportControl.SelectedRows.Count > 1;
         }

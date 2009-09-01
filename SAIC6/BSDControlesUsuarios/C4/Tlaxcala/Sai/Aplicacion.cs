@@ -42,11 +42,9 @@ namespace BSD.C4.Tlaxcala.Sai
 
             foreach (var valorActual in listaEntrada)
             {
-                if (!diccionario.ContainsKey(valorActual))
-                {
-                    diccionario.Add(valorActual, 0);
-                    listaFinal.Add(valorActual);
-                }
+                if (diccionario.ContainsKey(valorActual)) continue;
+                diccionario.Add(valorActual, 0);
+                listaFinal.Add(valorActual);
             }
             return listaFinal;
         }
@@ -70,7 +68,7 @@ namespace BSD.C4.Tlaxcala.Sai
                     {
                         var usuarioCorporacion =
                             UsuarioCorporacionMapper.Instance().GetByUsuario(intClaveUsuario);
-                        if (usuarioCorporacion != null && usuarioCorporacion.Count > 0)
+                        if (/*usuarioCorporacion != null &&*/ usuarioCorporacion.Count > 0)
                         {
                             return usuarioCorporacion[0].ClaveCorporacion;
                         }
@@ -134,9 +132,9 @@ namespace BSD.C4.Tlaxcala.Sai
                     case "089":
                         intClaveSistema = 1;
                         break;
-                    default:
-                        intClaveSistema = null;
-                        break;
+                    //default:
+                    //    intClaveSistema = null;
+                    //    break;
                 }
                 return intClaveSistema.ToString();
             }
