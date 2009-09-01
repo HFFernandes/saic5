@@ -55,8 +55,19 @@
             this.lblTipoIncidencia = new System.Windows.Forms.Label();
             this.txtTelefono = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.lblTelefono = new System.Windows.Forms.Label();
+            this.cklCorporacion = new System.Windows.Forms.CheckedListBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.gbDenunciante = new System.Windows.Forms.GroupBox();
+            this.txtDireccionDenunciante = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtApellidosDenunciante = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtNombreDenunciante = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.gbDenunciante.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -67,7 +78,7 @@
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(585, 50);
+            this.pictureBox1.Size = new System.Drawing.Size(594, 50);
             this.pictureBox1.TabIndex = 26;
             this.pictureBox1.TabStop = false;
             // 
@@ -135,22 +146,23 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(-1, 209);
+            this.label10.Location = new System.Drawing.Point(3, 207);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(73, 13);
+            this.label10.Size = new System.Drawing.Size(67, 13);
             this.label10.TabIndex = 43;
-            this.label10.Text = "  Referencias:";
+            this.label10.Text = "Referencias:";
             // 
             // txtReferencias
             // 
             this.txtReferencias.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.txtReferencias.Location = new System.Drawing.Point(94, 206);
+            this.txtReferencias.Location = new System.Drawing.Point(94, 207);
             this.txtReferencias.Multiline = true;
             this.txtReferencias.Name = "txtReferencias";
             this.txtReferencias.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtReferencias.Size = new System.Drawing.Size(488, 85);
+            this.txtReferencias.Size = new System.Drawing.Size(488, 44);
             this.txtReferencias.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtReferencias.TabIndex = 44;
+            this.txtReferencias.TabIndex = 7;
+            this.txtReferencias.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
             // 
             // cmbColonia
             // 
@@ -158,11 +170,13 @@
             this.cmbColonia.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.cmbColonia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbColonia.FormattingEnabled = true;
-            this.cmbColonia.Location = new System.Drawing.Point(374, 176);
+            this.cmbColonia.Location = new System.Drawing.Point(374, 177);
             this.cmbColonia.Name = "cmbColonia";
             this.cmbColonia.Size = new System.Drawing.Size(205, 21);
             this.cmbColonia.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.cmbColonia.TabIndex = 42;
+            this.cmbColonia.TabIndex = 5;
+            this.cmbColonia.SelectedIndexChanged += new System.EventHandler(this.cmbColonia_SelectedIndexChanged);
+            this.cmbColonia.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
             // 
             // cmbCP
             // 
@@ -170,12 +184,15 @@
             this.cmbCP.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.cmbCP.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.cmbCP.FormattingEnabled = true;
-            this.cmbCP.Location = new System.Drawing.Point(64, 175);
+            this.cmbCP.Location = new System.Drawing.Point(64, 176);
             this.cmbCP.MaxLength = 5;
             this.cmbCP.Name = "cmbCP";
             this.cmbCP.Size = new System.Drawing.Size(205, 21);
             this.cmbCP.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.cmbCP.TabIndex = 40;
+            this.cmbCP.TabIndex = 6;
+            this.cmbCP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SoloNumeros_KeyPress);
+            this.cmbCP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
+            this.cmbCP.TextChanged += new System.EventHandler(this.cmbCP_TextChanged);
             // 
             // cmbMunicipio
             // 
@@ -187,7 +204,9 @@
             this.cmbMunicipio.Name = "cmbMunicipio";
             this.cmbMunicipio.Size = new System.Drawing.Size(205, 21);
             this.cmbMunicipio.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.cmbMunicipio.TabIndex = 36;
+            this.cmbMunicipio.TabIndex = 3;
+            this.cmbMunicipio.SelectedIndexChanged += new System.EventHandler(this.cmbMunicipio_SelectedIndexChanged);
+            this.cmbMunicipio.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
             // 
             // cmbLocalidad
             // 
@@ -199,7 +218,9 @@
             this.cmbLocalidad.Name = "cmbLocalidad";
             this.cmbLocalidad.Size = new System.Drawing.Size(205, 21);
             this.cmbLocalidad.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.cmbLocalidad.TabIndex = 38;
+            this.cmbLocalidad.TabIndex = 4;
+            this.cmbLocalidad.SelectedIndexChanged += new System.EventHandler(this.cmbLocalidad_SelectedIndexChanged);
+            this.cmbLocalidad.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
             // 
             // cmbTipoIncidencia
             // 
@@ -212,23 +233,26 @@
             this.cmbTipoIncidencia.Name = "cmbTipoIncidencia";
             this.cmbTipoIncidencia.Size = new System.Drawing.Size(205, 21);
             this.cmbTipoIncidencia.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.cmbTipoIncidencia.TabIndex = 32;
+            this.cmbTipoIncidencia.TabIndex = 1;
+            this.cmbTipoIncidencia.SelectedIndexChanged += new System.EventHandler(this.cmbTipoIncidencia_SelectedIndexChanged);
+            this.cmbTipoIncidencia.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
             // 
             // txtDescripcion
             // 
             this.txtDescripcion.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.txtDescripcion.Location = new System.Drawing.Point(94, 296);
+            this.txtDescripcion.Location = new System.Drawing.Point(93, 259);
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtDescripcion.Size = new System.Drawing.Size(488, 90);
+            this.txtDescripcion.Size = new System.Drawing.Size(488, 44);
             this.txtDescripcion.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtDescripcion.TabIndex = 46;
+            this.txtDescripcion.TabIndex = 8;
+            this.txtDescripcion.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
             // 
             // lblDescripcionIncidencia
             // 
             this.lblDescripcionIncidencia.AutoSize = true;
-            this.lblDescripcionIncidencia.Location = new System.Drawing.Point(3, 296);
+            this.lblDescripcionIncidencia.Location = new System.Drawing.Point(-1, 259);
             this.lblDescripcionIncidencia.Name = "lblDescripcionIncidencia";
             this.lblDescripcionIncidencia.Size = new System.Drawing.Size(91, 26);
             this.lblDescripcionIncidencia.TabIndex = 45;
@@ -237,7 +261,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(323, 182);
+            this.label9.Location = new System.Drawing.Point(323, 183);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(45, 13);
             this.label9.TabIndex = 41;
@@ -246,7 +270,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(3, 179);
+            this.label8.Location = new System.Drawing.Point(3, 180);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(30, 13);
             this.label8.TabIndex = 39;
@@ -274,10 +298,12 @@
             // 
             this.txtDireccion.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtDireccion.Location = new System.Drawing.Point(64, 119);
+            this.txtDireccion.MaxLength = 255;
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(517, 20);
             this.txtDireccion.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtDireccion.TabIndex = 34;
+            this.txtDireccion.TabIndex = 2;
+            this.txtDireccion.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
             // 
             // label5
             // 
@@ -305,7 +331,9 @@
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(203, 20);
             this.txtTelefono.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtTelefono.TabIndex = 30;
+            this.txtTelefono.TabIndex = 0;
+            this.txtTelefono.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
+            this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SoloNumeros_KeyPress);
             // 
             // lblTelefono
             // 
@@ -316,11 +344,117 @@
             this.lblTelefono.TabIndex = 29;
             this.lblTelefono.Text = "Teléfono:";
             // 
+            // cklCorporacion
+            // 
+            this.cklCorporacion.FormattingEnabled = true;
+            this.cklCorporacion.Location = new System.Drawing.Point(94, 311);
+            this.cklCorporacion.Name = "cklCorporacion";
+            this.cklCorporacion.Size = new System.Drawing.Size(488, 94);
+            this.cklCorporacion.TabIndex = 9;
+            this.cklCorporacion.Leave += new System.EventHandler(this.cklCorporacion_Leave);
+            this.cklCorporacion.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 311);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(81, 13);
+            this.label3.TabIndex = 48;
+            this.label3.Text = "Corporaciones :";
+            // 
+            // gbDenunciante
+            // 
+            this.gbDenunciante.Controls.Add(this.txtDireccionDenunciante);
+            this.gbDenunciante.Controls.Add(this.label13);
+            this.gbDenunciante.Controls.Add(this.label12);
+            this.gbDenunciante.Controls.Add(this.txtApellidosDenunciante);
+            this.gbDenunciante.Controls.Add(this.label11);
+            this.gbDenunciante.Controls.Add(this.txtNombreDenunciante);
+            this.gbDenunciante.Location = new System.Drawing.Point(94, 411);
+            this.gbDenunciante.Name = "gbDenunciante";
+            this.gbDenunciante.Size = new System.Drawing.Size(488, 79);
+            this.gbDenunciante.TabIndex = 10;
+            this.gbDenunciante.TabStop = false;
+            // 
+            // txtDireccionDenunciante
+            // 
+            this.txtDireccionDenunciante.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txtDireccionDenunciante.Location = new System.Drawing.Point(62, 42);
+            this.txtDireccionDenunciante.MaxLength = 500;
+            this.txtDireccionDenunciante.Name = "txtDireccionDenunciante";
+            this.txtDireccionDenunciante.Size = new System.Drawing.Size(420, 20);
+            this.txtDireccionDenunciante.StrMensajeCampoRequerido = "El campo es requerido.";
+            this.txtDireccionDenunciante.TabIndex = 3;
+            this.txtDireccionDenunciante.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 44);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(58, 13);
+            this.label13.TabIndex = 54;
+            this.label13.Text = "Dirección :";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(211, 19);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(55, 13);
+            this.label12.TabIndex = 53;
+            this.label12.Text = "Apellidos :";
+            // 
+            // txtApellidosDenunciante
+            // 
+            this.txtApellidosDenunciante.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txtApellidosDenunciante.Location = new System.Drawing.Point(272, 16);
+            this.txtApellidosDenunciante.MaxLength = 50;
+            this.txtApellidosDenunciante.Name = "txtApellidosDenunciante";
+            this.txtApellidosDenunciante.Size = new System.Drawing.Size(210, 20);
+            this.txtApellidosDenunciante.StrMensajeCampoRequerido = "El campo es requerido.";
+            this.txtApellidosDenunciante.TabIndex = 2;
+            this.txtApellidosDenunciante.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 19);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(50, 13);
+            this.label11.TabIndex = 51;
+            this.label11.Text = "Nombre :";
+            // 
+            // txtNombreDenunciante
+            // 
+            this.txtNombreDenunciante.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txtNombreDenunciante.Location = new System.Drawing.Point(62, 16);
+            this.txtNombreDenunciante.MaxLength = 50;
+            this.txtNombreDenunciante.Name = "txtNombreDenunciante";
+            this.txtNombreDenunciante.Size = new System.Drawing.Size(137, 20);
+            this.txtNombreDenunciante.StrMensajeCampoRequerido = "El campo es requerido.";
+            this.txtNombreDenunciante.TabIndex = 1;
+            this.txtNombreDenunciante.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 411);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(74, 13);
+            this.label4.TabIndex = 50;
+            this.label4.Text = "Denunciante :";
+            // 
             // SAIFrmAltaIncidencia066
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(585, 432);
+            this.ClientSize = new System.Drawing.Size(594, 516);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.gbDenunciante);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.cklCorporacion);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txtReferencias);
             this.Controls.Add(this.cmbColonia);
@@ -342,11 +476,44 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.pictureBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.KeyPreview = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SAIFrmAltaIncidencia066";
-            this.Text = "SAIFrmAltaIncidencia066";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultLocation;
+            this.Text = "REGISTRO DE NUEVA INCIDENCIA";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SAIFrmAltaIncidencia066_FormClosing);
+            this.Controls.SetChildIndex(this.pictureBox1, 0);
+            this.Controls.SetChildIndex(this.lblTitulo, 0);
+            this.Controls.SetChildIndex(this.groupBox1, 0);
+            this.Controls.SetChildIndex(this.lblTelefono, 0);
+            this.Controls.SetChildIndex(this.txtTelefono, 0);
+            this.Controls.SetChildIndex(this.lblTipoIncidencia, 0);
+            this.Controls.SetChildIndex(this.label5, 0);
+            this.Controls.SetChildIndex(this.txtDireccion, 0);
+            this.Controls.SetChildIndex(this.label6, 0);
+            this.Controls.SetChildIndex(this.label7, 0);
+            this.Controls.SetChildIndex(this.label8, 0);
+            this.Controls.SetChildIndex(this.label9, 0);
+            this.Controls.SetChildIndex(this.lblDescripcionIncidencia, 0);
+            this.Controls.SetChildIndex(this.txtDescripcion, 0);
+            this.Controls.SetChildIndex(this.cmbTipoIncidencia, 0);
+            this.Controls.SetChildIndex(this.cmbLocalidad, 0);
+            this.Controls.SetChildIndex(this.cmbMunicipio, 0);
+            this.Controls.SetChildIndex(this.cmbCP, 0);
+            this.Controls.SetChildIndex(this.cmbColonia, 0);
+            this.Controls.SetChildIndex(this.txtReferencias, 0);
+            this.Controls.SetChildIndex(this.label10, 0);
+            this.Controls.SetChildIndex(this.cklCorporacion, 0);
+            this.Controls.SetChildIndex(this.label3, 0);
+            this.Controls.SetChildIndex(this.gbDenunciante, 0);
+            this.Controls.SetChildIndex(this.label4, 0);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.gbDenunciante.ResumeLayout(false);
+            this.gbDenunciante.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -379,5 +546,15 @@
         private System.Windows.Forms.Label lblTipoIncidencia;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox txtTelefono;
         private System.Windows.Forms.Label lblTelefono;
+        private System.Windows.Forms.CheckedListBox cklCorporacion;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.GroupBox gbDenunciante;
+        private System.Windows.Forms.Label label4;
+        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox txtDireccionDenunciante;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox txtApellidosDenunciante;
+        private System.Windows.Forms.Label label11;
+        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox txtNombreDenunciante;
     }
 }

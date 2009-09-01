@@ -643,5 +643,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         #endregion
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SAIFrmIncidencia066 Prueba = new SAIFrmIncidencia066("");
+            Prueba.Show();
+        }
+
     }
 }

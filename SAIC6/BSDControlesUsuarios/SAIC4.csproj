@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{FF9562EF-1FA0-49B7-B8B6-80D41CEBAC19}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -136,6 +136,24 @@
     </Compile>
     <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmAgregarUnidad.Designer.cs">
       <DependentUpon>SAIFrmAgregarUnidad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmAltaAccesoriosAuto066.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmAltaAccesoriosAuto066.Designer.cs">
+      <DependentUpon>SAIFrmAltaAccesoriosAuto066.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmAltaDatosAuto066.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmAltaDatosAuto066.Designer.cs">
+      <DependentUpon>SAIFrmAltaDatosAuto066.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmAltaDatosPersonaExtraviada.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmAltaDatosPersonaExtraviada.Designer.cs">
+      <DependentUpon>SAIFrmAltaDatosPersonaExtraviada.cs</DependentUpon>
     </Compile>
     <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmAltaIncidencia066.cs">
       <SubType>Form</SubType>
@@ -414,6 +432,15 @@
     <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmAgendaTelefonica.resx">
       <DependentUpon>SAIFrmAgendaTelefonica.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmAltaAccesoriosAuto066.resx">
+      <DependentUpon>SAIFrmAltaAccesoriosAuto066.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmAltaDatosAuto066.resx">
+      <DependentUpon>SAIFrmAltaDatosAuto066.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmAltaDatosPersonaExtraviada.resx">
+      <DependentUpon>SAIFrmAltaDatosPersonaExtraviada.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmAltaIncidencia066.resx">
       <DependentUpon>SAIFrmAltaIncidencia066.cs</DependentUpon>
