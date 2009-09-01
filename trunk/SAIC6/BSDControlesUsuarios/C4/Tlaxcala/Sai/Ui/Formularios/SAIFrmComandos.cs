@@ -346,7 +346,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                         throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
                                 }
                                 else
-                                    throw new SAIExcepcion("La corporación a la cual pertenece no está configurada para manejar unidades fisicas.");
+                                    throw new SAIExcepcion("La corporación a la cual pertenece no está configurada para manejar unidades fisicas, solo virtuales.");
                                 break;
                             case ID.CMD_U:
                                 if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(e.control.Id))
@@ -643,11 +643,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         #endregion
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            SAIFrmIncidencia066 Prueba = new SAIFrmIncidencia066("");
-            Prueba.Show();
-        }
 
     }
 }

@@ -48,7 +48,6 @@
             this.stComandos = new System.Windows.Forms.StatusStrip();
             this.tssInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.Monitor = new System.Windows.Forms.Timer(this.components);
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.SAIBarraComandos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgAdministrador)).BeginInit();
             this.pnResumenIncidencias.SuspendLayout();
@@ -245,22 +244,11 @@
             // 
             this.Monitor.Tick += new System.EventHandler(this.Monitor_Tick);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(0, 39);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // SAIFrmComandos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(319, 83);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.stComandos);
             this.Controls.Add(this.pnResumenIncidencias);
             this.Controls.Add(this.imgAdministrador);
@@ -306,6 +294,5 @@
         private System.Windows.Forms.StatusStrip stComandos;
         private System.Windows.Forms.ToolStripStatusLabel tssInfo;
         private System.Windows.Forms.Timer Monitor;
-        private System.Windows.Forms.Button button1;
     }
 }

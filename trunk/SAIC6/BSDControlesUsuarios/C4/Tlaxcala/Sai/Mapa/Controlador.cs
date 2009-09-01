@@ -99,25 +99,6 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
             tr.Start();
         }
 
-        public static void MuestraMapa(EstructuraUbicacion objDatosUbicacion)
-        {
-            if (_frmMapa == null)
-            {
-                _frmMapa = new SAIFrmMapa(ConfigurationSettings.AppSettings["XmlCartografia"], Application.StartupPath + @"\");
-                _frmMapa.Show();
-            }
-            tr = new Thread(delegate()
-            {
-                try
-                {
-                    _frmMapa.Invoke(new DelegadoActualizarMapa(ActualizarMapa), new object[] { objDatosUbicacion });
-                }
-                catch { }
-            }) { IsBackground = true };
-            tr.Start();
-        }
-
-
         /// <summary>
         /// Revisa si existen más instancias de formularios de incidencias abiertos, para que en caso de que ya no haya más, se cierre la ventana del mapa.
         /// </summary>
