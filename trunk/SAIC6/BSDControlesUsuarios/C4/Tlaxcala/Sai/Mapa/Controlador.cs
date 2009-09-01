@@ -144,5 +144,24 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
 
         }
 
+        /// <summary>
+        /// Revisa si existen más instancias de formularios de incidencias abiertos, para que en caso de que ya no haya más, se cierre la ventana del mapa.
+        /// </summary>
+        /// <remarks>
+        /// Este método debe de llamarse al cerrar cada formulario
+        /// </remarks>
+        public static void RevisaInstancias(SAIFrm089 frmIncidencia)
+        {
+            //if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+            //    return;
+
+            if (Aplicacion.VentanasIncidencias.Count == 0 || (Aplicacion.VentanasIncidencias.Count == 1 && Aplicacion.VentanasIncidencias[0].Ventana == (frmIncidencia as Form)))
+            {
+                _frmMapa.Close();
+                _frmMapa.Dispose();
+                _frmMapa = null;
+            }
+        }
+
     }
 }
