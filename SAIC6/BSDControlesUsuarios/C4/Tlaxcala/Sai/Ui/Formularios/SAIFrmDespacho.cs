@@ -3,6 +3,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using BSD.C4.Tlaxcala.Sai.Ui.Controles;
+using Microsoft.NetEnterpriseServers;
 using XtremeReportControl;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
@@ -25,7 +26,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private CorporacionIncidencia _entCorporacionIncidencia;
         private Incidencia _incidencia;
         private bool _blnComentarioNuevo;
-        private int intEstatusAnterior; 
+        private int _intEstatusAnterior;
+        private bool _blnLlegadaManual;
+        private bool _blnLiberadaManual;
 
         public SAIFrmDespacho(Incidencia incidencia)
         {
@@ -165,7 +168,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     saiTmpHoraLiberacion.Value = _despachoIncidencia.HoraLiberada.Value;
                     chkHoraLiberacion.Enabled = true;
                 }
-                intEstatusAnterior = _incidencia.ClaveEstatus;
+                _intEstatusAnterior = _incidencia.ClaveEstatus;
 
                 var comentariosDespacho =
                     DetalleDespachoIncidenciaMapper.Instance().GetByDespachoIncidencia(_despachoIncidencia.Clave);
@@ -301,11 +304,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void chkHoraLlegada_CheckedChanged(object sender, EventArgs e)
         {
             saiTmpHoraLlegada.Enabled = chkHoraLlegada.Checked;
+            ActualizarHoraLlegada();
         }
 
         private void chkHoraLiberacion_CheckedChanged(object sender, EventArgs e)
         {
             saiTmpHoraLiberacion.Enabled = chkHoraLiberacion.Checked;
+            ActualizaHoraLiberacion();
         }
 
         private void pnlUnidadPrincipal_DragDrop(object sender, DragEventArgs e)
@@ -512,20 +517,119 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void cmdQuitarUP_Click(object sender, EventArgs e)
         {
-            _unidadAsignada = null;
-            lblUnidadPrincipal.Text = ID.STR_DESCONOCIDO;
+            var confirmacion = new ExceptionMessageBox("¿Desea remover la asignación de esta unidad?", "SAI C4",
+                                                          ExceptionMessageBoxButtons.YesNo,
+                                                          ExceptionMessageBoxSymbol.Question,
+                                                          ExceptionMessageBoxDefaultButton.Button2);
 
-            _despachoIncidencia.ClaveUnidad = null;
-            DespachoIncidenciaMapper.Instance().Save(_despachoIncidencia);
+            if (DialogResult.Yes == confirmacion.Show(this))
+            {
+                _unidadAsignada = null;
+                lblUnidadPrincipal.Text = ID.STR_DESCONOCIDO;
+
+                _despachoIncidencia.ClaveUnidad = null;
+                DespachoIncidenciaMapper.Instance().Save(_despachoIncidencia);
+            }
         }
 
         private void cmdQuitarUA_Click(object sender, EventArgs e)
         {
-            _unidadApoyo = null;
-            lblUnidadApoyo.Text = ID.STR_DESCONOCIDO;
+            var confirmacion = new ExceptionMessageBox("¿Desea remover la asignación de esta unidad?", "SAI C4",
+                                                          ExceptionMessageBoxButtons.YesNo,
+                                                          ExceptionMessageBoxSymbol.Question,
+                                                          ExceptionMessageBoxDefaultButton.Button2);
 
-            _despachoIncidencia.ClaveUnidadApoyo = null;
-            DespachoIncidenciaMapper.Instance().Save(_despachoIncidencia);
+            if (DialogResult.Yes == confirmacion.Show(this))
+            {
+                _unidadApoyo = null;
+                lblUnidadApoyo.Text = ID.STR_DESCONOCIDO;
+
+                _despachoIncidencia.ClaveUnidadApoyo = null;
+                DespachoIncidenciaMapper.Instance().Save(_despachoIncidencia);
+            }
+        }
+
+        private void saiTmpHoraLlegada_ValueChanged(object sender, EventArgs e)
+        {
+            if (_blnLlegadaManual)
+            {
+                ActualizarHoraLlegada();
+            }
+        }
+
+        private void ActualizarHoraLlegada()
+        {
+            try
+            {
+                try
+                {
+                    if (!chkHoraLlegada.Checked && _despachoIncidencia != null)
+                    {
+                        _despachoIncidencia.HoraLlegada = null;
+                        DespachoIncidenciaMapper.Instance().Save(_despachoIncidencia);
+                    }
+                    else if (_despachoIncidencia != null)
+                    {
+                        _despachoIncidencia.HoraLlegada = saiTmpHoraLlegada.Value;
+                        DespachoIncidenciaMapper.Instance().Save(_despachoIncidencia);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
+            }
+            catch (SAIExcepcion) { }
+        }
+
+        private void saiTmpHoraLiberacion_ValueChanged(object sender, EventArgs e)
+        {
+            if (_blnLiberadaManual)
+            {
+                ActualizaHoraLiberacion();
+            }
+        }
+
+        private void ActualizaHoraLiberacion()
+        {
+            try
+            {
+                try
+                {
+                    if (!chkHoraLiberacion.Checked && _despachoIncidencia != null)
+                    {
+                        _despachoIncidencia.HoraLiberada = null;
+
+                        DespachoIncidenciaMapper.Instance().Save(_despachoIncidencia);
+                        _incidencia.ClaveEstatus = _intEstatusAnterior;
+                        IncidenciaMapper.Instance().Save(_incidencia);
+                    }
+                    else if (_despachoIncidencia != null)
+                    {
+                        _despachoIncidencia.HoraLiberada = saiTmpHoraLiberacion.Value;
+                        DespachoIncidenciaMapper.Instance().Save(_despachoIncidencia);
+                        _incidencia.ClaveEstatus = 4;
+                        IncidenciaMapper.Instance().Save(_incidencia);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
+            }
+            catch (SAIExcepcion)
+            {
+            }
+        }
+
+        private void saiTmpHoraLlegada_KeyUp(object sender, KeyEventArgs e)
+        {
+            _blnLlegadaManual = true;
+        }
+
+        private void saiTmpHoraLiberacion_KeyUp(object sender, KeyEventArgs e)
+        {
+            _blnLiberadaManual = true;
         }
     }
 }

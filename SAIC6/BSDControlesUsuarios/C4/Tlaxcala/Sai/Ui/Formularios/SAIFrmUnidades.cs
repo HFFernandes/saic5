@@ -7,7 +7,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
     public partial class SAIFrmUnidades : SAIFrmBase
     {
-        //private ReportRecord _registro;
         private ReportColumn _columna;
         private ReportRecordItem _item;
         private ReportRecord _registroActual;

@@ -51,7 +51,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "SAIFrmUnidades";
-            this.Text = "SAI - Unidades dispuestas y ocupadas de las corporaciones.";
+            this.Text = "SAI - Unidades de las corporaciones.";
             this.Load += new System.EventHandler(this.SAIFrmUnidades_Load);
             this.Controls.SetChildIndex(this.axUnidadesDispuestasOcupadas, 0);
             ((System.ComponentModel.ISupportInitialize)(this.axUnidadesDispuestasOcupadas)).EndInit();
