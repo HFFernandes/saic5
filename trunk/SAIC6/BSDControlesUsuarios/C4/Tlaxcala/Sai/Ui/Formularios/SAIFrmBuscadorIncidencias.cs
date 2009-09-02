@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Data.SqlClient;
 using System.Configuration;
@@ -22,7 +23,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void ModeloQuery_ConditionsChanged(object sender, Korzh.EasyQuery.ConditionsChangeEventArgs e)
         {
-            ActualizarResultado();
+            //ActualizarResultado();
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
@@ -120,6 +121,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void GridResultados_DoubleClick(object sender, EventArgs e)
         {
             //ModeloQuery.SaveToFile(@"D:\SLC.xml");
+        }
+
+        private void GridResultados_Navigate(object sender, System.Windows.Forms.NavigateEventArgs ne)
+        {
         }
     }
 }

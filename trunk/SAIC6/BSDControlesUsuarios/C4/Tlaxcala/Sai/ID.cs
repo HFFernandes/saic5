@@ -118,6 +118,9 @@
         public const string SQL_INCIDENCIASLIGADAS = "SELECT Incidencia.* FROM Incidencia WHERE Folio IN ({0})";
 
         public const string SQL_INCIDENCIAS089 =
+           "SELECT Incidencia.* FROM Incidencia LEFT OUTER JOIN TipoIncidencia ON Incidencia.ClaveTipo = TipoIncidencia.Clave WHERE (Incidencia.ClaveEstatus = {0} OR Incidencia.ClaveEstatus = {1}) AND (TipoIncidencia.ClaveSistema={2}) AND (Incidencia.Activo=1) ORDER BY TipoIncidencia.Prioridad DESC";
+
+        public const string SQL_INCIDENCIAS0892 =
            "SELECT Incidencia.* FROM Incidencia LEFT OUTER JOIN TipoIncidencia ON Incidencia.ClaveTipo = TipoIncidencia.Clave WHERE (Incidencia.ClaveEstatus = {0}) AND (TipoIncidencia.ClaveSistema={1}) AND (Incidencia.Activo=1) ORDER BY TipoIncidencia.Prioridad DESC";
 
         public const string SQL_DEPENDENCIAS089 =
@@ -150,11 +153,11 @@
 
         #region Colores
 
-        public static readonly uint COLOR_VERDE = (uint)Aplicacion.HexadecimalADecimal("ADFF2F");
-        public static readonly uint COLOR_NARANJA = (uint)Aplicacion.HexadecimalADecimal("FFA500");
-        public static readonly uint COLOR_ROJO = (uint)Aplicacion.HexadecimalADecimal("FF0099");
-        public static readonly uint COLOR_AMARILLO = (uint)Aplicacion.HexadecimalADecimal("FFFF99");
-        public static readonly uint COLOR_AZURE = (uint)Aplicacion.HexadecimalADecimal("F0FFFF");
+        public static readonly uint COLOR_VERDE = (uint)Aplicacion.HexadecimalADecimal("00FF66");
+        public static readonly uint COLOR_NARANJA = (uint)Aplicacion.HexadecimalADecimal("3399FF");
+        public static readonly uint COLOR_ROJO = (uint)Aplicacion.HexadecimalADecimal("0033FF");
+        public static readonly uint COLOR_AMARILLO = (uint)Aplicacion.HexadecimalADecimal("00FFFF");
+        public static readonly uint COLOR_AZURE = (uint)Aplicacion.HexadecimalADecimal("99FFFF");
 
         #endregion
 

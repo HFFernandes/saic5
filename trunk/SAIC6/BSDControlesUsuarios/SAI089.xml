@@ -1,7 +1,7 @@
 <DATAMODEL Version="5" Name="SAI" DefQuery="">
   <DESCRIPTION>Modelo del Sistema de Administracin de Incidencias</DESCRIPTION>
   <DBPARAMS>
-    <ConnectionString>Data Source=.\SQLEXPRESS;Initial Catalog=SAI_BD;Integrated Security=SSPI;</ConnectionString>
+    <ConnectionString>Data Source=.\SQLEXPRESS;Integrated Security=SSPI; Initial Catalog=SAI_BD</ConnectionString>
     <LoginPrompt>False</LoginPrompt>
     <GateClass>Korzh.EasyQuery.DataGates.SqlClientGate</GateClass>
   </DBPARAMS>
