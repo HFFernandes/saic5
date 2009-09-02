@@ -442,15 +442,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                     if (this.cbxCP.Items.Count > 0)
                     {
-
-                        for (int i = 0; i < this.cbxCP.Items.Count; i++)
+                        this.cbxCP.SelectedValue = ((Entidades.Colonia)this.cbxColonia.SelectedItem).ClaveCodigoPostal;
+                        /*for (int i = 0; i < this.cbxCP.Items.Count; i++)
                         {
                             if (((Entidades.CodigoPostal)this.cbxCP.Items[i]).Clave == ((Entidades.Colonia)this.cbxColonia.SelectedItem).ClaveCodigoPostal)
                             {
+                                
                                 this.SeleccionaCodigoPostal(this.cbxCP.Items[i]);
                                 break;
                             }
-                        }
+                        }*/
                     }
 
                     this._blnBloqueaEventos = false;
