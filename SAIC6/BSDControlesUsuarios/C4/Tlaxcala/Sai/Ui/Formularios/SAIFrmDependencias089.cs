@@ -273,7 +273,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 if (Convert.ToDateTime(this.gvDependencias[e.ColumnIndex, e.RowIndex].Value) > DateTime.Today)
                                 {
                                     this.gvDependencias[e.ColumnIndex, e.RowIndex].Value = string.Empty;
-                                    throw new SAIExcepcion("La fecha de envío a dependencia no se encuentra en el formato correcto, debe de ser una fecha menor o igual al dia actual", this);
+                                    throw new SAIExcepcion("La fecha de envío a dependencia no se encuentra en el formato correcto (dd/MM/AAAA), debe de ser una fecha menor o igual al dia actual", this);
                                 }
                                 else
                                 {
@@ -316,7 +316,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 if (Convert.ToDateTime(this.gvDependencias[e.ColumnIndex, e.RowIndex].Value) > DateTime.Today)
                                 {
                                     this.gvDependencias[e.ColumnIndex, e.RowIndex].Value = string.Empty;
-                                    throw new SAIExcepcion("La fecha de envío a dependencia no se encuentra en el formato correcto, debe de ser una fecha menor o igual al dia actual", this);
+                                    throw new SAIExcepcion("La fecha de envío a dependencia no se encuentra en el formato correcto (dd/MM/AAAA), debe de ser una fecha menor o igual al dia actual", this);
                                 }
                                 else
                                 {
