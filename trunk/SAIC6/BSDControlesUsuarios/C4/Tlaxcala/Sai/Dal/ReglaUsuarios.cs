@@ -18,9 +18,12 @@ namespace BSD.C4.Tlaxcala.Sai.Dal
         public static List<string> ObtenerSistemas(string strNombreUsuario, string strContraseña)
         {
             var sistemas = new List<string>();
+
             var usuario = UsuarioMapper.Instance().GetOneBySQLQuery(string.Format(ID.SQL_OBTENERUSUARIO, strNombreUsuario));
             if (usuario != null)
             {
+                sistemas.Clear();
+
                 //Existe un usuario con las credenciales proporcionadas
                 //Luego entonces, obtengo y presento los sistemas a los cuales puede accesar
                 var sistema = SistemaMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_OBTENERSISTEMAS, usuario.Clave));

@@ -81,7 +81,7 @@
             this.QueryColumnas.Appearance.AdjustChildLevel = true;
             this.QueryColumnas.Appearance.AttrElementFormat = "{entity} {attr}";
             this.QueryColumnas.Appearance.BackColor = System.Drawing.Color.White;
-            this.QueryColumnas.Appearance.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.QueryColumnas.Appearance.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.QueryColumnas.Appearance.ButtonActiveBodyColor = System.Drawing.Color.Gray;
             this.QueryColumnas.Appearance.ButtonActiveBorderColor = System.Drawing.Color.Black;
             this.QueryColumnas.Appearance.ButtonClickBodyColor = System.Drawing.Color.White;
@@ -101,7 +101,6 @@
             this.QueryColumnas.Appearance.Title = "";
             this.QueryColumnas.Appearance.TuneElementSizes = false;
             this.QueryColumnas.BackColor = System.Drawing.Color.White;
-            this.QueryColumnas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.QueryColumnas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.QueryColumnas.Location = new System.Drawing.Point(0, 0);
             this.QueryColumnas.Model = null;

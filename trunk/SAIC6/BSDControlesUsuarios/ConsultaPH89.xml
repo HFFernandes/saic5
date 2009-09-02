@@ -1,0 +1,48 @@
+<query name="">
+  <description />
+  <columns>
+    <Column caption="Folio" sorting="None" sortindex="-1">
+      <expr class="ENTATTR" id="lstIncidencias089.Folio" />
+    </Column>
+    <Column caption="Descripcion" sorting="None" sortindex="-1">
+      <expr class="ENTATTR" id="lstIncidencias089.Descripcion" />
+    </Column>
+    <Column caption="Direccion" sorting="None" sortindex="-1">
+      <expr class="ENTATTR" id="lstIncidencias089.Direccion" />
+    </Column>
+    <Column caption="Referencias" sorting="None" sortindex="-1">
+      <expr class="ENTATTR" id="lstIncidencias089.Referencias" />
+    </Column>
+    <Column caption="Numero de oficio generado" sorting="None" sortindex="-1">
+      <expr class="ENTATTR" id="lstIncidencias089.NumeroOficio" />
+    </Column>
+    <Column caption="Municipio" sorting="None" sortindex="-1">
+      <expr class="ENTATTR" id="Municipio.Nombre" />
+    </Column>
+    <Column caption="Localidad" sorting="None" sortindex="-1">
+      <expr class="ENTATTR" id="Localidad.Nombre" />
+    </Column>
+    <Column caption="Codigo postal" sorting="None" sortindex="-1">
+      <expr class="ENTATTR" id="CodigoPostal.Valor" />
+    </Column>
+    <Column caption="Tipo de Incidente" sorting="None" sortindex="-1">
+      <expr class="ENTATTR" id="{Tipos de Incidencia}.Descripcion" />
+    </Column>
+    <Column caption="Fecha" sorting="None" sortindex="-1">
+      <expr class="ENTATTR" id="lstIncidencias089.FechaSuceso" />
+    </Column>
+    <Column caption="Operador" sorting="None" sortindex="-1">
+      <expr class="ENTATTR" id="Usuario.NombreUsuario" />
+    </Column>
+  </columns>
+  <justsortedcolumns />
+  <conditions linking="All">
+    <Condition class="SMPL" enabled="True" ReadOnly="False">
+      <operator id="Contains" />
+      <expressions>
+        <expr class="ENTATTR" id="lstIncidencias089.Direccion" />
+        <expr class="CONST" type="String" kind="Scalar" value="" text="[escribir valor]" />
+      </expressions>
+    </Condition>
+  </conditions>
+</query>

@@ -73,7 +73,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     if (incidencia != null)
                     {
                         var incidenciaDespacho = new SAIFrmDespacho(incidencia);
-                        incidenciaDespacho.Show(Aplicacion.frmComandos);
+                        incidenciaDespacho.Show();
                     }
                 }
                 else
@@ -82,7 +82,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     if (incidencia != null)
                     {
                         //var incidenciaInfo = new SAIFrmAltaIncidencia066(incidencia);
-                        //incidenciaInfo.Show(Aplicacion.frmComandos);
+                        //incidenciaInfo.Show();
                     }
                 }
             }
@@ -107,7 +107,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         if (incidencia != null)
                         {
                             var incidenciaDespacho = new SAIFrmDespacho(incidencia);
-                            incidenciaDespacho.Show(Aplicacion.frmComandos);
+                            incidenciaDespacho.Show();
                         }
                     }
                 }
@@ -121,7 +121,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         if (incidencia != null)
                         {
                             //var incidenciaInfo = new SAIFrmIncidencia066(incidencia);
-                            //incidenciaInfo.Show(Aplicacion.frmComandos);
+                            //incidenciaInfo.Show();
                         }
                     }
                 }
@@ -356,8 +356,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     lstIncidenciasPorRemover.Clear();   //limpiamos la colección para el nuevo ciclo
 
                     //ordenamiento
-                    if (SAIChkOrdenarPrioridad.Checked)
-                        saiReport1.reportControl.SortOrder.Add(saiReport1.reportControl.Columns[8]);
+                    //if (SAIChkOrdenarPrioridad.Checked)
+                    //    saiReport1.reportControl.SortOrder.Add(saiReport1.reportControl.Columns[8]);
                 }
                 catch (Exception)
                 {
