@@ -244,6 +244,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void SAIBarraComandos_Execute(object sender, AxXtremeCommandBars._DCommandBarsEvents_ExecuteEvent e)
         {
+            //TODO: faltan Las consultas del buscador para 089
             try
             {
                 switch (Aplicacion.UsuarioPersistencia.strSistemaActual)
