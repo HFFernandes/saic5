@@ -49,10 +49,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             _blnBloqueaEventos = true;
             InitializeComponent();
             this.InsertarIncidencia();
-            this.Text = Convert.ToString(this._Incidencia089.Folio);
+            this.Text = "Folio "+ Convert.ToString(this._Incidencia089.Folio);
             this.SAIBarraEstado.SizingGrip = false;
             this.LlenarTipoIncidencias();
             this.LlenarMunicipios();
+            this.lblFechaHora.Text += " " + DateTime.Now.ToLocalTime();
+            this.lblOperador.Text += Aplicacion.UsuarioPersistencia.strNombreUsuario;
             _blnBloqueaEventos = false;
         }
 
@@ -60,9 +62,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         public SAIFrm089(Entidades.Incidencia entIncidencia)
         {
             InitializeComponent();
+            _blnBloqueaEventos = true;
             _Incidencia089 = entIncidencia;
-            this.Text = Convert.ToString(this._Incidencia089.Folio);
+            this.LlenarTipoIncidencias();
+            this.LlenarMunicipios();
+            this._blnBloqueaEventos = false;
+            this.Text = "Folio " + Convert.ToString(this._Incidencia089.Folio);
+            this.lblFechaHora.Text += " " + DateTime.Now.ToLocalTime();
+            this.lblOperador.Text += Aplicacion.UsuarioPersistencia.strNombreUsuario;
             this.LlenarDatosIncidencia();
+            _blnBloqueaEventos = false;
         }
 
         private void SAIFrm089_Load(object sender, EventArgs e)
@@ -106,6 +115,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             if (e.KeyCode == Keys.Enter)
             {
+                if (this.cbxCP.Text.Length == 5)
+                {
+                    CargarPorCP(this.cbxCP.Text);
+                }
                 this.cbxColonia.Focus();
             }
         }
@@ -379,11 +392,207 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 try
                 {
+                    Entidades.Municipio entMunicipio;
+                    Entidades.LocalidadList objListaLocalidades;
+                    Entidades.ColoniaList objListaColonias;
+                    Entidades.CodigoPostalList objListaCodigosPostales = new Entidades.CodigoPostalList();
+                    Entidades.CodigoPostal entCodigoPostal;
+                    bool blnExisteCodigoPostal = false;
+                    int i;
+
                     this.txtDireccion.Text = this._Incidencia089.Direccion;
                     this.txtReferencias.Text = this._Incidencia089.Referencias;
                     this.txtDescripcionDenuncia.Text = this._Incidencia089.Descripcion;
                     this.txtAliasDelincuente.Text = this._Incidencia089.AliasDelincuente;
                     this.txtOficioEnvio.Text = this._Incidencia089.NumeroOficio;
+
+
+                    //Datos de la Ubicacion
+
+                    if (this._Incidencia089.ClaveEstado.HasValue && this._Incidencia089.ClaveMunicipio.HasValue)
+                    {
+                        foreach (Entidades.Municipio municipio in cbxMunicipio.Items)
+                        {
+                            if (municipio.Clave == this._Incidencia089.ClaveMunicipio.Value)
+                            {
+                                this.cbxMunicipio.SelectedItem = municipio;
+                                break;
+                            }
+                        }
+
+                        //this._blnBloqueaEventos = true;
+                        //this.ActualizaLocalidades(Mappers.LocalidadMapper.Instance().GetByMunicipio(this._Incidencia089.ClaveMunicipio.Value));
+                        this._blnBloqueaEventos = false;
+                        
+                        this.cbxMunicipioActualizaLocalidades();                        
+
+                        if (this._Incidencia089.ClaveLocalidad.HasValue)
+                        {
+                            foreach (Entidades.Localidad localidad in cbxLocalidad.Items)
+                            {
+                                if (localidad.Clave == this._Incidencia089.ClaveLocalidad.Value)
+                                {
+                                    this.cbxLocalidad.SelectedItem = localidad;
+                                    break;
+                                }
+                            }
+
+                            //this.ActualizaColonias(Mappers.ColoniaMapper.Instance().GetByLocalidad(this._Incidencia089.ClaveLocalidad.Value));
+                            
+                            if (this._Incidencia089.ClaveColonia.HasValue)
+                            {
+                                this.cbxLocalidadActualizaColonia();
+                                foreach (Entidades.Colonia colonia in cbxColonia.Items)
+                                {
+                                    if (colonia.Clave == this._Incidencia089.ClaveColonia.Value)
+                                    {
+                                        this.cbxColonia.SelectedItem = colonia;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+
+                    /*
+
+                    //Datos de la ubicación
+                    if (this._Incidencia089.ClaveEstado.HasValue && this._Incidencia089.ClaveMunicipio.HasValue)
+                    {
+                        foreach (var elemento in cbxMunicipio.Items)
+                        {
+                            entMunicipio = (Entidades.Municipio)elemento;
+                            if (this._Incidencia089.ClaveMunicipio.Value == entMunicipio.Clave)
+                            {
+                                cbxMunicipio.SelectedIndex = -1;
+                                cbxMunicipio.SelectedItem = entMunicipio;
+                                break;
+                            }
+                        }
+
+                        //Se recuperan las localidades del municipio
+                        if (this._Incidencia089.ClaveLocalidad.HasValue)
+                        {
+                            objListaLocalidades = Mappers.LocalidadMapper.Instance().GetByMunicipio((cbxMunicipio.SelectedItem as Entidades.Municipio).Clave);
+                            if (objListaLocalidades != null)
+                            {
+                                cbxLocalidad.DataSource = objListaLocalidades;
+                                cbxLocalidad.DisplayMember = "Nombre";
+                                cbxLocalidad.ValueMember = "Clave";
+                                cbxLocalidad.SelectedIndex = -1;
+                            }
+
+
+                            //Se ubica la localidad
+                            foreach (var elemento in cbxLocalidad.Items)
+                            {
+
+                                if (this._Incidencia089.ClaveLocalidad.Value == (elemento as Entidades.Localidad).Clave)
+                                {
+                                    cbxLocalidad.SelectedIndex = -1;
+                                    cbxLocalidad.SelectedItem = elemento;
+                                    break;
+                                }
+                            }
+
+                            if (this._Incidencia089.ClaveCodigoPostal.HasValue)
+                            {
+                                //Se recuperan los códigos postales del municipio
+                                for (i = 0; i < objListaLocalidades.Count; i++)
+                                {
+                                    objListaColonias = Mappers.ColoniaMapper.Instance().GetByLocalidad(objListaLocalidades[i].Clave);
+                                    for (int j = 0; j < objListaColonias.Count; j++)
+                                    {
+                                        if (objListaColonias[j].ClaveCodigoPostal.HasValue)
+                                        {
+                                            entCodigoPostal = Mappers.CodigoPostalMapper.Instance().GetOne(objListaColonias[j].ClaveCodigoPostal.Value);
+                                            blnExisteCodigoPostal = false;
+                                            //Se revisa que el código postal no exista en la lista
+                                            for (int k = 0; k < objListaCodigosPostales.Count; k++)
+                                            {
+                                                if (objListaCodigosPostales[k].Valor == entCodigoPostal.Valor)
+                                                {
+                                                    blnExisteCodigoPostal = true;
+                                                    break;
+                                                }
+                                            }
+
+                                            if (!blnExisteCodigoPostal)
+                                            {
+                                                objListaCodigosPostales.Add(entCodigoPostal);
+                                            }
+                                        }
+                                    }
+                                }
+                                if (objListaCodigosPostales.Count > 0)
+                                {
+                                    cbxCP.DataSource = objListaCodigosPostales;
+                                    cbxCP.DisplayMember = "Valor";
+                                    cbxCP.ValueMember = "Clave";
+                                    cbxCP.SelectedIndex = -1;
+
+
+                                    //Se el código postal
+                                    foreach (var elemento in cbxCP.Items)
+                                    {
+                                        if (this._Incidencia089.ClaveCodigoPostal.Value == (elemento as Entidades.CodigoPostal).Clave)
+                                        {
+                                            cbxCP.SelectedIndex = -1;
+                                            cbxCP.SelectedItem = elemento;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            if (this._Incidencia089.ClaveColonia.HasValue)
+                            {
+                                objListaColonias =
+                                    Mappers.ColoniaMapper.Instance().GetByCodigoPostal(this._Incidencia089.ClaveCodigoPostal ?? 0);
+                                if (objListaColonias != null)
+                                {
+                                    cbxColonia.DataSource = objListaColonias;
+                                    cbxColonia.DisplayMember = "Nombre";
+                                    cbxColonia.ValueMember = "Clave";
+                                    cbxColonia.SelectedIndex = -1;
+
+                                    //Se ubica la colonia
+                                    foreach (var elemento in cbxColonia.Items)
+                                    {
+                                        if (this._Incidencia089.ClaveColonia.Value == (elemento as Entidades.Colonia).Clave)
+                                        {
+                                            cbxColonia.SelectedIndex = -1;
+                                            cbxColonia.SelectedItem = elemento;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        ActualizaMapaUbicacion();
+                    }
+
+
+                    /*foreach (Entidades.Municipio municipio in this.cbxMunicipio.Items)
+                    {
+                        if (((Entidades.Municipio)municipio).Clave == _Incidencia089.ClaveMunicipio.Value)
+                        {
+                            this.cbxMunicipio.SelectedItem = municipio;
+                            //this.cmbMunicipioRefrescaControles();
+                            break;
+                        }
+                    }
+
+                    foreach (Entidades.Localidad localidad in this.cbxLocalidad.Items)
+                    {
+                        if (((Entidades.Localidad)localidad).Clave == _Incidencia089.ClaveLocalidad.Value)
+                        {
+                            this.cbxMunicipio.SelectedItem = localidad;
+                            break;
+                        }
+                    }*/
+
                     if (this._Incidencia089.FechaDocumento.HasValue)
                     {
                         this.dtpFechaDoc.Value = this._Incidencia089.FechaDocumento.Value;
@@ -406,7 +615,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         private void cbxMunicipio_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cmbMunicipioRefrescaControles();
+            this.cbxMunicipioActualizaLocalidades();
+            //cmbMunicipioRefrescaControles();
         }
 
         /// <summary>
@@ -414,43 +624,66 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         private void cbxLocalidad_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Entidades.ColoniaList lstColonias;
+            this.cbxLocalidadActualizaColonia();
+        }
 
+        private void cbxLocalidadActualizaColonia()
+        {
             try
             {
+                Entidades.ColoniaList lstColonia;
                 try
                 {
+                    //Si esta bloqueado no hace nada
                     if (_blnBloqueaEventos)
                     {
                         return;
                     }
-
-                    _blnBloqueaEventos = true;
-                    LimpiaColonias();
-
-                    if (cbxLocalidad.SelectedItem != null)
+                    //Bandera para bloquear evento
+                    this._blnBloqueaEventos = true;
+                    this.LimpiaColonias(); //limpia colonias
+                    lstColonia = Mappers.ColoniaMapper.Instance().GetByLocalidad(((Entidades.Localidad)this.cbxLocalidad.SelectedItem).Clave);
+                    if (lstColonia.Count > 0)
                     {
-                        lstColonias = Mappers.ColoniaMapper.Instance().GetByLocalidad((cbxLocalidad.SelectedItem as Entidades.Localidad).Clave);
-                    }
-                    else
-                    {
-                        lstColonias = null;
-                    }
+                        //se agregan colonias al control correspondientes a la localidad seleccionada
+                        //posteriormente se agregaran lo CP de la localidad agregada
+                        this.ActualizaColonias(lstColonia);
+                        //objeto que se que almacenara los CP
+                        Entidades.CodigoPostalList cpTemp = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.CodigoPostalList();
+                        bool existe = false;//bandera para determinar si un cp esta repetido
 
-                    if (lstColonias != null)
-                    {
-                        ActualizaColonias(lstColonias);
-                        LimpiaTextoCodigoPostal();
+                        foreach (Entidades.Colonia coloni in lstColonia)
+                        {
+                            foreach (Entidades.CodigoPostal cp in cpTemp)
+                            {
+                                if (coloni.ClaveCodigoPostal.HasValue)
+                                {
+                                    //se valida que el codigo postal actual exista en la lista temporal para no agregarse
+                                    if (cp.Clave == coloni.ClaveCodigoPostal.Value)
+                                    {
+                                        existe = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (!existe)//si no existe un CP de una colonia de una localidad seleccioanda lo agrega en la lista tempoarl
+                            {
+                                cpTemp.Add(Mappers.CodigoPostalMapper.Instance().GetOne(coloni.ClaveCodigoPostal.Value));
+                                existe = false;
+                            }
+                        }
+                        //Actualiza la lista de CP correspondientes a la localidad seleccionada
+                        this.ActualizarCodigoPostal(cpTemp);
                     }
-                    _blnBloqueaEventos = false;
-                    ActualizaMapaUbicacion();
+                    //Bandera para desbloquear
+                    this._blnBloqueaEventos = false;
+                    this.ActualizaMapaUbicacion();
                 }
-                catch (System.Exception ex)
-                {
-                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
-                }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
             }
-            catch (SAIExcepcion) { }
+            catch (SAIExcepcion)
+            { }
         }
 
         /// <summary>
@@ -458,6 +691,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         private void cbxCP_SelectedIndexChanged(object sender, EventArgs e)
         {
+            /*
             try
             {
                 try
@@ -489,14 +723,44 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
                 }
             }
-            catch (SAIExcepcion) { }
+            catch (SAIExcepcion) { }*/
         }
         /// <summary>
         /// Se ejecuta cuando se selecciona una Colonia
         /// </summary>
         private void cbxColonia_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Entidades.Colonia entColonia = null;
+            try
+            {
+                try
+                {
+                    if (this._blnBloqueaEventos)
+                    { return; }
+                    this._blnBloqueaEventos = true;
+
+                    if (this.cbxCP.Items.Count > 0)
+                    {
+                        foreach (Entidades.CodigoPostal cp in this.cbxCP.Items)
+                        {
+                            if (cp.Clave == ((Entidades.Colonia)this.cbxColonia.SelectedItem).ClaveCodigoPostal)
+                            {
+                                this.cbxCP.SelectedItem = cp;
+                                break;
+                            }
+                        }
+                    }
+
+                    this._blnBloqueaEventos = false;
+                    this.ActualizaMapaUbicacion();
+                }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
+            }
+            catch (SAIExcepcion)
+            { }
+
+
+            /*Entidades.Colonia entColonia = null;
 
             try
             {
@@ -544,7 +808,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
                 }
             }
-            catch (SAIExcepcion) { }
+            catch (SAIExcepcion) { }*/
         }
 
         /// <summary>
@@ -564,6 +828,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         private void cbxCP_TextChanged(object sender, EventArgs e)
         {
+            /*
             if (cbxCP.Text.Length == 5)
             {
                 Entidades.ColoniaList lstColonias;
@@ -624,7 +889,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
                 catch (SAIExcepcion) { }
             }
-
+            */
             //this.CargarCascadaPorCp(this.cbxCP.Text);            
         }
         /// <summary>
@@ -772,7 +1037,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             if (this.txtOficioEnvio.Text != string.Empty)
             {
-                this._Incidencia089.ClaveEstatus = 2;
+                //this._Incidencia089.ClaveEstatus = 2;
                 this.ActualizarIncidencia();
             }
         }
@@ -1000,8 +1265,36 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void cbxMunicipio_CambiaMapa()
         { }
 
+        private void cbxMunicipioActualizaLocalidades()
+        {
+            try
+            {
+                try
+                {
+                    if (this._blnBloqueaEventos)
+                    { return; }
+                    this._blnBloqueaEventos = true;
+                    //Limpiar localidades y colonias
+                    this.LimpiaLocalidades();
+                    this.LimpiaColonias();
+                    //obtener las localidades del municipio seleccionado
+                    Entidades.LocalidadList lstLocalidades = Mappers.LocalidadMapper.Instance().GetByMunicipio(((Entidades.Municipio) this.cbxMunicipio.SelectedItem).Clave);
+
+                    if (lstLocalidades.Count > 0)
+                    {
+                        this.ActualizaLocalidades(lstLocalidades);
+                    }
+                    this._blnBloqueaEventos = false;
+                }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
+            }
+            catch (SAIExcepcion)
+            { }
+        }
 
         /// <summary>
+        /// ****OBSOLETA
         /// Recarga los controles de localidades y códigos postales con base al municipio seleccioando
         /// </summary>
         private void cmbMunicipioRefrescaControles()
@@ -1087,6 +1380,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
+
         /// <summary>
         /// Selecciona el elemento del combo de codigos postales
         /// </summary>
@@ -1150,6 +1444,59 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
             }
             catch (SAIExcepcion) { }
+        }
+
+        private void cbxCP_TextUpdate(object sender, EventArgs e)
+        {
+        }
+
+        private void CargarPorCP(string codigoPostal)
+        {
+            try
+            {
+                try
+                {
+                    Entidades.CodigoPostal CP = Mappers.CodigoPostalMapper.Instance().GetOneBySQLQuery("Select Clave, Valor from CodigoPostal where Valor = '" + codigoPostal + "'");
+                    //this.LimpiaColonias();
+                    //this.cbxColonia.Items.Clear();
+                    //this.cbxLocalidad.Items.Clear();
+                    //this.LimpiaLocalidades();
+                    Entidades.ColoniaList lstColonias = Mappers.ColoniaMapper.Instance().GetByCodigoPostal(CP.Clave);
+                    if (lstColonias.Count > 0)
+                    {
+                        this._blnBloqueaEventos = true;
+                        this.ActualizaColonias(lstColonias);
+                        this.cbxColonia.SelectedIndex = 0;
+                        this._blnBloqueaEventos = false;
+
+
+                        Entidades.LocalidadList lstLocalidad = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.LocalidadList();
+                        
+                        lstLocalidad.Add(Mappers.LocalidadMapper.Instance().GetOne(((Entidades.Colonia)this.cbxColonia.Items[0]).ClaveLocalidad));
+
+                        this._blnBloqueaEventos = true;
+                        this.ActualizaLocalidades(lstLocalidad);
+
+                        this.cbxLocalidad.SelectedIndex = 0;
+
+                        Entidades.Localidad localidad = Mappers.LocalidadMapper.Instance().GetOne(((Entidades.Localidad)this.cbxLocalidad.Items[0]).ClaveMunicipio);
+
+                        foreach (Entidades.Municipio municipio in this.cbxMunicipio.Items)
+                        {
+                            if (municipio.Clave == localidad.ClaveMunicipio)
+                            {
+                                this.cbxMunicipio.SelectedItem = municipio;
+                                break;
+                            }
+                        }
+                        this._blnBloqueaEventos = false;
+                    }
+                }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
+            }
+            catch (SAIExcepcion)
+            { }
         }
     }
 }
