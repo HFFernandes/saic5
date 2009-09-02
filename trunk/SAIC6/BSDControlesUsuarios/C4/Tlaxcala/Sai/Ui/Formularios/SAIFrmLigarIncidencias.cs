@@ -18,7 +18,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 saiCmbFolioPadre.Items.Add(registro);
             }
 
-            saiCmbFolioPadre.SelectedIndex = -1;
+            saiCmbFolioPadre.SelectedIndex = 0;
         }
 
         private void cmdAceptar_Click(object sender, EventArgs e)

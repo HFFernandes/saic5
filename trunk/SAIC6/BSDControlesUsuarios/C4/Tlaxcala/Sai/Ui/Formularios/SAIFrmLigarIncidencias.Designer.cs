@@ -50,7 +50,7 @@
             this.saiCmbFolioPadre.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.saiCmbFolioPadre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.saiCmbFolioPadre.FormattingEnabled = true;
-            this.saiCmbFolioPadre.Location = new System.Drawing.Point(15, 25);
+            this.saiCmbFolioPadre.Location = new System.Drawing.Point(15, 27);
             this.saiCmbFolioPadre.Name = "saiCmbFolioPadre";
             this.saiCmbFolioPadre.Size = new System.Drawing.Size(254, 21);
             this.saiCmbFolioPadre.StrMensajeCampoRequerido = "El campo es requerido.";
