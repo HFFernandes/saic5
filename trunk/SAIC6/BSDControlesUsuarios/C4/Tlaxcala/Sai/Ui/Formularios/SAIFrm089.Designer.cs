@@ -314,8 +314,9 @@
             // 
             // dtpFechaDoc
             // 
+            this.dtpFechaDoc.CustomFormat = "dd/MM/yyyy";
             this.dtpFechaDoc.Enabled = false;
-            this.dtpFechaDoc.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFechaDoc.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpFechaDoc.Location = new System.Drawing.Point(436, 416);
             this.dtpFechaDoc.Name = "dtpFechaDoc";
             this.dtpFechaDoc.Size = new System.Drawing.Size(115, 20);
@@ -366,8 +367,6 @@
             this.cbxCP.SelectedIndexChanged += new System.EventHandler(this.cbxCP_SelectedIndexChanged);
             this.cbxCP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbxCP_KeyPress);
             this.cbxCP.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cbxCP_KeyUp);
-            this.cbxCP.TextUpdate += new System.EventHandler(this.cbxCP_TextUpdate);
-            this.cbxCP.TextChanged += new System.EventHandler(this.cbxCP_TextChanged);
             // 
             // SAIFrm089
             // 
