@@ -43,8 +43,34 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             
             //Buscamos los datos del titular de la linea
             this.ObtenerTitularLinea(noTelefono);
+            //Desplegamos la información de la incidencia.
+            entUsuario = UsuarioMapper.Instance().GetOne(entIncidencia.ClaveUsuario);
+            this.lblOperador.Text += entUsuario.NombrePropio;
+            this.lblFechaHora.Text += entIncidencia.HoraRecepcion.ToString();
 
         }
+
+        public SAIFrmAltaIncidencia066(Incidencia oIncidencia,bool esSoloLectura)
+        {
+            InitializeComponent();
+            this.entIncidencia = oIncidencia;
+
+            //Desplegamos la información de la incidencia.
+            entUsuario = UsuarioMapper.Instance().GetOne(entIncidencia.ClaveUsuario);
+            this.lblOperador.Text += entUsuario.NombrePropio;
+            this.lblFechaHora.Text += entIncidencia.HoraRecepcion.ToString();
+            this.Text = string.Format("EDICIÓN DE INCIDENCIA FOLIO: {0}", this.entIncidencia.Folio);
+
+            
+            
+            //Inicializamos las listas
+            this.CargarMunicipios();
+            this.CargarTiposIncidencias();
+            this.CargarCoorporaciones();
+
+            
+        }
+
 
         #endregion
 
@@ -70,12 +96,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// los datos en dichos eventos, de lo contrario no se guarda la incidencia en tales eventos.
         /// </summary>
         protected Boolean _blnSeActivoClosed;
-
-        
-
-        
-
-
 
         #region PARA PERSONA EXTRAVIADA
 
@@ -106,12 +126,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <summary>
         /// Objetos robados para incidencia de tipo Robo de accesorios de vehículo.
         /// </summary>
-        protected RoboVehiculoAccesoriosObjectList ListaAccesoriosRobados;
+        protected RoboVehiculoAccesoriosList ListaAccesoriosRobados;
 
         /// <summary>
         /// Datos generales del robo de accesorios de vehiculos.
         /// </summary>
-        protected RoboAccesoriosObject DatosRoboAccesorios;
+        protected RoboAccesorios DatosRoboAccesorios;
 
         /// <summary>
         /// Lista de vehículos involucrados en el robo de accesorios.
@@ -123,7 +143,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         LocalidadList objListaLocalidades;
         CodigoPostalList objListaCodigosPostales = new CodigoPostalList();
         CodigoPostal entCodigoPostal;
-
+        Usuario entUsuario;
    
 
         #endregion
@@ -231,6 +251,26 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         }
 
+        /// <summary>
+        /// Guarda los accesorios de un vehiculo especificado.
+        /// </summary>
+        /// <param name="idRoboAccesorio">int, Id del robo</param>
+        /// <param name="idVehiculoActual">int,Id de vehiculo despues de guardar</param>
+        /// <param name="idVehiculoAnterior">int,Id del vehiculo despues de guardar</param>
+        private void GuardarAccesoriosPorVehiculo(int idRoboAccesorio,int idVehiculoActual,int idVehiculoAnterior)
+        {
+            //Guardamos los accesorios robados
+            foreach (RoboVehiculoAccesorios accesorio in this.ListaAccesoriosRobados)
+            {
+                if(accesorio.ClaveVehiculo==idVehiculoAnterior)
+                {
+                    accesorio.IdRoboAccesorio = idRoboAccesorio;
+                    accesorio.ClaveVehiculo = idVehiculoActual;
+                    RoboVehiculoAccesoriosMapper.Instance().Insert(accesorio);
+                }
+                
+            }
+        }
 
         /// <summary>
         /// Actualiza la información de la incidencia.
@@ -255,18 +295,23 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
 
                     //Checamos si existen Vehiculos con accesorios robados.
-                    if (ListaVehiculosInvolucrados != null && ListaAccesoriosRobados != null && (cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave==130)
+                    if (ListaVehiculosInvolucrados != null && ListaAccesoriosRobados != null && DatosRoboAccesorios != null && (cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave == 130)
                     {
                         try
                         {
+                            //Guardamos los datos del robo de accesorios
+                            DatosRoboAccesorios.IdIncidencia = entIncidencia.Folio;
+                            RoboAccesoriosMapper.Instance().Insert(DatosRoboAccesorios);
+                            //Guardamos los vehiculos involucrados.
                             foreach (VehiculoObject vehiculo in this.ListaVehiculosInvolucrados)
                             {
-                                VehiculoMapper.Instance().Save(vehiculo);
+                                int idAnterior = vehiculo.Clave;
+                                VehiculoMapper.Instance().Insert(vehiculo);
+
+                                //Guardamos los accesorios de este vehiculo.
+                                this.GuardarAccesoriosPorVehiculo(DatosRoboAccesorios.IdRoboAccesorio, vehiculo.Clave,idAnterior);
                             }
-                            foreach (RoboVehiculoAccesorios accesorio in this.ListaAccesoriosRobados)
-                            {
-                                RoboVehiculoAccesoriosMapper.Instance().Insert(accesorio);
-                            }
+                            
 
                         }
                         catch { }
@@ -378,9 +423,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 entIncidencia.ClaveEstado = 29;
                 entIncidencia.ClaveUsuario = Aplicacion.UsuarioPersistencia.intClaveUsuario;
                 IncidenciaMapper.Instance().Insert(entIncidencia);
+                entUsuario = UsuarioMapper.Instance().GetOne(entIncidencia.ClaveUsuario);
+                this.lblOperador.Text += entUsuario.NombrePropio;
+                this.lblFechaHora.Text += entIncidencia.HoraRecepcion.ToString();
             }
-            catch
+            catch(Exception ex)
             {
+                MessageBox.Show("Error al crear la nueva incidencia : "+ex.Message,"Error");
+                return;
             }
         }
         
@@ -945,6 +995,18 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (SAIExcepcion) { }
         }
 
+        private void cklCorporacion_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                this.GuardaCorporaciones();
+            }
+            catch (System.Exception ex)
+            {
+                throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+            }
+        }
+
 
         #region EVENTOS GENÉRICOS
 
@@ -972,22 +1034,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         #endregion
 
-        
-
-
-        private void cklCorporacion_Leave(object sender, EventArgs e)
-        {
-            try
-            {
-                this.GuardaCorporaciones();
-            }
-            catch (System.Exception ex)
-            {
-                throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
-            }
-        }
-
-
+ 
         #endregion
 
     }

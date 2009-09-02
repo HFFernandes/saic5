@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
+using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -29,9 +30,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         public VehiculoObjectList ListaVehiculosInvolucrados { get; set; }
 
-        public RoboAccesoriosObject DatosRoboAccesorio { get; set; }
+        public RoboAccesorios DatosRoboAccesorio { get; set; }
 
-        public RoboVehiculoAccesoriosObjectList ListaAccesoriosRobados { get; set; }
+        public RoboVehiculoAccesoriosList ListaAccesoriosRobados { get; set; }
 
         /// <summary>
         /// Vehiculo que se esta editanto.
@@ -51,7 +52,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             if (DatosRoboAccesorio==null)
             {
-                DatosRoboAccesorio = new RoboAccesoriosObject();
+                DatosRoboAccesorio = new RoboAccesorios();
             }
             DatosRoboAccesorio.DescripcionResponsable = this.txtAccesoriosResponsables.Text;
             DatosRoboAccesorio.FechaPercato = this.dtpAccesoriosFechaPercato.Value.Date;
@@ -110,17 +111,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             //Validamos que no sea nula
             if(this.ListaAccesoriosRobados==null)
             {
-                this.ListaAccesoriosRobados = new RoboVehiculoAccesoriosObjectList();
+                this.ListaAccesoriosRobados = new RoboVehiculoAccesoriosList();
             }
 
-            RoboVehiculoAccesoriosObject AccesorioRobado;
+            RoboVehiculoAccesorios AccesorioRobado;
             foreach(DataGridViewRow row in this.dgvAccesorios.Rows)
             {
                 if (row.Cells[1].Value!=null)
                 {
                     if (row.Cells[0].Value == null)
                     {
-                        AccesorioRobado = new RoboVehiculoAccesoriosObject();
+                        AccesorioRobado = new RoboVehiculoAccesorios();
                         EsNuevo = true;
                     }
                     else
@@ -144,10 +145,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.dgvAccesorios.Rows.Clear();
         }
 
-        private RoboVehiculoAccesoriosObject ObtenerAccesorioEditado(int idAccesorio)
+        private RoboVehiculoAccesorios ObtenerAccesorioEditado(int idAccesorio)
         {
-            RoboVehiculoAccesoriosObject encontrado = new RoboVehiculoAccesoriosObject();
-            foreach(RoboVehiculoAccesoriosObject accesorio in this.ListaAccesoriosRobados)
+            RoboVehiculoAccesorios encontrado = new RoboVehiculoAccesorios();
+            foreach(RoboVehiculoAccesorios accesorio in this.ListaAccesoriosRobados)
             {
                 if (accesorio.IdAccesorio == idAccesorio)
                 {
