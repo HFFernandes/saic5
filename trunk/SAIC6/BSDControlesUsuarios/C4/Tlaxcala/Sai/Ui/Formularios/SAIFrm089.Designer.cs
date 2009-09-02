@@ -51,7 +51,6 @@
             this.txtAliasDelincuente = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.txtOficioEnvio = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.cbxMunicipio = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox(this.components);
-            this.cbxCP = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox(this.components);
             this.cbxLocalidad = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox(this.components);
             this.cbxColonia = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox(this.components);
             this.lblFechaDocumento = new System.Windows.Forms.Label();
@@ -59,6 +58,7 @@
             this.chkFechaDoc = new System.Windows.Forms.CheckBox();
             this.btnDependencias = new System.Windows.Forms.Button();
             this.lblTitulo = new System.Windows.Forms.Label();
+            this.cbxCP = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -277,20 +277,6 @@
             this.cbxMunicipio.SelectedIndexChanged += new System.EventHandler(this.cbxMunicipio_SelectedIndexChanged);
             this.cbxMunicipio.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cbxMunicipio_KeyUp);
             // 
-            // cbxCP
-            // 
-            this.cbxCP.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.cbxCP.FormattingEnabled = true;
-            this.cbxCP.Location = new System.Drawing.Point(82, 181);
-            this.cbxCP.Name = "cbxCP";
-            this.cbxCP.Size = new System.Drawing.Size(200, 21);
-            this.cbxCP.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.cbxCP.TabIndex = 5;
-            this.cbxCP.SelectedIndexChanged += new System.EventHandler(this.cbxCP_SelectedIndexChanged);
-            this.cbxCP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbxCP_KeyPress);
-            this.cbxCP.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cbxCP_KeyUp);
-            this.cbxCP.TextChanged += new System.EventHandler(this.cbxCP_TextChanged);
-            // 
             // cbxLocalidad
             // 
             this.cbxLocalidad.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
@@ -368,11 +354,27 @@
             this.lblTitulo.TabIndex = 54;
             this.lblTitulo.Text = "REGISTRO DE NUEVA INCIDENCIA";
             // 
+            // cbxCP
+            // 
+            this.cbxCP.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cbxCP.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbxCP.FormattingEnabled = true;
+            this.cbxCP.Location = new System.Drawing.Point(82, 181);
+            this.cbxCP.Name = "cbxCP";
+            this.cbxCP.Size = new System.Drawing.Size(200, 21);
+            this.cbxCP.TabIndex = 55;
+            this.cbxCP.SelectedIndexChanged += new System.EventHandler(this.cbxCP_SelectedIndexChanged);
+            this.cbxCP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbxCP_KeyPress);
+            this.cbxCP.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cbxCP_KeyUp);
+            this.cbxCP.TextUpdate += new System.EventHandler(this.cbxCP_TextUpdate);
+            this.cbxCP.TextChanged += new System.EventHandler(this.cbxCP_TextChanged);
+            // 
             // SAIFrm089
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 531);
+            this.Controls.Add(this.cbxCP);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.btnDependencias);
             this.Controls.Add(this.chkFechaDoc);
@@ -380,7 +382,6 @@
             this.Controls.Add(this.lblFechaDocumento);
             this.Controls.Add(this.cbxColonia);
             this.Controls.Add(this.cbxLocalidad);
-            this.Controls.Add(this.cbxCP);
             this.Controls.Add(this.cbxMunicipio);
             this.Controls.Add(this.txtOficioEnvio);
             this.Controls.Add(this.txtAliasDelincuente);
@@ -425,7 +426,6 @@
             this.Controls.SetChildIndex(this.txtAliasDelincuente, 0);
             this.Controls.SetChildIndex(this.txtOficioEnvio, 0);
             this.Controls.SetChildIndex(this.cbxMunicipio, 0);
-            this.Controls.SetChildIndex(this.cbxCP, 0);
             this.Controls.SetChildIndex(this.cbxLocalidad, 0);
             this.Controls.SetChildIndex(this.cbxColonia, 0);
             this.Controls.SetChildIndex(this.lblFechaDocumento, 0);
@@ -433,6 +433,7 @@
             this.Controls.SetChildIndex(this.chkFechaDoc, 0);
             this.Controls.SetChildIndex(this.btnDependencias, 0);
             this.Controls.SetChildIndex(this.lblTitulo, 0);
+            this.Controls.SetChildIndex(this.cbxCP, 0);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -464,7 +465,6 @@
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox txtAliasDelincuente;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox txtOficioEnvio;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox cbxMunicipio;
-        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox cbxCP;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox cbxLocalidad;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox cbxColonia;
         private System.Windows.Forms.Label lblFechaDocumento;
@@ -472,5 +472,6 @@
         private System.Windows.Forms.CheckBox chkFechaDoc;
         private System.Windows.Forms.Button btnDependencias;
         protected System.Windows.Forms.Label lblTitulo;
+        private System.Windows.Forms.ComboBox cbxCP;
     }
 }
