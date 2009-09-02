@@ -155,7 +155,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     //Limpiamos el listado donde se almacenan las incidencias cuyo estado sea activo
                     //para iniciar nuevamente el ciclo
                     lstIncidenciasTemporales.Clear();
-                    foreach (var incidencia in (IncidenciaMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_INCIDENCIAS089,
+                    foreach (var incidencia in (IncidenciaMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_INCIDENCIAS0892,
                                                                                     (int)ESTATUSINCIDENCIAS.ACTIVA, Aplicacion.UsuarioPersistencia.ObtenerClaveSistema())))) //vamos a la base para obtener los registros de estado activo 
                     {
                         lstIncidenciasTemporales.Add(incidencia);
