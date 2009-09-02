@@ -81,7 +81,38 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         }
 
         private void SAIFrm089_Load(object sender, EventArgs e)
-        { }
+        {
+            this.Bloquear(Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_NI));
+        }
+
+        private void Bloquear(bool bloquear)
+        {
+            try
+            {
+                try
+                {
+                    this.txtAliasDelincuente.Enabled = bloquear;
+                    this.txtDescripcionDenuncia.Enabled = bloquear;
+                    this.txtDireccion.Enabled = bloquear;
+                    this.txtOficioEnvio.Enabled = bloquear;
+
+                    this.txtReferencias.Enabled = bloquear;
+                    this.cbxColonia.Enabled = bloquear;
+                    this.cbxCP.Enabled = bloquear;
+                    this.cbxLocalidad.Enabled = bloquear;
+                    this.cbxMunicipio.Enabled = bloquear;
+                    this.cbxTipoDenuncia.Enabled = bloquear;
+
+                    this.chkFechaDoc.Enabled = bloquear;
+
+                    this.btnDependencias.Enabled = bloquear;
+                }
+                catch (Exception ex)
+                { throw new SAIExcepcion(ex.Message); }
+            }
+            catch (SAIExcepcion)
+            { } 
+        }
 
         /// <summary>
         /// Manda el foco al campo Dirección
