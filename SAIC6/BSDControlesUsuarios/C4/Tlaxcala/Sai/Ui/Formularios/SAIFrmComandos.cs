@@ -40,7 +40,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             if (dialogResult == DialogResult.OK)
             {
                 InitializeComponent();
-                Aplicacion.frmComandos = this;
+                //Aplicacion.frmComandos = this;
 
                 SAIBarraComandos.DeleteAll(); //Se limpia la barra de comandos por si existiera alguno
                 SAIBarraComandos.EnableCustomization(true);
@@ -182,29 +182,29 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <summary>
         /// Para indicar si se ha presionado la tecla control
         /// </summary>
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            if (keyData == (Keys.ControlKey | Keys.Control))
-            {
-                _blnCtrPresionado = true;
-            }
+        //protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        //{
+        //    if (keyData == (Keys.ControlKey | Keys.Control))
+        //    {
+        //        _blnCtrPresionado = true;
+        //    }
 
-            return false;
-        }
+        //    return false;
+        //}
 
         /// <summary>
         /// Esta función se manda a llamar desde los demás formularios para mostrar la ventana del switch
         /// </summary>
-        public void MuestraSwitch()
-        {
-            if (Aplicacion.VentanasIncidencias.Count > 0)
-            {
-                var objVentana = new SAIFrmVentana(Aplicacion.VentanasIncidencias, this);
-                objVentana.Left = 200;
-                objVentana.Top = 200;
-                objVentana.Show(this);
-            }
-        }
+        //public void MuestraSwitch()
+        //{
+        //    if (Aplicacion.VentanasIncidencias.Count > 0)
+        //    {
+        //        var objVentana = new SAIFrmVentana(Aplicacion.VentanasIncidencias, this);
+        //        objVentana.Left = 200;
+        //        objVentana.Top = 200;
+        //        objVentana.Show(this);
+        //    }
+        //}
 
         /// <summary>
         /// Inicia el monitor para el Agente de Avaya
@@ -270,7 +270,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value)
                                 {
                                     var frmIncidencia089 = new SAIFrm089();
-                                    frmIncidencia089.Show(this);
+                                    frmIncidencia089.Show();
                                 }
                                 break;
                             case ID.CMD_P:
@@ -286,6 +286,34 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 }
                                 else
                                     throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
+                                break;
+                            case ID.CMD_PH:
+                                if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(e.control.Id))
+                                {
+                                    if (e.control.Checked)
+                                        buscadorDir.Dispose();
+                                    else
+                                    {
+                                        buscadorDir = new SAIFrmBuscadorIncidencias();
+                                        buscadorDir.CargarConsulta(string.Format("{0}\\{1}", Environment.CurrentDirectory,
+                                                                                 "ConsultaPH89.xml"));
+                                        MostrarEnSegundoMonitorSiEsPosible(buscadorDir);
+                                    }
+                                }
+                                break;
+                            case ID.CMD_SLC:
+                                if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(e.control.Id))
+                                {
+                                    if (e.control.Checked)
+                                        buscadorLig.Dispose();
+                                    else
+                                    {
+                                        buscadorLig = new SAIFrmBuscadorIncidencias();
+                                        buscadorLig.CargarConsulta(string.Format("{0}\\{1}", Environment.CurrentDirectory,
+                                                                                 "ConsultaSLC89.xml"));
+                                        MostrarEnSegundoMonitorSiEsPosible(buscadorLig);
+                                    }
+                                }
                                 break;
                         }
                         break;
@@ -310,7 +338,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value)
                                 {
                                     var frmAltaIncidencia = new SAIFrmAltaIncidencia066(string.Empty);
-                                    frmAltaIncidencia.Show(this);
+                                    frmAltaIncidencia.Show();
                                 }
                                 break;
                             case ID.CMD_P:
@@ -364,6 +392,48 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
 
                                 break;
+                            case ID.CMD_PH:
+                                if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(e.control.Id))
+                                {
+                                    if (e.control.Checked)
+                                        buscadorDir.Dispose();
+                                    else
+                                    {
+                                        buscadorDir = new SAIFrmBuscadorIncidencias();
+                                        buscadorDir.CargarConsulta(string.Format("{0}\\{1}", Environment.CurrentDirectory,
+                                                                                 "ConsultaPH.xml"));
+                                        MostrarEnSegundoMonitorSiEsPosible(buscadorDir);
+                                    }
+                                }
+                                break;
+                            case ID.CMD_RPH:
+                                if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(e.control.Id))
+                                {
+                                    if (e.control.Checked)
+                                        buscadorTel.Dispose();
+                                    else
+                                    {
+                                        buscadorTel = new SAIFrmBuscadorIncidencias();
+                                        buscadorTel.CargarConsulta(string.Format("{0}\\{1}", Environment.CurrentDirectory,
+                                                                                 "ConsultaRPH.xml"));
+                                        MostrarEnSegundoMonitorSiEsPosible(buscadorTel);
+                                    }
+                                }
+                                break;
+                            case ID.CMD_SLC:
+                                if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(e.control.Id))
+                                {
+                                    if (e.control.Checked)
+                                        buscadorLig.Dispose();
+                                    else
+                                    {
+                                        buscadorLig = new SAIFrmBuscadorIncidencias();
+                                        buscadorLig.CargarConsulta(string.Format("{0}\\{1}", Environment.CurrentDirectory,
+                                                                                 "ConsultaSLC.xml"));
+                                        MostrarEnSegundoMonitorSiEsPosible(buscadorLig);
+                                    }
+                                }
+                                break;
                         }
                         break;
                 }
@@ -378,48 +448,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         break;
                     case ID.CMD_SIF:
                         throw new SAIExcepcion("Funcionalidad no implementada.");
-                        break;
-                    case ID.CMD_PH:
-                        if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(e.control.Id))
-                        {
-                            if (e.control.Checked)
-                                buscadorDir.Dispose();
-                            else
-                            {
-                                buscadorDir = new SAIFrmBuscadorIncidencias();
-                                buscadorDir.CargarConsulta(string.Format("{0}\\{1}", Environment.CurrentDirectory,
-                                                                         "ConsultaPH.xml"));
-                                MostrarEnSegundoMonitorSiEsPosible(buscadorDir);
-                            }
-                        }
-                        break;
-                    case ID.CMD_RPH:
-                        if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(e.control.Id))
-                        {
-                            if (e.control.Checked)
-                                buscadorTel.Dispose();
-                            else
-                            {
-                                buscadorTel = new SAIFrmBuscadorIncidencias();
-                                buscadorTel.CargarConsulta(string.Format("{0}\\{1}", Environment.CurrentDirectory,
-                                                                         "ConsultaRPH.xml"));
-                                MostrarEnSegundoMonitorSiEsPosible(buscadorTel);
-                            }
-                        }
-                        break;
-                    case ID.CMD_SLC:
-                        if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(e.control.Id))
-                        {
-                            if (e.control.Checked)
-                                buscadorLig.Dispose();
-                            else
-                            {
-                                buscadorLig = new SAIFrmBuscadorIncidencias();
-                                buscadorLig.CargarConsulta(string.Format("{0}\\{1}", Environment.CurrentDirectory,
-                                                                         "ConsultaSLC.xml"));
-                                MostrarEnSegundoMonitorSiEsPosible(buscadorLig);
-                            }
-                        }
                         break;
                     case ID.CMD_TEL:
                         if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(e.control.Id))
@@ -459,6 +487,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         case ID.CMD_U:
                             e.control.Enabled = false;
                             break;
+                        case ID.CMD_RPH:
+                            e.control.Enabled = false;
+                            break;
                     }
                     break;
                 case "066":
@@ -476,6 +507,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         case ID.CMD_U:
                             e.control.Checked = unidadesCorporaciones.Created;
                             break;
+                        case ID.CMD_RPH:
+                            e.control.Checked = buscadorTel.Created;
+                            break;
                     }
                     break;
             }
@@ -484,9 +518,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 case ID.CMD_PH:
                     e.control.Checked = buscadorDir.Created;
-                    break;
-                case ID.CMD_RPH:
-                    e.control.Checked = buscadorTel.Created;
                     break;
                 case ID.CMD_SIF:
                     break;
@@ -588,14 +619,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// Si se ha presionado control tab, se muestra la ventana de swicheo
         /// </summary>
         /// <param name="e"></param>
-        protected override void OnKeyUp(KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Tab && _blnCtrPresionado)
-            {
-                MuestraSwitch();
-            }
-            _blnCtrPresionado = false;
-        }
+        //protected override void OnKeyUp(KeyEventArgs e)
+        //{
+        //    if (e.KeyCode == Keys.Tab && _blnCtrPresionado)
+        //    {
+        //        MuestraSwitch();
+        //    }
+        //    _blnCtrPresionado = false;
+        //}
 
         #region EVENTOS PARA MONITOR DE TCP
 
@@ -630,7 +661,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
             {
                 //var frmIncidencia089 = new SAIFrmIncidencia089(this.NoTelefono);
-                //frmIncidencia089.Show(this);
+                //frmIncidencia089.Show();
 
             }
         }

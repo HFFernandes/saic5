@@ -61,7 +61,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     if (incidencia != null)
                     {
                         var incidenciaDespacho = new SAIFrmDespacho(incidencia);
-                        incidenciaDespacho.Show(Aplicacion.frmComandos);
+                        incidenciaDespacho.Show();
                     }
                 }
                 else
@@ -70,7 +70,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     if (incidencia != null)
                     {
                         //var incidenciaInfo = new SAIFrmDespacho(incidencia);
-                        //incidenciaInfo.Show(Aplicacion.frmComandos);
+                        //incidenciaInfo.Show();
                     }
                 }
             }
@@ -95,7 +95,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         if (incidencia != null)
                         {
                             var incidenciaDespacho = new SAIFrmDespacho(incidencia);
-                            incidenciaDespacho.Show(Aplicacion.frmComandos);
+                            incidenciaDespacho.Show();
                         }
                     }
                 }
@@ -109,7 +109,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         if (incidencia != null)
                         {
                             //var incidenciaInfo = new SAIFrmIncidencia066(incidencia);
-                            //incidenciaInfo.Show(Aplicacion.frmComandos);
+                            //incidenciaInfo.Show();
                         }
                     }
                 }
@@ -363,7 +363,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     saiReport1.reportControl.Records[itm.Record.Index][7].Value = ObtenerLapso(incidencia.HoraRecepcion);
 
                                     var lapso = DateTime.Now.Subtract(incidencia.HoraRecepcion);
-                                    saiReport1.reportControl.Records[itm.Record.Index][7].BackColor = (int)lapso.TotalMinutes < 3 ? ID.COLOR_AMARILLO : ID.COLOR_ROJO;
+                                    saiReport1.reportControl.Records[itm.Record.Index][7].BackColor = (int)lapso.TotalMinutes <= 3 ? ID.COLOR_AMARILLO : ID.COLOR_ROJO;
 
                                     saiReport1.reportControl.Records[itm.Record.Index][9].Value =
                                         incidencia.FolioPadre.ToString() != string.Empty
@@ -404,8 +404,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     lstIncidenciasPorRemover.Clear();   //limpiamos la colección para el nuevo ciclo
 
                     //ordenamiento
-                    if (SAIChkOrdenarPrioridad.Checked)
-                        saiReport1.reportControl.SortOrder.Add(saiReport1.reportControl.Columns[10]);
+                    //if (SAIChkOrdenarPrioridad.Checked)
+                    //    saiReport1.reportControl.SortOrder.Add(saiReport1.reportControl.Columns[10]);
                 }
                 catch (Exception)
                 {

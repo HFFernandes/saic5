@@ -519,16 +519,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                                           ExceptionMessageBoxSymbol.Question,
                                                           ExceptionMessageBoxDefaultButton.Button2);
 
-            if (DialogResult.Yes == confirmacion.Show(this))
-            {
-                _unidadAsignada = null;
-                lblUnidadPrincipal.Text = ID.STR_DESCONOCIDO;
+            if (DialogResult.Yes != confirmacion.Show(this)) return;
+            _unidadAsignada = null;
+            lblUnidadPrincipal.Text = ID.STR_DESCONOCIDO;
 
-                _despachoIncidencia.ClaveUnidad = null;
-                DespachoIncidenciaMapper.Instance().Save(_despachoIncidencia);
+            _despachoIncidencia.ClaveUnidad = null;
+            DespachoIncidenciaMapper.Instance().Save(_despachoIncidencia);
 
-                cmdQuitarUP.Enabled = false;
-            }
+            cmdQuitarUP.Enabled = false;
         }
 
         private void cmdQuitarUA_Click(object sender, EventArgs e)
@@ -538,16 +536,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                                           ExceptionMessageBoxSymbol.Question,
                                                           ExceptionMessageBoxDefaultButton.Button2);
 
-            if (DialogResult.Yes == confirmacion.Show(this))
-            {
-                _unidadApoyo = null;
-                lblUnidadApoyo.Text = ID.STR_DESCONOCIDO;
+            if (DialogResult.Yes != confirmacion.Show(this)) return;
+            _unidadApoyo = null;
+            lblUnidadApoyo.Text = ID.STR_DESCONOCIDO;
 
-                _despachoIncidencia.ClaveUnidadApoyo = null;
-                DespachoIncidenciaMapper.Instance().Save(_despachoIncidencia);
+            _despachoIncidencia.ClaveUnidadApoyo = null;
+            DespachoIncidenciaMapper.Instance().Save(_despachoIncidencia);
 
-                cmdQuitarUA.Enabled = false;
-            }
+            cmdQuitarUA.Enabled = false;
         }
 
         private void saiTmpHoraLlegada_ValueChanged(object sender, EventArgs e)

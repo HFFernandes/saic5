@@ -23,7 +23,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void ModeloQuery_ConditionsChanged(object sender, Korzh.EasyQuery.ConditionsChangeEventArgs e)
         {
-            //ActualizarResultado();
+            ActualizarResultado();
         }
 
         private void btnActualizar_Click(object sender, EventArgs e)
@@ -115,7 +115,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void SAIFrmBuscadorIncidencias_Load(object sender, EventArgs e)
         {
-            //ModeloQuery.LoadFromFile(@"D:\nplantilla.xml");
+            //ModeloQuery.LoadFromFile(@"D:\plantilla89.xml");
         }
 
         private void GridResultados_DoubleClick(object sender, EventArgs e)
