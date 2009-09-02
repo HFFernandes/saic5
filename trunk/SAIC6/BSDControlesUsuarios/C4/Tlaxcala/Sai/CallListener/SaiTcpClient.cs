@@ -39,8 +39,10 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
                 //Iniciamos el Listener del TCP
                 this.objTcpListener.Start();
 
+                //Instanciamos el worker
+                this.bgwMonitor = new BackgroundWorker();
+                this.bgwMonitor.WorkerSupportsCancellation = true;
                 
-
             }
             catch
             {
@@ -92,6 +94,8 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
         /// </summary>
         private   NetworkStream netStream;
 
+
+        BackgroundWorker bgwMonitor;
         
         #endregion
 
@@ -140,8 +144,9 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
                 //Iniciamos el .jar (Aplicación agente de Avaya)
                 Shell(aplicacionAgente);
 
-
+               
                 objTcpClient = objTcpListener.AcceptTcpClient();
+                
 
             }
             catch (SocketException se)
@@ -157,44 +162,48 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
         {
             try
             {
-                //Obtenemos el NetWorkStream
-                netStream = objTcpClient.GetStream();
-
-                while (netStream.CanRead )
+                if (objTcpClient != null)
                 {
-                    if(objTcpClient.Available > 0)
+                    //Obtenemos el NetWorkStream
+                    netStream = objTcpClient.GetStream();
+
+                    while (netStream.CanRead)
                     {
-                        byte[] bytes = new byte[objTcpClient.ReceiveBufferSize];
-
-                        netStream.Read(bytes, 0, (int)objTcpClient.ReceiveBufferSize);
-
-                        //Mostramos los datos recibidos.
-                        string returndata = Encoding.UTF8.GetString(bytes);
-
-                        //OBtenemos el mensaje del Agente
-                        if (returndata.Contains("@"))
+                        if (objTcpClient.Available > 0)
                         {
-                            string datosAgente = returndata.Split("@".ToCharArray())[1];
-                            datosAgente = datosAgente.Substring(0, datosAgente.IndexOf('%'));
-                            FindMessajeEvent(string.Format("En extensión :{0}", datosAgente));
-                        }
-                        //Obtenemos el No de telefono de la llamada entrante.
-                        if (returndata.Contains("&"))
-                        {
-                            string datosLlamada = returndata.Split("&".ToCharArray())[1];
-                            datosLlamada = datosLlamada.Substring(0, datosLlamada.IndexOf('%'));
-                            if (!Aplicacion.LlamadasActuales.Contains(datosLlamada))
+                            byte[] bytes = new byte[objTcpClient.ReceiveBufferSize];
+
+                            netStream.Read(bytes, 0, (int)objTcpClient.ReceiveBufferSize);
+
+                            //Mostramos los datos recibidos.
+                            string returndata = Encoding.UTF8.GetString(bytes);
+
+                            //OBtenemos el mensaje del Agente
+                            if (returndata.Contains("@"))
                             {
-                                //Guardamos la llamada entrante.
-                                Aplicacion.LlamadasActuales.Add(datosLlamada);
-
-                                //Mandamos el telefono obtenido
-                                FindDataEvent(datosLlamada);
+                                string datosAgente = returndata.Split("@".ToCharArray())[1];
+                                datosAgente = datosAgente.Substring(0, datosAgente.IndexOf('%'));
+                                FindMessajeEvent(string.Format("En extensión :{0}", datosAgente));
                             }
-                            
+                            //Obtenemos el No de telefono de la llamada entrante.
+                            if (returndata.Contains("&"))
+                            {
+                                string datosLlamada = returndata.Split("&".ToCharArray())[1];
+                                datosLlamada = datosLlamada.Substring(0, datosLlamada.IndexOf('%'));
+                                if (!Aplicacion.LlamadasActuales.Contains(datosLlamada))
+                                {
+                                    //Guardamos la llamada entrante.
+                                    Aplicacion.LlamadasActuales.Add(datosLlamada);
+
+                                    //Mandamos el telefono obtenido
+                                    FindDataEvent(datosLlamada);
+                                }
+
+                            }
                         }
                     }
                 }
+                
             }
             catch (Exception ex)
             {

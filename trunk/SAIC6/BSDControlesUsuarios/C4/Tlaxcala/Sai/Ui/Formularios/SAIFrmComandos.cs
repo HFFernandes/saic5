@@ -212,8 +212,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void IniciarMonitorLlamadas()
         {
             TcpListener.IniciarCliente();
-            this.Monitor.Enabled = true;
-            this.Monitor.Start();
+
 
         }
 
@@ -222,8 +221,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         private void DetenerMonitorLlamadas()
         {
-            this.Monitor.Stop();
-            this.Monitor.Enabled = false;
+
             TcpListener.DetenerCliente();
         }
 
