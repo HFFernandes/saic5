@@ -104,6 +104,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 if (incidencia.FolioPadre == null)
                                     incidencia.FolioPadre = Convert.ToInt32(folioPadre);
                             }
+
                             if (listadoIncidencias.Count > 0)
                             {
                                 IncidenciaMapper.Instance().Update(listadoIncidencias);
