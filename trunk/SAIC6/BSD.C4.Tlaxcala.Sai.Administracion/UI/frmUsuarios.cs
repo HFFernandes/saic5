@@ -144,7 +144,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 Entidades.Usuario newUsuario = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Usuario();
                 newUsuario.NombrePropio = this.txtNombrePropio.Text;
                 newUsuario.NombreUsuario = this.txtUsuario.Text;
-                newUsuario.Contraseña = this.saiTxtContrasena.Text;
+                newUsuario.Contraseña = new CzSecurity().PassWordCifrado(this.saiTxtContrasena.Text);
+                //newUsuario.Contraseña = this.saiTxtContrasena.Text;
                 newUsuario.Despachador = this.rbDespachador.Checked ? true : false;
                 newUsuario.Activo = this.chkActivado.Checked;
                 Mappers.UsuarioMapper.Instance().Insert(newUsuario);
@@ -194,7 +195,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         Entidades.Usuario updUsuario = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Usuario(clave);
                         updUsuario.NombrePropio = this.txtNombrePropio.Text;
                         updUsuario.NombreUsuario = this.txtUsuario.Text;
-                        updUsuario.Contraseña = this.saiTxtContrasena.Text;
+                        //updUsuario.Contraseña = this.saiTxtContrasena.Text;
+                        updUsuario.Contraseña = new CzSecurity().PassWordCifrado(this.saiTxtContrasena.Text);
                         updUsuario.Despachador = this.rbDespachador.Checked ? true : false;
                         updUsuario.Activo = this.chkActivado.Checked;
                         Mappers.UsuarioMapper.Instance().Save(updUsuario);
@@ -293,9 +295,18 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// </summary>
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            this.Modificar();
-            this.LlenarGrid();
-            this.Limpiar();
+            try
+            {
+                if (this.SAIProveedorValidacion.ValidarCamposRequeridos(this.gpbDatosUsuario))
+                {
+                    this.Modificar();
+                    this.LlenarGrid();
+                    this.Limpiar();
+                }
+                else
+                { throw new SAIExcepcion("Hacen falta datos verifique que todo este capturado."); }
+            }catch(SAIExcepcion)
+            {}
         }
 
         /// <summary>
@@ -381,7 +392,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         //Llena los controles con los datos del Datagrid
                         this.txtNombrePropio.Text = Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["NombrePropio"].Value);
                         this.txtUsuario.Text = Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["NombreUsuario"].Value);
-                        this.saiTxtContrasena.Text = Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Contrasena"].Value);
+                        //this.saiTxtContrasena.Text = Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Contrasena"].Value);
                         this.chkActivado.Checked = Convert.ToBoolean(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Activo"].Value);
 
                         int corporacion = 0;
