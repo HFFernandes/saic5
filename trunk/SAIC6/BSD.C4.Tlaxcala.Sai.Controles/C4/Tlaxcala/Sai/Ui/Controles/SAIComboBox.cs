@@ -20,8 +20,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         //Guarda el valor de la cadena escrita en el combo
         private string _strCadenaEscrita = string.Empty;
         private bool _blnBusqueda = false;
-        public delegate void DelegadoCambiaMapa();
-        public event DelegadoCambiaMapa CambiaMapa;
+        //public delegate void DelegadoCambiaMapa();
+        //public event DelegadoCambiaMapa CambiaMapa;
         #endregion
 
         #region Propiedades
@@ -166,10 +166,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         {
             if (this._blnBusqueda)
             {
-                if (this.CambiaMapa!= null)
-                {
-                    this.CambiaMapa();
-                }
+                //if (this.CambiaMapa!= null)
+                //{
+                //    this.CambiaMapa();
+                //}
                 this._blnBusqueda = false;
                 return;
             }
@@ -216,7 +216,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             else
             {
 
-                foreach (Object objElemento in this.Items)
+                foreach (var objElemento in this.Items)
                 {
 
                     string strElemento = string.Empty;
@@ -248,17 +248,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
                     i++;
                 }
             }
-            if (blnSeEncontro)
+
+            if (!blnSeEncontro) return;
+
+            if (!this.DroppedDown)
             {
-                    if (!this.DroppedDown)
-                    {
-                        this.DroppedDown = true;
-                    }
-                    this._blnBusqueda = true;
-                    this.SelectedIndex = intIdx;
-                    this.Text = this._strCadenaEscrita;
-                    this.SelectionStart = this.Text.Length;
+                this.DroppedDown = true;
             }
+            this._blnBusqueda = true;
+            this.SelectedIndex = intIdx;
+            this.Text = this._strCadenaEscrita;
+            this.SelectionStart = this.Text.Length;
         }
 
         #region Funciones
