@@ -134,6 +134,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     string.Format(ID.SQL_OBTENERDESPACHOS2, incidencia.Folio));
 
             //cargar unidades,etc
+            lblUnidadPrincipal.Text = ID.STR_DESCONOCIDO;
+            lblUnidadApoyo.Text = ID.STR_DESCONOCIDO;
             if (_despachoIncidencia != null)
             {
                 lblUnidadPrincipal.Text = _despachoIncidencia.ClaveUnidad != null ? UnidadMapper.Instance().GetOne(_despachoIncidencia.ClaveUnidad.Value).Codigo : ID.STR_DESCONOCIDO;
@@ -146,11 +148,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 if (_despachoIncidencia.HoraLlegada != null)
                 {
                     saiTmpHoraLlegada.Value = _despachoIncidencia.HoraLlegada.Value;
+                    chkHoraLlegada.Checked = true;
                     chkHoraLlegada.Enabled = true;
                 }
                 if (_despachoIncidencia.HoraLiberada != null)
                 {
                     saiTmpHoraLiberacion.Value = _despachoIncidencia.HoraLiberada.Value;
+                    chkHoraLiberacion.Checked = true;
                     chkHoraLiberacion.Enabled = true;
                 }
 
@@ -285,7 +289,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void axComentarios_MouseDownEvent(object sender, AxXtremeReportControl._DReportControlEvents_MouseDownEvent e)
         {
-            int l=0, t=0, r=0, b=0;
+            int l = 0, t = 0, r = 0, b = 0;
 
             if (axComentarios.HeaderRows.Count <= 0) return;
             axComentarios.HeaderRows[0].GetRect(ref l, ref t, ref r, ref b);
@@ -622,11 +626,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void saiTmpHoraLlegada_KeyUp(object sender, KeyEventArgs e)
         {
             _blnLlegadaManual = true;
+            ActualizarHoraLlegada();
         }
 
         private void saiTmpHoraLiberacion_KeyUp(object sender, KeyEventArgs e)
         {
             _blnLiberadaManual = true;
+            ActualizaHoraLiberacion();
         }
     }
 }
