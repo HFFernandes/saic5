@@ -44,7 +44,7 @@
             // tmrRegistros
             // 
             this.tmrRegistros.Enabled = true;
-            this.tmrRegistros.Interval = 4000;
+            this.tmrRegistros.Interval = 2000;
             this.tmrRegistros.Tick += new System.EventHandler(this.tmrRegistros_Tick);
             // 
             // SAIFrmIncidenciasActivas089
