@@ -660,8 +660,50 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="e"></param>
         private void txtOficioEnvio_Leave(object sender, EventArgs e)
         {
+            Entidades.IncidenciaDependenciaList lstInsDependencia = Mappers.IncidenciaDependenciaMapper.Instance().GetByIncidencia(this._Incidencia089.Folio);
+            if (lstInsDependencia.Count > 0)
+            {
+                this.txtOficioEnvio.Text = this._Incidencia089.NumeroOficio;
+                if (this._Incidencia089.ClaveEstatus < 3)
+                {                    
+                    this._Incidencia089.ClaveEstatus = 3;
+                }
+                //else { }
+            }
+            else 
+            {
+                if (this.txtOficioEnvio.Text != string.Empty)
+                {
+                    this._Incidencia089.ClaveEstatus = 2;
+                }
+                else
+                {
+                    this._Incidencia089.ClaveEstatus = 2;
+                }
+            }
+            this._Incidencia089.ClaveEstatus = 2;
+            this.ActualizarIncidencia();
+
+            /*
             if (this.txtOficioEnvio.Text != string.Empty)
             {
+                //Entidades.IncidenciaDependenciaList lstInsDependencia = Mappers.IncidenciaDependenciaMapper.Instance().GetByIncidencia(this._Incidencia089.Folio);
+                if (lstInsDependencia.Count > 0)
+                {
+                    this.txtOficioEnvio.Text = this._Incidencia089.NumeroOficio;
+                    if (this._Incidencia089.ClaveEstatus < 3)
+                    {
+                        this._Incidencia089.ClaveEstatus = 2;
+                        this.ActualizarIncidencia();
+                    }
+                }
+                else 
+                {
+                    this._Incidencia089.ClaveEstatus = 2;
+                    this.ActualizarIncidencia();
+                }
+
+
                 if (this._Incidencia089.ClaveEstatus < 3)
                 {
                     this._Incidencia089.ClaveEstatus = 2;
@@ -672,7 +714,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 this._Incidencia089.ClaveEstatus = 2;
                 this.ActualizarIncidencia();
-            }
+            }*/
         }
 
         private void txtOficioEnvio_TextChanged(object sender, EventArgs e)
