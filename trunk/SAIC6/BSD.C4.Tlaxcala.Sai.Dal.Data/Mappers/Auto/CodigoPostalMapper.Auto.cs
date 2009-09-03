@@ -218,8 +218,16 @@ reader.GetString(1));
 
 
         // GetOne By Objects and Params
-            
 
+        /// <summary>
+        /// Obtiene la lista de CP de la localidad solicitada
+        /// </summary>
+        /// <param name="ilocalidad">Id de la Localidad</param>
+        /// <returns></returns>
+        public CodigoPostalList GetByLocalidad(System.Int32 ilocalidad)
+        {
+            return base.GetObjectListByAnyStoredProcedure(StoredProceduresPrefix() + "CodigoPostal_GetByLocalidad", ilocalidad);
+        }
 
         
 
