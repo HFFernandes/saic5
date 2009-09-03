@@ -361,12 +361,14 @@
             this.cbxCP.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbxCP.FormattingEnabled = true;
             this.cbxCP.Location = new System.Drawing.Point(82, 181);
+            this.cbxCP.MaxLength = 5;
             this.cbxCP.Name = "cbxCP";
             this.cbxCP.Size = new System.Drawing.Size(200, 21);
             this.cbxCP.TabIndex = 55;
             this.cbxCP.SelectedIndexChanged += new System.EventHandler(this.cbxCP_SelectedIndexChanged);
             this.cbxCP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cbxCP_KeyPress);
             this.cbxCP.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cbxCP_KeyUp);
+            this.cbxCP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbxCP_KeyDown);
             // 
             // SAIFrm089
             // 
