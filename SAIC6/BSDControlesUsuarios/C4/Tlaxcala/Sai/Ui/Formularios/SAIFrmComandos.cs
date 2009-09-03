@@ -244,6 +244,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             try
             {
+                Cursor = Cursors.WaitCursor;
+
                 switch (Aplicacion.UsuarioPersistencia.strSistemaActual)
                 {
                     case "089":
@@ -461,6 +463,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
             catch (SAIExcepcion)
             {
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
             }
         }
 

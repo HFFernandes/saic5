@@ -81,7 +81,7 @@
             this.QueryColumnas.Appearance.AdjustChildLevel = true;
             this.QueryColumnas.Appearance.AttrElementFormat = "{entity} {attr}";
             this.QueryColumnas.Appearance.BackColor = System.Drawing.Color.White;
-            this.QueryColumnas.Appearance.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.QueryColumnas.Appearance.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.QueryColumnas.Appearance.ButtonActiveBodyColor = System.Drawing.Color.Gray;
             this.QueryColumnas.Appearance.ButtonActiveBorderColor = System.Drawing.Color.Black;
             this.QueryColumnas.Appearance.ButtonClickBodyColor = System.Drawing.Color.White;
@@ -101,6 +101,7 @@
             this.QueryColumnas.Appearance.Title = "";
             this.QueryColumnas.Appearance.TuneElementSizes = false;
             this.QueryColumnas.BackColor = System.Drawing.Color.White;
+            this.QueryColumnas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.QueryColumnas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.QueryColumnas.Location = new System.Drawing.Point(0, 0);
             this.QueryColumnas.Model = null;
@@ -139,6 +140,7 @@
             this.QueryCondiciones.Appearance.ShowRootRow = true;
             this.QueryCondiciones.Appearance.TuneElementSizes = false;
             this.QueryCondiciones.BackColor = System.Drawing.Color.White;
+            this.QueryCondiciones.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.QueryCondiciones.Dock = System.Windows.Forms.DockStyle.Fill;
             this.QueryCondiciones.Location = new System.Drawing.Point(0, 0);
             this.QueryCondiciones.Model = null;
@@ -206,7 +208,6 @@
             this.GridResultados.Size = new System.Drawing.Size(912, 439);
             this.GridResultados.TabIndex = 2;
             this.GridResultados.DoubleClick += new System.EventHandler(this.GridResultados_DoubleClick);
-            this.GridResultados.Navigate += new System.Windows.Forms.NavigateEventHandler(this.GridResultados_Navigate);
             // 
             // ResultadoDataTable
             // 

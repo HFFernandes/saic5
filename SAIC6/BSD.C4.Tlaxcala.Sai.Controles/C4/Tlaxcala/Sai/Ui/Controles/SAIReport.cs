@@ -42,12 +42,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             columna.ShowInFieldChooser = blnMostrarEnChooser;
             columna.TreeColumn = blnTreeColumn;
 
-            if (blnPlusMinus)
-            {
-                columna.PlusMinus = true;
-                columna.NextVisualBlock = intBloque;
-                columna.Expanded = true;
-            }
+            if (!blnPlusMinus) return;
+            columna.PlusMinus = true;
+            columna.NextVisualBlock = intBloque;
+            columna.Expanded = true;
         }
 
         /// <summary>

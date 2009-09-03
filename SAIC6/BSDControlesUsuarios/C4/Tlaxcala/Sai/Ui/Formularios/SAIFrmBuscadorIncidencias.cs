@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Data.SqlClient;
@@ -43,9 +44,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     ResultadoDS.Tables[0].Columns.Clear();
 
                     var conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["CooperatorConnectionString"].ConnectionString);
+                    if (conexion.State == ConnectionState.Closed)
+                        conexion.Open();
+
                     var adaptador = new SqlDataAdapter(QueryColumnas.Query.Result.SQL, conexion);
                     adaptador.Fill(ResultadoDS, "Resultado");
-
                     GridResultados.Refresh();
                 }
                 catch (Exception) { throw new SAIExcepcion(ID.STR_ERRORFILTRO); }
@@ -121,10 +124,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void GridResultados_DoubleClick(object sender, EventArgs e)
         {
             //ModeloQuery.SaveToFile(@"D:\SLC.xml");
-        }
-
-        private void GridResultados_Navigate(object sender, System.Windows.Forms.NavigateEventArgs ne)
-        {
         }
     }
 }

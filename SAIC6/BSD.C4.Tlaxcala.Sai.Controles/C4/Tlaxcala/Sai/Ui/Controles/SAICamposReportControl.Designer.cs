@@ -57,6 +57,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SAI - Campos Adicionales";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SAICamposReportControl_FormClosed);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SAICamposReportControl_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.axFieldChooser1)).EndInit();
             this.ResumeLayout(false);
 
