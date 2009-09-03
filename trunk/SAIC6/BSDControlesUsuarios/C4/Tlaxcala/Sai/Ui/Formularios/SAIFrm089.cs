@@ -56,8 +56,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.SAIBarraEstado.SizingGrip = false;
             this.LlenarTipoIncidencias();
             this.LlenarMunicipios();
-            this.lblFechaHora.Text += " " + DateTime.Now.ToLocalTime();
-            this.lblOperador.Text += Aplicacion.UsuarioPersistencia.strNombreUsuario;
+            this.lblFechaHora.Text += "  " + DateTime.Now.ToLocalTime();
+            this.lblOperador.Text += "  " + Aplicacion.UsuarioPersistencia.strNombreUsuario;
             _blnBloqueaEventos = false;
         }
 
@@ -417,10 +417,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         //posteriormente se agregaran lo CP de la localidad agregada
                         this.ActualizaColonias(lstColonia);
                         //objeto que se que almacenara los CP
-                        Entidades.CodigoPostalList cpTemp = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.CodigoPostalList();
-                        bool existe = false;//bandera para determinar si un cp esta repetido
-
-                        foreach (Entidades.Colonia coloni in lstColonia)
+                        //Entidades.CodigoPostalList cpTemp = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.CodigoPostalList();
+                        //SE OBTIENE LA LISTA DE CODIGOS POSTALES DE LA LOCALIDAD CORRESPONDIENTE
+                        Entidades.CodigoPostalList lstCodigoPostal = Mappers.CodigoPostalMapper.Instance().GetByLocalidad(((Entidades.Localidad)this.cbxLocalidad.SelectedItem).Clave);
+                        //bool existe = false;//bandera para determinar si un cp esta repetido
+                        if (lstCodigoPostal.Count > 0)
+                        {
+                            this._blnBloqueaEventos = true;
+                            ActualizarCodigoPostal(lstCodigoPostal);
+                            this._blnBloqueaEventos = false;
+                        }
+                        /*foreach (Entidades.Colonia coloni in lstColonia)
                         {
                             foreach (Entidades.CodigoPostal cp in cpTemp)
                             {
@@ -441,7 +448,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             }
                         }
                         //Actualiza la lista de CP correspondientes a la localidad seleccionada
-                        this.ActualizarCodigoPostal(cpTemp);
+                        this.ActualizarCodigoPostal(cpTemp);*/
                     }
                     //Bandera para desbloquear
                     this._blnBloqueaEventos = false;
@@ -933,28 +940,36 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 try
                 {
+                    //SE OBTIENE LA ENTIDAD DEL CODIGO POSTAL
                     Entidades.CodigoPostal CP = Mappers.CodigoPostalMapper.Instance().GetOneBySQLQuery("Select Clave, Valor from CodigoPostal where Valor = '" + codigoPostal + "'");
+                    //SI EXISTE
                     if (CP != null)
                     {
+
+                        //SE OBTIENE LA LOSTA DE COLONIAS POR EL CODIGO POSTAL
                         Entidades.ColoniaList lstColonias = Mappers.ColoniaMapper.Instance().GetByCodigoPostal(CP.Clave);
+
                         if (lstColonias.Count > 0)
                         {
+                            //SE BLOQUEA EVENTO PARA LLENADO DE COLONIAS
                             this._blnBloqueaEventos = true;
                             this.ActualizaColonias(lstColonias);
+                            //SE SELECCIONA LA PRIMERA COLONIA
+                            //CABE MENCIONAR QUE UN CODIG POSTAL PUEDE CORRESPONDER A VARIAS COLONIAS
                             this.cbxColonia.SelectedIndex = 0;
                             this._blnBloqueaEventos = false;
-
+                            //SE AGREGA LA COLONIA A LA LISTA
                             Entidades.LocalidadList lstLocalidad = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.LocalidadList();
-
                             lstLocalidad.Add(Mappers.LocalidadMapper.Instance().GetOne(((Entidades.Colonia)this.cbxColonia.Items[0]).ClaveLocalidad));
-
+                            //SE ACTUALIZA LA LISTA DE COLONIAS
                             this._blnBloqueaEventos = true;
                             this.ActualizaLocalidades(lstLocalidad);
 
                             this.cbxLocalidad.SelectedIndex = 0;
 
                             Entidades.Localidad localidad = Mappers.LocalidadMapper.Instance().GetOne(((Entidades.Localidad)this.cbxLocalidad.SelectedItem).Clave);
-
+                            this.cbxMunicipio.SelectedValue = localidad.ClaveMunicipio;
+                            /*
                             foreach (Entidades.Municipio municipio in this.cbxMunicipio.Items)
                             {
                                 if (municipio.Clave == localidad.ClaveMunicipio)
@@ -962,7 +977,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     this.cbxMunicipio.SelectedItem = municipio;
                                     break;
                                 }
-                            }
+                            }*/
                             this._blnBloqueaEventos = false;
                         }
                     }
