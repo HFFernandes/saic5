@@ -246,6 +246,18 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         this._entIncidencia089.ClaveEstatus = 4;
                         Mappers.IncidenciaMapper.Instance().Save(this._entIncidencia089);
                     }
+                    else 
+                    {
+                        if (this.gvDependencias.Rows.Count == 0)
+                        {
+                            this._entIncidencia089.ClaveEstatus = 2;                            
+                        }
+                        else if (this.gvDependencias.Rows.Count > 0)
+                        {
+                            this._entIncidencia089.ClaveEstatus = 3;                            
+                        }
+                        Mappers.IncidenciaMapper.Instance().Save(this._entIncidencia089);
+                    }
                 }
                 catch (Exception ex)
                 { throw new SAIExcepcion(ex.Message, this); }
