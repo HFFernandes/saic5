@@ -15,6 +15,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             InitializeComponent();
         }
 
+        private void SAICamposReportControl_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SAIReport.SAIInstancia.btnCampos.Enabled = true;
+        }
+
         /// <summary>
         /// Evento que notificará a la instancia <see cref="SAIReport">SAIReport</see> a la cual pertenece
         /// que ha sido cerrado para habilitar nuevamente el control que lo inicio

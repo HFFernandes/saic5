@@ -39,7 +39,7 @@ namespace BSD.C4.Tlaxcala.Sai
                            new Comando(ID.CMD_SLC,"SLC","Consulta de incidentes ligados.",null,false,true),
                            //new Comando(ID.CMD_SS,"SS","",null,false,true),
                            new Comando(ID.CMD_TEL,"TEL","Mostrar agenda telefónica de las instituciones del estado.",'T',false,true),
-                           new Comando(ID.CMD_U,"U","Unidades dispuestas y ocupadas de las distintas corporaciones.",null,false,true),
+                           new Comando(ID.CMD_U,"U","Unidades de las distintas corporaciones.",null,false,true),
                            //new Comando(ID.CMD_UA,"UA","",null,false,true),
                            //new Comando(ID.CMD_UB,"UB","",null,false,true),
                            //new Comando(ID.CMD_V,"V","",null,false,true)
