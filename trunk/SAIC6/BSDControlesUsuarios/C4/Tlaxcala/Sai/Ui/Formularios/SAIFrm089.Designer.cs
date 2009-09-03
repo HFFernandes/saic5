@@ -208,6 +208,7 @@
             // 
             // txtDireccion
             // 
+            this.txtDireccion.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtDireccion.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtDireccion.Location = new System.Drawing.Point(82, 128);
             this.txtDireccion.Name = "txtDireccion";
@@ -219,6 +220,7 @@
             // 
             // txtReferencias
             // 
+            this.txtReferencias.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtReferencias.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtReferencias.Location = new System.Drawing.Point(82, 208);
             this.txtReferencias.Multiline = true;
@@ -231,6 +233,7 @@
             // 
             // txtDescripcionDenuncia
             // 
+            this.txtDescripcionDenuncia.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtDescripcionDenuncia.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtDescripcionDenuncia.Location = new System.Drawing.Point(82, 299);
             this.txtDescripcionDenuncia.Multiline = true;
@@ -242,6 +245,7 @@
             // 
             // txtAliasDelincuente
             // 
+            this.txtAliasDelincuente.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtAliasDelincuente.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtAliasDelincuente.Location = new System.Drawing.Point(107, 390);
             this.txtAliasDelincuente.MaxLength = 50;
@@ -253,6 +257,7 @@
             // 
             // txtOficioEnvio
             // 
+            this.txtOficioEnvio.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtOficioEnvio.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtOficioEnvio.Location = new System.Drawing.Point(107, 419);
             this.txtOficioEnvio.MaxLength = 50;
