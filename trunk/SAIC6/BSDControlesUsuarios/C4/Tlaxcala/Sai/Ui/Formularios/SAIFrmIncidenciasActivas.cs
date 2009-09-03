@@ -81,8 +81,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     var incidencia = IncidenciaMapper.Instance().GetOne(Convert.ToInt32(e.row.Record[0].Value));
                     if (incidencia != null)
                     {
-                        //var incidenciaInfo = new SAIFrmAltaIncidencia066(incidencia);
-                        //incidenciaInfo.Show();
+                        var incidenciaInfo = new SAIFrmAltaIncidencia066(incidencia,false);
+                        incidenciaInfo.Show();
                     }
                 }
             }
@@ -120,8 +120,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
                         if (incidencia != null)
                         {
-                            //var incidenciaInfo = new SAIFrmIncidencia066(incidencia);
-                            //incidenciaInfo.Show();
+                            var incidenciaInfo = new SAIFrmAltaIncidencia066(incidencia,false);
+                            incidenciaInfo.Show();
                         }
                     }
                 }
