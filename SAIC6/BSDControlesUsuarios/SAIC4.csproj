@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{FF9562EF-1FA0-49B7-B8B6-80D41CEBAC19}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -422,10 +422,10 @@
     <Content Include="jar_cti_cte01.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="lib\Ecsjtapia.jar">
+    <Content Include="Lib\Ecsjtapia.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="lib\javax.jar">
+    <Content Include="Lib\javax.jar">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="map.xml">

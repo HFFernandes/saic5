@@ -669,6 +669,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     //Actualizamos la incidencia.
                     this.entIncidencia.ClaveDenunciante = Denunciante.Clave;
                     IncidenciaMapper.Instance().Save(entIncidencia);
+                    this.LiberarNoTelefono(this.txtTelefono.Text.Trim());
                 
             }
             catch (System.Exception ex)
@@ -993,7 +994,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 try
                 {
                     //Buscamos el código postal.
-                    lstCodigoPostal = CodigoPostalMapper.Instance().GetBySQLQuery("Select Clave, Valor from CodigoPostal where Valor = '" + cmbCP.Text + "'");
+                    lstCodigoPostal = CodigoPostalMapper.Instance().GetBySQLQuery("Select Clave, Valor from CodigoPostal where Valor = '" + codigoPostal + "'");
 
                     //Obtenemos una colonia con ese código postal.
                     if (lstCodigoPostal != null && lstCodigoPostal.Count > 0)
@@ -1015,6 +1016,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             //que llena las localidades
                             this.cmbMunicipio.SelectedValue = objMunicipio.Clave;
                             this.cmbLocalidad.SelectedValue = objLocalidad.Clave;
+                            //Actualizamos el codigo postal.
+                            this.ActualizarCodigoPostal(lstCodigoPostal);
                             //Actualizamos el mapa
                             this.ActualizaMapaUbicacion(true);
 
@@ -1036,7 +1039,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void LimpiaLocalidades()
         {
             cmbLocalidad.DataSource = null;
-            //cmbLocalidad.Items.Clear();
         }
 
         /// <summary>
@@ -1045,7 +1047,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void LimpiaColonias()
         {
             cmbColonia.DataSource = null;
-            //cmbColonia.Items.Clear();
         }
 
 
@@ -1114,13 +1115,23 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 DatosTitular = Mappers.TelefonoTelmexMapper.Instance()
                 .GetOneBySQLQuery(string.Format(ID.SQL_OBTENERINFOTITULARLINEA, noTelefono));
-
                 this.txtTelefono.Text = noTelefono;
-                this.txtNombreDenunciante.Text = DatosTitular.Nombre;
-                this.txtApellidosDenunciante.Text = string.Format("{0} {1}", DatosTitular.ApellidoPaterno, DatosTitular.ApellidoMaterno);
-                this.txtDireccionDenunciante.Text = DatosTitular.Direccion;
-                CodigoPostal CodigoTitular = Mappers.CodigoPostalMapper.Instance().GetOneBySQLQuery(string.Format(ID.SQL_OBTENERCODIGOPOSTAL, DatosTitular.ClaveCodigoPostal));
-                this.cmbCP.Text = CodigoTitular.Valor;
+                if (DatosTitular!=null)
+                {
+                    this.txtNombreDenunciante.Text = DatosTitular.Nombre;
+                    this.txtApellidosDenunciante.Text = string.Format("{0} {1}", DatosTitular.ApellidoPaterno, DatosTitular.ApellidoMaterno);
+                    this.txtDireccionDenunciante.Text = DatosTitular.Direccion;
+                    CodigoPostal CodigoTitular = Mappers.CodigoPostalMapper.Instance().GetOneBySQLQuery(string.Format(ID.SQL_OBTENERCODIGOPOSTAL, DatosTitular.ClaveCodigoPostal));
+                    if (CodigoTitular != null)
+                    {
+                        this.cmbCP.Text = CodigoTitular.Valor;
+                        this.CargarCascadaPorCp(CodigoTitular.Valor);
+                    }
+                    
+                }
+                
+                
+                
             }
 
         }
@@ -1218,8 +1229,18 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.ListaVehiculosRobados = PantallaInfoAuto.ListaVehiculos;
             this.btnVerDatos.Enabled = true;
         }
-            
 
+        /// <summary>
+        /// Quita de la lista de llamadas capturadas actuales a el numero actual.
+        /// </summary>
+        /// <param name="noTelefono"></param>
+        private void LiberarNoTelefono(string noTelefono)
+        {
+            if (Aplicacion.LlamadasActuales.Contains(noTelefono))
+            {
+                Aplicacion.LlamadasActuales.Remove(noTelefono);
+            }
+        }
         
         #endregion
 
