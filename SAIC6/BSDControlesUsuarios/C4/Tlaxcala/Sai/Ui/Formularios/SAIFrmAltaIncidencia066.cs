@@ -170,7 +170,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <summary>
         /// Indica si se debe disparar los eventos en cascada para Municipios,Loc,y Col.
         /// </summary>
-        private bool DispararCascada = false;
+        private bool DispararCascadaHaciaAbajo = false;
+
+        private bool DispararCascadaHaciaArriba = true;
 
         #endregion
 
@@ -767,11 +769,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             try
             { 
                 var lstMunicipios = MunicipioMapper.Instance().GetAll();
-                DispararCascada = false;
+                DispararCascadaHaciaAbajo = false;
                 cmbMunicipio.DataSource = lstMunicipios;
                 cmbMunicipio.DisplayMember = "Nombre";
                 cmbMunicipio.ValueMember = "Clave";
-                DispararCascada = true;
+                DispararCascadaHaciaAbajo = true;
                 cmbMunicipio.SelectedIndex = -1;
 
             }
@@ -886,10 +888,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void ActualizarCodigoPostal(CodigoPostalList objListaCodigosPostales)
         {
+            this.DispararCascadaHaciaArriba = false;
             cmbCP.DataSource = objListaCodigosPostales;
             cmbCP.DisplayMember = "Valor";
             cmbCP.ValueMember = "Clave";
             cmbCP.SelectedIndex =0;
+            this.DispararCascadaHaciaArriba = true;
             
         }
 
@@ -992,7 +996,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="codigoPostal">string,Codigo postal</param>
         private void CargarCascadaPorCp(string codigoPostal)
         {
-            if (codigoPostal.Trim().Length == 5)
+            if (codigoPostal.Trim().Length == 5 && DispararCascadaHaciaArriba)
             {
                 ColoniaList lstColonias;
                 CodigoPostalList lstCodigoPostal;
@@ -1257,7 +1261,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void cmbMunicipio_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (DispararCascada)
+            if (DispararCascadaHaciaAbajo)
             {
                 //Buscamos las localidades del municipio seleccionado.
                 if (this.cmbMunicipio.SelectedItem != null && this.cmbMunicipio.SelectedIndex != -1)
@@ -1276,7 +1280,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void cmbLocalidad_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(DispararCascada)
+            if(DispararCascadaHaciaAbajo)
             {
                 //Buscamos las colonias de la localidad seleccionada.
                 if (this.cmbLocalidad.SelectedItem != null && this.cmbLocalidad.SelectedIndex != -1)
@@ -1295,7 +1299,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void cmbColonia_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(DispararCascada)
+            if(DispararCascadaHaciaAbajo)
             {
                 if (this.cmbColonia.SelectedItem != null && this.cmbColonia.SelectedIndex != -1)
                 {
@@ -1485,6 +1489,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
+        private void SAIFrmAltaIncidencia066_Load(object sender, EventArgs e)
+        {
+            this.ActualizaMapaUbicacion(true);
+        }
+
         #region EVENTOS GENÉRICOS
 
         private void SoloNumeros_KeyPress(object sender, KeyPressEventArgs e)
@@ -1496,13 +1505,29 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void Controls_KeyDown(object sender, KeyEventArgs e)
         {
+
+            Control controlActual = (Control)sender;
             //Para pasar el foco al control siguiente.
             switch (e.KeyData)
             {
                 case Keys.Enter:
 
-                    Control controlActual = (Control)sender;
+                    
                     this.FindForm().SelectNextControl(controlActual, true, false, true, true);
+
+                    break;
+
+                case Keys.Escape:
+
+                    if(controlActual.Name==this.cmbMunicipio.Name)
+                    {
+                        this.LimpiaCodigosPostales();
+                        this.LimpiaColonias();
+                        this.LimpiaLocalidades();
+                        
+                        this.cmbMunicipio.SelectedIndex = -1;
+                    }
+                     
 
                     break;
             }
@@ -1510,8 +1535,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
 
         #endregion
-
-        
 
         #endregion
 
