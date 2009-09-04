@@ -128,7 +128,7 @@
 
         public const string SQL_OBTENERINFOTITULARLINEA = "SELECT TelefonoTelmex.* FROM TelefonoTelmex WHERE Telefono='{0}'";
 
-        public const string SQL_OBTENERCODIGOPOSTAL = "SELECT * FROM CodigoPostal WHERE Clave={0}";
+        public const string SQL_OBTENERCODIGOPOSTAL = "SELECT * FROM CodigoPostal WHERE Valor={0}";
 
         public const string SQL_OBTENERDESPACHOS2 = "SELECT * FROM DespachoIncidencia WHERE Folio={0}";
 

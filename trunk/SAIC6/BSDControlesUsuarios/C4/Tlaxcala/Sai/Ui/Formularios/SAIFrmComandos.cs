@@ -652,10 +652,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
                 }
 
-                //Iniciamos el monitor del agente de Avaya
-                this.IniciarMonitorLlamadas();
+                
 
             }
+            //Iniciamos el monitor del agente de Avaya
+            this.IniciarMonitorLlamadas();
+
         }
 
         private void SAIFrmComandos_FormClosing(object sender, FormClosingEventArgs e)

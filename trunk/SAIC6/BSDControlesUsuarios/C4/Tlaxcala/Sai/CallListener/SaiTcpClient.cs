@@ -134,7 +134,7 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
 
                 process.StartInfo.FileName = RutaJava;
 
-                process.StartInfo.Arguments =string.Format("-jar {0}",NombreAgenteAvaya);
+                process.StartInfo.Arguments = string.Format("-jar {0}", NombreAgenteAvaya);
 
                 process.Start();
                 
@@ -174,7 +174,7 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
                 while (netStream.CanRead)
                 {
                     Thread.Sleep(100);
-                    if (netStream.DataAvailable)
+                    if (objTcpClient.Available>0)
                     {
                         byte[] bytes = new byte[objTcpClient.ReceiveBufferSize];
 
