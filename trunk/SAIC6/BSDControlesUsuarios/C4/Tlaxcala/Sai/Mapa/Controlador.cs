@@ -131,9 +131,14 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
 
             if (Aplicacion.VentanasIncidencias.Count == 0 || (Aplicacion.VentanasIncidencias.Count == 1 && Aplicacion.VentanasIncidencias[0].Ventana == (frmIncidencia as Form)))
             {
-                _frmMapa.Close();
-                _frmMapa.Dispose();
-                _frmMapa = null;
+                if (_frmMapa != null)
+                {
+                     _frmMapa.Close();
+                    _frmMapa.Dispose();
+                    _frmMapa = null;
+                }
+
+               
             }
 
         }
