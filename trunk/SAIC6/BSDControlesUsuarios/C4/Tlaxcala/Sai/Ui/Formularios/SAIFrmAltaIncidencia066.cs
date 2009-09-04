@@ -165,7 +165,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <summary>
         /// Indica si el formulario esta en modo edición
         /// </summary>
-        protected bool EsModoEdicion = false; 
+        protected bool EsModoEdicion = false;
+
+        /// <summary>
+        /// Indica si se debe disparar los eventos en cascada para Municipios,Loc,y Col.
+        /// </summary>
+        private bool DispararCascada = false;
 
         #endregion
 
@@ -269,8 +274,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                            }
                     }
                     
-                    //Actualizamos la ubicación del mapa
-                    this.ActualizaMapaUbicacion(true);
+                    
                 }
 
                 //Buscamos las corporaciones y las seleccionamos.
@@ -763,10 +767,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             try
             { 
                 var lstMunicipios = MunicipioMapper.Instance().GetAll();
+                DispararCascada = false;
                 cmbMunicipio.DataSource = lstMunicipios;
                 cmbMunicipio.DisplayMember = "Nombre";
                 cmbMunicipio.ValueMember = "Clave";
-
+                DispararCascada = true;
                 cmbMunicipio.SelectedIndex = -1;
 
             }
@@ -852,7 +857,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         ActualizaColonias(lstColonias);
                         LimpiaTextoCodigoPostal();
                     }
-                    ActualizaMapaUbicacion(true);
+                    //ActualizaMapaUbicacion(true);
                 }
                 catch (System.Exception ex)
                 {
@@ -906,44 +911,48 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void ActualizaMapaUbicacion(bool ActualizaMapa)
         {
 
+            //Verificamos si existe un municipio.
             if (cmbMunicipio.SelectedIndex == -1 || cmbMunicipio.Text.Trim() == string.Empty)
-            {
-                _objUbicacion.IdMunicipio = null;
-            }
+            { _objUbicacion.IdMunicipio = null;}
             else
             {
+                //Obtenemos el Id del municipio
                 _objUbicacion.IdMunicipio = int.Parse((cmbMunicipio.SelectedItem as Municipio).Clave.ToString());
 
+                //Verificamos si existe una localidad.
+                if (cmbLocalidad.SelectedIndex == -1 || cmbLocalidad.Text.Trim() == string.Empty)
+                {_objUbicacion.IdLocalidad = null;}
+                else
+                {
+                    //Obtenemos el Id de la localidad
+                    _objUbicacion.IdLocalidad = (cmbLocalidad.SelectedItem as Localidad).Clave;
+
+                    //Verificamos si existe una colonia.
+                    if (cmbColonia.SelectedIndex == -1 || cmbColonia.Text.Trim() == string.Empty)
+                    {_objUbicacion.IdColonia = null;}
+                    else
+                    {
+                        //Obtenemos el id de la colonia.
+                        _objUbicacion.IdColonia = (cmbColonia.SelectedItem as Colonia).Clave;
+                    }
+                    //Verificamos si existe el código postal.
+                    if (cmbCP.SelectedIndex == -1 || cmbCP.Text.Trim() == string.Empty)
+                    { _objUbicacion.IdCodigoPostal = null;}
+                    else
+                    {
+                        //Obtenemos el Id del código postal.
+                        _objUbicacion.IdCodigoPostal = (cmbCP.SelectedItem as CodigoPostal).Clave;
+
+                    }
+
+                }
             }
 
-            if (cmbLocalidad.SelectedIndex == -1 || cmbLocalidad.Text.Trim() == string.Empty)
-            {
-                _objUbicacion.IdLocalidad = null;
-            }
-            else
-            {
-                _objUbicacion.IdLocalidad = (cmbLocalidad.SelectedItem as Localidad).Clave;
-            }
+            
 
-            if (cmbColonia.SelectedIndex == -1 || cmbColonia.Text.Trim() == string.Empty)
-            {
-                _objUbicacion.IdColonia = null;
-            }
-            else
-            {
-                _objUbicacion.IdColonia = (cmbColonia.SelectedItem as Colonia).Clave;
+            
 
-            }
-
-            if (cmbCP.SelectedIndex == -1 || cmbCP.Text.Trim() == string.Empty)
-            {
-                _objUbicacion.IdCodigoPostal = null;
-            }
-            else
-            {
-                _objUbicacion.IdCodigoPostal = (cmbCP.SelectedItem as CodigoPostal).Clave;
-
-            }
+            
 
             if (ActualizaMapa)
             {
@@ -1248,41 +1257,59 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void cmbMunicipio_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //Buscamos las localidades del municipio seleccionado.
-            if (this.cmbMunicipio.SelectedItem != null)
+            if (DispararCascada)
             {
-                this.CargarLocalidadesPorMunicipio((cmbMunicipio.SelectedItem as Municipio).Clave);
+                //Buscamos las localidades del municipio seleccionado.
+                if (this.cmbMunicipio.SelectedItem != null && this.cmbMunicipio.SelectedIndex != -1)
+                {
+                    this.CargarLocalidadesPorMunicipio((cmbMunicipio.SelectedItem as Municipio).Clave);
+                    //Actualizamos la ubicación del mapa
+                    this.ActualizaMapaUbicacion(true);
+                }
+                else
+                {
+                    this.LimpiaLocalidades();
+                }
             }
-            else
-            {
-                this.LimpiaLocalidades();
-            }
+            
         }
 
         private void cmbLocalidad_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //Buscamos las colonias de la localidad seleccionada.
-            if (this.cmbLocalidad.SelectedItem != null)
+            if(DispararCascada)
             {
-                this.CargarColoniasPorLocalidad((cmbLocalidad.SelectedItem as Localidad).Clave);
+                //Buscamos las colonias de la localidad seleccionada.
+                if (this.cmbLocalidad.SelectedItem != null && this.cmbLocalidad.SelectedIndex != -1)
+                {
+                    this.CargarColoniasPorLocalidad((cmbLocalidad.SelectedItem as Localidad).Clave);
+                    //Actualizamos la ubicación del mapa
+                    this.ActualizaMapaUbicacion(true);
+                }
+                else
+                {
+                    this.LimpiaColonias();
+                }
             }
-            else
-            {
-                this.LimpiaColonias();
-            }
+            
         }
 
         private void cmbColonia_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.cmbColonia.SelectedItem != null)
+            if(DispararCascada)
             {
-                this.CargarCpPorColonia((this.cmbColonia.SelectedItem as Colonia).ClaveCodigoPostal.Value);
+                if (this.cmbColonia.SelectedItem != null && this.cmbColonia.SelectedIndex != -1)
+                {
+                    this.CargarCpPorColonia((this.cmbColonia.SelectedItem as Colonia).ClaveCodigoPostal.Value);
+                    //Actualizamos la ubicación del mapa
+                    this.ActualizaMapaUbicacion(true);
+                }
+                else
+                {
+                    this.LimpiaCodigosPostales();
+                    this.LimpiaTextoCodigoPostal();
+                }
             }
-            else
-            {
-                this.LimpiaCodigosPostales(); 
-                this.LimpiaTextoCodigoPostal();
-            }
+            
         }
 
         private void cmbCP_TextChanged(object sender, EventArgs e)
