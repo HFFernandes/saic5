@@ -1,4 +1,5 @@
-﻿namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
+﻿using System.Windows.Forms;
+namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
     partial class SAIFrmAltaIncidencia066
     {
@@ -39,10 +40,10 @@
             this.lblFechaHora = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.txtReferencias = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
-            this.cmbColonia = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox(this.components);
+            this.cmbColonia = new ComboBox();
             this.cmbCP = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox(this.components);
-            this.cmbMunicipio = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox(this.components);
-            this.cmbLocalidad = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox(this.components);
+            this.cmbMunicipio = new ComboBox();
+            this.cmbLocalidad = new ComboBox();
             this.cmbTipoIncidencia = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox(this.components);
             this.txtDescripcion = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.lblDescripcionIncidencia = new System.Windows.Forms.Label();
@@ -169,13 +170,13 @@
             // cmbColonia
             // 
             this.cmbColonia.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbColonia.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            //this.cmbColonia.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.cmbColonia.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbColonia.FormattingEnabled = true;
             this.cmbColonia.Location = new System.Drawing.Point(374, 177);
             this.cmbColonia.Name = "cmbColonia";
             this.cmbColonia.Size = new System.Drawing.Size(248, 21);
-            this.cmbColonia.StrMensajeCampoRequerido = "El campo es requerido.";
+            //this.cmbColonia.StrMensajeCampoRequerido = "El campo es requerido.";
             this.cmbColonia.TabIndex = 5;
             this.cmbColonia.SelectedIndexChanged += new System.EventHandler(this.cmbColonia_SelectedIndexChanged);
             this.cmbColonia.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
@@ -199,13 +200,13 @@
             // cmbMunicipio
             // 
             this.cmbMunicipio.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.cmbMunicipio.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            //this.cmbMunicipio.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.cmbMunicipio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMunicipio.Location = new System.Drawing.Point(64, 146);
             this.cmbMunicipio.MaxLength = 75;
             this.cmbMunicipio.Name = "cmbMunicipio";
             this.cmbMunicipio.Size = new System.Drawing.Size(205, 21);
-            this.cmbMunicipio.StrMensajeCampoRequerido = "El campo es requerido.";
+            //this.cmbMunicipio.StrMensajeCampoRequerido = "El campo es requerido.";
             this.cmbMunicipio.TabIndex = 3;
             this.cmbMunicipio.SelectedIndexChanged += new System.EventHandler(this.cmbMunicipio_SelectedIndexChanged);
             this.cmbMunicipio.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
@@ -213,13 +214,13 @@
             // cmbLocalidad
             // 
             this.cmbLocalidad.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cmbLocalidad.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            //this.cmbLocalidad.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.cmbLocalidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLocalidad.FormattingEnabled = true;
             this.cmbLocalidad.Location = new System.Drawing.Point(374, 146);
             this.cmbLocalidad.Name = "cmbLocalidad";
             this.cmbLocalidad.Size = new System.Drawing.Size(248, 21);
-            this.cmbLocalidad.StrMensajeCampoRequerido = "El campo es requerido.";
+            //this.cmbLocalidad.StrMensajeCampoRequerido = "El campo es requerido.";
             this.cmbLocalidad.TabIndex = 4;
             this.cmbLocalidad.SelectedIndexChanged += new System.EventHandler(this.cmbLocalidad_SelectedIndexChanged);
             this.cmbLocalidad.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
@@ -551,10 +552,10 @@
         private System.Windows.Forms.Label lblFechaHora;
         private System.Windows.Forms.Label label10;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox txtReferencias;
-        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox cmbColonia;
+        private ComboBox cmbColonia;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox cmbCP;
-        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox cmbMunicipio;
-        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox cmbLocalidad;
+        private ComboBox cmbMunicipio;
+        private ComboBox cmbLocalidad;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox cmbTipoIncidencia;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox txtDescripcion;
         private System.Windows.Forms.Label lblDescripcionIncidencia;
