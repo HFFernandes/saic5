@@ -74,7 +74,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     try
                     {
                         var lstIncidenciasPorLigar = new List<string>();
-                        for (int i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
+                        for (var i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
                         {
                             lstIncidenciasPorLigar.Add(saiReport1.reportControl.SelectedRows[i].Record[0].Value.ToString());
                         }
