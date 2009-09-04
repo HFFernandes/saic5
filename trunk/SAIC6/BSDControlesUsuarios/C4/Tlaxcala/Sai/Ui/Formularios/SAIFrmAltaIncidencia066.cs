@@ -43,10 +43,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             
             //Buscamos los datos del titular de la linea
             this.ObtenerTitularLinea(noTelefono);
-            //Desplegamos la información de la incidencia.
-            entUsuario = UsuarioMapper.Instance().GetOne(entIncidencia.ClaveUsuario);
-            this.lblOperador.Text += entUsuario.NombrePropio;
-            this.lblFechaHora.Text += entIncidencia.HoraRecepcion.ToString();
 
 
         }
@@ -155,6 +151,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         protected VehiculoObjectList ListaVehiculosInvolucrados;
 
         #endregion
+
+        /// <summary>
+        /// Para saber si existe el telefono en la tabla de telefono telmex
+        /// </summary>
+        TelefonoTelmex DatosTitular;
 
         LocalidadList objListaLocalidades;
         CodigoPostalList objListaCodigosPostales = new CodigoPostalList();
@@ -268,6 +269,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                            }
                     }
                     
+                    //Actualizamos la ubicación del mapa
+                    this.ActualizaMapaUbicacion(true);
                 }
 
                 //Buscamos las corporaciones y las seleccionamos.
@@ -290,6 +293,63 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 //Seleccionamos el tipo de incidencia.
                 this.cmbTipoIncidencia.SelectedValue = entIncidencia.ClaveTipo.Value;
                 this.cmbTipoIncidencia.Enabled = false;
+                //Obtenemos la información extra en caso de ser robo de vehiculo,accesorios o persona extraviada.
+                switch (entIncidencia.ClaveTipo.Value)
+                {
+                    //Robo de vehículo totalidad.
+                    case 131:
+                            if (ListaVehiculosRobados==null)
+                            { ListaVehiculosRobados = new VehiculoObjectList(); }
+
+                            VehiculoObject vehiculo;
+                            //Obtenemos la lista de los vehiculos robados.
+                            VehiculoRobadoObjectList VehiculosXIncidencia = VehiculoRobadoMapper.Instance().GetByIncidencia(entIncidencia.Folio);
+                            foreach (VehiculoRobadoObject vehiculoRobado in VehiculosXIncidencia)
+                            {
+                                //Obtenemos los datos del vehiculo y lo metemos en la lista
+                                vehiculo = VehiculoMapper.Instance().GetOne(vehiculoRobado.ClaveVehiculo);
+                                ListaVehiculosRobados.Add(vehiculo);
+                            }
+                            //Obtenemos los datos del propierario
+                            objPropietarioVehiculo =PropietarioVehiculoMapper.Instance().GetOne(VehiculosXIncidencia[0].ClavePropietario.Value);
+
+                        break;
+
+                    //Robo de vehiculos accesorios.
+                    case 130:
+                            //Obtenemos los datos generales del robo de accesorios
+                            if (DatosRoboAccesorios == null)
+                            { DatosRoboAccesorios = new RoboAccesorios(); }
+                            DatosRoboAccesorios = RoboAccesoriosMapper.Instance().GetByIncidencia(entIncidencia.Folio)[0];
+                           
+                            //Obtenemos la lista de accesorios robados.
+                            ListaAccesoriosRobados = RoboVehiculoAccesoriosMapper.Instance().GetByRoboAccesorios(DatosRoboAccesorios.IdRoboAccesorio);
+
+                            //Obtenemos los vehiculos involucrados.
+                            if (ListaVehiculosInvolucrados==null)
+                            {ListaVehiculosInvolucrados = new VehiculoObjectList();}
+                            VehiculoObject vehiculoInvolucrado;
+                            foreach (RoboVehiculoAccesorios accesorio in ListaAccesoriosRobados)
+                            {
+                                vehiculoInvolucrado = new VehiculoObject();
+                                vehiculoInvolucrado = VehiculoMapper.Instance().GetOne(accesorio.ClaveVehiculo.Value);
+                                if (!ListaVehiculosInvolucrados.Contains(vehiculoInvolucrado))
+                                {
+                                    ListaVehiculosInvolucrados.Add(vehiculoInvolucrado);
+                                }
+                            }
+
+                        break;
+
+                    //Extravio de persona.
+                    case 103:
+                    case 235:
+                            //Obtenemos las personas extraviadas para esta incidencia.
+                            if (ListaPersonasExtraviadas==null)
+                            {ListaPersonasExtraviadas = new PersonaExtraviadaList();}
+                            ListaPersonasExtraviadas = PersonaExtraviadaMapper.Instance().GetByIncidencia(entIncidencia.Folio);
+                        break;
+                }
             
             }
             catch(Exception ex)
@@ -481,8 +541,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
 
                     //Se se está editando no se modifica nada de lo capturado.
-                    if(!EsModoEdicion)
-                    {
+                    
                         //Checamos si existen Vehiculos con accesorios robados.
                         if (ListaVehiculosInvolucrados != null && ListaAccesoriosRobados != null && DatosRoboAccesorios != null && (cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave == 130)
                         {
@@ -509,41 +568,89 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         //Checamos si existen Vehiculos robados.
                         if (this.ListaVehiculosRobados != null && this.objPropietarioVehiculo != null && (cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave == 131)
                         {
+                           
+
                             //Guardamos el propietarios
-                            PropietarioVehiculoMapper.Instance().Insert(objPropietarioVehiculo);
+                            if (PropietarioVehiculoMapper.Instance().GetOne(objPropietarioVehiculo.Clave) == null)
+                            {
+                                PropietarioVehiculoMapper.Instance().Insert(objPropietarioVehiculo);
+                            }
+                            else
+                            {
+                                PropietarioVehiculoMapper.Instance().Save(objPropietarioVehiculo);
+                            }
+
                             //Guardamos los vehiculos.
                             foreach (VehiculoObject vehiculo in this.ListaVehiculosRobados)
                             {
-                                VehiculoMapper.Instance().Insert(vehiculo);
+                                if (VehiculoMapper.Instance().GetOne(vehiculo.Clave) == null)
+                                {
+                                    VehiculoMapper.Instance().Insert(vehiculo);
+                                }
+                                else
+                                {
+                                    VehiculoMapper.Instance().Save(vehiculo);
+                                }
+                                
                             }
+
+
                             //Insertamos en la tabla de relación los vehiculos robados
+                           VehiculoRobadoObject vehiculoRobado;
+                            bool EsNuevoVehiculoRobado=false;
                             foreach (VehiculoObject vehiculo in this.ListaVehiculosRobados)
                             {
-                                VehiculoRobadoMapper.Instance().Insert(new VehiculoRobadoObject()
+                                vehiculoRobado = new VehiculoRobadoObject();
+                                EsNuevoVehiculoRobado = true;
+                                if (VehiculoRobadoMapper.Instance().GetByVehiculo(vehiculo.Clave).Count>0)
+                                { 
+                                    vehiculoRobado = VehiculoRobadoMapper.Instance().GetByVehiculo(vehiculo.Clave)[0];
+                                    EsNuevoVehiculoRobado = false;
+                                };
+                                if(vehiculoRobado==null)
                                 {
-                                    ClavePropietario = objPropietarioVehiculo.Clave,
-                                    ClaveVehiculo = vehiculo.Clave,
-                                    Folio = this.entIncidencia.Folio
-
-                                });
+                                    vehiculoRobado=new VehiculoRobadoObject();
+                                    EsNuevoVehiculoRobado=true;
+                                }
+                                vehiculoRobado.ClavePropietario=objPropietarioVehiculo.Clave;
+                                vehiculoRobado.ClaveVehiculo= vehiculo.Clave;
+                                vehiculoRobado.Folio=this.entIncidencia.Folio;
+                                if (EsNuevoVehiculoRobado)
+                                {
+                                    VehiculoRobadoMapper.Instance().Insert(vehiculoRobado);
+                                }
+                                else
+                                {
+                                    VehiculoRobadoMapper.Instance().Save(vehiculoRobado);
+                                }
+                                
+                                
                             }
                         }
 
                         //Checamos si existen personas extraviadas
                         if (this.ListaPersonasExtraviadas != null && this.ListaPersonasExtraviadas.Count > 0 && ((cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave == 103 | (cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave == 235))
                         {
+                            
                             foreach (PersonaExtraviada persona in this.ListaPersonasExtraviadas)
                             {
                                 persona.Folio = this.entIncidencia.Folio;
-                                PersonaExtraviadaMapper.Instance().Insert(persona);
+                                persona.Estatura = Math.Round(persona.Estatura.Value, 2);
+                                //Si existe solo lo actualizamos.
+                                if (PersonaExtraviadaMapper.Instance().GetOne(persona.Clave)!=null)
+                                {
+                                    PersonaExtraviadaMapper.Instance().Save(persona);
+                                }
+                                else
+                                {
+                                    PersonaExtraviadaMapper.Instance().Insert(persona);
+                                }
+                                
+                                
                             }
 
                         }
 
-
-                    }
-                    
- 
                     //Guardamos el denunciante y actualizamos el campo en la incidencia.
                     bool EsNuevo = false;
                     if(this.Denunciante==null)
@@ -576,6 +683,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         protected void RecuperaDatosEnIncidencia()
         {
+            this.ActualizaMapaUbicacion(false);
             if (entIncidencia != null)
             {
                 //Obtenemos el municipio
@@ -743,7 +851,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         ActualizaColonias(lstColonias);
                         LimpiaTextoCodigoPostal();
                     }
-                    ActualizaMapaUbicacion();
+                    ActualizaMapaUbicacion(true);
                 }
                 catch (System.Exception ex)
                 {
@@ -793,7 +901,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <summary>
         /// Actualiza el mapa con los datos de la ubicación del formulario actuales
         /// </summary>
-        private void ActualizaMapaUbicacion()
+        /// <param name="ActualizaMapa">bool,Indica si debe actualizarse el mapa o solo refrescar el objeto con las ubicaciones</param>
+        private void ActualizaMapaUbicacion(bool ActualizaMapa)
         {
 
             if (cmbMunicipio.SelectedIndex == -1 || cmbMunicipio.Text.Trim() == string.Empty)
@@ -835,8 +944,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
             }
 
-
-            Mapa.Controlador.MuestraMapa(_objUbicacion);
+            if (ActualizaMapa)
+            {
+                Mapa.Controlador.MuestraMapa(_objUbicacion);
+            }
+            
         }
 
 
@@ -865,7 +977,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         
         /// <summary>
-        /// BUsca el municipio,localidad al que pertenece un código postal especificado.
+        /// Busca el municipio,localidad al que pertenece un código postal especificado.
         /// </summary>
         /// <param name="codigoPostal">string,Codigo postal</param>
         private void CargarCascadaPorCp(string codigoPostal)
@@ -904,7 +1016,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             this.cmbMunicipio.SelectedValue = objMunicipio.Clave;
                             this.cmbLocalidad.SelectedValue = objLocalidad.Clave;
                             //Actualizamos el mapa
-                            this.ActualizaMapaUbicacion();
+                            this.ActualizaMapaUbicacion(true);
 
                         }
 
@@ -1000,7 +1112,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             if (!string.IsNullOrEmpty(noTelefono))
             {
-                TelefonoTelmex DatosTitular = Mappers.TelefonoTelmexMapper.Instance()
+                DatosTitular = Mappers.TelefonoTelmexMapper.Instance()
                 .GetOneBySQLQuery(string.Format(ID.SQL_OBTENERINFOTITULARLINEA, noTelefono));
 
                 this.txtTelefono.Text = noTelefono;
@@ -1012,6 +1124,101 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
 
         }
+
+        /// <summary>
+        /// Inserta o actualiza los datos del titular de le linea.
+        /// </summary>
+        private void GuardarTitularLinea()
+        {
+            bool EsNuevoTitular = false;
+            try
+            {
+                
+
+                if (!string.IsNullOrEmpty(this.txtTelefono.Text))
+                {
+                    this.DatosTitular = new TelefonoTelmex();
+                    this.DatosTitular = Mappers.TelefonoTelmexMapper.Instance()
+                    .GetOneBySQLQuery(string.Format(ID.SQL_OBTENERINFOTITULARLINEA, this.txtTelefono.Text.Trim()));
+                    if (DatosTitular == null)
+                    {
+                        DatosTitular = new TelefonoTelmex();
+                        EsNuevoTitular = true;
+                    }
+                    this.DatosTitular.Telefono = this.txtTelefono.Text;
+                    this.DatosTitular.Nombre = this.txtNombreDenunciante.Text;
+                    this.DatosTitular.ApellidoPaterno = txtApellidosDenunciante.Text;
+                    this.DatosTitular.Direccion = this.txtDireccionDenunciante.Text;
+                    this.DatosTitular.ClaveCodigoPostal = Convert.ToInt32(this.cmbCP.Text);
+                    if (EsNuevoTitular)
+                    {
+                        TelefonoTelmexMapper.Instance().Insert(DatosTitular);
+                    }
+                    else
+                    {
+                        TelefonoTelmexMapper.Instance().Save(DatosTitular);
+                    }
+                }
+                
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error al guardar titular de linea : "+ex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
+            
+            
+                
+            
+        }
+
+        /// <summary>
+        /// Muestra la pantalla de captura para personas extraviadas
+        /// </summary>
+        private void MostrarCapturaPersonaExtraviada()
+        {
+            SAIFrmAltaDatosPersonaExtraviada PantallaPersonaExtraviada = new SAIFrmAltaDatosPersonaExtraviada();
+            //Pasamos la lista de personas
+            PantallaPersonaExtraviada.ListaPersonas = this.ListaPersonasExtraviadas;
+            PantallaPersonaExtraviada.ShowDialog(this);
+            //Obtenemos las personas capturadas.
+            this.ListaPersonasExtraviadas = PantallaPersonaExtraviada.ListaPersonas;
+            this.btnVerDatos.Enabled = true;
+        }
+
+
+        /// <summary>
+        /// Muestra la pantalla de captura para accesorios de vehículos robados.
+        /// </summary>
+        private void MostrarCapturaAccesoriosRobados()
+        {
+            SAIFrmAltaAccesoriosAuto066 PantallaInfoAccesorios = new SAIFrmAltaAccesoriosAuto066();
+            PantallaInfoAccesorios.ListaAccesoriosRobados = this.ListaAccesoriosRobados;
+            PantallaInfoAccesorios.ListaVehiculosInvolucrados = this.ListaVehiculosInvolucrados;
+            PantallaInfoAccesorios.DatosRoboAccesorio = this.DatosRoboAccesorios;
+            PantallaInfoAccesorios.ShowDialog(this);
+            this.ListaAccesoriosRobados = PantallaInfoAccesorios.ListaAccesoriosRobados;
+            this.ListaVehiculosInvolucrados = PantallaInfoAccesorios.ListaVehiculosInvolucrados;
+            this.DatosRoboAccesorios = PantallaInfoAccesorios.DatosRoboAccesorio;
+            this.btnVerDatos.Enabled = true;
+        }
+
+        /// <summary>
+        /// Muestra la pantalla de captura para vehículos robados.
+        /// </summary>
+        private void MostrarCapturaVehiculoRobado()
+        {
+            SAIFrmAltaDatosAuto066 PantallaInfoAuto = new SAIFrmAltaDatosAuto066();
+            //Pasamos el propietario y la lista de vehiculos robados.
+            PantallaInfoAuto.Propietario = objPropietarioVehiculo;
+
+            PantallaInfoAuto.ListaVehiculos = this.ListaVehiculosRobados;
+            PantallaInfoAuto.ShowDialog(this);
+            //Obtenemos los datos capturados sobre vehiculos robados
+            this.objPropietarioVehiculo = PantallaInfoAuto.Propietario;
+            this.ListaVehiculosRobados = PantallaInfoAuto.ListaVehiculos;
+            this.btnVerDatos.Enabled = true;
+        }
+            
 
         
         #endregion
@@ -1078,6 +1285,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             cmbMunicipio.Enabled = true;
             cmbLocalidad.Enabled = true;
             cmbColonia.Enabled = true;
+            this.btnVerDatos.Enabled = false;
             cmbCP.Enabled = true;
             this.gbDenunciante.Enabled = true;
 
@@ -1094,38 +1302,21 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             {
                                 //Robo de vehículo totalidad.
                                 case 131:
-                                        SAIFrmAltaDatosAuto066 PantallaInfoAuto = new SAIFrmAltaDatosAuto066();
-                                        //Pasamos el propietario y la lista de vehiculos robados.
-                                        PantallaInfoAuto.Propietario = objPropietarioVehiculo;
+                                    this.MostrarCapturaVehiculoRobado();
                                         
-                                        PantallaInfoAuto.ListaVehiculos = this.ListaVehiculosRobados;
-                                        PantallaInfoAuto.ShowDialog(this);
-                                        //Obtenemos los datos capturados sobre vehiculos robados
-                                        this.objPropietarioVehiculo = PantallaInfoAuto.Propietario;
-                                        this.ListaVehiculosRobados = PantallaInfoAuto.ListaVehiculos;
                                     break;
 
                                 //Robo de vehiculos accesorios.
                                 case 130:
-                                    SAIFrmAltaAccesoriosAuto066 PantallaInfoAccesorios = new SAIFrmAltaAccesoriosAuto066();
-                                    PantallaInfoAccesorios.ListaAccesoriosRobados = this.ListaAccesoriosRobados;
-                                    PantallaInfoAccesorios.ListaVehiculosInvolucrados = this.ListaVehiculosInvolucrados;
-                                    PantallaInfoAccesorios.DatosRoboAccesorio = this.DatosRoboAccesorios;
-                                    PantallaInfoAccesorios.ShowDialog(this);
-                                    this.ListaAccesoriosRobados = PantallaInfoAccesorios.ListaAccesoriosRobados;
-                                    this.ListaVehiculosInvolucrados = PantallaInfoAccesorios.ListaVehiculosInvolucrados;
-                                    this.DatosRoboAccesorios = PantallaInfoAccesorios.DatosRoboAccesorio;
+                                    this.MostrarCapturaAccesoriosRobados();
+                                    
                                     break;
 
                                 //Extravio de persona.
                                 case 103:
                                 case 235:
-                                    SAIFrmAltaDatosPersonaExtraviada PantallaPersonaExtraviada=new SAIFrmAltaDatosPersonaExtraviada();
-                                    //Pasamos la lista de personas
-                                    PantallaPersonaExtraviada.ListaPersonas = this.ListaPersonasExtraviadas;
-                                    PantallaPersonaExtraviada.ShowDialog(this);
-                                    //Obtenemos las personas capturadas.
-                                    this.ListaPersonasExtraviadas = PantallaPersonaExtraviada.ListaPersonas;
+                                    this.MostrarCapturaPersonaExtraviada();
+                                    
                                     break;
 
                                 //Foránea
@@ -1197,6 +1388,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                         this.RecuperaDatosEnIncidencia();
                         this.ActualizaIncidencia();
+                        this.GuardaCorporaciones();
+                        this.GuardarTitularLinea();
                     }
                     
                     
@@ -1210,18 +1403,39 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (SAIExcepcion) { }
         }
 
-        private void cklCorporacion_Leave(object sender, EventArgs e)
+        private void cklCorporacion_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            try
-            {
-                this.GuardaCorporaciones();
-            }
-            catch (System.Exception ex)
-            {
-                throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
-            }
+            this.cklCorporacion_Leave(sender, e);
         }
 
+        private void cklCorporacion_Leave(object sender, EventArgs e)
+        {
+            this.GuardaCorporaciones();
+        }
+
+        private void btnVerDatos_Click(object sender, EventArgs e)
+        {
+            TipoIncidencia objTipo = (cmbTipoIncidencia.SelectedItem as TipoIncidencia);
+
+            switch (objTipo.Clave)
+            {
+                //Robo de vehículo totalidad.
+                case 131:
+                           this.MostrarCapturaVehiculoRobado();
+                    break;
+
+                //Robo de vehiculos accesorios.
+                case 130:
+                        this.MostrarCapturaAccesoriosRobados();
+                    break;
+
+                //Extravio de persona.
+                case 103:
+                case 235:
+                        this.MostrarCapturaPersonaExtraviada();
+                    break;
+            }
+        }
 
         #region EVENTOS GENÉRICOS
 
@@ -1249,7 +1463,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         #endregion
 
- 
+        
+
         #endregion
 
     }

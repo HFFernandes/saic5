@@ -145,6 +145,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.dgvAccesorios.Rows.Clear();
         }
 
+        /// <summary>
+        /// Obtiene el accesorio que se esta editando
+        /// </summary>
+        /// <param name="idAccesorio">idAccesorio,int Id del accesorio</param>
+        /// <returns></returns>
         private RoboVehiculoAccesorios ObtenerAccesorioEditado(int idAccesorio)
         {
             RoboVehiculoAccesorios encontrado = new RoboVehiculoAccesorios();
@@ -208,6 +213,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             
         }
 
+        /// <summary>
+        /// Muestra los datos de un vehiculo capturado, y sus accesorios robados.
+        /// </summary>
+        /// <param name="idVehiculo">int,Id del vehiculo a editar</param>
         private void MostrarDatosVehiculo(int idVehiculo)
         {
             if(this.ListaVehiculosInvolucrados!=null)
@@ -227,6 +236,25 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
             }
             
+        }
+
+        /// <summary>
+        /// Muestra todos los datos del robo de accesorios.
+        /// </summary>
+        private void MostrarDatosRoboAccesorios()
+        {
+            if(DatosRoboAccesorio!=null)
+            {
+                this.txtAccesoriosPersonaSePercato.Text=DatosRoboAccesorio.PersonaPercato;
+                this.txtAccesoriosResponsables.Text=DatosRoboAccesorio.DescripcionResponsable;
+                this.dtpAccesoriosFechaPercato.Value=DatosRoboAccesorio.FechaPercato.Value;
+            }
+            if(ListaVehiculosInvolucrados!=null)
+            {
+                //Mostramos la listas de vehiculos capturados.
+                this.MostrarVehiculos(this.ListaVehiculosInvolucrados);
+            }
+  
         }
 
         #endregion
@@ -285,11 +313,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
+        private void SAIFrmAltaAccesoriosAuto066_Load(object sender, EventArgs e)
+        {
+            this.MostrarDatosRoboAccesorios();
+        }
+
+
         #endregion
 
         
-
-        
-  
     }
 }

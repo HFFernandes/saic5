@@ -259,6 +259,7 @@
             this.MinimizeBox = false;
             this.Name = "SAIFrmAltaDatosPersonaExtraviada";
             this.Text = "Datos de persona extraviada";
+            this.Load += new System.EventHandler(this.SAIFrmAltaDatosPersonaExtraviada_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SAIFrmAltaDatosPersonaExtraviada_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SAIFrmAltaDatosPersonaExtraviada_KeyDown);
             this.grpExtravio.ResumeLayout(false);
