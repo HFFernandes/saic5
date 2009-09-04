@@ -44,7 +44,7 @@ namespace BSD.C4.Tlaxcala.Sai.Dal
         /// <returns>Una instancia de la entidad usuario pasada, pudiendo ser nula</returns>
         public static Usuario AutenticarUsuario(string strNombreUsuario, string strContraseña)
         {
-            return UsuarioMapper.Instance().GetOneBySQLQuery(string.Format(ID.SQL_AUTENTICARUSUARIO, strNombreUsuario, strContraseña));
+            return UsuarioMapper.Instance().GetOneBySQLQuery(string.Format(ID.SQL_AUTENTICARUSUARIO, strNombreUsuario, new Aplicacion.CzSecurity().PassWordCifrado(strContraseña)));
         }
     }
 }
