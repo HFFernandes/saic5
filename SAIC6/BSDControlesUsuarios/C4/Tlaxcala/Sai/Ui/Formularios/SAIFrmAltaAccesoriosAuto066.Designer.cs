@@ -32,6 +32,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbAccesorios = new System.Windows.Forms.GroupBox();
+            this.dgvAccesorios = new System.Windows.Forms.DataGridView();
+            this.gcIdAccesorio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gcAccesorio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtAccesoriosResponsables = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.dtpAccesoriosFechaPercato = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDatePicker(this.components);
             this.txtAccesoriosPersonaSePercato = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
@@ -39,6 +42,10 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.dgvVehiculoAccesorios = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDataGridView(this.components);
+            this.ClaveVehiculoInvolucrado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbDatosRobo = new System.Windows.Forms.GroupBox();
             this.gbDatosVehiculo = new System.Windows.Forms.GroupBox();
             this.btnAgregarVehiculo = new System.Windows.Forms.Button();
@@ -49,19 +56,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.gbVehiculos = new System.Windows.Forms.GroupBox();
-            this.ClaveVehiculoInvolucrado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvAccesorios = new System.Windows.Forms.DataGridView();
-            this.gcIdAccesorio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gcAccesorio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbAccesorios.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAccesorios)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVehiculoAccesorios)).BeginInit();
             this.gbDatosRobo.SuspendLayout();
             this.gbDatosVehiculo.SuspendLayout();
             this.gbVehiculos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAccesorios)).BeginInit();
             this.SuspendLayout();
             // 
             // gbAccesorios
@@ -74,8 +74,36 @@
             this.gbAccesorios.TabStop = false;
             this.gbAccesorios.Text = "Accesorios robados a este vehiculo :";
             // 
+            // dgvAccesorios
+            // 
+            this.dgvAccesorios.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvAccesorios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAccesorios.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.gcIdAccesorio,
+            this.gcAccesorio});
+            this.dgvAccesorios.Location = new System.Drawing.Point(6, 17);
+            this.dgvAccesorios.Name = "dgvAccesorios";
+            this.dgvAccesorios.RowHeadersVisible = false;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvAccesorios.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvAccesorios.Size = new System.Drawing.Size(609, 115);
+            this.dgvAccesorios.TabIndex = 0;
+            // 
+            // gcIdAccesorio
+            // 
+            this.gcIdAccesorio.HeaderText = "IdAccesorio";
+            this.gcIdAccesorio.Name = "gcIdAccesorio";
+            this.gcIdAccesorio.Visible = false;
+            // 
+            // gcAccesorio
+            // 
+            this.gcAccesorio.HeaderText = "Accesorio";
+            this.gcAccesorio.Name = "gcAccesorio";
+            // 
             // txtAccesoriosResponsables
             // 
+            this.txtAccesoriosResponsables.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtAccesoriosResponsables.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtAccesoriosResponsables.Location = new System.Drawing.Point(169, 48);
             this.txtAccesoriosResponsables.MaxLength = 500;
@@ -101,6 +129,7 @@
             // 
             // txtAccesoriosPersonaSePercato
             // 
+            this.txtAccesoriosPersonaSePercato.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtAccesoriosPersonaSePercato.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtAccesoriosPersonaSePercato.Location = new System.Drawing.Point(141, 19);
             this.txtAccesoriosPersonaSePercato.MaxLength = 150;
@@ -148,20 +177,41 @@
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvVehiculoAccesorios.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvVehiculoAccesorios.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvVehiculoAccesorios.Location = new System.Drawing.Point(11, 19);
             this.dgvVehiculoAccesorios.Name = "dgvVehiculoAccesorios";
             this.dgvVehiculoAccesorios.RowHeadersVisible = false;
             this.dgvVehiculoAccesorios.Size = new System.Drawing.Size(621, 109);
             this.dgvVehiculoAccesorios.TabIndex = 13;
             this.dgvVehiculoAccesorios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVehiculoAccesorios_CellClick);
+            // 
+            // ClaveVehiculoInvolucrado
+            // 
+            this.ClaveVehiculoInvolucrado.HeaderText = "Clave";
+            this.ClaveVehiculoInvolucrado.Name = "ClaveVehiculoInvolucrado";
+            this.ClaveVehiculoInvolucrado.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Marca";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Modelo";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Placas";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             // 
             // gbDatosRobo
             // 
@@ -208,6 +258,7 @@
             // 
             // txtPlacas
             // 
+            this.txtPlacas.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtPlacas.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtPlacas.Location = new System.Drawing.Point(492, 22);
             this.txtPlacas.MaxLength = 250;
@@ -219,6 +270,7 @@
             // 
             // txtModelo
             // 
+            this.txtModelo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtModelo.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtModelo.Location = new System.Drawing.Point(277, 22);
             this.txtModelo.MaxLength = 250;
@@ -230,6 +282,7 @@
             // 
             // txtMarca
             // 
+            this.txtMarca.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtMarca.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtMarca.Location = new System.Drawing.Point(52, 22);
             this.txtMarca.MaxLength = 250;
@@ -276,54 +329,6 @@
             this.gbVehiculos.TabStop = false;
             this.gbVehiculos.Text = "Vehículos Involucrados :";
             // 
-            // ClaveVehiculoInvolucrado
-            // 
-            this.ClaveVehiculoInvolucrado.HeaderText = "Clave";
-            this.ClaveVehiculoInvolucrado.Name = "ClaveVehiculoInvolucrado";
-            this.ClaveVehiculoInvolucrado.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Marca";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Modelo";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Placas";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dgvAccesorios
-            // 
-            this.dgvAccesorios.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvAccesorios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAccesorios.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.gcIdAccesorio,
-            this.gcAccesorio});
-            this.dgvAccesorios.Location = new System.Drawing.Point(6, 17);
-            this.dgvAccesorios.Name = "dgvAccesorios";
-            this.dgvAccesorios.RowHeadersVisible = false;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvAccesorios.RowsDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvAccesorios.Size = new System.Drawing.Size(609, 115);
-            this.dgvAccesorios.TabIndex = 0;
-            // 
-            // gcIdAccesorio
-            // 
-            this.gcIdAccesorio.HeaderText = "IdAccesorio";
-            this.gcIdAccesorio.Name = "gcIdAccesorio";
-            this.gcIdAccesorio.Visible = false;
-            // 
-            // gcAccesorio
-            // 
-            this.gcAccesorio.HeaderText = "Accesorio";
-            this.gcAccesorio.Name = "gcAccesorio";
-            // 
             // SAIFrmAltaAccesoriosAuto066
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -339,16 +344,17 @@
             this.Name = "SAIFrmAltaAccesoriosAuto066";
             this.Text = "Información de accesorios robados";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.SAIFrmAltaAccesoriosAuto066_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SAIFrmAltaAccesoriosAuto066_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SAIAltaAccesoriosAuto066_KeyDown);
             this.gbAccesorios.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAccesorios)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVehiculoAccesorios)).EndInit();
             this.gbDatosRobo.ResumeLayout(false);
             this.gbDatosRobo.PerformLayout();
             this.gbDatosVehiculo.ResumeLayout(false);
             this.gbDatosVehiculo.PerformLayout();
             this.gbVehiculos.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAccesorios)).EndInit();
             this.ResumeLayout(false);
 
         }

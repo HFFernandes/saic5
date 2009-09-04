@@ -16,6 +16,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
     public partial class SAIFrmComandos : Form
     {
+        private SAIFrmUnidades unidadesCorporaciones;
+        private SAIFrmIncidenciasActivas iactivas066;
+        private SAIFrmIncidenciasActivas089 iactivas089;
+        private SAIFrmIncidenciasPendientes ipendientes066;
+        private SAIFrmIncidenciasPendientes089 ipendientes089;
+        private SAIFrmEstadoUnidades asignacionUnidades;
+        private SAIFrmAgendaTelefonica agendaTelefonica;
+        private SAIFrmBuscadorIncidencias buscadorDir;
+        private SAIFrmBuscadorIncidencias buscadorTel;
+        private SAIFrmBuscadorIncidencias buscadorLig;
 
         #region CONSTRUCTOR
 
@@ -40,7 +50,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 SAIBarraComandos.Customization += SAIBarraComandos_Customization;
                 SAIBarraComandos.Execute += SAIBarraComandos_Execute;
                 SAIBarraComandos.UpdateEvent += SAIBarraComandos_UpdateEvent;
-                SAIBarraComandos.CustomizationResetToolBar += SAIBarraComandos_CustomizationResetToolBar;
                 SAIBarraComandos.GlobalSettings.ResourceFile = Environment.CurrentDirectory +
                                                                "\\SuitePro.ResourceES.xml";
                 SAIBarraComandos.KeyBindings.AllowDoubleKeyShortcuts = true;
@@ -53,8 +62,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 Left = (Screen.PrimaryScreen.WorkingArea.Right - Width);
 
                 //Se crean los eventos para el monitor de Avaya
-                //this.TcpListener.ListenerFindDataEvent += new EventHandler<FindDataEventArgs>(TcpListener_ListenerFindDataEvent);
-                //this.TcpListener.ListenerMessageDataEvent += new EventHandler<FindMessageEventArgs>(TcpListener_ListenerMessageDataEvent);
+                this.TcpListener.ListenerFindDataEvent += new EventHandler<FindDataEventArgs>(TcpListener_ListenerFindDataEvent);
+                this.TcpListener.ListenerMessageDataEvent += new EventHandler<FindMessageEventArgs>(TcpListener_ListenerMessageDataEvent);
             }
         }
 
@@ -62,21 +71,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         #region VARIABLES
 
-        private SAIFrmUnidades unidadesCorporaciones;
-        private SAIFrmIncidenciasActivas iactivas066;
-        private SAIFrmIncidenciasActivas089 iactivas089;
-        private SAIFrmIncidenciasPendientes ipendientes066;
-        private SAIFrmIncidenciasPendientes089 ipendientes089;
-        private SAIFrmEstadoUnidades asignacionUnidades;
-        private SAIFrmAgendaTelefonica agendaTelefonica;
-        private SAIFrmBuscadorIncidencias buscadorDir;
-        private SAIFrmBuscadorIncidencias buscadorTel;
-        private SAIFrmBuscadorIncidencias buscadorLig;
-
         /// <summary>
         /// Indica si se ha presionado la tecla control
         /// </summary>
-        //private bool _blnCtrPresionado;
+        private bool _blnCtrPresionado;
 
         /// <summary>
         /// Monitor de actividad telefónica Asincrono
@@ -144,6 +142,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             controlBarra.Style = XTPButtonStyle.xtpButtonAutomatic;
             return controlBarra;
         }
+
+
 
         /// <summary>
         /// Método estático para colocar un formulario en un
@@ -234,6 +234,31 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             this.NoTelefono = dato;
             this.tssInfo.Text = string.Format("Última llamada : {0} ", dato);
+            var lstTipoIncidencias = new TipoIncidenciaList();
+            lstTipoIncidencias = Aplicacion.UsuarioPersistencia.strSistemaActual == "066" ? TipoIncidenciaMapper.Instance().GetBySistema(2) : TipoIncidenciaMapper.Instance().GetBySistema(1);
+            if (lstTipoIncidencias.Count == 0)
+            {
+
+                throw new SAIExcepcion("No es posible registrar incidencias, no existen tipos de incidencias cargados en el sistema, favor de contactar al administrador", this);
+
+            }
+
+            //Se pregunta qué es el usuario y a qué sistema entró:
+            if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
+                Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
+            {
+
+                var frmIncidencia066 = new SAIFrmAltaIncidencia066(this.NoTelefono);
+                frmIncidencia066.Show();
+
+            }
+            else if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
+                Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+            {
+                //var frmIncidencia089 = new SAIFrmIncidencia089(this.NoTelefono);
+                //frmIncidencia089.Show();
+
+            }
         }
 
         #endregion
@@ -242,10 +267,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         void SAIBarraComandos_Execute(object sender, AxXtremeCommandBars._DCommandBarsEvents_ExecuteEvent e)
         {
+            //TODO: faltan Las consultas del buscador para 089
             try
             {
-                Cursor = Cursors.WaitCursor;
-
                 switch (Aplicacion.UsuarioPersistencia.strSistemaActual)
                 {
                     case "089":
@@ -266,11 +290,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
                                 break;
                             case ID.CMD_NI:
-                                //if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value)
-                                //{
-                                var frmIncidencia089 = new SAIFrm089();
-                                frmIncidencia089.Show();
-                                //}
+                                if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value)
+                                {
+                                    var frmIncidencia089 = new SAIFrm089();
+                                    frmIncidencia089.Show();
+                                }
                                 break;
                             case ID.CMD_P:
                                 if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(e.control.Id))
@@ -334,11 +358,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
                                 break;
                             case ID.CMD_NI:
-                                //if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value)
-                                //{
-                                var frmAltaIncidencia = new SAIFrmAltaIncidencia066(string.Empty);
-                                frmAltaIncidencia.Show();
-                                //}
+                                if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value)
+                                {
+                                    //Incidencia incidencia = IncidenciaMapper.Instance().GetOne(180);
+                                    //var frmAltaIncidencia = new SAIFrmAltaIncidencia066(incidencia, false);
+                                    var frmAltaIncidencia = new SAIFrmAltaIncidencia066("");
+                                    frmAltaIncidencia.Show();
+                                }
                                 break;
                             case ID.CMD_P:
                                 if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(e.control.Id))
@@ -440,6 +466,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 switch (e.control.Id)
                 {
                     case ID.CMD_CAN:
+                        throw new SAIExcepcion("Funcionalidad no implementada.");
                         break;
                     case ID.CMD_HI:
                         throw new SAIExcepcion("Funcionalidad no implementada.");
@@ -463,10 +490,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
             catch (SAIExcepcion)
             {
-            }
-            finally
-            {
-                Cursor = Cursors.Default;
             }
         }
 
@@ -532,7 +555,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
-        private void SAIBarraComandos_Customization(object sender, AxXtremeCommandBars._DCommandBarsEvents_CustomizationEvent e)
+        void SAIBarraComandos_Customization(object sender, AxXtremeCommandBars._DCommandBarsEvents_CustomizationEvent e)
         {
             var controls = SAIBarraComandos.DesignerControls;
             if (controls.Count == 0)
@@ -550,54 +573,18 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
 
             e.options.AllowNewToolbars = false;
-            //e.options.ShowToolbarsPage = false;
+            e.options.ShowToolbarsPage = false;
             e.options.ShowMenusPage = false;
-        }
-
-        private void SAIBarraComandos_CustomizationResetToolBar(object sender, AxXtremeCommandBars._DCommandBarsEvents_CustomizationResetToolBarEvent e)
-        {
-            SAIBarraComandos.DeleteAll();
-            if (SAIBarraComandos.Count == 0)
-            {
-                var barra = SAIBarraComandos.Add("Comandos", XTPBarPosition.xtpBarTop);
-                barra.SetIconSize(32, 32); //Tamaño predeterminado para el item
-                barra.Closeable = false;
-                //Indicamos que no es posible cerrar la colección de items en la barra para evitar la lógica requerida
-                barra.EnableAnimation = true; //Indicamos que mostraremos efectos de desvanecimiento
-                barra.ShowGripper = false;
-                //Indicamos que ocultaremos el gripper para evitar que pueda moverse de su ubicación predeterminada
-
-                //Agregamos los comandos predeterminados que manejará el sistema y sus accesos rápidos
-                var coleccionComandos = ComandosColeccion.ColeccionComandos();
-                foreach (var comando in coleccionComandos)
-                {
-                    if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(comando.Identificador))
-                    {
-                        AgregarBoton(barra.Controls, XTPControlType.xtpControlButton, comando.Identificador, comando.Caption,
-                                  comando.IniciaGrupo, comando.Descripcion, comando.EsVisible);
-
-                        if (comando.TeclaAccesoRapido != null)
-                            SAIBarraComandos.KeyBindings.Add(ID.FCONTROL, comando.TeclaAccesoRapido ?? '0', comando.Identificador);
-                    }
-                }
-            }
         }
 
         private void SAIFrmComandos_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
-                SAIBarraComandos.SaveCommandBars("SAIC4", "Sistema de Administracion de Incidencias", "BarraComandos066");
-            else
-                SAIBarraComandos.SaveCommandBars("SAIC4", "Sistema de Administracion de Incidencias", "BarraComandos089");
+            //SAIBarraComandos.SaveCommandBars("SAIC4", "Sistema de Administracion de Incidencias", "BarraComandos");
         }
 
         private void SAIFrmComandos_Load(object sender, EventArgs e)
         {
-            if (Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
-                SAIBarraComandos.LoadCommandBars("SAIC4", "Sistema de Administracion de Incidencias", "BarraComandos066");
-            else
-                SAIBarraComandos.LoadCommandBars("SAIC4", "Sistema de Administracion de Incidencias", "BarraComandos089");
-
+            //SAIBarraComandos.LoadCommandBars("SAIC4", "Sistema de Administracion de Incidencias", "BarraComandos");
             if (SAIBarraComandos.Count == 0)
             {
                 var barra = SAIBarraComandos.Add("Comandos", XTPBarPosition.xtpBarTop);
@@ -623,7 +610,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
 
                 //Iniciamos el monitor del agente de Avaya
-                // this.IniciarMonitorLlamadas();
+                 this.IniciarMonitorLlamadas();
 
             }
         }
@@ -677,39 +664,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             this.Invoke(new DelegadoEscribirDato(EscribirDato), new object[] { e.Datos });
 
-            var lstTipoIncidencias = new TipoIncidenciaList();
-            lstTipoIncidencias = Aplicacion.UsuarioPersistencia.strSistemaActual == "066" ? TipoIncidenciaMapper.Instance().GetBySistema(2) : TipoIncidenciaMapper.Instance().GetBySistema(1);
-            if (lstTipoIncidencias.Count == 0)
-            {
-
-                throw new SAIExcepcion("No es posible registrar incidencias, no existen tipos de incidencias cargados en el sistema, favor de contactar al administrador", this);
-
-            }
-
-            //Se pregunta qué es el usuario y a qué sistema entró:
-            if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
-                Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
-            {
-
-                //var frmIncidencia066 = new SAIFrmIncidencia066(this.NoTelefono);
-                //frmIncidencia066.Show();
-
-            }
-            else if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
-                Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
-            {
-                //var frmIncidencia089 = new SAIFrmIncidencia089(this.NoTelefono);
-                //frmIncidencia089.Show();
-
-            }
+            
         }
 
         #endregion
 
-        private void Monitor_Tick(object sender, EventArgs e)
-        {
-            TcpListener.BuscarDatos();
-        }
+       
 
         #endregion
 

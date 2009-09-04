@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grpPropietario = new System.Windows.Forms.GroupBox();
             this.label11 = new System.Windows.Forms.Label();
             this.txtTelefonoPropietario = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
@@ -65,7 +65,7 @@
             this.grpPropietario.Location = new System.Drawing.Point(10, 12);
             this.grpPropietario.Name = "grpPropietario";
             this.grpPropietario.Size = new System.Drawing.Size(821, 78);
-            this.grpPropietario.TabIndex = 21;
+            this.grpPropietario.TabIndex = 0;
             this.grpPropietario.TabStop = false;
             this.grpPropietario.Text = "Datos del propietario :";
             // 
@@ -86,7 +86,8 @@
             this.txtTelefonoPropietario.Name = "txtTelefonoPropietario";
             this.txtTelefonoPropietario.Size = new System.Drawing.Size(185, 20);
             this.txtTelefonoPropietario.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtTelefonoPropietario.TabIndex = 4;
+            this.txtTelefonoPropietario.TabIndex = 2;
+            this.txtTelefonoPropietario.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
             this.txtTelefonoPropietario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SoloNumeros_KeyPress);
             // 
             // label13
@@ -100,13 +101,15 @@
             // 
             // txtDireccionPropietario
             // 
+            this.txtDireccionPropietario.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtDireccionPropietario.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtDireccionPropietario.Location = new System.Drawing.Point(111, 46);
             this.txtDireccionPropietario.MaxLength = 250;
             this.txtDireccionPropietario.Name = "txtDireccionPropietario";
             this.txtDireccionPropietario.Size = new System.Drawing.Size(702, 20);
             this.txtDireccionPropietario.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtDireccionPropietario.TabIndex = 4;
+            this.txtDireccionPropietario.TabIndex = 3;
+            this.txtDireccionPropietario.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
             // 
             // label12
             // 
@@ -119,6 +122,7 @@
             // 
             // txtNombrePropietario
             // 
+            this.txtNombrePropietario.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtNombrePropietario.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtNombrePropietario.Location = new System.Drawing.Point(111, 16);
             this.txtNombrePropietario.MaxLength = 250;
@@ -126,19 +130,20 @@
             this.txtNombrePropietario.Size = new System.Drawing.Size(453, 20);
             this.txtNombrePropietario.StrMensajeCampoRequerido = "El campo es requerido.";
             this.txtNombrePropietario.TabIndex = 1;
+            this.txtNombrePropietario.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
             // 
             // dgvVehiculo
             // 
             this.dgvVehiculo.AllowUserToOrderColumns = true;
             this.dgvVehiculo.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvVehiculo.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvVehiculo.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvVehiculo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvVehiculo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ClaveVehiculo,
@@ -150,19 +155,19 @@
             this.NoMotor,
             this.NumeroSerie,
             this.SeñasParticulares});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvVehiculo.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvVehiculo.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvVehiculo.Location = new System.Drawing.Point(5, 19);
             this.dgvVehiculo.Name = "dgvVehiculo";
             this.dgvVehiculo.RowHeadersVisible = false;
             this.dgvVehiculo.Size = new System.Drawing.Size(810, 119);
-            this.dgvVehiculo.TabIndex = 5;
+            this.dgvVehiculo.TabIndex = 1;
             // 
             // ClaveVehiculo
             // 
@@ -224,7 +229,7 @@
             this.gbVehiculo.Location = new System.Drawing.Point(10, 96);
             this.gbVehiculo.Name = "gbVehiculo";
             this.gbVehiculo.Size = new System.Drawing.Size(821, 150);
-            this.gbVehiculo.TabIndex = 22;
+            this.gbVehiculo.TabIndex = 1;
             this.gbVehiculo.TabStop = false;
             this.gbVehiculo.Text = "Datos del/los vehículo(s):";
             // 
@@ -242,6 +247,7 @@
             this.Name = "SAIFrmAltaDatosAuto066";
             this.Text = "Datos del Vehículo";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.SAIFrmAltaDatosAuto066_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SAIFrmAltaDatosAuto066_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SAIFrmAltaDatosAuto066_KeyDown);
             this.grpPropietario.ResumeLayout(false);

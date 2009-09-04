@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
+using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -46,14 +47,23 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 this.ListaPersonas = new PersonaExtraviadaList();
             }
-            PersonaExtraviada Persona = new PersonaExtraviada();
+            PersonaExtraviada Persona;
             int intEdad;
             float fltEstatura;
             DateTime dtmFecha;
             foreach(DataGridViewRow row in this.dgvPersonaExtraviada.Rows)
             {
+                Persona = new PersonaExtraviada();
                 if (row.Cells[2].Value != null && !string.IsNullOrEmpty(row.Cells[2].Value.ToString()))
                 {
+                    if (row.Cells[0].Value != null)
+                    {
+                        Persona = PersonaExtraviadaMapper.Instance().GetOne(Convert.ToInt32(row.Cells[0].Value));
+                        
+                    }
+                    if (Persona == null) 
+                    { Persona = new PersonaExtraviada(); }
+
                     //Nombre:
                     Persona.Nombre = row.Cells[2].Value != null ? row.Cells[2].Value.ToString().ToUpper() : string.Empty;
                     //Edad:
@@ -153,10 +163,69 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     Persona.Caracteristicas = row.Cells[21].Value != null ? row.Cells[21].Value.ToString().ToUpper() : string.Empty;
 
                     //Agregamos la persona a la lista:
-                    this.ListaPersonas.Add(Persona);
+                    if (ListaPersonas.Contains(Persona))
+                    {
+                        this.ListaPersonas.Replace(Persona);
+                    }
+                    else
+                    {
+                        this.ListaPersonas.Add(Persona);
+                    }
+                    
 
                 }
                 
+            }
+        }
+
+        private void MostrarDatosPersonas()
+        {
+            try
+            {
+                this.dgvPersonaExtraviada.Rows.Clear();
+                int count = 1;
+                foreach(PersonaExtraviada persona in  this.ListaPersonas)
+                {
+                    this.dgvPersonaExtraviada.Rows[dgvPersonaExtraviada.RowCount - count].Cells[0].Value = persona.Clave;
+                    this.dgvPersonaExtraviada.Rows[dgvPersonaExtraviada.RowCount - count].Cells[1].Value = persona.Folio;
+                    this.dgvPersonaExtraviada.Rows[dgvPersonaExtraviada.RowCount - count].Cells[2].Value = persona.Nombre;
+                    this.dgvPersonaExtraviada.Rows[dgvPersonaExtraviada.RowCount - count].Cells[3].Value = persona.Edad;
+                    this.dgvPersonaExtraviada.Rows[dgvPersonaExtraviada.RowCount - count].Cells[4].Value = persona.Sexo;
+                    this.dgvPersonaExtraviada.Rows[dgvPersonaExtraviada.RowCount - count].Cells[5].Value = persona.Estatura.Value.ToString("N2");
+                    this.dgvPersonaExtraviada.Rows[dgvPersonaExtraviada.RowCount - count].Cells[6].Value = persona.Parentesco;
+                    this.dgvPersonaExtraviada.Rows[dgvPersonaExtraviada.RowCount - count].Cells[7].Value = persona.FechaExtravio.ToShortDateString();
+                    this.dgvPersonaExtraviada.Rows[dgvPersonaExtraviada.RowCount - count].Cells[8].Value = persona.Tez;
+                    this.dgvPersonaExtraviada.Rows[dgvPersonaExtraviada.RowCount - count].Cells[9].Value = persona.TipoCabello;
+                    this.dgvPersonaExtraviada.Rows[dgvPersonaExtraviada.RowCount - count].Cells[10].Value = persona.ColorCabello;
+                    this.dgvPersonaExtraviada.Rows[dgvPersonaExtraviada.RowCount - count].Cells[11].Value = persona.LargoCabello;
+                    this.dgvPersonaExtraviada.Rows[dgvPersonaExtraviada.RowCount - count].Cells[12].Value = persona.Frente;
+                    this.dgvPersonaExtraviada.Rows[dgvPersonaExtraviada.RowCount - count].Cells[13].Value = persona.Cejas;
+                    this.dgvPersonaExtraviada.Rows[dgvPersonaExtraviada.RowCount - count].Cells[14].Value = persona.OjosColor;
+                    this.dgvPersonaExtraviada.Rows[dgvPersonaExtraviada.RowCount - count].Cells[15].Value = persona.OjosForma;
+                    this.dgvPersonaExtraviada.Rows[dgvPersonaExtraviada.RowCount - count].Cells[16].Value = persona.NarizForma;
+                    this.dgvPersonaExtraviada.Rows[dgvPersonaExtraviada.RowCount - count].Cells[17].Value = persona.BocaTamaño;
+                    this.dgvPersonaExtraviada.Rows[dgvPersonaExtraviada.RowCount - count].Cells[18].Value = persona.Labios;
+                    this.dgvPersonaExtraviada.Rows[dgvPersonaExtraviada.RowCount - count].Cells[19].Value = persona.Vestimenta;
+                    this.dgvPersonaExtraviada.Rows[dgvPersonaExtraviada.RowCount - count].Cells[20].Value = persona.Destino;
+                    this.dgvPersonaExtraviada.Rows[dgvPersonaExtraviada.RowCount - count].Cells[21].Value = persona.Caracteristicas;
+                    this.dgvPersonaExtraviada.Rows.Add(1);
+                    count++;
+                }
+                //For para quitar las filas vacias.
+                for (int i = 0; i < count; i++)
+                {
+                    if ((dgvPersonaExtraviada.RowCount - 1) >= i)
+                        if (this.dgvPersonaExtraviada.Rows[i].Cells[2].Value == null)
+                        {
+                            this.dgvPersonaExtraviada.Rows.RemoveAt(i);
+                            i--;
+                        }
+
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error al mostrar información de personas : "+ex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
 
@@ -201,9 +270,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
             catch (SAIExcepcion) { }
         }
-  
+
+        private void SAIFrmAltaDatosPersonaExtraviada_Load(object sender, EventArgs e)
+        {
+            this.MostrarDatosPersonas();
+        }
 
         #endregion
+
+       
 
         
     }
