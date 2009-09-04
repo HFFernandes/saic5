@@ -87,30 +87,26 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 {
                     //Recuperar el folio y generar una instancia de la entidad para
                     //pasarla al nuevo formulario
-                    for (int i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
+                    for (var i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
                     {
                         var incidencia =
                             IncidenciaMapper.Instance().GetOne(
                                 Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
-                        if (incidencia != null)
-                        {
-                            var incidenciaDespacho = new SAIFrmDespacho(incidencia);
-                            incidenciaDespacho.Show();
-                        }
+                        if (incidencia == null) continue;
+                        var incidenciaDespacho = new SAIFrmDespacho(incidencia);
+                        incidenciaDespacho.Show();
                     }
                 }
                 else
                 {
-                    for (int i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
+                    for (var i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
                     {
                         var incidencia =
                             IncidenciaMapper.Instance().GetOne(
                                 Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
-                        if (incidencia != null)
-                        {
-                            var incidenciaInfo = new SAIFrmAltaIncidencia066(incidencia, false);
-                            incidenciaInfo.Show();
-                        }
+                        if (incidencia == null) continue;
+                        var incidenciaInfo = new SAIFrmAltaIncidencia066(incidencia, false);
+                        incidenciaInfo.Show();
                     }
                 }
             }
@@ -128,7 +124,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     try
                     {
                         var lstIncidenciasPorLigar = new List<string>();
-                        for (int i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
+                        for (var i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
                         {
                             lstIncidenciasPorLigar.Add(saiReport1.reportControl.SelectedRows[i].Record[0].Value.ToString());
                         }
@@ -222,19 +218,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     //Limpiamos el listado donde se almacenan las incidencias cuyo estado sea pendiente
                     //para iniciar nuevamente el ciclo
                     lstIncidenciasTemporales.Clear();
-                    if (Aplicacion.UsuarioPersistencia.blnEsDespachador == true)
-                    {
-                        resIncidencias = IncidenciaMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_INCIDENCIASCORPORACION,
-                                                                                    Aplicacion.UsuarioPersistencia.
-                                                                                        intCorporacion,
-                                                                                    (int)ESTATUSINCIDENCIAS.PENDIENTE));
-                    }
-                    else
-                    {
-                        resIncidencias =
-                            IncidenciaMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_INCIDENCIAS,
-                                                                                    (int)ESTATUSINCIDENCIAS.PENDIENTE));
-                    }
+                    resIncidencias = Aplicacion.UsuarioPersistencia.blnEsDespachador == true ? IncidenciaMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_INCIDENCIASCORPORACION,
+                                                                                                                                                       Aplicacion.UsuarioPersistencia.
+                                                                                                                                                           intCorporacion,
+                                                                                                                                                       (int)ESTATUSINCIDENCIAS.PENDIENTE)) : IncidenciaMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_INCIDENCIAS,
+                                                                                                                                                                                                                                                     (int)ESTATUSINCIDENCIAS.PENDIENTE));
+
 
                     foreach (var incidencia in resIncidencias) //vamos a la base para obtener los registros de estado pendiente y de la corporación del usuario
                     {
