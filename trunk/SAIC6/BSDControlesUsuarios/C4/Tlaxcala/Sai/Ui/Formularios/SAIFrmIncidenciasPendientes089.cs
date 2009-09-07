@@ -9,17 +9,29 @@ using XtremeReportControl;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
+    /// <summary>
+    /// Form para enlistar todas las incidencias de estado
+    /// pendiente para el sistema 089
+    /// </summary>
     public partial class SAIFrmIncidenciasPendientes089 : SAIFrmBase
     {
+        //Declaración de los listados tipados utilizados
+        //para la manipulación de registros 
         private List<Incidencia> lstIncidenciasRegistradas;
         private List<Incidencia> lstIncidenciasTemporales;
         private List<Incidencia> lstIncidenciasPorRemover;
         private List<ReportRecord> lstRegistrosReporte;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public SAIFrmIncidenciasPendientes089()
         {
             InitializeComponent();
+
+            //Obtiene el ancho del área de trabajo de la pantalla principal
             Width = Screen.GetWorkingArea(this).Width;
+            //Establecemos los eventos de reacción para el listado
             saiReport1.btnLigarIncidencias.Click += btnLigarIncidencias_Click;
             saiReport1.btnVistaPrevia.Click += btnVistaPrevia_Click;
             saiReport1.reportControl.RowDblClick += reportControl_RowDblClick;
@@ -30,10 +42,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             lstRegistrosReporte = new List<ReportRecord>();
         }
 
+        /// <summary>
+        /// Genera una vista previa de impresión de los registros actuales
+        /// </summary>
+        /// <param name="sender">generador del evento</param>
+        /// <param name="e">argumentos del evento</param>
         void btnVistaPrevia_Click(object sender, EventArgs e)
         {
             try
             {
+                //verificamos que tenga permisos para realizar esta acción
                 if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_P))
                 {
                     saiReport1.reportControl.PrintPreviewOptions.Title = "Reporte de Incidencias 089";
@@ -47,6 +65,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
+        /// <summary>
+        /// Método para instanciar una entidad de tipo incidencia y mostrarla para edición
+        /// </summary>
+        /// <param name="sender">generador del evento</param>
+        /// <param name="e">argumentos del evento</param>
         void reportControl_RowDblClick(object sender, AxXtremeReportControl._DReportControlEvents_RowDblClickEvent e)
         {
             try
@@ -65,6 +88,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
+        /// <summary>
+        /// Método para determinar el folio padre de una colección de incidencias
+        /// </summary>
+        /// <param name="sender">generador del evento</param>
+        /// <param name="e">argumentos del evento</param>
         void btnLigarIncidencias_Click(object sender, EventArgs e)
         {
             if (Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_P))
@@ -147,6 +175,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             ObtenerRegistros();
         }
 
+        /// <summary>
+        /// Método periodico para la actualización de registros
+        /// </summary>
+        /// <param name="sender">generador del evento</param>
+        /// <param name="e">argumentos del evento</param>
         private void tmrRegistros_Tick(object sender, EventArgs e)
         {
             ObtenerRegistros();
