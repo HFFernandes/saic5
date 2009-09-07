@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Xml;
 
 namespace BSD.C4.Tlaxcala.Sai.Mapa
@@ -13,12 +13,24 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
                 xDoc.Load(XMLstr);
 
                 var mapaXML = xDoc.GetElementsByTagName("map");
-                var lista = ((XmlElement)mapaXML[0]).GetElementsByTagName("layer");
+                var lista = ((XmlElement) mapaXML[0]).GetElementsByTagName("layer");
                 //CCapa[] capas;
                 var mapa = new CMapa(lista.Count);
                 //capas = new CCapa[lista.Count];
                 int n = 0;
-                XmlNodeList file, labelfield, layername, type, filltype, fillcolor, linestyle, linecolor, pointstyle, labelsize, size, showlabel, visible;
+                XmlNodeList file,
+                            labelfield,
+                            layername,
+                            type,
+                            filltype,
+                            fillcolor,
+                            linestyle,
+                            linecolor,
+                            pointstyle,
+                            labelsize,
+                            size,
+                            showlabel,
+                            visible;
                 foreach (XmlElement nodo in lista)
                 {
                     mapa.Capas[n] = new CCapa();
@@ -89,6 +101,7 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
                 CError.EscribeLog();
             }
         }
+
         /*public CCapa[] leerXML(string XMLstr)
         {
             try

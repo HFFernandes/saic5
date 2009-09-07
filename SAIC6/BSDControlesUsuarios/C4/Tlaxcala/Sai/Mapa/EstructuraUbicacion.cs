@@ -1,8 +1,7 @@
-ï»¿namespace BSD.C4.Tlaxcala.Sai.Mapa
+namespace BSD.C4.Tlaxcala.Sai.Mapa
 {
-
     /// <summary>
-    /// Guarda la informaciÃ³n que se maneja para la comunicaciÃ³n entre el formulario de incidencia y el formulario del mapa, a travÃ©s de la clase controlador
+    /// Guarda la información que se maneja para la comunicación entre el formulario de incidencia y el formulario del mapa, a través de la clase controlador
     /// </summary>
     public class EstructuraUbicacion
     {
@@ -22,7 +21,7 @@
         public int? IdColonia { get; set; }
 
         /// <summary>
-        /// Obtiene o establece el valor del identificador del cÃ³digo postal seleccionado
+        /// Obtiene o establece el valor del identificador del código postal seleccionado
         /// </summary>
         public int? IdCodigoPostal { get; set; }
     }

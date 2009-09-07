@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>    
+    <cfg>
+    		<user>sa</user>
+    		<password>nikita</password>
+    		<server>.\SQLEXPRESS</server>
+        <catalog>SAI_BD</catalog>
+    </cfg>           
+ </config>
