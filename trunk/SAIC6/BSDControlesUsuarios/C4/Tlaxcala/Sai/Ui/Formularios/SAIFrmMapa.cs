@@ -9,24 +9,40 @@ using CPw;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
-
+    /// <summary>
+    /// Formulario que presenta la cartografia del estado
+    /// </summary>
     public partial class SAIFrmMapa : Form
     {
         CMapa mapXML;
         private string XMLconf;
         private string path;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="XMLconf">archivo xml que almacena la configuración</param>
+        /// <param name="path">ruta del archivo</param>
         public SAIFrmMapa(string XMLconf, string path)
         {
             InitializeComponent();
+
             this.Size = new Size(640, 480);
             this.XMLconf = XMLconf;
             this.path = path;
         }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="XMLconf">archivo xml que almacena la configuración</param>
+        /// <param name="path">ruta del archivo</param>
+        /// <param name="width">ancho en pixeles del formulario</param>
+        /// <param name="height">alto en pixeles del formulario</param>
         public SAIFrmMapa(string XMLconf, string path, int width, int height)
         {
             InitializeComponent();
+
             this.Size = new Size(width, height);
             this.XMLconf = XMLconf;
             this.path = path;
@@ -35,10 +51,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void CMapa_Load(object sender, EventArgs e)
         {
             AgregarCapas();
+
             mapa.ZoomFull();
             mapa.Refresh();
         }
 
+        /// <summary>
+        /// Método que establece las n capas que deberá presentar el control
+        /// </summary>
         private void AgregarCapas()
         {
             try
@@ -91,6 +111,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 break;
                         }
                     }
+
                     AgregarLeyenda();
                     OcultarCapas(false);
                 }
@@ -101,7 +122,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
             catch (Exception ex)
             {
-                //CError.EscribeLog(ex);
                 MessageBox.Show(ex.ToString());
             }
         }
@@ -111,13 +131,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             leyenda.Populate(mapa);
         }
 
-        //Refresca el Mapa centrándolo en la COLONIA elegída
+        /// <summary>
+        /// Método para ubicar el mapa en la capa de colonias con el ID pasado
+        /// </summary>
+        /// <param name="id">Identificador de la colonia</param>
         public void Colonia(int id)
         {
             try
             {
                 ActualizaLbl(true);
                 var state = mapa["COLONIA"].SearchExpression("ID = \"" + id + "\"");
+
                 if (!state.EOF)
                 {
                     OcultarCapas(true);
@@ -139,18 +163,21 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (Exception ex)
             {
                 ActualizaLbl(false);
-                //CError.EscribeLog(ex);
                 MessageBox.Show(ex.ToString());
             }
         }
 
-        //Refresca el Mapa centrándolo en el CP elegído
+        /// <summary>
+        /// Método para ubicar el mapa en la capa de cp con el ID pasado
+        /// </summary>
+        /// <param name="id">Identificador del cp</param>
         public void CP(int id)
         {
             try
             {
                 ActualizaLbl(true);
                 var state = mapa["COLONIA"].SearchExpression("CP = \"" + id + "\"");
+
                 if (!state.EOF)
                 {
                     OcultarCapas(true);
@@ -172,18 +199,21 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (Exception ex)
             {
                 ActualizaLbl(false);
-                //CError.EscribeLog(ex);
                 MessageBox.Show(ex.ToString());
             }
         }
 
-        //Refresca el Mapa centrándolo en el MUNICIPIO elegído
+        /// <summary>
+        /// Método para ubicar el mapa en la capa de municipios con el ID pasado
+        /// </summary>
+        /// <param name="id">Identificador del municipio</param>
         public void Municipio(int id)
         {
             try
             {
                 ActualizaLbl(true);
                 var state = mapa["MUNICIPIO"].SearchExpression("ID = \"" + id + "\"");
+
                 if (!state.EOF)
                 {
                     OcultarCapas(true);
@@ -205,18 +235,21 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (Exception ex)
             {
                 ActualizaLbl(false);
-                //CError.EscribeLog(ex);
                 MessageBox.Show(ex.ToString());
             }
         }
 
-        //Refresca el Mapa centrándolo en la LOCALIDAD elegída
+        /// <summary>
+        /// Método para ubicar el mapa en la capa de localidades con el ID pasado
+        /// </summary>
+        /// <param name="id">Identificador de la localidad</param>
         public void Localidad(int id)
         {
             try
             {
                 ActualizaLbl(true);
                 var state = mapa["LOCALIDAD"].SearchExpression("ID = \"" + id + "\"");
+
                 if (!state.EOF)
                 {
                     OcultarCapas(true);
@@ -232,7 +265,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (Exception ex)
             {
                 ActualizaLbl(false);
-                //CError.EscribeLog(ex);
                 MessageBox.Show(ex.ToString());
             }
         }
@@ -266,6 +298,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 ActualizaLbl(false);
             }
         }
+
         private void OcultarCapas(bool val)
         {
             for (int i = 0; i < mapXML.Count; i++)
@@ -276,10 +309,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
             }
         }
+
         private void btnPanning_Click(object sender, EventArgs e)
         {
             ActivarPanning();
         }
+
         private void ActivarPanning()
         {
             if (!btnPanning.Checked)
@@ -290,6 +325,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 btnZoomOut.Checked = false;
             }
         }
+
         private void btnZoomIn_Click(object sender, EventArgs e)
         {
             if (!btnZoomIn.Checked)
