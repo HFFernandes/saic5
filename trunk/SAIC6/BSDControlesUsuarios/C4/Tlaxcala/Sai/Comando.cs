@@ -26,11 +26,16 @@
             EsVisible = esvisible;
         }
 
+        #region Campos
+
         public int Identificador { get; set; }
         public string Caption { get; set; }
         public string Descripcion { get; set; }
         public char? TeclaAccesoRapido { get; set; }
         public bool IniciaGrupo { get; set; }
         public bool EsVisible { get; set; }
+
+        #endregion
+
     }
 }

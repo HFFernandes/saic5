@@ -25,10 +25,13 @@ namespace BSD.C4.Tlaxcala.Sai
         /// </summary>
         public static List<SAIWinSwitchItem> VentanasIncidencias = new List<SAIWinSwitchItem>();
 
-        public static SAIFrmComandos frmComandos;
+        /// <summary>
+        /// Apuntador hacia la instancia actual de SAIFrmComandos
+        /// </summary>
+        //public static SAIFrmComandos frmComandos;
 
         /// <summary>
-        /// Método para la conversion de hexadecimal a decimal para los colores
+        /// Método para la conversion de un número hexadecimal a decimal para los colores
         /// </summary>
         /// <param name="strHex">Codigo hexadecimal a convertir</param>
         /// <returns>Valor decimal correspondiente</returns>
@@ -37,6 +40,11 @@ namespace BSD.C4.Tlaxcala.Sai
             return Int32.Parse(strHex, System.Globalization.NumberStyles.HexNumber);
         }
 
+        /// <summary>
+        /// Método para remover de un listado tipado los elementos duplicados
+        /// </summary>
+        /// <param name="listaEntrada">Lista del cual serán removidos los duplicados</param>
+        /// <returns>Una nueva colección depurada</returns>
         public static List<string> removerDuplicados(List<string> listaEntrada)
         {
             var diccionario = new Dictionary<string, int>();
@@ -45,6 +53,7 @@ namespace BSD.C4.Tlaxcala.Sai
             foreach (var valorActual in listaEntrada)
             {
                 if (diccionario.ContainsKey(valorActual)) continue;
+
                 diccionario.Add(valorActual, 0);
                 listaFinal.Add(valorActual);
             }
@@ -52,10 +61,12 @@ namespace BSD.C4.Tlaxcala.Sai
         }
 
         /// <summary>
-        /// Clase donde persisten los permisos y configuraciones de un usuario especifico
+        /// Clase donde persisten los permisos y configuraciones del usuario actual
         /// </summary>
         public static class UsuarioPersistencia
         {
+            #region Campos
+
             public static int intClaveUsuario { get; set; }
             public static string strNombreUsuario { get; set; }
             public static string[] strSistemas { get; set; }
@@ -66,12 +77,15 @@ namespace BSD.C4.Tlaxcala.Sai
             {
                 get
                 {
+                    //Comprobamos que sea un despachador para poder determinar su corporación
                     if (blnEsDespachador == true)
                     {
+                        //Obtenemos una instancia de la entidad usuario por corporación
                         var usuarioCorporacion =
                             UsuarioCorporacionMapper.Instance().GetByUsuario(intClaveUsuario);
-                        if (/*usuarioCorporacion != null &&*/ usuarioCorporacion.Count > 0)
+                        if (usuarioCorporacion != null && usuarioCorporacion.Count > 0)
                         {
+                            //Retornamos la clave obtenida
                             return usuarioCorporacion[0].ClaveCorporacion;
                         }
                     }
@@ -80,6 +94,8 @@ namespace BSD.C4.Tlaxcala.Sai
                 }
             }
 
+            #endregion
+
             /// <summary>
             /// Función que determina si el usuario actual tiene permisos de LECTURA sobre el modulo specificado
             /// </summary>
@@ -87,6 +103,7 @@ namespace BSD.C4.Tlaxcala.Sai
             /// <returns>verdadero o falso</returns>
             public static bool blnPuedeLeer(int intSubModulo)
             {
+                //Obtenemos una lista de permisos para el módulo definido del sistema en el cual fue logeado
                 var permisoObjectList = PermisoMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_OBTENERPERMISOS, intClaveUsuario, intSubModulo, ObtenerClaveSistema()));
                 foreach (var o in permisoObjectList)
                 {
@@ -104,6 +121,7 @@ namespace BSD.C4.Tlaxcala.Sai
             /// <returns>verdadero o falso</returns>
             public static bool blnPuedeEscribir(int intSubModulo)
             {
+                //Obtenemos una lista de permisos para el módulo definido del sistema en el cual fue logeado
                 var permisoObjectList = PermisoMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_OBTENERPERMISOS, intClaveUsuario, intSubModulo, ObtenerClaveSistema()));
                 foreach (var o in permisoObjectList)
                 {
@@ -142,6 +160,9 @@ namespace BSD.C4.Tlaxcala.Sai
             }
         }
 
+        /// <summary>
+        /// Clase que implementa métodos de cifrado del tipo MD5
+        /// </summary>
         public class CzSecurity
         {
             #region CONSTRUCTOR
@@ -191,17 +212,16 @@ namespace BSD.C4.Tlaxcala.Sai
                 byte[] data = md5Hasher.ComputeHash(Encoding.Default.GetBytes(_Password));
 
                 // Creamos un Stringbuilder 
-                //y.
                 StringBuilder sBuilder = new StringBuilder();
 
-                // Loop through each byte of the hashed data 
-                // and format each one as a hexadecimal string.
+                // Se recorre cada byte del hash obtenido y se le da
+                // formato como cadena hexadecimal
                 for (int i = 0; i < data.Length; i++)
                 {
                     sBuilder.Append(data[i].ToString("x2"));
                 }
 
-                // Return the hexadecimal string.
+                // Retorna la cadena en formato hexadecimal concatenada en el stringbuilder
                 return sBuilder.ToString();
             }
 
@@ -219,21 +239,18 @@ namespace BSD.C4.Tlaxcala.Sai
                 byte[] data = md5Hasher.ComputeHash(Encoding.Default.GetBytes(password));
 
                 // Creamos un Stringbuilder 
-                //y.
                 StringBuilder sBuilder = new StringBuilder();
 
-                // Loop through each byte of the hashed data 
-                // and format each one as a hexadecimal string.
+                // Se recorre cada byte del hash obtenido y se le da
+                // formato como cadena hexadecimal
                 for (int i = 0; i < data.Length; i++)
                 {
                     sBuilder.Append(data[i].ToString("x2"));
                 }
 
-                // Return the hexadecimal string.
+                // Retorna la cadena en formato hexadecimal concatenada en el stringbuilder
                 return sBuilder.ToString();
             }
-
-
 
             #endregion
         }
