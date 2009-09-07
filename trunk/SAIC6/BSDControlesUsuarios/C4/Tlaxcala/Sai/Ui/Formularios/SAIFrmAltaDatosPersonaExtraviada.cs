@@ -1,4 +1,8 @@
-﻿using System;
+﻿//Autor : T.S.U. Angel Martinez Ortiz
+//Fecha : Agosto del 2009
+//Empresa :InfinitySoft TI Experts
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -180,6 +184,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void MostrarDatosPersonas()
         {
+            if(this.ListaPersonas!=null)
             try
             {
                 this.dgvPersonaExtraviada.Rows.Clear();
