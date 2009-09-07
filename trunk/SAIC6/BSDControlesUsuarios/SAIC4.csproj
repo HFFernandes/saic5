@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{FF9562EF-1FA0-49B7-B8B6-80D41CEBAC19}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -59,6 +59,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Recursos Externos\ActualMap.dll</HintPath>
     </Reference>
+    <Reference Include="CodeEngine.Framework.QueryBuilder, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Recursos Externos\CodeEngine.Framework.QueryBuilder.dll</HintPath>
+    </Reference>
     <Reference Include="Cooperator.Framework.Core, Version=1.3.2.0, Culture=neutral, PublicKeyToken=8f7f403e20325116, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Recursos Externos\Cooperator.Framework.Core.dll</HintPath>
@@ -79,6 +83,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Recursos Externos\ExceptionMessageBox.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=028265cbccdfa80d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Recursos Externos\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="Korzh.EasyQuery.CLR20, Version=2.5.0.29, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Recursos Externos\Korzh.EasyQuery.CLR20.dll</HintPath>
@@ -94,6 +102,30 @@
     <Reference Include="Microsoft.VisualC" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="Microsoft.VisualStudio.TeamSystem.Data.UnitTesting, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="NPOI, Version=1.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Recursos Externos\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.DDF, Version=1.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Recursos Externos\NPOI.DDF.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.HPSF, Version=1.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Recursos Externos\NPOI.HPSF.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.HSSF, Version=1.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Recursos Externos\NPOI.HSSF.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.POIFS, Version=1.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Recursos Externos\NPOI.POIFS.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.Util, Version=1.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Recursos Externos\NPOI.Util.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -113,10 +145,44 @@
     <Compile Include="C4\Tlaxcala\Sai\Excepciones\SAIExcepcion.cs" />
     <Compile Include="C4\Tlaxcala\Sai\ID.cs" />
     <Compile Include="C4\Tlaxcala\Sai\Mapa\CCapa.cs" />
+    <Compile Include="C4\Tlaxcala\Sai\Mapa\CConn.cs" />
+    <Compile Include="C4\Tlaxcala\Sai\Mapa\CDats.cs" />
     <Compile Include="C4\Tlaxcala\Sai\Mapa\CEnums.cs" />
     <Compile Include="C4\Tlaxcala\Sai\Mapa\CError.cs" />
+    <Compile Include="C4\Tlaxcala\Sai\Mapa\CExportXLS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Mapa\CExportXLS.Designer.cs">
+      <DependentUpon>CExportXLS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Mapa\CFrmConfDB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Mapa\CFrmConfDB.Designer.cs">
+      <DependentUpon>CFrmConfDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Mapa\CFrmGenReportes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Mapa\CFrmGenReportes.Designer.cs">
+      <DependentUpon>CFrmGenReportes.cs</DependentUpon>
+    </Compile>
     <Compile Include="C4\Tlaxcala\Sai\Mapa\CMapa.cs" />
     <Compile Include="C4\Tlaxcala\Sai\Mapa\Controlador.cs" />
+    <Compile Include="C4\Tlaxcala\Sai\Mapa\CReg.cs" />
+    <Compile Include="C4\Tlaxcala\Sai\Mapa\CRIncidencias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Mapa\CRIncidencias.Designer.cs">
+      <DependentUpon>CRIncidencias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Mapa\CSetPoint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Mapa\CSetPoint.Designer.cs">
+      <DependentUpon>CSetPoint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\Mapa\CXls.cs" />
     <Compile Include="C4\Tlaxcala\Sai\Mapa\CXML.cs" />
     <Compile Include="C4\Tlaxcala\Sai\Mapa\EstructuraUbicacion.cs" />
     <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrm089.cs">
@@ -431,6 +497,21 @@
     <Content Include="map.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Mapa\CExportXLS.resx">
+      <DependentUpon>CExportXLS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Mapa\CFrmConfDB.resx">
+      <DependentUpon>CFrmConfDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Mapa\CFrmGenReportes.resx">
+      <DependentUpon>CFrmGenReportes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Mapa\CRIncidencias.resx">
+      <DependentUpon>CRIncidencias.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\Mapa\CSetPoint.resx">
+      <DependentUpon>CSetPoint.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrm089.resx">
       <DependentUpon>SAIFrm089.cs</DependentUpon>
       <SubType>Designer</SubType>

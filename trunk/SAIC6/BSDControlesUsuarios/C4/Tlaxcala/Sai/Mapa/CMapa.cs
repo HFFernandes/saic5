@@ -10,6 +10,6 @@
         {
             Capas = new CCapa[_count];
             Count = _count;
-        }        
+        }
     }
 }
