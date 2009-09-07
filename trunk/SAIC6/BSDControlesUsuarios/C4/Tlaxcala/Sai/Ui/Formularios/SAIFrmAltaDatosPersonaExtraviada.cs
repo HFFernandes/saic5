@@ -15,9 +15,11 @@ using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
+    /// <summary>
+    /// Formulario para capturar los datos de una incidencia de tipo: Persona extraviada.
+    /// </summary>
     public partial class SAIFrmAltaDatosPersonaExtraviada : Form
     {
-
 
         #region CONSTRUCTOR
 
@@ -283,8 +285,5 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         #endregion
 
-       
-
-        
     }
 }

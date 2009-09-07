@@ -16,6 +16,9 @@ using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
+    /// <summary>
+    /// Formulario para capturar los datos de una incidencia de tipo: Robo accesorios vehiculo.
+    /// </summary>
     public partial class SAIFrmAltaAccesoriosAuto066 : Form
     {
 
@@ -33,10 +36,21 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         #region PROPIEDADES
 
+
+        /// <summary>
+        /// Contiene la lisa de vehiculos involucrados en el robo.
+        /// </summary>
         public VehiculoObjectList ListaVehiculosInvolucrados { get; set; }
 
+        /// <summary>
+        /// Contiene los datos generales del robo de accesorios.
+        /// </summary>
         public RoboAccesorios DatosRoboAccesorio { get; set; }
 
+
+        /// <summary>
+        /// Contiene la lista de accesorios robados.
+        /// </summary>
         public RoboVehiculoAccesoriosList ListaAccesoriosRobados { get; set; }
 
         /// <summary>

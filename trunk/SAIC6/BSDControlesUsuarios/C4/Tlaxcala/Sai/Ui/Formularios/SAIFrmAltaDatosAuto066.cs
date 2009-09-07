@@ -15,6 +15,10 @@ using BSD.C4.Tlaxcala.Sai.Excepciones;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
+
+    /// <summary>
+    /// Formulario para capturar datos de una incidencia de tipo : Robo vehiculo totalidad.
+    /// </summary>
     public partial class SAIFrmAltaDatosAuto066 : Form
     {
 
@@ -179,7 +183,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void Controls_KeyDown(object sender, KeyEventArgs e)
         {
-            //Para pasar el foco al control siguiente.
+            //Para pasar el foco al control siguiente segun el TabIndex.
             switch (e.KeyData)
             {
                 case Keys.Enter:
@@ -195,6 +199,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             try
             {
+                //Obtenemos los datos de los autos que fueron capturados.
                 this.LlenarDatosAuto();
             }
             catch (System.Exception ex)
@@ -206,14 +211,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void SAIFrmAltaDatosAuto066_Load(object sender, EventArgs e)
         {
+            //Mostramos los vehículos que ya han sido capturados.
             this.MostrarDatosAuto();
         }
 
         #endregion
-
-        
-
-        
-
     }
 }

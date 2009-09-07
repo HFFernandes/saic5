@@ -18,6 +18,10 @@ using System.Collections;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
+
+    /// <summary>
+    /// Formulario para altas de incidencias para el 066
+    /// </summary>
     public partial class SAIFrmAltaIncidencia066 : SAIFrmBase
     {
 
@@ -51,8 +55,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="oIncidencia"></param>
-        /// <param name="esSoloLectura"></param>
+        /// <param name="oIncidencia">Incidencia,Objeto de tipo Incidencia.</param>
+        /// <param name="esSoloLectura">bool, Indica si el formulario se debe mostrar con solo lectura.</param>
         public SAIFrmAltaIncidencia066(Incidencia oIncidencia,bool esSoloLectura)
         {
             InitializeComponent();
@@ -153,13 +157,28 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         #endregion
 
         /// <summary>
-        /// Para saber si existe el telefono en la tabla de telefono telmex
+        /// Contiene la información del teléfono registrado en la base de Telmex.
         /// </summary>
         TelefonoTelmex DatosTitular;
 
+        /// <summary>
+        /// Contiene la lista de localidades por municipio.
+        /// </summary>
         LocalidadList objListaLocalidades;
+
+        /// <summary>
+        /// Contiene la lista de códigos postales.
+        /// </summary>
         CodigoPostalList objListaCodigosPostales = new CodigoPostalList();
+
+        /// <summary>
+        /// Representa un código postal.
+        /// </summary>
         CodigoPostal entCodigoPostal;
+
+        /// <summary>
+        /// Contiene todos los datos del usuario logueado.
+        /// </summary>
         Usuario entUsuario;
 
         /// <summary>
@@ -168,10 +187,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         protected bool EsModoEdicion = false;
 
         /// <summary>
-        /// Indica si se debe disparar los eventos en cascada para Municipios,Loc,y Col.
+        /// Indica si se debe disparar los eventos en cascada desde Municipio,localidad,colonia,código postal.
         /// </summary>
         private bool DispararCascadaHaciaAbajo = false;
 
+        /// <summary>
+        /// Indica si se debe disparar los eventos en cascada desde Codigo Postal,colonia,localidad y municipio.
+        /// </summary>
         private bool DispararCascadaHaciaArriba = true;
 
         #endregion
@@ -734,7 +756,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         }
 
-
         /// <summary>
         /// Crea una nueva incidencia y muestra sus datos al abrir el formilario.
         /// </summary>
@@ -1267,6 +1288,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 if (this.cmbMunicipio.SelectedItem != null && this.cmbMunicipio.SelectedIndex != -1)
                 {
                     this.CargarLocalidadesPorMunicipio((cmbMunicipio.SelectedItem as Municipio).Clave);
+
                     //Actualizamos la ubicación del mapa
                     this.ActualizaMapaUbicacion(true);
                 }

@@ -50,10 +50,6 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
             
         }
 
-       
-        
-
-
         #endregion
 
         #region VARIABLES
@@ -105,8 +101,14 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
         /// </summary>
         private   NetworkStream netStream;
 
+        /// <summary>
+        /// BackGroundWorker para iniciar el Agente Java en segundo plano.
+        /// </summary>
         BackgroundWorker bgwIniciador;
 
+        /// <summary>
+        /// Hilo para escuchar el puerto TCP constantemente en segundo plano.
+        /// </summary>
         Thread ProcesoMonitor;
 
         #endregion
@@ -293,18 +295,12 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
                 objTcpListener.Start();
                 //Aceptamos la conexión entrante.
                 objTcpClient = objTcpListener.AcceptTcpClient();
-
-                
-
-
             }
             catch (SocketException se)
             {
                 this.FindMessajeEvent(se.Message);
             }
         }
-
-        
 
         /// <summary>
         /// Se dispara cuando el Listener encuentra un dato.
