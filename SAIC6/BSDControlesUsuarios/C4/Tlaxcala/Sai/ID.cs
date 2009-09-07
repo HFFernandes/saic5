@@ -83,8 +83,7 @@
         #endregion
 
         #region Consultas SQL
-        //Las incidencias ya se ordenan por prioridad
-
+        
         public const string SQL_CORPORACIONES =
             "SELECT Corporacion.* FROM Corporacion INNER JOIN CorporacionIncidencia ON Corporacion.Clave = CorporacionIncidencia.ClaveCorporacion INNER JOIN Incidencia ON CorporacionIncidencia.Folio = Incidencia.Folio WHERE (Incidencia.Folio = {0}) AND (Corporacion.Activo=1)";
 
