@@ -38,7 +38,7 @@ namespace ConsultaRemota
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ResultDS.ConnectionString = ConfigurationManager.ConnectionStrings["SAI_Conn"].ConnectionString;
+            ResultDS.ConnectionString = ConfigurationManager.ConnectionStrings["CooperatorConnectionString"].ConnectionString;
             if (!Page.IsPostBack)
             {
                 var queryName = Page.Request.QueryString.Get("query");
@@ -65,7 +65,7 @@ namespace ConsultaRemota
             var versionAttr =
                 (System.Reflection.AssemblyFileVersionAttribute)Attribute.GetCustomAttribute(QueryPanel1.GetType().Assembly, typeof(System.Reflection.AssemblyFileVersionAttribute));
 
-            LabelVersion.Text = "Version: " + versionAttr.Version;
+            LabelVersion.Text = "Versión: " + versionAttr.Version;
         }
 
         protected void Page_Unload(object sender, EventArgs e)
@@ -119,6 +119,7 @@ namespace ConsultaRemota
             var form = new HtmlForm();
             ResultGrid.EnableViewState = false;
             page.EnableEventValidation = false;
+
             // Realiza las inicializaciones de la instancia de la clase Page que requieran los diseñadores RAD.
             page.DesignerInitialize();
             page.Controls.Add(form);
@@ -128,7 +129,7 @@ namespace ConsultaRemota
             Response.Buffer = true;
             Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
             //Response.ContentType = "application/vnd.ms-excel";
-            Response.AddHeader("Content-Disposition", "attachment;filename=data.xls");
+            Response.AddHeader("Content-Disposition", "attachment;filename=Incidencias.xls");
             Response.Charset = "UTF-8";
             Response.ContentEncoding = Encoding.Default;
             Response.Write(sb.ToString());

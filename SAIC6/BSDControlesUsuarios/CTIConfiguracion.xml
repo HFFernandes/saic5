@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <CTI>
-<cadenaAES>AVAYA#SWITCH1#CSTA#AESC4TLAX</cadenaAES>
-<usuarioAES>cmapi</usuarioAES>
-<pwdAES>Cmapi01.</pwdAES>
-<extensionFisica>10704</extensionFisica>
-<puertoTCP>9998</puertoTCP>
-<Debug>0</Debug>
+    <cadenaAES>AVAYA#SWITCH1#CSTA#AESC4TLAX</cadenaAES>
+    <usuarioAES>cmapi</usuarioAES>
+    <pwdAES>Cmapi01.</pwdAES>
+    <extensionFisica>10704</extensionFisica>
+    <puertoTCP>9998</puertoTCP>
+    <Debug>0</Debug>
 </CTI>

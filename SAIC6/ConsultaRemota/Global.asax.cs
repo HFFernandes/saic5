@@ -13,33 +13,31 @@ namespace ConsultaRemota
 
         protected void Session_Start(object sender, EventArgs e)
         {
-            var ci = System.Threading.Thread.CurrentThread.CurrentUICulture;
-            var lang = ci.ToString();
-
-            if (lang.Length < 3)
+            var cultura = System.Threading.Thread.CurrentThread.CurrentUICulture;
+            var lengua = cultura.ToString();
+            if (lengua.Length < 3)
             {
-                lang = System.Globalization.CultureInfo.CreateSpecificCulture(lang).ToString();
+                lengua = System.Globalization.CultureInfo.CreateSpecificCulture(lengua).ToString();
             }
 
-            Session["currentLanguage"] = lang;
-            var path = AppDomain.CurrentDomain.BaseDirectory;
-            path += "data\\SAI066.xml";
+            Session["currentLanguage"] = lengua;
+            var ruta = AppDomain.CurrentDomain.BaseDirectory;
+            ruta += "data\\SAI066.xml";
 
-            var model = new Korzh.EasyQuery.DataModel { UseResourcesForOperators = true };
+            var modelo = new Korzh.EasyQuery.DataModel { UseResourcesForOperators = true };
+            modelo.LoadFromFile(ruta);
+            Session["DataModel"] = modelo;
 
-            model.LoadFromFile(path);
-            Session["DataModel"] = model;
-
-            var query = new Korzh.EasyQuery.Query { Model = model };
-            query.Formats.DateFormat = "#MM-dd-yyyy#";
-            query.Formats.DateTimeFormat = "#MM-dd-yyyy hh:mm:ss#";
-            query.Formats.QuoteBool = false;
-            query.Formats.QuoteTime = false;
-            query.Formats.SqlQuote1 = '[';
-            query.Formats.SqlQuote2 = ']';
-            query.Formats.SqlSyntax = Korzh.EasyQuery.SqlSyntax.SQL2;
-            query.Formats.TimeFormat = "#hh:mm:ss#";
-            Session["Query"] = query;
+            var consulta = new Korzh.EasyQuery.Query { Model = modelo };
+            consulta.Formats.DateFormat = "#MM-dd-yyyy#";
+            consulta.Formats.DateTimeFormat = "#MM-dd-yyyy hh:mm:ss#";
+            consulta.Formats.QuoteBool = false;
+            consulta.Formats.QuoteTime = false;
+            consulta.Formats.SqlQuote1 = '[';
+            consulta.Formats.SqlQuote2 = ']';
+            consulta.Formats.SqlSyntax = Korzh.EasyQuery.SqlSyntax.SQL2;
+            consulta.Formats.TimeFormat = "#hh:mm:ss#";
+            Session["Query"] = consulta;
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)

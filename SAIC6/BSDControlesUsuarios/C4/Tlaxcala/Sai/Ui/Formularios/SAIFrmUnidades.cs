@@ -47,8 +47,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     //En base al resultado obtenido se agrupan los registros
                     if (unidades.Count > 0)
                     {
-                        axUnidadesDispuestasOcupadas.SortOrder.Add(axUnidadesDispuestasOcupadas.Columns[2]);
-                        axUnidadesDispuestasOcupadas.ShowItemsInGroups = true;
+                        //axUnidadesDispuestasOcupadas.SortOrder.Add(axUnidadesDispuestasOcupadas.Columns[2]);
+                        //axUnidadesDispuestasOcupadas.ShowItemsInGroups = true;
                         axUnidadesDispuestasOcupadas.Populate();
                     }
                 }
