@@ -55,6 +55,24 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         }
 
         /// <summary>
+        /// Constructor para generar una nueva incidencia 089
+        /// </summary>
+        /// <param name="strTelefono">Numero de Telefono</param>
+        public SAIFrm089(string strTelefono)
+        {
+            _blnBloqueaEventos = true;
+            InitializeComponent();
+            this.InsertarIncidencia();
+            this.Text = "Folio " + Convert.ToString(this._Incidencia089.Folio);
+            this.SAIBarraEstado.SizingGrip = false;
+            this.LlenarTipoIncidencias();
+            this.LlenarMunicipios();
+            this.lblFechaHora.Text += "  " + DateTime.Now.ToLocalTime();
+            this.lblOperador.Text += "  " + Aplicacion.UsuarioPersistencia.strNombreUsuario;
+            _blnBloqueaEventos = false;
+        }
+
+        /// <summary>
         /// Constructor para una incidencia ya existente
         /// </summary>
         /// <param name="entIncidencia">Entidad ya existente(Consulta)</param>
