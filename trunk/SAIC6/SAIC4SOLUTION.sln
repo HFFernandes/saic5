@@ -21,28 +21,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSD.C4.Tlaxcala.Sai.Adminis
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsultaRemota", "ConsultaRemota\ConsultaRemota.csproj", "{35AB973A-B07A-47F6-AC65-9AC4059BDB5C}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SaiService", "SaiService\", "{1FBE1BBA-4585-405B-BD94-76754F6F6C1C}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFramework = "2.0"
-		ProjectReferences = "{BE8ABD41-5009-4C17-95B7-898591CD5E8D}|BSD.C4.Tlaxcala.Sai.Dal.Data.dll;{9716832D-4A55-419A-9A48-95462175AF66}|BSD.C4.Tlaxcala.Sai.Dal.Entities.dll;"
-		Debug.AspNetCompiler.VirtualPath = "/SaiService"
-		Debug.AspNetCompiler.PhysicalPath = "SaiService\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\SaiService\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/SaiService"
-		Release.AspNetCompiler.PhysicalPath = "SaiService\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\SaiService\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "1266"
-		DefaultWebSiteLanguage = "Visual C#"
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeEngine.Framework.QueryBuilder", "QueryBuilder\CodeEngine.Framework.QueryBuilder.csproj", "{9281D89A-C56F-4620-B036-1258CDB9B28E}"
 EndProject
 Global
@@ -112,14 +90,6 @@ Global
 		{35AB973A-B07A-47F6-AC65-9AC4059BDB5C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{35AB973A-B07A-47F6-AC65-9AC4059BDB5C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{35AB973A-B07A-47F6-AC65-9AC4059BDB5C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{1FBE1BBA-4585-405B-BD94-76754F6F6C1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1FBE1BBA-4585-405B-BD94-76754F6F6C1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1FBE1BBA-4585-405B-BD94-76754F6F6C1C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{1FBE1BBA-4585-405B-BD94-76754F6F6C1C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{1FBE1BBA-4585-405B-BD94-76754F6F6C1C}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{1FBE1BBA-4585-405B-BD94-76754F6F6C1C}.Release|Any CPU.Build.0 = Debug|Any CPU
-		{1FBE1BBA-4585-405B-BD94-76754F6F6C1C}.Release|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{1FBE1BBA-4585-405B-BD94-76754F6F6C1C}.Release|Mixed Platforms.Build.0 = Debug|Any CPU
 		{9281D89A-C56F-4620-B036-1258CDB9B28E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9281D89A-C56F-4620-B036-1258CDB9B28E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9281D89A-C56F-4620-B036-1258CDB9B28E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU

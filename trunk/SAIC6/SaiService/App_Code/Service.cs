@@ -1,66 +1,62 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Web;
 using System.Web.Services;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 
-[WebService(Namespace = "http://tempuri.org/")]
+[WebService(Namespace = "http://saic4.tlaxcala.gob/")]
 [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
-public class Service : System.Web.Services.WebService
+public class Service : WebService
 {
-    public Service () 
+    public Service()
     {
-
-        
     }
 
-    
     /// <summary>
     /// Guarda una nueva incidencia.
     /// </summary>
     /// <param name="newIncidence">Incidencia,Objeto de tipo incidencia.</param>
     /// <returns>bool,True si la inserción fué correcta,false caso contrario</returns>
     [WebMethod]
-    public bool InsertNewIncidence(Incidencia newIncidence) 
+    public bool InsertNewIncidence(Incidencia newIncidence)
     {
-        Incidencia NuevaIncidencia=new Incidencia();
+        Incidencia NuevaIncidencia = new Incidencia();
         bool exito = true;
+
         try
         {
-            if(newIncidence!=null)
+            if (newIncidence != null)
             {
-
-                NuevaIncidencia.FolioPadre=null;
-                NuevaIncidencia.Descripcion=newIncidence.Descripcion;
-                NuevaIncidencia.Direccion=newIncidence.Direccion;
-                NuevaIncidencia.Referencias=newIncidence.Referencias;
-                NuevaIncidencia.HoraRecepcion=newIncidence.HoraRecepcion;
-                NuevaIncidencia.ClaveEstado=newIncidence.ClaveEstado;
-                NuevaIncidencia.ClaveMunicipio=newIncidence.ClaveMunicipio;
-                NuevaIncidencia.ClaveLocalidad=newIncidence.ClaveLocalidad;
-                NuevaIncidencia.ClaveCodigoPostal=newIncidence.ClaveCodigoPostal;
-                NuevaIncidencia.Telefono=newIncidence.Telefono;
-                NuevaIncidencia.ClaveDenunciante=newIncidence.ClaveDenunciante;
-                NuevaIncidencia.ClaveEstatus=2;//Pendiente
-                NuevaIncidencia.ClaveUsuario=1;//UsuarioWeb
-                NuevaIncidencia.Activo=true;
-                NuevaIncidencia.ClaveTipo=newIncidence.ClaveTipo;
-                NuevaIncidencia.Prioridad=null;
-                NuevaIncidencia.FechaDocumento=null;
-                NuevaIncidencia.NumeroOficio=null;
-                NuevaIncidencia.FechaSuceso=null;
-                NuevaIncidencia.AliasDelincuente=newIncidence.AliasDelincuente;
-                NuevaIncidencia.Imagen=newIncidence.Imagen;
+                NuevaIncidencia.FolioPadre = null;
+                NuevaIncidencia.Descripcion = newIncidence.Descripcion;
+                NuevaIncidencia.Direccion = newIncidence.Direccion;
+                NuevaIncidencia.Referencias = newIncidence.Referencias;
+                NuevaIncidencia.HoraRecepcion = newIncidence.HoraRecepcion;
+                NuevaIncidencia.ClaveEstado = newIncidence.ClaveEstado;
+                NuevaIncidencia.ClaveMunicipio = newIncidence.ClaveMunicipio;
+                NuevaIncidencia.ClaveLocalidad = newIncidence.ClaveLocalidad;
+                NuevaIncidencia.ClaveCodigoPostal = newIncidence.ClaveCodigoPostal;
+                NuevaIncidencia.Telefono = newIncidence.Telefono;
+                NuevaIncidencia.ClaveDenunciante = newIncidence.ClaveDenunciante;
+                NuevaIncidencia.ClaveEstatus = 2;//Pendiente
+                NuevaIncidencia.ClaveUsuario = 1;//UsuarioWeb
+                NuevaIncidencia.Activo = true;
+                NuevaIncidencia.ClaveTipo = newIncidence.ClaveTipo;
+                NuevaIncidencia.Prioridad = null;
+                NuevaIncidencia.FechaDocumento = null;
+                NuevaIncidencia.NumeroOficio = null;
+                NuevaIncidencia.FechaSuceso = null;
+                NuevaIncidencia.AliasDelincuente = newIncidence.AliasDelincuente;
+                NuevaIncidencia.Imagen = newIncidence.Imagen;
                 IncidenciaMapper.Instance().Save(NuevaIncidencia);
             }
-            
+
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             exito = false;
-            throw new Exception(ex.Message);
+            //throw new Exception(ex.Message);
         }
+
         return exito;
     }
 
@@ -72,10 +68,9 @@ public class Service : System.Web.Services.WebService
     [WebMethod]
     public TipoIncidenciaList GetTypesIncidence(TipoSistema tipo)
     {
-
         TipoIncidenciaList lstTipoIncidencias;
 
-        if (tipo== TipoSistema.Sistema_066)
+        if (tipo == TipoSistema.Sistema_066)
         {
             lstTipoIncidencias = TipoIncidenciaMapper.Instance().GetBySistema(2);
         }
@@ -105,10 +100,8 @@ public class Service : System.Web.Services.WebService
     [WebMethod]
     public LocalidadList GetLocalidadesPorMunicipio(int IdMunicipio)
     {
-
         return LocalidadMapper.Instance().GetByMunicipio(IdMunicipio);
     }
-
 
     /// <summary>
     /// Obtiene las colonias de una localidad especificada según el catálogo de SAI.
@@ -127,6 +120,4 @@ public class Service : System.Web.Services.WebService
         Sistema_089 = 089
     }
 
-
-           
 }

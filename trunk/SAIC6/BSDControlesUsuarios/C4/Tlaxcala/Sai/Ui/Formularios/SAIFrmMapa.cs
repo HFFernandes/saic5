@@ -15,8 +15,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
     public partial class SAIFrmMapa : Form
     {
         CMapa mapXML;
-        private string XMLconf;
-        private string path;
+        private readonly string XMLconf;
+        private readonly string path;
 
         /// <summary>
         /// Constructor
@@ -27,7 +27,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             InitializeComponent();
 
-            this.Size = new Size(640, 480);
+            Size = new Size(640, 480);
             this.XMLconf = XMLconf;
             this.path = path;
         }
@@ -43,7 +43,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             InitializeComponent();
 
-            this.Size = new Size(width, height);
+            Size = new Size(width, height);
             this.XMLconf = XMLconf;
             this.path = path;
         }
@@ -384,7 +384,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void ActualizaLbl(bool flag)
         {
-            lblUpdate.Location = new System.Drawing.Point(this.Size.Width / 2, this.Size.Height / 2);
+            lblUpdate.Location = new System.Drawing.Point(Size.Width / 2, Size.Height / 2);
             lblUpdate.Visible = flag;
         }
 

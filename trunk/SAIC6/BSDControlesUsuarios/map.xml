@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map>
     <layer>
-        <file>municipio.TAB</file>
+        <file>MUNICIPIO.TAB</file>
         <layername>MUNICIPIO</layername>
         <labelfield>NOMBRE</labelfield>
         <labelsize>10</labelsize>
@@ -15,7 +15,7 @@
         <visible>true</visible>
     </layer>
     <layer>
-        <file>localidad.TAB</file>
+        <file>LOCALIDAD.TAB</file>
         <layername>LOCALIDAD</layername>
         <labelfield>NOMBRE</labelfield>
         <labelsize>10</labelsize>
@@ -29,8 +29,8 @@
         <visible>true</visible>
     </layer>
     <layer>
-        <file>colonia.TAB</file>
-        <layername>Colonia</layername>
+        <file>COLONIA.TAB</file>
+        <layername>COLONIA</layername>
         <labelfield>NOMBRE</labelfield>
         <labelsize>10</labelsize>
         <showlabel>true</showlabel>
@@ -60,11 +60,11 @@
         <file>CALLE.TAB</file>
         <layername>ID</layername>
         <labelfield>NOMBRE</labelfield>
-        <labelsize>7</labelsize>
+        <labelsize>9</labelsize>
         <showlabel>true</showlabel>
         <type>line</type>
         <fillstyle>UpwardDiagonal</fillstyle>
-        <fillcolor>LightGray</fillcolor>
+        <fillcolor>Black</fillcolor>
         <linestyle>Solid</linestyle>
         <linecolor>Blue</linecolor>
         <size>1</size>

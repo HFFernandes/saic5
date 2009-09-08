@@ -47,6 +47,7 @@
             // saiTxtUnidad
             // 
             this.saiTxtUnidad.BlnEsRequerido = true;
+            this.saiTxtUnidad.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.saiTxtUnidad.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.saiTxtUnidad.Location = new System.Drawing.Point(15, 25);
             this.saiTxtUnidad.Name = "saiTxtUnidad";
