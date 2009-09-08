@@ -1194,7 +1194,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.DatosTitular.Nombre = this.txtNombreDenunciante.Text;
                     this.DatosTitular.ApellidoPaterno = txtApellidosDenunciante.Text;
                     this.DatosTitular.Direccion = this.txtDireccionDenunciante.Text;
-                    this.DatosTitular.ClaveCodigoPostal = Convert.ToInt32(this.cmbCP.Text);
+                    if (!string.IsNullOrEmpty(this.cmbCP.Text))
+                    { this.DatosTitular.ClaveCodigoPostal = Convert.ToInt32(this.cmbCP.Text); }
                     if (EsNuevoTitular)
                     {
                         TelefonoTelmexMapper.Instance().Insert(DatosTitular);
