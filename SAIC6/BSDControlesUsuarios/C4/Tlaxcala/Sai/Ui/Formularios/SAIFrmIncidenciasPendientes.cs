@@ -10,6 +10,10 @@ using System.Diagnostics;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
+    /// <summary>
+    /// Form para la manipulación de incidencias pendientes
+    /// por despachar
+    /// </summary>
     public partial class SAIFrmIncidenciasPendientes : SAIFrmBase
     {
         private List<Incidencia> lstIncidenciasRegistradas;
@@ -17,10 +21,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private List<Incidencia> lstIncidenciasPorRemover;
         private List<ReportRecord> lstRegistrosReporte;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public SAIFrmIncidenciasPendientes()
         {
             InitializeComponent();
+            //Obtenemos el ancho del área de trabajo principal
             Width = Screen.GetWorkingArea(this).Width;
+            //Definimos los eventos de reacción para el listado de registros
             saiReport1.btnLigarIncidencias.Click += btnLigarIncidencias_Click;
             saiReport1.btnDespacharIncidencias.Click += btnDespacharIncidencias_Click;
             saiReport1.btnVistaPrevia.Click += btnVistaPrevia_Click;
@@ -32,6 +41,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             lstRegistrosReporte = new List<ReportRecord>();
         }
 
+        /// <summary>
+        /// Genera una vista previa de impresión de los registros listados
+        /// </summary>
+        /// <param name="sender">generador del evento</param>
+        /// <param name="e">argumentos del evento</param>
         void btnVistaPrevia_Click(object sender, EventArgs e)
         {
             try
@@ -49,6 +63,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void reportControl_RowDblClick(object sender, AxXtremeReportControl._DReportControlEvents_RowDblClickEvent e)
         {
             try
@@ -79,6 +98,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnDespacharIncidencias_Click(object sender, EventArgs e)
         {
             try
@@ -115,6 +139,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnLigarIncidencias_Click(object sender, EventArgs e)
         {
             if (Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_P))

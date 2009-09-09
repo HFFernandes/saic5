@@ -54,6 +54,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
             mapa.ZoomFull();
             mapa.Refresh();
+
+            btnLeyenda_Click(sender,e);
         }
 
         /// <summary>

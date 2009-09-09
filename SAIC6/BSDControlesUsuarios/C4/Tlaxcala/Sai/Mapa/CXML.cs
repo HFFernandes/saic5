@@ -13,7 +13,7 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
                 xDoc.Load(XMLstr);
 
                 var mapaXML = xDoc.GetElementsByTagName("map");
-                var lista = ((XmlElement) mapaXML[0]).GetElementsByTagName("layer");
+                var lista = ((XmlElement)mapaXML[0]).GetElementsByTagName("layer");
                 //CCapa[] capas;
                 var mapa = new CMapa(lista.Count);
                 //capas = new CCapa[lista.Count];
@@ -31,6 +31,7 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
                             size,
                             showlabel,
                             visible;
+
                 foreach (XmlElement nodo in lista)
                 {
                     mapa.Capas[n] = new CCapa();
@@ -43,12 +44,11 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
                     labelsize = nodo.GetElementsByTagName("labelsize");
                     mapa.Capas[n].LabelSize = int.Parse(labelsize[0].InnerText);
                     showlabel = nodo.GetElementsByTagName("showlabel");
-                    if (showlabel[0].InnerText.ToLower() == "true")
-                        mapa.Capas[n].ShowLabel = true;
-                    else
-                        mapa.Capas[n].ShowLabel = false;
+
+                    mapa.Capas[n].ShowLabel = showlabel[0].InnerText.ToLower() == "true";
                     type = nodo.GetElementsByTagName("type");
                     mapa.Capas[n].Type = type[0].InnerText;
+
                     switch (mapa.Capas[n].Type)
                     {
                         case "poly":
@@ -78,13 +78,11 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
                         default:
                             return null;
                     }
+
                     size = nodo.GetElementsByTagName("size");
                     mapa.Capas[n].Size = int.Parse(size[0].InnerText);
                     visible = nodo.GetElementsByTagName("visible");
-                    if (visible[0].InnerText.ToLower() == "true")
-                        mapa.Capas[n].Visible = true;
-                    else
-                        mapa.Capas[n].Visible = false;
+                    mapa.Capas[n].Visible = visible[0].InnerText.ToLower() == "true";
                     n++;
                 }
                 mapa.Count = n;

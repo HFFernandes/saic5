@@ -189,6 +189,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             saiReport1.btnLigarIncidencias.Enabled = saiReport1.reportControl.SelectedRows.Count > 1;
         }
 
+        /// <summary>
+        /// Método para la obtención de registros de manera periodica
+        /// </summary>
         private void ObtenerRegistros()
         {
             try
