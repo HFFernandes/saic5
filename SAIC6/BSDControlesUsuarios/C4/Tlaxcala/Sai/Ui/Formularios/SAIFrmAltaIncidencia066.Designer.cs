@@ -41,7 +41,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.label10 = new System.Windows.Forms.Label();
             this.txtReferencias = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.cmbColonia = new System.Windows.Forms.ComboBox();
-            this.cmbCP = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox(this.components);
             this.cmbMunicipio = new System.Windows.Forms.ComboBox();
             this.cmbLocalidad = new System.Windows.Forms.ComboBox();
             this.cmbTipoIncidencia = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox(this.components);
@@ -67,6 +66,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.txtNombreDenunciante = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.label4 = new System.Windows.Forms.Label();
             this.btnVerDatos = new System.Windows.Forms.Button();
+            this.cmbCP = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.gbDenunciante.SuspendLayout();
@@ -178,22 +178,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.cmbColonia.TabIndex = 5;
             this.cmbColonia.SelectedIndexChanged += new System.EventHandler(this.cmbColonia_SelectedIndexChanged);
             this.cmbColonia.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
-            // 
-            // cmbCP
-            // 
-            this.cmbCP.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbCP.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.cmbCP.ClrBackColorFoco = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.cmbCP.FormattingEnabled = true;
-            this.cmbCP.Location = new System.Drawing.Point(64, 176);
-            this.cmbCP.MaxLength = 5;
-            this.cmbCP.Name = "cmbCP";
-            this.cmbCP.Size = new System.Drawing.Size(205, 21);
-            this.cmbCP.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.cmbCP.TabIndex = 6;
-            this.cmbCP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SoloNumeros_KeyPress);
-            this.cmbCP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
-            this.cmbCP.TextChanged += new System.EventHandler(this.cmbCP_TextChanged);
             // 
             // cmbMunicipio
             // 
@@ -460,11 +444,27 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.btnVerDatos.UseVisualStyleBackColor = true;
             this.btnVerDatos.Click += new System.EventHandler(this.btnVerDatos_Click);
             // 
+            // cmbCP
+            // 
+            this.cmbCP.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.cmbCP.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cmbCP.FormattingEnabled = true;
+            this.cmbCP.Location = new System.Drawing.Point(64, 177);
+            this.cmbCP.MaxLength = 5;
+            this.cmbCP.Name = "cmbCP";
+            this.cmbCP.Size = new System.Drawing.Size(205, 21);
+            this.cmbCP.TabIndex = 52;
+            this.cmbCP.SelectedIndexChanged += new System.EventHandler(this.cmbCP_SelectedIndexChanged);
+            this.cmbCP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbCP_KeyPress);
+            this.cmbCP.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbCP_KeyUp);
+            this.cmbCP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbCP_KeyDown);
+            // 
             // SAIFrmAltaIncidencia066
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(634, 516);
+            this.Controls.Add(this.cmbCP);
             this.Controls.Add(this.btnVerDatos);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.gbDenunciante);
@@ -473,7 +473,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txtReferencias);
             this.Controls.Add(this.cmbColonia);
-            this.Controls.Add(this.cmbCP);
             this.Controls.Add(this.cmbMunicipio);
             this.Controls.Add(this.cmbLocalidad);
             this.Controls.Add(this.cmbTipoIncidencia);
@@ -517,7 +516,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.Controls.SetChildIndex(this.cmbTipoIncidencia, 0);
             this.Controls.SetChildIndex(this.cmbLocalidad, 0);
             this.Controls.SetChildIndex(this.cmbMunicipio, 0);
-            this.Controls.SetChildIndex(this.cmbCP, 0);
             this.Controls.SetChildIndex(this.cmbColonia, 0);
             this.Controls.SetChildIndex(this.txtReferencias, 0);
             this.Controls.SetChildIndex(this.label10, 0);
@@ -526,6 +524,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.Controls.SetChildIndex(this.gbDenunciante, 0);
             this.Controls.SetChildIndex(this.label4, 0);
             this.Controls.SetChildIndex(this.btnVerDatos, 0);
+            this.Controls.SetChildIndex(this.cmbCP, 0);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -548,7 +547,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private System.Windows.Forms.Label label10;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox txtReferencias;
         private ComboBox cmbColonia;
-        private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox cmbCP;
         private ComboBox cmbMunicipio;
         private ComboBox cmbLocalidad;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIComboBox cmbTipoIncidencia;
@@ -574,5 +572,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private System.Windows.Forms.Label label11;
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox txtNombreDenunciante;
         private System.Windows.Forms.Button btnVerDatos;
+        private ComboBox cmbCP;
     }
 }
