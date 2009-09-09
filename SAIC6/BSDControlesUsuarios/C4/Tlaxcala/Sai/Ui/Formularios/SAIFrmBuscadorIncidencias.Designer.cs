@@ -42,6 +42,7 @@
             this.tabPrincipal = new System.Windows.Forms.TabControl();
             this.tabDefinicionConsulta = new System.Windows.Forms.TabPage();
             this.tabResultados = new System.Windows.Forms.TabPage();
+            this.btnExportar = new System.Windows.Forms.ToolStripButton();
             this.ContenedorSplit.Panel1.SuspendLayout();
             this.ContenedorSplit.Panel2.SuspendLayout();
             this.ContenedorSplit.SuspendLayout();
@@ -175,7 +176,8 @@
             // 
             this.barComandos.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.barComandos.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnActualizar});
+            this.btnActualizar,
+            this.btnExportar});
             this.barComandos.Location = new System.Drawing.Point(3, 3);
             this.barComandos.Name = "barComandos";
             this.barComandos.Size = new System.Drawing.Size(912, 25);
@@ -253,6 +255,16 @@
             this.tabResultados.Text = "Resultados Obtenidos";
             this.tabResultados.UseVisualStyleBackColor = true;
             // 
+            // btnExportar
+            // 
+            this.btnExportar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnExportar.Image = ((System.Drawing.Image)(resources.GetObject("btnExportar.Image")));
+            this.btnExportar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnExportar.Name = "btnExportar";
+            this.btnExportar.Size = new System.Drawing.Size(23, 22);
+            this.btnExportar.ToolTipText = "Exportar los resultados a excel";
+            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
+            // 
             // SAIFrmBuscadorIncidencias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -295,5 +307,6 @@
         private System.Windows.Forms.TabControl tabPrincipal;
         private System.Windows.Forms.TabPage tabDefinicionConsulta;
         private System.Windows.Forms.TabPage tabResultados;
+        private System.Windows.Forms.ToolStripButton btnExportar;
     }
 }

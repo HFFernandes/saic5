@@ -124,5 +124,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             //ModeloQuery.SaveToFile(@"D:\SLC.xml");
         }
+
+        private void btnExportar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
