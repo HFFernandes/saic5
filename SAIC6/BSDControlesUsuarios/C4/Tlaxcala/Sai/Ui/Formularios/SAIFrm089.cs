@@ -1,4 +1,7 @@
-﻿using System;
+﻿/*
+ * Hecho por: TSUI DAVID JESUS ENCISO GUADARRAMA
+ */
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
