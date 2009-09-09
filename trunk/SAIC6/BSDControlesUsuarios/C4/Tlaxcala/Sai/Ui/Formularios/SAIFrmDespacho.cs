@@ -231,7 +231,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             if (strComentario != ID.STR_NUEVOCOMENTARIO)
             {
                 _blnComentarioNuevo = true;
-                AgregarRegistro(strComentario, Aplicacion.UsuarioPersistencia.strNombreUsuario);
+                AgregarRegistro(strComentario.ToUpper(), Aplicacion.UsuarioPersistencia.strNombreUsuario);
 
                 LimpiarEncabezado(true);
                 axComentarios.Populate();
