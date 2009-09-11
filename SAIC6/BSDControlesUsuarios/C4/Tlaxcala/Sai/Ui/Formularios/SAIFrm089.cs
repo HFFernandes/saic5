@@ -123,7 +123,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                     this.chkFechaDoc.Enabled = bloquear;
 
-                    this.btnDependencias.Enabled = bloquear;
+                    //this.btnDependencias.Enabled = bloquear;
                 }
                 catch (Exception ex)
                 { throw new SAIExcepcion(ex.Message); }
