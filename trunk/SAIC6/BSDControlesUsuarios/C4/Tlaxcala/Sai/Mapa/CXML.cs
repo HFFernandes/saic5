@@ -91,12 +91,8 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
 
             catch (Exception exp)
             {
-                CError.EscribeLog(exp);
+                //CError.EscribeLog(exp);
                 return null;
-            }
-            finally
-            {
-                CError.EscribeLog();
             }
         }
 
