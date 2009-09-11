@@ -90,6 +90,7 @@
             this.pnResumenIncidencias.Name = "pnResumenIncidencias";
             this.pnResumenIncidencias.Size = new System.Drawing.Size(201, 60);
             this.pnResumenIncidencias.TabIndex = 2;
+            this.pnResumenIncidencias.Visible = false;
             // 
             // saiTxtPrioridad5
             // 
@@ -236,7 +237,7 @@
             // tssInfo
             // 
             this.tssInfo.Name = "tssInfo";
-            this.tssInfo.Size = new System.Drawing.Size(32, 17);
+            this.tssInfo.Size = new System.Drawing.Size(29, 17);
             this.tssInfo.Text = "Listo";
             // 
             // SAIFrmComandos

@@ -92,7 +92,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.lblTitulo.Location = new System.Drawing.Point(181, 15);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(318, 24);
-            this.lblTitulo.TabIndex = 27;
+            this.lblTitulo.TabIndex = 0;
             this.lblTitulo.Text = "REGISTRO DE NUEVA INCIDENCIA";
             // 
             // groupBox1
@@ -104,7 +104,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.groupBox1.Location = new System.Drawing.Point(2, 51);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(620, 29);
-            this.groupBox1.TabIndex = 28;
+            this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
             // lblOperador
@@ -151,7 +151,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.label10.Location = new System.Drawing.Point(3, 207);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(67, 13);
-            this.label10.TabIndex = 43;
+            this.label10.TabIndex = 16;
             this.label10.Text = "Referencias:";
             // 
             // txtReferencias
@@ -164,7 +164,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.txtReferencias.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtReferencias.Size = new System.Drawing.Size(528, 44);
             this.txtReferencias.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtReferencias.TabIndex = 7;
+            this.txtReferencias.TabIndex = 17;
             this.txtReferencias.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
             // 
             // cmbColonia
@@ -175,7 +175,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.cmbColonia.Location = new System.Drawing.Point(374, 177);
             this.cmbColonia.Name = "cmbColonia";
             this.cmbColonia.Size = new System.Drawing.Size(248, 21);
-            this.cmbColonia.TabIndex = 5;
+            this.cmbColonia.TabIndex = 15;
             this.cmbColonia.SelectedIndexChanged += new System.EventHandler(this.cmbColonia_SelectedIndexChanged);
             this.cmbColonia.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
             // 
@@ -187,7 +187,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.cmbMunicipio.MaxLength = 75;
             this.cmbMunicipio.Name = "cmbMunicipio";
             this.cmbMunicipio.Size = new System.Drawing.Size(205, 21);
-            this.cmbMunicipio.TabIndex = 3;
+            this.cmbMunicipio.TabIndex = 9;
             this.cmbMunicipio.SelectedIndexChanged += new System.EventHandler(this.cmbMunicipio_SelectedIndexChanged);
             this.cmbMunicipio.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
             // 
@@ -199,7 +199,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.cmbLocalidad.Location = new System.Drawing.Point(374, 146);
             this.cmbLocalidad.Name = "cmbLocalidad";
             this.cmbLocalidad.Size = new System.Drawing.Size(248, 21);
-            this.cmbLocalidad.TabIndex = 4;
+            this.cmbLocalidad.TabIndex = 11;
             this.cmbLocalidad.SelectedIndexChanged += new System.EventHandler(this.cmbLocalidad_SelectedIndexChanged);
             this.cmbLocalidad.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
             // 
@@ -214,8 +214,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.cmbTipoIncidencia.Name = "cmbTipoIncidencia";
             this.cmbTipoIncidencia.Size = new System.Drawing.Size(214, 21);
             this.cmbTipoIncidencia.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.cmbTipoIncidencia.TabIndex = 1;
+            this.cmbTipoIncidencia.TabIndex = 5;
             this.cmbTipoIncidencia.SelectedIndexChanged += new System.EventHandler(this.cmbTipoIncidencia_SelectedIndexChanged);
+            this.cmbTipoIncidencia.Leave += new System.EventHandler(this.cmbTipoIncidencia_Leave);
             this.cmbTipoIncidencia.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
             // 
             // txtDescripcion
@@ -228,7 +229,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.txtDescripcion.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtDescripcion.Size = new System.Drawing.Size(529, 44);
             this.txtDescripcion.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtDescripcion.TabIndex = 8;
+            this.txtDescripcion.TabIndex = 19;
             this.txtDescripcion.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
             // 
             // lblDescripcionIncidencia
@@ -237,7 +238,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.lblDescripcionIncidencia.Location = new System.Drawing.Point(-1, 259);
             this.lblDescripcionIncidencia.Name = "lblDescripcionIncidencia";
             this.lblDescripcionIncidencia.Size = new System.Drawing.Size(91, 26);
-            this.lblDescripcionIncidencia.TabIndex = 45;
+            this.lblDescripcionIncidencia.TabIndex = 18;
             this.lblDescripcionIncidencia.Text = "  Descripción \r\n  de la Incidencia:";
             // 
             // label9
@@ -246,7 +247,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.label9.Location = new System.Drawing.Point(323, 183);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(45, 13);
-            this.label9.TabIndex = 41;
+            this.label9.TabIndex = 14;
             this.label9.Text = "Colonia:";
             // 
             // label8
@@ -255,7 +256,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.label8.Location = new System.Drawing.Point(3, 180);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(30, 13);
-            this.label8.TabIndex = 39;
+            this.label8.TabIndex = 12;
             this.label8.Text = "C.P.:";
             // 
             // label7
@@ -264,7 +265,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.label7.Location = new System.Drawing.Point(312, 154);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(56, 13);
-            this.label7.TabIndex = 37;
+            this.label7.TabIndex = 10;
             this.label7.Text = "Localidad:";
             // 
             // label6
@@ -273,7 +274,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.label6.Location = new System.Drawing.Point(3, 156);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(55, 13);
-            this.label6.TabIndex = 35;
+            this.label6.TabIndex = 8;
             this.label6.Text = "Municipio:";
             // 
             // txtDireccion
@@ -285,7 +286,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(558, 20);
             this.txtDireccion.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtDireccion.TabIndex = 2;
+            this.txtDireccion.TabIndex = 7;
             this.txtDireccion.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
             // 
             // label5
@@ -294,7 +295,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.label5.Location = new System.Drawing.Point(3, 122);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(55, 13);
-            this.label5.TabIndex = 33;
+            this.label5.TabIndex = 6;
             this.label5.Text = "Dirección:";
             // 
             // lblTipoIncidencia
@@ -303,7 +304,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.lblTipoIncidencia.Location = new System.Drawing.Point(272, 91);
             this.lblTipoIncidencia.Name = "lblTipoIncidencia";
             this.lblTipoIncidencia.Size = new System.Drawing.Size(98, 13);
-            this.lblTipoIncidencia.TabIndex = 31;
+            this.lblTipoIncidencia.TabIndex = 4;
             this.lblTipoIncidencia.Text = "Tipo de Incidencia:";
             // 
             // txtTelefono
@@ -314,7 +315,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(203, 20);
             this.txtTelefono.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtTelefono.TabIndex = 0;
+            this.txtTelefono.TabIndex = 3;
             this.txtTelefono.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
             this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SoloNumeros_KeyPress);
             // 
@@ -324,18 +325,20 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.lblTelefono.Location = new System.Drawing.Point(3, 91);
             this.lblTelefono.Name = "lblTelefono";
             this.lblTelefono.Size = new System.Drawing.Size(52, 13);
-            this.lblTelefono.TabIndex = 29;
+            this.lblTelefono.TabIndex = 2;
             this.lblTelefono.Text = "Teléfono:";
             // 
             // cklCorporacion
             // 
+            this.cklCorporacion.CheckOnClick = true;
             this.cklCorporacion.FormattingEnabled = true;
             this.cklCorporacion.Location = new System.Drawing.Point(94, 311);
             this.cklCorporacion.Name = "cklCorporacion";
             this.cklCorporacion.Size = new System.Drawing.Size(528, 94);
-            this.cklCorporacion.TabIndex = 9;
-            this.cklCorporacion.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.cklCorporacion_ItemCheck);
+            this.cklCorporacion.TabIndex = 21;
+            this.cklCorporacion.MouseUp += new System.Windows.Forms.MouseEventHandler(this.cklCorporacion_MouseUp);
             this.cklCorporacion.Leave += new System.EventHandler(this.cklCorporacion_Leave);
+            this.cklCorporacion.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cklCorporacion_KeyUp);
             this.cklCorporacion.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
             // 
             // label3
@@ -344,7 +347,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.label3.Location = new System.Drawing.Point(3, 311);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(81, 13);
-            this.label3.TabIndex = 48;
+            this.label3.TabIndex = 20;
             this.label3.Text = "Corporaciones :";
             // 
             // gbDenunciante
@@ -358,7 +361,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.gbDenunciante.Location = new System.Drawing.Point(94, 411);
             this.gbDenunciante.Name = "gbDenunciante";
             this.gbDenunciante.Size = new System.Drawing.Size(528, 79);
-            this.gbDenunciante.TabIndex = 10;
+            this.gbDenunciante.TabIndex = 23;
             this.gbDenunciante.TabStop = false;
             // 
             // txtDireccionDenunciante
@@ -370,7 +373,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.txtDireccionDenunciante.Name = "txtDireccionDenunciante";
             this.txtDireccionDenunciante.Size = new System.Drawing.Size(460, 20);
             this.txtDireccionDenunciante.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtDireccionDenunciante.TabIndex = 3;
+            this.txtDireccionDenunciante.TabIndex = 5;
             this.txtDireccionDenunciante.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
             // 
             // label13
@@ -379,7 +382,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.label13.Location = new System.Drawing.Point(6, 44);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(58, 13);
-            this.label13.TabIndex = 54;
+            this.label13.TabIndex = 4;
             this.label13.Text = "Dirección :";
             // 
             // label12
@@ -388,7 +391,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.label12.Location = new System.Drawing.Point(211, 19);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(55, 13);
-            this.label12.TabIndex = 53;
+            this.label12.TabIndex = 2;
             this.label12.Text = "Apellidos :";
             // 
             // txtApellidosDenunciante
@@ -400,7 +403,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.txtApellidosDenunciante.Name = "txtApellidosDenunciante";
             this.txtApellidosDenunciante.Size = new System.Drawing.Size(250, 20);
             this.txtApellidosDenunciante.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtApellidosDenunciante.TabIndex = 2;
+            this.txtApellidosDenunciante.TabIndex = 3;
             this.txtApellidosDenunciante.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
             // 
             // label11
@@ -409,7 +412,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.label11.Location = new System.Drawing.Point(6, 19);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(50, 13);
-            this.label11.TabIndex = 51;
+            this.label11.TabIndex = 0;
             this.label11.Text = "Nombre :";
             // 
             // txtNombreDenunciante
@@ -430,7 +433,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.label4.Location = new System.Drawing.Point(3, 411);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 13);
-            this.label4.TabIndex = 50;
+            this.label4.TabIndex = 22;
             this.label4.Text = "Denunciante :";
             // 
             // btnVerDatos
@@ -439,7 +442,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.btnVerDatos.Location = new System.Drawing.Point(373, 87);
             this.btnVerDatos.Name = "btnVerDatos";
             this.btnVerDatos.Size = new System.Drawing.Size(33, 23);
-            this.btnVerDatos.TabIndex = 51;
+            this.btnVerDatos.TabIndex = 24;
             this.btnVerDatos.Text = "(...)";
             this.btnVerDatos.UseVisualStyleBackColor = true;
             this.btnVerDatos.Click += new System.EventHandler(this.btnVerDatos_Click);
@@ -453,7 +456,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.cmbCP.MaxLength = 5;
             this.cmbCP.Name = "cmbCP";
             this.cmbCP.Size = new System.Drawing.Size(205, 21);
-            this.cmbCP.TabIndex = 52;
+            this.cmbCP.TabIndex = 13;
             this.cmbCP.SelectedIndexChanged += new System.EventHandler(this.cmbCP_SelectedIndexChanged);
             this.cmbCP.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbCP_KeyPress);
             this.cmbCP.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbCP_KeyUp);
