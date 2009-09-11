@@ -39,6 +39,7 @@
             // gvDependencias
             // 
             this.gvDependencias.AllowUserToAddRows = false;
+            this.gvDependencias.AllowUserToDeleteRows = false;
             this.gvDependencias.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.gvDependencias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvDependencias.Location = new System.Drawing.Point(12, 199);
