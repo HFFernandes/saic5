@@ -688,18 +688,23 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.ActualizarIncidencia();
         }
 
+        /// <summary>
+        /// Evento que se ejecuta cuando se modifica el numero de oficio
+        /// </summary>
         private void txtOficioEnvio_TextChanged(object sender, EventArgs e)
         {
+            //si se ha capturado texto
             if (this.txtOficioEnvio.Text != string.Empty || this.txtOficioEnvio.Text.Length > 0)
             {
                 Entidades.IncidenciaDependenciaList lstIncidenciaDependencia = Mappers.IncidenciaDependenciaMapper.Instance().GetByIncidencia(this._Incidencia089.Folio);
-                if (lstIncidenciaDependencia.Count > 0)
+                if (lstIncidenciaDependencia.Count > 0)//se verifica si tiene dependencias
                 {
-                    this.txtOficioEnvio.Text = this._Incidencia089.NumeroOficio;
-                    
+                    //si tiene se escrie el numero de oficio No se puede cmabiar si tiene asignadas ya dependencias
+                    this.txtOficioEnvio.Text = this._Incidencia089.NumeroOficio;                    
                 }
                 else 
                 {
+                    //no tiene dependencias y se asigna el estatus a 2
                     this._Incidencia089.ClaveEstatus = 2;
                     this.ActualizarIncidencia();
                 }
@@ -708,13 +713,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             else
             {
                 Entidades.IncidenciaDependenciaList lstIncidenciaDependencia = Mappers.IncidenciaDependenciaMapper.Instance().GetByIncidencia(this._Incidencia089.Folio);
-                if (lstIncidenciaDependencia.Count > 0)
+                if (lstIncidenciaDependencia.Count > 0)//tiene dependencias
                 {
+                    //el numeor de ofici ya asignado no puede cambiar
                     this.txtOficioEnvio.Text = this._Incidencia089.NumeroOficio;
                     this.btnDependencias.Enabled = true;
                 }
                 else
                 {
+                    //no tiene dependencias y si es borrado el numero de oficio, el estatus es 1
                     this._Incidencia089.ClaveEstatus = 1;
                     this.ActualizarIncidencia();
                     this.btnDependencias.Enabled = false;
