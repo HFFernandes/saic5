@@ -657,38 +657,69 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void txtOficioEnvio_Leave(object sender, EventArgs e)
         {
             Entidades.IncidenciaDependenciaList lstInsDependencia = Mappers.IncidenciaDependenciaMapper.Instance().GetByIncidencia(this._Incidencia089.Folio);
-            if (lstInsDependencia.Count > 0)
+            if (lstInsDependencia.Count > 0)//Si tiene de pendencias
             {
                 this.txtOficioEnvio.Text = this._Incidencia089.NumeroOficio;
-                if (this._Incidencia089.ClaveEstatus < 3)
-                {                    
-                    this._Incidencia089.ClaveEstatus = 3;
+                bool completo = false;//bandera para verificar si esta completo (cada dependencia tiene ambas fechas asignadas) o nel
+                foreach (Entidades.IncidenciaDependencia dependencia in lstInsDependencia)
+                {
+                    if (dependencia.FechaEnvioDependencia.HasValue && dependencia.FechaNotificacion.HasValue)//ambas fechas tienen valor asignado
+                    { completo = true; }
+                    else
+                    { completo = false; } 
                 }
+                if (!completo)//le faltan fechas a capturar
+                { this._Incidencia089.ClaveEstatus = 3; }
+                else { this._Incidencia089.ClaveEstatus = 4; }//esta completo
             }
-            else 
+            else //si no tiene dependencias
             {
+                //si se ha capturado un numeor de oficio
                 if (this.txtOficioEnvio.Text != string.Empty)
                 {
                     this._Incidencia089.ClaveEstatus = 2;
                 }
-                else
+                else//si no se ha capturado numero de oficio
                 {
-                    this._Incidencia089.ClaveEstatus = 2;
+                    this._Incidencia089.ClaveEstatus = 1;
                 }
             }
-            this._Incidencia089.ClaveEstatus = 2;
+            
             this.ActualizarIncidencia();
         }
 
         private void txtOficioEnvio_TextChanged(object sender, EventArgs e)
         {
-            if (this.txtOficioEnvio.Text != string.Empty)
+            if (this.txtOficioEnvio.Text != string.Empty || this.txtOficioEnvio.Text.Length > 0)
             {
+                Entidades.IncidenciaDependenciaList lstIncidenciaDependencia = Mappers.IncidenciaDependenciaMapper.Instance().GetByIncidencia(this._Incidencia089.Folio);
+                if (lstIncidenciaDependencia.Count > 0)
+                {
+                    this.txtOficioEnvio.Text = this._Incidencia089.NumeroOficio;
+                    
+                }
+                else 
+                {
+                    this._Incidencia089.ClaveEstatus = 2;
+                    this.ActualizarIncidencia();
+                }
                 this.btnDependencias.Enabled = true;
             }
             else
             {
-                this.btnDependencias.Enabled = false;
+                Entidades.IncidenciaDependenciaList lstIncidenciaDependencia = Mappers.IncidenciaDependenciaMapper.Instance().GetByIncidencia(this._Incidencia089.Folio);
+                if (lstIncidenciaDependencia.Count > 0)
+                {
+                    this.txtOficioEnvio.Text = this._Incidencia089.NumeroOficio;
+                    this.btnDependencias.Enabled = true;
+                }
+                else
+                {
+                    this._Incidencia089.ClaveEstatus = 1;
+                    this.ActualizarIncidencia();
+                    this.btnDependencias.Enabled = false;
+                }
+                
             }
         }
 
