@@ -3,11 +3,6 @@
 //Empresa :InfinitySoft TI Experts
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
@@ -37,17 +32,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this._blnBloqueaEventos = true;
             InitializeComponent();
 
-            
-
             //Creamos la nueva incidencia.
             this.CrearNuevaIncidencia();
-            this.Text = string.Format("REGISTRO DE NUEVA INCIDENCIA FOLIO: {0}",this.entIncidencia.Folio);
+            this.Text = string.Format("REGISTRO DE NUEVA INCIDENCIA FOLIO: {0}", this.entIncidencia.Folio);
             //Inicializamos las listas
 
             this.CargarMunicipios();
             this.CargarTiposIncidencias();
             this.CargarCoorporaciones();
-            
+
             //Buscamos los datos del titular de la linea
             //this.ObtenerTitularLinea(noTelefono);
 
@@ -60,7 +53,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         /// <param name="oIncidencia">Incidencia,Objeto de tipo Incidencia.</param>
         /// <param name="esSoloLectura">bool, Indica si el formulario se debe mostrar con solo lectura.</param>
-        public SAIFrmAltaIncidencia066(Incidencia oIncidencia,bool esSoloLectura)
+        public SAIFrmAltaIncidencia066(Incidencia oIncidencia, bool esSoloLectura)
         {
             InitializeComponent();
             this._blnBloqueaEventos = true;
@@ -83,7 +76,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             //Verificamos si debe estar como solo lectura.
             EsSoloLectura = esSoloLectura;
             this._blnBloqueaEventos = false;
-            
+
         }
 
 
@@ -115,12 +108,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// si se va a guardar la incidencia en los eventos Leave de los controles, si está en falso se guardan
         /// los datos en dichos eventos, de lo contrario no se guarda la incidencia en tales eventos.
         /// </summary>
-        protected Boolean _blnSeActivoClosed;
+        protected bool _blnSeActivoClosed;
+
         /// <summary>
         /// Bandera que se utiliza para detener el disparo en cascada de los eventos SelectedIndexChanged
         /// para las listas de municipios, localidades, colonias y códigos postales.
         /// </summary>
-        private Boolean _blnBloqueaEventos;
+        private bool _blnBloqueaEventos;
 
         #region PARA PERSONA EXTRAVIADA
 
@@ -173,17 +167,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <summary>
         /// Contiene la lista de localidades por municipio.
         /// </summary>
-        LocalidadList objListaLocalidades;
+        //LocalidadList objListaLocalidades;
 
         /// <summary>
         /// Contiene la lista de códigos postales.
         /// </summary>
-        CodigoPostalList objListaCodigosPostales = new CodigoPostalList();
+        //CodigoPostalList objListaCodigosPostales = new CodigoPostalList();
 
         /// <summary>
         /// Representa un código postal.
         /// </summary>
-        CodigoPostal entCodigoPostal;
+        //CodigoPostal entCodigoPostal;
 
         /// <summary>
         /// Contiene todos los datos del usuario logueado.
@@ -193,12 +187,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <summary>
         /// Indica si el formulario esta en modo edición
         /// </summary>
-        protected bool EsModoEdicion = false;
+        protected bool EsModoEdicion;
 
         /// <summary>
         /// Indica si se debe disparar los eventos en cascada desde Municipio,localidad,colonia,código postal.
         /// </summary>
-        private bool DispararCascadaHaciaAbajo = false;
+        //private bool DispararCascadaHaciaAbajo;
 
         /// <summary>
         /// Indica si se debe disparar los eventos en cascada desde Codigo Postal,colonia,localidad y municipio.
@@ -209,13 +203,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         #region PROPIEDADES
 
-        bool esSoloLectura = false;
+        bool esSoloLectura;
 
         /// <summary>
         /// Obtiene o establece el valor que indica si el formulario será de solo lectura
         /// </summary>
         /// <remarks>Cuando esta propiedad es verdadera, los controles hijos del formulario se convierten a solo lectura</remarks>
-        public Boolean EsSoloLectura
+        public bool EsSoloLectura
         {
             get { return esSoloLectura; }
             set
@@ -289,7 +283,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.txtApellidosDenunciante.Text = Denunciante.Apellido;
                 }
 
-
                 if (this.entIncidencia.ClaveEstado.HasValue && this.entIncidencia.ClaveMunicipio.HasValue)
                 {
                     //Selecciona el muncipio correspondiente
@@ -355,20 +348,20 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }*/
 
                 //Buscamos las corporaciones y las seleccionamos.
-                CorporacionIncidenciaList Corporaciones= CorporacionIncidenciaMapper.Instance().GetByIncidencia(this.entIncidencia.Folio);
+                CorporacionIncidenciaList Corporaciones = CorporacionIncidenciaMapper.Instance().GetByIncidencia(this.entIncidencia.Folio);
                 foreach (CorporacionIncidencia corporacion in Corporaciones)
                 {
-                    Corporacion corp=CorporacionMapper.Instance().GetOne(corporacion.ClaveCorporacion);
+                    Corporacion corp = CorporacionMapper.Instance().GetOne(corporacion.ClaveCorporacion);
 
-                    for (int i = 0; i <this.cklCorporacion.Items.Count; i++)
+                    for (int i = 0; i < this.cklCorporacion.Items.Count; i++)
                     {
-                        object elemento = this.cklCorporacion.Items[i];
-                        if(elemento.ToString()==corp.Descripcion)
+                        var elemento = this.cklCorporacion.Items[i];
+                        if (elemento.ToString() == corp.Descripcion)
                         {
                             this.cklCorporacion.SetItemChecked(i, true);
                         }
                     }
-                    
+
                 }
                 //Checamos el tipo de incidencia y obtenemos los objetos dependientes como Vehiculos Robados,Accesorios o Personas extraviadas.
                 //Seleccionamos el tipo de incidencia.
@@ -379,63 +372,63 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 {
                     //Robo de vehículo totalidad.
                     case 131:
-                            if (ListaVehiculosRobados==null)
-                            { ListaVehiculosRobados = new VehiculoObjectList(); }
+                        if (ListaVehiculosRobados == null)
+                        { ListaVehiculosRobados = new VehiculoObjectList(); }
 
-                            VehiculoObject vehiculo;
-                            //Obtenemos la lista de los vehiculos robados.
-                            VehiculoRobadoObjectList VehiculosXIncidencia = VehiculoRobadoMapper.Instance().GetByIncidencia(entIncidencia.Folio);
-                            foreach (VehiculoRobadoObject vehiculoRobado in VehiculosXIncidencia)
-                            {
-                                //Obtenemos los datos del vehiculo y lo metemos en la lista
-                                vehiculo = VehiculoMapper.Instance().GetOne(vehiculoRobado.ClaveVehiculo);
-                                ListaVehiculosRobados.Add(vehiculo);
-                            }
-                            //Obtenemos los datos del propierario
-                            objPropietarioVehiculo =PropietarioVehiculoMapper.Instance().GetOne(VehiculosXIncidencia[0].ClavePropietario.Value);
+                        VehiculoObject vehiculo;
+                        //Obtenemos la lista de los vehiculos robados.
+                        VehiculoRobadoObjectList VehiculosXIncidencia = VehiculoRobadoMapper.Instance().GetByIncidencia(entIncidencia.Folio);
+                        foreach (VehiculoRobadoObject vehiculoRobado in VehiculosXIncidencia)
+                        {
+                            //Obtenemos los datos del vehiculo y lo metemos en la lista
+                            vehiculo = VehiculoMapper.Instance().GetOne(vehiculoRobado.ClaveVehiculo);
+                            ListaVehiculosRobados.Add(vehiculo);
+                        }
+                        //Obtenemos los datos del propierario
+                        objPropietarioVehiculo = PropietarioVehiculoMapper.Instance().GetOne(VehiculosXIncidencia[0].ClavePropietario.Value);
 
                         break;
 
                     //Robo de vehiculos accesorios.
                     case 130:
-                            //Obtenemos los datos generales del robo de accesorios
-                            if (DatosRoboAccesorios == null)
-                            { DatosRoboAccesorios = new RoboAccesorios(); }
-                            DatosRoboAccesorios = RoboAccesoriosMapper.Instance().GetByIncidencia(entIncidencia.Folio)[0];
-                           
-                            //Obtenemos la lista de accesorios robados.
-                            ListaAccesoriosRobados = RoboVehiculoAccesoriosMapper.Instance().GetByRoboAccesorios(DatosRoboAccesorios.IdRoboAccesorio);
+                        //Obtenemos los datos generales del robo de accesorios
+                        if (DatosRoboAccesorios == null)
+                        { DatosRoboAccesorios = new RoboAccesorios(); }
+                        DatosRoboAccesorios = RoboAccesoriosMapper.Instance().GetByIncidencia(entIncidencia.Folio)[0];
 
-                            //Obtenemos los vehiculos involucrados.
-                            if (ListaVehiculosInvolucrados==null)
-                            {ListaVehiculosInvolucrados = new VehiculoObjectList();}
-                            VehiculoObject vehiculoInvolucrado;
-                            foreach (RoboVehiculoAccesorios accesorio in ListaAccesoriosRobados)
+                        //Obtenemos la lista de accesorios robados.
+                        ListaAccesoriosRobados = RoboVehiculoAccesoriosMapper.Instance().GetByRoboAccesorios(DatosRoboAccesorios.IdRoboAccesorio);
+
+                        //Obtenemos los vehiculos involucrados.
+                        if (ListaVehiculosInvolucrados == null)
+                        { ListaVehiculosInvolucrados = new VehiculoObjectList(); }
+                        VehiculoObject vehiculoInvolucrado;
+                        foreach (RoboVehiculoAccesorios accesorio in ListaAccesoriosRobados)
+                        {
+                            //vehiculoInvolucrado = new VehiculoObject();
+                            vehiculoInvolucrado = VehiculoMapper.Instance().GetOne(accesorio.ClaveVehiculo.Value);
+                            if (!ListaVehiculosInvolucrados.Contains(vehiculoInvolucrado))
                             {
-                                vehiculoInvolucrado = new VehiculoObject();
-                                vehiculoInvolucrado = VehiculoMapper.Instance().GetOne(accesorio.ClaveVehiculo.Value);
-                                if (!ListaVehiculosInvolucrados.Contains(vehiculoInvolucrado))
-                                {
-                                    ListaVehiculosInvolucrados.Add(vehiculoInvolucrado);
-                                }
+                                ListaVehiculosInvolucrados.Add(vehiculoInvolucrado);
                             }
+                        }
 
                         break;
 
                     //Extravio de persona.
                     case 103:
                     case 235:
-                            //Obtenemos las personas extraviadas para esta incidencia.
-                            if (ListaPersonasExtraviadas==null)
-                            {ListaPersonasExtraviadas = new PersonaExtraviadaList();}
-                            ListaPersonasExtraviadas = PersonaExtraviadaMapper.Instance().GetByIncidencia(entIncidencia.Folio);
+                        //Obtenemos las personas extraviadas para esta incidencia.
+                        if (ListaPersonasExtraviadas == null)
+                        { ListaPersonasExtraviadas = new PersonaExtraviadaList(); }
+                        ListaPersonasExtraviadas = PersonaExtraviadaMapper.Instance().GetByIncidencia(entIncidencia.Folio);
                         break;
                 }
-            
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar información de la incidencia : "+ex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("Error al cargar información de la incidencia : " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -450,45 +443,50 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             return denunciante;
         }
 
-        /// <summary>
-        /// Actualiza la información en la colección global de ventanas de la incidencia actual
-        /// </summary>
-        private void ActualizaVentanaIncidencias()
-        {
-            try
-            {
-                try
+        /*
+                /// <summary>
+                /// Actualiza la información en la colección global de ventanas de la incidencia actual
+                /// </summary>
+                private void ActualizaVentanaIncidencias()
                 {
-                    for (int i = 0; i < Aplicacion.VentanasIncidencias.Count; i++)
+                    try
                     {
-                        if (Aplicacion.VentanasIncidencias[i].Ventana == this)
+                        try
                         {
-                            Aplicacion.VentanasIncidencias[i].Folio = entIncidencia.Folio.ToString();
-                            if (entIncidencia.Descripcion != string.Empty)
-                                Aplicacion.VentanasIncidencias[i].Informacion += "Descripción: " + entIncidencia.Descripcion;
-                            
-                            if (entIncidencia.Referencias != string.Empty)
-                                Aplicacion.VentanasIncidencias[i].Informacion += "Referencias: " + entIncidencia.Referencias;
+                            for (int i = 0; i < Aplicacion.VentanasIncidencias.Count; i++)
+                            {
+                                if (Aplicacion.VentanasIncidencias[i].Ventana == this)
+                                {
+                                    Aplicacion.VentanasIncidencias[i].Folio = entIncidencia.Folio.ToString();
+                                    if (entIncidencia.Descripcion != string.Empty)
+                                        Aplicacion.VentanasIncidencias[i].Informacion += "Descripción: " + entIncidencia.Descripcion;
+
+                                    if (entIncidencia.Referencias != string.Empty)
+                                        Aplicacion.VentanasIncidencias[i].Informacion += "Referencias: " + entIncidencia.Referencias;
+                                }
+                            }
+                        }
+                        catch (System.Exception ex)
+                        {
+                            throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
                         }
                     }
-                }
-                catch (System.Exception ex)
-                {
-                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
-                }
-            }
-            catch (SAIExcepcion) { }
+                    catch (SAIExcepcion) { }
 
-        }
+                }
+        */
 
         /// <summary>
         /// Guarda las corporaciones asociadas a la incidencia
         /// </summary>
         private void GuardaCorporaciones()
         {
+            //if (!_blnDirty)
+            //    return;
+
             IEnumerator myEnumerator;
             CorporacionList ListaCorporaciones = this.ObtenerCorporaciones();
-            Boolean blnTieneDatos = false;
+            bool blnTieneDatos = false;
             CorporacionIncidenciaList lstCorporacionIncidencia;
 
             try
@@ -543,15 +541,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
                     this.entIncidencia.ClaveEstatus = 1;
 
-                    IncidenciaMapper.Instance().Save(this.entIncidencia);
+                    //IncidenciaMapper.Instance().Save(this.entIncidencia);
 
                     CorporacionIncidenciaMapper.Instance().DeleteByIncidencia(this.entIncidencia.Folio);
 
                     myEnumerator = this.cklCorporacion.CheckedIndices.GetEnumerator();
-                    int y;
-                    while (myEnumerator.MoveNext() != false)
+                    //int y;
+                    while (myEnumerator.MoveNext())
                     {
-                        y = (int)myEnumerator.Current;
+                        int y = (int)myEnumerator.Current;
                         foreach (Corporacion objCorporacion in ListaCorporaciones)
                         {
                             if (this.cklCorporacion.Items[y].ToString() == objCorporacion.Descripcion)
@@ -565,9 +563,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     if (blnTieneDatos)
                     {
                         this.entIncidencia.ClaveEstatus = 2;
-                        IncidenciaMapper.Instance().Save(this.entIncidencia);
+                        //IncidenciaMapper.Instance().Save(this.entIncidencia);
 
                     }
+
+                    IncidenciaMapper.Instance().Save(this.entIncidencia);
                 }
                 catch (System.Exception ex)
                 {
@@ -584,18 +584,18 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="idRoboAccesorio">int, Id del robo</param>
         /// <param name="idVehiculoActual">int,Id de vehiculo despues de guardar</param>
         /// <param name="idVehiculoAnterior">int,Id del vehiculo despues de guardar</param>
-        private void GuardarAccesoriosPorVehiculo(int idRoboAccesorio,int idVehiculoActual,int idVehiculoAnterior)
+        private void GuardarAccesoriosPorVehiculo(int idRoboAccesorio, int idVehiculoActual, int idVehiculoAnterior)
         {
             //Guardamos los accesorios robados
             foreach (RoboVehiculoAccesorios accesorio in this.ListaAccesoriosRobados)
             {
-                if(accesorio.ClaveVehiculo==idVehiculoAnterior)
+                if (accesorio.ClaveVehiculo == idVehiculoAnterior)
                 {
                     accesorio.IdRoboAccesorio = idRoboAccesorio;
                     accesorio.ClaveVehiculo = idVehiculoActual;
                     RoboVehiculoAccesoriosMapper.Instance().Insert(accesorio);
                 }
-                
+
             }
         }
 
@@ -605,159 +605,159 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void ActualizaIncidencia()
         {
 
-             try
+            try
             {
-                
 
-                    //Checamos si no son bromas o insultos.
-                    if (cmbTipoIncidencia.SelectedItem != null && (
-                       (cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave == 254
-                        ||
-                        (cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave == 256
-                        ))
+
+                //Checamos si no son bromas o insultos.
+                if (cmbTipoIncidencia.SelectedItem != null && (
+                   (cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave == 254
+                    ||
+                    (cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave == 256
+                    ))
+                {
+                    txtDireccion.Text = "SIN REGISTRO";
+                    //Se cambia a incidencia cancelada
+                    entIncidencia.ClaveEstatus = 5;
+                }
+
+                //Se se está editando no se modifica nada de lo capturado.
+
+                //Checamos si existen Vehiculos con accesorios robados.
+                if (ListaVehiculosInvolucrados != null && ListaAccesoriosRobados != null && DatosRoboAccesorios != null && (cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave == 130)
+                {
+                    try
                     {
-                        txtDireccion.Text = "SIN REGISTRO";
-                        //Se cambia a incidencia cancelada
-                        entIncidencia.ClaveEstatus = 5;
+                        //Guardamos los datos del robo de accesorios
+                        DatosRoboAccesorios.IdIncidencia = entIncidencia.Folio;
+                        RoboAccesoriosMapper.Instance().Insert(DatosRoboAccesorios);
+                        //Guardamos los vehiculos involucrados.
+                        foreach (VehiculoObject vehiculo in this.ListaVehiculosInvolucrados)
+                        {
+                            int idAnterior = vehiculo.Clave;
+                            VehiculoMapper.Instance().Insert(vehiculo);
+
+                            //Guardamos los accesorios de este vehiculo.
+                            this.GuardarAccesoriosPorVehiculo(DatosRoboAccesorios.IdRoboAccesorio, vehiculo.Clave, idAnterior);
+                        }
+
+
+                    }
+                    catch { }
+                }
+
+                //Checamos si existen Vehiculos robados.
+                if (this.ListaVehiculosRobados != null && this.objPropietarioVehiculo != null && (cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave == 131)
+                {
+
+
+                    //Guardamos el propietarios
+                    if (PropietarioVehiculoMapper.Instance().GetOne(objPropietarioVehiculo.Clave) == null)
+                    {
+                        PropietarioVehiculoMapper.Instance().Insert(objPropietarioVehiculo);
+                    }
+                    else
+                    {
+                        PropietarioVehiculoMapper.Instance().Save(objPropietarioVehiculo);
                     }
 
-                    //Se se está editando no se modifica nada de lo capturado.
-                    
-                        //Checamos si existen Vehiculos con accesorios robados.
-                        if (ListaVehiculosInvolucrados != null && ListaAccesoriosRobados != null && DatosRoboAccesorios != null && (cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave == 130)
-                        {
-                            try
-                            {
-                                //Guardamos los datos del robo de accesorios
-                                DatosRoboAccesorios.IdIncidencia = entIncidencia.Folio;
-                                RoboAccesoriosMapper.Instance().Insert(DatosRoboAccesorios);
-                                //Guardamos los vehiculos involucrados.
-                                foreach (VehiculoObject vehiculo in this.ListaVehiculosInvolucrados)
-                                {
-                                    int idAnterior = vehiculo.Clave;
-                                    VehiculoMapper.Instance().Insert(vehiculo);
-
-                                    //Guardamos los accesorios de este vehiculo.
-                                    this.GuardarAccesoriosPorVehiculo(DatosRoboAccesorios.IdRoboAccesorio, vehiculo.Clave, idAnterior);
-                                }
-
-
-                            }
-                            catch { }
-                        }
-
-                        //Checamos si existen Vehiculos robados.
-                        if (this.ListaVehiculosRobados != null && this.objPropietarioVehiculo != null && (cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave == 131)
-                        {
-                           
-
-                            //Guardamos el propietarios
-                            if (PropietarioVehiculoMapper.Instance().GetOne(objPropietarioVehiculo.Clave) == null)
-                            {
-                                PropietarioVehiculoMapper.Instance().Insert(objPropietarioVehiculo);
-                            }
-                            else
-                            {
-                                PropietarioVehiculoMapper.Instance().Save(objPropietarioVehiculo);
-                            }
-
-                            //Guardamos los vehiculos.
-                            foreach (VehiculoObject vehiculo in this.ListaVehiculosRobados)
-                            {
-                                if (VehiculoMapper.Instance().GetOne(vehiculo.Clave) == null)
-                                {
-                                    VehiculoMapper.Instance().Insert(vehiculo);
-                                }
-                                else
-                                {
-                                    VehiculoMapper.Instance().Save(vehiculo);
-                                }
-                                
-                            }
-
-
-                            //Insertamos en la tabla de relación los vehiculos robados
-                           VehiculoRobadoObject vehiculoRobado;
-                            bool EsNuevoVehiculoRobado=false;
-                            foreach (VehiculoObject vehiculo in this.ListaVehiculosRobados)
-                            {
-                                vehiculoRobado = new VehiculoRobadoObject();
-                                EsNuevoVehiculoRobado = true;
-                                if (VehiculoRobadoMapper.Instance().GetByVehiculo(vehiculo.Clave).Count>0)
-                                { 
-                                    vehiculoRobado = VehiculoRobadoMapper.Instance().GetByVehiculo(vehiculo.Clave)[0];
-                                    EsNuevoVehiculoRobado = false;
-                                };
-                                if(vehiculoRobado==null)
-                                {
-                                    vehiculoRobado=new VehiculoRobadoObject();
-                                    EsNuevoVehiculoRobado=true;
-                                }
-                                vehiculoRobado.ClavePropietario=objPropietarioVehiculo.Clave;
-                                vehiculoRobado.ClaveVehiculo= vehiculo.Clave;
-                                vehiculoRobado.Folio=this.entIncidencia.Folio;
-                                if (EsNuevoVehiculoRobado)
-                                {
-                                    VehiculoRobadoMapper.Instance().Insert(vehiculoRobado);
-                                }
-                                else
-                                {
-                                    VehiculoRobadoMapper.Instance().Save(vehiculoRobado);
-                                }
-                                
-                                
-                            }
-                        }
-
-                        //Checamos si existen personas extraviadas
-                        if (this.ListaPersonasExtraviadas != null && this.ListaPersonasExtraviadas.Count > 0 && ((cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave == 103 | (cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave == 235))
-                        {
-                            
-                            foreach (PersonaExtraviada persona in this.ListaPersonasExtraviadas)
-                            {
-                                persona.Folio = this.entIncidencia.Folio;
-                                persona.Estatura = Math.Round(persona.Estatura.Value, 2);
-                                //Si existe solo lo actualizamos.
-                                if (PersonaExtraviadaMapper.Instance().GetOne(persona.Clave)!=null)
-                                {
-                                    PersonaExtraviadaMapper.Instance().Save(persona);
-                                }
-                                else
-                                {
-                                    PersonaExtraviadaMapper.Instance().Insert(persona);
-                                }
-                                
-                                
-                            }
-
-                        }
-
-                    //Guardamos el denunciante y actualizamos el campo en la incidencia.
-                    bool EsNuevo = false;
-                    if(this.Denunciante==null)
+                    //Guardamos los vehiculos.
+                    foreach (VehiculoObject vehiculo in this.ListaVehiculosRobados)
                     {
-                        this.Denunciante = new DenuncianteObject();
-                        EsNuevo = true;
+                        if (VehiculoMapper.Instance().GetOne(vehiculo.Clave) == null)
+                        {
+                            VehiculoMapper.Instance().Insert(vehiculo);
+                        }
+                        else
+                        {
+                            VehiculoMapper.Instance().Save(vehiculo);
+                        }
+
                     }
-                    Denunciante.Nombre = this.txtNombreDenunciante.Text;
-                    Denunciante.Apellido = this.txtApellidosDenunciante.Text;
-                    Denunciante.Direccion = this.txtDireccionDenunciante.Text;
-                    if (EsNuevo)//Insertamos.
-                    {DenuncianteMapper.Instance().Insert(this.Denunciante);}
-                    else//Actualizamos.
-                    {DenuncianteMapper.Instance().Save(this.Denunciante);}
-                    
-                    //Actualizamos la incidencia.
-                    this.entIncidencia.ClaveDenunciante = Denunciante.Clave;
-                    IncidenciaMapper.Instance().Save(entIncidencia);
-                    this.LiberarNoTelefono(this.txtTelefono.Text.Trim());
-                
+
+
+                    //Insertamos en la tabla de relación los vehiculos robados
+                    VehiculoRobadoObject vehiculoRobado;
+                    bool EsNuevoVehiculoRobado = false;
+                    foreach (VehiculoObject vehiculo in this.ListaVehiculosRobados)
+                    {
+                        vehiculoRobado = new VehiculoRobadoObject();
+                        EsNuevoVehiculoRobado = true;
+                        if (VehiculoRobadoMapper.Instance().GetByVehiculo(vehiculo.Clave).Count > 0)
+                        {
+                            vehiculoRobado = VehiculoRobadoMapper.Instance().GetByVehiculo(vehiculo.Clave)[0];
+                            EsNuevoVehiculoRobado = false;
+                        };
+                        if (vehiculoRobado == null)
+                        {
+                            vehiculoRobado = new VehiculoRobadoObject();
+                            EsNuevoVehiculoRobado = true;
+                        }
+                        vehiculoRobado.ClavePropietario = objPropietarioVehiculo.Clave;
+                        vehiculoRobado.ClaveVehiculo = vehiculo.Clave;
+                        vehiculoRobado.Folio = this.entIncidencia.Folio;
+                        if (EsNuevoVehiculoRobado)
+                        {
+                            VehiculoRobadoMapper.Instance().Insert(vehiculoRobado);
+                        }
+                        else
+                        {
+                            VehiculoRobadoMapper.Instance().Save(vehiculoRobado);
+                        }
+
+
+                    }
+                }
+
+                //Checamos si existen personas extraviadas
+                if (this.ListaPersonasExtraviadas != null && this.ListaPersonasExtraviadas.Count > 0 && ((cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave == 103 | (cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave == 235))
+                {
+
+                    foreach (PersonaExtraviada persona in this.ListaPersonasExtraviadas)
+                    {
+                        persona.Folio = this.entIncidencia.Folio;
+                        persona.Estatura = Math.Round(persona.Estatura.Value, 2);
+                        //Si existe solo lo actualizamos.
+                        if (PersonaExtraviadaMapper.Instance().GetOne(persona.Clave) != null)
+                        {
+                            PersonaExtraviadaMapper.Instance().Save(persona);
+                        }
+                        else
+                        {
+                            PersonaExtraviadaMapper.Instance().Insert(persona);
+                        }
+
+
+                    }
+
+                }
+
+                //Guardamos el denunciante y actualizamos el campo en la incidencia.
+                bool EsNuevo = false;
+                if (this.Denunciante == null)
+                {
+                    this.Denunciante = new DenuncianteObject();
+                    EsNuevo = true;
+                }
+                Denunciante.Nombre = this.txtNombreDenunciante.Text;
+                Denunciante.Apellido = this.txtApellidosDenunciante.Text;
+                Denunciante.Direccion = this.txtDireccionDenunciante.Text;
+                if (EsNuevo)//Insertamos.
+                { DenuncianteMapper.Instance().Insert(this.Denunciante); }
+                else//Actualizamos.
+                { DenuncianteMapper.Instance().Save(this.Denunciante); }
+
+                //Actualizamos la incidencia.
+                this.entIncidencia.ClaveDenunciante = Denunciante.Clave;
+                IncidenciaMapper.Instance().Save(entIncidencia);
+                this.LiberarNoTelefono(this.txtTelefono.Text.Trim());
+
             }
             catch (System.Exception ex)
             {
                 throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
             }
-        
+
         }
 
         /// <summary>
@@ -770,33 +770,33 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 //Obtenemos el municipio
                 if (cmbMunicipio.SelectedIndex == -1 || cmbMunicipio.Text.Trim() == string.Empty)
-                { entIncidencia.ClaveMunicipio = null;}
+                { entIncidencia.ClaveMunicipio = null; }
                 else
                 { entIncidencia.ClaveMunicipio = _objUbicacion.IdMunicipio; }
 
                 //Obtenemos la localidad.
                 if (cmbLocalidad.SelectedIndex == -1 || cmbLocalidad.Text.Trim() == string.Empty)
-                {entIncidencia.ClaveLocalidad = null;}
+                { entIncidencia.ClaveLocalidad = null; }
                 else
-                { entIncidencia.ClaveLocalidad = _objUbicacion.IdLocalidad;}
+                { entIncidencia.ClaveLocalidad = _objUbicacion.IdLocalidad; }
 
                 //Obtenemos la colonia.
                 if (cmbColonia.SelectedIndex == -1 || cmbColonia.Text.Trim() == string.Empty)
-                {entIncidencia.ClaveColonia = null;}
+                { entIncidencia.ClaveColonia = null; }
                 else
-                {entIncidencia.ClaveColonia = _objUbicacion.IdColonia;}
+                { entIncidencia.ClaveColonia = _objUbicacion.IdColonia; }
 
                 //Obtenemos el código postal.
                 if (cmbCP.SelectedIndex == -1 || cmbCP.Text.Trim() == string.Empty)
-                {entIncidencia.ClaveCodigoPostal = null;}
+                { entIncidencia.ClaveCodigoPostal = null; }
                 else
-                {entIncidencia.ClaveCodigoPostal = _objUbicacion.IdCodigoPostal;}
+                { entIncidencia.ClaveCodigoPostal = _objUbicacion.IdCodigoPostal; }
 
                 //Obtenemos el tipo de incidencia.
                 if (cmbTipoIncidencia.SelectedIndex != -1 && cmbTipoIncidencia.Text.Trim() != string.Empty)
-                {entIncidencia.ClaveTipo = (cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave;}
+                { entIncidencia.ClaveTipo = (cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave; }
                 else
-                {entIncidencia.ClaveTipo = null;}
+                { entIncidencia.ClaveTipo = null; }
 
                 //Obtenemos el número de teléfono,descripción y la dirección.
                 entIncidencia.Telefono = txtTelefono.Text;
@@ -815,7 +815,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void CrearNuevaIncidencia()
         {
             try
-            { 
+            {
                 entIncidencia.Referencias = string.Empty;
                 entIncidencia.Descripcion = string.Empty;
                 entIncidencia.Activo = true;
@@ -828,13 +828,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 this.lblOperador.Text += entUsuario.NombrePropio;
                 this.lblFechaHora.Text += entIncidencia.HoraRecepcion.ToString();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show("Error al crear la nueva incidencia : "+ex.Message,"Error");
+                MessageBox.Show("Error al crear la nueva incidencia : " + ex.Message, "Error");
                 return;
             }
         }
-        
+
         /// <summary>
         /// Llena la lista de municipios
         /// </summary>
@@ -853,14 +853,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     cmbMunicipio.SelectedIndex = -1;
 
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     throw new SAIExcepcion(ex.Message);
                 }
             }
             catch (SAIExcepcion)
             { }
-            
+
         }
 
         /// <summary>
@@ -869,14 +869,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void CargarTiposIncidencias()
         {
             TipoIncidenciaList lstTipoIncidencias;
-            if(Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
-            {
-                lstTipoIncidencias=TipoIncidenciaMapper.Instance().GetBySistema(2);
-            }
-            else
-            {
-                lstTipoIncidencias=TipoIncidenciaMapper.Instance().GetBySistema(1);
-            }
+            lstTipoIncidencias = Aplicacion.UsuarioPersistencia.strSistemaActual == "066" ? TipoIncidenciaMapper.Instance().GetBySistema(2) : TipoIncidenciaMapper.Instance().GetBySistema(1);
 
             foreach (var objTipoIncidencia in lstTipoIncidencias)
             {
@@ -892,10 +885,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <summary>
         /// Actualiza el combo de localidades 
         /// </summary>
-        /// <param name="objListaLocalidades">Lista de localidades que se mostrarán en el control</param>
-        private void ActualizaLocalidades(LocalidadList objListaLocalidades)
+        /// <param name="objListaLocalidadesp">Lista de localidades que se mostrarán en el control</param>
+        private void ActualizaLocalidades(LocalidadList objListaLocalidadesp)
         {
-            cmbLocalidad.DataSource = objListaLocalidades;
+            cmbLocalidad.DataSource = objListaLocalidadesp;
             cmbLocalidad.DisplayMember = "Nombre";
             cmbLocalidad.ValueMember = "Clave";
             cmbLocalidad.SelectedIndex = -1;
@@ -903,90 +896,98 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         }
 
-        /// <summary>
-        /// Obtiene la lista de localidades de un municipio especificado.
-        /// </summary>
-        /// <param name="idMunicipio">int,Id del municipio.</param>
-        private void CargarLocalidadesPorMunicipio(int idMunicipio)
-        {
-            objListaLocalidades = LocalidadMapper.Instance().GetByMunicipio(idMunicipio);
-            if (objListaLocalidades != null)
-            {
-                this.ActualizaLocalidades(objListaLocalidades);
-            }
-        }
-
-        /// <summary>
-        /// Obtiene la lista de colonias de una localidad especificada.
-        /// </summary>
-        /// <param name="idLocalidad"></param>
-        private void CargarColoniasPorLocalidad(int idLocalidad)
-        {
-            ColoniaList lstColonias;
-
-            try
-            {
-                try
+        /*
+                /// <summary>
+                /// Obtiene la lista de localidades de un municipio especificado.
+                /// </summary>
+                /// <param name="idMunicipio">int,Id del municipio.</param>
+                private void CargarLocalidadesPorMunicipio(int idMunicipio)
                 {
-
-
-                    LimpiaColonias();
-                    lstColonias = ColoniaMapper.Instance().GetByLocalidad(idLocalidad);
-                    
-
-                    if (lstColonias != null)
+                    objListaLocalidades = LocalidadMapper.Instance().GetByMunicipio(idMunicipio);
+                    if (objListaLocalidades != null)
                     {
-                        ActualizaColonias(lstColonias);
-                        LimpiaTextoCodigoPostal();
+                        this.ActualizaLocalidades(objListaLocalidades);
                     }
-                    //ActualizaMapaUbicacion(true);
                 }
-                catch (System.Exception ex)
-                {
-                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
-                }
-            }
-            catch (SAIExcepcion) { }
-        }
+        */
 
-        /// <summary>
-        /// Obtiene el código postal de una colonia especificada.
-        /// </summary>
-        /// <param name="idCp">int, Id del código postal</param>
-        private void CargarCpPorColonia(int idCp)
-        {
-            
-               entCodigoPostal = CodigoPostalMapper.Instance().GetOne(idCp);
-                if(entCodigoPostal!=null)
+        /*
+                /// <summary>
+                /// Obtiene la lista de colonias de una localidad especificada.
+                /// </summary>
+                /// <param name="idLocalidad"></param>
+                private void CargarColoniasPorLocalidad(int idLocalidad)
                 {
-                    objListaCodigosPostales.Clear();
-                    this.objListaCodigosPostales.Add(entCodigoPostal);
-                    this.ActualizarCodigoPostal(objListaCodigosPostales);
-                } 
- 
-        }
+                    ColoniaList lstColonias;
+
+                    try
+                    {
+                        try
+                        {
+
+
+                            LimpiaColonias();
+                            lstColonias = ColoniaMapper.Instance().GetByLocalidad(idLocalidad);
+
+
+                            if (lstColonias != null)
+                            {
+                                ActualizaColonias(lstColonias);
+                                LimpiaTextoCodigoPostal();
+                            }
+                            //ActualizaMapaUbicacion(true);
+                        }
+                        catch (System.Exception ex)
+                        {
+                            throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                        }
+                    }
+                    catch (SAIExcepcion) { }
+                }
+        */
+
+        /*
+                /// <summary>
+                /// Obtiene el código postal de una colonia especificada.
+                /// </summary>
+                /// <param name="idCp">int, Id del código postal</param>
+                private void CargarCpPorColonia(int idCp)
+                {
+
+                    entCodigoPostal = CodigoPostalMapper.Instance().GetOne(idCp);
+                    if (entCodigoPostal != null)
+                    {
+                        objListaCodigosPostales.Clear();
+                        this.objListaCodigosPostales.Add(entCodigoPostal);
+                        this.ActualizarCodigoPostal(objListaCodigosPostales);
+                    }
+
+                }
+        */
         /// <summary>
         /// Actualiza la lista de los códigos postales
         /// </summary>
-        /// <param name="objListaCodigosPostales">Lista de los códigos postales que se mostrarán en el control</param>
-        private void ActualizarCodigoPostal(CodigoPostalList objListaCodigosPostales)
+        /// <param name="objListaCodigosPostalesp">Lista de los códigos postales que se mostrarán en el control</param>
+        private void ActualizarCodigoPostal(CodigoPostalList objListaCodigosPostalesp)
         {
-            this.cmbCP.DataSource = objListaCodigosPostales;
+            this.cmbCP.DataSource = objListaCodigosPostalesp;
             this.cmbCP.DisplayMember = "Valor";
             this.cmbCP.ValueMember = "Clave";
-            this.cmbCP.SelectedIndex = -1;            
+            this.cmbCP.SelectedIndex = -1;
         }
 
-        /// <summary>
-        /// Selecciona el elemento del combo de codigos postales
-        /// </summary>
-        /// <param name="objElemento">Elemento que se va a seleccionar</param>
-        private void SeleccionaCodigoPostal(Object objElemento)
-        {
-            cmbCP.SelectedIndex = -1;
-            cmbCP.SelectedItem = objElemento;
+        /*
+                /// <summary>
+                /// Selecciona el elemento del combo de codigos postales
+                /// </summary>
+                /// <param name="objElemento">Elemento que se va a seleccionar</param>
+                private void SeleccionaCodigoPostal(Object objElemento)
+                {
+                    cmbCP.SelectedIndex = -1;
+                    cmbCP.SelectedItem = objElemento;
 
-        }
+                }
+        */
 
         /// <summary>
         /// Actualiza el mapa con los datos de la ubicación del formulario actuales
@@ -1045,15 +1046,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         }
 
-        /// <summary>
-        /// Limpia el texto del combo de códigos postales
-        /// </summary>
-        private void LimpiaTextoCodigoPostal()
-        {
-            cmbCP.Text = string.Empty;
-        }
+        /*
+                /// <summary>
+                /// Limpia el texto del combo de códigos postales
+                /// </summary>
+                private void LimpiaTextoCodigoPostal()
+                {
+                    cmbCP.Text = string.Empty;
+                }
+        */
 
-        
+
         /// <summary>
         /// Busca el municipio,localidad al que pertenece un código postal especificado.
         /// </summary>
@@ -1135,14 +1138,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             cmbCP.DataSource = null;
         }
 
-        /// <summary>
-        /// Limpia el texto del control del combo de colonias
-        /// </summary>
-        private void LimpiaTextoColonia()
-        {
-            cmbColonia.SelectedIndex = -1;
-            cmbColonia.Text = string.Empty;
-        }
+        /*
+                /// <summary>
+                /// Limpia el texto del control del combo de colonias
+                /// </summary>
+                private void LimpiaTextoColonia()
+                {
+                    cmbColonia.SelectedIndex = -1;
+                    cmbColonia.Text = string.Empty;
+                }
+        */
 
         private CorporacionList ObtenerCorporaciones()
         {
@@ -1177,9 +1182,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (SAIExcepcion) { }
 
 
-           
-            
- 
+
+
+
         }
 
         /// <summary>
@@ -1190,25 +1195,25 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             if (!string.IsNullOrEmpty(noTelefono))
             {
-                DatosTitular = Mappers.TelefonoTelmexMapper.Instance()
+                DatosTitular = TelefonoTelmexMapper.Instance()
                 .GetOneBySQLQuery(string.Format(ID.SQL_OBTENERINFOTITULARLINEA, noTelefono));
                 this.txtTelefono.Text = noTelefono;
-                if (DatosTitular!=null)
+                if (DatosTitular != null)
                 {
                     this.txtNombreDenunciante.Text = DatosTitular.Nombre;
                     this.txtApellidosDenunciante.Text = string.Format("{0} {1}", DatosTitular.ApellidoPaterno, DatosTitular.ApellidoMaterno);
                     this.txtDireccionDenunciante.Text = DatosTitular.Direccion;
-                    CodigoPostal CodigoTitular = Mappers.CodigoPostalMapper.Instance().GetOneBySQLQuery(string.Format(ID.SQL_OBTENERCODIGOPOSTAL, DatosTitular.ClaveCodigoPostal));
+                    CodigoPostal CodigoTitular = CodigoPostalMapper.Instance().GetOneBySQLQuery(string.Format(ID.SQL_OBTENERCODIGOPOSTAL, DatosTitular.ClaveCodigoPostal));
                     if (CodigoTitular != null)
                     {
                         this.cmbCP.Text = CodigoTitular.Valor;
                         this.CargarCascadaPorCp(CodigoTitular.Valor);
                     }
-                    
+
                 }
-                
-                
-                
+
+
+
             }
 
         }
@@ -1221,7 +1226,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             bool EsNuevoTitular = false;
             try
             {
-                
+
 
                 if (!string.IsNullOrEmpty(this.txtTelefono.Text))
                 {
@@ -1248,16 +1253,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         TelefonoTelmexMapper.Instance().Save(DatosTitular);
                     }
                 }
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show("Error al guardar titular de linea : "+ex.Message,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("Error al guardar titular de linea : " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
-            
-                
-            
+
+
+
+
         }
 
         /// <summary>
@@ -1319,7 +1324,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 Aplicacion.LlamadasActuales.Remove(noTelefono);
             }
         }
-        
+
         #endregion
 
         #region MANEJADORES DE EVENTOS
@@ -1341,7 +1346,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 {
                     this.LimpiaLocalidades();
                 }
-            }*/            
+            }*/
         }
 
         private void cmbLocalidad_SelectedIndexChanged(object sender, EventArgs e)
@@ -1361,7 +1366,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.LimpiaColonias();
                 }
             }*/
-            
+
         }
 
         private void cmbColonia_SelectedIndexChanged(object sender, EventArgs e)
@@ -1385,8 +1390,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     {
                         if (this.cmbColonia.SelectedValue != null)
                         {
-                            CodigoPostalList lstCodigoPostal = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.CodigoPostalList();
-                            lstCodigoPostal.Add(Mappers.CodigoPostalMapper.Instance().GetOne(Convert.ToInt32(this.cmbColonia.SelectedValue)));
+                            CodigoPostalList lstCodigoPostal = new CodigoPostalList();
+                            lstCodigoPostal.Add(CodigoPostalMapper.Instance().GetOne(Convert.ToInt32(this.cmbColonia.SelectedValue)));
                             this._blnBloqueaEventos = true;
                             if (lstCodigoPostal.Count > 0)
                             {
@@ -1419,18 +1424,20 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.LimpiaTextoCodigoPostal();
                 }
             }*/
-            
+
         }
 
-        private void cmbCP_TextChanged(object sender, EventArgs e)
-        {
-            this.CargarCascadaPorCp(this.cmbCP.Text);
-        }
+        /*
+                private void cmbCP_TextChanged(object sender, EventArgs e)
+                {
+                    this.CargarCascadaPorCp(this.cmbCP.Text);
+                }
+        */
 
         private void cmbTipoIncidencia_SelectedIndexChanged(object sender, EventArgs e)
         {
-          
-            if(!EsModoEdicion)
+
+            if (!EsModoEdicion)
             {
                 //Limpiamos las listas que reciben datos de ventanas hijas
                 this.objPropietarioVehiculo = null;
@@ -1451,30 +1458,31 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 try
                 {
-                   
+
                     if (cmbTipoIncidencia.SelectedIndex != -1 && cmbTipoIncidencia.Text.Trim() != string.Empty && !EsModoEdicion)
                     {
                         TipoIncidencia objTipo = (cmbTipoIncidencia.SelectedItem as TipoIncidencia);
 
+                        if (objTipo != null)
                             switch (objTipo.Clave)
                             {
                                 //Robo de vehículo totalidad.
                                 case 131:
                                     this.MostrarCapturaVehiculoRobado();
-                                        
+
                                     break;
 
                                 //Robo de vehiculos accesorios.
                                 case 130:
                                     this.MostrarCapturaAccesoriosRobados();
-                                    
+
                                     break;
 
                                 //Extravio de persona.
                                 case 103:
                                 case 235:
                                     this.MostrarCapturaPersonaExtraviada();
-                                    
+
                                     break;
 
                                 //Foránea
@@ -1490,16 +1498,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 //Anónima.
                                 case 260:
                                     this.gbDenunciante.Enabled = false;
-                                break;
+                                    break;
 
-                                    //BROMA O INSULTO.
+                                //BROMA O INSULTO.
                                 case 254:
                                 case 256:
-                                        txtDireccion.Text = "SIN REGISTRO";
-                                break;
+                                    txtDireccion.Text = "SIN REGISTRO";
+                                    break;
                             }
-
-                        
                     }
                 }
                 catch (System.Exception ex)
@@ -1528,7 +1534,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                     }
 
-                    
+
                     //Checamos si es Broma o Insulto.
                     if (cmbTipoIncidencia.SelectedItem != null && (
                        (cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave == 254
@@ -1549,8 +1555,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         this.GuardaCorporaciones();
                         this.GuardarTitularLinea();
                     }
-                    
-                    
+
+
                     Mapa.Controlador.RevisaInstancias(this);
                 }
                 catch (System.Exception ex)
@@ -1561,38 +1567,34 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (SAIExcepcion) { }
         }
 
-        private void cklCorporacion_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            this.cklCorporacion_Leave(sender, e);
-        }
-
         private void cklCorporacion_Leave(object sender, EventArgs e)
         {
-            this.GuardaCorporaciones();
+            GuardaCorporaciones();
         }
 
         private void btnVerDatos_Click(object sender, EventArgs e)
         {
             TipoIncidencia objTipo = (cmbTipoIncidencia.SelectedItem as TipoIncidencia);
 
-            switch (objTipo.Clave)
-            {
-                //Robo de vehículo totalidad.
-                case 131:
-                           this.MostrarCapturaVehiculoRobado();
-                    break;
+            if (objTipo != null)
+                switch (objTipo.Clave)
+                {
+                    //Robo de vehículo totalidad.
+                    case 131:
+                        this.MostrarCapturaVehiculoRobado();
+                        break;
 
-                //Robo de vehiculos accesorios.
-                case 130:
+                    //Robo de vehiculos accesorios.
+                    case 130:
                         this.MostrarCapturaAccesoriosRobados();
-                    break;
+                        break;
 
-                //Extravio de persona.
-                case 103:
-                case 235:
+                    //Extravio de persona.
+                    case 103:
+                    case 235:
                         this.MostrarCapturaPersonaExtraviada();
-                    break;
-            }
+                        break;
+                }
         }
 
         private void SAIFrmAltaIncidencia066_Load(object sender, EventArgs e)
@@ -1618,22 +1620,22 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 case Keys.Enter:
 
-                    
+
                     this.FindForm().SelectNextControl(controlActual, true, false, true, true);
 
                     break;
 
                 case Keys.Escape:
 
-                    if(controlActual.Name==this.cmbMunicipio.Name)
+                    if (controlActual.Name == this.cmbMunicipio.Name)
                     {
                         this.LimpiaCodigosPostales();
                         this.LimpiaColonias();
                         this.LimpiaLocalidades();
-                        
+
                         this.cmbMunicipio.SelectedIndex = -1;
                     }
-                     
+
 
                     break;
             }
@@ -1660,7 +1662,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.LimpiaColonias();
                     this.LimpiaCodigosPostales();
                     //obtener las localidades del municipio seleccionado
-                    LocalidadList lstLocalidades = Mappers.LocalidadMapper.Instance().GetByMunicipio(((Municipio)this.cmbMunicipio.SelectedItem).Clave);
+                    LocalidadList lstLocalidades = LocalidadMapper.Instance().GetByMunicipio(((Municipio)this.cmbMunicipio.SelectedItem).Clave);
 
                     if (lstLocalidades.Count > 0)
                     {
@@ -1691,7 +1693,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     //Bandera para bloquear evento
                     this._blnBloqueaEventos = true;
                     this.LimpiaColonias(); //limpia colonias
-                    lstColonia = Mappers.ColoniaMapper.Instance().GetByLocalidad(((Localidad)this.cmbLocalidad.SelectedItem).Clave);
+                    lstColonia = ColoniaMapper.Instance().GetByLocalidad(((Localidad)this.cmbLocalidad.SelectedItem).Clave);
                     if (lstColonia.Count > 0)
                     {
                         //se agregan colonias al control correspondientes a la localidad seleccionada
@@ -1700,7 +1702,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         //objeto que se que almacenara los CP
                         //Entidades.CodigoPostalList cpTemp = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.CodigoPostalList();
                         //SE OBTIENE LA LISTA DE CODIGOS POSTALES DE LA LOCALIDAD CORRESPONDIENTE
-                        CodigoPostalList lstCodigoPostal = Mappers.CodigoPostalMapper.Instance().GetByLocalidad(((Localidad)this.cmbLocalidad.SelectedItem).Clave);
+                        CodigoPostalList lstCodigoPostal = CodigoPostalMapper.Instance().GetByLocalidad(((Localidad)this.cmbLocalidad.SelectedItem).Clave);
                         //bool existe = false;//bandera para determinar si un cp esta repetido
                         if (lstCodigoPostal.Count > 0)
                         {
@@ -1734,7 +1736,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         {
                             if (this.cmbCP.SelectedValue != null)
                             {
-                                ColoniaList lstColonia = Mappers.ColoniaMapper.Instance().GetByCodigoPostal(Convert.ToInt32(this.cmbCP.SelectedValue));
+                                ColoniaList lstColonia = ColoniaMapper.Instance().GetByCodigoPostal(Convert.ToInt32(this.cmbCP.SelectedValue));
                                 if (lstColonia.Count > 0)
                                 {
                                     this._blnBloqueaEventos = true;
@@ -1778,38 +1780,44 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 try
                 {
                     //SE OBTIENE LA ENTIDAD DEL CODIGO POSTAL
-                    CodigoPostal CP = Mappers.CodigoPostalMapper.Instance().GetOneBySQLQuery("Select Clave, Valor from CodigoPostal where Valor = '" + codigoPostal + "'");
+                    CodigoPostal CP = CodigoPostalMapper.Instance().GetOneBySQLQuery("Select Clave, Valor from CodigoPostal where Valor = '" + codigoPostal + "'");
+
                     //SI EXISTE
                     if (CP != null)
                     {
-                        CodigoPostalList lstCodigoPostal = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.CodigoPostalList();
+                        CodigoPostalList lstCodigoPostal = new CodigoPostalList();
                         lstCodigoPostal.Add(CP);
+
                         this._blnBloqueaEventos = true;
                         this.ActualizarCodigoPostal(lstCodigoPostal);
                         this.cmbCP.SelectedIndex = 0;
                         this._blnBloqueaEventos = false;
+
                         //SE OBTIENE LA LOSTA DE COLONIAS POR EL CODIGO POSTAL
-                        ColoniaList lstColonias = Mappers.ColoniaMapper.Instance().GetByCodigoPostal(CP.Clave);
+                        ColoniaList lstColonias = ColoniaMapper.Instance().GetByCodigoPostal(CP.Clave);
 
                         if (lstColonias.Count > 0)
                         {
                             //SE BLOQUEA EVENTO PARA LLENADO DE COLONIAS
                             this._blnBloqueaEventos = true;
                             this.ActualizaColonias(lstColonias);
+
                             //SE SELECCIONA LA PRIMERA COLONIA
                             //CABE MENCIONAR QUE UN CODIG POSTAL PUEDE CORRESPONDER A VARIAS COLONIAS
                             this.cmbColonia.SelectedIndex = 0;
                             this._blnBloqueaEventos = false;
+
                             //SE AGREGA LA COLONIA A LA LISTA
-                            LocalidadList lstLocalidad = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.LocalidadList();
-                            lstLocalidad.Add(Mappers.LocalidadMapper.Instance().GetOne(((Colonia)this.cmbColonia.Items[0]).ClaveLocalidad));
+                            LocalidadList lstLocalidad = new LocalidadList();
+                            lstLocalidad.Add(LocalidadMapper.Instance().GetOne(((Colonia)this.cmbColonia.Items[0]).ClaveLocalidad));
+
                             //SE ACTUALIZA LA LISTA DE COLONIAS
                             this._blnBloqueaEventos = true;
                             this.ActualizaLocalidades(lstLocalidad);
 
                             this.cmbLocalidad.SelectedIndex = 0;
 
-                            Localidad localidad = Mappers.LocalidadMapper.Instance().GetOne(((Localidad)this.cmbLocalidad.SelectedItem).Clave);
+                            Localidad localidad = LocalidadMapper.Instance().GetOne(((Localidad)this.cmbLocalidad.SelectedItem).Clave);
                             this.cmbMunicipio.SelectedValue = localidad.ClaveMunicipio;
                             this._blnBloqueaEventos = false;
                         }
@@ -1828,14 +1836,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 e.Handled = false;
             }
-            else if (Char.IsControl(e.KeyChar))
-            {
-                e.Handled = false;
-            }
-            else
-            {
-                e.Handled = true;
-            }
+            else e.Handled = !Char.IsControl(e.KeyChar);
         }
 
         private void cmbCP_KeyUp(object sender, KeyEventArgs e)
@@ -1844,6 +1845,26 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 this.cmbColonia.Focus();
             }
+        }
+
+        private void cklCorporacion_MouseUp(object sender, MouseEventArgs e)
+        {
+            GuardaCorporaciones();
+        }
+
+        private void cmbTipoIncidencia_Leave(object sender, EventArgs e)
+        {
+            if (cmbTipoIncidencia.SelectedIndex != -1 && cmbTipoIncidencia.Text.Trim() != string.Empty)
+            { entIncidencia.ClaveTipo = (cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave; }
+            else
+            { entIncidencia.ClaveTipo = null; }
+            IncidenciaMapper.Instance().Save(entIncidencia);
+        }
+
+        private void cklCorporacion_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+                GuardaCorporaciones();
         }
 
     }

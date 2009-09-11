@@ -6,6 +6,7 @@ using BSD.C4.Tlaxcala.Sai.Excepciones;
 using Microsoft.NetEnterpriseServers;
 using XtremeReportControl;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
+using System.Diagnostics;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {

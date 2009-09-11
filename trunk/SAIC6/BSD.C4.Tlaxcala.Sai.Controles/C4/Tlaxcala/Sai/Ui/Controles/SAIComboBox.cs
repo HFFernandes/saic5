@@ -109,9 +109,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         public SAIComboBox(IContainer components)
         {
             components.Add(this);
-
             InitializeComponent();
-            
         }
 
         #region Eventos
@@ -164,23 +162,22 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 
         protected override void OnSelectedIndexChanged(EventArgs e)
         {
-            if (this._blnBusqueda)
-            {
+            //if (this._blnBusqueda)
+            //{
                 //if (this.CambiaMapa!= null)
                 //{
                 //    this.CambiaMapa();
                 //}
-                this._blnBusqueda = false;
-                return;
-            }
+
+                //this._blnBusqueda = false;
+                //return;
+            //}
 
             if (this.SelectedIndex != -1 && !this.DroppedDown)
             {
-                    this._strCadenaEscrita = string.Empty;
+                this._strCadenaEscrita = string.Empty;
             }
-           
-            
-            
+
             base.OnSelectedIndexChanged(e);
         }
 
@@ -188,9 +185,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         {
 
             this._strCadenaEscrita = this.Text;
-           
+
             this.AutoComplete();
-            e.Handled = true;
+            //e.Handled = true;
             base.OnKeyUp(e);
         }
 
@@ -198,18 +195,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         {
             int intIdx = -1;
             int i = 0;
-            Boolean blnSeEncontro = false;
+            bool blnSeEncontro = false;
 
-            if (this.SelectedIndex != -1 || this.Text == string.Empty)
+            if (this.SelectedIndex != -1 || this.Text.Trim() == string.Empty)
             {
-               
                 return;
             }
-               
 
             intIdx = this.FindString(this._strCadenaEscrita);
 
-            if ( intIdx != -1)
+            if (intIdx != -1)
             {
                 blnSeEncontro = true;
             }
@@ -218,12 +213,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 
                 foreach (var objElemento in this.Items)
                 {
-
                     string strElemento = string.Empty;
 
                     if (objElemento.GetType() == strElemento.GetType())
                     {
-                        strElemento = (String)objElemento;
+                        strElemento = (string)objElemento;
 
                         if (strElemento.ToUpper().Contains(this._strCadenaEscrita.ToUpper()))
                         {
@@ -234,7 +228,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
                     }
                     else if (objElemento.GetType().GetProperty(this.DisplayMember) != null)
                     {
-                       
+
                         strElemento = objElemento.GetType().GetProperty(this.DisplayMember).GetValue(objElemento, null).ToString();
 
                         if (strElemento.ToUpper().Contains(this._strCadenaEscrita.ToUpper()))
@@ -261,8 +255,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             this.SelectionStart = this.Text.Length;
         }
 
-        #region Funciones
-        #endregion
 
     }
 }
