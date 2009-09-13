@@ -21,8 +21,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BSD.C4.Tlaxcala.Sai.Adminis
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsultaRemota", "ConsultaRemota\ConsultaRemota.csproj", "{35AB973A-B07A-47F6-AC65-9AC4059BDB5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Documentacion", "Documentacion\Documentacion.csproj", "{14297BB3-FA9C-4B8C-A8C8-6E288DCC6E04}"
-EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = SAIC4SOLUTION.vsmdi
@@ -90,14 +88,6 @@ Global
 		{35AB973A-B07A-47F6-AC65-9AC4059BDB5C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{35AB973A-B07A-47F6-AC65-9AC4059BDB5C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{35AB973A-B07A-47F6-AC65-9AC4059BDB5C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{14297BB3-FA9C-4B8C-A8C8-6E288DCC6E04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{14297BB3-FA9C-4B8C-A8C8-6E288DCC6E04}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{14297BB3-FA9C-4B8C-A8C8-6E288DCC6E04}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{14297BB3-FA9C-4B8C-A8C8-6E288DCC6E04}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{14297BB3-FA9C-4B8C-A8C8-6E288DCC6E04}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{14297BB3-FA9C-4B8C-A8C8-6E288DCC6E04}.Release|Any CPU.Build.0 = Release|Any CPU
-		{14297BB3-FA9C-4B8C-A8C8-6E288DCC6E04}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{14297BB3-FA9C-4B8C-A8C8-6E288DCC6E04}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
