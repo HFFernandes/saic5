@@ -7,7 +7,7 @@
     public class Comando
     {
         /// <summary>
-        /// Constructor con parametros
+        /// Constructor de la clase con parametros para la nueva definición
         /// </summary>
         /// <param name="identificador">Clave interna que define al comando en base a las constantes declaradas en la clase <see cref="ID">ID</see></param>
         /// <param name="caption">Texto para el comando</param>
@@ -28,11 +28,29 @@
 
         #region Campos
 
+        ///<summary>
+        /// Campo identificador de la clave interna
+        ///</summary>
         public int Identificador { get; set; }
+        ///<summary>
+        /// Campo para la definición del texto
+        ///</summary>
         public string Caption { get; set; }
+        ///<summary>
+        /// Campo para la descripción del comando
+        ///</summary>
         public string Descripcion { get; set; }
+        ///<summary>
+        /// Campo para la definición del método abreviado
+        ///</summary>
         public char? TeclaAccesoRapido { get; set; }
+        ///<summary>
+        /// Campo para definir el inicio de un separator
+        ///</summary>
         public bool IniciaGrupo { get; set; }
+        ///<summary>
+        /// Campo para definir la visibilidad
+        ///</summary>
         public bool EsVisible { get; set; }
 
         #endregion

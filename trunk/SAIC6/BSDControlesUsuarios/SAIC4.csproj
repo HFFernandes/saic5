@@ -183,18 +183,6 @@
     <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmDespacho.Designer.cs">
       <DependentUpon>SAIFrmDespacho.cs</DependentUpon>
     </Compile>
-    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidencia066.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidencia066.Designer.cs">
-      <DependentUpon>SAIFrmIncidencia066.cs</DependentUpon>
-    </Compile>
-    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidencia066Despacho.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidencia066Despacho.Designer.cs">
-      <DependentUpon>SAIFrmIncidencia066Despacho.cs</DependentUpon>
-    </Compile>
     <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidenciasActivas089.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -237,18 +225,6 @@
     <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmEstadoUnidades.Designer.cs">
       <DependentUpon>SAIFrmEstadoUnidades.cs</DependentUpon>
     </Compile>
-    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidencia.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidencia.Designer.cs">
-      <DependentUpon>SAIFrmIncidencia.cs</DependentUpon>
-    </Compile>
-    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidencia089.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidencia089.Designer.cs">
-      <DependentUpon>SAIFrmIncidencia089.cs</DependentUpon>
-    </Compile>
     <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidenciasActivas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -273,12 +249,6 @@
     <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmUnidades.Designer.cs">
       <DependentUpon>SAIFrmUnidades.cs</DependentUpon>
     </Compile>
-    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmVentana.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmVentana.designer.cs">
-      <DependentUpon>SAIFrmVentana.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -294,14 +264,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmBuscadorIncidencias.resx">
       <DependentUpon>SAIFrmBuscadorIncidencias.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidencia066.resx">
-      <DependentUpon>SAIFrmIncidencia066.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidencia066Despacho.resx">
-      <DependentUpon>SAIFrmIncidencia066Despacho.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidenciasPendientes089.resx">
@@ -328,14 +290,6 @@
       <DependentUpon>SAIFrmEstadoUnidades.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidencia.resx">
-      <DependentUpon>SAIFrmIncidencia.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidencia089.resx">
-      <DependentUpon>SAIFrmIncidencia089.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIncidenciasActivas.resx">
       <DependentUpon>SAIFrmIncidenciasActivas.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -346,10 +300,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmIniciarSesion.resx">
       <DependentUpon>SAIFrmIniciarSesion.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="C4\Tlaxcala\Sai\Ui\Formularios\SAIFrmVentana.resx">
-      <DependentUpon>SAIFrmVentana.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

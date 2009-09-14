@@ -36,13 +36,13 @@
             this.ModeloQuery = new Korzh.EasyQuery.Query();
             this.barComandos = new System.Windows.Forms.ToolStrip();
             this.btnActualizar = new System.Windows.Forms.ToolStripButton();
+            this.btnExportar = new System.Windows.Forms.ToolStripButton();
             this.GridResultados = new System.Windows.Forms.DataGrid();
             this.ResultadoDataTable = new System.Data.DataTable();
             this.ResultadoDS = new System.Data.DataSet();
             this.tabPrincipal = new System.Windows.Forms.TabControl();
             this.tabDefinicionConsulta = new System.Windows.Forms.TabPage();
             this.tabResultados = new System.Windows.Forms.TabPage();
-            this.btnExportar = new System.Windows.Forms.ToolStripButton();
             this.ContenedorSplit.Panel1.SuspendLayout();
             this.ContenedorSplit.Panel2.SuspendLayout();
             this.ContenedorSplit.SuspendLayout();
@@ -194,6 +194,16 @@
             this.btnActualizar.ToolTipText = "Actualizar resultados";
             this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
+            // btnExportar
+            // 
+            this.btnExportar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnExportar.Image = ((System.Drawing.Image)(resources.GetObject("btnExportar.Image")));
+            this.btnExportar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnExportar.Name = "btnExportar";
+            this.btnExportar.Size = new System.Drawing.Size(23, 22);
+            this.btnExportar.ToolTipText = "Exportar los resultados a excel";
+            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
+            // 
             // GridResultados
             // 
             this.GridResultados.BackgroundColor = System.Drawing.Color.White;
@@ -204,12 +214,13 @@
             this.GridResultados.HeaderForeColor = System.Drawing.SystemColors.ControlText;
             this.GridResultados.Location = new System.Drawing.Point(3, 3);
             this.GridResultados.Name = "GridResultados";
+            this.GridResultados.Padding = new System.Windows.Forms.Padding(0, 1, 0, 0);
+            this.GridResultados.PreferredRowHeight = 17;
             this.GridResultados.ReadOnly = true;
             this.GridResultados.RowHeadersVisible = false;
             this.GridResultados.RowHeaderWidth = 15;
             this.GridResultados.Size = new System.Drawing.Size(912, 439);
             this.GridResultados.TabIndex = 2;
-            this.GridResultados.DoubleClick += new System.EventHandler(this.GridResultados_DoubleClick);
             // 
             // ResultadoDataTable
             // 
@@ -255,16 +266,6 @@
             this.tabResultados.Text = "Resultados Obtenidos";
             this.tabResultados.UseVisualStyleBackColor = true;
             // 
-            // btnExportar
-            // 
-            this.btnExportar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnExportar.Image = ((System.Drawing.Image)(resources.GetObject("btnExportar.Image")));
-            this.btnExportar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnExportar.Name = "btnExportar";
-            this.btnExportar.Size = new System.Drawing.Size(23, 22);
-            this.btnExportar.ToolTipText = "Exportar los resultados a excel";
-            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
-            // 
             // SAIFrmBuscadorIncidencias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -273,7 +274,6 @@
             this.MinimumSize = new System.Drawing.Size(934, 527);
             this.Name = "SAIFrmBuscadorIncidencias";
             this.Text = "SAI - Buscador de Incidencias";
-            this.Load += new System.EventHandler(this.SAIFrmBuscadorIncidencias_Load);
             this.Controls.SetChildIndex(this.tabPrincipal, 0);
             this.ContenedorSplit.Panel1.ResumeLayout(false);
             this.ContenedorSplit.Panel2.ResumeLayout(false);

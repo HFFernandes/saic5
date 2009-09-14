@@ -191,6 +191,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void SAIFrmDespacho_Load(object sender, EventArgs e)
         {
+            //TODO: Verificar ue se bloquen los controles en base a los permisos
         }
 
         private void ConfigurarGrid()

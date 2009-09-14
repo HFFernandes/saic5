@@ -55,6 +55,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.lblFechaHora.Text += "  " + DateTime.Now.ToLocalTime();
             this.lblOperador.Text += "  " + Aplicacion.UsuarioPersistencia.strNombreUsuario;
             _blnBloqueaEventos = false;
+            base.Activated += SAIFrm089_Activated;
+        }
+
+        void SAIFrm089_Activated(object sender, EventArgs e)
+        {
+            Aplicacion.intFolioPorCancelar = _Incidencia089.Folio;
+            Aplicacion.frmIncidenciaActiva = this;
         }
 
         /// <summary>
@@ -73,6 +80,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.lblFechaHora.Text += "  " + DateTime.Now.ToLocalTime();
             this.lblOperador.Text += "  " + Aplicacion.UsuarioPersistencia.strNombreUsuario;
             _blnBloqueaEventos = false;
+            base.Activated += SAIFrm089_Activated;
         }
 
         /// <summary>
@@ -770,7 +778,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 _objUbicacion.IdCodigoPostal = (cbxCP.SelectedItem as Entidades.CodigoPostal).Clave;
             }
-            Mapa.Controlador.MuestraMapa(_objUbicacion);
+            Mapa.Controlador.MuestraMapa(_objUbicacion,this);
         }
         /// <summary>
         /// Actualiza la ubicación del mapa cuando el formulario es activado

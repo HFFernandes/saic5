@@ -1,27 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using Mappers = BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using Entidades = BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
-using Objetos = BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
+    ///<summary>
+    ///</summary>
     public partial class SAIFrmDependencias089 : SAIFrmBase
     {
         //protected int _iFolio;
         protected Entidades.Incidencia _entIncidencia089;
 
+        ///<summary>
+        ///</summary>
         public SAIFrmDependencias089()
         {
             InitializeComponent();
         }
 
+        ///<summary>
+        ///</summary>
+        ///<param name="_Incidencia089"></param>
         public SAIFrmDependencias089(Entidades.Incidencia _Incidencia089)
         {
             this.InitializeComponent();
@@ -54,13 +56,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         {
                             this.chklstDependencias.Items.Add(dependencia.Descripcion);
                         }
-                        
+
                         this.chklstDependencias.CheckOnClick = true;
                     }
 
-                    for(int i= 0; i < this.chklstDependencias.Items.Count; i++)
-                    {                    
-                        foreach(DataGridViewRow row in this.gvDependencias.Rows)
+                    for (int i = 0; i < this.chklstDependencias.Items.Count; i++)
+                    {
+                        foreach (DataGridViewRow row in this.gvDependencias.Rows)
                         {
                             if (Convert.ToString(row.Cells["Dependencia"].Value) == Convert.ToString(this.chklstDependencias.Items[i]))
                             {
@@ -90,7 +92,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             dtDependencias.Columns.Add(new DataColumn("Dependencia", Type.GetType("System.String")));
             dtDependencias.Columns.Add(new DataColumn("Folio", Type.GetType("System.Int32")));
             dtDependencias.Columns.Add(new DataColumn("Fecha de Envio Dependencia", Type.GetType("System.String")));
-            dtDependencias.Columns.Add(new DataColumn("Fecha de Notificacion", Type.GetType("System.String")));            
+            dtDependencias.Columns.Add(new DataColumn("Fecha de Notificacion", Type.GetType("System.String")));
             //Se obtiene los datos para el llenado del Datatable
             Entidades.IncidenciaDependenciaList lstIncidenciaDependencias = Mappers.IncidenciaDependenciaMapper.Instance().GetByIncidencia(iFolio);
             if (lstIncidenciaDependencias.Count > 0)
@@ -183,9 +185,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             if (Convert.ToString(rowGv.Cells["Dependencia"].Value) == dependencia.Descripcion)
                             {
                                 Entidades.IncidenciaDependencia delInsDependencia = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.IncidenciaDependencia(dependencia.Clave, this._entIncidencia089.Folio);
-                                Mappers.IncidenciaDependenciaMapper.Instance().Delete(delInsDependencia); 
+                                Mappers.IncidenciaDependenciaMapper.Instance().Delete(delInsDependencia);
                                 break;
-                            }                            
+                            }
                         }
                     }
                     //Actualiza el DataGrid
@@ -198,13 +200,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
             catch (SAIExcepcion)
             { }
-            
+
         }
-/// <summary>
-/// Evento que se ejecuta para cerrar la ventana
-/// </summary>
-/// <param name="sender"></param>
-/// <param name="e"></param>
+        /// <summary>
+        /// Evento que se ejecuta para cerrar la ventana
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -215,9 +217,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         private void ChecarParaActualizarEstatus()
         {
-            try 
+            try
             {
-                try 
+                try
                 {
                     bool bCompleto = false;
                     foreach (DataGridViewRow row in this.gvDependencias.Rows)
@@ -226,7 +228,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         {
                             bCompleto = true;
                         }
-                        else 
+                        else
                         {
                             bCompleto = false;
                         }
@@ -246,15 +248,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         this._entIncidencia089.ClaveEstatus = 4;
                         Mappers.IncidenciaMapper.Instance().Save(this._entIncidencia089);
                     }
-                    else 
+                    else
                     {
                         if (this.gvDependencias.Rows.Count == 0)
                         {
-                            this._entIncidencia089.ClaveEstatus = 2;                            
+                            this._entIncidencia089.ClaveEstatus = 2;
                         }
                         else if (this.gvDependencias.Rows.Count > 0)
                         {
-                            this._entIncidencia089.ClaveEstatus = 3;                            
+                            this._entIncidencia089.ClaveEstatus = 3;
                         }
                         Mappers.IncidenciaMapper.Instance().Save(this._entIncidencia089);
                     }
@@ -330,19 +332,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     this.gvDependencias[e.ColumnIndex, e.RowIndex].Value = string.Empty;
                                     throw new SAIExcepcion("La fecha de envío a dependencia no se encuentra en el formato correcto (dd/MM/AAAA), debe de ser una fecha menor o igual al dia actual", this);
                                 }
+
+                                Entidades.IncidenciaDependencia updInsDependencia = Mappers.IncidenciaDependenciaMapper.Instance().GetOne(Convert.ToInt32(this.gvDependencias["ClaveDependencia", e.RowIndex].Value), Convert.ToInt32(this.gvDependencias["Folio", e.RowIndex].Value)); ;
+                                if (this.gvDependencias["Fecha de Envio Dependencia", e.RowIndex].Value != DBNull.Value && Convert.ToString(this.gvDependencias["Fecha de Envio Dependencia", e.RowIndex].Value) != string.Empty)
+                                    updInsDependencia.FechaEnvioDependencia = Convert.ToDateTime(this.gvDependencias["Fecha de Envio Dependencia", e.RowIndex].Value);
                                 else
-                                {
-                                    Entidades.IncidenciaDependencia updInsDependencia = Mappers.IncidenciaDependenciaMapper.Instance().GetOne(Convert.ToInt32(this.gvDependencias["ClaveDependencia", e.RowIndex].Value), Convert.ToInt32(this.gvDependencias["Folio", e.RowIndex].Value)); ;
-                                    if (this.gvDependencias["Fecha de Envio Dependencia", e.RowIndex].Value != DBNull.Value && Convert.ToString(this.gvDependencias["Fecha de Envio Dependencia", e.RowIndex].Value) != string.Empty)
-                                        updInsDependencia.FechaEnvioDependencia = Convert.ToDateTime(this.gvDependencias["Fecha de Envio Dependencia", e.RowIndex].Value);
-                                    else
-                                        updInsDependencia.FechaEnvioDependencia = new Nullable<DateTime>();
-                                    if (this.gvDependencias["Fecha de Notificacion", e.RowIndex].Value != DBNull.Value && Convert.ToString(this.gvDependencias["Fecha de Notificacion", e.RowIndex].Value) != string.Empty)
-                                        updInsDependencia.FechaNotificacion = Convert.ToDateTime(this.gvDependencias["Fecha de Notificacion", e.RowIndex].Value);
-                                    else
-                                        updInsDependencia.FechaNotificacion = new Nullable<DateTime>();
-                                    Mappers.IncidenciaDependenciaMapper.Instance().Save(updInsDependencia);
-                                }
+                                    updInsDependencia.FechaEnvioDependencia = new Nullable<DateTime>();
+                                if (this.gvDependencias["Fecha de Notificacion", e.RowIndex].Value != DBNull.Value && Convert.ToString(this.gvDependencias["Fecha de Notificacion", e.RowIndex].Value) != string.Empty)
+                                    updInsDependencia.FechaNotificacion = Convert.ToDateTime(this.gvDependencias["Fecha de Notificacion", e.RowIndex].Value);
+                                else
+                                    updInsDependencia.FechaNotificacion = new Nullable<DateTime>();
+                                Mappers.IncidenciaDependenciaMapper.Instance().Save(updInsDependencia);
                             }
                             else if (Convert.ToString(this.gvDependencias[e.ColumnIndex, e.RowIndex].Value) != string.Empty)
                             {

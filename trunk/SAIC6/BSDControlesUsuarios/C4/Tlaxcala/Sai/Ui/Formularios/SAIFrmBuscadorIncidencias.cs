@@ -7,8 +7,12 @@ using BSD.C4.Tlaxcala.Sai.Excepciones;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
+    ///<summary>
+    ///</summary>
     public partial class SAIFrmBuscadorIncidencias : SAIFrmBase
     {
+        ///<summary>
+        ///</summary>
         public SAIFrmBuscadorIncidencias()
         {
             InitializeComponent();
@@ -60,6 +64,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
+        ///<summary>
+        ///</summary>
+        ///<param name="strPath"></param>
+        ///<exception cref="SAIExcepcion"></exception>
         public void CargarConsulta(string strPath)
         {
             try
@@ -113,16 +121,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 Close();
             }
-        }
-
-        private void SAIFrmBuscadorIncidencias_Load(object sender, EventArgs e)
-        {
-            //ModeloQuery.LoadFromFile(@"D:\plantilla89.xml");
-        }
-
-        private void GridResultados_DoubleClick(object sender, EventArgs e)
-        {
-            //ModeloQuery.SaveToFile(@"D:\SLC.xml");
         }
 
         private void btnExportar_Click(object sender, EventArgs e)

@@ -7,6 +7,8 @@ using System.Threading;
 
 namespace BSD.C4
 {
+    ///<summary>
+    ///</summary>
     public class Entrada
     {
         /// <summary>
@@ -55,7 +57,7 @@ namespace BSD.C4
                     var objetoExcepcion = (Exception)e.ExceptionObject;
                     if (e.IsTerminating)
                     {
-                        throw new SAIExcepcion(objetoExcepcion.Message,null);
+                        throw new SAIExcepcion(objetoExcepcion.Message, null);
                     }
                 }
                 catch (SAIExcepcion)

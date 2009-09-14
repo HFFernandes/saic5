@@ -25,7 +25,7 @@ namespace BSD.C4.Tlaxcala.Sai
                            new Comando(ID.CMD_SLC,"SLC","Consulta de incidentes ligados.",null,false,true),
                            new Comando(ID.CMD_TEL,"TEL","Mostrar agenda telefónica de las instituciones del estado.",'T',false,true),
                            new Comando(ID.CMD_U,"U","Unidades de las distintas corporaciones.",'U',false,true),
-                           new Comando(ID.CMD_M,"M","Muestra el mapa para la georeferenciación del incidente.",'M',false,true)
+                           new Comando(ID.CMD_M,"M","Muestra el mapa para la referenciación geográfica del incidente.",'M',false,true)
                        };
         }
     }
