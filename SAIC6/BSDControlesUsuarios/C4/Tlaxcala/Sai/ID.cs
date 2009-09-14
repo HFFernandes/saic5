@@ -39,7 +39,7 @@
         public const int CMD_UA = 2800; //Dar de alta unidades (066)
         public const int CMD_UB = 2900; //Dar de baja unidades (066)
         public const int CMD_V = 3000;  //Introducción de datos de vehiculo sospechoso (066)
-        public const int CMD_M = 4000;  //Muestra el mapa
+        public const int CMD_M = 3100;  //Muestra el mapa
 
         #endregion
 
@@ -148,6 +148,8 @@
         public const string STR_ERRORFILTRO = "Ha ocurrido un error al tratar de generar el filtro.";
         public const string STR_NUEVOCOMENTARIO = "Inserte aquí su nuevo comentario";
         public const string STR_UNIDADVIRTUAL = "Virtual";
+        public const string STR_CORPORACIONESVIRTUALES = "La corporación a la cual pertenece no está configurada para manejar unidades fisicas, solo virtuales.";
+        public const string STR_CONFIRMARSALIDA = "¿Está seguro de querer salir del aplicativo?";
 
         #endregion
 

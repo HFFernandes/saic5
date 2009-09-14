@@ -35,8 +35,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             //Creamos la nueva incidencia.
             this.CrearNuevaIncidencia();
             this.Text = string.Format("REGISTRO DE NUEVA INCIDENCIA FOLIO: {0}", this.entIncidencia.Folio);
+            
             //Inicializamos las listas
-
             this.CargarMunicipios();
             this.CargarTiposIncidencias();
             this.CargarCoorporaciones();
@@ -45,8 +45,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             //this.ObtenerTitularLinea(noTelefono);
 
             this._blnBloqueaEventos = false;
+            base.Activated += SAIFrmAltaIncidencia066_Activated;
         }
 
+        void SAIFrmAltaIncidencia066_Activated(object sender, EventArgs e)
+        {
+            Aplicacion.intFolioPorCancelar = entIncidencia.Folio;
+            Aplicacion.frmIncidenciaActiva = this;
+        }
 
         /// <summary>
         /// Constructor
@@ -65,6 +71,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.lblFechaHora.Text += entIncidencia.HoraRecepcion.ToString();
             this.Text = string.Format("EDICIÓN DE INCIDENCIA FOLIO: {0}", this.entIncidencia.Folio);
             //this.EsModoEdicion = true;
+
             //Inicializamos las listas
             this.CargarMunicipios();
             this.CargarTiposIncidencias();
@@ -76,7 +83,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             //Verificamos si debe estar como solo lectura.
             EsSoloLectura = esSoloLectura;
             this._blnBloqueaEventos = false;
-
+            base.Activated += SAIFrmAltaIncidencia066_Activated;
         }
 
 
@@ -1029,7 +1036,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 _objUbicacion.IdCodigoPostal = (cmbCP.SelectedItem as CodigoPostal).Clave;
             }
-            Mapa.Controlador.MuestraMapa(_objUbicacion);
+            Mapa.Controlador.MuestraMapa(_objUbicacion,this);
         }
         /// <summary>
         /// Actualiza la lista de colonias del combo correspondiente
@@ -1468,13 +1475,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             {
                                 //Robo de vehículo totalidad.
                                 case 131:
-                                    this.MostrarCapturaVehiculoRobado();
+                                    //this.MostrarCapturaVehiculoRobado();
+                                    btnVerDatos.Enabled = true;
 
                                     break;
 
                                 //Robo de vehiculos accesorios.
                                 case 130:
-                                    this.MostrarCapturaAccesoriosRobados();
+                                    //this.MostrarCapturaAccesoriosRobados();
+                                    btnVerDatos.Enabled = true;
 
                                     break;
 
@@ -1482,6 +1491,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 case 103:
                                 case 235:
                                     this.MostrarCapturaPersonaExtraviada();
+                                    btnVerDatos.Enabled = true;
 
                                     break;
 
@@ -1547,14 +1557,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         e.Cancel = true;
                         throw new SAIExcepcion("Debe de indicar el número de teléfono de la incidencia", this);
                     }
-                    else
-                    {
 
-                        this.RecuperaDatosEnIncidencia();
-                        this.ActualizaIncidencia();
-                        this.GuardaCorporaciones();
-                        this.GuardarTitularLinea();
-                    }
+                    this.RecuperaDatosEnIncidencia();
+                    this.ActualizaIncidencia();
+                    this.GuardaCorporaciones();
+                    this.GuardarTitularLinea();
 
 
                     Mapa.Controlador.RevisaInstancias(this);
@@ -1866,6 +1873,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             if (e.KeyCode == Keys.Space)
                 GuardaCorporaciones();
         }
+
 
     }
 }

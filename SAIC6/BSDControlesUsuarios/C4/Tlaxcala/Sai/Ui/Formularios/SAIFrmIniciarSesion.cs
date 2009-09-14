@@ -7,6 +7,8 @@ using System.Threading;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
+    ///<summary>
+    ///</summary>
     public partial class SAIFrmIniciarSesion : SAIFrmBase
     {
         /// <summary>
@@ -51,6 +53,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             saiCmbSistema.Enabled = true;
             saiCmbSistema.Items.Add(strItem);
             saiCmbSistema.SelectedIndex = 0;
+
+            saiLogoControl.DetenerAnimacion();
         }
 
         private void cmdAceptar_Click(object sender, EventArgs e)
@@ -118,6 +122,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void saiTxtUsuario_KeyUp(object sender, KeyEventArgs e)
         {
             saiCmbSistema.Enabled = false;
+            saiLogoControl.IniciarAnimacion();
             ObtenerSistemas();
         }
     }

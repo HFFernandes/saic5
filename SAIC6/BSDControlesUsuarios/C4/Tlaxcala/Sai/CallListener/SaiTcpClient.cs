@@ -3,7 +3,6 @@
 //Empresa : InfinitySoft IT Experts
 
 using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
@@ -11,7 +10,6 @@ using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
 using System.Configuration;
-using System.Drawing;
 using System.ComponentModel;
 
 namespace BSD.C4.Tlaxcala.Sai.CallListener
@@ -38,16 +36,16 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
 
                 //Iniciamos el Listener del TCP
                 this.objTcpListener.Start();
-                
-                
-                
+
+
+
             }
             catch
             {
-                
+
             }
 
-            
+
         }
 
         #endregion
@@ -79,27 +77,27 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
 
         #endregion
 
-        
+
 
         /// <summary>
         /// Ip y numero de puerto para el Listener.
         /// </summary>
-        IPEndPoint LocalEndPoint; 
+        IPEndPoint LocalEndPoint;
 
         /// <summary>
         /// Cliente de conexiones para TCP.
         /// </summary>
-        private   TcpClient objTcpClient;
+        private TcpClient objTcpClient;
 
         /// <summary>
         /// Para escuchar las conexiones de TCP.
         /// </summary>
         TcpListener objTcpListener;
-        
+
         /// <summary>
         /// Para obtener el NetworkStream que manda el agente de Avaya.
         /// </summary>
-        private   NetworkStream netStream;
+        private NetworkStream netStream;
 
         /// <summary>
         /// BackGroundWorker para iniciar el Agente Java en segundo plano.
@@ -118,11 +116,11 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
         /// <summary>
         /// Inicia la aplicación .jar
         /// </summary>
-        private   void IniciarAgenteAvaya()
+        private void IniciarAgenteAvaya()
         {
             try
             {
-                
+
                 //Configuramos el proceso.
                 Process process = new Process();
 
@@ -139,20 +137,20 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
                 process.StartInfo.Arguments = string.Format("-jar {0}", NombreAgenteAvaya);
 
                 process.Start();
-                
+
                 FindMessajeEvent("Inició agente Avaya correctamente...");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 FindMessajeEvent("Error al iniciar agente de Avaya :" + ex.Message);
             }
-            
+
         }
 
         /// <summary>
         /// Inicia el sub proceso que inicia el agente de Avaya.
         /// </summary>
-        public   void IniciarCliente()
+        public void IniciarCliente()
         {
             //Instanciamos el sub proceso que arranca el Java
             bgwIniciador = new BackgroundWorker();
@@ -160,7 +158,7 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
             bgwIniciador.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgwIniciador_RunWorkerCompleted);
 
             this.bgwIniciador.RunWorkerAsync();
-            
+
         }
 
         /// <summary>
@@ -176,7 +174,7 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
                 while (netStream.CanRead)
                 {
                     Thread.Sleep(100);
-                    if (objTcpClient.Available>0)
+                    if (objTcpClient.Available > 0)
                     {
                         byte[] bytes = new byte[objTcpClient.ReceiveBufferSize];
 
@@ -212,8 +210,8 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
 
 
                 }
-                
-                
+
+
             }
             catch (Exception ex)
             {
@@ -227,27 +225,27 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
         /// <summary>
         /// Envia el mensaje para cerrar el Agente de Avaya.
         /// </summary>
-        public   void DetenerCliente()
+        public void DetenerCliente()
         {
             try
             {
                 //Detenemos el proceso que monitorea el puerto
                 this.ProcesoMonitor.Abort();
-               
+
                 //Mandamos el comando que interpreta el .jar para detenerse.
                 string responseString = "Exit%";
                 Byte[] sendBytes = Encoding.ASCII.GetBytes(responseString);
                 netStream.Write(sendBytes, 0, sendBytes.Length);
 
                 this.FindMessajeEvent("Se envió deneter agente");
-                
-                
+
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 this.FindMessajeEvent("Error al detener :" + ex.Message);
             }
-             
+
         }
 
         /// <summary>
@@ -307,7 +305,7 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
         /// </summary>
         public event EventHandler<FindDataEventArgs> ListenerFindDataEvent;
 
-        protected   void FindDataEvent(string val)
+        protected void FindDataEvent(string val)
         {
             EventHandler<FindDataEventArgs> temp = ListenerFindDataEvent;
             if (temp != null)
@@ -319,60 +317,62 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
         /// </summary>
         public event EventHandler<FindMessageEventArgs> ListenerMessageDataEvent;
 
-        protected   void FindMessajeEvent(string msg)
+        protected void FindMessajeEvent(string msg)
         {
             EventHandler<FindMessageEventArgs> temp = ListenerMessageDataEvent;
             if (temp != null)
                 temp(this, new FindMessageEventArgs(msg));
         }
 
-       
 
-       
+
+
         #endregion
 
     }
 
     #region CLASES AUXILIAES PARA MANEJO DE EVENTOS
 
+    ///<summary>
+    ///</summary>
     public class FindDataEventArgs : EventArgs
     {
-        private string datos;
-
+        ///<summary>
+        ///</summary>
+        ///<param name="datosTelefono"></param>
         public FindDataEventArgs(string datosTelefono)
         {
-            datos = datosTelefono;
+            Datos = datosTelefono;
         }
 
 
-        public string Datos
-        {
-            get { return datos; }
-            set { datos = value; }
-        }
+        ///<summary>
+        ///</summary>
+        public string Datos { get; set; }
     }
 
+    ///<summary>
+    ///</summary>
     public class FindMessageEventArgs : EventArgs
     {
-        private string mensaje;
-
+        ///<summary>
+        ///</summary>
+        ///<param name="msg"></param>
         public FindMessageEventArgs(string msg)
         {
-            mensaje = msg;
+            Mensaje = msg;
         }
 
 
-        public string Mensaje
-        {
-            get { return mensaje; }
-            set { mensaje = value; }
-        }
+        ///<summary>
+        ///</summary>
+        public string Mensaje { get; set; }
     }
 
 
     #endregion
 
-    
-  
+
+
 
 }

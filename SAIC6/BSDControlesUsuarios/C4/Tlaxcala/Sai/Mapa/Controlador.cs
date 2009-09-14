@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using BSD.C4.Tlaxcala.Sai.Ui.Formularios;
-using BSD.C4.Tlaxcala.Sai;
 using System.Configuration;
 using System.Windows.Forms;
 using System.Threading;
@@ -51,7 +47,7 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
         /// </remarks>
         /// <param name="objDatosUbicacion">Clase que contiene los identificadores de municipio, localidad, colonia y código postal</param>
         /// <param name="frmIncidencia">Referencia del formulario que manda a llamar el método</param>
-        public static void MuestraMapa(EstructuraUbicacion objDatosUbicacion, SAIFrmIncidencia frmIncidencia)
+        public static void MuestraMapa(EstructuraUbicacion objDatosUbicacion, SAIFrmBase frmIncidencia)
         {
             if (_frmMapa == null)
             {
@@ -72,7 +68,7 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
                                     }
                                 }) {IsBackground = true};
             tr.Start();
-            //frmIncidencia.Focus();
+            frmIncidencia.Focus();
         }
 
         /// <summary>

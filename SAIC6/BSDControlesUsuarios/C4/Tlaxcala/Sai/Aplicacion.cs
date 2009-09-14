@@ -13,7 +13,6 @@ namespace BSD.C4.Tlaxcala.Sai
     /// </summary>
     public static class Aplicacion
     {
-
         /// <summary>
         /// Contiene los numero de telefono que estan siendo atendidos actualmente.
         /// </summary>
@@ -29,6 +28,16 @@ namespace BSD.C4.Tlaxcala.Sai
         /// Apuntador hacia la instancia actual de SAIFrmComandos
         /// </summary>
         //public static SAIFrmComandos frmComandos;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static int intFolioPorCancelar;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static SAIFrmBase frmIncidenciaActiva;
 
         /// <summary>
         /// Método para la conversion de un número hexadecimal a decimal para los colores
@@ -67,12 +76,26 @@ namespace BSD.C4.Tlaxcala.Sai
         {
             #region Campos
 
+            ///<summary>
+            ///</summary>
             public static int intClaveUsuario { get; set; }
+            ///<summary>
+            ///</summary>
             public static string strNombreUsuario { get; set; }
+            ///<summary>
+            ///</summary>
             public static string[] strSistemas { get; set; }
+            ///<summary>
+            ///</summary>
             public static string strSistemaActual { get; set; }
+            ///<summary>
+            ///</summary>
             public static bool? blnEsDespachador { get; set; }
+            ///<summary>
+            ///</summary>
             public static int? intClaveSistema { get; set; }
+            ///<summary>
+            ///</summary>
             public static int? intCorporacion
             {
                 get
@@ -132,11 +155,19 @@ namespace BSD.C4.Tlaxcala.Sai
                 return false;
             }
 
+            ///<summary>
+            ///</summary>
+            ///<param name="intSubModulo"></param>
+            ///<returns></returns>
             public static bool blnPuedeLeeryEscribir(int intSubModulo)
             {
                 return blnPuedeLeer(intSubModulo) && blnPuedeEscribir(intSubModulo);
             }
 
+            ///<summary>
+            ///</summary>
+            ///<param name="intSubModulo"></param>
+            ///<returns></returns>
             public static bool blnPuedeLeeroEscribir(int intSubModulo)
             {
                 return blnPuedeLeer(intSubModulo) || blnPuedeEscribir(intSubModulo);
@@ -256,19 +287,39 @@ namespace BSD.C4.Tlaxcala.Sai
         }
     }
 
+    ///<summary>
+    ///</summary>
     public enum ESTATUSINCIDENCIAS
     {
+        ///<summary>
+        ///</summary>
         NUEVA = 1,
+        ///<summary>
+        ///</summary>
         PENDIENTE = 2,
+        ///<summary>
+        ///</summary>
         ACTIVA = 3,
+        ///<summary>
+        ///</summary>
         CERRADA = 4,
+        ///<summary>
+        ///</summary>
         CANCELADA = 5
     }
 
+    ///<summary>
+    ///</summary>
     public enum ESTATUSUNIDADES
     {
+        ///<summary>
+        ///</summary>
         LIBRE = 1,    //Unidad que puede ser asignada a una incidencia (VERDE)
+        ///<summary>
+        ///</summary>
         DESPACHADA = 2,   //Unidad que va en camino a atender la incidencia (ROJO)
+        ///<summary>
+        ///</summary>
         LLEGADA = 3   //Unidad que se encuentra ya en el lugar de la incidencia 
     }
 }
