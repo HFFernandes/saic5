@@ -1,4 +1,3 @@
-
 //
 // Enum: TopUnit
 // Copyright 2006 by Ewout Stortenbeker

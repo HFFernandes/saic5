@@ -11,6 +11,7 @@ using CodeEngine.Framework.QueryBuilder.Enums;
 // This class is part of the CodeEngine Framework.
 // You can download the framework DLL at http://www.code-engine.com/
 //
+
 namespace CodeEngine.Framework.QueryBuilder
 {
     /// <summary>
@@ -20,11 +21,13 @@ namespace CodeEngine.Framework.QueryBuilder
     {
         public string FieldName;
         public Sorting SortOrder;
+
         public OrderByClause(string field)
         {
             FieldName = field;
             SortOrder = Sorting.Ascending;
         }
+
         public OrderByClause(string field, Sorting order)
         {
             FieldName = field;

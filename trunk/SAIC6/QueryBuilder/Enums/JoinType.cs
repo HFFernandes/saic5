@@ -1,4 +1,3 @@
-
 //
 // Enum: JoinType
 // Copyright 2006 by Ewout Stortenbeker

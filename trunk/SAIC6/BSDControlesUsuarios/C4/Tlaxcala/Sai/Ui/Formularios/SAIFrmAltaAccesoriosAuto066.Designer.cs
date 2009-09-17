@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbAccesorios = new System.Windows.Forms.GroupBox();
             this.dgvAccesorios = new System.Windows.Forms.DataGridView();
             this.gcIdAccesorio = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -84,9 +84,9 @@
             this.dgvAccesorios.Location = new System.Drawing.Point(6, 17);
             this.dgvAccesorios.Name = "dgvAccesorios";
             this.dgvAccesorios.RowHeadersVisible = false;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvAccesorios.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvAccesorios.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvAccesorios.Size = new System.Drawing.Size(609, 115);
             this.dgvAccesorios.TabIndex = 0;
             // 
@@ -177,14 +177,14 @@
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvVehiculoAccesorios.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvVehiculoAccesorios.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvVehiculoAccesorios.Location = new System.Drawing.Point(11, 19);
             this.dgvVehiculoAccesorios.Name = "dgvVehiculoAccesorios";
             this.dgvVehiculoAccesorios.RowHeadersVisible = false;
@@ -342,7 +342,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SAIFrmAltaAccesoriosAuto066";
-            this.Text = "Información de accesorios robados";
+            this.Text = "SAI - Información de accesorios robados";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.SAIFrmAltaAccesoriosAuto066_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SAIFrmAltaAccesoriosAuto066_FormClosing);

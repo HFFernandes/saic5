@@ -2,20 +2,16 @@
  * Hecho por: TSUI DAVID JESUS ENCISO GUADARRAMA
  */
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using Mappers = BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using Entidades = BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
-using BSD.C4.Tlaxcala.Sai.Mapa;
-using BSD.C4.Tlaxcala.Sai.Ui.Controles;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
+    ///<summary>
+    ///</summary>
     public partial class SAIFrm089 : SAIFrmBase
     {
         protected Entidades.Incidencia _Incidencia089;
@@ -161,6 +157,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 this.cbxMunicipio.Focus();
             }
         }
+
         /// <summary>
         /// Manda el foco al campo Localidad
         /// </summary>
@@ -171,6 +168,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 this.cbxLocalidad.Focus();
             }
         }
+
         /// <summary>
         /// Manda el foco al campo Colonia
         /// </summary>
@@ -202,6 +200,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 this.txtReferencias.Focus();
             }
         }
+
         /// <summary>
         /// Manda el foco al campo Oficio Envio
         /// </summary>
@@ -222,6 +221,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 this.dtpFechaDoc.Focus();
             }
         }
+
         /// <summary>
         /// Manda el foco al campo Llena los Tipos de Incidencias para 089
         /// </summary>
@@ -267,6 +267,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (SAIExcepcion)
             { }
         }
+
         /// <summary>
         /// Agrega una nueva Incidencia
         /// </summary>
@@ -328,6 +329,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             frmDependencias.TopMost = true;
             frmDependencias.ShowDialog(this);
         }
+
         /// <summary>
         /// Llena los controles con los datos de una incidencia
         /// </summary>
@@ -405,6 +407,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (SAIExcepcion)
             { }
         }
+
         /// <summary>
         /// Se ejecuta cuando se selecciona un municipio
         /// </summary>
@@ -464,6 +467,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (SAIExcepcion)
             { }
         }
+
         /// <summary>
         /// Se ejecuta cuando se selecciona una Colonia
         /// </summary>
@@ -510,6 +514,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             { }
         }
 
+/*
         /// <summary>
         /// Selecciona un CP
         /// </summary>
@@ -522,6 +527,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.cbxCP.SelectedItem = cpItem;
             }
         }
+*/
+
         /// <summary>
         /// Valida que solo se captren numeros al Capturar el Codigo Postal
         /// </summary>
@@ -571,6 +578,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 this.ActualizarIncidencia();
             }
         }
+
         /// <summary>
         /// Ocurre cuando se activa o desactiva el check de Fecha Documento, activando o desactivando el control Fecha Documento
         /// </summary>
@@ -586,6 +594,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 this._Incidencia089.FechaDocumento = new Nullable<DateTime>();
             }
         }
+
         /// <summary>
         /// Se asigna fecha del documento del Oficio
         /// </summary>
@@ -650,6 +659,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 this._Incidencia089.NumeroOficio = this.txtOficioEnvio.Text;
             }
         }
+
         // <summary>
         /// Actualiza los datos de la incidencia cuando se cierra formulario
         /// </summary>
@@ -657,6 +667,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             this.ActualizarIncidencia();
         }
+
         /// <summary>
         /// Si se captura un numero de oficio se actualiza el estatus a Pendiente
         /// </summary>
@@ -780,6 +791,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
             Mapa.Controlador.MuestraMapa(_objUbicacion,this);
         }
+
         /// <summary>
         /// Actualiza la ubicación del mapa cuando el formulario es activado
         /// </summary>
@@ -849,6 +861,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.cbxLocalidad.DataSource = null;
             //cmbLocalidad.Items.Clear();
         }
+
         /// <summary>
         /// Limpia el combo que contiene la lista de colonias
         /// </summary>
@@ -858,6 +871,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             //cmbColonia.Items.Clear();
         }
 
+/*
         /// <summary>
         /// Limpia el texto del combo de códigos postales
         /// </summary>
@@ -865,6 +879,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             this.cbxCP.Text = string.Empty;
         }
+*/
 
         /// <summary>
         /// Limpia el combo que contiene los códigos postales
@@ -876,10 +891,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.cbxCP.Text = string.Empty;
         }
 
+/*
         /// <summary>
         /// Obtiene el código postal de una colonia especificada.
         /// </summary>
-        /// <param name="idCp">int, Id del código postal</param>
+        /// <param name="iCp">int, Id del código postal</param>
         private void LlenarCpPorColonia(int iCp)
         {
             entCodigoPostal = Mappers.CodigoPostalMapper.Instance().GetOne(iCp);
@@ -890,6 +906,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 this.ActualizarCodigoPostal(objListaCodigosPostales);
             }
         }
+*/
 
         /// <summary>
         /// Actualiza las localidades por el municipio seleccionado
@@ -923,6 +940,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (SAIExcepcion)
             { }
         }
+
         /// <summary>
         /// Selecciona el elemento del combo de codigos postales
         /// </summary>
@@ -933,6 +951,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             cbxCP.SelectedItem = objElemento;
         }
 
+/*
         /// <summary>
         /// Limpia el texto del control del combo de colonias
         /// </summary>
@@ -941,6 +960,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             cbxColonia.SelectedIndex = -1;
             cbxColonia.Text = string.Empty;
         }
+*/
 
         /// <summary>
         /// Valida los controles obligatorios del formulario y cierra el mapa en caso de que ya no existan
@@ -1027,6 +1047,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (SAIExcepcion)
             { }
         }
+
         /// <summary>
         /// Evento que se ejecua cuando se selecciona un CP de la lista, y selecciona la colonia correspondiente
         /// <remarks>
@@ -1066,6 +1087,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             catch (SAIExcepcion)
             { }
         }
+
         /// <summary>
         /// Evento que se ejecuta cuando se presiona una tecla, verifica que el codigo postal este capturado (5 digitos)
         /// y si se pulsa la tecla enter para buscar colonia, localidad y municipio por el cp capturado.

@@ -32,7 +32,7 @@ namespace BSD.C4.Tlaxcala.Sai
         /// <summary>
         /// 
         /// </summary>
-        public static int intFolioPorCancelar;
+        public static int? intFolioPorCancelar;
 
         /// <summary>
         /// 

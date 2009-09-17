@@ -11,6 +11,7 @@ using CodeEngine.Framework.QueryBuilder.Enums;
 // This class is part of the CodeEngine Framework.
 // You can download the framework DLL at http://www.code-engine.com/
 //
+
 namespace CodeEngine.Framework.QueryBuilder
 {
     /// <summary>
@@ -26,11 +27,13 @@ namespace CodeEngine.Framework.QueryBuilder
         private string m_FieldName;
         private Comparison m_ComparisonOperator;
         private object m_Value;
+
         internal struct SubClause
         {
             public LogicOperator LogicOperator;
             public Comparison ComparisonOperator;
             public object Value;
+
             public SubClause(LogicOperator logic, Comparison compareOperator, object compareValue)
             {
                 LogicOperator = logic;
@@ -38,7 +41,8 @@ namespace CodeEngine.Framework.QueryBuilder
                 Value = compareValue;
             }
         }
-        internal List<SubClause> SubClauses;	// Array of SubClause
+
+        internal List<SubClause> SubClauses; // Array of SubClause
 
         /// <summary>
         /// Gets/sets the name of the database column this WHERE clause should operate on
@@ -74,11 +78,11 @@ namespace CodeEngine.Framework.QueryBuilder
             m_Value = firstCompareValue;
             SubClauses = new List<SubClause>();
         }
+
         public void AddClause(LogicOperator logic, Comparison compareOperator, object compareValue)
         {
             SubClause NewSubClause = new SubClause(logic, compareOperator, compareValue);
             SubClauses.Add(NewSubClause);
         }
     }
-
 }

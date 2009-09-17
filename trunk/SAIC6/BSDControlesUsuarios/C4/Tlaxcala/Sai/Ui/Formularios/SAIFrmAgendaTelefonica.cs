@@ -5,8 +5,12 @@ using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
+    ///<summary>
+    ///</summary>
     public partial class SAIFrmAgendaTelefonica : SAIFrmBase
     {
+        ///<summary>
+        ///</summary>
         public SAIFrmAgendaTelefonica()
         {
             InitializeComponent();

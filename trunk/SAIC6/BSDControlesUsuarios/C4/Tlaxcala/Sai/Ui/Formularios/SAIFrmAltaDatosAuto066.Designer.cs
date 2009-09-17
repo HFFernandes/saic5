@@ -165,7 +165,7 @@
             this.dgvVehiculo.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvVehiculo.Location = new System.Drawing.Point(5, 19);
             this.dgvVehiculo.Name = "dgvVehiculo";
-            this.dgvVehiculo.RowHeadersVisible = false;
+            this.dgvVehiculo.RowHeadersWidth = 15;
             this.dgvVehiculo.Size = new System.Drawing.Size(810, 119);
             this.dgvVehiculo.TabIndex = 1;
             // 

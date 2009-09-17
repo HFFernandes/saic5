@@ -10,6 +10,7 @@ using System.Text;
 // This class is part of the CodeEngine Framework.
 // You can download the framework DLL at http://www.code-engine.com/
 // 
+
 namespace CodeEngine.Framework.QueryBuilder
 {
     public class SqlLiteral
@@ -17,6 +18,7 @@ namespace CodeEngine.Framework.QueryBuilder
         public static string StatementRowsAffected = "SELECT @@ROWCOUNT";
 
         private string _value;
+
         public string Value
         {
             get { return _value; }
@@ -28,5 +30,4 @@ namespace CodeEngine.Framework.QueryBuilder
             _value = value;
         }
     }
-
 }
