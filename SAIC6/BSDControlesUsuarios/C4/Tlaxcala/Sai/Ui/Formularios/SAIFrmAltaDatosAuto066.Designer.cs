@@ -166,6 +166,7 @@
             this.dgvVehiculo.Location = new System.Drawing.Point(5, 19);
             this.dgvVehiculo.Name = "dgvVehiculo";
             this.dgvVehiculo.RowHeadersWidth = 15;
+            this.dgvVehiculo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvVehiculo.Size = new System.Drawing.Size(810, 119);
             this.dgvVehiculo.TabIndex = 1;
             // 
