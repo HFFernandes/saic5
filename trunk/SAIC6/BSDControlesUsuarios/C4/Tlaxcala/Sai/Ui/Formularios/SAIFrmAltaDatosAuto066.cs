@@ -30,6 +30,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         public SAIFrmAltaDatosAuto066()
         {
             InitializeComponent();
+            //dgvVehiculo.RowHeadersVisible = true;
         }
 
         #endregion
@@ -46,8 +47,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         public VehiculoObjectList ListaVehiculos { get; set; }
 
-
-
         #endregion
 
         #region MÉTODOS
@@ -57,6 +56,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         private void LlenarDatosAuto()
         {
+            if (ListaVehiculos != null)
+                ListaVehiculos.Clear();
+
             //Llenamos los datos del propietario.
             if (this.Propietario == null)
             {
@@ -107,11 +109,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
 
                 }
-
-
             }
-
-
         }
 
         /// <summary>
@@ -119,44 +117,48 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         private void MostrarDatosAuto()
         {
-            if (Propietario != null)
+            try
             {
-                this.txtDireccionPropietario.Text = Propietario.Domicilio;
-                this.txtNombrePropietario.Text = Propietario.Nombre;
-                this.txtTelefonoPropietario.Text = Propietario.Telefono;
+                if (Propietario != null)
+                {
+                    this.txtDireccionPropietario.Text = Propietario.Domicilio;
+                    this.txtNombrePropietario.Text = Propietario.Nombre;
+                    this.txtTelefonoPropietario.Text = Propietario.Telefono;
+                }
+
+                if (ListaVehiculos != null)
+                {
+                    this.dgvVehiculo.Rows.Clear();
+                    int count = 1;
+                    foreach (VehiculoObject vehiculo in this.ListaVehiculos)
+                    {
+                        this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[0].Value = vehiculo.Clave;
+                        this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[1].Value = vehiculo.Marca;
+                        this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[2].Value = vehiculo.Tipo;
+                        this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[3].Value = vehiculo.Modelo;
+                        this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[4].Value = vehiculo.Placas;
+                        this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[5].Value = vehiculo.Color;
+                        this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[6].Value = vehiculo.NumeroMotor;
+                        this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[7].Value = vehiculo.NumeroSerie;
+                        this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[8].Value = vehiculo.SeñasParticulares;
+                        this.dgvVehiculo.Rows.Add(1);
+                        count++;
+
+                    }
+                    //For para quitar las filas vacias.
+                    for (int i = 0; i < count; i++)
+                    {
+                        if ((dgvVehiculo.RowCount - 1) >= i)
+                            if (this.dgvVehiculo.Rows[i].Cells[1].Value == null)
+                            {
+                                this.dgvVehiculo.Rows.RemoveAt(i);
+                                i--;
+                            }
+                    }
+                }
             }
-            if (ListaVehiculos != null)
+            catch (Exception)
             {
-                this.dgvVehiculo.Rows.Clear();
-                int count = 1;
-                foreach (VehiculoObject vehiculo in this.ListaVehiculos)
-                {
-
-                    this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[0].Value = vehiculo.Clave;
-                    this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[1].Value = vehiculo.Marca;
-                    this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[2].Value = vehiculo.Tipo;
-                    this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[3].Value = vehiculo.Modelo;
-                    this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[4].Value = vehiculo.Placas;
-                    this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[5].Value = vehiculo.Color;
-                    this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[6].Value = vehiculo.NumeroMotor;
-                    this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[7].Value = vehiculo.NumeroSerie;
-                    this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[8].Value = vehiculo.SeñasParticulares;
-                    this.dgvVehiculo.Rows.Add(1);
-                    count++;
-
-                }
-                //For para quitar las filas vacias.
-                for (int i = 0; i < count; i++)
-                {
-                    if ((dgvVehiculo.RowCount - 1) >= i)
-                        if (this.dgvVehiculo.Rows[i].Cells[1].Value == null)
-                        {
-                            this.dgvVehiculo.Rows.RemoveAt(i);
-                            i--;
-                        }
-
-                }
-
             }
         }
 
@@ -187,7 +189,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             switch (e.KeyData)
             {
                 case Keys.Enter:
-
                     Control controlActual = (Control)sender;
                     this.FindForm().SelectNextControl(controlActual, true, false, true, true);
 
