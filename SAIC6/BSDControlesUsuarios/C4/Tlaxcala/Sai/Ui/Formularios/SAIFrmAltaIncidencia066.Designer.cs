@@ -501,6 +501,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultLocation;
             this.Text = "REGISTRO DE NUEVA INCIDENCIA";
             this.Load += new System.EventHandler(this.SAIFrmAltaIncidencia066_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SAIFrmAltaIncidencia066_FormClosed);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SAIFrmAltaIncidencia066_FormClosing);
             this.Controls.SetChildIndex(this.pictureBox1, 0);
             this.Controls.SetChildIndex(this.lblTitulo, 0);

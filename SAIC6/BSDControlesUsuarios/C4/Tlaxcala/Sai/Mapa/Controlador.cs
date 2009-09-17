@@ -6,11 +6,16 @@ using System.Threading;
 
 namespace BSD.C4.Tlaxcala.Sai.Mapa
 {
+    ///<summary>
+    ///</summary>
     public static class Controlador
     {
         public static SAIFrmMapa _frmMapa;
         private static Thread tr;
 
+        ///<summary>
+        ///</summary>
+        ///<param name="objDatosUbicacion"></param>
         public delegate void DelegadoActualizarMapa(EstructuraUbicacion objDatosUbicacion);
 
         private static void ActualizarMapa(EstructuraUbicacion objDatosUbicacion)

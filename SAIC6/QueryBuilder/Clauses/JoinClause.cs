@@ -11,6 +11,7 @@ using CodeEngine.Framework.QueryBuilder.Enums;
 // This class is part of the CodeEngine Framework.
 // You can download the framework DLL at http://www.code-engine.com/
 //
+
 namespace CodeEngine.Framework.QueryBuilder
 {
     /// <summary>
@@ -23,14 +24,18 @@ namespace CodeEngine.Framework.QueryBuilder
         public string FromColumn;
         public Comparison ComparisonOperator;
         public string ToTable;
+        public string ToTableAlias;
         public string ToColumn;
-        public JoinClause(JoinType join, string toTableName, string toColumnName, Comparison @operator, string fromTableName, string fromColumnName)
+
+        public JoinClause(JoinType join, string toTableName, string toColumnName, Comparison @operator,
+                          string fromTableName, string fromColumnName)
         {
             JoinType = join;
             FromTable = fromTableName;
             FromColumn = fromColumnName;
             ComparisonOperator = @operator;
             ToTable = toTableName;
+            ToTableAlias = "";
             ToColumn = toColumnName;
         }
     }

@@ -470,7 +470,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                                           ExceptionMessageBoxDefaultButton.Button2);
                         if (DialogResult.Yes == confirmarSalida.Show(this))
                         {
-                            var incidencia = IncidenciaMapper.Instance().GetOne(Aplicacion.intFolioPorCancelar);
+                            var incidencia = Aplicacion.intFolioPorCancelar != null ? IncidenciaMapper.Instance().GetOne(Aplicacion.intFolioPorCancelar.Value) : null;
                             if (incidencia != null)
                             {
                                 incidencia.ClaveEstatus = (int)ESTATUSINCIDENCIAS.CANCELADA;
@@ -478,7 +478,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                                 Aplicacion.frmIncidenciaActiva.Dispose();
                                 Aplicacion.frmIncidenciaActiva = null;
-                                Aplicacion.intFolioPorCancelar = -1;
+                                Aplicacion.intFolioPorCancelar = null;
+                            }
+                            else
+                            {
+                                throw new SAIExcepcion("No existe una incidencia activa que se pueda cancelar.");
                             }
                         }
                         break;

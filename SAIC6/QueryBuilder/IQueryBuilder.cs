@@ -10,6 +10,7 @@ using System.Text;
 // This interface is part of the CodeEngine Framework.
 // You can download the framework DLL at http://www.code-engine.com/
 // 
+
 namespace CodeEngine.Framework.QueryBuilder
 {
     public interface IQueryBuilder

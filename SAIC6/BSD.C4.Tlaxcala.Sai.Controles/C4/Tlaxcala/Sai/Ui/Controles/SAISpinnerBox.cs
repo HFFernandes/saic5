@@ -3,6 +3,8 @@ using System.Windows.Forms;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 {
+    ///<summary>
+    ///</summary>
     public partial class SAISpinnerBox : PictureBox
     {
         #region Campos
@@ -16,6 +18,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 
         #region Propiedades
 
+        ///<summary>
+        ///</summary>
         public double Intervalo
         {
             get
@@ -28,6 +32,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             }
         }
 
+        ///<summary>
+        ///</summary>
         public int Velocidad
         {
             get
@@ -42,6 +48,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 
         #endregion
 
+        ///<summary>
+        ///</summary>
         public SAISpinnerBox()
         {
             InitializeComponent();
@@ -53,11 +61,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             this.Velocidad = 1;
         }
 
+        ///<summary>
+        ///</summary>
         public void Activar()
         {
             this.timer.Start();
         }
 
+        ///<summary>
+        ///</summary>
         public void Desactivar()
         {
             this.timer.Stop();

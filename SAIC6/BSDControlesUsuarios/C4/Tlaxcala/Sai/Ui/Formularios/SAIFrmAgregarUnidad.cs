@@ -6,8 +6,12 @@ using BSD.C4.Tlaxcala.Sai.Excepciones;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
+    ///<summary>
+    ///</summary>
     public partial class SAIFrmAgregarUnidad : SAIFrmBase
     {
+        ///<summary>
+        ///</summary>
         public SAIFrmAgregarUnidad()
         {
             InitializeComponent();

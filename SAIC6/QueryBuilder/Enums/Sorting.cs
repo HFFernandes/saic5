@@ -1,4 +1,3 @@
-
 //
 // Enum: Sorting
 // Copyright 2006 by Ewout Stortenbeker

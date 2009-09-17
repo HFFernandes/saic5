@@ -39,14 +39,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <summary>
         /// Propietario del Vehículo.
         /// </summary>
-        public PropietarioVehiculoObject Propietario {get; set; }
+        public PropietarioVehiculoObject Propietario { get; set; }
 
         /// <summary>
         /// Lista con el/los vehiculos que fueron reportados como robados.
         /// </summary>
         public VehiculoObjectList ListaVehiculos { get; set; }
 
-        
+
 
         #endregion
 
@@ -58,28 +58,28 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void LlenarDatosAuto()
         {
             //Llenamos los datos del propietario.
-            if(this.Propietario==null)
+            if (this.Propietario == null)
             {
                 this.Propietario = new PropietarioVehiculoObject();
             }
-            
+
             this.Propietario.Domicilio = this.txtDireccionPropietario.Text;
             this.Propietario.Nombre = this.txtNombrePropietario.Text;
             this.Propietario.Telefono = this.txtTelefonoPropietario.Text;
 
             //Llenamos los datos
-            if(this.ListaVehiculos==null)
+            if (this.ListaVehiculos == null)
             {
                 this.ListaVehiculos = new VehiculoObjectList();
             }
 
             VehiculoObject Vehiculo;
-            foreach(DataGridViewRow row in this.dgvVehiculo.Rows)
+            foreach (DataGridViewRow row in this.dgvVehiculo.Rows)
             {
-                Vehiculo = new VehiculoObject();
-                if (row.Cells[1].Value != null && row.Cells[2].Value != null && row.Cells[3].Value!=null)
+                //Vehiculo = new VehiculoObject();
+                if (row.Cells[1].Value != null && row.Cells[2].Value != null && row.Cells[3].Value != null)
                 {
-
+                    Vehiculo = new VehiculoObject();
                     if (row.Cells[0].Value != null)
                     {
                         Vehiculo = VehiculoMapper.Instance().GetOne(Convert.ToInt32(row.Cells[0].Value));
@@ -105,12 +105,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     {
                         this.ListaVehiculos.Add(Vehiculo);
                     }
-                    
+
                 }
-                
-              
+
+
             }
-            
+
 
         }
 
@@ -119,13 +119,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         private void MostrarDatosAuto()
         {
-            if (Propietario!=null)
+            if (Propietario != null)
             {
                 this.txtDireccionPropietario.Text = Propietario.Domicilio;
                 this.txtNombrePropietario.Text = Propietario.Nombre;
                 this.txtTelefonoPropietario.Text = Propietario.Telefono;
             }
-            if (ListaVehiculos!=null)
+            if (ListaVehiculos != null)
             {
                 this.dgvVehiculo.Rows.Clear();
                 int count = 1;
@@ -142,8 +142,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[7].Value = vehiculo.NumeroSerie;
                     this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[8].Value = vehiculo.SeñasParticulares;
                     this.dgvVehiculo.Rows.Add(1);
-                        count++;
-                    
+                    count++;
+
                 }
                 //For para quitar las filas vacias.
                 for (int i = 0; i < count; i++)

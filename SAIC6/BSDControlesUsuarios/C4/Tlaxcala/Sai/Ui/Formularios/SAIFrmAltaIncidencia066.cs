@@ -1038,6 +1038,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
             Mapa.Controlador.MuestraMapa(_objUbicacion,this);
         }
+
         /// <summary>
         /// Actualiza la lista de colonias del combo correspondiente
         /// </summary>
@@ -1872,6 +1873,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             if (e.KeyCode == Keys.Space)
                 GuardaCorporaciones();
+        }
+
+        private void SAIFrmAltaIncidencia066_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            //para que no se quede en memoria
+            Aplicacion.intFolioPorCancelar = null;
         }
 
 

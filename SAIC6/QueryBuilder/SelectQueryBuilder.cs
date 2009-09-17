@@ -13,18 +13,19 @@ using CodeEngine.Framework.QueryBuilder.Enums;
 // the UpdateQueryBuilder, InsertQueryBuilder and DeleteQueryBuilder.
 // You can download the framework DLL at http://www.code-engine.com/
 // 
+
 namespace CodeEngine.Framework.QueryBuilder
 {
     public class SelectQueryBuilder : IQueryBuilder
     {
         protected bool _distinct = false;
         protected TopClause _topClause = new TopClause(100, TopUnit.Percent);
-        protected List<string> _selectedColumns = new List<string>();	// array of string
-        protected List<string> _selectedTables = new List<string>();	// array of string
-        protected List<JoinClause> _joins = new List<JoinClause>();	// array of JoinClause
+        protected List<string> _selectedColumns = new List<string>(); // array of string
+        protected List<string> _selectedTables = new List<string>(); // array of string
+        protected List<JoinClause> _joins = new List<JoinClause>(); // array of JoinClause
         protected WhereStatement _whereStatement = new WhereStatement();
-        protected List<OrderByClause> _orderByStatement = new List<OrderByClause>();	// array of OrderByClause
-        protected List<string> _groupByColumns = new List<string>();		// array of string
+        protected List<OrderByClause> _orderByStatement = new List<OrderByClause>(); // array of OrderByClause
+        protected List<string> _groupByColumns = new List<string>(); // array of string
         protected WhereStatement _havingStatement = new WhereStatement();
 
         internal WhereStatement WhereStatement
@@ -33,13 +34,17 @@ namespace CodeEngine.Framework.QueryBuilder
             set { _whereStatement = value; }
         }
 
-        public SelectQueryBuilder() { }
+        public SelectQueryBuilder()
+        {
+        }
+
         public SelectQueryBuilder(DbProviderFactory factory)
         {
             _dbProviderFactory = factory;
         }
 
         private DbProviderFactory _dbProviderFactory;
+
         public void SetDbProviderFactory(DbProviderFactory factory)
         {
             _dbProviderFactory = factory;
@@ -60,6 +65,7 @@ namespace CodeEngine.Framework.QueryBuilder
                 _topClause.Unit = TopUnit.Records;
             }
         }
+
         public TopClause TopClause
         {
             get { return _topClause; }
@@ -73,9 +79,10 @@ namespace CodeEngine.Framework.QueryBuilder
                 if (_selectedColumns.Count > 0)
                     return _selectedColumns.ToArray();
                 else
-                    return new string[1] { "*" };
+                    return new string[1] {"*"};
             }
         }
+
         public string[] SelectedTables
         {
             get { return _selectedTables.ToArray(); }
@@ -85,15 +92,18 @@ namespace CodeEngine.Framework.QueryBuilder
         {
             _selectedColumns.Clear();
         }
+
         public void SelectCount()
         {
             SelectColumn("count(1)");
         }
+
         public void SelectColumn(string column)
         {
             _selectedColumns.Clear();
             _selectedColumns.Add(column);
         }
+
         public void SelectColumns(params string[] columns)
         {
             _selectedColumns.Clear();
@@ -102,11 +112,13 @@ namespace CodeEngine.Framework.QueryBuilder
                 _selectedColumns.Add(column);
             }
         }
+
         public void SelectFromTable(string table)
         {
             _selectedTables.Clear();
             _selectedTables.Add(table);
         }
+
         public void SelectFromTables(params string[] tables)
         {
             _selectedTables.Clear();
@@ -115,13 +127,17 @@ namespace CodeEngine.Framework.QueryBuilder
                 _selectedTables.Add(Table);
             }
         }
+
         public void AddJoin(JoinClause newJoin)
         {
             _joins.Add(newJoin);
         }
-        public void AddJoin(JoinType join, string toTableName, string toColumnName, Comparison @operator, string fromTableName, string fromColumnName)
+
+        public void AddJoin(JoinType join, string toTableName, string toColumnName, Comparison @operator,
+                            string fromTableName, string fromColumnName)
         {
-            JoinClause NewJoin = new JoinClause(join, toTableName, toColumnName, @operator, fromTableName, fromColumnName);
+            JoinClause NewJoin = new JoinClause(join, toTableName, toColumnName, @operator, fromTableName,
+                                                fromColumnName);
             _joins.Add(NewJoin);
         }
 
@@ -131,13 +147,26 @@ namespace CodeEngine.Framework.QueryBuilder
             set { _whereStatement = value; }
         }
 
-        public void AddWhere(WhereClause clause) { AddWhere(clause, 1); }
+        public void AddWhere(WhereClause clause)
+        {
+            AddWhere(clause, 1);
+        }
+
         public void AddWhere(WhereClause clause, int level)
         {
             _whereStatement.Add(clause, level);
         }
-        public WhereClause AddWhere(string field, Comparison @operator, object compareValue) { return AddWhere(field, @operator, compareValue, 1); }
-        public WhereClause AddWhere(Enum field, Comparison @operator, object compareValue) { return AddWhere(field.ToString(), @operator, compareValue, 1); }
+
+        public WhereClause AddWhere(string field, Comparison @operator, object compareValue)
+        {
+            return AddWhere(field, @operator, compareValue, 1);
+        }
+
+        public WhereClause AddWhere(Enum field, Comparison @operator, object compareValue)
+        {
+            return AddWhere(field.ToString(), @operator, compareValue, 1);
+        }
+
         public WhereClause AddWhere(string field, Comparison @operator, object compareValue, int level)
         {
             WhereClause NewWhereClause = new WhereClause(field, @operator, compareValue);
@@ -149,7 +178,12 @@ namespace CodeEngine.Framework.QueryBuilder
         {
             _orderByStatement.Add(clause);
         }
-        public void AddOrderBy(Enum field, Sorting order) { this.AddOrderBy(field.ToString(), order); }
+
+        public void AddOrderBy(Enum field, Sorting order)
+        {
+            this.AddOrderBy(field.ToString(), order);
+        }
+
         public void AddOrderBy(string field, Sorting order)
         {
             OrderByClause NewOrderByClause = new OrderByClause(field, order);
@@ -170,13 +204,26 @@ namespace CodeEngine.Framework.QueryBuilder
             set { _havingStatement = value; }
         }
 
-        public void AddHaving(WhereClause clause) { AddHaving(clause, 1); }
+        public void AddHaving(WhereClause clause)
+        {
+            AddHaving(clause, 1);
+        }
+
         public void AddHaving(WhereClause clause, int level)
         {
             _havingStatement.Add(clause, level);
         }
-        public WhereClause AddHaving(string field, Comparison @operator, object compareValue) { return AddHaving(field, @operator, compareValue, 1); }
-        public WhereClause AddHaving(Enum field, Comparison @operator, object compareValue) { return AddHaving(field.ToString(), @operator, compareValue, 1); }
+
+        public WhereClause AddHaving(string field, Comparison @operator, object compareValue)
+        {
+            return AddHaving(field, @operator, compareValue, 1);
+        }
+
+        public WhereClause AddHaving(Enum field, Comparison @operator, object compareValue)
+        {
+            return AddHaving(field.ToString(), @operator, compareValue, 1);
+        }
+
         public WhereClause AddHaving(string field, Comparison @operator, object compareValue, int level)
         {
             WhereClause NewWhereClause = new WhereClause(field, @operator, compareValue);
@@ -186,12 +233,12 @@ namespace CodeEngine.Framework.QueryBuilder
 
         public DbCommand BuildCommand()
         {
-            return (DbCommand)this.BuildQuery(true);
+            return (DbCommand) this.BuildQuery(true);
         }
 
         public string BuildQuery()
         {
-            return (string)this.BuildQuery(false);
+            return (string) this.BuildQuery(false);
         }
 
         /// <summary>
@@ -201,7 +248,8 @@ namespace CodeEngine.Framework.QueryBuilder
         private object BuildQuery(bool buildCommand)
         {
             if (buildCommand && _dbProviderFactory == null)
-                throw new Exception("Cannot build a command when the Db Factory hasn't been specified. Call SetDbProviderFactory first.");
+                throw new Exception(
+                    "Cannot build a command when the Db Factory hasn't been specified. Call SetDbProviderFactory first.");
 
             DbCommand command = null;
             if (buildCommand)
@@ -229,8 +277,9 @@ namespace CodeEngine.Framework.QueryBuilder
             // Output column names
             if (_selectedColumns.Count == 0)
             {
-                if (_selectedTables.Count == 1) 
-                    Query += _selectedTables[0] + "."; // By default only select * from the table that was selected. If there are any joins, it is the responsibility of the user to select the needed columns.
+                if (_selectedTables.Count == 1)
+                    Query += _selectedTables[0] + ".";
+                        // By default only select * from the table that was selected. If there are any joins, it is the responsibility of the user to select the needed columns.
 
                 Query += "*";
             }
@@ -263,13 +312,38 @@ namespace CodeEngine.Framework.QueryBuilder
                     string JoinString = "";
                     switch (Clause.JoinType)
                     {
-                        case JoinType.InnerJoin: JoinString = "INNER JOIN"; break;
-                        case JoinType.OuterJoin: JoinString = "OUTER JOIN"; break;
-                        case JoinType.LeftJoin: JoinString = "LEFT JOIN"; break;
-                        case JoinType.RightJoin: JoinString = "RIGHT JOIN"; break;
+                        case JoinType.InnerJoin:
+                            JoinString = "INNER JOIN";
+                            break;
+                        case JoinType.OuterJoin:
+                            JoinString = "OUTER JOIN";
+                            break;
+                        case JoinType.LeftJoin:
+                            JoinString = "LEFT JOIN";
+                            break;
+                        case JoinType.RightJoin:
+                            JoinString = "RIGHT JOIN";
+                            break;
                     }
-                    JoinString += " " + Clause.ToTable + " ON ";
-                    JoinString += WhereStatement.CreateComparisonClause(Clause.FromTable + '.' + Clause.FromColumn, Clause.ComparisonOperator, new SqlLiteral(Clause.ToTable + '.' + Clause.ToColumn));
+
+                    if (Clause.ToTableAlias == "")
+                    {
+                        JoinString += " " + Clause.ToTable + " ON ";
+                        JoinString += WhereStatement.CreateComparisonClause(Clause.FromTable + '.' + Clause.FromColumn,
+                                                                            Clause.ComparisonOperator,
+                                                                            new SqlLiteral(Clause.ToTable + '.' +
+                                                                                           Clause.ToColumn));
+                    }
+                    else
+                    {
+                        JoinString += " " + Clause.ToTable + " AS " + Clause.ToTableAlias + " ON ";
+                        JoinString += WhereStatement.CreateComparisonClause(Clause.FromTable + '.' + Clause.FromColumn,
+                                                                            Clause.ComparisonOperator,
+                                                                            new SqlLiteral(Clause.ToTableAlias + '.' +
+                                                                                           Clause.ToColumn));
+                    }
+
+
                     Query += JoinString + ' ';
                 }
             }
@@ -319,9 +393,11 @@ namespace CodeEngine.Framework.QueryBuilder
                     switch (Clause.SortOrder)
                     {
                         case Sorting.Ascending:
-                            OrderByClause = Clause.FieldName + " ASC"; break;
+                            OrderByClause = Clause.FieldName + " ASC";
+                            break;
                         case Sorting.Descending:
-                            OrderByClause = Clause.FieldName + " DESC"; break;
+                            OrderByClause = Clause.FieldName + " DESC";
+                            break;
                     }
                     Query += OrderByClause + ',';
                 }
@@ -342,5 +418,4 @@ namespace CodeEngine.Framework.QueryBuilder
             }
         }
     }
-
 }

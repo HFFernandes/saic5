@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 {
+    ///<summary>
+    ///</summary>
     public partial class SAITimePicker : DateTimePicker
     {
         #region Campos
@@ -90,11 +89,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 
         #endregion
 
+        ///<summary>
+        ///</summary>
         public SAITimePicker()
         {
             InitializeComponent();
         }
 
+        ///<summary>
+        ///</summary>
+        ///<param name="container"></param>
         public SAITimePicker(IContainer container)
         {
             container.Add(this);

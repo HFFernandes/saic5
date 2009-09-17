@@ -3,8 +3,14 @@ using System.Drawing;
 
 namespace BSD.C4.Tlaxcala.Sai.Mapa
 {
+    ///<summary>
+    ///</summary>
     public class CEnums
     {
+        ///<summary>
+        ///</summary>
+        ///<param name="linestyle"></param>
+        ///<returns></returns>
         public static LineStyle getLineStyle(string linestyle)
         {
             LineStyle ls; //Valor por default
@@ -65,6 +71,10 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
             return ls;
         }
 
+        ///<summary>
+        ///</summary>
+        ///<param name="fillstyle"></param>
+        ///<returns></returns>
         public static FillStyle getFillStyle(string fillstyle)
         {
             FillStyle fs; //Valor por default
@@ -113,6 +123,10 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
             return fs;
         }
 
+        ///<summary>
+        ///</summary>
+        ///<param name="color"></param>
+        ///<returns></returns>
         public static Color getColor(string color)
         {
             Color col; //Valor por default
@@ -545,6 +559,10 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
             return col;
         }
 
+        ///<summary>
+        ///</summary>
+        ///<param name="pointstyle"></param>
+        ///<returns></returns>
         public static PointStyle getPointStyle(string pointstyle)
         {
             PointStyle ps; //Valor por default

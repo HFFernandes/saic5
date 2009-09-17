@@ -1,4 +1,3 @@
-
 //
 // Enum: Comparison
 // Copyright 2006 by Ewout Stortenbeker

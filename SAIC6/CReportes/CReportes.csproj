@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B36B3B5F-9437-48DE-B812-CBC46D3E8B5B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BSD</RootNamespace>
+    <AssemblyName>SAI-Reportes</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <PublishUrl>http://localhost/CReportes/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <StartupObject>BSD.C4.Tlaxcala.Sai.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ActualMap, Version=4.2.0.0, Culture=neutral, PublicKeyToken=a25fe4226f571a77, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\ActualMap.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=028265cbccdfa80d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.ExceptionMessageBox, Version=9.0.242.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualC" />
+    <Reference Include="NPOI, Version=1.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.DDF, Version=1.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.HPSF, Version=1.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.HSSF, Version=1.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.POIFS, Version=1.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.Util, Version=1.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\WINDOWS\assembly\GAC_MSIL\System.Web.Services\2.0.0.0__b03f5f7f11d50a3a\System.Web.Services.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="C4\Tlaxcala\Sai\CCapa.cs" />
+    <Compile Include="C4\Tlaxcala\Sai\CConn.cs" />
+    <Compile Include="C4\Tlaxcala\Sai\CDats.cs" />
+    <Compile Include="C4\Tlaxcala\Sai\CEnums.cs" />
+    <Compile Include="C4\Tlaxcala\Sai\CError.cs" />
+    <Compile Include="C4\Tlaxcala\Sai\CConfDB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\CConfDB.Designer.cs">
+      <DependentUpon>CConfDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\CMsgs.cs" />
+    <Compile Include="C4\Tlaxcala\Sai\CPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\CPrincipal.Designer.cs">
+      <DependentUpon>CPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\CSupervisor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\CSupervisor.Designer.cs">
+      <DependentUpon>CSupervisor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\CMapa.cs" />
+    <Compile Include="C4\Tlaxcala\Sai\CRIncidencias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\CRIncidencias.Designer.cs">
+      <DependentUpon>CRIncidencias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\CSetPoint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\CSetPoint.Designer.cs">
+      <DependentUpon>CSetPoint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="C4\Tlaxcala\Sai\CXls.cs" />
+    <Compile Include="C4\Tlaxcala\Sai\CXML.cs" />
+    <Compile Include="C4\Tlaxcala\Sai\Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\CConfDB.resx">
+      <DependentUpon>CConfDB.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\CPrincipal.resx">
+      <DependentUpon>CPrincipal.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\CSupervisor.resx">
+      <DependentUpon>CSupervisor.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\CRIncidencias.resx">
+      <DependentUpon>CRIncidencias.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="C4\Tlaxcala\Sai\CSetPoint.resx">
+      <DependentUpon>CSetPoint.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="C4\Tlaxcala\Sai\app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="C4\Tlaxcala\Sai\Reportes\conf\conf.xml">
+    </Content>
+    <Content Include="C4\Tlaxcala\Sai\Reportes\conf\map.xml">
+    </Content>
+    <Content Include="C4\Tlaxcala\Sai\Reportes\lib\ActualMap.dll" />
+    <Content Include="C4\Tlaxcala\Sai\Reportes\lib\ActualMapUtil.dll" />
+    <Content Include="C4\Tlaxcala\Sai\Reportes\lib\CodeEngine.Framework.QueryBuilder.dll" />
+    <Content Include="C4\Tlaxcala\Sai\Reportes\lib\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="C4\Tlaxcala\Sai\Reportes\lib\Microsoft.ExceptionMessageBox.dll" />
+    <Content Include="C4\Tlaxcala\Sai\Reportes\lib\NPOI.DDF.dll" />
+    <Content Include="C4\Tlaxcala\Sai\Reportes\lib\NPOI.DDF.xml" />
+    <Content Include="C4\Tlaxcala\Sai\Reportes\lib\NPOI.dll" />
+    <Content Include="C4\Tlaxcala\Sai\Reportes\lib\NPOI.HPSF.dll" />
+    <Content Include="C4\Tlaxcala\Sai\Reportes\lib\NPOI.HPSF.xml" />
+    <Content Include="C4\Tlaxcala\Sai\Reportes\lib\NPOI.HSSF.dll" />
+    <Content Include="C4\Tlaxcala\Sai\Reportes\lib\NPOI.HSSF.xml" />
+    <Content Include="C4\Tlaxcala\Sai\Reportes\lib\NPOI.POIFS.dll" />
+    <Content Include="C4\Tlaxcala\Sai\Reportes\lib\NPOI.POIFS.xml" />
+    <Content Include="C4\Tlaxcala\Sai\Reportes\lib\NPOI.Util.dll" />
+    <Content Include="C4\Tlaxcala\Sai\Reportes\lib\NPOI.Util.xml" />
+    <Content Include="C4\Tlaxcala\Sai\Reportes\lib\NPOI.xml" />
+    <None Include="C4\Tlaxcala\Sai\Reportes\imagenes\zoomOut32.png" />
+    <None Include="C4\Tlaxcala\Sai\Reportes\imagenes\zoomOut16.png" />
+    <None Include="C4\Tlaxcala\Sai\Reportes\imagenes\zoomIn.png" />
+    <None Include="C4\Tlaxcala\Sai\Reportes\imagenes\zoomIn32.png" />
+    <None Include="C4\Tlaxcala\Sai\Reportes\imagenes\zoomIn16.png" />
+    <None Include="C4\Tlaxcala\Sai\Reportes\imagenes\zoomFull.png" />
+    <None Include="C4\Tlaxcala\Sai\Reportes\imagenes\zoomFull32.png" />
+    <None Include="C4\Tlaxcala\Sai\Reportes\imagenes\zoomFull16.png" />
+    <None Include="C4\Tlaxcala\Sai\Reportes\imagenes\tlaxcala_logotipo.gif" />
+    <None Include="C4\Tlaxcala\Sai\Reportes\imagenes\supervisor.png" />
+    <None Include="C4\Tlaxcala\Sai\Reportes\imagenes\shapefile.png" />
+    <None Include="C4\Tlaxcala\Sai\Reportes\imagenes\shapefile32.png" />
+    <None Include="C4\Tlaxcala\Sai\Reportes\imagenes\shapefile16.png" />
+    <None Include="C4\Tlaxcala\Sai\Reportes\imagenes\satelite.png" />
+    <None Include="C4\Tlaxcala\Sai\Reportes\imagenes\satelite32.png" />
+    <None Include="C4\Tlaxcala\Sai\Reportes\imagenes\satelite16.png" />
+    <None Include="C4\Tlaxcala\Sai\Reportes\imagenes\punteo.png" />
+    <None Include="C4\Tlaxcala\Sai\Reportes\imagenes\hand.png" />
+    <None Include="C4\Tlaxcala\Sai\Reportes\imagenes\hand32.png" />
+    <None Include="C4\Tlaxcala\Sai\Reportes\imagenes\hand16.png" />
+    <None Include="C4\Tlaxcala\Sai\Reportes\imagenes\excel.png" />
+    <None Include="C4\Tlaxcala\Sai\Reportes\imagenes\Connection_band.bmp" />
+    <None Include="C4\Tlaxcala\Sai\Reportes\imagenes\clipmap.bmp" />
+    <None Include="C4\Tlaxcala\Sai\Reportes\imagenes\clip.png" />
+    <None Include="C4\Tlaxcala\Sai\Reportes\imagenes\clip32.png" />
+    <None Include="C4\Tlaxcala\Sai\Reportes\imagenes\clip16.png" />
+    <None Include="C4\Tlaxcala\Sai\Reportes\imagenes\zoomOut.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QueryBuilder\CodeEngine.Framework.QueryBuilder.csproj">
+      <Project>{9281D89A-C56F-4620-B036-1258CDB9B28E}</Project>
+      <Name>CodeEngine.Framework.QueryBuilder</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="C4\Tlaxcala\Sai\Reportes\datos\" />
+    <Folder Include="C4\Tlaxcala\Sai\Reportes\symbols\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

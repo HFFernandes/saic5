@@ -1,4 +1,3 @@
-
 //
 // Enum: LogicOperator
 // Copyright 2006 by Ewout Stortenbeker
