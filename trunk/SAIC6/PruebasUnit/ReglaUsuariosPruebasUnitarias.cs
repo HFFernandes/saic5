@@ -1,4 +1,4 @@
-ï»¿using BSD.C4.Tlaxcala.Sai.Dal;
+using BSD.C4.Tlaxcala.Sai.Dal;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 
@@ -19,17 +19,12 @@ namespace PruebasUnit
         ///</summary>
         public TestContext TestContext
         {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
+            get { return testContextInstance; }
+            set { testContextInstance = value; }
         }
 
         #region Additional test attributes
+
         // 
         //You can use the following additional attributes as you write your tests:
         //
@@ -57,6 +52,7 @@ namespace PruebasUnit
         //{
         //}
         //
+
         #endregion
 
         /// <summary>
@@ -65,12 +61,12 @@ namespace PruebasUnit
         [TestMethod()]
         public void AutenticaUsuarioPruebasUnitarias()
         {
-            var st = new List<string> { "089", "066" };
+            var st = new List<string> {"089", "066"};
 
             string strNombreUsuario = "jbaez";
-            string strContraseÃ±a = "nikita";
+            string strContraseña = "nikita";
             List<string> expected = st;
-            List<string> actual = ReglaUsuarios.ObtenerSistemas(strNombreUsuario, strContraseÃ±a);
+            List<string> actual = ReglaUsuarios.ObtenerSistemas(strNombreUsuario, strContraseña);
             Assert.AreEqual(expected, actual);
         }
     }

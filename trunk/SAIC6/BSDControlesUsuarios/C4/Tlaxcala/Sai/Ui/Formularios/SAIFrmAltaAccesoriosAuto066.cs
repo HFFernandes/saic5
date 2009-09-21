@@ -1,4 +1,4 @@
-﻿//Autor : T.S.U. Angel Martinez Ortiz
+//Autor : T.S.U. Angel Martinez Ortiz
 //Fecha : Agosto del 2009
 //Empresa :InfinitySoft TI Experts
 
@@ -16,7 +16,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
     /// </summary>
     public partial class SAIFrmAltaAccesoriosAuto066 : Form
     {
-
         #region CONSTRUCTOR
 
         /// <summary>
@@ -25,12 +24,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         public SAIFrmAltaAccesoriosAuto066()
         {
             InitializeComponent();
+            dgvAccesorios.RowHeadersVisible = true;
         }
 
         #endregion
 
         #region PROPIEDADES
-
 
         /// <summary>
         /// Contiene la lisa de vehiculos involucrados en el robo.
@@ -51,20 +50,18 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <summary>
         /// Vehiculo que se esta editanto.
         /// </summary>
-        VehiculoObject VehiculoInvolucrado;
-
-
+        private VehiculoObject VehiculoInvolucrado;
 
         #endregion
 
-        #region MÉTODOS
+        #region M�TODOS
 
         /// <summary>
         /// Obtiene los datos acerca de los accesorios robados.
         /// </summary>
         private void ObtenerDatosAccesorios()
         {
-            if (DatosRoboAccesorio==null)
+            if (DatosRoboAccesorio == null)
             {
                 DatosRoboAccesorio = new RoboAccesorios();
             }
@@ -79,8 +76,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void AgregarVehiculoALista()
         {
             bool EsNuevo = false;
-            if(this.ListaVehiculosInvolucrados==null)
-            {this.ListaVehiculosInvolucrados = new VehiculoObjectList();}
+            if (this.ListaVehiculosInvolucrados == null)
+            {
+                this.ListaVehiculosInvolucrados = new VehiculoObjectList();
+            }
 
             if (this.VehiculoInvolucrado == null)
             {
@@ -99,7 +98,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 this.ListaVehiculosInvolucrados.Add(VehiculoInvolucrado);
             }
-            
+
 
             //Agregamos los accesorios de este vehiculo
             this.AgregarAccesoriosALista(VehiculoInvolucrado.Clave);
@@ -112,7 +111,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             //Mostramos la listas de vehiculos capturados.
             this.MostrarVehiculos(this.ListaVehiculosInvolucrados);
             this.VehiculoInvolucrado = null;
-
         }
 
         /// <summary>
@@ -123,15 +121,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             bool EsNuevo = false;
             //Validamos que no sea nula
-            if(this.ListaAccesoriosRobados==null)
+            if (this.ListaAccesoriosRobados == null)
             {
                 this.ListaAccesoriosRobados = new RoboVehiculoAccesoriosList();
             }
 
             RoboVehiculoAccesorios AccesorioRobado;
-            foreach(DataGridViewRow row in this.dgvAccesorios.Rows)
+            foreach (DataGridViewRow row in this.dgvAccesorios.Rows)
             {
-                if (row.Cells[1].Value!=null)
+                if (row.Cells[1].Value != null)
                 {
                     if (row.Cells[0].Value == null)
                     {
@@ -152,9 +150,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     {
                         this.ListaAccesoriosRobados.Replace(AccesorioRobado);
                     }
-                    
                 }
-                
             }
             this.dgvAccesorios.Rows.Clear();
         }
@@ -167,11 +163,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private RoboVehiculoAccesorios ObtenerAccesorioEditado(int idAccesorio)
         {
             RoboVehiculoAccesorios encontrado = new RoboVehiculoAccesorios();
-            foreach(RoboVehiculoAccesorios accesorio in this.ListaAccesoriosRobados)
+            foreach (RoboVehiculoAccesorios accesorio in this.ListaAccesoriosRobados)
             {
                 if (accesorio.IdAccesorio == idAccesorio)
                 {
-                    encontrado= accesorio;
+                    encontrado = accesorio;
                 }
             }
             return encontrado;
@@ -187,26 +183,25 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             int count = 1;
             foreach (RoboVehiculoAccesoriosObject accesorio in this.ListaAccesoriosRobados)
             {
-                if(accesorio.ClaveVehiculo==idVehiculo)
+                if (accesorio.ClaveVehiculo == idVehiculo)
                 {
                     this.dgvAccesorios.Rows[dgvAccesorios.RowCount - count].Cells[0].Value = accesorio.IdAccesorio;
-                    this.dgvAccesorios.Rows[dgvAccesorios.RowCount-count].Cells[1].Value = accesorio.AccesorioRobado;
+                    this.dgvAccesorios.Rows[dgvAccesorios.RowCount - count].Cells[1].Value = accesorio.AccesorioRobado;
                     this.dgvAccesorios.Rows.Add(1);
                     count++;
                 }
             }
             //For para quitar las filas vacias.
-            for (int i = 0; i < count; i++)
-            {
-                if ((dgvAccesorios.RowCount - 1) >= i)
-                    if (this.dgvAccesorios.Rows[i].Cells[1].Value == null)
-                    {
-                        this.dgvAccesorios.Rows.RemoveAt(i);
-                        i--;
-                    }
-                
-            }
-
+            if (count > 1)
+                for (int i = 0; i < count; i++)
+                {
+                    if ((dgvAccesorios.RowCount - 1) >= i)
+                        if (this.dgvAccesorios.Rows[i].Cells[1].Value == null)
+                        {
+                            this.dgvAccesorios.Rows.RemoveAt(i);
+                            i--;
+                        }
+                }
         }
 
         /// <summary>
@@ -216,7 +211,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void MostrarVehiculos(VehiculoObjectList vehiculos)
         {
             this.dgvVehiculoAccesorios.Rows.Clear();
-            foreach(VehiculoObject vehiculo in vehiculos)
+            foreach (VehiculoObject vehiculo in vehiculos)
             {
                 this.dgvVehiculoAccesorios.Rows.Add(1);
                 this.dgvVehiculoAccesorios.Rows[dgvVehiculoAccesorios.RowCount - 1].Cells[0].Value = vehiculo.Clave;
@@ -224,7 +219,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 this.dgvVehiculoAccesorios.Rows[dgvVehiculoAccesorios.RowCount - 1].Cells[2].Value = vehiculo.Modelo;
                 this.dgvVehiculoAccesorios.Rows[dgvVehiculoAccesorios.RowCount - 1].Cells[3].Value = vehiculo.Placas;
             }
-            
         }
 
         /// <summary>
@@ -233,11 +227,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <param name="idVehiculo">int,Id del vehiculo a editar</param>
         private void MostrarDatosVehiculo(int idVehiculo)
         {
-            if(this.ListaVehiculosInvolucrados!=null)
+            if (this.ListaVehiculosInvolucrados != null)
             {
-                foreach(VehiculoObject vehiculo in this.ListaVehiculosInvolucrados)
+                foreach (VehiculoObject vehiculo in this.ListaVehiculosInvolucrados)
                 {
-                    if(vehiculo.Clave==idVehiculo)
+                    if (vehiculo.Clave == idVehiculo)
                     {
                         this.VehiculoInvolucrado = vehiculo;
                         this.txtMarca.Text = vehiculo.Marca;
@@ -246,10 +240,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         this.MostrarAccesorioPorVehiculo(idVehiculo);
                         break;
                     }
-
                 }
             }
-            
         }
 
         /// <summary>
@@ -257,18 +249,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         private void MostrarDatosRoboAccesorios()
         {
-            if(DatosRoboAccesorio!=null)
+            if (DatosRoboAccesorio != null)
             {
-                this.txtAccesoriosPersonaSePercato.Text=DatosRoboAccesorio.PersonaPercato;
-                this.txtAccesoriosResponsables.Text=DatosRoboAccesorio.DescripcionResponsable;
-                this.dtpAccesoriosFechaPercato.Value=DatosRoboAccesorio.FechaPercato.Value;
+                this.txtAccesoriosPersonaSePercato.Text = DatosRoboAccesorio.PersonaPercato;
+                this.txtAccesoriosResponsables.Text = DatosRoboAccesorio.DescripcionResponsable;
+                this.dtpAccesoriosFechaPercato.Value = DatosRoboAccesorio.FechaPercato.Value;
             }
-            if(ListaVehiculosInvolucrados!=null)
+            if (ListaVehiculosInvolucrados != null)
             {
                 //Mostramos la listas de vehiculos capturados.
                 this.MostrarVehiculos(this.ListaVehiculosInvolucrados);
             }
-  
         }
 
         #endregion
@@ -298,7 +289,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 int idVehiculo = Convert.ToInt32(this.dgvVehiculoAccesorios.Rows[e.RowIndex].Cells[0].Value);
                 this.MostrarDatosVehiculo(idVehiculo);
             }
-
         }
 
         private void Controls_KeyDown(object sender, KeyEventArgs e)
@@ -332,9 +322,46 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.MostrarDatosRoboAccesorios();
         }
 
-
         #endregion
 
-        
+        private void btnEliminarVehiculo_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvVehiculoAccesorios.CurrentRow != null && !dgvVehiculoAccesorios.CurrentRow.IsNewRow)
+                    dgvVehiculoAccesorios.Rows.Remove(dgvVehiculoAccesorios.CurrentRow);
+                else if (dgvVehiculoAccesorios.Rows.Count == 1)
+                    dgvVehiculoAccesorios.Rows.Clear();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void btnEliminarAccesorio_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvAccesorios.CurrentRow != null && !dgvAccesorios.CurrentRow.IsNewRow)
+                    dgvAccesorios.Rows.Remove(dgvAccesorios.CurrentRow);
+                else if (dgvAccesorios.Rows.Count == 1)
+                    dgvAccesorios.Rows.Clear();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void dgvAccesorios_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                //if (e.RowIndex >= 0)
+                //    AgregarAccesoriosALista(Convert.ToInt32(dgvVehiculoAccesorios.SelectedRows[e.RowIndex].Cells[0].Value));
+            }
+            catch (Exception)
+            {
+            }
+        }
     }
 }

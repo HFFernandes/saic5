@@ -1,4 +1,4 @@
-Ôªøusing System;
+using System;
 using System.Collections.Generic;
 using BSD.C4.Tlaxcala.Sai.Dal;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
@@ -12,15 +12,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
     public partial class SAIFrmIniciarSesion : SAIFrmBase
     {
         /// <summary>
-        /// Listado que almacenar√° la colecci√≥n de sistemas a los cuales tiene acceso el usuario
+        /// Listado que almacenar· la colecciÛn de sistemas a los cuales tiene acceso el usuario
         /// </summary>
         private List<string> sistemas;
+
         /// <summary>
-        /// Delegado para la ejecuci√≥n del m√©todo LimpiarCombo
+        /// Delegado para la ejecuciÛn del mÈtodo LimpiarCombo
         /// </summary>
         public delegate void DelegadoLimpiarCombo();
+
         /// <summary>
-        /// Delegado para la ejecuci√≥n del m√©todo AgregarItem
+        /// Delegado para la ejecuciÛn del mÈtodo AgregarItem
         /// </summary>
         /// <param name="strItem"></param>
         public delegate void DelegadoAgregarItem(string strItem);
@@ -32,12 +34,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             InitializeComponent();
 
-            //Inicializamos la capacidad de la colecci√≥n a 2 por ser 089,066
+            //Inicializamos la capacidad de la colecciÛn a 2 por ser 089,066
             sistemas = new List<string>(2);
         }
 
         /// <summary>
-        /// M√©todo utilizado para limpiar todos los items del combo saiCmbSistema
+        /// MÈtodo utilizado para limpiar todos los items del combo saiCmbSistema
         /// </summary>
         private void LimpiarCombo()
         {
@@ -45,7 +47,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         }
 
         /// <summary>
-        /// M√©todo para agregar un item a la colecci√≥n de items del saiCmbSistema
+        /// MÈtodo para agregar un item a la colecciÛn de items del saiCmbSistema
         /// </summary>
         /// <param name="strItem">Elemento enviado por el delegado</param>
         private void AgregarItem(string strItem)
@@ -61,25 +63,27 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             try
             {
-                //Usamos el proveedore de validaci√≥n para verificar que todos los controles
+                //Usamos el proveedore de validaciÛn para verificar que todos los controles
                 //marcados como requeridos tengan un valor
                 if (SAIProveedorValidacion.ValidarCamposRequeridos(this))
                 {
-                    //Comprobamos las credenciales y deber√° regresar almenos un registro, que de ser nulo no existe
-                    var usuario = ReglaUsuarios.AutenticarUsuario(saiTxtUsuario.Text.Trim(), saiTxtContrase√±a.Text.Trim());
+                    //Comprobamos las credenciales y deber· regresar almenos un registro, que de ser nulo no existe
+                    var usuario = ReglaUsuarios.AutenticarUsuario(saiTxtUsuario.Text.Trim(),
+                                                                  saiTxtContraseÒa.Text.Trim());
                     if (usuario != null)
                     {
-                        //Almacenamos las propiedades de la entidad que persistir√°n durante la ejecuci√≥n
+                        //Almacenamos las propiedades de la entidad que persistir·n durante la ejecuciÛn
                         Aplicacion.UsuarioPersistencia.intClaveUsuario = usuario.Clave;
                         Aplicacion.UsuarioPersistencia.strNombreUsuario = usuario.NombreUsuario;
-                        Aplicacion.UsuarioPersistencia.blnEsDespachador = usuario.Despachador ?? false; //si es nulo asignamos falso
+                        Aplicacion.UsuarioPersistencia.blnEsDespachador = usuario.Despachador ?? false;
+                            //si es nulo asignamos falso
                         Aplicacion.UsuarioPersistencia.strSistemaActual = saiCmbSistema.SelectedItem.ToString();
 
                         DialogResult = DialogResult.OK;
                         Close();
                     }
                     else
-                        throw new SAIExcepcion("Las credenciales de autenticaci√≥n no son v√°lidas.", this);
+                        throw new SAIExcepcion("Las credenciales de autenticaciÛn no son v·lidas.", this);
                 }
                 else
                     throw new SAIExcepcion("Existen campos requeridos vacios.", this);
@@ -98,24 +102,27 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void ObtenerSistemas()
         {
             //Ejecutamos en segundo plano la consulta de los sistemas a los cuales tiene
-            //acceso para no trabar la UI mediante la invocaci√≥n de los delegados, ya que no
-            //es posible actualizar un control desde otro hilo al que pertenece la aplicaci√≥n
+            //acceso para no trabar la UI mediante la invocaciÛn de los delegados, ya que no
+            //es posible actualizar un control desde otro hilo al que pertenece la aplicaciÛn
             var tr = new Thread(delegate()
-                                     {
-                                         saiCmbSistema.Invoke(new DelegadoLimpiarCombo(LimpiarCombo));
+                                    {
+                                        saiCmbSistema.Invoke(new DelegadoLimpiarCombo(LimpiarCombo));
 
-                                         if (saiTxtUsuario.Text.Length < 5) return;
-                                         sistemas = Aplicacion.removerDuplicados(ReglaUsuarios.ObtenerSistemas(saiTxtUsuario.Text.Trim(), saiTxtContrase√±a.Text.Trim()));
+                                        if (saiTxtUsuario.Text.Length < 5) return;
+                                        sistemas =
+                                            Aplicacion.removerDuplicados(
+                                                ReglaUsuarios.ObtenerSistemas(saiTxtUsuario.Text.Trim(),
+                                                                              saiTxtContraseÒa.Text.Trim()));
 
-                                         if (sistemas.Count < 1) return;
-                                         saiCmbSistema.Invoke(new DelegadoLimpiarCombo(LimpiarCombo));
-                                         foreach (var s in sistemas)
-                                         {
-                                             saiCmbSistema.Invoke(new DelegadoAgregarItem(AgregarItem),
-                                                                  new object[] { s });
-                                         }
-                                         Aplicacion.UsuarioPersistencia.strSistemas = sistemas.ToArray();
-                                     }) { IsBackground = true };
+                                        if (sistemas.Count < 1) return;
+                                        saiCmbSistema.Invoke(new DelegadoLimpiarCombo(LimpiarCombo));
+                                        foreach (var s in sistemas)
+                                        {
+                                            saiCmbSistema.Invoke(new DelegadoAgregarItem(AgregarItem),
+                                                                 new object[] {s});
+                                        }
+                                        Aplicacion.UsuarioPersistencia.strSistemas = sistemas.ToArray();
+                                    }) {IsBackground = true};
             tr.Start();
         }
 

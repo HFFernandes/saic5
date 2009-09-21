@@ -1,4 +1,4 @@
-Ôªøusing System.ComponentModel;
+using System.ComponentModel;
 using System.Windows.Forms;
 using System.Drawing;
 
@@ -23,19 +23,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         [Category("Appearance"), Description("Obtiene o establece el color que toma el control al tener el foco.")]
         public Color ClrBackColorFoco
         {
-            get
-            {
-                return this._clrBackColorFoco;
-            }
-            set
-            {
-                this._clrBackColorFoco = value;
-            }
+            get { return this._clrBackColorFoco; }
+            set { this._clrBackColorFoco = value; }
         }
 
         #endregion
 
         #region Metodos
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -47,13 +42,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         /// <summary>
         /// Constructor con parametro
         /// </summary>
-        /// <param name="container">Contenedor en el cual estar√° embebido</param>
+        /// <param name="container">Contenedor en el cual estar· embebido</param>
         public SAIDataGridView(IContainer container)
         {
             container.Add(this);
 
             InitializeComponent();
         }
+
         #endregion
 
         #region Eventos
@@ -63,7 +59,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         /// </summary>
         /// <param name="e">Argumentos del evento</param>
         /// <remarks>
-        /// Se sobreescribe la implementaci√≥n de la clase base para cambiar el color de fondo cuando la celda obtiene el foco
+        /// Se sobreescribe la implementaciÛn de la clase base para cambiar el color de fondo cuando la celda obtiene el foco
         /// </remarks>
         protected override void OnCellFormatting(DataGridViewCellFormattingEventArgs e)
         {

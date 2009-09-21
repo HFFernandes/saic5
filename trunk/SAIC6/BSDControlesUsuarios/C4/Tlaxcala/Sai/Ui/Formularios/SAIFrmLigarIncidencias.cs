@@ -1,12 +1,12 @@
-Ôªøusing System;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
     /// <summary>
-    /// Form que define el folio que ser√° padre
-    /// de una colecci√≥n de incidencias pasadas para su ligue
+    /// Form que define el folio que ser· padre
+    /// de una colecciÛn de incidencias pasadas para su ligue
     /// </summary>
     public partial class SAIFrmLigarIncidencias : SAIFrmBase
     {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.IO;
 using System.Data.SqlClient;
@@ -46,7 +46,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     ResultadoDS.Tables[0].Rows.Clear();
                     ResultadoDS.Tables[0].Columns.Clear();
 
-                    var conexion = new SqlConnection(ConfigurationManager.ConnectionStrings["CooperatorConnectionString"].ConnectionString);
+                    var conexion =
+                        new SqlConnection(
+                            ConfigurationManager.ConnectionStrings["CooperatorConnectionString"].ConnectionString);
                     if (conexion.State == ConnectionState.Closed)
                         conexion.Open();
 
@@ -54,7 +56,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     adaptador.Fill(ResultadoDS, "Resultado");
                     GridResultados.Refresh();
                 }
-                catch (Exception) { throw new SAIExcepcion(ID.STR_ERRORFILTRO); }
+                catch (Exception)
+                {
+                    throw new SAIExcepcion(ID.STR_ERRORFILTRO);
+                }
             }
             catch (SAIExcepcion)
             {
@@ -92,7 +97,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void CargarModelo()
         {
-            var strArchivo = Aplicacion.UsuarioPersistencia.strSistemaActual == "066" ? string.Format("{0}\\{1}", Environment.CurrentDirectory, "SAI066.xml") : string.Format("{0}\\{1}", Environment.CurrentDirectory, "SAI089.xml");
+            var strArchivo = Aplicacion.UsuarioPersistencia.strSistemaActual == "066"
+                                 ? string.Format("{0}\\{1}", Environment.CurrentDirectory, "SAI066.xml")
+                                 : string.Format("{0}\\{1}", Environment.CurrentDirectory, "SAI089.xml");
 
             try
             {
@@ -125,7 +132,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void btnExportar_Click(object sender, EventArgs e)
         {
-
         }
     }
 }

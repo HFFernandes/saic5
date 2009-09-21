@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
@@ -23,8 +23,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
             Width = Screen.GetWorkingArea(this).Width;
             var intReg = saiReport1.reportControl.EnableDragDrop("SAIC4:iUnidades",
-                                          XTPReportDragDrop.xtpReportAllowDrag |
-                                          XTPReportDragDrop.xtpReportAllowDrop);
+                                                                 XTPReportDragDrop.xtpReportAllowDrag |
+                                                                 XTPReportDragDrop.xtpReportAllowDrop);
             saiReport1.btnBajaUnidad.Click += btnBajaUnidad_Click;
             saiReport1.btnAltaUnidad.Click += btnAltaUnidad_Click;
             saiReport1.btnVistaPrevia.Click += btnVistaPrevia_Click;
@@ -35,7 +35,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             lstRegistrosReporte = new List<ReportRecord>();
         }
 
-        void btnVistaPrevia_Click(object sender, EventArgs e)
+        private void btnVistaPrevia_Click(object sender, EventArgs e)
         {
             try
             {
@@ -52,11 +52,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
-        void btnAltaUnidad_Click(object sender, EventArgs e)
+        private void btnAltaUnidad_Click(object sender, EventArgs e)
         {
             try
             {
-                if ((Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false) && Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_AU))
+                if ((Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false) &&
+                    Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_AU))
                 {
                     var agregarUnidad = new SAIFrmAgregarUnidad();
                     agregarUnidad.ShowDialog(this);
@@ -69,30 +70,39 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
-        void btnBajaUnidad_Click(object sender, EventArgs e)
+        private void btnBajaUnidad_Click(object sender, EventArgs e)
         {
             try
             {
-                if ((Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false) && Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_AU))
+                if ((Aplicacion.UsuarioPersistencia.blnEsDespachador ?? false) &&
+                    Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_AU))
                 {
-                    var confirmarBaja = new ExceptionMessageBox(saiReport1.reportControl.SelectedRows.Count > 1 ? "Â¿Desea dar de baja las unidades seleccionadas?" : "Â¿Desea dar de baja esta unidad?", "Confirmar Baja",
-                                                                ExceptionMessageBoxButtons.YesNo,
-                                                                ExceptionMessageBoxSymbol.Question,
-                                                                ExceptionMessageBoxDefaultButton.Button2);
+                    var confirmarBaja =
+                        new ExceptionMessageBox(
+                            saiReport1.reportControl.SelectedRows.Count > 1
+                                ? "¿Desea dar de baja las unidades seleccionadas?"
+                                : "¿Desea dar de baja esta unidad?", "Confirmar Baja",
+                            ExceptionMessageBoxButtons.YesNo,
+                            ExceptionMessageBoxSymbol.Question,
+                            ExceptionMessageBoxDefaultButton.Button2);
 
                     if (DialogResult.Yes == confirmarBaja.Show(this))
                     {
                         for (int i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
                         {
                             var despachoIncidencia =
-                                DespachoIncidenciaMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_UNIDADENDESPACHO, saiReport1.reportControl.SelectedRows[i].Record[0].Value));
+                                DespachoIncidenciaMapper.Instance().GetBySQLQuery(string.Format(
+                                                                                      ID.SQL_UNIDADENDESPACHO,
+                                                                                      saiReport1.reportControl.
+                                                                                          SelectedRows[i].Record[0].
+                                                                                          Value));
 
                             if (despachoIncidencia.Count >= 1)
-                                throw new SAIExcepcion("La unidad que intenta dar de baja estÃ¡ asignada a un incidente.");
+                                throw new SAIExcepcion("La unidad que intenta dar de baja está asignada a un incidente.");
 
                             var lstUnidades = new UnidadList();
                             var unidad = UnidadMapper.Instance().GetOne(
-                                                        Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
+                                Convert.ToInt32(saiReport1.reportControl.SelectedRows[i].Record[0].Value));
 
                             if (unidad != null)
                             {
@@ -148,22 +158,27 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     //Limpiamos el listado donde se almacenan las unidades 
                     //para iniciar nuevamente el ciclo
                     lstUnidadesTemporales.Clear();
-                    foreach (var unidad in (UnidadMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_UNIDADESCORPORACION, Aplicacion.UsuarioPersistencia.intCorporacion ?? -1)))) //vamos a la base para obtener las unidades de la corporacion del usuario
+                    foreach (
+                        var unidad in
+                            (UnidadMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_UNIDADESCORPORACION,
+                                                                                 Aplicacion.UsuarioPersistencia.
+                                                                                     intCorporacion ?? -1))))
+                        //vamos a la base para obtener las unidades de la corporacion del usuario
                     {
                         lstUnidadesTemporales.Add(unidad);
-                        //verificamos que la unidad no estÃ© ya en la lista de unidades registradas
+                        //verificamos que la unidad no esté ya en la lista de unidades registradas
                         //que de no estarlo la agregamos al listado tipado y al grid
                         if (!lstUnidadesRegistradas.Contains(unidad))
                         {
                             lstUnidadesRegistradas.Add(unidad);
                             lstRegistrosReporte.Add(saiReport1.AgregarRegistro(null, unidad.Clave,
-                                string.Empty,
-                                unidad.Codigo,
-                                string.Empty,
-                                ID.STR_ESTATUSLIBRE,
-                                DateTime.Now.ToShortTimeString(),
-                                string.Empty,
-                                string.Empty));
+                                                                               string.Empty,
+                                                                               unidad.Codigo,
+                                                                               string.Empty,
+                                                                               ID.STR_ESTATUSLIBRE,
+                                                                               DateTime.Now.ToShortTimeString(),
+                                                                               string.Empty,
+                                                                               string.Empty));
                         }
                         else
                         {
@@ -172,8 +187,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             var iCols = saiReport1.reportControl.Columns.Count;
                             var iRows = saiReport1.reportControl.Rows.Count;
 
-                            //buscamos el Row por el cÃ³digo de la unidad para obtener su posiciÃ³n dentro del grid
-                            var itm = saiReport1.reportControl.Records.FindRecordItem(0, iRows, 0, iCols, 0, 1, unidad.Codigo, XTPReportTextSearchParms.xtpReportTextSearchExactPhrase);
+                            //buscamos el Row por el código de la unidad para obtener su posición dentro del grid
+                            var itm = saiReport1.reportControl.Records.FindRecordItem(0, iRows, 0, iCols, 0, 1,
+                                                                                      unidad.Codigo,
+                                                                                      XTPReportTextSearchParms.
+                                                                                          xtpReportTextSearchExactPhrase);
                             if (itm != null && itm.Index >= 0)
                             {
                                 var dtHora = new DateTime();
@@ -184,7 +202,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     DespachoIncidenciaMapper.Instance().GetBySQLQuery(string.Format(
                                                                                           ID.SQL_OBTENERDESPACHOS,
                                                                                           Aplicacion.UsuarioPersistencia
-                                                                                              .intCorporacion ?? -1, itm.Record[0].Value));
+                                                                                              .intCorporacion ?? -1,
+                                                                                          itm.Record[0].Value));
                                 foreach (var unidadDespacho in unidadDespachoList)
                                 {
                                     saiReport1.reportControl.Records[itm.Record.Index][1].Value = ID.STR_DESCONOCIDO;
@@ -194,12 +213,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                         dtHora = unidadDespacho.HoraLiberada ?? DateTime.Now;
                                         strStatus = ID.STR_ESTATUSLIBRE;
 
-                                        saiReport1.reportControl.Records[itm.Record.Index][1].Value = ID.STR_DESCONOCIDO;   //por ser libre no tiene folio
+                                        saiReport1.reportControl.Records[itm.Record.Index][1].Value = ID.STR_DESCONOCIDO;
+                                            //por ser libre no tiene folio
                                         saiReport1.reportControl.Records[itm.Record.Index][2].Value = unidad.Codigo;
-                                        saiReport1.reportControl.Records[itm.Record.Index][3].Value = ID.STR_DESCONOCIDO;   //falta el campo para colocar el responsable de la unidad
+                                        saiReport1.reportControl.Records[itm.Record.Index][3].Value = ID.STR_DESCONOCIDO;
+                                            //falta el campo para colocar el responsable de la unidad
                                         saiReport1.reportControl.Records[itm.Record.Index][4].Value = strStatus;
                                         saiReport1.reportControl.Records[itm.Record.Index][4].BackColor = ID.COLOR_VERDE;
-                                        saiReport1.reportControl.Records[itm.Record.Index][5].Value = dtHora.ToShortTimeString();
+                                        saiReport1.reportControl.Records[itm.Record.Index][5].Value =
+                                            dtHora.ToShortTimeString();
                                         saiReport1.reportControl.Records[itm.Record.Index][6].Value = ID.STR_DESCONOCIDO;
                                         saiReport1.reportControl.Records[itm.Record.Index][7].Value = ID.STR_DESCONOCIDO;
                                         continue;
@@ -210,7 +232,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                         dtHora = unidadDespacho.HoraLlegada ?? DateTime.Now;
                                         strStatus = ID.STR_ESTATUSLLEGADA;
 
-                                        saiReport1.reportControl.Records[itm.Record.Index][1].Value = unidadDespacho.Folio;
+                                        saiReport1.reportControl.Records[itm.Record.Index][1].Value =
+                                            unidadDespacho.Folio;
                                         saiReport1.reportControl.Records[itm.Record.Index][4].BackColor = ID.COLOR_AZURE;
                                         goto Actualizar;
                                     }
@@ -220,18 +243,26 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                         dtHora = unidadDespacho.HoraDespachada ?? DateTime.Now;
                                         strStatus = ID.STR_ESTATUSDESPACHADA;
 
-                                        saiReport1.reportControl.Records[itm.Record.Index][1].Value = unidadDespacho.Folio;
+                                        saiReport1.reportControl.Records[itm.Record.Index][1].Value =
+                                            unidadDespacho.Folio;
                                         saiReport1.reportControl.Records[itm.Record.Index][4].BackColor =
                                             ID.COLOR_NARANJA;
                                         goto Actualizar;
                                     }
 
-                                Actualizar:
-                                    saiReport1.reportControl.Records[itm.Record.Index][3].Value = ID.STR_DESCONOCIDO;   //falta el campo para colocar el responsable de la unidad
-                                    saiReport1.reportControl.Records[itm.Record.Index][4].Value = strStatus != string.Empty ? strStatus : ID.STR_DESCONOCIDO;
-                                    saiReport1.reportControl.Records[itm.Record.Index][5].Value = dtHora.ToShortTimeString();
+                                    Actualizar:
+                                    saiReport1.reportControl.Records[itm.Record.Index][3].Value = ID.STR_DESCONOCIDO;
+                                        //falta el campo para colocar el responsable de la unidad
+                                    saiReport1.reportControl.Records[itm.Record.Index][4].Value = strStatus !=
+                                                                                                  string.Empty
+                                                                                                      ? strStatus
+                                                                                                      : ID.
+                                                                                                            STR_DESCONOCIDO;
+                                    saiReport1.reportControl.Records[itm.Record.Index][5].Value =
+                                        dtHora.ToShortTimeString();
                                     saiReport1.reportControl.Records[itm.Record.Index][6].Value =
-                                        IncidenciaMapper.Instance().GetOne(unidadDespacho.Folio).Direccion != string.Empty
+                                        IncidenciaMapper.Instance().GetOne(unidadDespacho.Folio).Direccion !=
+                                        string.Empty
                                             ? IncidenciaMapper.Instance().GetOne(unidadDespacho.Folio).Direccion
                                             : ID.STR_DESCONOCIDO;
                                     saiReport1.reportControl.Records[itm.Record.Index][7].Value =
@@ -240,18 +271,21 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                             Descripcion ?? ID.STR_DESCONOCIDO;
                                 }
 
-                                //TODO: La hora no es la de la liberaciÃ³n 
+                                //TODO: La hora no es la de la liberación 
                                 if (unidadDespachoList.Count == 0)
                                 {
                                     dtHora = DateTime.Now;
                                     strStatus = ID.STR_ESTATUSLIBRE;
 
-                                    saiReport1.reportControl.Records[itm.Record.Index][1].Value = ID.STR_DESCONOCIDO;   //por ser libre no tiene folio
+                                    saiReport1.reportControl.Records[itm.Record.Index][1].Value = ID.STR_DESCONOCIDO;
+                                        //por ser libre no tiene folio
                                     saiReport1.reportControl.Records[itm.Record.Index][2].Value = unidad.Codigo;
-                                    saiReport1.reportControl.Records[itm.Record.Index][3].Value = ID.STR_DESCONOCIDO;   //falta el campo para colocar el responsable de la unidad
+                                    saiReport1.reportControl.Records[itm.Record.Index][3].Value = ID.STR_DESCONOCIDO;
+                                        //falta el campo para colocar el responsable de la unidad
                                     saiReport1.reportControl.Records[itm.Record.Index][4].Value = strStatus;
                                     saiReport1.reportControl.Records[itm.Record.Index][4].BackColor = ID.COLOR_VERDE;
-                                    saiReport1.reportControl.Records[itm.Record.Index][5].Value = dtHora.ToShortTimeString();
+                                    saiReport1.reportControl.Records[itm.Record.Index][5].Value =
+                                        dtHora.ToShortTimeString();
                                     saiReport1.reportControl.Records[itm.Record.Index][6].Value = ID.STR_DESCONOCIDO;
                                     saiReport1.reportControl.Records[itm.Record.Index][7].Value = ID.STR_DESCONOCIDO;
                                 }
@@ -269,7 +303,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         }
                     }
 
-                    //recorremos la colecciÃ³n de unidades por remover
+                    //recorremos la colección de unidades por remover
                     //y hacemos match contra el id para proceder
                     //a eliminar el registro del grid
                     foreach (var unidad in lstUnidadesPorRemover)
@@ -283,7 +317,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         }
                         lstUnidadesRegistradas.Remove(unidad);
                     }
-                    lstUnidadesPorRemover.Clear();   //limpiamos la colecciÃ³n para el nuevo ciclo
+                    lstUnidadesPorRemover.Clear(); //limpiamos la colección para el nuevo ciclo
                 }
                 catch (Exception)
                 {

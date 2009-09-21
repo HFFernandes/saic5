@@ -1,4 +1,4 @@
-锘縰sing System;
+using System;
 using System.Windows.Forms;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
@@ -19,13 +19,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             saiReport1.btnVistaPrevia.Click += btnVistaPrevia_Click;
         }
 
-        void btnVistaPrevia_Click(object sender, EventArgs e)
+        private void btnVistaPrevia_Click(object sender, EventArgs e)
         {
             try
             {
                 if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_TEL))
                 {
-                    saiReport1.reportControl.PrintPreviewOptions.Title = "Agenda Telef贸nica";
+                    saiReport1.reportControl.PrintPreviewOptions.Title = "Agenda Telef髇ica";
                     saiReport1.reportControl.PrintPreview(true);
                 }
                 else
@@ -47,12 +47,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             //Definir las columnas del listado y obtener los registros
             saiReport1.AgregarColumna(0, "ID", 20, false, false, false, false);
             saiReport1.AgregarColumna(1, "Nombre", 200, true, true, true, false);
-            saiReport1.AgregarColumna(2, "Direcci贸n", 200, true, true, true, false);
-            saiReport1.AgregarColumna(3, "Tel茅fono", 80, true, true, true, false, true, 4);
+            saiReport1.AgregarColumna(2, "Direcci髇", 200, true, true, true, false);
+            saiReport1.AgregarColumna(3, "Tel閒ono", 80, true, true, true, false, true, 4);
             saiReport1.AgregarColumna(4, "Fax", 80, true, true, true, false);
             saiReport1.AgregarColumna(5, "Email", 80, true, true, true, false);
-            saiReport1.AgregarColumna(6, "Direcci贸n Web", 90, true, true, true, false);
-            saiReport1.AgregarColumna(7, "Clasificaci贸n", 150, true, true, true, false);
+            saiReport1.AgregarColumna(6, "Direcci髇 Web", 90, true, true, true, false);
+            saiReport1.AgregarColumna(7, "Clasificaci髇", 150, true, true, true, false);
 
             ObtenerRegistros();
             saiReport1.reportControl.Redraw();
@@ -69,12 +69,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     {
                         saiReport1.AgregarRegistro(null, o.Clave,
                                                    o.Nombre,
-                                                   o.Direcci贸n,
+                                                   o.Direcci髇,
                                                    o.Telefono,
                                                    o.Fax,
                                                    o.Email,
                                                    o.DireccionWeb,
-                                                   ClasificacionOrganizacionMapper.Instance().GetOne(o.ClaveClasificacion).Descripcion);
+                                                   ClasificacionOrganizacionMapper.Instance().GetOne(
+                                                       o.ClaveClasificacion).Descripcion);
                     }
                 }
                 catch (Exception ex)

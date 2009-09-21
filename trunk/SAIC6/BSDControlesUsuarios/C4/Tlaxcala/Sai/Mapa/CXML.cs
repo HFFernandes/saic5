@@ -19,7 +19,7 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
                 xDoc.Load(XMLstr);
 
                 var mapaXML = xDoc.GetElementsByTagName("map");
-                var lista = ((XmlElement)mapaXML[0]).GetElementsByTagName("layer");
+                var lista = ((XmlElement) mapaXML[0]).GetElementsByTagName("layer");
                 //CCapa[] capas;
                 var mapa = new CMapa(lista.Count);
                 //capas = new CCapa[lista.Count];

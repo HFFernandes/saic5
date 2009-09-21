@@ -1,4 +1,4 @@
-Ôªøusing System;
+using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 using System.Drawing;
@@ -22,6 +22,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         private bool _blnBusqueda = false;
         //public delegate void DelegadoCambiaMapa();
         //public event DelegadoCambiaMapa CambiaMapa;
+
         #endregion
 
         #region Propiedades
@@ -32,64 +33,43 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         [Category("Appearance"), Description("Obtiene o establece el color que toma el control al tener el foco.")]
         public Color ClrBackColorFoco
         {
-            get
-            {
-                return this._clrBackColorFoco;
-            }
-            set
-            {
-                this._clrBackColorFoco = value;
-            }
+            get { return this._clrBackColorFoco; }
+            set { this._clrBackColorFoco = value; }
         }
 
         /// <summary>
         /// Obtiene o establece si el control debe ser forsozamente llenado
         /// </summary>
-        [Category("Behavior"), Description("Obtiene o establece si el control debe ser forsozamente llenado."), DefaultValue(false)]
+        [Category("Behavior"), Description("Obtiene o establece si el control debe ser forsozamente llenado."),
+         DefaultValue(false)]
         public bool BlnEsRequerido
         {
-            get
-            {
-                return this._blnEsRequerido;
-            }
-            set
-            {
-                this._blnEsRequerido = value;
-            }
+            get { return this._blnEsRequerido; }
+            set { this._blnEsRequerido = value; }
         }
 
         /// <summary>
-        /// Obtiene o establece el mensaje que deber√° ser mostrado en caso de ser requerido.
+        /// Obtiene o establece el mensaje que deber· ser mostrado en caso de ser requerido.
         /// </summary>
-        [Category("Behavior"), Description("Obtiene o establece el mensaje que deber√° ser mostrado en caso de ser requerido."), DefaultValue("Campo requerido")]
+        [Category("Behavior"),
+         Description("Obtiene o establece el mensaje que deber· ser mostrado en caso de ser requerido."),
+         DefaultValue("Campo requerido")]
         public string StrMensajeCampoRequerido
         {
-            get
-            {
-                return _strMensajeCampoRequerido ?? "El campo es requerido.";
-            }
-            set
-            {
-                this._strMensajeCampoRequerido = value;
-            }
+            get { return _strMensajeCampoRequerido ?? "El campo es requerido."; }
+            set { this._strMensajeCampoRequerido = value; }
         }
 
         /// <summary>
-        /// Obtiene si el control pas√≥ la validaci√≥n de campo requerido
+        /// Obtiene si el control pasÛ la validaciÛn de campo requerido
         /// y el setter fue sellado para evitar la inyeccion de un valor distinto al real
         /// y que solo pueda ser manipulado desde este contenedor
         /// </summary>
         [Browsable(false)]
         public bool BlnFueValido
         {
-            get
-            {
-                return this._blnFueValido;
-            }
-            protected set
-            {
-                this._blnFueValido = value;
-            }
+            get { return this._blnFueValido; }
+            protected set { this._blnFueValido = value; }
         }
 
         #endregion
@@ -105,7 +85,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         /// <summary>
         /// Constructor con parametro
         /// </summary>
-        /// <param name="components">Contenedor en el cual estar√° embebido</param>
+        /// <param name="components">Contenedor en el cual estar· embebido</param>
         public SAIComboBox(IContainer components)
         {
             components.Add(this);
@@ -113,12 +93,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         }
 
         #region Eventos
+
         /// <summary>
         /// Se ejecuta cuando el control recibe el foco
         /// </summary>
         /// <param name="e">Argumentos del evento</param>
         /// <remarks>
-        /// Se sobreescribe la implementaci√≥n de la clase base para cambiar el color de fondo cuando el control obtiene el foco
+        /// Se sobreescribe la implementaciÛn de la clase base para cambiar el color de fondo cuando el control obtiene el foco
         /// </remarks>
         protected override void OnGotFocus(EventArgs e)
         {
@@ -137,7 +118,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         /// </summary>
         /// <param name="e">Argumentos del evento</param>
         /// <remarks>
-        /// Se sobreescribe la implementaci√≥n de la clase base para restaurar el color de fondo cuando el control pierde el foco
+        /// Se sobreescribe la implementaciÛn de la clase base para restaurar el color de fondo cuando el control pierde el foco
         /// </remarks>
         protected override void OnLostFocus(EventArgs e)
         {
@@ -157,20 +138,20 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 
             base.OnTextChanged(e);
         }
-        #endregion
 
+        #endregion
 
         protected override void OnSelectedIndexChanged(EventArgs e)
         {
             //if (this._blnBusqueda)
             //{
-                //if (this.CambiaMapa!= null)
-                //{
-                //    this.CambiaMapa();
-                //}
+            //if (this.CambiaMapa!= null)
+            //{
+            //    this.CambiaMapa();
+            //}
 
-                //this._blnBusqueda = false;
-                //return;
+            //this._blnBusqueda = false;
+            //return;
             //}
 
             if (this.SelectedIndex != -1 && !this.DroppedDown)
@@ -183,7 +164,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 
         protected override void OnKeyUp(KeyEventArgs e)
         {
-
             this._strCadenaEscrita = this.Text;
 
             this.AutoComplete();
@@ -210,14 +190,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             }
             else
             {
-
                 foreach (var objElemento in this.Items)
                 {
                     string strElemento = string.Empty;
 
                     if (objElemento.GetType() == strElemento.GetType())
                     {
-                        strElemento = (string)objElemento;
+                        strElemento = (string) objElemento;
 
                         if (strElemento.ToUpper().Contains(this._strCadenaEscrita.ToUpper()))
                         {
@@ -228,8 +207,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
                     }
                     else if (objElemento.GetType().GetProperty(this.DisplayMember) != null)
                     {
-
-                        strElemento = objElemento.GetType().GetProperty(this.DisplayMember).GetValue(objElemento, null).ToString();
+                        strElemento =
+                            objElemento.GetType().GetProperty(this.DisplayMember).GetValue(objElemento, null).ToString();
 
                         if (strElemento.ToUpper().Contains(this._strCadenaEscrita.ToUpper()))
                         {
@@ -237,7 +216,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
                             blnSeEncontro = true;
                             break;
                         }
-
                     }
                     i++;
                 }
@@ -254,7 +232,5 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             this.Text = this._strCadenaEscrita;
             this.SelectionStart = this.Text.Length;
         }
-
-
     }
 }

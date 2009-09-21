@@ -1,7 +1,7 @@
-Ôªø//Modific√≥ : T.S.U. Angel Martinez Ortiz
+//ModificÛ : T.S.U. Angel Martinez Ortiz
 //Fecha : 25 de agosto del 2009
-//Cambios : Se agreg√≥ el monitor para el Agente de Avaya.
-//          Se organiz√≥ el c√≥digo fuente
+//Cambios : Se agregÛ el monitor para el Agente de Avaya.
+//          Se organizÛ el cÛdigo fuente
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -17,7 +17,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
     ///</summary>
     public partial class SAIFrmComandos : Form
     {
-
         #region CONSTRUCTOR
 
         /// <summary>
@@ -34,8 +33,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 SAIBarraComandos.DeleteAll(); //Se limpia la barra de comandos por si existiera alguno
                 SAIBarraComandos.EnableCustomization(true);
 
-                //Se crean los eventos de reacci√≥n para la personalizaci√≥n de los comandos y la funcionalidad
-                //en su ejecuci√≥n
+                //Se crean los eventos de reacciÛn para la personalizaciÛn de los comandos y la funcionalidad
+                //en su ejecuciÛn
                 SAIBarraComandos.Customization += SAIBarraComandos_Customization;
                 SAIBarraComandos.Execute += SAIBarraComandos_Execute;
                 SAIBarraComandos.UpdateEvent += SAIBarraComandos_UpdateEvent;
@@ -45,7 +44,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 SAIBarraComandos.KeyBindings.AllowDoubleKeyShortcuts = true;
                 SAIBarraComandos.Icons.AddIcons(imgAdministrador.Icons);
 
-                //Se establece el ancho,posici√≥n superior e izquierda en base a la definici√≥n
+                //Se establece el ancho,posiciÛn superior e izquierda en base a la definiciÛn
                 //de la pantalla primaria
                 Width = Screen.PrimaryScreen.WorkingArea.Width;
                 Top = (Screen.PrimaryScreen.WorkingArea.Height - Height);
@@ -80,7 +79,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         */
 
         /// <summary>
-        /// Monitor de actividad telef√≥nica Asincrono
+        /// Monitor de actividad telefÛnica Asincrono
         /// </summary>
         private SaiTcpClient TcpListener = new SaiTcpClient();
 
@@ -96,47 +95,51 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         #endregion
 
-        #region M√âTODOS
+        #region M…TODOS
 
         /// <summary>
-        /// Funci√≥n sobrecargada para la creaci√≥n de un bot√≥n de comando en la barra de comandos
+        /// FunciÛn sobrecargada para la creaciÛn de un botÛn de comando en la barra de comandos
         /// </summary>
         /// <param name="Controles">Contenedor al cual es perteneciente</param>
-        /// <param name="TipoControl">Tipo de control del cual ser√° derivado</param>
-        /// <param name="Identificador">Constante que identifica al control de manera √∫nica</param>
-        /// <param name="Caption">Texto que se mostrar√° identificando al control</param>
+        /// <param name="TipoControl">Tipo de control del cual ser· derivado</param>
+        /// <param name="Identificador">Constante que identifica al control de manera ˙nica</param>
+        /// <param name="Caption">Texto que se mostrar· identificando al control</param>
         /// <returns>Instancia generada</returns>
-        public CommandBarControl AgregarBoton(CommandBarControls Controles, XTPControlType TipoControl, int Identificador, string Caption)
+        public CommandBarControl AgregarBoton(CommandBarControls Controles, XTPControlType TipoControl,
+                                              int Identificador, string Caption)
         {
             return AgregarBoton(Controles, TipoControl, Identificador, Caption, false, "", true);
         }
 
         /// <summary>
-        /// Funci√≥n sobrecargada para la creaci√≥n de un bot√≥n de comando en la barra de comandos
+        /// FunciÛn sobrecargada para la creaciÛn de un botÛn de comando en la barra de comandos
         /// </summary>
         /// <param name="Controles">Contenedor al cual es perteneciente</param>
-        /// <param name="TipoControl">Tipo de control del cual ser√° derivado</param>
-        /// <param name="Identificador">Constante que identifica al control de manera √∫nica</param>
-        /// <param name="Caption">Texto que se mostrar√° identificando al control</param>
-        /// <param name="IniciarGrupo">Propiedad que indica si el control iniciar√° un grupo y contendr√° un separador</param>
+        /// <param name="TipoControl">Tipo de control del cual ser· derivado</param>
+        /// <param name="Identificador">Constante que identifica al control de manera ˙nica</param>
+        /// <param name="Caption">Texto que se mostrar· identificando al control</param>
+        /// <param name="IniciarGrupo">Propiedad que indica si el control iniciar· un grupo y contendr· un separador</param>
         /// <returns>Instancia generada</returns>
-        public CommandBarControl AgregarBoton(CommandBarControls Controles, XTPControlType TipoControl, int Identificador, string Caption, bool IniciarGrupo)
+        public CommandBarControl AgregarBoton(CommandBarControls Controles, XTPControlType TipoControl,
+                                              int Identificador, string Caption, bool IniciarGrupo)
         {
             return AgregarBoton(Controles, TipoControl, Identificador, Caption, IniciarGrupo, "", true);
         }
 
         /// <summary>
-        /// Funci√≥n sobrecargada para la creaci√≥n de un bot√≥n de comando en la barra de comandos
+        /// FunciÛn sobrecargada para la creaciÛn de un botÛn de comando en la barra de comandos
         /// </summary>
         /// <param name="Controles">Contenedor al cual es perteneciente</param>
-        /// <param name="TipoControl">Tipo de control del cual ser√° derivado</param>
-        /// <param name="Identificador">Constante que identifica al control de manera √∫nica</param>
-        /// <param name="Caption">Texto que se mostrar√° identificando al control</param>
-        /// <param name="IniciarGrupo">Propiedad que indica si el control iniciar√° un grupo y contendr√° un separador</param>
-        /// <param name="Descripcion">Propiedad que describe al usuario la funci√≥n del comando</param>
-        /// <param name="EsVisible">Propiedad que indica si el control definido ser√° o no visible para el usuario</param>
+        /// <param name="TipoControl">Tipo de control del cual ser· derivado</param>
+        /// <param name="Identificador">Constante que identifica al control de manera ˙nica</param>
+        /// <param name="Caption">Texto que se mostrar· identificando al control</param>
+        /// <param name="IniciarGrupo">Propiedad que indica si el control iniciar· un grupo y contendr· un separador</param>
+        /// <param name="Descripcion">Propiedad que describe al usuario la funciÛn del comando</param>
+        /// <param name="EsVisible">Propiedad que indica si el control definido ser· o no visible para el usuario</param>
         /// <returns>Instancia generada</returns>
-        public CommandBarControl AgregarBoton(CommandBarControls Controles, XTPControlType TipoControl, int Identificador, string Caption, bool IniciarGrupo, string Descripcion, bool EsVisible)
+        public CommandBarControl AgregarBoton(CommandBarControls Controles, XTPControlType TipoControl,
+                                              int Identificador, string Caption, bool IniciarGrupo, string Descripcion,
+                                              bool EsVisible)
         {
             var controlBarra = Controles.Add(TipoControl, Identificador, Caption, -1, false);
             controlBarra.IconId = Identificador;
@@ -150,11 +153,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         }
 
         /// <summary>
-        /// M√©todo est√°tico para colocar un formulario en un
+        /// MÈtodo est·tico para colocar un formulario en un
         /// segundo monitor si y solo si es posible
         /// </summary>
         /// <param name="form">Instancia del formulario a ubicar</param>
-        static void MostrarEnSegundoMonitorSiEsPosible(Form form)
+        private static void MostrarEnSegundoMonitorSiEsPosible(Form form)
         {
             //Obtengo el listado de todas las pantallas activas
             var screens = Screen.AllScreens;
@@ -171,7 +174,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         lstScreens.Add(screen);
                 }
 
-                //Ubicamos el formulario en la √°rea de trabajo
+                //Ubicamos el formulario en la ·rea de trabajo
                 //de la pantalla secundaria
                 form.Location = lstScreens[0].WorkingArea.Location;
             }
@@ -192,12 +195,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         //    {
         //        _blnCtrPresionado = true;
         //    }
-
         //    return false;
         //}
-
         /// <summary>
-        /// Esta funci√≥n se manda a llamar desde los dem√°s formularios para mostrar la ventana del switch
+        /// Esta funciÛn se manda a llamar desde los dem·s formularios para mostrar la ventana del switch
         /// </summary>
         //public void MuestraSwitch()
         //{
@@ -209,7 +210,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         //        objVentana.Show(this);
         //    }
         //}
-
         /// <summary>
         /// Inicia el monitor para el Agente de Avaya
         /// </summary>
@@ -226,24 +226,28 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             TcpListener.DetenerCliente();
         }
 
-        void EscribirMensaje(string mensaje)
+        private void EscribirMensaje(string mensaje)
         {
             tssInfo.Text = mensaje;
         }
 
-        void EscribirDato(string dato)
+        private void EscribirDato(string dato)
         {
             NoTelefono = dato;
-            tssInfo.Text = string.Format("√öltima llamada : {0} ", dato);
+            tssInfo.Text = string.Format("⁄ltima llamada : {0} ", dato);
 
             //var lstTipoIncidencias = new TipoIncidenciaList();
-            var lstTipoIncidencias = Aplicacion.UsuarioPersistencia.strSistemaActual == "066" ? TipoIncidenciaMapper.Instance().GetBySistema(2) : TipoIncidenciaMapper.Instance().GetBySistema(1);
+            var lstTipoIncidencias = Aplicacion.UsuarioPersistencia.strSistemaActual == "066"
+                                         ? TipoIncidenciaMapper.Instance().GetBySistema(2)
+                                         : TipoIncidenciaMapper.Instance().GetBySistema(1);
             if (lstTipoIncidencias.Count == 0)
             {
-                throw new SAIExcepcion("No es posible registrar incidencias, no existen tipos de incidencias cargados en el sistema, favor de contactar al administrador", this);
+                throw new SAIExcepcion(
+                    "No es posible registrar incidencias, no existen tipos de incidencias cargados en el sistema, favor de contactar al administrador",
+                    this);
             }
 
-            //Se pregunta qu√© es el usuario y a qu√© sistema entr√≥:
+            //Se pregunta quÈ es el usuario y a quÈ sistema entrÛ:
             if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
                 Aplicacion.UsuarioPersistencia.strSistemaActual == "066")
             {
@@ -251,10 +255,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 frmIncidencia066.Show();
             }
             else if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value &&
-                Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+                     Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
             {
-                //Se pasa el n√∫mero telef√≥nico solo para determinar la ubicaci√≥n
-                //geogr√°fica en caso de que exista y no para datos del denunciante
+                //Se pasa el n˙mero telefÛnico solo para determinar la ubicaciÛn
+                //geogr·fica en caso de que exista y no para datos del denunciante
                 var frmIncidencia089 = new SAIFrm089(NoTelefono);
                 frmIncidencia089.Show();
             }
@@ -264,7 +268,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         #region EVENTOS
 
-        void SAIBarraComandos_Execute(object sender, AxXtremeCommandBars._DCommandBarsEvents_ExecuteEvent e)
+        private void SAIBarraComandos_Execute(object sender, AxXtremeCommandBars._DCommandBarsEvents_ExecuteEvent e)
         {
             try
             {
@@ -318,7 +322,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     else
                                     {
                                         buscadorDir = new SAIFrmBuscadorIncidencias();
-                                        buscadorDir.CargarConsulta(string.Format("{0}\\{1}", Environment.CurrentDirectory,
+                                        buscadorDir.CargarConsulta(string.Format("{0}\\{1}",
+                                                                                 Environment.CurrentDirectory,
                                                                                  "ConsultaPH89.xml"));
                                         MostrarEnSegundoMonitorSiEsPosible(buscadorDir);
                                     }
@@ -332,7 +337,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     else
                                     {
                                         buscadorLig = new SAIFrmBuscadorIncidencias();
-                                        buscadorLig.CargarConsulta(string.Format("{0}\\{1}", Environment.CurrentDirectory,
+                                        buscadorLig.CargarConsulta(string.Format("{0}\\{1}",
+                                                                                 Environment.CurrentDirectory,
                                                                                  "ConsultaSLC89.xml"));
                                         MostrarEnSegundoMonitorSiEsPosible(buscadorLig);
                                     }
@@ -379,8 +385,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
                                 break;
                             case ID.CMD_AU:
-                                var corporacion = Aplicacion.UsuarioPersistencia.intCorporacion != null ?
-                                CorporacionMapper.Instance().GetOne(Aplicacion.UsuarioPersistencia.intCorporacion.Value) : null;
+                                var corporacion = Aplicacion.UsuarioPersistencia.intCorporacion != null
+                                                      ?
+                                                          CorporacionMapper.Instance().GetOne(
+                                                              Aplicacion.UsuarioPersistencia.intCorporacion.Value)
+                                                      : null;
 
                                 if (corporacion != null && corporacion.UnidadesVirtuales == false)
                                 {
@@ -423,7 +432,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     else
                                     {
                                         buscadorDir = new SAIFrmBuscadorIncidencias();
-                                        buscadorDir.CargarConsulta(string.Format("{0}\\{1}", Environment.CurrentDirectory,
+                                        buscadorDir.CargarConsulta(string.Format("{0}\\{1}",
+                                                                                 Environment.CurrentDirectory,
                                                                                  "ConsultaPH.xml"));
                                         MostrarEnSegundoMonitorSiEsPosible(buscadorDir);
                                     }
@@ -437,7 +447,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     else
                                     {
                                         buscadorTel = new SAIFrmBuscadorIncidencias();
-                                        buscadorTel.CargarConsulta(string.Format("{0}\\{1}", Environment.CurrentDirectory,
+                                        buscadorTel.CargarConsulta(string.Format("{0}\\{1}",
+                                                                                 Environment.CurrentDirectory,
                                                                                  "ConsultaRPH.xml"));
                                         MostrarEnSegundoMonitorSiEsPosible(buscadorTel);
                                     }
@@ -451,7 +462,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     else
                                     {
                                         buscadorLig = new SAIFrmBuscadorIncidencias();
-                                        buscadorLig.CargarConsulta(string.Format("{0}\\{1}", Environment.CurrentDirectory,
+                                        buscadorLig.CargarConsulta(string.Format("{0}\\{1}",
+                                                                                 Environment.CurrentDirectory,
                                                                                  "ConsultaSLC.xml"));
                                         MostrarEnSegundoMonitorSiEsPosible(buscadorLig);
                                     }
@@ -464,16 +476,22 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 switch (e.control.Id)
                 {
                     case ID.CMD_CAN:
-                        var confirmarSalida = new ExceptionMessageBox(string.Format("¬øDesea cancelar el Folio {0}?", Aplicacion.intFolioPorCancelar), "Confirmar Cancelaci√≥n.",
-                                                          ExceptionMessageBoxButtons.YesNo,
-                                                          ExceptionMessageBoxSymbol.Question,
-                                                          ExceptionMessageBoxDefaultButton.Button2);
+                        var confirmarSalida =
+                            new ExceptionMessageBox(
+                                string.Format("øDesea cancelar el Folio {0}?", Aplicacion.intFolioPorCancelar),
+                                "Confirmar CancelaciÛn.",
+                                ExceptionMessageBoxButtons.YesNo,
+                                ExceptionMessageBoxSymbol.Question,
+                                ExceptionMessageBoxDefaultButton.Button2);
                         if (DialogResult.Yes == confirmarSalida.Show(this))
                         {
-                            var incidencia = Aplicacion.intFolioPorCancelar != null ? IncidenciaMapper.Instance().GetOne(Aplicacion.intFolioPorCancelar.Value) : null;
+                            var incidencia = Aplicacion.intFolioPorCancelar != null
+                                                 ? IncidenciaMapper.Instance().GetOne(
+                                                       Aplicacion.intFolioPorCancelar.Value)
+                                                 : null;
                             if (incidencia != null)
                             {
-                                incidencia.ClaveEstatus = (int)ESTATUSINCIDENCIAS.CANCELADA;
+                                incidencia.ClaveEstatus = (int) ESTATUSINCIDENCIAS.CANCELADA;
                                 IncidenciaMapper.Instance().Save(incidencia);
 
                                 Aplicacion.frmIncidenciaActiva.Dispose();
@@ -512,7 +530,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
-        void SAIBarraComandos_UpdateEvent(object sender, AxXtremeCommandBars._DCommandBarsEvents_UpdateEvent e)
+        private void SAIBarraComandos_UpdateEvent(object sender, AxXtremeCommandBars._DCommandBarsEvents_UpdateEvent e)
         {
             switch (Aplicacion.UsuarioPersistencia.strSistemaActual)
             {
@@ -566,8 +584,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 case ID.CMD_PH:
                     e.control.Checked = buscadorDir.Created;
                     break;
-                //case ID.CMD_SIF:
-                //    break;
+                    //case ID.CMD_SIF:
+                    //    break;
                 case ID.CMD_SLC:
                     e.control.Checked = buscadorLig.Created;
                     break;
@@ -577,7 +595,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
         }
 
-        private void SAIBarraComandos_Customization(object sender, AxXtremeCommandBars._DCommandBarsEvents_CustomizationEvent e)
+        private void SAIBarraComandos_Customization(object sender,
+                                                    AxXtremeCommandBars._DCommandBarsEvents_CustomizationEvent e)
         {
             var controls = SAIBarraComandos.DesignerControls;
             if (controls.Count == 0)
@@ -598,28 +617,34 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             e.options.ShowMenusPage = false;
         }
 
-        private void SAIBarraComandos_CustomizationResetToolBar(object sender, AxXtremeCommandBars._DCommandBarsEvents_CustomizationResetToolBarEvent e)
+        private void SAIBarraComandos_CustomizationResetToolBar(object sender,
+                                                                AxXtremeCommandBars.
+                                                                    _DCommandBarsEvents_CustomizationResetToolBarEvent e)
         {
             SAIBarraComandos.DeleteAll();
             if (SAIBarraComandos.Count == 0)
             {
                 var barra = SAIBarraComandos.Add("Comandos", XTPBarPosition.xtpBarTop);
-                barra.SetIconSize(32, 32);  //Tama√±o predeterminado para el item
-                barra.Closeable = false;    //Indicamos que no es posible cerrar la colecci√≥n de items en la barra para evitar la l√≥gica requerida
-                barra.EnableAnimation = true;   //Indicamos que mostraremos efectos de desvanecimiento
-                barra.ShowGripper = false;  //Indicamos que ocultaremos el gripper para evitar que pueda moverse de su ubicaci√≥n predeterminada
+                barra.SetIconSize(32, 32); //TamaÒo predeterminado para el item
+                barra.Closeable = false;
+                    //Indicamos que no es posible cerrar la colecciÛn de items en la barra para evitar la lÛgica requerida
+                barra.EnableAnimation = true; //Indicamos que mostraremos efectos de desvanecimiento
+                barra.ShowGripper = false;
+                    //Indicamos que ocultaremos el gripper para evitar que pueda moverse de su ubicaciÛn predeterminada
 
-                //Agregamos los comandos predeterminados que manejar√° el sistema y sus accesos r√°pidos
+                //Agregamos los comandos predeterminados que manejar· el sistema y sus accesos r·pidos
                 var coleccionComandos = ComandosColeccion.ColeccionComandos();
                 foreach (var comando in coleccionComandos)
                 {
                     if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(comando.Identificador))
                     {
-                        AgregarBoton(barra.Controls, XTPControlType.xtpControlButton, comando.Identificador, comando.Caption,
-                                  comando.IniciaGrupo, comando.Descripcion, comando.EsVisible);
+                        AgregarBoton(barra.Controls, XTPControlType.xtpControlButton, comando.Identificador,
+                                     comando.Caption,
+                                     comando.IniciaGrupo, comando.Descripcion, comando.EsVisible);
 
                         if (comando.TeclaAccesoRapido != null)
-                            SAIBarraComandos.KeyBindings.Add(ID.FCONTROL, comando.TeclaAccesoRapido ?? '0', comando.Identificador);
+                            SAIBarraComandos.KeyBindings.Add(ID.FCONTROL, comando.TeclaAccesoRapido ?? '0',
+                                                             comando.Identificador);
                     }
                 }
             }
@@ -645,22 +670,26 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             if (SAIBarraComandos.Count == 0)
             {
                 var barra = SAIBarraComandos.Add("Comandos", XTPBarPosition.xtpBarTop);
-                barra.SetIconSize(32, 32);  //Tama√±o predeterminado para el item
-                barra.Closeable = false;    //Indicamos que no es posible cerrar la colecci√≥n de items en la barra para evitar la l√≥gica requerida
-                barra.EnableAnimation = true;   //Indicamos que mostraremos efectos de desvanecimiento
-                barra.ShowGripper = false;  //Indicamos que ocultaremos el gripper para evitar que pueda moverse de su ubicaci√≥n predeterminada
+                barra.SetIconSize(32, 32); //TamaÒo predeterminado para el item
+                barra.Closeable = false;
+                    //Indicamos que no es posible cerrar la colecciÛn de items en la barra para evitar la lÛgica requerida
+                barra.EnableAnimation = true; //Indicamos que mostraremos efectos de desvanecimiento
+                barra.ShowGripper = false;
+                    //Indicamos que ocultaremos el gripper para evitar que pueda moverse de su ubicaciÛn predeterminada
 
-                //Agregamos los comandos predeterminados que manejar√° el sistema y sus accesos r√°pidos
+                //Agregamos los comandos predeterminados que manejar· el sistema y sus accesos r·pidos
                 var coleccionComandos = ComandosColeccion.ColeccionComandos();
                 foreach (var comando in coleccionComandos)
                 {
                     if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(comando.Identificador))
                     {
-                        AgregarBoton(barra.Controls, XTPControlType.xtpControlButton, comando.Identificador, comando.Caption,
-                                  comando.IniciaGrupo, comando.Descripcion, comando.EsVisible);
+                        AgregarBoton(barra.Controls, XTPControlType.xtpControlButton, comando.Identificador,
+                                     comando.Caption,
+                                     comando.IniciaGrupo, comando.Descripcion, comando.EsVisible);
 
                         if (comando.TeclaAccesoRapido != null)
-                            SAIBarraComandos.KeyBindings.Add(ID.FCONTROL, comando.TeclaAccesoRapido ?? '0', comando.Identificador);
+                            SAIBarraComandos.KeyBindings.Add(ID.FCONTROL, comando.TeclaAccesoRapido ?? '0',
+                                                             comando.Identificador);
                     }
                 }
             }
@@ -674,16 +703,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 var confirmarSalida = new ExceptionMessageBox(ID.STR_CONFIRMARSALIDA, "Salir",
-                                                          ExceptionMessageBoxButtons.YesNo,
-                                                          ExceptionMessageBoxSymbol.Question,
-                                                          ExceptionMessageBoxDefaultButton.Button2);
+                                                              ExceptionMessageBoxButtons.YesNo,
+                                                              ExceptionMessageBoxSymbol.Question,
+                                                              ExceptionMessageBoxDefaultButton.Button2);
 
                 if (DialogResult.Yes == confirmarSalida.Show(this))
                 {
                     //Detenemos el monitor de llamadas
                     DetenerMonitorLlamadas();
 
-                    //Cerramos la aplicaci√≥n.
+                    //Cerramos la aplicaciÛn.
                     Application.Exit();
                 }
                 else
@@ -708,22 +737,18 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         #region EVENTOS PARA MONITOR DE TCP
 
-        void TcpListener_ListenerMessageDataEvent(object sender, FindMessageEventArgs e)
+        private void TcpListener_ListenerMessageDataEvent(object sender, FindMessageEventArgs e)
         {
-            Invoke(new DelegadoEscribirDato(EscribirMensaje), new object[] { e.Mensaje });
+            Invoke(new DelegadoEscribirDato(EscribirMensaje), new object[] {e.Mensaje});
         }
 
-        void TcpListener_ListenerFindDataEvent(object sender, FindDataEventArgs e)
+        private void TcpListener_ListenerFindDataEvent(object sender, FindDataEventArgs e)
         {
-            Invoke(new DelegadoEscribirDato(EscribirDato), new object[] { e.Datos });
+            Invoke(new DelegadoEscribirDato(EscribirDato), new object[] {e.Datos});
         }
 
         #endregion
 
-
-
         #endregion
-
-
     }
 }

@@ -3,11 +3,6 @@
 //Empresa :InfinitySoft TI Experts
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
@@ -30,7 +25,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         public SAIFrmAltaDatosAuto066()
         {
             InitializeComponent();
-            //dgvVehiculo.RowHeadersVisible = true;
+            dgvVehiculo.RowHeadersVisible = true;
         }
 
         #endregion
@@ -129,31 +124,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 if (ListaVehiculos != null)
                 {
                     this.dgvVehiculo.Rows.Clear();
-                    int count = 1;
-                    foreach (VehiculoObject vehiculo in this.ListaVehiculos)
+                    for (int i = 0; i < ListaVehiculos.Count; i++)
                     {
-                        this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[0].Value = vehiculo.Clave;
-                        this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[1].Value = vehiculo.Marca;
-                        this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[2].Value = vehiculo.Tipo;
-                        this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[3].Value = vehiculo.Modelo;
-                        this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[4].Value = vehiculo.Placas;
-                        this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[5].Value = vehiculo.Color;
-                        this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[6].Value = vehiculo.NumeroMotor;
-                        this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[7].Value = vehiculo.NumeroSerie;
-                        this.dgvVehiculo.Rows[dgvVehiculo.RowCount - count].Cells[8].Value = vehiculo.SeñasParticulares;
-                        this.dgvVehiculo.Rows.Add(1);
-                        count++;
-
-                    }
-                    //For para quitar las filas vacias.
-                    for (int i = 0; i < count; i++)
-                    {
-                        if ((dgvVehiculo.RowCount - 1) >= i)
-                            if (this.dgvVehiculo.Rows[i].Cells[1].Value == null)
-                            {
-                                this.dgvVehiculo.Rows.RemoveAt(i);
-                                i--;
-                            }
+                        this.dgvVehiculo.Rows.Add(ListaVehiculos[i].Clave,
+                            ListaVehiculos[i].Marca,
+                            ListaVehiculos[i].Tipo,
+                            ListaVehiculos[i].Modelo,
+                            ListaVehiculos[i].Placas,
+                            ListaVehiculos[i].Color,
+                            ListaVehiculos[i].NumeroMotor,
+                            ListaVehiculos[i].NumeroSerie,
+                            ListaVehiculos[i].SeñasParticulares);
                     }
                 }
             }
@@ -217,5 +198,19 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         }
 
         #endregion
+
+        private void btnEliminarFila_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dgvVehiculo.CurrentRow != null && !dgvVehiculo.CurrentRow.IsNewRow)
+                    dgvVehiculo.Rows.Remove(dgvVehiculo.CurrentRow);
+                else if (dgvVehiculo.Rows.Count == 1)
+                    dgvVehiculo.Rows.Clear();
+            }
+            catch (Exception)
+            {
+            }
+        }
     }
 }

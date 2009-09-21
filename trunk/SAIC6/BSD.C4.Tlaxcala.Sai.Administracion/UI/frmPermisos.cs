@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -60,13 +60,19 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     {
                         string corporacion = "NO APLICA";
                         //obtiene lista de relacion usuario - corporacion para obtener la descripcion de la corporacion a la que pretenece un usuario
-                        Objetos.UsuarioCorporacionObjectList lstUsrCorp = Mappers.UsuarioCorporacionMapper.Instance().GetByUsuario(usr.Clave);
+                        Objetos.UsuarioCorporacionObjectList lstUsrCorp =
+                            Mappers.UsuarioCorporacionMapper.Instance().GetByUsuario(usr.Clave);
                         if (lstUsrCorp.Count > 0)
                         {
-                            corporacion = Mappers.CorporacionMapper.Instance().GetOne(lstUsrCorp[0].ClaveCorporacion).Descripcion;
+                            corporacion =
+                                Mappers.CorporacionMapper.Instance().GetOne(lstUsrCorp[0].ClaveCorporacion).Descripcion;
                         }
-                        object[] usuario = new object[] { usr.Clave, usr.NombreUsuario, usr.NombrePropio,
-                        usr.Despachador.Value, usr.Despachador.Value?"SI":"NO", corporacion };
+                        object[] usuario = new object[]
+                                               {
+                                                   usr.Clave, usr.NombreUsuario, usr.NombrePropio,
+                                                   usr.Despachador.Value, usr.Despachador.Value ? "SI" : "NO",
+                                                   corporacion
+                                               };
                         catUsuarios.Rows.Add(usuario);
                     }
 
@@ -75,13 +81,20 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     this.gvUsuarios.Columns["Clave"].Visible = false;
                     this.gvUsuarios.Columns["Desp"].Visible = false;
 
-                    lstUsuarios = null;                    
+                    lstUsuarios = null;
                 }
                 catch (Exception ex)
-                { throw new Exception(ex.Message); }
-                finally { catUsuarios = null; }
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    catUsuarios = null;
+                }
             }
-            catch (SAIExcepcion) { }
+            catch (SAIExcepcion)
+            {
+            }
         }
 
         /// <summary>
@@ -109,18 +122,22 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 {
                     //se obtiene el registro seleccionado
                     int selectedRow = this.gvUsuarios.CurrentCellAddress.Y;
-                    if (selectedRow > -1)//si hay registro seleccionado?
+                    if (selectedRow > -1) //si hay registro seleccionado?
                     {
                         int clave = Convert.ToInt32(this.gvUsuarios.Rows[selectedRow].Cells["Clave"].Value);
                         this.CargarPermisos(clave);
-                        this.lblDatos.Text = Convert.ToString(this.gvUsuarios.Rows[selectedRow].Cells["NombrePropio"].Value);
+                        this.lblDatos.Text =
+                            Convert.ToString(this.gvUsuarios.Rows[selectedRow].Cells["NombrePropio"].Value);
                     }
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         //Llena los permisos correspondientes a un sistema, mostrando todos  los comandos(no son los permisos ya asignados a un usuario)
@@ -145,10 +162,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     {
                         foreach (Entidades.Submodulo submodulo in lstSubModulos)
                         {
-
                             /*if (sistema.Name == Convert.ToString(submodulo.ClaveSistema))
                             {*/
-                                sistema.Nodes.Add(Convert.ToString(submodulo.Clave), submodulo.Descripcion);
+                            sistema.Nodes.Add(Convert.ToString(submodulo.Clave), submodulo.Descripcion);
                             //}
                         }
                     }
@@ -169,7 +185,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -183,7 +200,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             {
                 try
                 {
-                    Objetos.PermisoUsuarioObjectList permisosReal = Mappers.PermisoUsuarioMapper.Instance().GetByUsuario(claveUsuario); //.GetAll();
+                    Objetos.PermisoUsuarioObjectList permisosReal =
+                        Mappers.PermisoUsuarioMapper.Instance().GetByUsuario(claveUsuario); //.GetAll();
 
                     foreach (Objetos.PermisoUsuarioObject permisoActual in permisosReal)
                     {
@@ -210,7 +228,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                                         submodulo.Parent.Expand();
                                         expander = false;
                                     }
-                                }                                
+                                }
                             }
                         }
                     }
@@ -221,7 +239,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -253,7 +272,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             {
                 try
                 {
-                    Objetos.PermisoUsuarioObjectList pTieneUsuario = Mappers.PermisoUsuarioMapper.Instance().GetByUsuario(claveUsr); //.GetAll();
+                    Objetos.PermisoUsuarioObjectList pTieneUsuario =
+                        Mappers.PermisoUsuarioMapper.Instance().GetByUsuario(claveUsr); //.GetAll();
                     if (pTieneUsuario.Count > 0)
                     {
                         //Se agrega operacion a la bitacora
@@ -276,10 +296,18 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                                         if (pAgregar.ClavePermiso != pTUsuario.ClavePermiso)
                                         {
                                             //Si el permiso no existe se agrega
-                                            Objetos.PermisoUsuarioObject pExiste = Mappers.PermisoUsuarioMapper.Instance().GetOne(pAgregar.ClaveUsuario, pAgregar.ClaveSubmodulo, pAgregar.ClavePermiso, pAgregar.ClaveSistema);
+                                            Objetos.PermisoUsuarioObject pExiste =
+                                                Mappers.PermisoUsuarioMapper.Instance().GetOne(pAgregar.ClaveUsuario,
+                                                                                               pAgregar.ClaveSubmodulo,
+                                                                                               pAgregar.ClavePermiso,
+                                                                                               pAgregar.ClaveSistema);
                                             if (pExiste == null)
                                             {
-                                                string descripcion = "Permiso de " + Mappers.PermisoMapper.Instance().GetOne(pAgregar.ClavePermiso).Descripcion + " para " + Mappers.SubmoduloMapper.Instance().GetOne(pAgregar.ClaveSubmodulo).Descripcion;
+                                                string descripcion = "Permiso de " +
+                                                                     Mappers.PermisoMapper.Instance().GetOne(
+                                                                         pAgregar.ClavePermiso).Descripcion + " para " +
+                                                                     Mappers.SubmoduloMapper.Instance().GetOne(
+                                                                         pAgregar.ClaveSubmodulo).Descripcion;
                                                 Mappers.PermisoUsuarioMapper.Instance().Insert(pAgregar);
                                                 bitacora.ValorActual = descripcion;
                                                 //se agrega operacion en la bitacora
@@ -291,10 +319,18 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                                     {
                                         if (pAgregar.ClavePermiso != pTUsuario.ClavePermiso)
                                         {
-                                            Objetos.PermisoUsuarioObject pExiste = Mappers.PermisoUsuarioMapper.Instance().GetOne(pAgregar.ClaveUsuario, pAgregar.ClaveSubmodulo, pAgregar.ClavePermiso, pAgregar.ClaveSistema);
+                                            Objetos.PermisoUsuarioObject pExiste =
+                                                Mappers.PermisoUsuarioMapper.Instance().GetOne(pAgregar.ClaveUsuario,
+                                                                                               pAgregar.ClaveSubmodulo,
+                                                                                               pAgregar.ClavePermiso,
+                                                                                               pAgregar.ClaveSistema);
                                             if (pExiste == null)
                                             {
-                                                string descripcion = "Permiso de " + Mappers.PermisoMapper.Instance().GetOne(pAgregar.ClavePermiso).Descripcion + " para " + Mappers.SubmoduloMapper.Instance().GetOne(pAgregar.ClaveSubmodulo).Descripcion;
+                                                string descripcion = "Permiso de " +
+                                                                     Mappers.PermisoMapper.Instance().GetOne(
+                                                                         pAgregar.ClavePermiso).Descripcion + " para " +
+                                                                     Mappers.SubmoduloMapper.Instance().GetOne(
+                                                                         pAgregar.ClaveSubmodulo).Descripcion;
                                                 Mappers.PermisoUsuarioMapper.Instance().Insert(pAgregar);
                                                 bitacora.ValorActual = descripcion;
                                                 //se agrega operacion en la bitacora
@@ -319,14 +355,16 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
                         foreach (Objetos.PermisoUsuarioObject pAgregar in lstPermisosUsuarioAdd)
                         {
-                            string descripcion = "Permiso de " + Mappers.PermisoMapper.Instance().GetOne(pAgregar.ClavePermiso).Descripcion + " para " + Mappers.SubmoduloMapper.Instance().GetOne(pAgregar.ClaveSubmodulo).Descripcion;
+                            string descripcion = "Permiso de " +
+                                                 Mappers.PermisoMapper.Instance().GetOne(pAgregar.ClavePermiso).
+                                                     Descripcion + " para " +
+                                                 Mappers.SubmoduloMapper.Instance().GetOne(pAgregar.ClaveSubmodulo).
+                                                     Descripcion;
                             Mappers.PermisoUsuarioMapper.Instance().Insert(pAgregar);
                             bitacora.ValorActual = descripcion;
                             //se agrega operacion en bitacora por cada permiso
-                            Mappers.BitacoraMapper.Instance().Insert(bitacora);    
+                            Mappers.BitacoraMapper.Instance().Insert(bitacora);
                         }
-
-                        
                     }
                 }
                 catch (Exception ex)
@@ -335,7 +373,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -349,7 +388,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             {
                 try
                 {
-                    Objetos.PermisoUsuarioObjectList pTieneUsuario = Mappers.PermisoUsuarioMapper.Instance().GetByUsuario(claveUsr);
+                    Objetos.PermisoUsuarioObjectList pTieneUsuario =
+                        Mappers.PermisoUsuarioMapper.Instance().GetByUsuario(claveUsr);
                     Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
                     bitacora.Descripcion = "Se quitaron permisos para el usuario: " + this.lblDatos.Text;
                     bitacora.FechaOperacion = DateTime.Today;
@@ -367,10 +407,19 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                                 //se compara el permiso por persmiso que tiene el usuario
                                 //contra los permisos que no se seleccionaron
                                 //solo se quitan aquellos que el usuario deselecciono
-                                if (pTUsuario.ClavePermiso == pQuitar.ClavePermiso && pTUsuario.ClaveSubmodulo == pQuitar.ClaveSubmodulo && pQuitar.ClaveUsuario == claveUsr && pTUsuario.ClaveSistema == pQuitar.ClaveSistema)
+                                if (pTUsuario.ClavePermiso == pQuitar.ClavePermiso &&
+                                    pTUsuario.ClaveSubmodulo == pQuitar.ClaveSubmodulo &&
+                                    pQuitar.ClaveUsuario == claveUsr && pTUsuario.ClaveSistema == pQuitar.ClaveSistema)
                                 {
-                                    string descripcion = "Permiso de " + Mappers.PermisoMapper.Instance().GetOne(pQuitar.ClavePermiso).Descripcion + " para " + Mappers.SubmoduloMapper.Instance().GetOne(pQuitar.ClaveSubmodulo).Descripcion;
-                                    Mappers.PermisoUsuarioMapper.Instance().Delete(pQuitar.ClaveUsuario, pQuitar.ClaveSubmodulo, pQuitar.ClavePermiso, pQuitar.ClaveSistema);
+                                    string descripcion = "Permiso de " +
+                                                         Mappers.PermisoMapper.Instance().GetOne(pQuitar.ClavePermiso).
+                                                             Descripcion + " para " +
+                                                         Mappers.SubmoduloMapper.Instance().GetOne(
+                                                             pQuitar.ClaveSubmodulo).Descripcion;
+                                    Mappers.PermisoUsuarioMapper.Instance().Delete(pQuitar.ClaveUsuario,
+                                                                                   pQuitar.ClaveSubmodulo,
+                                                                                   pQuitar.ClavePermiso,
+                                                                                   pQuitar.ClaveSistema);
                                     bitacora.ValorActual = descripcion;
                                     Mappers.BitacoraMapper.Instance().Insert(bitacora);
                                 }
@@ -379,10 +428,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     }
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -407,8 +459,10 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             try
             {
-                Objetos.PermisoUsuarioObjectList lstPermisosAdd = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects.PermisoUsuarioObjectList();
-                Objetos.PermisoUsuarioObjectList lstPermisosDel = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects.PermisoUsuarioObjectList();
+                Objetos.PermisoUsuarioObjectList lstPermisosAdd =
+                    new BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects.PermisoUsuarioObjectList();
+                Objetos.PermisoUsuarioObjectList lstPermisosDel =
+                    new BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects.PermisoUsuarioObjectList();
 
                 try
                 {
@@ -423,7 +477,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                                 if (permiso.Checked)
                                 {
                                     //se agregan los nodos (permisos) checados y se agregan a una lista de objetos tipo PermisoUsuarios
-                                    Objetos.PermisoUsuarioObject tempPermiso = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects.PermisoUsuarioObject();
+                                    Objetos.PermisoUsuarioObject tempPermiso =
+                                        new BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects.PermisoUsuarioObject();
                                     tempPermiso.ClavePermiso = Convert.ToInt32(permiso.Name);
                                     tempPermiso.ClaveSubmodulo = Convert.ToInt32(submodulo.Name);
                                     tempPermiso.ClaveUsuario = claveUsuario;
@@ -433,7 +488,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                                 else
                                 {
                                     //se agrega los nodos (permisos) que no estan checados para quitarlos de la BD
-                                    Objetos.PermisoUsuarioObject tempPermiso = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects.PermisoUsuarioObject();
+                                    Objetos.PermisoUsuarioObject tempPermiso =
+                                        new BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects.PermisoUsuarioObject();
                                     tempPermiso.ClavePermiso = Convert.ToInt32(permiso.Name);
                                     tempPermiso.ClaveSubmodulo = Convert.ToInt32(submodulo.Name);
                                     tempPermiso.ClaveUsuario = claveUsuario;
@@ -447,17 +503,20 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     //Se agregan los permisos checados
                     this.AgregarPermisos(claveUsuario, lstPermisosAdd);
                     //se quitan los permisos no checados de la lista
-                    this.QuitarPermisos(claveUsuario, lstPermisosDel);                    
+                    this.QuitarPermisos(claveUsuario, lstPermisosDel);
                     this.Limpiar();
                     //se cargan permisos actualizados
                     this.CargarPermisos(claveUsuario);
                     MessageBox.Show("Operacion completada.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
