@@ -1,4 +1,4 @@
-锘縰sing System;
+using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
@@ -9,7 +9,7 @@ using BSD.C4.Tlaxcala.Sai.Ui.Formularios;
 namespace BSD.C4.Tlaxcala.Sai
 {
     /// <summary>
-    /// Clase que maneja los objetos globales a nivel de la aplicaci贸n
+    /// Clase que maneja los objetos globales a nivel de la aplicaci髇
     /// </summary>
     public static class Aplicacion
     {
@@ -28,7 +28,6 @@ namespace BSD.C4.Tlaxcala.Sai
         /// Apuntador hacia la instancia actual de SAIFrmComandos
         /// </summary>
         //public static SAIFrmComandos frmComandos;
-
         /// <summary>
         /// 
         /// </summary>
@@ -40,7 +39,7 @@ namespace BSD.C4.Tlaxcala.Sai
         public static SAIFrmBase frmIncidenciaActiva;
 
         /// <summary>
-        /// M茅todo para la conversion de un n煤mero hexadecimal a decimal para los colores
+        /// M閠odo para la conversion de un n鷐ero hexadecimal a decimal para los colores
         /// </summary>
         /// <param name="strHex">Codigo hexadecimal a convertir</param>
         /// <returns>Valor decimal correspondiente</returns>
@@ -50,10 +49,10 @@ namespace BSD.C4.Tlaxcala.Sai
         }
 
         /// <summary>
-        /// M茅todo para remover de un listado tipado los elementos duplicados
+        /// M閠odo para remover de un listado tipado los elementos duplicados
         /// </summary>
-        /// <param name="listaEntrada">Lista del cual ser谩n removidos los duplicados</param>
-        /// <returns>Una nueva colecci贸n depurada</returns>
+        /// <param name="listaEntrada">Lista del cual ser醤 removidos los duplicados</param>
+        /// <returns>Una nueva colecci髇 depurada</returns>
         public static List<string> removerDuplicados(List<string> listaEntrada)
         {
             var diccionario = new Dictionary<string, int>();
@@ -79,31 +78,37 @@ namespace BSD.C4.Tlaxcala.Sai
             ///<summary>
             ///</summary>
             public static int intClaveUsuario { get; set; }
+
             ///<summary>
             ///</summary>
             public static string strNombreUsuario { get; set; }
+
             ///<summary>
             ///</summary>
             public static string[] strSistemas { get; set; }
+
             ///<summary>
             ///</summary>
             public static string strSistemaActual { get; set; }
+
             ///<summary>
             ///</summary>
             public static bool? blnEsDespachador { get; set; }
+
             ///<summary>
             ///</summary>
             public static int? intClaveSistema { get; set; }
+
             ///<summary>
             ///</summary>
             public static int? intCorporacion
             {
                 get
                 {
-                    //Comprobamos que sea un despachador para poder determinar su corporaci贸n
+                    //Comprobamos que sea un despachador para poder determinar su corporaci髇
                     if (blnEsDespachador == true)
                     {
-                        //Obtenemos una instancia de la entidad usuario por corporaci贸n
+                        //Obtenemos una instancia de la entidad usuario por corporaci髇
                         var usuarioCorporacion =
                             UsuarioCorporacionMapper.Instance().GetByUsuario(intClaveUsuario);
                         if (usuarioCorporacion != null && usuarioCorporacion.Count > 0)
@@ -120,14 +125,16 @@ namespace BSD.C4.Tlaxcala.Sai
             #endregion
 
             /// <summary>
-            /// Funci贸n que determina si el usuario actual tiene permisos de LECTURA sobre el modulo specificado
+            /// Funci髇 que determina si el usuario actual tiene permisos de LECTURA sobre el modulo specificado
             /// </summary>
-            /// <param name="intSubModulo">M贸dulo sobre el cual se consultan los permisos</param>
+            /// <param name="intSubModulo">M骴ulo sobre el cual se consultan los permisos</param>
             /// <returns>verdadero o falso</returns>
             public static bool blnPuedeLeer(int intSubModulo)
             {
-                //Obtenemos una lista de permisos para el m贸dulo definido del sistema en el cual fue logeado
-                var permisoObjectList = PermisoMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_OBTENERPERMISOS, intClaveUsuario, intSubModulo, ObtenerClaveSistema()));
+                //Obtenemos una lista de permisos para el m骴ulo definido del sistema en el cual fue logeado
+                var permisoObjectList =
+                    PermisoMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_OBTENERPERMISOS, intClaveUsuario,
+                                                                         intSubModulo, ObtenerClaveSistema()));
                 foreach (var o in permisoObjectList)
                 {
                     if (o.Valor.Equals(2))
@@ -138,14 +145,16 @@ namespace BSD.C4.Tlaxcala.Sai
             }
 
             /// <summary>
-            /// Funci贸n que determina si el usuario actual tiene permisos de ESCRIBIR sobre el modulo specificado
+            /// Funci髇 que determina si el usuario actual tiene permisos de ESCRIBIR sobre el modulo specificado
             /// </summary>
-            /// <param name="intSubModulo">M贸dulo sobre el cual se consultan los permisos</param>
+            /// <param name="intSubModulo">M骴ulo sobre el cual se consultan los permisos</param>
             /// <returns>verdadero o falso</returns>
             public static bool blnPuedeEscribir(int intSubModulo)
             {
-                //Obtenemos una lista de permisos para el m贸dulo definido del sistema en el cual fue logeado
-                var permisoObjectList = PermisoMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_OBTENERPERMISOS, intClaveUsuario, intSubModulo, ObtenerClaveSistema()));
+                //Obtenemos una lista de permisos para el m骴ulo definido del sistema en el cual fue logeado
+                var permisoObjectList =
+                    PermisoMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_OBTENERPERMISOS, intClaveUsuario,
+                                                                         intSubModulo, ObtenerClaveSistema()));
                 foreach (var o in permisoObjectList)
                 {
                     if (o.Valor.Equals(4))
@@ -183,16 +192,16 @@ namespace BSD.C4.Tlaxcala.Sai
                     case "089":
                         intClaveSistema = 1;
                         break;
-                    //default:
-                    //    intClaveSistema = null;
-                    //    break;
+                        //default:
+                        //    intClaveSistema = null;
+                        //    break;
                 }
                 return intClaveSistema.ToString();
             }
         }
 
         /// <summary>
-        /// Clase que implementa m茅todos de cifrado del tipo MD5
+        /// Clase que implementa m閠odos de cifrado del tipo MD5
         /// </summary>
         public class CzSecurity
         {
@@ -202,7 +211,8 @@ namespace BSD.C4.Tlaxcala.Sai
             /// Constructor
             /// </summary>
             public CzSecurity()
-            { }
+            {
+            }
 
             #endregion
 
@@ -224,7 +234,7 @@ namespace BSD.C4.Tlaxcala.Sai
             }
 
             /// <summary>
-            ///Set, string, Contrase帽a del usuario
+            ///Set, string, Contrase馻 del usuario
             /// </summary>
             public string Password
             {
@@ -232,7 +242,7 @@ namespace BSD.C4.Tlaxcala.Sai
             }
 
             /// <summary>
-            /// get,string, Contrase帽a cifrada
+            /// get,string, Contrase馻 cifrada
             /// </summary>
             public string PassWordCifrado()
             {
@@ -314,12 +324,12 @@ namespace BSD.C4.Tlaxcala.Sai
     {
         ///<summary>
         ///</summary>
-        LIBRE = 1,    //Unidad que puede ser asignada a una incidencia (VERDE)
+        LIBRE = 1, //Unidad que puede ser asignada a una incidencia (VERDE)
         ///<summary>
         ///</summary>
-        DESPACHADA = 2,   //Unidad que va en camino a atender la incidencia (ROJO)
+        DESPACHADA = 2, //Unidad que va en camino a atender la incidencia (ROJO)
         ///<summary>
         ///</summary>
-        LLEGADA = 3   //Unidad que se encuentra ya en el lugar de la incidencia 
+        LLEGADA = 3 //Unidad que se encuentra ya en el lugar de la incidencia 
     }
 }

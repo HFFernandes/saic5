@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Forms;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
@@ -15,7 +15,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         public SAIFrmAgregarUnidad()
         {
             InitializeComponent();
-            
+
             saiTxtUnidad.Focus();
             cmdAceptar.Focus();
         }
@@ -28,7 +28,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 {
                     if (SAIProveedorValidacion.ValidarCamposRequeridos(this))
                     {
-                        var unidad = UnidadMapper.Instance().GetOneBySQLQuery(string.Format(ID.SQL_VERIFICARUNIDAD, saiTxtUnidad.Text.Trim()));
+                        var unidad =
+                            UnidadMapper.Instance().GetOneBySQLQuery(string.Format(ID.SQL_VERIFICARUNIDAD,
+                                                                                   saiTxtUnidad.Text.Trim()));
                         if (unidad == null)
                         {
                             if (Aplicacion.UsuarioPersistencia.intCorporacion != null)
@@ -36,7 +38,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 UnidadMapper.Instance().Insert(new Unidad
                                                                    {
                                                                        Activo = true,
-                                                                       ClaveCorporacion = Aplicacion.UsuarioPersistencia.intCorporacion.Value,
+                                                                       ClaveCorporacion =
+                                                                           Aplicacion.UsuarioPersistencia.intCorporacion
+                                                                           .Value,
                                                                        Codigo = saiTxtUnidad.Text
                                                                    });
 
@@ -45,7 +49,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             }
                         }
                         else
-                            throw new SAIExcepcion("La unidad ya existe para su corporación. Probablemente no este activa, consulte con el Administrador.");
+                            throw new SAIExcepcion(
+                                "La unidad ya existe para su corporaci�n. Probablemente no este activa, consulte con el Administrador.");
                     }
                     else
                         throw new SAIExcepcion("Existen campos requeridos vacios.");

@@ -1,9 +1,8 @@
-﻿using BSD.C4.Tlaxcala.Sai.Excepciones;
+using BSD.C4.Tlaxcala.Sai.Excepciones;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 namespace PruebasUnit
 {
-    
-    
     /// <summary>
     ///This is a test class for SAIExcepcionPruebasUnitarias and is intended
     ///to contain all SAIExcepcionPruebasUnitarias Unit Tests
@@ -11,8 +10,6 @@ namespace PruebasUnit
     [TestClass()]
     public class SAIExcepcionPruebasUnitarias
     {
-
-
         private TestContext testContextInstance;
 
         /// <summary>
@@ -21,17 +18,12 @@ namespace PruebasUnit
         ///</summary>
         public TestContext TestContext
         {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
+            get { return testContextInstance; }
+            set { testContextInstance = value; }
         }
 
         #region Additional test attributes
+
         // 
         //You can use the following additional attributes as you write your tests:
         //
@@ -59,8 +51,8 @@ namespace PruebasUnit
         //{
         //}
         //
-        #endregion
 
+        #endregion
 
         /// <summary>
         ///A test for SAIExcepcion Constructor

@@ -1,4 +1,4 @@
-﻿using System.Timers;
+using System.Timers;
 using System.Windows.Forms;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
@@ -22,28 +22,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         ///</summary>
         public double Intervalo
         {
-            get
-            {
-                return this.timer.Interval;
-            }
-            set
-            {
-                this.timer.Interval = (int)value;
-            }
+            get { return this.timer.Interval; }
+            set { this.timer.Interval = (int) value; }
         }
 
         ///<summary>
         ///</summary>
         public int Velocidad
         {
-            get
-            {
-                return this.velocidad;
-            }
-            set
-            {
-                this.velocidad = value;
-            }
+            get { return this.velocidad; }
+            set { this.velocidad = value; }
         }
 
         #endregion
@@ -55,7 +43,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             InitializeComponent();
 
             this.esActivo = false;
-            this.timer = new System.Timers.Timer { Interval = ((int)33.0) };
+            this.timer = new System.Timers.Timer {Interval = ((int) 33.0)};
             this.timer.Elapsed += this.HandleTick;
             this.posicionX = 0;
             this.Velocidad = 1;
@@ -96,7 +84,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             graphics.DrawImage(base.Image, this.posicionX, 0, base.Size.Width, base.Size.Height);
             if (this.posicionX != 0)
             {
-                graphics.DrawImage(base.Image, (this.posicionX - base.Size.Width) + 1, 0, base.Size.Width, base.Size.Height);
+                graphics.DrawImage(base.Image, (this.posicionX - base.Size.Width) + 1, 0, base.Size.Width,
+                                   base.Size.Height);
             }
         }
     }

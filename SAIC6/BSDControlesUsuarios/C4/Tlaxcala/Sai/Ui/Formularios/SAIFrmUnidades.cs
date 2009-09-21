@@ -1,4 +1,4 @@
-锘縰sing System;
+using System;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using XtremeReportControl;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
@@ -32,7 +32,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 try
                 {
-                    //Obtenemos la colecci贸n de unidades
+                    //Obtenemos la colecci髇 de unidades
                     var unidades = UnidadMapper.Instance().GetAll();
                     foreach (var unidad in unidades)
                     {
@@ -40,7 +40,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         _registroActual = axUnidadesDispuestasOcupadas.Records.Insert(0);
                         _item = _registroActual.AddItem(unidad.Clave);
                         _item = _registroActual.AddItem(unidad.Codigo);
-                        _item = _registroActual.AddItem(CorporacionMapper.Instance().GetOne(unidad.ClaveCorporacion).Descripcion);
+                        _item =
+                            _registroActual.AddItem(
+                                CorporacionMapper.Instance().GetOne(unidad.ClaveCorporacion).Descripcion);
                         _item = _registroActual.AddItem(unidad.Activo ? "Si" : "No");
                     }
 
@@ -63,7 +65,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         }
 
         /// <summary>
-        /// M茅todo para la inicializaci贸n del grid y la definici贸n de sus columnas
+        /// M閠odo para la inicializaci髇 del grid y la definici髇 de sus columnas
         /// </summary>
         private void ConfigurarGrid()
         {
@@ -73,7 +75,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             _columna = axUnidadesDispuestasOcupadas.Columns.Add(1, "Unidad", 90, true);
             _columna.Sortable = false;
 
-            _columna = axUnidadesDispuestasOcupadas.Columns.Add(2, "Corporaci贸n", 100, true);
+            _columna = axUnidadesDispuestasOcupadas.Columns.Add(2, "Corporaci髇", 100, true);
             _columna = axUnidadesDispuestasOcupadas.Columns.Add(3, "Activa", 50, false);
         }
     }

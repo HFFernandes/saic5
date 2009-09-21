@@ -1,14 +1,12 @@
-﻿using System;
+using System;
 using System.Web;
 
 namespace ConsultaRemota
 {
     public class Global : HttpApplication
     {
-
         protected void Application_Start(object sender, EventArgs e)
         {
-
         }
 
         protected void Session_Start(object sender, EventArgs e)
@@ -24,11 +22,11 @@ namespace ConsultaRemota
             var ruta = AppDomain.CurrentDomain.BaseDirectory;
             ruta += "data\\SAI066.xml";
 
-            var modelo = new Korzh.EasyQuery.DataModel { UseResourcesForOperators = true };
+            var modelo = new Korzh.EasyQuery.DataModel {UseResourcesForOperators = true};
             modelo.LoadFromFile(ruta);
             Session["DataModel"] = modelo;
 
-            var consulta = new Korzh.EasyQuery.Query { Model = modelo };
+            var consulta = new Korzh.EasyQuery.Query {Model = modelo};
             consulta.Formats.DateFormat = "#MM-dd-yyyy#";
             consulta.Formats.DateTimeFormat = "#MM-dd-yyyy hh:mm:ss#";
             consulta.Formats.QuoteBool = false;
@@ -42,27 +40,22 @@ namespace ConsultaRemota
 
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
         {
-
         }
 
         protected void Application_Error(object sender, EventArgs e)
         {
-
         }
 
         protected void Session_End(object sender, EventArgs e)
         {
-
         }
 
         protected void Application_End(object sender, EventArgs e)
         {
-
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -40,7 +40,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             DataTable catLocalidades = new DataTable("catLocalidades");
 
             try
-            {                
+            {
                 catLocalidades.Columns.Add("Clave", Type.GetType("System.Int32"));
                 catLocalidades.Columns.Add("ClaveMunicipio", Type.GetType("System.Int32"));
                 catLocalidades.Columns.Add("Municipio", Type.GetType("System.String"));
@@ -51,8 +51,12 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
                 foreach (Entidades.Localidad localidad in lstLocalidad)
                 {
-                    object[] registro = new object[] { localidad.Clave, localidad.ClaveMunicipio, 
-                        Mappers.MunicipioMapper.Instance().GetOne(localidad.ClaveMunicipio).Nombre, localidad.ClaveLocalidadCartografia, localidad.Nombre };
+                    object[] registro = new object[]
+                                            {
+                                                localidad.Clave, localidad.ClaveMunicipio,
+                                                Mappers.MunicipioMapper.Instance().GetOne(localidad.ClaveMunicipio).
+                                                    Nombre, localidad.ClaveLocalidadCartografia, localidad.Nombre
+                                            };
                     catLocalidades.Rows.Add(registro);
                 }
 
@@ -61,7 +65,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 this.gvLocalidades.Columns["ClaveMunicipio"].Visible = false;
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -78,10 +83,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     this.ddlEstado.ValueMember = "Clave";
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -98,10 +106,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     this.ddlMunicipio.ValueMember = "Clave";
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         #region ABC
@@ -113,13 +124,18 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             try
             {
-                try 
+                try
                 {
                     Entidades.Localidad newLocalidad = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Localidad();
-                    newLocalidad.Clave = this.txtClaveLocalidadCartografia.Text != string.Empty ? Convert.ToInt32(this.txtClaveLocalidadCartografia.Text) : 0;
+                    newLocalidad.Clave = this.txtClaveLocalidadCartografia.Text != string.Empty
+                                             ? Convert.ToInt32(this.txtClaveLocalidadCartografia.Text)
+                                             : 0;
                     newLocalidad.ClaveMunicipio = Convert.ToInt32(this.ddlMunicipio.SelectedValue);
                     newLocalidad.Nombre = this.saiTxtNombre.Text;
-                    newLocalidad.ClaveLocalidadCartografia = this.txtClaveLocalidadCartografia.Text != string.Empty ? Convert.ToInt32(this.txtClaveLocalidadCartografia.Text) : 0;
+                    newLocalidad.ClaveLocalidadCartografia = this.txtClaveLocalidadCartografia.Text != string.Empty
+                                                                 ? Convert.ToInt32(
+                                                                       this.txtClaveLocalidadCartografia.Text)
+                                                                 : 0;
                     Mappers.LocalidadMapper.Instance().Insert(newLocalidad);
 
                     //Agrega operacion a bitacora
@@ -133,10 +149,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     Mappers.BitacoraMapper.Instance().Insert(bitacora);
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -146,13 +165,21 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             try
             {
-                try 
+                try
                 {
-                    Entidades.Localidad updLocalidad = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Localidad(Convert.ToInt32(this.gvLocalidades.Rows[this.ObtenerIndiceSeleccionado()].Cells["Clave"].Value));
-                    updLocalidad.Clave = this.txtClaveLocalidadCartografia.Text != string.Empty ? Convert.ToInt32(this.txtClaveLocalidadCartografia.Text) : 0;
+                    Entidades.Localidad updLocalidad =
+                        new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Localidad(
+                            Convert.ToInt32(
+                                this.gvLocalidades.Rows[this.ObtenerIndiceSeleccionado()].Cells["Clave"].Value));
+                    updLocalidad.Clave = this.txtClaveLocalidadCartografia.Text != string.Empty
+                                             ? Convert.ToInt32(this.txtClaveLocalidadCartografia.Text)
+                                             : 0;
                     updLocalidad.ClaveMunicipio = Convert.ToInt32(this.ddlMunicipio.SelectedValue);
                     updLocalidad.Nombre = this.saiTxtNombre.Text;
-                    updLocalidad.ClaveLocalidadCartografia = this.txtClaveLocalidadCartografia.Text != string.Empty ? Convert.ToInt32(this.txtClaveLocalidadCartografia.Text) : 0;
+                    updLocalidad.ClaveLocalidadCartografia = this.txtClaveLocalidadCartografia.Text != string.Empty
+                                                                 ? Convert.ToInt32(
+                                                                       this.txtClaveLocalidadCartografia.Text)
+                                                                 : 0;
                     Mappers.LocalidadMapper.Instance().Save(updLocalidad);
 
                     Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
@@ -161,16 +188,21 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     bitacora.NombreCatalogo = "Localidades";
                     bitacora.Operacion = "UPDATE";
                     bitacora.ValorActual = updLocalidad.Nombre;
-                    bitacora.ValorAnterior = Convert.ToString(this.gvLocalidades.Rows[this.ObtenerIndiceSeleccionado()].Cells["Localidad"].Value);
+                    bitacora.ValorAnterior =
+                        Convert.ToString(
+                            this.gvLocalidades.Rows[this.ObtenerIndiceSeleccionado()].Cells["Localidad"].Value);
                     bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
 
                     Mappers.BitacoraMapper.Instance().Insert(bitacora);
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -180,12 +212,16 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             try
             {
-                try 
+                try
                 {
-                    Mappers.LocalidadMapper.Instance().Delete(Convert.ToInt32(this.gvLocalidades.Rows[this.ObtenerIndiceSeleccionado()].Cells["Clave"].Value));
+                    Mappers.LocalidadMapper.Instance().Delete(
+                        Convert.ToInt32(this.gvLocalidades.Rows[this.ObtenerIndiceSeleccionado()].Cells["Clave"].Value));
 
                     Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
-                    bitacora.Descripcion = "Se elimino la Localidad: " + Convert.ToString(this.gvLocalidades.Rows[this.ObtenerIndiceSeleccionado()].Cells["Localidad"].Value);
+                    bitacora.Descripcion = "Se elimino la Localidad: " +
+                                           Convert.ToString(
+                                               this.gvLocalidades.Rows[this.ObtenerIndiceSeleccionado()].Cells[
+                                                   "Localidad"].Value);
                     bitacora.FechaOperacion = DateTime.Today;
                     bitacora.NombreCatalogo = "Localidades";
                     bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
@@ -194,10 +230,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     Mappers.BitacoraMapper.Instance().Insert(bitacora);
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -214,7 +253,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             this.ddlMunicipio.SelectedIndex = -1;
             this.ddlEstado.SelectedIndex = 0;
             this.saiTxtNombre.Text = string.Empty;
-            this.btnAgregar.Enabled = true;            
+            this.btnAgregar.Enabled = true;
         }
 
         #endregion
@@ -224,7 +263,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// </summary>
         /// <returns>Indice</returns>
         private int ObtenerIndiceSeleccionado()
-        { return this.gvLocalidades.CurrentCellAddress.Y; }
+        {
+            return this.gvLocalidades.CurrentCellAddress.Y;
+        }
 
         /// <summary>
         /// Valida que los campos esten correctos para poder Agregar y actualiza el Datagrid
@@ -247,10 +288,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     }
                 }
                 else
-                { throw new SAIExcepcion("Seleccione un Municipio."); }
+                {
+                    throw new SAIExcepcion("Seleccione un Municipio.");
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -280,18 +324,27 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 {
                     if (this.ObtenerIndiceSeleccionado() > -1)
                     {
-                        this.saiTxtNombre.Text = Convert.ToString(this.gvLocalidades.Rows[this.ObtenerIndiceSeleccionado()].Cells["Localidad"].Value);
-                        this.ddlMunicipio.SelectedValue = this.gvLocalidades.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveMunicipio"].Value;
+                        this.saiTxtNombre.Text =
+                            Convert.ToString(
+                                this.gvLocalidades.Rows[this.ObtenerIndiceSeleccionado()].Cells["Localidad"].Value);
+                        this.ddlMunicipio.SelectedValue =
+                            this.gvLocalidades.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveMunicipio"].Value;
                         //this.ddlEstado.SelectedIndex = 0;
-                        this.txtClaveLocalidadCartografia.Text = Convert.ToString(this.gvLocalidades.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveLocalidadCartografia"].Value);
+                        this.txtClaveLocalidadCartografia.Text =
+                            Convert.ToString(
+                                this.gvLocalidades.Rows[this.ObtenerIndiceSeleccionado()].Cells[
+                                    "ClaveLocalidadCartografia"].Value);
                         this.btnAgregar.Enabled = false;
                     }
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>

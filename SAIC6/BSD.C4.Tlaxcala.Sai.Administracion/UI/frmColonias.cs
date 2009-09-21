@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -40,17 +40,20 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             try
             {
-                try 
+                try
                 {
                     this.ddlEstado.DataSource = Mappers.EstadoMapper.Instance().GetAll();
                     this.ddlEstado.DisplayMember = "Nombre";
                     this.ddlEstado.ValueMember = "Clave";
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -61,7 +64,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             try
             {
-                try 
+                try
                 {
                     Entidades.Localidad localidad = Mappers.LocalidadMapper.Instance().GetOne(idlocalidad);
                     Entidades.Municipio municipio = Mappers.MunicipioMapper.Instance().GetOne(localidad.ClaveMunicipio);
@@ -72,11 +75,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     this.ddlMunicipio.ValueMember = "Clave";
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
-
+            {
+            }
         }
 
         /// <summary>
@@ -100,9 +105,15 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
                     foreach (Entidades.Colonia colonia in lstColonias)
                     {
-                        object[] registro = new object[] { colonia.Clave, colonia.ClaveLocalidad, 
-                        Mappers.LocalidadMapper.Instance().GetOne(colonia.ClaveLocalidad).Nombre, colonia.Nombre,
-                        colonia.ClaveCodigoPostal, Mappers.CodigoPostalMapper.Instance().GetOne(colonia.ClaveCodigoPostal.Value).Valor };
+                        object[] registro = new object[]
+                                                {
+                                                    colonia.Clave, colonia.ClaveLocalidad,
+                                                    Mappers.LocalidadMapper.Instance().GetOne(colonia.ClaveLocalidad).
+                                                        Nombre, colonia.Nombre,
+                                                    colonia.ClaveCodigoPostal,
+                                                    Mappers.CodigoPostalMapper.Instance().GetOne(
+                                                        colonia.ClaveCodigoPostal.Value).Valor
+                                                };
                         catColonias.Rows.Add(registro);
                     }
 
@@ -112,10 +123,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     this.gvColonias.Columns["ClaveCodigo"].Visible = false;
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -123,15 +137,15 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// </summary>
         private void LlenarLocalidad()
         {
-            try 
+            try
             {
                 this.ddlLocalidad.DataSource = Mappers.LocalidadMapper.Instance().GetAll();
                 this.ddlLocalidad.DisplayMember = "Nombre";
                 this.ddlLocalidad.ValueMember = "Clave";
-
             }
             catch
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -154,14 +168,18 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     this.ddlCodigoPostal.ValueMember = "Valor";
                     this.ddlCodigoPostal.DisplayMember = "Descripcion";
                 }
-                catch(Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                catch (Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         #region ABC
+
         /// <summary>
         /// Agrega una nueva Colonia
         /// </summary>
@@ -169,7 +187,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             try
             {
-                try 
+                try
                 {
                     Entidades.Colonia newColonia = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Colonia();
                     newColonia.Clave = Convert.ToInt32(this.saiClave.Text);
@@ -196,11 +214,15 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     Mappers.BitacoraMapper.Instance().Insert(bitacora);
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
+
         /// <summary>
         /// Modifica datos de una Colonia
         /// </summary>
@@ -208,11 +230,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             try
             {
-                try 
+                try
                 {
-                    int selectedColonia = Convert.ToInt32(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveCartografia"].Value);
+                    int selectedColonia =
+                        Convert.ToInt32(
+                            this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveCartografia"].Value);
                     Entidades.Colonia updColonia = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Colonia(selectedColonia);
-                    updColonia.Clave = Convert .ToInt32(this.saiClave.Text);
+                    updColonia.Clave = Convert.ToInt32(this.saiClave.Text);
                     updColonia.ClaveLocalidad = Convert.ToInt32(this.ddlLocalidad.SelectedValue);
                     updColonia.Nombre = this.saiTxtNombre.Text;
 
@@ -233,17 +257,22 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     bitacora.NombreCatalogo = "Colonias";
                     bitacora.Operacion = "UPDATE";
                     bitacora.ValorActual = this.saiTxtNombre.Text;
-                    bitacora.ValorAnterior = Convert.ToString(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["Nombre"].Value);
+                    bitacora.ValorAnterior =
+                        Convert.ToString(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["Nombre"].Value);
                     bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
 
                     Mappers.BitacoraMapper.Instance().Insert(bitacora);
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
+
         /// <summary>
         /// Elimina una colonia existente
         /// </summary>
@@ -251,12 +280,17 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             try
             {
-                try 
+                try
                 {
-                    Mappers.ColoniaMapper.Instance().Delete(Convert.ToInt32(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveCartografia"].Value));
+                    Mappers.ColoniaMapper.Instance().Delete(
+                        Convert.ToInt32(
+                            this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveCartografia"].Value));
 
                     Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
-                    bitacora.Descripcion = "Se elimino la colonia: " + Convert.ToString(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["Nombre"].Value);
+                    bitacora.Descripcion = "Se elimino la colonia: " +
+                                           Convert.ToString(
+                                               this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["Nombre"].
+                                                   Value);
                     bitacora.FechaOperacion = DateTime.Today;
                     bitacora.NombreCatalogo = "Colonias";
                     bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
@@ -265,11 +299,15 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     Mappers.BitacoraMapper.Instance().Insert(bitacora);
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
+
         /// <summary>
         /// Limpia los controles del formulario de Colonias
         /// </summary>
@@ -295,7 +333,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// </summary>
         /// <returns>Inidce</returns>
         private int ObtenerIndiceSeleccionado()
-        { return this.gvColonias.CurrentCellAddress.Y; }
+        {
+            return this.gvColonias.CurrentCellAddress.Y;
+        }
 
         /// <summary>
         /// Llama el metodo Limpiar
@@ -318,7 +358,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// </summary>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("¿Esta seguro de eliminar la Colonia?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (
+                MessageBox.Show("�Esta seguro de eliminar la Colonia?", "Eliminar", MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 this.Eliminar();
                 this.LlenarGrid();
@@ -353,6 +395,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 this.Limpiar();
             }
         }
+
         /// <summary>
         /// Obtiene datos de una colonia seleccionada
         /// </summary>
@@ -364,21 +407,33 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 {
                     if (this.ObtenerIndiceSeleccionado() > -1)
                     {
-                        this.saiClave.Text = Convert.ToString(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveCartografia"].Value);
-                        this.saiTxtNombre.Text = Convert.ToString(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["Nombre"].Value);
-                        this.SeleccionarComboItem(Convert.ToInt32(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveCodigo"].Value));
-                        this.ddlLocalidad.SelectedValue = this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveLocalidad"].Value;
-                        this.LlenarMunicipio(Convert.ToInt32(this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveLocalidad"].Value));
+                        this.saiClave.Text =
+                            Convert.ToString(
+                                this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveCartografia"].Value);
+                        this.saiTxtNombre.Text =
+                            Convert.ToString(
+                                this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["Nombre"].Value);
+                        this.SeleccionarComboItem(
+                            Convert.ToInt32(
+                                this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveCodigo"].Value));
+                        this.ddlLocalidad.SelectedValue =
+                            this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveLocalidad"].Value;
+                        this.LlenarMunicipio(
+                            Convert.ToInt32(
+                                this.gvColonias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveLocalidad"].Value));
                         this.btnModificar.Enabled = true;
                         this.btnEliminar.Visible = true;
                         this.btnAgregar.Enabled = false;
                     }
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -391,12 +446,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 this.txtCP.Visible = true;
                 this.lblOtro.Visible = true;
             }
-            else 
+            else
             {
                 this.txtCP.Visible = false;
                 this.lblOtro.Visible = false;
             }
         }
+
         /// <summary>
         /// Obtiene valor del Codigo postal seleccionado
         /// </summary>
@@ -404,7 +460,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         private object ObtenerValor()
         {
             if (this.ddlCodigoPostal.SelectedItem != null)
-                return ((Utilerias.ComboItem)this.ddlCodigoPostal.SelectedItem).Valor;
+                return ((Utilerias.ComboItem) this.ddlCodigoPostal.SelectedItem).Valor;
             else
                 return 0;
         }
@@ -434,12 +490,12 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             try
             {
-                try 
+                try
                 {
                     bool existe = false;
                     int max = 0;
                     Entidades.CodigoPostalList lstCodigoPostal = Mappers.CodigoPostalMapper.Instance().GetAll();
-                    foreach (Entidades.CodigoPostal codigoPostal in lstCodigoPostal) 
+                    foreach (Entidades.CodigoPostal codigoPostal in lstCodigoPostal)
                     {
                         if (codigoPostal.Valor == cp)
                         {
@@ -448,17 +504,18 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                             break;
                         }
 
-                        if(codigoPostal.Clave > max)
+                        if (codigoPostal.Clave > max)
                             max = codigoPostal.Clave;
                     }
-                    
+
                     if (!existe) //Si no existe CP en el catalogo loa grega
                     {
                         Entidades.CodigoPostal newCP = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.CodigoPostal();
-                        newCP.Clave = max + 1; //Genera id para el codigo postal, [se hace asi de esta forma porque no se establecio un identity]
+                        newCP.Clave = max + 1;
+                            //Genera id para el codigo postal, [se hace asi de esta forma porque no se establecio un identity]
                         newCP.Valor = cp;
                         Mappers.CodigoPostalMapper.Instance().Insert(newCP);
-                        
+
                         Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
                         bitacora.Descripcion = "Se agrego el Codigo Postal: " + newCP.Valor;
                         bitacora.FechaOperacion = DateTime.Today;
@@ -473,10 +530,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     return max;
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
             return 0;
         }
 

@@ -1,4 +1,4 @@
-Ôªøusing System;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -14,14 +14,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
     /// </summary>
     public partial class SAIFrmMapa : Form
     {
-        CMapa mapXML;
+        private CMapa mapXML;
         private readonly string XMLconf;
         private readonly string path;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="XMLconf">archivo xml que almacena la configuraci√≥n</param>
+        /// <param name="XMLconf">archivo xml que almacena la configuraciÛn</param>
         /// <param name="path">ruta del archivo</param>
         public SAIFrmMapa(string XMLconf, string path)
         {
@@ -35,7 +35,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="XMLconf">archivo xml que almacena la configuraci√≥n</param>
+        /// <param name="XMLconf">archivo xml que almacena la configuraciÛn</param>
         /// <param name="path">ruta del archivo</param>
         /// <param name="width">ancho en pixeles del formulario</param>
         /// <param name="height">alto en pixeles del formulario</param>
@@ -55,11 +55,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             mapa.ZoomFull();
             mapa.Refresh();
 
-            btnLeyenda_Click(sender,e);
+            btnLeyenda_Click(sender, e);
         }
 
         /// <summary>
-        /// M√©todo que establece las n capas que deber√° presentar el control
+        /// MÈtodo que establece las n capas que deber· presentar el control
         /// </summary>
         private void AgregarCapas()
         {
@@ -119,7 +119,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
                 else
                 {
-                    MessageBox.Show("Ocurri√≥ un error durante la lectura el archivo XML", "Error al cargar mapa");
+                    MessageBox.Show("OcurriÛ un error durante la lectura el archivo XML", "Error al cargar mapa");
                 }
             }
             catch (Exception ex)
@@ -134,7 +134,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         }
 
         /// <summary>
-        /// M√©todo para ubicar el mapa en la capa de colonias con el ID pasado
+        /// MÈtodo para ubicar el mapa en la capa de colonias con el ID pasado
         /// </summary>
         /// <param name="id">Identificador de la colonia</param>
         public void Colonia(int id)
@@ -170,7 +170,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         }
 
         /// <summary>
-        /// M√©todo para ubicar el mapa en la capa de cp con el ID pasado
+        /// MÈtodo para ubicar el mapa en la capa de cp con el ID pasado
         /// </summary>
         /// <param name="id">Identificador del cp</param>
         public void CP(int id)
@@ -206,7 +206,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         }
 
         /// <summary>
-        /// M√©todo para ubicar el mapa en la capa de municipios con el ID pasado
+        /// MÈtodo para ubicar el mapa en la capa de municipios con el ID pasado
         /// </summary>
         /// <param name="id">Identificador del municipio</param>
         public void Municipio(int id)
@@ -242,7 +242,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         }
 
         /// <summary>
-        /// M√©todo para ubicar el mapa en la capa de localidades con el ID pasado
+        /// MÈtodo para ubicar el mapa en la capa de localidades con el ID pasado
         /// </summary>
         /// <param name="id">Identificador de la localidad</param>
         public void Localidad(int id)
@@ -258,7 +258,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     mapa.Extent = state.RecordExtent;
                     mapa.MapShapes.Clear();
                     var shape = mapa.MapShapes.Add(state.Shape);
-                    var s = new Symbol { FillStyle = FillStyle.Invisible, LineColor = Color.Red, Size = 17 };
+                    var s = new Symbol {FillStyle = FillStyle.Invisible, LineColor = Color.Red, Size = 17};
                     shape.Symbol = s;
                     mapa.Refresh();
                 }
@@ -275,17 +275,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             if (id_colonia > 0)
                 Colonia(id_colonia);
+            else if (cp > 0)
+                CP(cp);
+            else if (id_localidad > 0)
+                Localidad(id_localidad);
+            else if (id_municipio > 0)
+                Municipio(id_municipio);
             else
-                if (cp > 0)
-                    CP(cp);
-                else
-                    if (id_localidad > 0)
-                        Localidad(id_localidad);
-                    else
-                        if (id_municipio > 0)
-                            Municipio(id_municipio);
-                        else
-                            CentrarEstado();
+                CentrarEstado();
         }
 
         public void CentrarEstado()
@@ -386,7 +383,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void ActualizaLbl(bool flag)
         {
-            lblUpdate.Location = new System.Drawing.Point(Size.Width / 2, Size.Height / 2);
+            lblUpdate.Location = new System.Drawing.Point(Size.Width/2, Size.Height/2);
             lblUpdate.Visible = flag;
         }
 

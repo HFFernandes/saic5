@@ -29,8 +29,11 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SAIFrmAltaDatosPersonaExtraviada));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grpExtravio = new System.Windows.Forms.GroupBox();
+            this.tbComandos = new System.Windows.Forms.ToolStrip();
+            this.btnEliminarRegistro = new System.Windows.Forms.ToolStripButton();
             this.dgvPersonaExtraviada = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDataGridView(this.components);
             this.Clave = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Folio = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,18 +58,41 @@
             this.Destino = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Caracteristicas = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpExtravio.SuspendLayout();
+            this.tbComandos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonaExtraviada)).BeginInit();
             this.SuspendLayout();
             // 
             // grpExtravio
             // 
+            this.grpExtravio.Controls.Add(this.tbComandos);
             this.grpExtravio.Controls.Add(this.dgvPersonaExtraviada);
-            this.grpExtravio.Location = new System.Drawing.Point(12, 12);
+            this.grpExtravio.Location = new System.Drawing.Point(2, 6);
             this.grpExtravio.Name = "grpExtravio";
-            this.grpExtravio.Size = new System.Drawing.Size(746, 182);
-            this.grpExtravio.TabIndex = 20;
+            this.grpExtravio.Size = new System.Drawing.Size(765, 182);
+            this.grpExtravio.TabIndex = 0;
             this.grpExtravio.TabStop = false;
             this.grpExtravio.Text = "Extravío de Persona";
+            // 
+            // tbComandos
+            // 
+            this.tbComandos.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.tbComandos.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnEliminarRegistro});
+            this.tbComandos.Location = new System.Drawing.Point(3, 16);
+            this.tbComandos.Name = "tbComandos";
+            this.tbComandos.Size = new System.Drawing.Size(759, 25);
+            this.tbComandos.TabIndex = 0;
+            this.tbComandos.Text = "toolStrip1";
+            // 
+            // btnEliminarRegistro
+            // 
+            this.btnEliminarRegistro.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnEliminarRegistro.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminarRegistro.Image")));
+            this.btnEliminarRegistro.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEliminarRegistro.Name = "btnEliminarRegistro";
+            this.btnEliminarRegistro.Size = new System.Drawing.Size(23, 22);
+            this.btnEliminarRegistro.ToolTipText = "Eliminar el registro actual.";
+            this.btnEliminarRegistro.Click += new System.EventHandler(this.btnEliminarRegistro_Click);
             // 
             // dgvPersonaExtraviada
             // 
@@ -105,12 +131,13 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvPersonaExtraviada.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvPersonaExtraviada.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dgvPersonaExtraviada.Location = new System.Drawing.Point(3, 16);
+            this.dgvPersonaExtraviada.Location = new System.Drawing.Point(3, 44);
             this.dgvPersonaExtraviada.MultiSelect = false;
             this.dgvPersonaExtraviada.Name = "dgvPersonaExtraviada";
             this.dgvPersonaExtraviada.RowHeadersVisible = false;
-            this.dgvPersonaExtraviada.Size = new System.Drawing.Size(737, 152);
-            this.dgvPersonaExtraviada.TabIndex = 0;
+            this.dgvPersonaExtraviada.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvPersonaExtraviada.Size = new System.Drawing.Size(759, 132);
+            this.dgvPersonaExtraviada.TabIndex = 1;
             this.dgvPersonaExtraviada.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvPersonaExtraviada_KeyDown);
             // 
             // Clave
@@ -263,6 +290,9 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SAIFrmAltaDatosPersonaExtraviada_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SAIFrmAltaDatosPersonaExtraviada_KeyDown);
             this.grpExtravio.ResumeLayout(false);
+            this.grpExtravio.PerformLayout();
+            this.tbComandos.ResumeLayout(false);
+            this.tbComandos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonaExtraviada)).EndInit();
             this.ResumeLayout(false);
 
@@ -294,5 +324,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Vestimenta;
         private System.Windows.Forms.DataGridViewTextBoxColumn Destino;
         private System.Windows.Forms.DataGridViewTextBoxColumn Caracteristicas;
+        private System.Windows.Forms.ToolStrip tbComandos;
+        private System.Windows.Forms.ToolStripButton btnEliminarRegistro;
     }
 }

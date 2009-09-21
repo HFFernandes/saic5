@@ -1,4 +1,4 @@
-Ôªøusing System;
+using System;
 using System.Web.Services;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
@@ -15,7 +15,7 @@ public class Service : WebService
     /// Guarda una nueva incidencia.
     /// </summary>
     /// <param name="newIncidence">Incidencia,Objeto de tipo incidencia.</param>
-    /// <returns>bool,True si la inserci√≥n fu√© correcta,false caso contrario</returns>
+    /// <returns>bool,True si la inserciÛn fuÈ correcta,false caso contrario</returns>
     [WebMethod]
     public bool InsertNewIncidence(Incidencia newIncidence)
     {
@@ -37,8 +37,8 @@ public class Service : WebService
                 NuevaIncidencia.ClaveCodigoPostal = newIncidence.ClaveCodigoPostal;
                 NuevaIncidencia.Telefono = newIncidence.Telefono;
                 NuevaIncidencia.ClaveDenunciante = newIncidence.ClaveDenunciante;
-                NuevaIncidencia.ClaveEstatus = 2;//Pendiente
-                NuevaIncidencia.ClaveUsuario = 1;//UsuarioWeb
+                NuevaIncidencia.ClaveEstatus = 2; //Pendiente
+                NuevaIncidencia.ClaveUsuario = 1; //UsuarioWeb
                 NuevaIncidencia.Activo = true;
                 NuevaIncidencia.ClaveTipo = newIncidence.ClaveTipo;
                 NuevaIncidencia.Prioridad = null;
@@ -49,7 +49,6 @@ public class Service : WebService
                 NuevaIncidencia.Imagen = newIncidence.Imagen;
                 IncidenciaMapper.Instance().Save(NuevaIncidencia);
             }
-
         }
         catch (Exception ex)
         {
@@ -61,9 +60,9 @@ public class Service : WebService
     }
 
     /// <summary>
-    /// Obtiene el cat√°logo de incidencias de SAI(Sistema de Administraci√≥n de Incidencias) por tipo 066 √≥ 089
+    /// Obtiene el cat·logo de incidencias de SAI(Sistema de AdministraciÛn de Incidencias) por tipo 066 Û 089
     /// </summary>
-    /// <param name="tipo">TipoSistema, especifica el tipo de sistema(066 √≥ 089)</param>
+    /// <param name="tipo">TipoSistema, especifica el tipo de sistema(066 Û 089)</param>
     /// <returns>TipoIncidenciaList,Lista de tipos de incidencia.</returns>
     [WebMethod]
     public TipoIncidenciaList GetTypesIncidence(TipoSistema tipo)
@@ -83,9 +82,9 @@ public class Service : WebService
     }
 
     /// <summary>
-    /// Obtiene el cat√°logo de municipios de SAI para el estado de Tlaxcala.
+    /// Obtiene el cat·logo de municipios de SAI para el estado de Tlaxcala.
     /// </summary>
-    /// <returns>MunicipioList, Lista del cat√°logo de Municipios.</returns>
+    /// <returns>MunicipioList, Lista del cat·logo de Municipios.</returns>
     [WebMethod]
     public MunicipioList GetMunicipios()
     {
@@ -93,7 +92,7 @@ public class Service : WebService
     }
 
     /// <summary>
-    /// Obtiene las localidades de un municipio especificado seg√∫n el cat√°logo de SAI.
+    /// Obtiene las localidades de un municipio especificado seg˙n el cat·logo de SAI.
     /// </summary>
     /// <param name="IdMunicipio">int, Id del municipio seleccionado.</param>
     /// <returns>LocalidadList, Lista de localidades.</returns>
@@ -104,7 +103,7 @@ public class Service : WebService
     }
 
     /// <summary>
-    /// Obtiene las colonias de una localidad especificada seg√∫n el cat√°logo de SAI.
+    /// Obtiene las colonias de una localidad especificada seg˙n el cat·logo de SAI.
     /// </summary>
     /// <param name="IdLocalidad">int,Id de localidad seleccionada.</param>
     /// <returns>ColoniaList, Lista de colonias.</returns>
@@ -119,5 +118,4 @@ public class Service : WebService
         Sistema_066 = 066,
         Sistema_089 = 089
     }
-
 }

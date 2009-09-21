@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.Configuration;
 using System.IO;
 using System.Text;
@@ -19,15 +19,15 @@ namespace ConsultaRemota
         protected void Page_Init(object sender, EventArgs e)
         {
             baseDataPath = MapPath("./data");
-            modelo = (DataModel)Session["DataModel"];
-            consulta = (Query)Session["Query"];
+            modelo = (DataModel) Session["DataModel"];
+            consulta = (Query) Session["Query"];
         }
 
         protected override void InitializeCulture()
         {
             base.InitializeCulture();
 
-            var lang = (string)Session["currentLanguage"];
+            var lang = (string) Session["currentLanguage"];
             Culture = lang;
             UICulture = lang;
 
@@ -38,7 +38,8 @@ namespace ConsultaRemota
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ResultDS.ConnectionString = ConfigurationManager.ConnectionStrings["CooperatorConnectionString"].ConnectionString;
+            ResultDS.ConnectionString =
+                ConfigurationManager.ConnectionStrings["CooperatorConnectionString"].ConnectionString;
             if (!Page.IsPostBack)
             {
                 var queryName = Page.Request.QueryString.Get("query");
@@ -63,9 +64,11 @@ namespace ConsultaRemota
             consulta.ConditionsChanged += query_ConditionsChanged;
 
             var versionAttr =
-                (System.Reflection.AssemblyFileVersionAttribute)Attribute.GetCustomAttribute(QueryPanel1.GetType().Assembly, typeof(System.Reflection.AssemblyFileVersionAttribute));
+                (System.Reflection.AssemblyFileVersionAttribute)
+                Attribute.GetCustomAttribute(QueryPanel1.GetType().Assembly,
+                                             typeof (System.Reflection.AssemblyFileVersionAttribute));
 
-            LabelVersion.Text = "VersiÃ³n: " + versionAttr.Version;
+            LabelVersion.Text = "Versión: " + versionAttr.Version;
         }
 
         protected void Page_Unload(object sender, EventArgs e)
@@ -88,11 +91,11 @@ namespace ConsultaRemota
         {
             System.Threading.Thread.Sleep(1000);
 
-            var query = (Query)Session["Query"];
+            var query = (Query) Session["Query"];
             try
             {
                 query.BuildSQL();
-                var formats = new QueryTextFormats { UseHtml = true, UseMathSymbolsForOperators = true };
+                var formats = new QueryTextFormats {UseHtml = true, UseMathSymbolsForOperators = true};
                 Debug.WriteLine(query.GetConditionsText(formats));
                 ResultDS.SelectCommand = query.Result.SQL;
                 ResultDS.Select(DataSourceSelectArguments.Empty);
@@ -120,7 +123,7 @@ namespace ConsultaRemota
             ResultGrid.EnableViewState = false;
             page.EnableEventValidation = false;
 
-            // Realiza las inicializaciones de la instancia de la clase Page que requieran los diseÃ±adores RAD.
+            // Realiza las inicializaciones de la instancia de la clase Page que requieran los diseñadores RAD.
             page.DesignerInitialize();
             page.Controls.Add(form);
             form.Controls.Add(ResultGrid);

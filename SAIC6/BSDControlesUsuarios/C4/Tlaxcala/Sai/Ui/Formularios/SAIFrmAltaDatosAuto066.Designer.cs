@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SAIFrmAltaDatosAuto066));
             this.grpPropietario = new System.Windows.Forms.GroupBox();
             this.label11 = new System.Windows.Forms.Label();
             this.txtTelefonoPropietario = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
@@ -49,9 +50,12 @@
             this.NumeroSerie = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SeñasParticulares = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbVehiculo = new System.Windows.Forms.GroupBox();
+            this.tbComandos = new System.Windows.Forms.ToolStrip();
+            this.btnEliminarFila = new System.Windows.Forms.ToolStripButton();
             this.grpPropietario.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVehiculo)).BeginInit();
             this.gbVehiculo.SuspendLayout();
+            this.tbComandos.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpPropietario
@@ -86,7 +90,7 @@
             this.txtTelefonoPropietario.Name = "txtTelefonoPropietario";
             this.txtTelefonoPropietario.Size = new System.Drawing.Size(185, 20);
             this.txtTelefonoPropietario.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtTelefonoPropietario.TabIndex = 2;
+            this.txtTelefonoPropietario.TabIndex = 3;
             this.txtTelefonoPropietario.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
             this.txtTelefonoPropietario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SoloNumeros_KeyPress);
             // 
@@ -108,7 +112,7 @@
             this.txtDireccionPropietario.Name = "txtDireccionPropietario";
             this.txtDireccionPropietario.Size = new System.Drawing.Size(702, 20);
             this.txtDireccionPropietario.StrMensajeCampoRequerido = "El campo es requerido.";
-            this.txtDireccionPropietario.TabIndex = 3;
+            this.txtDireccionPropietario.TabIndex = 5;
             this.txtDireccionPropietario.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
             // 
             // label12
@@ -117,7 +121,7 @@
             this.label12.Location = new System.Drawing.Point(9, 46);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(58, 13);
-            this.label12.TabIndex = 3;
+            this.label12.TabIndex = 4;
             this.label12.Text = "Dirección :";
             // 
             // txtNombrePropietario
@@ -163,11 +167,12 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvVehiculo.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvVehiculo.Location = new System.Drawing.Point(5, 19);
+            this.dgvVehiculo.Location = new System.Drawing.Point(3, 40);
             this.dgvVehiculo.Name = "dgvVehiculo";
+            this.dgvVehiculo.RowHeadersVisible = false;
             this.dgvVehiculo.RowHeadersWidth = 15;
             this.dgvVehiculo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvVehiculo.Size = new System.Drawing.Size(810, 119);
+            this.dgvVehiculo.Size = new System.Drawing.Size(815, 119);
             this.dgvVehiculo.TabIndex = 1;
             // 
             // ClaveVehiculo
@@ -226,19 +231,40 @@
             // 
             // gbVehiculo
             // 
+            this.gbVehiculo.Controls.Add(this.tbComandos);
             this.gbVehiculo.Controls.Add(this.dgvVehiculo);
             this.gbVehiculo.Location = new System.Drawing.Point(10, 96);
             this.gbVehiculo.Name = "gbVehiculo";
-            this.gbVehiculo.Size = new System.Drawing.Size(821, 150);
+            this.gbVehiculo.Size = new System.Drawing.Size(821, 170);
             this.gbVehiculo.TabIndex = 1;
             this.gbVehiculo.TabStop = false;
             this.gbVehiculo.Text = "Datos del/los vehículo(s):";
+            // 
+            // tbComandos
+            // 
+            this.tbComandos.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.tbComandos.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnEliminarFila});
+            this.tbComandos.Location = new System.Drawing.Point(3, 16);
+            this.tbComandos.Name = "tbComandos";
+            this.tbComandos.Size = new System.Drawing.Size(815, 25);
+            this.tbComandos.TabIndex = 0;
+            // 
+            // btnEliminarFila
+            // 
+            this.btnEliminarFila.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnEliminarFila.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminarFila.Image")));
+            this.btnEliminarFila.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEliminarFila.Name = "btnEliminarFila";
+            this.btnEliminarFila.Size = new System.Drawing.Size(23, 22);
+            this.btnEliminarFila.ToolTipText = "Eliminar el registro actual.";
+            this.btnEliminarFila.Click += new System.EventHandler(this.btnEliminarFila_Click);
             // 
             // SAIFrmAltaDatosAuto066
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(835, 253);
+            this.ClientSize = new System.Drawing.Size(842, 275);
             this.Controls.Add(this.gbVehiculo);
             this.Controls.Add(this.grpPropietario);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -255,6 +281,9 @@
             this.grpPropietario.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVehiculo)).EndInit();
             this.gbVehiculo.ResumeLayout(false);
+            this.gbVehiculo.PerformLayout();
+            this.tbComandos.ResumeLayout(false);
+            this.tbComandos.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -279,5 +308,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn NoMotor;
         private System.Windows.Forms.DataGridViewTextBoxColumn NumeroSerie;
         private System.Windows.Forms.DataGridViewTextBoxColumn SeñasParticulares;
+        private System.Windows.Forms.ToolStrip tbComandos;
+        private System.Windows.Forms.ToolStripButton btnEliminarFila;
     }
 }

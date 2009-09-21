@@ -156,7 +156,7 @@ namespace CodeEngine.Framework.QueryBuilder
                     LevelWhere += "(" + WhereClause + ") AND ";
                 }
                 LevelWhere = LevelWhere.Substring(0, LevelWhere.Length - 5);
-                    // Trim de last AND inserted by foreach loop
+                // Trim de last AND inserted by foreach loop
                 if (WhereStatement.Count > 1)
                 {
                     Result += " (" + LevelWhere + ") ";

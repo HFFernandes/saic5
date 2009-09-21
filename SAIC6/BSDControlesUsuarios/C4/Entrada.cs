@@ -1,4 +1,4 @@
-锘縰sing System;
+using System;
 using System.Globalization;
 using System.Windows.Forms;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
@@ -12,7 +12,7 @@ namespace BSD.C4
     public class Entrada
     {
         /// <summary>
-        /// Punto de entrada de la aplicaci贸n
+        /// Punto de entrada de la aplicaci髇
         /// indicando Single Thread Apartment
         /// </summary>
         [STAThread]
@@ -20,19 +20,19 @@ namespace BSD.C4
         {
             bool blnMutex;
 
-            //Implementamos exclusi贸n mutua
+            //Implementamos exclusi髇 mutua
             using (var mutex = new Mutex(true, "SAICC4", out blnMutex))
             {
                 if (blnMutex)
                 {
-                    //Establecemos la cultura para el hilo actual a espa帽ol de M茅xico
+                    //Establecemos la cultura para el hilo actual a espa駉l de M閤ico
                     Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
 
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
 
                     //Establecemos el evento de control para aquellas excepciones que no fueron controladas
-                    //dentro del dominio de la aplicaci贸n
+                    //dentro del dominio de la aplicaci髇
                     AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
                     Application.Run(new SAIFrmComandos());
                     mutex.ReleaseMutex();
@@ -44,17 +44,17 @@ namespace BSD.C4
         }
 
         /// <summary>
-        /// Manejador de excepciones que no fueron manejadas dentro del dominio de la aplicaci贸n
+        /// Manejador de excepciones que no fueron manejadas dentro del dominio de la aplicaci髇
         /// </summary>
         /// <param name="sender">generador del evento</param>
         /// <param name="e">argumentos del evento</param>
-        static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             if (e.ExceptionObject is Exception)
             {
                 try
                 {
-                    var objetoExcepcion = (Exception)e.ExceptionObject;
+                    var objetoExcepcion = (Exception) e.ExceptionObject;
                     if (e.IsTerminating)
                     {
                         throw new SAIExcepcion(objetoExcepcion.Message, null);

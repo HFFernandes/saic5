@@ -1,25 +1,28 @@
-ï»¿using System.Reflection;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
+
 [assembly: AssemblyTitle("SAI")]
-[assembly: AssemblyDescription("Sistema de AdministraciÃ³n de Incidencias C4")]
+[assembly: AssemblyDescription("Sistema de Administración de Incidencias C4")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("BSD Security Systems")]
 [assembly: AssemblyProduct("SAI")]
-[assembly: AssemblyCopyright("Copyright Â© BSD Security Systems 2009")]
+[assembly: AssemblyCopyright("Copyright © BSD Security Systems 2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
 // COM, set the ComVisible attribute to true on that type.
+
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
+
 [assembly: Guid("efa9a810-3b59-4d06-a76b-3a9983504acb")]
 
 // Version information for an assembly consists of the following four values:
@@ -32,5 +35,6 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
+
 [assembly: AssemblyVersion("1.0.0.*")]
 [assembly: AssemblyFileVersion("1.0.0.0")]

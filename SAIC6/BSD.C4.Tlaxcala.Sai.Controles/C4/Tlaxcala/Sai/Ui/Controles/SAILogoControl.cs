@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.Windows.Forms;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
@@ -9,14 +9,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 
         public int VelocidadAnimacion
         {
-            get
-            {
-                return this.spinnerPicture.Velocidad;
-            }
-            set
-            {
-                this.spinnerPicture.Velocidad = value;
-            }
+            get { return this.spinnerPicture.Velocidad; }
+            set { this.spinnerPicture.Velocidad = value; }
         }
 
         #endregion
@@ -25,7 +19,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         {
             InitializeComponent();
             this.spinnerPicture.Velocidad = 8;
-            this.logoPicture.SizeChanged += this.VerificarTamaÃ±o;
+            this.logoPicture.SizeChanged += this.VerificarTamaño;
         }
 
         public void DetenerAnimacion()
@@ -50,9 +44,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             }
         }
 
-        private void VerificarTamaÃ±o(object sender, EventArgs e)
+        private void VerificarTamaño(object sender, EventArgs e)
         {
-            if ((this.logoPicture.Size.Height < this.logoPicture.Image.Height) && (this.logoPicture.Size.Width < this.logoPicture.Image.Width))
+            if ((this.logoPicture.Size.Height < this.logoPicture.Image.Height) &&
+                (this.logoPicture.Size.Width < this.logoPicture.Image.Width))
             {
                 this.logoPicture.SizeMode = PictureBoxSizeMode.StretchImage;
             }

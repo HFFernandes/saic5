@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,6 +14,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             InitializeComponent();
         }
+
         /// <summary>
         /// Crea una instancia del formulario de Usuarios
         /// </summary>
@@ -23,6 +24,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             frm_Usuarios.MdiParent = this;
             frm_Usuarios.Show();
         }
+
         /// <summary>
         /// Crea una instancia del formulario de Permisos
         /// </summary>
@@ -32,6 +34,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             frm_Permisos.MdiParent = this;
             frm_Permisos.Show();
         }
+
         /// <summary>
         /// Crea una instancia del formulario de Tipos Incidencias
         /// </summary>
@@ -41,6 +44,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             frm_TiposIncidencias.MdiParent = this;
             frm_TiposIncidencias.Show();
         }
+
         /// <summary>
         /// Cierra la aplicacion
         /// </summary>
@@ -48,6 +52,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             this.Close();
         }
+
         /// <summary>
         /// Crea una instancia del formulario de Corporaciones
         /// </summary>
@@ -57,6 +62,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             frm_Corporaciones.MdiParent = this;
             frm_Corporaciones.Show();
         }
+
         /// <summary>
         /// Crea una instancia del formulario de Unidades
         /// </summary>
@@ -66,6 +72,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             frm_Unidades.MdiParent = this;
             frm_Unidades.Show();
         }
+
         /// <summary>
         /// Crea una instancia del formulario de Colonias
         /// </summary>
@@ -75,6 +82,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             frm_Colonias.MdiParent = this;
             frm_Colonias.Show();
         }
+
         /// <summary>
         /// Crea una instancia del formulario Municipios 
         /// </summary>
@@ -84,6 +92,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             frm_Municipios.MdiParent = this;
             frm_Municipios.Show();
         }
+
         /// <summary>
         /// Crea una instancia del formulario de Localidades
         /// </summary>
@@ -93,6 +102,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             frm_Localidades.MdiParent = this;
             frm_Localidades.Show();
         }
+
         /// <summary>
         /// Crea una instancia del formulario de Bitacora
         /// </summary>
@@ -102,6 +112,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             frm_Bitacora.MdiParent = this;
             frm_Bitacora.Show();
         }
+
         /// <summary>
         /// Crea una instancia del formulario de Dependencias
         /// </summary>
@@ -109,8 +120,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             frmDependecias frm_Dependencias = new frmDependecias();
             frm_Dependencias.MdiParent = this;
-            frm_Dependencias.Show();            
+            frm_Dependencias.Show();
         }
+
         /// <summary>
         /// Crea una instancia del formulario de Clasificacion de Organizaciones
         /// </summary>
@@ -120,6 +132,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             frm_ClasificacionOrganizacion.MdiParent = this;
             frm_ClasificacionOrganizacion.Show();
         }
+
         /// <summary>
         /// Crea una instancia del formulario de Organizaciones
         /// </summary>

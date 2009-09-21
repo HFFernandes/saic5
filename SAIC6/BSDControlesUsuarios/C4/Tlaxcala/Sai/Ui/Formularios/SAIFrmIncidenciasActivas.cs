@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
@@ -16,11 +16,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
     /// </summary>
     public partial class SAIFrmIncidenciasActivas : SAIFrmBase
     {
-
         /// <summary>
         /// listado tipado de incidencias para manipular cuando han cambiado de estado
         /// </summary>
         private List<Incidencia> lstIncidenciasRegistradas;
+
         private List<Incidencia> lstIncidenciasTemporales;
         private List<Incidencia> lstIncidenciasPorRemover;
         private List<ReportRecord> lstRegistrosReporte;
@@ -32,7 +32,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             InitializeComponent();
 
-            //obtenemos el tamaÃ±o del Ã¡rea de trabajo principal
+            //obtenemos el tamaño del área de trabajo principal
             Width = Screen.GetWorkingArea(this).Width;
             //creamos los eventos de respuesta
             saiReport1.btnLigarIncidencias.Click += btnLigarIncidencias_Click;
@@ -40,31 +40,31 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             saiReport1.btnVistaPrevia.Click += btnVistaPrevia_Click;
             saiReport1.reportControl.RowDblClick += reportControl_RowDblClick;
 
-            //generamos un listado tipado para la manipulaciÃ³n de registros
+            //generamos un listado tipado para la manipulación de registros
             lstIncidenciasRegistradas = new List<Incidencia>();
             lstIncidenciasTemporales = new List<Incidencia>();
             lstIncidenciasPorRemover = new List<Incidencia>();
             lstRegistrosReporte = new List<ReportRecord>();
         }
 
-         /// <summary>
-         /// Genera una vista previa de impresiÃ³n de los registros enlistados
-         /// </summary>
-         /// <param name="sender">generador del evento</param>
-         /// <param name="e">argumentos del evento</param>
-        void btnVistaPrevia_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Genera una vista previa de impresión de los registros enlistados
+        /// </summary>
+        /// <param name="sender">generador del evento</param>
+        /// <param name="e">argumentos del evento</param>
+        private void btnVistaPrevia_Click(object sender, EventArgs e)
         {
             try
             {
-                //verificamos los permisos de lectura o escritura para este mÃ³dulo
+                //verificamos los permisos de lectura o escritura para este módulo
                 if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(ID.CMD_A))
                 {
-                    //Iniciamos la vista previa de impresiÃ³n de los registros enlistados
+                    //Iniciamos la vista previa de impresión de los registros enlistados
                     saiReport1.reportControl.PrintPreviewOptions.Title = "Reporte de Incidencias Activas";
                     saiReport1.reportControl.PrintPreview(true);
                 }
                 else
-                    throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);  //indicamos que no tiene los privilegios
+                    throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS); //indicamos que no tiene los privilegios
             }
             catch (SAIExcepcion)
             {
@@ -76,7 +76,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         /// <param name="sender">generador del evento</param>
         /// <param name="e">argumentos del evento</param>
-        void reportControl_RowDblClick(object sender, AxXtremeReportControl._DReportControlEvents_RowDblClickEvent e)
+        private void reportControl_RowDblClick(object sender,
+                                               AxXtremeReportControl._DReportControlEvents_RowDblClickEvent e)
         {
             try
             {
@@ -108,11 +109,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         }
 
         /// <summary>
-        /// mÃ©todo para instanciar las entidades de tipo incidencia que fueron seleccionadas desde el listado
+        /// método para instanciar las entidades de tipo incidencia que fueron seleccionadas desde el listado
         /// </summary>
         /// <param name="sender">generador del evento</param>
         /// <param name="e">argumentos del evento</param>
-        void btnDespacharIncidencias_Click(object sender, EventArgs e)
+        private void btnDespacharIncidencias_Click(object sender, EventArgs e)
         {
             try
             {
@@ -150,34 +151,35 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         }
 
         /// <summary>
-        /// mÃ©todo para relacionar una o mas entidades de tipo incidencia a un padre
+        /// método para relacionar una o mas entidades de tipo incidencia a un padre
         /// </summary>
         /// <param name="sender">generador del evento</param>
         /// <param name="e">argumentos del evento</param>
-        void btnLigarIncidencias_Click(object sender, EventArgs e)
+        private void btnLigarIncidencias_Click(object sender, EventArgs e)
         {
-            //Verificamos los permisos de lectura o escritura del usuario actual al mÃ³dulo correspondiente
+            //Verificamos los permisos de lectura o escritura del usuario actual al módulo correspondiente
             if (Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_A))
             {
                 try
                 {
                     try
                     {
-                        //generamos un listado tipado donde serÃ¡n almacenados los folios por ligar
+                        //generamos un listado tipado donde serán almacenados los folios por ligar
                         var lstIncidenciasPorLigar = new List<string>();
                         for (var i = 0; i < saiReport1.reportControl.SelectedRows.Count; i++)
                         {
-                            lstIncidenciasPorLigar.Add(saiReport1.reportControl.SelectedRows[i].Record[0].Value.ToString());
+                            lstIncidenciasPorLigar.Add(
+                                saiReport1.reportControl.SelectedRows[i].Record[0].Value.ToString());
                         }
 
-                        //eliminamos de la colecciÃ³n aquellos registros duplicados
+                        //eliminamos de la colección aquellos registros duplicados
                         var lstLigarResultado = Aplicacion.removerDuplicados(lstIncidenciasPorLigar);
-                        //pasamos la colecciÃ³n como parametro al constructor de la nueva instancia del form LigarIncidencias
+                        //pasamos la colección como parametro al constructor de la nueva instancia del form LigarIncidencias
                         var ligarIncidencias = new SAIFrmLigarIncidencias(lstLigarResultado);
                         var dialogResult = ligarIncidencias.ShowDialog(this);
                         if (dialogResult == DialogResult.OK)
                         {
-                            //Obtenemos el folio que fue definido como Padre dentro de la colecciÃ³n pasada
+                            //Obtenemos el folio que fue definido como Padre dentro de la colección pasada
                             var folioPadre = ligarIncidencias.strFolioPadre;
                             lstLigarResultado.Remove(folioPadre);
 
@@ -192,7 +194,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             var listadoIncidencias =
                                 IncidenciaMapper.Instance().GetBySQLQuery(
                                     string.Format(ID.SQL_INCIDENCIASLIGADAS,
-                                                  stbFolios.ToString().Trim().Remove(stbFolios.ToString().Trim().Length - 1)));
+                                                  stbFolios.ToString().Trim().Remove(
+                                                      stbFolios.ToString().Trim().Length - 1)));
                             foreach (var incidencia in listadoIncidencias)
                             {
                                 if (incidencia.FolioPadre == null)
@@ -223,9 +226,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         /// <param name="sender">generador del evento</param>
         /// <param name="e">argumentos del evento</param>
-        void SAIFrmIncidenciasActivas_Load(object sender, EventArgs e)
+        private void SAIFrmIncidenciasActivas_Load(object sender, EventArgs e)
         {
-            //Ocultamos comandos de acciÃ³n que no son necesarios para incidencias activas
+            //Ocultamos comandos de acción que no son necesarios para incidencias activas
             saiReport1.btnAltaUnidad.Visible = false;
             saiReport1.btnBajaUnidad.Visible = false;
             saiReport1.btnSeparador2.Visible = false;
@@ -233,10 +236,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
             //Definimos las columnas del listado y obtenemos los registros
             saiReport1.AgregarColumna(0, "ID", 20, false, false);
-            saiReport1.AgregarColumna(1, "No de TelÃ©fono", 100, true, true, true);
+            saiReport1.AgregarColumna(1, "No de Teléfono", 100, true, true, true);
             saiReport1.AgregarColumna(2, "Status", 100, true, false, false);
             saiReport1.AgregarColumna(3, "Hora de Entrada", 100, true, true, true);
-            saiReport1.AgregarColumna(4, "UbicaciÃ³n", 250, true, true, true, false, true, 2);
+            saiReport1.AgregarColumna(4, "Ubicación", 250, true, true, true, false, true, 2);
             saiReport1.AgregarColumna(5, "Tipo de Incidencia", 250, true, true, true);
             saiReport1.AgregarColumna(6, "Dividido En", 70, true, true, true);
             saiReport1.AgregarColumna(7, "Folio", 150, true, true, true);
@@ -245,7 +248,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         }
 
         /// <summary>
-        /// evento que actualizarÃ¡ los registros de manera periodica
+        /// evento que actualizará los registros de manera periodica
         /// </summary>
         /// <param name="sender">generador del evento</param>
         /// <param name="e">argumentos del evento</param>
@@ -259,7 +262,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         }
 
         /// <summary>
-        /// evento principal para la obtenciÃ³n de registros de entidad incidencia y de estado activo
+        /// evento principal para la obtención de registros de entidad incidencia y de estado activo
         /// </summary>
         private void ObtenerRegistros()
         {
@@ -272,43 +275,67 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     //Limpiamos el listado donde se almacenan las incidencias cuyo estado sea activo
                     //para iniciar nuevamente el ciclo
                     lstIncidenciasTemporales.Clear();
-                    resIncidencias = Aplicacion.UsuarioPersistencia.blnEsDespachador == true ? IncidenciaMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_INCIDENCIASCORPORACION,
-                                                                                                                                                       Aplicacion.UsuarioPersistencia.
-                                                                                                                                                           intCorporacion,
-                                                                                                                                                       (int)ESTATUSINCIDENCIAS.ACTIVA)) : IncidenciaMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_INCIDENCIAS,
-                                                                                                                                                                                                                                                  (int)ESTATUSINCIDENCIAS.ACTIVA));
+                    resIncidencias = Aplicacion.UsuarioPersistencia.blnEsDespachador == true
+                                         ? IncidenciaMapper.Instance().GetBySQLQuery(
+                                               string.Format(ID.SQL_INCIDENCIASCORPORACION,
+                                                             Aplicacion.UsuarioPersistencia.
+                                                                 intCorporacion,
+                                                             (int) ESTATUSINCIDENCIAS.ACTIVA))
+                                         : IncidenciaMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_INCIDENCIAS,
+                                                                                                   (int)
+                                                                                                   ESTATUSINCIDENCIAS.
+                                                                                                       ACTIVA));
 
 
-                    foreach (var incidencia in resIncidencias) //vamos a la base para obtener los registros de estado activo
+                    foreach (var incidencia in resIncidencias)
+                        //vamos a la base para obtener los registros de estado activo
                     {
                         lstIncidenciasTemporales.Add(incidencia);
-                        //verificamos que la incidencia no estÃ© ya en la lista de incidencias registradas
+                        //verificamos que la incidencia no esté ya en la lista de incidencias registradas
                         //que de no estarlo la agregamos al listado tipado y al grid
                         if (!lstIncidenciasRegistradas.Contains(incidencia))
                         {
                             lstIncidenciasRegistradas.Add(incidencia);
                             var corporaciones = new StringBuilder();
 
-                            CorporacionMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_CORPORACIONES, incidencia.Folio)).ForEach(delegate(Corporacion c)
-                            {
-                                corporaciones.Append(c.Descripcion);
-                                corporaciones.Append(",");
-                            });
+                            CorporacionMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_CORPORACIONES,
+                                                                                     incidencia.Folio)).ForEach(
+                                delegate(Corporacion c)
+                                    {
+                                        corporaciones.Append(c.Descripcion);
+                                        corporaciones.Append(",");
+                                    });
 
                             lstRegistrosReporte.Add(saiReport1.AgregarRegistro(null, incidencia.Folio,
-                                                                           incidencia.Telefono,
-                                                                           EstatusIncidenciaMapper.Instance().GetOne(incidencia.ClaveEstatus).Descripcion,
-                                                                           incidencia.HoraRecepcion.ToShortTimeString(),
-                                                                           incidencia.Direccion,
-                                                                           incidencia.ClaveTipo != null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo.Value).Descripcion : ID.STR_DESCONOCIDO,
-                                                                           corporaciones.ToString().Trim().Length > 1 ? corporaciones.ToString().Trim().Remove(corporaciones.Length - 1) : string.Empty,
-                                                                           incidencia.Folio.ToString(),
-                                                                           incidencia.ClaveTipo != null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo.Value).Prioridad.ToString() : ID.STR_DESCONOCIDO));
+                                                                               incidencia.Telefono,
+                                                                               EstatusIncidenciaMapper.Instance().GetOne
+                                                                                   (incidencia.ClaveEstatus).Descripcion,
+                                                                               incidencia.HoraRecepcion.
+                                                                                   ToShortTimeString(),
+                                                                               incidencia.Direccion,
+                                                                               incidencia.ClaveTipo != null
+                                                                                   ? TipoIncidenciaMapper.Instance().
+                                                                                         GetOne(
+                                                                                         incidencia.ClaveTipo.Value).
+                                                                                         Descripcion
+                                                                                   : ID.STR_DESCONOCIDO,
+                                                                               corporaciones.ToString().Trim().Length >
+                                                                               1
+                                                                                   ? corporaciones.ToString().Trim().
+                                                                                         Remove(corporaciones.Length - 1)
+                                                                                   : string.Empty,
+                                                                               incidencia.Folio.ToString(),
+                                                                               incidencia.ClaveTipo != null
+                                                                                   ? TipoIncidenciaMapper.Instance().
+                                                                                         GetOne(
+                                                                                         incidencia.ClaveTipo.Value).
+                                                                                         Prioridad.ToString()
+                                                                                   : ID.STR_DESCONOCIDO));
                         }
                         else
                         {
-                            //la incidencia ya existe en la colecciÃ³n,ahora la
-                            //buscamos y verificamos si algÃºn registro cambio para su actualizacion
+                            //la incidencia ya existe en la colección,ahora la
+                            //buscamos y verificamos si algún registro cambio para su actualizacion
                             var incidenciaTemp = lstIncidenciasRegistradas.Find(inc => inc.Folio == incidencia.Folio);
                             if (incidenciaTemp != null)
                             {
@@ -317,8 +344,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 var iCols = saiReport1.reportControl.Columns.Count;
                                 var iRows = saiReport1.reportControl.Rows.Count;
 
-                                //buscamos el Row por el nÃºmero Ãºnico de folio para obtener su posiciÃ³n dentro del grid
-                                var itm = saiReport1.reportControl.Records.FindRecordItem(1, iRows, 1, iCols, 1, 1, incidencia.Folio.ToString(), XTPReportTextSearchParms.xtpReportTextSearchExactPhrase);
+                                //buscamos el Row por el número único de folio para obtener su posición dentro del grid
+                                var itm = saiReport1.reportControl.Records.FindRecordItem(1, iRows, 1, iCols, 1, 1,
+                                                                                          incidencia.Folio.ToString(),
+                                                                                          XTPReportTextSearchParms.
+                                                                                              xtpReportTextSearchExactPhrase);
                                 if (itm != null && itm.Index >= 0)
                                 {
                                     //comparamos el valor anterior con el actual y si cambio entonces actualizamos
@@ -337,15 +367,21 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     saiReport1.reportControl.Records[itm.Record.Index][4].Value = incidencia.Direccion;
 
                                     //if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
-                                    saiReport1.reportControl.Records[itm.Record.Index][5].Value = incidencia.ClaveTipo != null ?
-                                        TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo.Value).Descripcion : ID.STR_DESCONOCIDO;
+                                    saiReport1.reportControl.Records[itm.Record.Index][5].Value =
+                                        incidencia.ClaveTipo != null
+                                            ?
+                                                TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo.Value).
+                                                    Descripcion
+                                            : ID.STR_DESCONOCIDO;
 
                                     var corporaciones = new StringBuilder();
-                                    CorporacionMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_CORPORACIONES, incidencia.Folio)).ForEach(delegate(Corporacion c)
-                                    {
-                                        corporaciones.Append(c.Descripcion);
-                                        corporaciones.Append(",");
-                                    });
+                                    CorporacionMapper.Instance().GetBySQLQuery(string.Format(ID.SQL_CORPORACIONES,
+                                                                                             incidencia.Folio)).ForEach(
+                                        delegate(Corporacion c)
+                                            {
+                                                corporaciones.Append(c.Descripcion);
+                                                corporaciones.Append(",");
+                                            });
 
                                     saiReport1.reportControl.Records[itm.Record.Index][6].Value =
                                         corporaciones.ToString().Trim().Length > 1
@@ -353,7 +389,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                             : ID.STR_DESCONOCIDO;
 
                                     //if (!incidenciaTemp.ClaveTipo.Equals(incidencia.ClaveTipo))
-                                    saiReport1.reportControl.Records[itm.Record.Index][8].Value = incidencia.ClaveTipo != null ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo.Value).Prioridad.ToString() : ID.STR_DESCONOCIDO;
+                                    saiReport1.reportControl.Records[itm.Record.Index][8].Value =
+                                        incidencia.ClaveTipo != null
+                                            ? TipoIncidenciaMapper.Instance().GetOne(incidencia.ClaveTipo.Value).
+                                                  Prioridad.ToString()
+                                            : ID.STR_DESCONOCIDO;
                                 }
                             }
                         }
@@ -369,8 +409,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         }
                     }
 
-                    //recorremos la colecciÃ³n de incidencias por remover
-                    //y hacemos match contra el nÃºmero Ãºnico de folio para proceder
+                    //recorremos la colección de incidencias por remover
+                    //y hacemos match contra el número único de folio para proceder
                     //a eliminar el registro del grid
                     foreach (var incidencia in lstIncidenciasPorRemover)
                     {
@@ -383,7 +423,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         }
                         lstIncidenciasRegistradas.Remove(incidencia);
                     }
-                    lstIncidenciasPorRemover.Clear();   //limpiamos la colecciÃ³n para el nuevo ciclo
+                    lstIncidenciasPorRemover.Clear(); //limpiamos la colección para el nuevo ciclo
 
                     //ordenamiento
                     //if (SAIChkOrdenarPrioridad.Checked)
@@ -400,6 +440,5 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 Close();
             }
         }
-    
     }
 }

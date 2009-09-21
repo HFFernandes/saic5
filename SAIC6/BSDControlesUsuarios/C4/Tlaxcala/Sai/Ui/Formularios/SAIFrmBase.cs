@@ -1,17 +1,16 @@
-Ôªøusing System.Windows.Forms;
+using System.Windows.Forms;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
     /// <summary>
-    /// Formulario base del cual deber√° heredarse cualquier implementaci√≥n de ventana y que
-    /// contiene m√©todos y funciones para la creaci√≥n de barras de comandos y proveedores de
-    /// validaci√≥n para los controles de captura
+    /// Formulario base del cual deber· heredarse cualquier implementaciÛn de ventana y que
+    /// contiene mÈtodos y funciones para la creaciÛn de barras de comandos y proveedores de
+    /// validaciÛn para los controles de captura
     /// 
-    /// Los formularios derivados deber√°n implementar la interfaz <see cref="IEventosFormulario">IEventosFormulario</see>
+    /// Los formularios derivados deber·n implementar la interfaz <see cref="IEventosFormulario">IEventosFormulario</see>
     /// </summary>
     public partial class SAIFrmBase : Form
     {
-
         /// <summary>
         /// Lleva el estado del caso de la tecla control presionada.
         /// </summary>
@@ -27,7 +26,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         }
 
         ///// <summary>
-        ///// Hace la llamada a la funci√≥n de la ventana Owner para mostrar el control switch
+        ///// Hace la llamada a la funciÛn de la ventana Owner para mostrar el control switch
         ///// </summary>
         ///// <param name="e"></param>
         //protected override void OnKeyUp(KeyEventArgs e)
@@ -45,7 +44,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         //}
 
         /// <summary>
-        /// Detecta cuando se presion√≥ la tecla control
+        /// Detecta cuando se presionÛ la tecla control
         /// </summary>
         /// <returns></returns>
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -56,7 +55,5 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
             return false;
         }
-
-
     }
 }

@@ -1,11 +1,11 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Security.Cryptography;
 
 namespace BSD.C4.Tlaxcala.Sai.Administracion.Utilerias
 {
-    class CzSecurity
+    internal class CzSecurity
     {
         #region CONSTRUCTOR
 
@@ -13,7 +13,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.Utilerias
         /// Constructor
         /// </summary>
         public CzSecurity()
-        { }
+        {
+        }
 
         #endregion
 
@@ -35,7 +36,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.Utilerias
         }
 
         /// <summary>
-        ///Set, string, ContraseÃ±a del usuario
+        ///Set, string, Contraseña del usuario
         /// </summary>
         public string Password
         {
@@ -43,7 +44,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.Utilerias
         }
 
         /// <summary>
-        /// get,string, ContraseÃ±a cifrada
+        /// get,string, Contraseña cifrada
         /// </summary>
         public string PassWordCifrado()
         {
@@ -95,8 +96,6 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.Utilerias
             // Return the hexadecimal string.
             return sBuilder.ToString();
         }
-
-
 
         #endregion
     }

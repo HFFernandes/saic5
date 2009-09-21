@@ -1,4 +1,4 @@
-ï»¿//Autor : T.S.U. Angel Martinez Ortiz.
+//Autor : T.S.U. Angel Martinez Ortiz.
 //Fecha : 24 de agosto del 2009
 //Empresa : InfinitySoft IT Experts
 
@@ -15,11 +15,10 @@ using System.ComponentModel;
 namespace BSD.C4.Tlaxcala.Sai.CallListener
 {
     /// <summary>
-    /// Clase que se encarga de escuchar el Caller Id de Avaya de forma AsÃ­ncrona.
+    /// Clase que se encarga de escuchar el Caller Id de Avaya de forma Asíncrona.
     /// </summary>
     public class SaiTcpClient
     {
-
         #region CONSTRUCTOR
 
         /// <summary>
@@ -36,53 +35,44 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
 
                 //Iniciamos el Listener del TCP
                 this.objTcpListener.Start();
-
-
-
             }
             catch
             {
-
             }
-
-
         }
 
         #endregion
 
         #region VARIABLES
 
-
         #region OBTENIDAS DEL App.Config
 
         /// <summary>
         /// IP para comunicarse con el agente de Avaya.
         /// </summary>
-        IPAddress ipAgente = IPAddress.Parse(ConfigurationManager.AppSettings["IpAgente"]);
+        private IPAddress ipAgente = IPAddress.Parse(ConfigurationManager.AppSettings["IpAgente"]);
 
         /// <summary>
-        /// Puerto configurado para mandar informaciÃ³n desde el agente Avaya
+        /// Puerto configurado para mandar información desde el agente Avaya
         /// </summary>
-        int puertoAgente = Convert.ToInt32(ConfigurationManager.AppSettings["PuertoAgente"]);
+        private int puertoAgente = Convert.ToInt32(ConfigurationManager.AppSettings["PuertoAgente"]);
 
         /// <summary>
         /// Nombre y ruta del Agente de Avaya
         /// </summary>
-        string RutaJava = ConfigurationManager.AppSettings["RutaJava"];
+        private string RutaJava = ConfigurationManager.AppSettings["RutaJava"];
 
         /// <summary>
         /// Nombre del programa proporcionado por Avaya
         /// </summary>
-        string NombreAgenteAvaya = ConfigurationManager.AppSettings["NombreAgente"];
+        private string NombreAgenteAvaya = ConfigurationManager.AppSettings["NombreAgente"];
 
         #endregion
-
-
 
         /// <summary>
         /// Ip y numero de puerto para el Listener.
         /// </summary>
-        IPEndPoint LocalEndPoint;
+        private IPEndPoint LocalEndPoint;
 
         /// <summary>
         /// Cliente de conexiones para TCP.
@@ -92,7 +82,7 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
         /// <summary>
         /// Para escuchar las conexiones de TCP.
         /// </summary>
-        TcpListener objTcpListener;
+        private TcpListener objTcpListener;
 
         /// <summary>
         /// Para obtener el NetworkStream que manda el agente de Avaya.
@@ -102,25 +92,24 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
         /// <summary>
         /// BackGroundWorker para iniciar el Agente Java en segundo plano.
         /// </summary>
-        BackgroundWorker bgwIniciador;
+        private BackgroundWorker bgwIniciador;
 
         /// <summary>
         /// Hilo para escuchar el puerto TCP constantemente en segundo plano.
         /// </summary>
-        Thread ProcesoMonitor;
+        private Thread ProcesoMonitor;
 
         #endregion
 
-        #region MÃ‰TODOS
+        #region MÉTODOS
 
         /// <summary>
-        /// Inicia la aplicaciÃ³n .jar
+        /// Inicia la aplicación .jar
         /// </summary>
         private void IniciarAgenteAvaya()
         {
             try
             {
-
                 //Configuramos el proceso.
                 Process process = new Process();
 
@@ -138,13 +127,12 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
 
                 process.Start();
 
-                FindMessajeEvent("IniciÃ³ agente Avaya correctamente...");
+                FindMessajeEvent("Inició agente Avaya correctamente...");
             }
             catch (Exception ex)
             {
                 FindMessajeEvent("Error al iniciar agente de Avaya :" + ex.Message);
             }
-
         }
 
         /// <summary>
@@ -158,7 +146,6 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
             bgwIniciador.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgwIniciador_RunWorkerCompleted);
 
             this.bgwIniciador.RunWorkerAsync();
-
         }
 
         /// <summary>
@@ -178,7 +165,7 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
                     {
                         byte[] bytes = new byte[objTcpClient.ReceiveBufferSize];
 
-                        netStream.Read(bytes, 0, (int)objTcpClient.ReceiveBufferSize);
+                        netStream.Read(bytes, 0, (int) objTcpClient.ReceiveBufferSize);
 
                         //Mostramos los datos recibidos.
                         string returndata = Encoding.UTF8.GetString(bytes);
@@ -188,7 +175,7 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
                         {
                             string datosAgente = returndata.Split("@".ToCharArray())[1];
                             datosAgente = datosAgente.Substring(0, datosAgente.IndexOf('%'));
-                            FindMessajeEvent(string.Format("En extensiÃ³n :{0}", datosAgente));
+                            FindMessajeEvent(string.Format("En extensión :{0}", datosAgente));
                         }
                         //Obtenemos el No de telefono de la llamada entrante.
                         if (returndata.Contains("&"))
@@ -203,22 +190,14 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
                                 //Mandamos el telefono obtenido
                                 FindDataEvent(datosLlamada);
                             }
-
                         }
-
                     }
-
-
                 }
-
-
             }
             catch (Exception ex)
             {
                 FindMessajeEvent("Error al obtener datos : " + ex.Message);
-
             }
-
         }
 
 
@@ -237,15 +216,12 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
                 Byte[] sendBytes = Encoding.ASCII.GetBytes(responseString);
                 netStream.Write(sendBytes, 0, sendBytes.Length);
 
-                this.FindMessajeEvent("Se enviÃ³ deneter agente");
-
-
+                this.FindMessajeEvent("Se envió deneter agente");
             }
             catch (Exception ex)
             {
                 this.FindMessajeEvent("Error al detener :" + ex.Message);
             }
-
         }
 
         /// <summary>
@@ -274,8 +250,7 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
 
         #region EVENTOS
 
-
-        void bgwIniciador_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void bgwIniciador_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             //Iniciamos el sub-proceso.
             ProcesoMonitor = new Thread(BuscarDatos);
@@ -284,14 +259,14 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
             ProcesoMonitor.Start();
         }
 
-        void bgwIniciador_DoWork(object sender, DoWorkEventArgs e)
+        private void bgwIniciador_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
-                //Iniciamos el .jar (AplicaciÃ³n agente de Avaya)
+                //Iniciamos el .jar (Aplicación agente de Avaya)
                 IniciarAgenteAvaya();
                 objTcpListener.Start();
-                //Aceptamos la conexiÃ³n entrante.
+                //Aceptamos la conexión entrante.
                 objTcpClient = objTcpListener.AcceptTcpClient();
             }
             catch (SocketException se)
@@ -324,11 +299,7 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
                 temp(this, new FindMessageEventArgs(msg));
         }
 
-
-
-
         #endregion
-
     }
 
     #region CLASES AUXILIAES PARA MANEJO DE EVENTOS
@@ -369,10 +340,5 @@ namespace BSD.C4.Tlaxcala.Sai.CallListener
         public string Mensaje { get; set; }
     }
 
-
     #endregion
-
-
-
-
 }

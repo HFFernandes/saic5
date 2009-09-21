@@ -1,4 +1,4 @@
-锘縰sing System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,6 +21,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             InitializeComponent();
         }
+
         /// <summary>
         /// Llama los metodos correspondientes al llenado del Datagrid y llenado de las Clasificaciones
         /// </summary>
@@ -29,6 +30,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             this.LlenarGrid();
             this.LlenarClasificacion();
         }
+
         /// <summary>
         /// Llena el combobox de las clasificaciones
         /// </summary>
@@ -36,15 +38,18 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             try
             {
-                Entidades.ClasificacionOrganizacionList lstClasificacionOrg = Mappers.ClasificacionOrganizacionMapper.Instance().GetAll();
+                Entidades.ClasificacionOrganizacionList lstClasificacionOrg =
+                    Mappers.ClasificacionOrganizacionMapper.Instance().GetAll();
                 //Valida que el catalogo de Clasificaciones no este vacio
                 if (lstClasificacionOrg.Count == 0)
                 {
-                    throw new SAIExcepcion("No puede agregar o Modificar una Organizacion ya que el catalogo de Clasificaciones esta vacio, Agrege por lo menos una clasificaci贸n para las Organizaciones.");
+                    throw new SAIExcepcion(
+                        "No puede agregar o Modificar una Organizacion ya que el catalogo de Clasificaciones esta vacio, Agrege por lo menos una clasificaci髇 para las Organizaciones.");
                 }
                 foreach (Entidades.ClasificacionOrganizacion ClasificacionOrg in lstClasificacionOrg)
                 {
-                    this.saiDdlClasificacion.Items.Add(new ComboItem(ClasificacionOrg.Clave, ClasificacionOrg.Descripcion));
+                    this.saiDdlClasificacion.Items.Add(new ComboItem(ClasificacionOrg.Clave,
+                                                                     ClasificacionOrg.Descripcion));
                 }
                 this.saiDdlClasificacion.DisplayMember = "Descripcion";
                 this.saiDdlClasificacion.ValueMember = "Valor";
@@ -54,13 +59,14 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 //Deshabilita botones
                 this.gvOrganizaciones.DataSource = null;
                 this.Limpiar();
-                this.btnLimpiar.Enabled=false;
+                this.btnLimpiar.Enabled = false;
                 this.btnAgregar.Enabled = false;
                 this.btnModificar.Enabled = false;
                 this.btnEliminar.Enabled = false;
                 //this.Limpiar();
             }
         }
+
         /// <summary>
         /// Llena el Datagrid de Organizaciones
         /// </summary>
@@ -83,9 +89,15 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
                 foreach (Entidades.Organizacion organizacion in lstOrganizacion)
                 {
-                    object[] registro = new object[] { organizacion.Clave, organizacion.Nombre, organizacion.Direcci贸n,
-                        organizacion.Telefono, organizacion.Fax, organizacion.Email, organizacion.DireccionWeb,
-                        organizacion.ClaveClasificacion, Mappers.ClasificacionOrganizacionMapper.Instance().GetOne(organizacion.ClaveClasificacion).Descripcion };
+                    object[] registro = new object[]
+                                            {
+                                                organizacion.Clave, organizacion.Nombre, organizacion.Direcci髇,
+                                                organizacion.Telefono, organizacion.Fax, organizacion.Email,
+                                                organizacion.DireccionWeb,
+                                                organizacion.ClaveClasificacion,
+                                                Mappers.ClasificacionOrganizacionMapper.Instance().GetOne(
+                                                    organizacion.ClaveClasificacion).Descripcion
+                                            };
                     catOrganizacion.Rows.Add(registro);
                 }
                 this.gvOrganizaciones.DataSource = catOrganizacion;
@@ -93,8 +105,10 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 this.gvOrganizaciones.Columns["ClaveClasificacion"].Visible = false;
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
+
         /// <summary>
         /// Agrega una nueva Organizacion
         /// </summary>
@@ -105,8 +119,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 try
                 {
                     Entidades.Organizacion newOrganizacion = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Organizacion();
-                    newOrganizacion.ClaveClasificacion = Convert.ToInt32(this.ObtieneValor(this.saiDdlClasificacion.SelectedIndex));
-                    newOrganizacion.Direcci贸n = this.saiTxtDireccion.Text;
+                    newOrganizacion.ClaveClasificacion =
+                        Convert.ToInt32(this.ObtieneValor(this.saiDdlClasificacion.SelectedIndex));
+                    newOrganizacion.Direcci髇 = this.saiTxtDireccion.Text;
                     newOrganizacion.DireccionWeb = this.saiTxtDireccionWeb.Text;
                     newOrganizacion.Email = this.saiTxtEmail.Text;
                     newOrganizacion.Fax = this.saiTxtFax.Text;
@@ -125,11 +140,15 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     Mappers.BitacoraMapper.Instance().Insert(bitacora);
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
+
         /// <summary>
         /// Modifica una Organizacion existente
         /// </summary>
@@ -137,9 +156,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             try
             {
-                Entidades.Organizacion updOrganizacion = Mappers.OrganizacionMapper.Instance().GetOne(Convert.ToInt32(this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["Clave"].Value));
-                updOrganizacion.ClaveClasificacion = Convert.ToInt32(this.ObtieneValor(this.saiDdlClasificacion.SelectedIndex));
-                updOrganizacion.Direcci贸n = this.saiTxtDireccion.Text;
+                Entidades.Organizacion updOrganizacion =
+                    Mappers.OrganizacionMapper.Instance().GetOne(
+                        Convert.ToInt32(
+                            this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["Clave"].Value));
+                updOrganizacion.ClaveClasificacion =
+                    Convert.ToInt32(this.ObtieneValor(this.saiDdlClasificacion.SelectedIndex));
+                updOrganizacion.Direcci髇 = this.saiTxtDireccion.Text;
                 updOrganizacion.DireccionWeb = this.saiTxtDireccionWeb.Text;
                 updOrganizacion.Email = this.saiTxtEmail.Text;
                 updOrganizacion.Fax = this.saiTxtFax.Text;
@@ -154,14 +177,17 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 bitacora.NombreCatalogo = "Organizaciones";
                 bitacora.Operacion = "UPDATE";
                 bitacora.ValorActual = saiTxtNombre.Text + ", " + this.saiTxtDireccion.Text;
-                bitacora.ValorAnterior = Convert.ToString(this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["Nombre"].Value);
+                bitacora.ValorAnterior =
+                    Convert.ToString(this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["Nombre"].Value);
                 bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
 
                 Mappers.BitacoraMapper.Instance().Insert(bitacora);
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
+
         /// <summary>
         /// Elimina una organizacion
         /// </summary>
@@ -169,10 +195,14 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             try
             {
-                Mappers.OrganizacionMapper.Instance().Delete(Convert.ToInt32(this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["Clave"].Value));
+                Mappers.OrganizacionMapper.Instance().Delete(
+                    Convert.ToInt32(this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["Clave"].Value));
 
                 Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
-                bitacora.Descripcion = "Se elimino la Organizacion: " + Convert.ToString(this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["Nombre"].Value);
+                bitacora.Descripcion = "Se elimino la Organizacion: " +
+                                       Convert.ToString(
+                                           this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["Nombre"].
+                                               Value);
                 bitacora.FechaOperacion = DateTime.Today;
                 bitacora.NombreCatalogo = "Organizaciones";
                 bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
@@ -181,8 +211,10 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 Mappers.BitacoraMapper.Instance().Insert(bitacora);
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
+
         /// <summary>
         /// Limpia los controles del formulario de Organizaciones
         /// </summary>
@@ -205,6 +237,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             this.saiTxtTelefono.Text = string.Empty;
             this.saiDdlClasificacion.SelectedIndex = -1;
         }
+
         /// <summary>
         /// Obtiene el indice del registro seleccionado
         /// </summary>
@@ -213,6 +246,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             return this.gvOrganizaciones.CurrentCellAddress.Y;
         }
+
         /// <summary>
         /// Cierra la ventana de Organizaciones
         /// </summary>
@@ -220,18 +254,22 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             this.Close();
         }
+
         /// <summary>
         /// Llama el metodo Eliminar, Actualiza el Datagrid
         /// </summary>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("驴Esta seguro de Eliminar la Organizaci贸n?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (
+                MessageBox.Show("縀sta seguro de Eliminar la Organizaci髇?", "Eliminar", MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 this.Eliminar();
                 this.LlenarGrid();
                 this.Limpiar();
             }
         }
+
         /// <summary>
         /// Valida campos obligatorios y llama el metodo Agregar, Actualiza el Datagrid
         /// </summary>
@@ -244,6 +282,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 this.Limpiar();
             }
         }
+
         /// <summary>
         /// Valida campos obligatorios y llama el metodo Modificar, Actualiza el Datagrid
         /// </summary>
@@ -256,6 +295,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 this.Limpiar();
             }
         }
+
         /// <summary>
         /// LLama el metodo Limpiar
         /// </summary>
@@ -273,13 +313,27 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             {
                 if (this.ObtieneIndiceSeleccionado() > -1)
                 {
-                    this.saiTxtNombre.Text = Convert.ToString(this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["Nombre"].Value);
-                    this.saiTxtDireccion.Text = Convert.ToString(this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["Direccion"].Value);
-                    this.saiTxtTelefono.Text = Convert.ToString(this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["Telefono"].Value);
-                    this.saiTxtFax.Text = Convert.ToString(this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["Fax"].Value);
-                    this.saiTxtEmail.Text = Convert.ToString(this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["Email"].Value);
-                    this.saiTxtDireccionWeb.Text = Convert.ToString(this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["DireccionWeb"].Value);
-                    this.SeleccionarComboItem(Convert.ToInt32(this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["ClaveClasificacion"].Value));
+                    this.saiTxtNombre.Text =
+                        Convert.ToString(
+                            this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["Nombre"].Value);
+                    this.saiTxtDireccion.Text =
+                        Convert.ToString(
+                            this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["Direccion"].Value);
+                    this.saiTxtTelefono.Text =
+                        Convert.ToString(
+                            this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["Telefono"].Value);
+                    this.saiTxtFax.Text =
+                        Convert.ToString(this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["Fax"].Value);
+                    this.saiTxtEmail.Text =
+                        Convert.ToString(
+                            this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["Email"].Value);
+                    this.saiTxtDireccionWeb.Text =
+                        Convert.ToString(
+                            this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["DireccionWeb"].Value);
+                    this.SeleccionarComboItem(
+                        Convert.ToInt32(
+                            this.gvOrganizaciones.Rows[this.ObtieneIndiceSeleccionado()].Cells["ClaveClasificacion"].
+                                Value));
                     //this.saiDdlClasificacion.SelectedValue();
                     this.btnAgregar.Enabled = false;
                     this.btnEliminar.Visible = true;
@@ -287,8 +341,10 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
+
         /// <summary>
         /// Obtiene el valor del elemento seleccionado de un ComoboBox
         /// </summary>
@@ -296,8 +352,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <returns>Objeto que representa el Valor</returns>
         private object ObtieneValor(int indice)
         {
-            return ((ComboItem)this.saiDdlClasificacion.Items[indice]).Valor;
+            return ((ComboItem) this.saiDdlClasificacion.Items[indice]).Valor;
         }
+
         /// <summary>
         /// Obtiene la descripcion de un elemento del Combobox
         /// </summary>
@@ -305,10 +362,11 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <returns>Objeto que representa la Descripcion</returns>
         private string ObtieneDescripcion(int indice)
         {
-            return ((ComboItem)this.saiDdlClasificacion.Items[indice]).Descripcion;
+            return ((ComboItem) this.saiDdlClasificacion.Items[indice]).Descripcion;
         }
+
         /// <summary>
-        /// Selecciona un elemento del ComboBox Clasificaci贸n
+        /// Selecciona un elemento del ComboBox Clasificaci髇
         /// </summary>
         /// <param name="Value">Valor que representa el elemento a seleccionar</param>
         private void SeleccionarComboItem(int Value)
@@ -321,7 +379,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     break;
                 }
                 else
-                { this.saiDdlClasificacion.SelectedIndex = -1; }
+                {
+                    this.saiDdlClasificacion.SelectedIndex = -1;
+                }
             }
         }
     }

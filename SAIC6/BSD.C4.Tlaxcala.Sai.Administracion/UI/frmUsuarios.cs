@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,10 +28,10 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         private void frmUsuarios_Load(object sender, EventArgs e)
         {
             this.tltUsuarios.SetToolTip(this.txtUsuario, "El usuario debe tener un maximo de 10 caracteres.");
-            this.tltUsuarios.SetToolTip(this.saiTxtContrasena, "La Contraseña debe tener un maximo de 10 caracteres.");
-            
+            this.tltUsuarios.SetToolTip(this.saiTxtContrasena, "La Contrase�a debe tener un maximo de 10 caracteres.");
+
             SAIBarraEstado.SizingGrip = false;
-            SAIBarraEstado.TabIndex = 0;            
+            SAIBarraEstado.TabIndex = 0;
             this.LlenarCorporaciones();
             this.LlenarGrid();
             this.Limpiar();
@@ -56,7 +56,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 this.ddlCorporaciones.ValueMember = "Clave";
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -67,7 +68,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             //Se crea un DataTable con las columnas correspondientes
             DataTable catUsuarios = new DataTable("CatUsuarios");
             try
-            {                
+            {
                 try
                 {
                     //Esta columna no se mostrara
@@ -76,7 +77,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     catUsuarios.Columns.Add(new DataColumn("NombrePropio", Type.GetType("System.String")));
                     catUsuarios.Columns.Add(new DataColumn("Activo", Type.GetType("System.Boolean")));
                     catUsuarios.Columns.Add(new DataColumn("Contrasena", Type.GetType("System.String")));
-                    catUsuarios.Columns.Add(new DataColumn("Contraseña", Type.GetType("System.String")));
+                    catUsuarios.Columns.Add(new DataColumn("Contrase�a", Type.GetType("System.String")));
                     catUsuarios.Columns.Add(new DataColumn("Desp", Type.GetType("System.Boolean")));
                     //Columna para mostarse "SI" o "NO"
                     catUsuarios.Columns.Add(new DataColumn("Despachador", Type.GetType("System.String")));
@@ -86,8 +87,12 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     //Se llena el datatable
                     foreach (Entidades.Usuario usr in lstUsuarios)
                     {
-                        object[] usuario = new object[] { usr.Clave, usr.NombreUsuario, usr.NombrePropio,
-                        usr.Activo,  usr.Contraseña,"*******", usr.Despachador.Value, usr.Despachador.Value?"SI":"NO"};
+                        object[] usuario = new object[]
+                                               {
+                                                   usr.Clave, usr.NombreUsuario, usr.NombrePropio,
+                                                   usr.Activo, usr.Contrase�a, "*******", usr.Despachador.Value,
+                                                   usr.Despachador.Value ? "SI" : "NO"
+                                               };
                         catUsuarios.Rows.Add(usuario);
                     }
 
@@ -103,8 +108,12 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 }
             }
             catch (SAIExcepcion)
-            { }
-            finally { catUsuarios = null; }
+            {
+            }
+            finally
+            {
+                catUsuarios = null;
+            }
         }
 
         /// <summary>
@@ -144,8 +153,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 Entidades.Usuario newUsuario = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Usuario();
                 newUsuario.NombrePropio = this.txtNombrePropio.Text;
                 newUsuario.NombreUsuario = this.txtUsuario.Text;
-                newUsuario.Contraseña = new CzSecurity().PassWordCifrado(this.saiTxtContrasena.Text);
-                //newUsuario.Contraseña = this.saiTxtContrasena.Text;
+                newUsuario.Contrase�a = new CzSecurity().PassWordCifrado(this.saiTxtContrasena.Text);
+                //newUsuario.Contrase�a = this.saiTxtContrasena.Text;
                 newUsuario.Despachador = this.rbDespachador.Checked ? true : false;
                 newUsuario.Activo = this.chkActivado.Checked;
                 Mappers.UsuarioMapper.Instance().Insert(newUsuario);
@@ -163,9 +172,12 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 {
                     if (this.ddlCorporaciones.SelectedIndex > -1)
                     {
-                        Objetos.UsuarioCorporacionObject newUsuarioCorporacion = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects.UsuarioCorporacionObject();
-                        newUsuarioCorporacion.ClaveCorporacion = Convert.ToInt32(this.ObtieneValor(this.ddlCorporaciones.SelectedIndex));
-                        newUsuarioCorporacion.ClaveUsuario = Mappers.UsuarioMapper.Instance().GetByUsuario(newUsuario.NombreUsuario).Clave;
+                        Objetos.UsuarioCorporacionObject newUsuarioCorporacion =
+                            new BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects.UsuarioCorporacionObject();
+                        newUsuarioCorporacion.ClaveCorporacion =
+                            Convert.ToInt32(this.ObtieneValor(this.ddlCorporaciones.SelectedIndex));
+                        newUsuarioCorporacion.ClaveUsuario =
+                            Mappers.UsuarioMapper.Instance().GetByUsuario(newUsuario.NombreUsuario).Clave;
 
                         Mappers.UsuarioCorporacionMapper.Instance().Insert(newUsuarioCorporacion);
                     }
@@ -176,7 +188,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -191,12 +204,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     if (this.ObtieneIndiceSeleccionado() > -1)
                     {
                         //Obtiene los datos del usuario a modificar
-                        int clave = Convert.ToInt32(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Clave"].Value);
+                        int clave =
+                            Convert.ToInt32(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Clave"].Value);
                         Entidades.Usuario updUsuario = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Usuario(clave);
                         updUsuario.NombrePropio = this.txtNombrePropio.Text;
                         updUsuario.NombreUsuario = this.txtUsuario.Text;
-                        //updUsuario.Contraseña = this.saiTxtContrasena.Text;
-                        updUsuario.Contraseña = new CzSecurity().PassWordCifrado(this.saiTxtContrasena.Text);
+                        //updUsuario.Contrase�a = this.saiTxtContrasena.Text;
+                        updUsuario.Contrase�a = new CzSecurity().PassWordCifrado(this.saiTxtContrasena.Text);
                         updUsuario.Despachador = this.rbDespachador.Checked ? true : false;
                         updUsuario.Activo = this.chkActivado.Checked;
                         Mappers.UsuarioMapper.Instance().Save(updUsuario);
@@ -208,18 +222,23 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         bitacora.NombreCatalogo = "Usuario";
                         bitacora.Operacion = "UPDATE";
                         bitacora.ValorActual = this.txtNombrePropio.Text + ", " + this.txtUsuario.Text;
-                        
-                        bitacora.ValorAnterior = Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["NombreUsuario"].Value);
+
+                        bitacora.ValorAnterior =
+                            Convert.ToString(
+                                this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["NombreUsuario"].Value);
                         bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
 
                         Mappers.BitacoraMapper.Instance().Insert(bitacora);
                     }
-                }//Esta exepcion se atrapa para que no muestre error alguno (es un bug del cooperator)
+                } //Esta exepcion se atrapa para que no muestre error alguno (es un bug del cooperator)
                 catch (Cooperator.Framework.Data.Exceptions.NoRowAffectedException)
-                { return; }
+                {
+                    return;
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -235,24 +254,30 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     if (this.ObtieneIndiceSeleccionado() > -1)
                     {
                         //Se obtiene la clave dle usuario que se va eliminar
-                        int clave = Convert.ToInt32(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Clave"].Value);
+                        int clave =
+                            Convert.ToInt32(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Clave"].Value);
 
                         //se crea objeto para la relacion Susuario - Corporacion y se obtiene todas las relaciones
-                        Objetos.UsuarioCorporacionObjectList lstUsuCorp =  Mappers.UsuarioCorporacionMapper.Instance().GetByUsuario(clave);
+                        Objetos.UsuarioCorporacionObjectList lstUsuCorp =
+                            Mappers.UsuarioCorporacionMapper.Instance().GetByUsuario(clave);
                         //si alguna relacion 
                         if (lstUsuCorp.Count > 0)
                         {
                             foreach (Objetos.UsuarioCorporacionObject usrCorp in lstUsuCorp)
                             {
-                                Mappers.UsuarioCorporacionMapper.Instance().Delete(usrCorp.ClaveUsuario, usrCorp.ClaveCorporacion);
+                                Mappers.UsuarioCorporacionMapper.Instance().Delete(usrCorp.ClaveUsuario,
+                                                                                   usrCorp.ClaveCorporacion);
                             }
                         }
-                        
+
                         //Se elimina usuario
                         Mappers.UsuarioMapper.Instance().Delete(clave);
 
                         Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
-                        bitacora.Descripcion = "Se elimino el usuario: " + Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["NombrePropio"].Value);
+                        bitacora.Descripcion = "Se elimino el usuario: " +
+                                               Convert.ToString(
+                                                   this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells[
+                                                       "NombrePropio"].Value);
                         bitacora.FechaOperacion = DateTime.Today;
                         bitacora.NombreCatalogo = "Usuario";
                         bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
@@ -262,10 +287,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     }
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -287,7 +315,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -304,9 +333,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     this.Limpiar();
                 }
                 else
-                { throw new SAIExcepcion("Hacen falta datos verifique que todo este capturado."); }
-            }catch(SAIExcepcion)
-            {}
+                {
+                    throw new SAIExcepcion("Hacen falta datos verifique que todo este capturado.");
+                }
+            }
+            catch (SAIExcepcion)
+            {
+            }
         }
 
         /// <summary>
@@ -318,26 +351,34 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             try
             {
-                int usrSelected = Convert.ToInt32(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Clave"].Value);
+                int usrSelected =
+                    Convert.ToInt32(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Clave"].Value);
 
                 if (Mappers.IncidenciaMapper.Instance().GetByUsuario(usrSelected).Count > 0)
                 {
-                    throw new SAIExcepcion("No se puede eliminar el usuario porque tiene insidencias asociadas. *Sugerencia: Puede desactivar el usuario.");
+                    throw new SAIExcepcion(
+                        "No se puede eliminar el usuario porque tiene insidencias asociadas. *Sugerencia: Puede desactivar el usuario.");
                 }
                 else
                 {
                     //Pregunta si se desea eliminar el usuario
-                    if (MessageBox.Show("Desea Eliminar el usuario", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    if (
+                        MessageBox.Show("Desea Eliminar el usuario", "Eliminar", MessageBoxButtons.YesNo,
+                                        MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         //se obtiene el usuario selelcionado
                         //se obtienen todos los permisos del usuario, en caso de tener
-                        Objetos.PermisoUsuarioObjectList lstPermisos = Mappers.PermisoUsuarioMapper.Instance().GetByUsuario(usrSelected);
+                        Objetos.PermisoUsuarioObjectList lstPermisos =
+                            Mappers.PermisoUsuarioMapper.Instance().GetByUsuario(usrSelected);
                         //si tiene permisos el usuario
                         if (lstPermisos.Count > 0)
                         {
                             //Se agrega operacion en bitacora
                             Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
-                            bitacora.Descripcion = "Se elimino el permiso del usuario: " + Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["NombrePropio"].Value);
+                            bitacora.Descripcion = "Se elimino el permiso del usuario: " +
+                                                   Convert.ToString(
+                                                       this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells[
+                                                           "NombrePropio"].Value);
                             bitacora.FechaOperacion = DateTime.Today;
                             bitacora.NombreCatalogo = "Permiso Usuario";
                             bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
@@ -346,7 +387,10 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                             foreach (Objetos.PermisoUsuarioObject permiso in lstPermisos)
                             {
                                 //se elimina permiso uno por uno
-                                Mappers.PermisoUsuarioMapper.Instance().Delete(permiso.ClaveUsuario, permiso.ClaveSubmodulo, permiso.ClavePermiso, permiso.ClaveSistema);
+                                Mappers.PermisoUsuarioMapper.Instance().Delete(permiso.ClaveUsuario,
+                                                                               permiso.ClaveSubmodulo,
+                                                                               permiso.ClavePermiso,
+                                                                               permiso.ClaveSistema);
                                 //Se agrega en bitacora la operacion
                                 Mappers.BitacoraMapper.Instance().Insert(bitacora);
                             }
@@ -367,14 +411,16 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                             //se limpian controles
                             this.Limpiar();
                         }
-                    }//se limpian controles
+                    } //se limpian controles
                     else
                     {
                         this.Limpiar();
                     }
-                }                
+                }
             }
-            catch (SAIExcepcion) { }
+            catch (SAIExcepcion)
+            {
+            }
         }
 
         /// <summary>
@@ -390,10 +436,16 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     if (this.ObtieneIndiceSeleccionado() > -1)
                     {
                         //Llena los controles con los datos del Datagrid
-                        this.txtNombrePropio.Text = Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["NombrePropio"].Value);
-                        this.txtUsuario.Text = Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["NombreUsuario"].Value);
+                        this.txtNombrePropio.Text =
+                            Convert.ToString(
+                                this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["NombrePropio"].Value);
+                        this.txtUsuario.Text =
+                            Convert.ToString(
+                                this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["NombreUsuario"].Value);
                         //this.saiTxtContrasena.Text = Convert.ToString(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Contrasena"].Value);
-                        this.chkActivado.Checked = Convert.ToBoolean(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Activo"].Value);
+                        this.chkActivado.Checked =
+                            Convert.ToBoolean(
+                                this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Activo"].Value);
 
                         int corporacion = 0;
 
@@ -404,7 +456,10 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                             this.rbDespachador.Checked = true;
                             this.rbOperador.Checked = false;
                             //si el usuario tiene relacion con una corporacion
-                            Objetos.UsuarioCorporacionObjectList lstUCorp = Mappers.UsuarioCorporacionMapper.Instance().GetByUsuario(Convert.ToInt32(this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Clave"].Value));
+                            Objetos.UsuarioCorporacionObjectList lstUCorp =
+                                Mappers.UsuarioCorporacionMapper.Instance().GetByUsuario(
+                                    Convert.ToInt32(
+                                        this.gvUsuarios.Rows[this.ObtieneIndiceSeleccionado()].Cells["Clave"].Value));
                             foreach (Objetos.UsuarioCorporacionObject usrCorp in lstUCorp)
                             {
                                 //obtiene la clave de la corporacion asociada
@@ -431,10 +486,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     }
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -471,7 +529,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <returns>Un objeto con el valor del elemento seleccionado</returns>
         private object ObtieneValor(int indice)
         {
-            return ((ComboItem)this.ddlCorporaciones.Items[indice]).Valor;
+            return ((ComboItem) this.ddlCorporaciones.Items[indice]).Valor;
         }
 
         /// <summary>
@@ -481,7 +539,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <returns>Objeto con la descripcion del elemento</returns>
         private string ObtieneDescripcion(int indice)
         {
-            return ((ComboItem)this.ddlCorporaciones.Items[indice]).Descripcion;
+            return ((ComboItem) this.ddlCorporaciones.Items[indice]).Descripcion;
         }
 
         /// <summary>
@@ -500,7 +558,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     break;
                 }
                 else //en caso contrario no se selecciona nigun elemento
-                { this.ddlCorporaciones.SelectedIndex = -1; }
+                {
+                    this.ddlCorporaciones.SelectedIndex = -1;
+                }
             }
         }
 
@@ -517,7 +577,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 this.lblCorporacion.Visible = true;
                 this.ddlCorporaciones.Visible = true;
             }
-            else 
+            else
             {
                 this.lblCorporacion.Visible = false;
                 this.ddlCorporaciones.Visible = false;
@@ -535,7 +595,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 {
                     //Obtiene una lista de todos los usuario existentes
                     Entidades.UsuarioList lstUsuarios = Mappers.UsuarioMapper.Instance().GetAll();
-                    foreach(Entidades.Usuario usuario in lstUsuarios)
+                    foreach (Entidades.Usuario usuario in lstUsuarios)
                     {
                         //recorre todos los usuarios y si el usuario capturado es igual uno existente
                         if (usuario.NombreUsuario == this.txtUsuario.Text)
@@ -554,10 +614,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     }
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
     }
 }

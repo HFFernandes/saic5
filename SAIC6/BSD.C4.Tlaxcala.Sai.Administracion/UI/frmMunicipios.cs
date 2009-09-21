@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -37,7 +37,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// </summary>
         private void LlenarGrid()
         {
-            try 
+            try
             {
                 DataTable catMunicipios = new DataTable("CatMunicipios");
                 try
@@ -51,8 +51,12 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
                     foreach (Entidades.Municipio municipio in lstMunicipios)
                     {
-                        object[] registro = new object[] { municipio.Clave, municipio.ClaveEstado, 
-                            Mappers.EstadoMapper.Instance().GetOne(municipio.ClaveEstado.Value).Nombre, municipio.Nombre };
+                        object[] registro = new object[]
+                                                {
+                                                    municipio.Clave, municipio.ClaveEstado,
+                                                    Mappers.EstadoMapper.Instance().GetOne(municipio.ClaveEstado.Value).
+                                                        Nombre, municipio.Nombre
+                                                };
 
                         catMunicipios.Rows.Add(registro);
                     }
@@ -60,13 +64,15 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     this.gvMunicipios.DataSource = catMunicipios;
                     //this.gvMunicipios.Columns["ClaveCartografia"].Visible = false;
                     this.gvMunicipios.Columns["ClaveEstado"].Visible = false;
-
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -76,18 +82,21 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             try
             {
-                try 
+                try
                 {
                     this.ddlEstado.DataSource = Mappers.EstadoMapper.Instance().GetAll();
                     this.ddlEstado.DisplayMember = "Nombre";
                     this.ddlEstado.ValueMember = "Clave";
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
-        }    
+            {
+            }
+        }
 
         #region ABC
 
@@ -116,10 +125,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     Mappers.BitacoraMapper.Instance().Insert(bitacora);
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -129,20 +141,25 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             try
             {
-                try 
+                try
                 {
-                    int municipioSelected = Convert.ToInt32(this.gvMunicipios.Rows[this.ObtenerIndiceSeleccionado()].Cells["Clave"].Value);
-                    Entidades.Municipio updMunicipio = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Municipio(municipioSelected);
+                    int municipioSelected =
+                        Convert.ToInt32(this.gvMunicipios.Rows[this.ObtenerIndiceSeleccionado()].Cells["Clave"].Value);
+                    Entidades.Municipio updMunicipio =
+                        new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Municipio(municipioSelected);
                     updMunicipio.Clave = Convert.ToInt32(this.saiClave.Text);
                     updMunicipio.Nombre = this.saiTxtNombre.Text;
                     updMunicipio.ClaveEstado = Convert.ToInt32(this.ddlEstado.SelectedValue);
                     Mappers.MunicipioMapper.Instance().Save(updMunicipio);
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -152,16 +169,20 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             try
             {
-                try 
+                try
                 {
-                    int municipioSelected = Convert.ToInt32(this.gvMunicipios.Rows[this.ObtenerIndiceSeleccionado()].Cells["Clave"].Value);
+                    int municipioSelected =
+                        Convert.ToInt32(this.gvMunicipios.Rows[this.ObtenerIndiceSeleccionado()].Cells["Clave"].Value);
                     Mappers.MunicipioMapper.Instance().Delete(municipioSelected);
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -214,7 +235,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 this.Limpiar();
             }
         }
-        
+
         /// <summary>
         /// Obtiene el indice del registro seleccionado
         /// </summary>

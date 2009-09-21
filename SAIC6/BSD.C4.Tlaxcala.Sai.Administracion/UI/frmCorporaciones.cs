@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -55,19 +55,29 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     Entidades.CorporacionList lstCorporaciones = Mappers.CorporacionMapper.Instance().GetAll();
                     foreach (Entidades.Corporacion corporacion in lstCorporaciones)
                     {
-                        object[] registro = new object[] { corporacion.Clave, corporacion.Descripcion, corporacion.ClaveSistema, 
-                        Mappers.SistemaMapper.Instance().GetOne(corporacion.ClaveSistema.Value).Descripcion, corporacion.UnidadesVirtuales, corporacion.Activo, corporacion.Zn };
+                        object[] registro = new object[]
+                                                {
+                                                    corporacion.Clave, corporacion.Descripcion, corporacion.ClaveSistema
+                                                    ,
+                                                    Mappers.SistemaMapper.Instance().GetOne(
+                                                        corporacion.ClaveSistema.Value).Descripcion,
+                                                    corporacion.UnidadesVirtuales, corporacion.Activo, corporacion.Zn
+                                                };
                         catCorporaciones.Rows.Add(registro);
                     }
 
-                    this.gvCorporaciones.DataSource = catCorporaciones.DefaultView; //Mappers.CorporacionMapper.Instance().GetAll();
+                    this.gvCorporaciones.DataSource = catCorporaciones.DefaultView;
+                        //Mappers.CorporacionMapper.Instance().GetAll();
                     this.gvCorporaciones.Columns["ClaveSistema"].Visible = false;
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -94,10 +104,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     this.saiTxtZn.Text = string.Empty;
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -122,10 +135,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     }
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -135,7 +151,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <returns>Objeto que representa el valor</returns>
         private object ObtieneValor(int indice)
         {
-            return ((ComboItem)this.ddlSistema.Items[indice]).Valor;
+            return ((ComboItem) this.ddlSistema.Items[indice]).Valor;
         }
 
         /// <summary>
@@ -145,7 +161,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <returns>Objeto que representa la descripcion</returns>
         private string ObtieneDescripcion(int indice)
         {
-            return ((ComboItem)this.ddlSistema.Items[indice]).Descripcion;
+            return ((ComboItem) this.ddlSistema.Items[indice]).Descripcion;
         }
 
         /// <summary>
@@ -162,13 +178,16 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     break;
                 }
                 else
-                { this.ddlSistema.SelectedIndex = -1; }
+                {
+                    this.ddlSistema.SelectedIndex = -1;
+                }
             }
         }
 
         #region ABC
+
         /// <summary>
-            /// Metodo que Agrega un nuevo registro
+        /// Metodo que Agrega un nuevo registro
         /// </summary>
         private void Agregar()
         {
@@ -179,7 +198,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     if (this.SAIProveedorValidacion.ValidarCamposRequeridos(this.groupBox2))
                     {
                         Entidades.Corporacion newCorporacion = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Corporacion();
-                        newCorporacion.ClaveSistema = Convert.ToInt32(this.ObtieneValor(this.ddlSistema.SelectedIndex)); // Convert.ToInt32(this.ObtieneValor(this.ddlSistema.SelectedIndex)); // Convert.ToInt32(this.ddlSistema.SelectedValue);
+                        newCorporacion.ClaveSistema = Convert.ToInt32(this.ObtieneValor(this.ddlSistema.SelectedIndex));
+                            // Convert.ToInt32(this.ObtieneValor(this.ddlSistema.SelectedIndex)); // Convert.ToInt32(this.ddlSistema.SelectedValue);
                         newCorporacion.Descripcion = this.saiTxtDescripcion.Text;
                         newCorporacion.Activo = this.chkActivo.Checked;
                         newCorporacion.UnidadesVirtuales = this.chkUnidadVirtual.Checked;
@@ -198,10 +218,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     }
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -217,8 +240,10 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     if (rowSelected > -1)
                     {
                         int clave = Convert.ToInt32(this.gvCorporaciones.Rows[rowSelected].Cells["Clave"].Value);
-                        Entidades.Corporacion updCorporacion = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Corporacion(clave);
-                        updCorporacion.ClaveSistema = Convert.ToInt32(this.ObtieneValor(this.ddlSistema.SelectedIndex)); // Convert.ToInt32(this.ddlSistema.SelectedValue);
+                        Entidades.Corporacion updCorporacion =
+                            new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Corporacion(clave);
+                        updCorporacion.ClaveSistema = Convert.ToInt32(this.ObtieneValor(this.ddlSistema.SelectedIndex));
+                            // Convert.ToInt32(this.ddlSistema.SelectedValue);
                         updCorporacion.Descripcion = this.saiTxtDescripcion.Text;
                         updCorporacion.UnidadesVirtuales = this.chkUnidadVirtual.Checked;
                         updCorporacion.Activo = this.chkActivo.Checked;
@@ -238,10 +263,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     }
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -256,9 +284,12 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     int selectedRow = this.gvCorporaciones.CurrentCellAddress.Y;
                     if (selectedRow > -1)
                     {
-                        Mappers.CorporacionMapper.Instance().Delete(Convert.ToInt32(this.gvCorporaciones.Rows[selectedRow].Cells["Clave"].Value));
+                        Mappers.CorporacionMapper.Instance().Delete(
+                            Convert.ToInt32(this.gvCorporaciones.Rows[selectedRow].Cells["Clave"].Value));
                         Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
-                        bitacora.Descripcion = "Se elimino la corporacion: " + Convert.ToString(this.gvCorporaciones.Rows[selectedRow].Cells["Descripcion"].Value);
+                        bitacora.Descripcion = "Se elimino la corporacion: " +
+                                               Convert.ToString(
+                                                   this.gvCorporaciones.Rows[selectedRow].Cells["Descripcion"].Value);
                         bitacora.FechaOperacion = DateTime.Today;
                         bitacora.NombreCatalogo = "Corporaciones";
                         bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
@@ -266,13 +297,17 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
                         Mappers.BitacoraMapper.Instance().Insert(bitacora);
                     }
-                }                
+                }
                 catch
-                { throw new SAIExcepcion("No puede eliminar la corporcaion porque esta asociada."); }
+                {
+                    throw new SAIExcepcion("No puede eliminar la corporcaion porque esta asociada.");
+                }
             }
-            catch (SAIExcepcion) { }
-        
+            catch (SAIExcepcion)
+            {
+            }
         }
+
         #endregion
 
         /// <summary>
@@ -287,10 +322,14 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     int selectedRow = this.gvCorporaciones.CurrentCellAddress.Y;
                     if (selectedRow > -1)
                     {
-                        this.saiTxtDescripcion.Text = Convert.ToString(this.gvCorporaciones.Rows[selectedRow].Cells["Descripcion"].Value);
-                        this.SeleccionarComboItem(Convert.ToInt32(this.gvCorporaciones.Rows[selectedRow].Cells["ClaveSistema"].Value));
-                        this.chkActivo.Checked = Convert.ToBoolean(this.gvCorporaciones.Rows[selectedRow].Cells["Activo"].Value);
-                        this.chkUnidadVirtual.Checked = Convert.ToBoolean(this.gvCorporaciones.Rows[selectedRow].Cells["UnidadesVirtuales"].Value);
+                        this.saiTxtDescripcion.Text =
+                            Convert.ToString(this.gvCorporaciones.Rows[selectedRow].Cells["Descripcion"].Value);
+                        this.SeleccionarComboItem(
+                            Convert.ToInt32(this.gvCorporaciones.Rows[selectedRow].Cells["ClaveSistema"].Value));
+                        this.chkActivo.Checked =
+                            Convert.ToBoolean(this.gvCorporaciones.Rows[selectedRow].Cells["Activo"].Value);
+                        this.chkUnidadVirtual.Checked =
+                            Convert.ToBoolean(this.gvCorporaciones.Rows[selectedRow].Cells["UnidadesVirtuales"].Value);
                         this.saiTxtZn.Text = Convert.ToString(this.gvCorporaciones.Rows[selectedRow].Cells["Zn"].Value);
                         this.btnEliminar.Visible = true;
                         this.btnModificar.Enabled = true;
@@ -299,10 +338,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     }
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -340,7 +382,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -348,7 +391,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// </summary>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Â¿Desea Eliminar la corporaciÃ²n?", "Sistema de Administracion de Incidencias", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (
+                MessageBox.Show("¿Desea Eliminar la corporaciòn?", "Sistema de Administracion de Incidencias",
+                                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 this.Eliminar();
                 this.LlenarGrid();

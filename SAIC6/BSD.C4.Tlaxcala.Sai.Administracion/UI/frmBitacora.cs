@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,13 +21,15 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             InitializeComponent();
         }
+
         /// <summary>
-        /// Deshabilitar el poder cambiar el tamaño de la ventana
+        /// Deshabilitar el poder cambiar el tama�o de la ventana
         /// </summary>
         private void frmBitacora_Load(object sender, EventArgs e)
         {
             SAIBarraEstado.SizingGrip = false;
         }
+
         /// <summary>
         /// Busca todos los registros en Bitacora
         /// </summary>
@@ -35,6 +37,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             this.gvBitacora.DataSource = Mappers.BitacoraMapper.Instance().GetAll();
         }
+
         /// <summary>
         /// Cierra la ventana de Bitacora
         /// </summary>
@@ -42,6 +45,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             this.Close();
         }
+
         /// <summary>
         /// Genera Filtro de datos y muestra resultado
         /// </summary>
@@ -73,12 +77,15 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     }
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
-        
+
         /// <summary>
         /// Limpia filtros
         /// </summary>
@@ -89,6 +96,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             this.chkCatalogo.Checked = false;
             this.chkOperacion.Checked = false;
         }
+
         /// <summary>
         /// Activa Check para filtrar
         /// </summary>
@@ -99,6 +107,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             else
                 this.chkOperacion.Checked = false;
         }
+
         /// <summary>
         /// Activa Check para filtrar
         /// </summary>
@@ -109,6 +118,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             else
                 this.chkCatalogo.Checked = false;
         }
+
         /// <summary>
         /// Deselecciona Combobox Operacion si se desactiva check
         /// </summary>
@@ -117,6 +127,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             if (!this.chkOperacion.Checked)
                 this.ddlOperacion.SelectedIndex = -1;
         }
+
         /// <summary>
         /// Deselecciona Combobox Catalogos si se desactiva check
         /// </summary>

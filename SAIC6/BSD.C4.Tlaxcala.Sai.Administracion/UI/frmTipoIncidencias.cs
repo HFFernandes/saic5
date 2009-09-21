@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -54,9 +54,14 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
                     foreach (Entidades.TipoIncidencia tipoIncidencia in lstTipoIns)
                     {
-                        object[] registro = new object[] { tipoIncidencia.Clave, tipoIncidencia.Descripcion, 
-                            tipoIncidencia.ClaveSistema, Mappers.SistemaMapper.Instance().GetOne(tipoIncidencia.ClaveSistema).Descripcion,
-                            tipoIncidencia.ClaveOperacion, tipoIncidencia.Prioridad};
+                        object[] registro = new object[]
+                                                {
+                                                    tipoIncidencia.Clave, tipoIncidencia.Descripcion,
+                                                    tipoIncidencia.ClaveSistema,
+                                                    Mappers.SistemaMapper.Instance().GetOne(tipoIncidencia.ClaveSistema)
+                                                        .Descripcion,
+                                                    tipoIncidencia.ClaveOperacion, tipoIncidencia.Prioridad
+                                                };
                         catTipoIncidencia.Rows.Add(registro);
                     }
 
@@ -65,10 +70,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     this.gvTipoIncidencias.Columns["ClaveSistema"].Visible = false;
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
-            catch(SAIExcepcion)
-            { }
+            catch (SAIExcepcion)
+            {
+            }
         }
 
         //Llena el combo con los sistemas disponibles
@@ -82,21 +90,24 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
                     foreach (Objetos.SistemaObject sistema in lstSistema)
                     {
-                        if(sistema.Descripcion != "ADM")
-                            this.ddlSistema.Items.Add(new ComboItem(sistema.Clave, sistema.Descripcion)); 
+                        if (sistema.Descripcion != "ADM")
+                            this.ddlSistema.Items.Add(new ComboItem(sistema.Clave, sistema.Descripcion));
                     }
-                    
+
                     this.ddlSistema.DisplayMember = "Descripcion";
                     this.ddlSistema.ValueMember = "Clave";
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
-         /// <summary>
+        /// <summary>
         /// Evento del DataGrid para obtener los datos que del regitro que se ha seleccionado
         /// </summary>
         private void gvTipoIncidencias_SelectionChanged(object sender, EventArgs e)
@@ -110,28 +121,41 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     if (selectedRow > -1)
                     {
                         this.btnModificar.Enabled = true;
-                        this.saiTxtDescripcion.Text = Convert.ToString(this.gvTipoIncidencias.Rows[this.ObtenerIndiceSeleccionado()].Cells["Descripcion"].Value);
-                        this.SeleccionarComboItem(Convert.ToInt32(this.gvTipoIncidencias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveSistema"].Value));
+                        this.saiTxtDescripcion.Text =
+                            Convert.ToString(
+                                this.gvTipoIncidencias.Rows[this.ObtenerIndiceSeleccionado()].Cells["Descripcion"].Value);
+                        this.SeleccionarComboItem(
+                            Convert.ToInt32(
+                                this.gvTipoIncidencias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveSistema"].
+                                    Value));
                         //this.ddlSistema.SelectedValue = this.gvTipoIncidencias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveSistema"].Value;
-                        this.txtClaveoperacion.Text = Convert.ToString(this.gvTipoIncidencias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveOperacion"].Value);
-                        this.ddlPrioridad.SelectedText = Convert.ToString(this.gvTipoIncidencias.Rows[this.ObtenerIndiceSeleccionado()].Cells["Prioridad"].Value);
-                        
+                        this.txtClaveoperacion.Text =
+                            Convert.ToString(
+                                this.gvTipoIncidencias.Rows[this.ObtenerIndiceSeleccionado()].Cells["ClaveOperacion"].
+                                    Value);
+                        this.ddlPrioridad.SelectedText =
+                            Convert.ToString(
+                                this.gvTipoIncidencias.Rows[this.ObtenerIndiceSeleccionado()].Cells["Prioridad"].Value);
+
                         this.btnAgregar.Enabled = false;
                         this.btnEliminar.Visible = true;
                     }
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
         /// Deselecciona algun registro del DataGrid y limpia el campo Descripcion
         /// </summary>
         private void Limpiar()
-        {            
+        {
             foreach (DataGridViewRow row in this.gvTipoIncidencias.Rows)
             {
                 row.Selected = false;
@@ -157,7 +181,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             {
                 try
                 {
-                    Entidades.TipoIncidencia newTipoIncidencia = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.TipoIncidencia();
+                    Entidades.TipoIncidencia newTipoIncidencia =
+                        new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.TipoIncidencia();
                     //newTipoIncidencia.ClaveSistema = Convert.ToInt32(this.ddlSistema.SelectedValue);
                     newTipoIncidencia.ClaveSistema = Convert.ToInt32(this.ObtieneValor(this.ddlSistema.SelectedIndex));
                     newTipoIncidencia.Descripcion = this.saiTxtDescripcion.Text;
@@ -176,10 +201,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     Mappers.BitacoraMapper.Instance().Insert(bitacora);
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -209,16 +237,21 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     bitacora.NombreCatalogo = "Tipo Incidencias";
                     bitacora.Operacion = "UPDATE";
                     bitacora.ValorActual = this.saiTxtDescripcion.Text + ", " + this.txtClaveoperacion.Text;
-                    bitacora.ValorAnterior = Convert.ToString(this.gvTipoIncidencias.Rows[this.ObtenerIndiceSeleccionado()].Cells["Descripcion"].Value);
+                    bitacora.ValorAnterior =
+                        Convert.ToString(
+                            this.gvTipoIncidencias.Rows[this.ObtenerIndiceSeleccionado()].Cells["Descripcion"].Value);
                     bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
                     //Agrega operacion en bitacora
                     Mappers.BitacoraMapper.Instance().Insert(bitacora);
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -233,10 +266,13 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     int rowSelected = this.gvTipoIncidencias.CurrentCellAddress.Y;
                     if (rowSelected > -1)
                     {
-                        Mappers.TipoIncidenciaMapper.Instance().Delete(Convert.ToInt32(this.gvTipoIncidencias.Rows[rowSelected].Cells["Clave"].Value));
+                        Mappers.TipoIncidenciaMapper.Instance().Delete(
+                            Convert.ToInt32(this.gvTipoIncidencias.Rows[rowSelected].Cells["Clave"].Value));
 
                         Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
-                        bitacora.Descripcion = "Se elimino el Tipo de Incidencia: " + Convert.ToString(this.gvTipoIncidencias.Rows[rowSelected].Cells["Descripcion"].Value);
+                        bitacora.Descripcion = "Se elimino el Tipo de Incidencia: " +
+                                               Convert.ToString(
+                                                   this.gvTipoIncidencias.Rows[rowSelected].Cells["Descripcion"].Value);
                         bitacora.FechaOperacion = DateTime.Today;
                         bitacora.NombreCatalogo = "Tipo Incidencias";
                         bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
@@ -246,11 +282,15 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     }
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
+
         #endregion
 
         /// <summary>
@@ -276,7 +316,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 this.Limpiar();
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -295,10 +336,14 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                         this.Limpiar();
                     }
                 }
-                else { throw new SAIExcepcion("Seleccione un sistema."); }
+                else
+                {
+                    throw new SAIExcepcion("Seleccione un sistema.");
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -314,7 +359,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// </summary>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Desea eliminar el Tipo de Incidencia?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (
+                MessageBox.Show("Desea eliminar el Tipo de Incidencia?", "Eliminar", MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 this.Eliminar();
                 this.LlenarGrid();
@@ -346,7 +393,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <returns>objeto con el valor del elmento seleccionaod</returns>
         private object ObtieneValor(int indice)
         {
-            return ((ComboItem)this.ddlSistema.Items[indice]).Valor;
+            return ((ComboItem) this.ddlSistema.Items[indice]).Valor;
         }
 
         /// <summary>
@@ -356,7 +403,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <returns>Objeto que representa la descripcion</returns>
         private string ObtieneDescripcion(int indice)
         {
-            return ((ComboItem)this.ddlSistema.Items[indice]).Descripcion;
+            return ((ComboItem) this.ddlSistema.Items[indice]).Descripcion;
         }
 
         /// <summary>
@@ -373,7 +420,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     break;
                 }
                 else
-                { this.ddlSistema.SelectedIndex = -1; }
+                {
+                    this.ddlSistema.SelectedIndex = -1;
+                }
             }
         }
 
@@ -393,7 +442,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             else
             {
                 e.Handled = true;
-            }            
+            }
         }
     }
 }

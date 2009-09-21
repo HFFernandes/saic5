@@ -1,4 +1,4 @@
-锘縰sing System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,11 +27,11 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         private void frmClasificacionOrganizacion_Load(object sender, EventArgs e)
         {
             this.SAIBarraEstado.SizingGrip = false;
-            this.LlenarGrid();            
+            this.LlenarGrid();
         }
 
         /// <summary>
-        /// Llena el Datatgrid con el catalogo de Clasificacion de Organizaci贸n
+        /// Llena el Datatgrid con el catalogo de Clasificacion de Organizaci髇
         /// </summary>
         private void LlenarGrid()
         {
@@ -42,21 +42,26 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     this.gvClasificacionOrg.DataSource = Mappers.ClasificacionOrganizacionMapper.Instance().GetAll();
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
+
         /// <summary>
-        /// Agrega una nueva Clasificaci贸n
+        /// Agrega una nueva Clasificaci髇
         /// </summary>
         private void Agregar()
         {
-            try 
+            try
             {
                 try
                 {
-                    Entidades.ClasificacionOrganizacion newClasificacionOrg = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.ClasificacionOrganizacion();
+                    Entidades.ClasificacionOrganizacion newClasificacionOrg =
+                        new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.ClasificacionOrganizacion();
                     newClasificacionOrg.Descripcion = this.saiTxtDescripcion.Text;
                     Mappers.ClasificacionOrganizacionMapper.Instance().Insert(newClasificacionOrg);
 
@@ -70,13 +75,17 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     Mappers.BitacoraMapper.Instance().Insert(bitacora);
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
+
         /// <summary>
-        /// Modifica una Casificaci贸n
+        /// Modifica una Casificaci髇
         /// </summary>
         private void Modificar()
         {
@@ -84,29 +93,39 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             {
                 try
                 {
-                    Entidades.ClasificacionOrganizacion updClasificacionOrg = Mappers.ClasificacionOrganizacionMapper.Instance().GetOne(Convert.ToInt32(this.gvClasificacionOrg.Rows[this.ObtenerIndiceSeleccionado()].Cells["Clave"].Value));
+                    Entidades.ClasificacionOrganizacion updClasificacionOrg =
+                        Mappers.ClasificacionOrganizacionMapper.Instance().GetOne(
+                            Convert.ToInt32(
+                                this.gvClasificacionOrg.Rows[this.ObtenerIndiceSeleccionado()].Cells["Clave"].Value));
                     updClasificacionOrg.Descripcion = this.saiTxtDescripcion.Text;
                     Mappers.ClasificacionOrganizacionMapper.Instance().Save(updClasificacionOrg);
 
                     Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
-                    bitacora.Descripcion = "Se modifico la Clasificacion de Organizacion: " + updClasificacionOrg.Descripcion;
+                    bitacora.Descripcion = "Se modifico la Clasificacion de Organizacion: " +
+                                           updClasificacionOrg.Descripcion;
                     bitacora.FechaOperacion = DateTime.Today;
                     bitacora.NombreCatalogo = "Clasificacion Organizacion";
                     bitacora.Operacion = "UPDATE";
                     bitacora.ValorActual = this.saiTxtDescripcion.Text;
-                    bitacora.ValorAnterior = Convert.ToString(this.gvClasificacionOrg.Rows[this.ObtenerIndiceSeleccionado()].Cells["Descripcion"].Value);
+                    bitacora.ValorAnterior =
+                        Convert.ToString(
+                            this.gvClasificacionOrg.Rows[this.ObtenerIndiceSeleccionado()].Cells["Descripcion"].Value);
                     bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
 
                     Mappers.BitacoraMapper.Instance().Insert(bitacora);
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
+
         /// <summary>
-        /// Elimina una clasificaci貌n de Organizaciones del catalogo
+        /// Elimina una clasificaci騨 de Organizaciones del catalogo
         /// </summary>
         private void Eliminar()
         {
@@ -114,10 +133,15 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             {
                 try
                 {
-                    Mappers.ClasificacionOrganizacionMapper.Instance().Delete(Convert.ToInt32(this.gvClasificacionOrg.Rows[this.ObtenerIndiceSeleccionado()].Cells["Clave"].Value));
+                    Mappers.ClasificacionOrganizacionMapper.Instance().Delete(
+                        Convert.ToInt32(
+                            this.gvClasificacionOrg.Rows[this.ObtenerIndiceSeleccionado()].Cells["Clave"].Value));
 
                     Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
-                    bitacora.Descripcion = "Se elimino la Clasificacion de Organizacion: " + Convert.ToString(this.gvClasificacionOrg.Rows[this.ObtenerIndiceSeleccionado()].Cells["Descripcion"].Value);
+                    bitacora.Descripcion = "Se elimino la Clasificacion de Organizacion: " +
+                                           Convert.ToString(
+                                               this.gvClasificacionOrg.Rows[this.ObtenerIndiceSeleccionado()].Cells[
+                                                   "Descripcion"].Value);
                     bitacora.FechaOperacion = DateTime.Today;
                     bitacora.NombreCatalogo = "Clasificacion Organizacion";
                     bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
@@ -126,11 +150,15 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                     Mappers.BitacoraMapper.Instance().Insert(bitacora);
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
+
         /// <summary>
         /// Limpia los controles del formulario de Clasificaciones
         /// </summary>
@@ -141,6 +169,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             this.btnAgregar.Enabled = true;
             this.btnModificar.Enabled = false;
         }
+
         /// <summary>
         /// Obtiene el indice del registro seleccionado
         /// </summary>
@@ -149,24 +178,29 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             return this.gvClasificacionOrg.CurrentCellAddress.Y;
         }
+
         /// <summary>
-        /// Evanto que obtiene los datos de la clasificaci贸n seleccionada para su modificaci贸n
+        /// Evanto que obtiene los datos de la clasificaci髇 seleccionada para su modificaci髇
         /// </summary>
         private void gvClasificacionOrg_SelectionChanged(object sender, EventArgs e)
         {
             try
             {
-                if(this.ObtenerIndiceSeleccionado() > -1)
+                if (this.ObtenerIndiceSeleccionado() > -1)
                 {
-                    this.saiTxtDescripcion.Text = Convert.ToString(this.gvClasificacionOrg.Rows[this.ObtenerIndiceSeleccionado()].Cells["Descripcion"].Value);
+                    this.saiTxtDescripcion.Text =
+                        Convert.ToString(
+                            this.gvClasificacionOrg.Rows[this.ObtenerIndiceSeleccionado()].Cells["Descripcion"].Value);
                     this.btnEliminar.Visible = true;
                     this.btnAgregar.Enabled = false;
                     this.btnModificar.Enabled = true;
                 }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
+
         /// <summary>
         /// Llama el metodo Limpiar
         /// </summary>
@@ -174,6 +208,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             this.Limpiar();
         }
+
         /// <summary>
         /// Valida campos obligatorios y llama el metodo modificar
         /// </summary>
@@ -186,32 +221,37 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 this.Limpiar();
             }
         }
+
         /// <summary>
         /// Valida campos obligatorios y llama el metodo agregar
         /// </summary>
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            if(this.SAIProveedorValidacion.ValidarCamposRequeridos(this.gbpDatosGenerales))
+            if (this.SAIProveedorValidacion.ValidarCamposRequeridos(this.gbpDatosGenerales))
             {
                 this.Agregar();
                 this.LlenarGrid();
                 this.Limpiar();
             }
         }
+
         /// <summary>
         /// Llama el metodo Eliminar
         /// </summary>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("驴Esta seguro de Eliminar la Clasificacion?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (
+                MessageBox.Show("縀sta seguro de Eliminar la Clasificacion?", "Eliminar", MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 this.Eliminar();
                 this.LlenarGrid();
                 this.Limpiar();
             }
         }
+
         /// <summary>
-        /// Cierra la ventana de Clasificaci贸n de Organizaciones
+        /// Cierra la ventana de Clasificaci髇 de Organizaciones
         /// </summary>
         private void btnCerrar_Click(object sender, EventArgs e)
         {

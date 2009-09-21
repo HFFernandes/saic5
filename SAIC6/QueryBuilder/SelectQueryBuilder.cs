@@ -279,7 +279,7 @@ namespace CodeEngine.Framework.QueryBuilder
             {
                 if (_selectedTables.Count == 1)
                     Query += _selectedTables[0] + ".";
-                        // By default only select * from the table that was selected. If there are any joins, it is the responsibility of the user to select the needed columns.
+                // By default only select * from the table that was selected. If there are any joins, it is the responsibility of the user to select the needed columns.
 
                 Query += "*";
             }

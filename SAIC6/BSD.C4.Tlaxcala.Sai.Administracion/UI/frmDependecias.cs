@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,8 +28,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <param name="e"></param>
         private void frmDependecias_Load(object sender, EventArgs e)
         {
-             this.SAIBarraEstado.SizingGrip = false;
-             this.LlenarGrid();
+            this.SAIBarraEstado.SizingGrip = false;
+            this.LlenarGrid();
         }
 
         /// <summary>
@@ -37,17 +37,20 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// </summary>
         private void LlenarGrid()
         {
-            try 
+            try
             {
                 try
                 {
                     this.gvDependencias.DataSource = Mappers.DependenciaMapper.Instance().GetAll();
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -55,7 +58,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// </summary>
         private void Agregar()
         {
-            try 
+            try
             {
                 Entidades.Dependencia newDependencia = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Dependencia();
                 newDependencia.Descripcion = this.saiTxtDependencia.Text;
@@ -70,9 +73,11 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
 
                 Mappers.BitacoraMapper.Instance().Insert(bitacora);
             }
-            catch(SAIExcepcion)
-            {}        
+            catch (SAIExcepcion)
+            {
+            }
         }
+
         /// <summary>
         /// Modifica la Descripcion de una Dependencia
         /// </summary>
@@ -80,7 +85,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             try
             {
-                Entidades.Dependencia updDependencia = Mappers.DependenciaMapper.Instance().GetOne(Convert.ToInt32(this.gvDependencias.Rows[this.ObtieneIndiceSeleccionado()].Cells["Clave"].Value));
+                Entidades.Dependencia updDependencia =
+                    Mappers.DependenciaMapper.Instance().GetOne(
+                        Convert.ToInt32(this.gvDependencias.Rows[this.ObtieneIndiceSeleccionado()].Cells["Clave"].Value));
                 updDependencia.Descripcion = this.saiTxtDependencia.Text;
                 Mappers.DependenciaMapper.Instance().Save(updDependencia);
                 //Agrega operacion al catalogo
@@ -94,8 +101,10 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 Mappers.BitacoraMapper.Instance().Insert(bitacora);
             }
             catch (SAIExcepcion)
-            { } 
+            {
+            }
         }
+
         /// <summary>
         /// Elimina una dependencia del catalogo
         /// </summary>
@@ -103,10 +112,14 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             try
             {
-                Mappers.DependenciaMapper.Instance().Delete(Convert.ToInt32(this.gvDependencias.Rows[this.ObtieneIndiceSeleccionado()].Cells["Clave"].Value));
+                Mappers.DependenciaMapper.Instance().Delete(
+                    Convert.ToInt32(this.gvDependencias.Rows[this.ObtieneIndiceSeleccionado()].Cells["Clave"].Value));
                 //Agrega operacion en la bitacora
                 Entidades.Bitacora bitacora = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.Bitacora();
-                bitacora.Descripcion = "Se elimino la Dependencia: " + Convert.ToString(this.gvDependencias.Rows[this.ObtieneIndiceSeleccionado()].Cells["Descripcion"].Value);
+                bitacora.Descripcion = "Se elimino la Dependencia: " +
+                                       Convert.ToString(
+                                           this.gvDependencias.Rows[this.ObtieneIndiceSeleccionado()].Cells[
+                                               "Descripcion"].Value);
                 bitacora.FechaOperacion = DateTime.Today;
                 bitacora.NombreCatalogo = "Dependencias";
                 bitacora.NombrePropio = ConfigurationSettings.AppSettings["strUsrKey"];
@@ -115,7 +128,8 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 Mappers.BitacoraMapper.Instance().Insert(bitacora);
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
 
         /// <summary>
@@ -128,6 +142,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
             this.btnModificar.Enabled = false;
             this.btnEliminar.Visible = false;
         }
+
         /// <summary>
         /// Obtiene el indice del registro sleccionado
         /// </summary>
@@ -136,6 +151,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             return this.gvDependencias.CurrentCellAddress.Y;
         }
+
         /// <summary>
         /// Cierra la ventana de Dependencias
         /// </summary>
@@ -145,6 +161,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         {
             this.Close();
         }
+
         /// <summary>
         /// Llama el metodo Limpiar
         /// </summary>
@@ -167,7 +184,7 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
                 this.Modificar();
                 this.LlenarGrid();
                 this.Limpiar();
-            }            
+            }
         }
 
         /// <summary>
@@ -192,7 +209,9 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <param name="e"></param>
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Esta seguro de eliminar la dependencia?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (
+                MessageBox.Show("Esta seguro de eliminar la dependencia?", "Eliminar", MessageBoxButtons.YesNo,
+                                MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 this.Eliminar();
                 this.LlenarGrid();
@@ -207,23 +226,28 @@ namespace BSD.C4.Tlaxcala.Sai.Administracion.UI
         /// <param name="e"></param>
         private void gvDependencias_SelectionChanged(object sender, EventArgs e)
         {
-            try 
+            try
             {
                 try
                 {
                     if (this.ObtieneIndiceSeleccionado() > -1)
                     {
-                        this.saiTxtDependencia.Text = Convert.ToString(this.gvDependencias.Rows[this.ObtieneIndiceSeleccionado()].Cells["Descripcion"].Value);
+                        this.saiTxtDependencia.Text =
+                            Convert.ToString(
+                                this.gvDependencias.Rows[this.ObtieneIndiceSeleccionado()].Cells["Descripcion"].Value);
                         this.btnEliminar.Visible = true;
                         this.btnAgregar.Enabled = false;
                         this.btnModificar.Enabled = true;
                     }
                 }
                 catch (Exception ex)
-                { throw new SAIExcepcion(ex.Message); }
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
             }
             catch (SAIExcepcion)
-            { }
+            {
+            }
         }
     }
 }

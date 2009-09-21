@@ -1,10 +1,10 @@
-Ôªøusing System.ComponentModel;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 {
     /// <summary>
-    /// Control que implementa funciones de validaci√≥n de campos
+    /// Control que implementa funciones de validaciÛn de campos
     /// </summary>
     public partial class SAIProveedorValidacion : Component
     {
@@ -19,7 +19,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         /// <summary>
         /// Constructor con parametros
         /// </summary>
-        /// <param name="container">Contenedor en el cual ser√° embebido</param>
+        /// <param name="container">Contenedor en el cual ser· embebido</param>
         public SAIProveedorValidacion(IContainer container)
         {
             container.Add(this);
@@ -28,10 +28,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         }
 
         /// <summary>
-        /// Funci√≥n booleana para realizar la validaci√≥n de controles marcados como requeridos
+        /// FunciÛn booleana para realizar la validaciÛn de controles marcados como requeridos
         /// </summary>
-        /// <param name="parentControls">Contenedor padre donde reside el proveedor de validaci√≥n</param>
-        /// <returns>Valor booleano que indica si la validaci√≥n fue satisfactoria</returns>
+        /// <param name="parentControls">Contenedor padre donde reside el proveedor de validaciÛn</param>
+        /// <returns>Valor booleano que indica si la validaciÛn fue satisfactoria</returns>
         public bool ValidarCamposRequeridos(Control parentControls)
         {
             foreach (var t in parentControls.Controls)
@@ -52,7 +52,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             }
 
             return true;
-        Error:
+            Error:
             return false;
         }
     }
