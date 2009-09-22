@@ -80,13 +80,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                 intEdad = Convert.ToInt32(row.Cells[3].Value);
                                 if (intEdad <= 0)
                                 {
-                                    throw new SAIExcepcion("La edad no se encuentra en el formato correcto, debe de ser un valor numérico mayor a 0.");
+                                    throw new SAIExcepcion("La edad no se encuentra en el formato correcto, debe de ser un valor numérico mayor a 0.",this);
                                 }
                                 Persona.Edad = intEdad;
                             }
                             catch
                             {
-                                throw new SAIExcepcion("La edad no se encuentra en el formato correcto, debe de ser un valor numérico mayor a 0.");
+                                throw new SAIExcepcion("La edad no se encuentra en el formato correcto, debe de ser un valor numérico mayor a 0.",this);
                             }
                         }
                         //Sexo:
@@ -96,7 +96,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         }
                         else
                         {
-                            throw new SAIExcepcion("Debe especificar el sexo de la persona, F (Femenino) y M (Masculino)");
+                            throw new SAIExcepcion("Debe especificar el sexo de la persona, F (Femenino) y M (Masculino)",this);
                         }
                         //Estatura:
                         if (row.Cells[5].Value != null)
@@ -315,7 +315,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
                     catch (Exception ex)
                     {
-                        throw new SAIExcepcion(ex.Message);
+                        throw new SAIExcepcion(ex.Message,this);
                     }
                 }
                 catch (SAIExcepcion)
@@ -357,7 +357,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
                 catch (Exception ex)
                 {
-                    throw new SAIExcepcion(ex.Message + " " + ex.StackTrace, this);
+                    throw new SAIExcepcion(ex.Message, this);
                 }
             }
             catch (SAIExcepcion)

@@ -29,7 +29,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     saiReport1.reportControl.PrintPreview(true);
                 }
                 else
-                    throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
+                    throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS,this);
             }
             catch (SAIExcepcion)
             {
@@ -80,7 +80,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
                 catch (Exception ex)
                 {
-                    throw new SAIExcepcion(ex.Message);
+                    throw new SAIExcepcion(ex.Message,this);
                 }
             }
             catch (SAIExcepcion)
