@@ -39,8 +39,6 @@
             this.brComandosAccesorios = new System.Windows.Forms.ToolStrip();
             this.btnEliminarAccesorio = new System.Windows.Forms.ToolStripButton();
             this.dgvAccesorios = new System.Windows.Forms.DataGridView();
-            this.gcIdAccesorio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gcAccesorio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtAccesoriosResponsables = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.dtpAccesoriosFechaPercato = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDatePicker(this.components);
             this.txtAccesoriosPersonaSePercato = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
@@ -55,8 +53,6 @@
             this.gbDatosRobo = new System.Windows.Forms.GroupBox();
             this.gbDatosVehiculo = new System.Windows.Forms.GroupBox();
             this.gbVehiculos = new System.Windows.Forms.GroupBox();
-            this.brComandosVehiculo = new System.Windows.Forms.ToolStrip();
-            this.btnEliminarVehiculo = new System.Windows.Forms.ToolStripButton();
             this.btnAgregarVehiculo = new System.Windows.Forms.Button();
             this.txtPlacas = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.txtModelo = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
@@ -64,6 +60,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.gcIdAccesorio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gcAccesorio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbAccesorios.SuspendLayout();
             this.brComandosAccesorios.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccesorios)).BeginInit();
@@ -71,17 +69,16 @@
             this.gbDatosRobo.SuspendLayout();
             this.gbDatosVehiculo.SuspendLayout();
             this.gbVehiculos.SuspendLayout();
-            this.brComandosVehiculo.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbAccesorios
             // 
             this.gbAccesorios.Controls.Add(this.brComandosAccesorios);
             this.gbAccesorios.Controls.Add(this.dgvAccesorios);
-            this.gbAccesorios.Location = new System.Drawing.Point(11, 48);
+            this.gbAccesorios.Location = new System.Drawing.Point(11, 169);
             this.gbAccesorios.Name = "gbAccesorios";
-            this.gbAccesorios.Size = new System.Drawing.Size(621, 138);
-            this.gbAccesorios.TabIndex = 7;
+            this.gbAccesorios.Size = new System.Drawing.Size(621, 166);
+            this.gbAccesorios.TabIndex = 8;
             this.gbAccesorios.TabStop = false;
             this.gbAccesorios.Text = "Accesorios robados a este vehiculo :";
             // 
@@ -137,20 +134,9 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
             this.dgvAccesorios.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvAccesorios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvAccesorios.Size = new System.Drawing.Size(615, 92);
+            this.dgvAccesorios.Size = new System.Drawing.Size(615, 120);
             this.dgvAccesorios.TabIndex = 1;
             this.dgvAccesorios.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAccesorios_CellValueChanged);
-            // 
-            // gcIdAccesorio
-            // 
-            this.gcIdAccesorio.HeaderText = "IdAccesorio";
-            this.gcIdAccesorio.Name = "gcIdAccesorio";
-            this.gcIdAccesorio.Visible = false;
-            // 
-            // gcAccesorio
-            // 
-            this.gcAccesorio.HeaderText = "Accesorio";
-            this.gcAccesorio.Name = "gcAccesorio";
             // 
             // txtAccesoriosResponsables
             // 
@@ -244,13 +230,13 @@
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvVehiculoAccesorios.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dgvVehiculoAccesorios.Location = new System.Drawing.Point(3, 40);
+            this.dgvVehiculoAccesorios.Location = new System.Drawing.Point(3, 19);
             this.dgvVehiculoAccesorios.Name = "dgvVehiculoAccesorios";
             this.dgvVehiculoAccesorios.ReadOnly = true;
             this.dgvVehiculoAccesorios.RowHeadersVisible = false;
             this.dgvVehiculoAccesorios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvVehiculoAccesorios.Size = new System.Drawing.Size(615, 92);
-            this.dgvVehiculoAccesorios.TabIndex = 1;
+            this.dgvVehiculoAccesorios.Size = new System.Drawing.Size(615, 90);
+            this.dgvVehiculoAccesorios.TabIndex = 0;
             this.dgvVehiculoAccesorios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVehiculoAccesorios_CellClick);
             // 
             // ClaveVehiculoInvolucrado
@@ -313,35 +299,13 @@
             // 
             // gbVehiculos
             // 
-            this.gbVehiculos.Controls.Add(this.brComandosVehiculo);
             this.gbVehiculos.Controls.Add(this.dgvVehiculoAccesorios);
-            this.gbVehiculos.Location = new System.Drawing.Point(11, 197);
+            this.gbVehiculos.Location = new System.Drawing.Point(11, 48);
             this.gbVehiculos.Name = "gbVehiculos";
-            this.gbVehiculos.Size = new System.Drawing.Size(621, 138);
-            this.gbVehiculos.TabIndex = 8;
+            this.gbVehiculos.Size = new System.Drawing.Size(621, 115);
+            this.gbVehiculos.TabIndex = 7;
             this.gbVehiculos.TabStop = false;
             this.gbVehiculos.Text = "Vehículos Involucrados :";
-            // 
-            // brComandosVehiculo
-            // 
-            this.brComandosVehiculo.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.brComandosVehiculo.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnEliminarVehiculo});
-            this.brComandosVehiculo.Location = new System.Drawing.Point(3, 16);
-            this.brComandosVehiculo.Name = "brComandosVehiculo";
-            this.brComandosVehiculo.Size = new System.Drawing.Size(615, 25);
-            this.brComandosVehiculo.TabIndex = 0;
-            this.brComandosVehiculo.Text = "toolStrip1";
-            // 
-            // btnEliminarVehiculo
-            // 
-            this.btnEliminarVehiculo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnEliminarVehiculo.Image = ((System.Drawing.Image)(resources.GetObject("btnEliminarVehiculo.Image")));
-            this.btnEliminarVehiculo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEliminarVehiculo.Name = "btnEliminarVehiculo";
-            this.btnEliminarVehiculo.Size = new System.Drawing.Size(23, 22);
-            this.btnEliminarVehiculo.ToolTipText = "Eliminar el vehiculo actual.";
-            this.btnEliminarVehiculo.Click += new System.EventHandler(this.btnEliminarVehiculo_Click);
             // 
             // btnAgregarVehiculo
             // 
@@ -417,6 +381,19 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Marca :";
             // 
+            // gcIdAccesorio
+            // 
+            this.gcIdAccesorio.FillWeight = 60.9137F;
+            this.gcIdAccesorio.HeaderText = "IdAccesorio";
+            this.gcIdAccesorio.Name = "gcIdAccesorio";
+            this.gcIdAccesorio.Visible = false;
+            // 
+            // gcAccesorio
+            // 
+            this.gcAccesorio.FillWeight = 139.0863F;
+            this.gcAccesorio.HeaderText = "Accesorio";
+            this.gcAccesorio.Name = "gcAccesorio";
+            // 
             // SAIFrmAltaAccesoriosAuto066
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -445,9 +422,6 @@
             this.gbDatosVehiculo.ResumeLayout(false);
             this.gbDatosVehiculo.PerformLayout();
             this.gbVehiculos.ResumeLayout(false);
-            this.gbVehiculos.PerformLayout();
-            this.brComandosVehiculo.ResumeLayout(false);
-            this.brComandosVehiculo.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -477,11 +451,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridView dgvAccesorios;
+        private System.Windows.Forms.ToolStrip brComandosAccesorios;
+        private System.Windows.Forms.ToolStripButton btnEliminarAccesorio;
         private System.Windows.Forms.DataGridViewTextBoxColumn gcIdAccesorio;
         private System.Windows.Forms.DataGridViewTextBoxColumn gcAccesorio;
-        private System.Windows.Forms.ToolStrip brComandosAccesorios;
-        private System.Windows.Forms.ToolStrip brComandosVehiculo;
-        private System.Windows.Forms.ToolStripButton btnEliminarAccesorio;
-        private System.Windows.Forms.ToolStripButton btnEliminarVehiculo;
     }
 }

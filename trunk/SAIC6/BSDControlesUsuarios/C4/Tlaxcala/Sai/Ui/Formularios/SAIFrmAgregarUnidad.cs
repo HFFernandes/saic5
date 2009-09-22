@@ -50,14 +50,14 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         }
                         else
                             throw new SAIExcepcion(
-                                "La unidad ya existe para su corporación. Probablemente no este activa, consulte con el Administrador.");
+                                "La unidad ya existe para su corporación. Probablemente no este activa, consulte con el Administrador.",this);
                     }
                     else
-                        throw new SAIExcepcion("Existen campos requeridos vacios.");
+                        throw new SAIExcepcion("Existen campos requeridos vacios.",this);
                 }
                 catch (Exception ex)
                 {
-                    throw new SAIExcepcion(ex.Message);
+                    throw new SAIExcepcion(ex.Message,this);
                 }
             }
             catch (SAIExcepcion)

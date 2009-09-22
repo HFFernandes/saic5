@@ -291,7 +291,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     }
                                 }
                                 else
-                                    throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
+                                    throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS,this);
                                 break;
                             case ID.CMD_NI:
                                 if (Aplicacion.UsuarioPersistencia.blnPuedeEscribir(e.control.Id))
@@ -312,7 +312,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     }
                                 }
                                 else
-                                    throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
+                                    throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS,this);
                                 break;
                             case ID.CMD_PH:
                                 if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(e.control.Id))
@@ -361,7 +361,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     }
                                 }
                                 else
-                                    throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
+                                    throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS,this);
                                 break;
                             case ID.CMD_NI:
                                 //if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value)
@@ -382,7 +382,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     }
                                 }
                                 else
-                                    throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
+                                    throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS,this);
                                 break;
                             case ID.CMD_AU:
                                 var corporacion = Aplicacion.UsuarioPersistencia.intCorporacion != null
@@ -404,10 +404,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                         }
                                     }
                                     else
-                                        throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
+                                        throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS,this);
                                 }
                                 else
-                                    throw new SAIExcepcion(ID.STR_CORPORACIONESVIRTUALES);
+                                    throw new SAIExcepcion(ID.STR_CORPORACIONESVIRTUALES,this);
                                 break;
                             case ID.CMD_U:
                                 if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(e.control.Id))
@@ -421,7 +421,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     }
                                 }
                                 else
-                                    throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS);
+                                    throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS,this);
 
                                 break;
                             case ID.CMD_PH:
@@ -500,12 +500,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             }
                             else
                             {
-                                throw new SAIExcepcion("No existe una incidencia activa que se pueda cancelar.");
+                                throw new SAIExcepcion("No existe una incidencia activa que se pueda cancelar.",this);
                             }
                         }
                         break;
                     case ID.CMD_SIF:
-                        throw new SAIExcepcion("Funcionalidad no implementada.");
+                        throw new SAIExcepcion("Funcionalidad no implementada.",this);
                         break;
                     case ID.CMD_TEL:
                         if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(e.control.Id))

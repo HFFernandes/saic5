@@ -58,7 +58,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
                 catch (Exception)
                 {
-                    throw new SAIExcepcion(ID.STR_ERRORFILTRO);
+                    throw new SAIExcepcion(ID.STR_ERRORFILTRO,this);
                 }
             }
             catch (SAIExcepcion)
@@ -83,11 +83,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
                 catch (FileNotFoundException)
                 {
-                    throw new SAIExcepcion(ID.STR_NOSELOCALIZOARCHIVO);
+                    throw new SAIExcepcion(ID.STR_NOSELOCALIZOARCHIVO,this);
                 }
                 catch (Exception ex)
                 {
-                    throw new SAIExcepcion(ex.Message);
+                    throw new SAIExcepcion(ex.Message,this);
                 }
             }
             catch (SAIExcepcion)
@@ -117,11 +117,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
                 catch (FileNotFoundException)
                 {
-                    throw new SAIExcepcion(ID.STR_NOSELOCALIZOARCHIVO);
+                    throw new SAIExcepcion(ID.STR_NOSELOCALIZOARCHIVO,this);
                 }
                 catch (Exception ex)
                 {
-                    throw new SAIExcepcion(ex.Message);
+                    throw new SAIExcepcion(ex.Message,this);
                 }
             }
             catch (SAIExcepcion)
