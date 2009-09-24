@@ -300,11 +300,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void dgvVehiculoAccesorios_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (this.dgvVehiculoAccesorios.Rows[e.RowIndex].Cells[0].Value != null)
-            {
-                int idVehiculo = Convert.ToInt32(this.dgvVehiculoAccesorios.Rows[e.RowIndex].Cells[0].Value);
-                this.MostrarDatosVehiculo(idVehiculo);
-            }
+            //if (this.dgvVehiculoAccesorios.Rows[e.RowIndex].Cells[0].Value != null)
+            //{
+            //    int idVehiculo = Convert.ToInt32(this.dgvVehiculoAccesorios.Rows[e.RowIndex].Cells[0].Value);
+            //    this.MostrarDatosVehiculo(idVehiculo);
+            //}
         }
 
         private void Controls_KeyDown(object sender, KeyEventArgs e)
@@ -374,6 +374,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
             catch (Exception)
             {
+            }
+        }
+
+        private void dgvVehiculoAccesorios_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (this.dgvVehiculoAccesorios.Rows[e.RowIndex].Cells[0].Value != null)
+            {
+                int idVehiculo = Convert.ToInt32(this.dgvVehiculoAccesorios.Rows[e.RowIndex].Cells[0].Value);
+                this.MostrarDatosVehiculo(idVehiculo);
             }
         }
     }

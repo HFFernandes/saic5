@@ -10,6 +10,7 @@ using BSD.C4.Tlaxcala.Sai.Dal.Rules.Objects;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
 using Mappers = BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using System.Collections;
+using BSD.C4.Tlaxcala.Sai.Mapa;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -104,7 +105,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// <remarks>
         /// Este objeto se pasa al método del la clase controladora del mapa para leer los valores de los id's correspondientes
         /// </remarks>
-        private Mapa.EstructuraUbicacion _objUbicacion = new Mapa.EstructuraUbicacion();
+        private EstructuraUbicacion _objUbicacion = new EstructuraUbicacion();
 
         /// <summary>
         /// Esta bandera lleva el estado para saber si el usuario quiso cerrar la ventana, esto para saber
@@ -170,14 +171,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// Contiene la lista de localidades por municipio.
         /// </summary>
         //LocalidadList objListaLocalidades;
+
         /// <summary>
         /// Contiene la lista de códigos postales.
         /// </summary>
         //CodigoPostalList objListaCodigosPostales = new CodigoPostalList();
+
         /// <summary>
         /// Representa un código postal.
         /// </summary>
         //CodigoPostal entCodigoPostal;
+
         /// <summary>
         /// Contiene todos los datos del usuario logueado.
         /// </summary>
@@ -192,6 +196,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// Indica si se debe disparar los eventos en cascada desde Municipio,localidad,colonia,código postal.
         /// </summary>
         //private bool DispararCascadaHaciaAbajo;
+
         /// <summary>
         /// Indica si se debe disparar los eventos en cascada desde Codigo Postal,colonia,localidad y municipio.
         /// </summary>
@@ -558,7 +563,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     //int y;
                     while (myEnumerator.MoveNext())
                     {
-                        int y = (int)myEnumerator.Current;
+                        var y = (int)myEnumerator.Current;
                         foreach (Corporacion objCorporacion in ListaCorporaciones)
                         {
                             if (this.cklCorporacion.Items[y].ToString() == objCorporacion.Descripcion)
@@ -1018,22 +1023,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         private void ActualizaMapaUbicacion()
         {
-            if (cmbMunicipio.SelectedIndex == -1 || cmbMunicipio.Text.Trim() == string.Empty)
+            if (cmbCP.SelectedIndex == -1 || cmbCP.Text.Trim() == string.Empty)
             {
-                _objUbicacion.IdMunicipio = null;
+                _objUbicacion.IdCodigoPostal = null;
             }
             else
             {
-                _objUbicacion.IdMunicipio = int.Parse((cmbMunicipio.SelectedItem as Municipio).Clave.ToString());
-            }
-
-            if (cmbLocalidad.SelectedIndex == -1 || cmbLocalidad.Text.Trim() == string.Empty)
-            {
-                _objUbicacion.IdLocalidad = null;
-            }
-            else
-            {
-                _objUbicacion.IdLocalidad = (cmbLocalidad.SelectedItem as Localidad).Clave;
+                _objUbicacion.IdCodigoPostal = (cmbCP.SelectedItem as CodigoPostal).Clave;
             }
 
             if (cmbColonia.SelectedIndex == -1 || cmbColonia.Text.Trim() == string.Empty)
@@ -1045,15 +1041,44 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 _objUbicacion.IdColonia = (cmbColonia.SelectedItem as Colonia).Clave;
             }
 
-            if (cmbCP.SelectedIndex == -1 || cmbCP.Text.Trim() == string.Empty)
+            if (cmbLocalidad.SelectedIndex == -1 || cmbLocalidad.Text.Trim() == string.Empty)
             {
-                _objUbicacion.IdCodigoPostal = null;
+                _objUbicacion.IdLocalidad = null;
             }
             else
             {
-                _objUbicacion.IdCodigoPostal = (cmbCP.SelectedItem as CodigoPostal).Clave;
+                _objUbicacion.IdLocalidad = (cmbLocalidad.SelectedItem as Localidad).Clave;
             }
-            Mapa.Controlador.MuestraMapa(_objUbicacion, this);
+
+            if (cmbMunicipio.SelectedIndex == -1 || cmbMunicipio.Text.Trim() == string.Empty)
+            {
+                _objUbicacion.IdMunicipio = null;
+            }
+            else
+            {
+                _objUbicacion.IdMunicipio = int.Parse((cmbMunicipio.SelectedItem as Municipio).Clave.ToString());
+            }
+
+            Controlador.MuestraMapa(_objUbicacion, this);
+        }
+
+        protected override void OnActivated(EventArgs e)
+        {
+            try
+            {
+                try
+                {
+                    base.OnActivated(e);
+                    ActualizaMapaUbicacion();
+                }
+                catch (Exception ex)
+                {
+                    throw new SAIExcepcion(ex.Message);
+                }
+            }
+            catch (SAIExcepcion)
+            {
+            }
         }
 
         /// <summary>
@@ -1124,7 +1149,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             //Actualizamos el codigo postal.
                             this.ActualizarCodigoPostal(lstCodigoPostal);
                             //Actualizamos el mapa
-                            this.ActualizaMapaUbicacion();
+                            //this.ActualizaMapaUbicacion();
+
+                            var esUbi = new EstructuraUbicacion() { IdColonia = objColonia.Clave };
+                            Controlador.MuestraMapa(esUbi);
                         }
                     }
                 }
@@ -1196,7 +1224,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                     this.cklCorporacion.CheckOnClick = true;
                 }
-                catch (System.Exception ex)
+                catch (Exception ex)
                 {
                     throw new SAIExcepcion(ex.Message, this);
                 }
@@ -1393,6 +1421,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
                     this._blnBloqueaEventos = true;
 
+                    var idCol = Convert.ToInt32(cmbColonia.SelectedValue);
+                    var esUbi = new EstructuraUbicacion() { IdColonia = idCol };
+                    Controlador.MuestraMapa(esUbi);
+
                     if (this.cmbCP.Items.Count > 0)
                     {
                         if (((Colonia)this.cmbColonia.SelectedItem).ClaveCodigoPostal.HasValue)
@@ -1418,7 +1450,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
 
                     this._blnBloqueaEventos = false;
-                    this.ActualizaMapaUbicacion();
+                    //this.ActualizaMapaUbicacion();
                 }
                 catch (Exception ex)
                 {
@@ -1677,21 +1709,27 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     {
                         return;
                     }
+                    var idMun = Convert.ToInt32(cmbMunicipio.SelectedValue);
+                    var esUbi = new EstructuraUbicacion() { IdMunicipio = idMun };
+                    Controlador.MuestraMapa(esUbi);
+
                     this._blnBloqueaEventos = true;
+
                     //Limpiar localidades y colonias
                     this.LimpiaLocalidades();
                     this.LimpiaColonias();
                     this.LimpiaCodigosPostales();
+
                     //obtener las localidades del municipio seleccionado
                     LocalidadList lstLocalidades =
-                        LocalidadMapper.Instance().GetByMunicipio(((Municipio)this.cmbMunicipio.SelectedItem).Clave);
+                        LocalidadMapper.Instance().GetByMunicipio(idMun/*((Municipio)this.cmbMunicipio.SelectedItem).Clave*/);
 
                     if (lstLocalidades.Count > 0)
                     {
                         this.ActualizaLocalidades(lstLocalidades);
                     }
                     this._blnBloqueaEventos = false;
-                    this.ActualizaMapaUbicacion();
+                    //this.ActualizaMapaUbicacion();
                 }
                 catch (Exception ex)
                 {
@@ -1718,8 +1756,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     //Bandera para bloquear evento
                     this._blnBloqueaEventos = true;
                     this.LimpiaColonias(); //limpia colonias
+
+                    var idLoc = Convert.ToInt32(cmbLocalidad.SelectedValue);
+                    var esUbi = new EstructuraUbicacion() { IdLocalidad = idLoc };
+                    Controlador.MuestraMapa(esUbi);
+
                     lstColonia =
-                        ColoniaMapper.Instance().GetByLocalidad(((Localidad)this.cmbLocalidad.SelectedItem).Clave);
+                        ColoniaMapper.Instance().GetByLocalidad(idLoc/*((Localidad)this.cmbLocalidad.SelectedItem).Clave*/);
                     if (lstColonia.Count > 0)
                     {
                         //se agregan colonias al control correspondientes a la localidad seleccionada
@@ -1729,8 +1772,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         //Entidades.CodigoPostalList cpTemp = new BSD.C4.Tlaxcala.Sai.Dal.Rules.Entities.CodigoPostalList();
                         //SE OBTIENE LA LISTA DE CODIGOS POSTALES DE LA LOCALIDAD CORRESPONDIENTE
                         CodigoPostalList lstCodigoPostal =
-                            CodigoPostalMapper.Instance().GetByLocalidad(
-                                ((Localidad)this.cmbLocalidad.SelectedItem).Clave);
+                            CodigoPostalMapper.Instance().GetByLocalidad(idLoc/*
+                                ((Localidad)this.cmbLocalidad.SelectedItem).Clave*/
+                                                                                   );
                         //bool existe = false;//bandera para determinar si un cp esta repetido
                         if (lstCodigoPostal.Count > 0)
                         {
@@ -1741,7 +1785,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     }
                     //Bandera para desbloquear
                     this._blnBloqueaEventos = false;
-                    this.ActualizaMapaUbicacion();
+                    //this.ActualizaMapaUbicacion();
                 }
                 catch (Exception ex)
                 {
@@ -1765,12 +1809,17 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         {
                             return;
                         }
+
+                        var idCp = Convert.ToInt32(cmbCP.SelectedValue);
+                        var esUbi = new EstructuraUbicacion() { IdCodigoPostal = idCp };
+                        Controlador.MuestraMapa(esUbi);
+
                         if (this.cmbCP.Items.Count > 0 && this.cmbColonia.Items.Count > 0)
                         {
                             if (this.cmbCP.SelectedValue != null)
                             {
                                 ColoniaList lstColonia =
-                                    ColoniaMapper.Instance().GetByCodigoPostal(Convert.ToInt32(this.cmbCP.SelectedValue));
+                                    ColoniaMapper.Instance().GetByCodigoPostal(idCp/*Convert.ToInt32(this.cmbCP.SelectedValue)*/);
                                 if (lstColonia.Count > 0)
                                 {
                                     this._blnBloqueaEventos = true;
@@ -1778,7 +1827,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     this._blnBloqueaEventos = false;
                                 }
                             }
-                            this.ActualizaMapaUbicacion();
+                            //this.ActualizaMapaUbicacion();
                         }
                     }
                 }
@@ -1807,7 +1856,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 {
                 }
                 CargarPorCP(codigop);
-                this.ActualizaMapaUbicacion();
+                //this.ActualizaMapaUbicacion();
             }
         }
 
@@ -1833,7 +1882,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         this.cmbCP.SelectedIndex = 0;
                         this._blnBloqueaEventos = false;
 
-                        //SE OBTIENE LA LOSTA DE COLONIAS POR EL CODIGO POSTAL
+                        //SE OBTIENE LA LISTA DE COLONIAS POR EL CODIGO POSTAL
                         ColoniaList lstColonias = ColoniaMapper.Instance().GetByCodigoPostal(CP.Clave);
 
                         if (lstColonias.Count > 0)
@@ -1859,9 +1908,13 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             this.cmbLocalidad.SelectedIndex = 0;
 
                             Localidad localidad =
-                                LocalidadMapper.Instance().GetOne(((Localidad)this.cmbLocalidad.SelectedItem).Clave);
+                                LocalidadMapper.Instance().GetOne(Convert.ToInt32(this.cmbLocalidad.SelectedValue));
                             this.cmbMunicipio.SelectedValue = localidad.ClaveMunicipio;
                             this._blnBloqueaEventos = false;
+
+                            //var idLoc = Convert.ToInt32(this.cmbLocalidad.SelectedValue);
+                            var esUbi = new EstructuraUbicacion() {IdLocalidad = localidad.Clave };
+                            Controlador.MuestraMapa(esUbi);
                         }
                     }
                 }
