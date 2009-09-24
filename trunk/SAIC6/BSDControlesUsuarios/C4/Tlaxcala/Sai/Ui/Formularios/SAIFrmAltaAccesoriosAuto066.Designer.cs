@@ -39,6 +39,8 @@
             this.brComandosAccesorios = new System.Windows.Forms.ToolStrip();
             this.btnEliminarAccesorio = new System.Windows.Forms.ToolStripButton();
             this.dgvAccesorios = new System.Windows.Forms.DataGridView();
+            this.gcIdAccesorio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gcAccesorio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtAccesoriosResponsables = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
             this.dtpAccesoriosFechaPercato = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAIDatePicker(this.components);
             this.txtAccesoriosPersonaSePercato = new BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox(this.components);
@@ -60,8 +62,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.gcIdAccesorio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gcAccesorio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbAccesorios.SuspendLayout();
             this.brComandosAccesorios.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAccesorios)).BeginInit();
@@ -126,6 +126,7 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvAccesorios.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvAccesorios.Enabled = false;
             this.dgvAccesorios.Location = new System.Drawing.Point(3, 40);
             this.dgvAccesorios.Name = "dgvAccesorios";
             this.dgvAccesorios.RowHeadersVisible = false;
@@ -137,6 +138,19 @@
             this.dgvAccesorios.Size = new System.Drawing.Size(615, 120);
             this.dgvAccesorios.TabIndex = 1;
             this.dgvAccesorios.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAccesorios_CellValueChanged);
+            // 
+            // gcIdAccesorio
+            // 
+            this.gcIdAccesorio.FillWeight = 60.9137F;
+            this.gcIdAccesorio.HeaderText = "IdAccesorio";
+            this.gcIdAccesorio.Name = "gcIdAccesorio";
+            this.gcIdAccesorio.Visible = false;
+            // 
+            // gcAccesorio
+            // 
+            this.gcAccesorio.FillWeight = 139.0863F;
+            this.gcAccesorio.HeaderText = "Accesorio";
+            this.gcAccesorio.Name = "gcAccesorio";
             // 
             // txtAccesoriosResponsables
             // 
@@ -238,6 +252,7 @@
             this.dgvVehiculoAccesorios.Size = new System.Drawing.Size(615, 90);
             this.dgvVehiculoAccesorios.TabIndex = 0;
             this.dgvVehiculoAccesorios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVehiculoAccesorios_CellClick);
+            this.dgvVehiculoAccesorios.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVehiculoAccesorios_CellEnter);
             // 
             // ClaveVehiculoInvolucrado
             // 
@@ -380,19 +395,6 @@
             this.label1.Size = new System.Drawing.Size(43, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Marca :";
-            // 
-            // gcIdAccesorio
-            // 
-            this.gcIdAccesorio.FillWeight = 60.9137F;
-            this.gcIdAccesorio.HeaderText = "IdAccesorio";
-            this.gcIdAccesorio.Name = "gcIdAccesorio";
-            this.gcIdAccesorio.Visible = false;
-            // 
-            // gcAccesorio
-            // 
-            this.gcAccesorio.FillWeight = 139.0863F;
-            this.gcAccesorio.HeaderText = "Accesorio";
-            this.gcAccesorio.Name = "gcAccesorio";
             // 
             // SAIFrmAltaAccesoriosAuto066
             // 

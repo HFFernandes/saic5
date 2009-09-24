@@ -126,7 +126,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
                     if (s != string.Empty)
                         registro.AddItem(s);
                     else
-                        registro.AddItem("(desconocido)");
+                        registro.AddItem("(sin registro)");
                 }
 
             registro.Tag = intID;

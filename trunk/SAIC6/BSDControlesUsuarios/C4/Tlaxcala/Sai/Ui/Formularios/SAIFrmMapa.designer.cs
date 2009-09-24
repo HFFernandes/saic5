@@ -59,7 +59,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(592, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(691, 25);
             this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -133,8 +133,8 @@
             // contenedorMapa.Panel2
             // 
             this.contenedorMapa.Panel2.Controls.Add(this.leyenda);
-            this.contenedorMapa.Size = new System.Drawing.Size(592, 341);
-            this.contenedorMapa.SplitterDistance = 450;
+            this.contenedorMapa.Size = new System.Drawing.Size(691, 459);
+            this.contenedorMapa.SplitterDistance = 525;
             this.contenedorMapa.TabIndex = 7;
             // 
             // lblUpdate
@@ -190,7 +190,7 @@
             this.mapa.ScaleBar.Symbol.Size = 1;
             this.mapa.ScaleBar.Symbol.TransparentColor = System.Drawing.Color.Empty;
             this.mapa.ScaleBar.Visible = false;
-            this.mapa.Size = new System.Drawing.Size(450, 341);
+            this.mapa.Size = new System.Drawing.Size(525, 459);
             this.mapa.SmoothingMode = ActualMap.SmoothingMode.None;
             this.mapa.TabIndex = 1;
             this.mapa.ToolShape.FillColor = System.Drawing.Color.Transparent;
@@ -203,20 +203,20 @@
             this.leyenda.IconWidth = 20;
             this.leyenda.Location = new System.Drawing.Point(0, 0);
             this.leyenda.Name = "leyenda";
-            this.leyenda.Size = new System.Drawing.Size(138, 341);
+            this.leyenda.Size = new System.Drawing.Size(162, 459);
             this.leyenda.TabIndex = 2;
             // 
             // SAIFrmMapa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(592, 366);
+            this.ClientSize = new System.Drawing.Size(691, 484);
             this.ControlBox = false;
             this.Controls.Add(this.contenedorMapa);
             this.Controls.Add(this.toolStrip1);
-            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(600, 400);
             this.Name = "SAIFrmMapa";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "SAI - Mapa";
             this.Deactivate += new System.EventHandler(this.CMapa_Deactivate);
             this.Load += new System.EventHandler(this.CMapa_Load);

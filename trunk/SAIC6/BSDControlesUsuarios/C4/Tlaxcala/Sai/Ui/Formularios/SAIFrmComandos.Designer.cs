@@ -228,7 +228,7 @@
             // 
             this.stComandos.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tssInfo});
-            this.stComandos.Location = new System.Drawing.Point(0, 53);
+            this.stComandos.Location = new System.Drawing.Point(0, 47);
             this.stComandos.Name = "stComandos";
             this.stComandos.Size = new System.Drawing.Size(319, 22);
             this.stComandos.TabIndex = 3;
@@ -244,7 +244,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(319, 75);
+            this.ClientSize = new System.Drawing.Size(319, 69);
             this.Controls.Add(this.stComandos);
             this.Controls.Add(this.pnResumenIncidencias);
             this.Controls.Add(this.imgAdministrador);

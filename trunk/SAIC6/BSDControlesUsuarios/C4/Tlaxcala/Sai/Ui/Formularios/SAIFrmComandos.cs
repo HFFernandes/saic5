@@ -10,6 +10,7 @@ using XtremeCommandBars;
 using BSD.C4.Tlaxcala.Sai.Excepciones;
 using BSD.C4.Tlaxcala.Sai.Dal.Rules.Mappers;
 using BSD.C4.Tlaxcala.Sai.CallListener;
+using BSD.C4.Tlaxcala.Sai.Mapa;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 {
@@ -210,6 +211,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         //        objVentana.Show(this);
         //    }
         //}
+
         /// <summary>
         /// Inicia el monitor para el Agente de Avaya
         /// </summary>
@@ -291,7 +293,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     }
                                 }
                                 else
-                                    throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS,this);
+                                    throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS, this);
                                 break;
                             case ID.CMD_NI:
                                 if (Aplicacion.UsuarioPersistencia.blnPuedeEscribir(e.control.Id))
@@ -312,7 +314,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     }
                                 }
                                 else
-                                    throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS,this);
+                                    throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS, this);
                                 break;
                             case ID.CMD_PH:
                                 if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(e.control.Id))
@@ -361,7 +363,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     }
                                 }
                                 else
-                                    throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS,this);
+                                    throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS, this);
                                 break;
                             case ID.CMD_NI:
                                 //if (!Aplicacion.UsuarioPersistencia.blnEsDespachador.Value)
@@ -382,7 +384,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     }
                                 }
                                 else
-                                    throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS,this);
+                                    throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS, this);
                                 break;
                             case ID.CMD_AU:
                                 var corporacion = Aplicacion.UsuarioPersistencia.intCorporacion != null
@@ -404,10 +406,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                         }
                                     }
                                     else
-                                        throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS,this);
+                                        throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS, this);
                                 }
                                 else
-                                    throw new SAIExcepcion(ID.STR_CORPORACIONESVIRTUALES,this);
+                                    throw new SAIExcepcion(ID.STR_CORPORACIONESVIRTUALES, this);
                                 break;
                             case ID.CMD_U:
                                 if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(e.control.Id))
@@ -421,7 +423,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                     }
                                 }
                                 else
-                                    throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS,this);
+                                    throw new SAIExcepcion(ID.STR_SINPRIVILEGIOS, this);
 
                                 break;
                             case ID.CMD_PH:
@@ -491,7 +493,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                                                  : null;
                             if (incidencia != null)
                             {
-                                incidencia.ClaveEstatus = (int) ESTATUSINCIDENCIAS.CANCELADA;
+                                incidencia.ClaveEstatus = (int)ESTATUSINCIDENCIAS.CANCELADA;
                                 IncidenciaMapper.Instance().Save(incidencia);
 
                                 Aplicacion.frmIncidenciaActiva.Dispose();
@@ -500,12 +502,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             }
                             else
                             {
-                                throw new SAIExcepcion("No existe una incidencia activa que se pueda cancelar.",this);
+                                throw new SAIExcepcion("No existe una incidencia activa que se pueda cancelar.", this);
                             }
                         }
-                        break;
-                    case ID.CMD_SIF:
-                        throw new SAIExcepcion("Funcionalidad no implementada.",this);
                         break;
                     case ID.CMD_TEL:
                         if (Aplicacion.UsuarioPersistencia.blnPuedeLeeroEscribir(e.control.Id))
@@ -584,8 +583,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 case ID.CMD_PH:
                     e.control.Checked = buscadorDir.Created;
                     break;
-                    //case ID.CMD_SIF:
-                    //    break;
+                //case ID.CMD_SIF:
+                //    break;
                 case ID.CMD_SLC:
                     e.control.Checked = buscadorLig.Created;
                     break;
@@ -627,10 +626,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 var barra = SAIBarraComandos.Add("Comandos", XTPBarPosition.xtpBarTop);
                 barra.SetIconSize(32, 32); //Tamaño predeterminado para el item
                 barra.Closeable = false;
-                    //Indicamos que no es posible cerrar la colección de items en la barra para evitar la lógica requerida
+                //Indicamos que no es posible cerrar la colección de items en la barra para evitar la lógica requerida
                 barra.EnableAnimation = true; //Indicamos que mostraremos efectos de desvanecimiento
                 barra.ShowGripper = false;
-                    //Indicamos que ocultaremos el gripper para evitar que pueda moverse de su ubicación predeterminada
+                //Indicamos que ocultaremos el gripper para evitar que pueda moverse de su ubicación predeterminada
 
                 //Agregamos los comandos predeterminados que manejará el sistema y sus accesos rápidos
                 var coleccionComandos = ComandosColeccion.ColeccionComandos();
@@ -672,10 +671,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 var barra = SAIBarraComandos.Add("Comandos", XTPBarPosition.xtpBarTop);
                 barra.SetIconSize(32, 32); //Tamaño predeterminado para el item
                 barra.Closeable = false;
-                    //Indicamos que no es posible cerrar la colección de items en la barra para evitar la lógica requerida
+                //Indicamos que no es posible cerrar la colección de items en la barra para evitar la lógica requerida
                 barra.EnableAnimation = true; //Indicamos que mostraremos efectos de desvanecimiento
                 barra.ShowGripper = false;
-                    //Indicamos que ocultaremos el gripper para evitar que pueda moverse de su ubicación predeterminada
+                //Indicamos que ocultaremos el gripper para evitar que pueda moverse de su ubicación predeterminada
 
                 //Agregamos los comandos predeterminados que manejará el sistema y sus accesos rápidos
                 var coleccionComandos = ComandosColeccion.ColeccionComandos();
@@ -696,6 +695,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
             //Iniciamos el monitor del agente de Avaya
             IniciarMonitorLlamadas();
+            Controlador.MuestraMapa(new EstructuraUbicacion());
         }
 
         private void SAIFrmComandos_FormClosing(object sender, FormClosingEventArgs e)
@@ -739,12 +739,12 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void TcpListener_ListenerMessageDataEvent(object sender, FindMessageEventArgs e)
         {
-            Invoke(new DelegadoEscribirDato(EscribirMensaje), new object[] {e.Mensaje});
+            Invoke(new DelegadoEscribirDato(EscribirMensaje), new object[] { e.Mensaje });
         }
 
         private void TcpListener_ListenerFindDataEvent(object sender, FindDataEventArgs e)
         {
-            Invoke(new DelegadoEscribirDato(EscribirDato), new object[] {e.Datos});
+            Invoke(new DelegadoEscribirDato(EscribirDato), new object[] { e.Datos });
         }
 
         #endregion

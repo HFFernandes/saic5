@@ -27,7 +27,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             InitializeComponent();
 
-            Size = new Size(640, 480);
+            //Size = new Size(640, 480);
             this.XMLconf = XMLconf;
             this.path = path;
         }
@@ -43,7 +43,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             InitializeComponent();
 
-            Size = new Size(width, height);
+            //Size = new Size(width, height);
             this.XMLconf = XMLconf;
             this.path = path;
         }
@@ -162,10 +162,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
                 ActualizaLbl(false);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 ActualizaLbl(false);
-                MessageBox.Show(ex.ToString());
+                //MessageBox.Show(ex.ToString());
             }
         }
 
@@ -198,10 +198,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
                 ActualizaLbl(false);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 ActualizaLbl(false);
-                MessageBox.Show(ex.ToString());
+                //MessageBox.Show(ex.ToString());
             }
         }
 
@@ -234,10 +234,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 }
                 ActualizaLbl(false);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 ActualizaLbl(false);
-                MessageBox.Show(ex.ToString());
+                //MessageBox.Show(ex.ToString());
             }
         }
 
@@ -258,19 +258,30 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     mapa.Extent = state.RecordExtent;
                     mapa.MapShapes.Clear();
                     var shape = mapa.MapShapes.Add(state.Shape);
-                    var s = new Symbol {FillStyle = FillStyle.Invisible, LineColor = Color.Red, Size = 17};
+                    var s = new Symbol
+                                {
+                                    FillStyle = FillStyle.Invisible,
+                                    LineColor = Color.Red,
+                                    Size = 3
+                                };
                     shape.Symbol = s;
                     mapa.Refresh();
                 }
                 ActualizaLbl(false);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 ActualizaLbl(false);
-                MessageBox.Show(ex.ToString());
+                //MessageBox.Show(ex.ToString());
             }
         }
 
+        ///<summary>
+        ///</summary>
+        ///<param name="id_colonia"></param>
+        ///<param name="cp"></param>
+        ///<param name="id_localidad"></param>
+        ///<param name="id_municipio"></param>
         public void UbicarNI(int id_colonia, int cp, int id_localidad, int id_municipio)
         {
             if (id_colonia > 0)
@@ -285,6 +296,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 CentrarEstado();
         }
 
+        ///<summary>
+        ///</summary>
         public void CentrarEstado()
         {
             if (mapa.LayerCount > 0)
@@ -383,7 +396,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
         private void ActualizaLbl(bool flag)
         {
-            lblUpdate.Location = new System.Drawing.Point(Size.Width/2, Size.Height/2);
+            lblUpdate.Location = new System.Drawing.Point(Size.Width / 2, Size.Height / 2);
             lblUpdate.Visible = flag;
         }
 

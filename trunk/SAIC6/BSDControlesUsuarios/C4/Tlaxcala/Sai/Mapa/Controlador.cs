@@ -109,15 +109,15 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
         /// </remarks>
         public static void RevisaInstancias()
         {
-            //if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
-            //    return;
+            ////if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+            ////    return;
 
-            if (Aplicacion.VentanasIncidencias.Count == 0)
-            {
-                _frmMapa.Close();
-                _frmMapa.Dispose();
-                _frmMapa = null;
-            }
+            //if (Aplicacion.VentanasIncidencias.Count == 0)
+            //{
+            //    _frmMapa.Close();
+            //    _frmMapa.Dispose();
+            //    _frmMapa = null;
+            //}
         }
 
         /// <summary>
@@ -128,20 +128,20 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
         /// </remarks>
         public static void RevisaInstancias(Form frmIncidencia)
         {
-            //if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
-            //    return;
+            ////if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+            ////    return;
 
-            if (Aplicacion.VentanasIncidencias.Count == 0 ||
-                (Aplicacion.VentanasIncidencias.Count == 1 &&
-                 Aplicacion.VentanasIncidencias[0].Ventana == (frmIncidencia as Form)))
-            {
-                if (_frmMapa != null)
-                {
-                    _frmMapa.Close();
-                    _frmMapa.Dispose();
-                    _frmMapa = null;
-                }
-            }
+            //if (Aplicacion.VentanasIncidencias.Count == 0 ||
+            //    (Aplicacion.VentanasIncidencias.Count == 1 &&
+            //     Aplicacion.VentanasIncidencias[0].Ventana == (frmIncidencia as Form)))
+            //{
+            //    if (_frmMapa != null)
+            //    {
+            //        _frmMapa.Close();
+            //        _frmMapa.Dispose();
+            //        _frmMapa = null;
+            //    }
+            //}
         }
 
         /// <summary>
@@ -152,17 +152,17 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
         /// </remarks>
         public static void RevisaInstancias(SAIFrm089 frmIncidencia)
         {
-            //if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
-            //    return;
+            ////if (Aplicacion.UsuarioPersistencia.strSistemaActual == "089")
+            ////    return;
 
-            if (Aplicacion.VentanasIncidencias.Count == 0 ||
-                (Aplicacion.VentanasIncidencias.Count == 1 &&
-                 Aplicacion.VentanasIncidencias[0].Ventana == (frmIncidencia as Form)))
-            {
-                _frmMapa.Close();
-                _frmMapa.Dispose();
-                _frmMapa = null;
-            }
+            //if (Aplicacion.VentanasIncidencias.Count == 0 ||
+            //    (Aplicacion.VentanasIncidencias.Count == 1 &&
+            //     Aplicacion.VentanasIncidencias[0].Ventana == (frmIncidencia as Form)))
+            //{
+            //    _frmMapa.Close();
+            //    _frmMapa.Dispose();
+            //    _frmMapa = null;
+            //}
         }
     }
 }
