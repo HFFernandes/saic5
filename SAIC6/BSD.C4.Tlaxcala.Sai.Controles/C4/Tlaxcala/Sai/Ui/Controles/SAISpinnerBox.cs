@@ -67,25 +67,25 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
         private void HandleTick(object sender, ElapsedEventArgs e)
         {
             this.posicionX += this.Velocidad;
-            if (this.posicionX > base.Size.Width)
+            if (this.posicionX > Size.Width)
             {
                 this.posicionX = 0;
             }
             if (this.posicionX < 0)
             {
-                this.posicionX = base.Size.Width;
+                this.posicionX = Size.Width;
             }
-            base.Invalidate();
+            Invalidate();
         }
 
         protected override void OnPaint(PaintEventArgs pe)
         {
             var graphics = pe.Graphics;
-            graphics.DrawImage(base.Image, this.posicionX, 0, base.Size.Width, base.Size.Height);
+            graphics.DrawImage(Image, this.posicionX, 0, Size.Width, Size.Height);
             if (this.posicionX != 0)
             {
-                graphics.DrawImage(base.Image, (this.posicionX - base.Size.Width) + 1, 0, base.Size.Width,
-                                   base.Size.Height);
+                graphics.DrawImage(Image, (this.posicionX - Size.Width) + 1, 0, Size.Width,
+                                   Size.Height);
             }
         }
     }

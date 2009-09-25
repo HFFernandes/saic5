@@ -207,13 +207,6 @@ namespace BSD.C4.Tlaxcala.Sai
         {
             #region CONSTRUCTOR
 
-            /// <summary>
-            /// Constructor
-            /// </summary>
-            public CzSecurity()
-            {
-            }
-
             #endregion
 
             #region MIEMBROS

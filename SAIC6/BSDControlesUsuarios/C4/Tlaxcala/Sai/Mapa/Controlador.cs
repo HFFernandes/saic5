@@ -3,7 +3,6 @@ using System.Configuration;
 using System.Windows.Forms;
 using System.Threading;
 
-
 namespace BSD.C4.Tlaxcala.Sai.Mapa
 {
     ///<summary>
@@ -20,7 +19,12 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
 
         private static void ActualizarMapa(EstructuraUbicacion objDatosUbicacion)
         {
-            if (objDatosUbicacion.IdColonia.HasValue)
+            if (objDatosUbicacion.IdCodigoPostal.HasValue)
+            {
+                _frmMapa.CP(objDatosUbicacion.IdCodigoPostal.Value);
+                _frmMapa.Refresh();
+            }
+            else if (objDatosUbicacion.IdColonia.HasValue)
             {
                 _frmMapa.Colonia(objDatosUbicacion.IdColonia.Value);
                 _frmMapa.Refresh();
@@ -41,7 +45,6 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
                 _frmMapa.CentrarEstado();
             }
         }
-
 
         /// <summary>
         /// Muestra el mapa con la información del formulario que lo manda a llamar
@@ -66,12 +69,12 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
                                     try
                                     {
                                         _frmMapa.Invoke(new DelegadoActualizarMapa(ActualizarMapa),
-                                                        new object[] {objDatosUbicacion});
+                                                        new object[] { objDatosUbicacion });
                                     }
                                     catch
                                     {
                                     }
-                                }) {IsBackground = true};
+                                }) { IsBackground = true };
             tr.Start();
             frmIncidencia.Focus();
         }
@@ -92,12 +95,12 @@ namespace BSD.C4.Tlaxcala.Sai.Mapa
                                     try
                                     {
                                         _frmMapa.Invoke(new DelegadoActualizarMapa(ActualizarMapa),
-                                                        new object[] {objDatosUbicacion});
+                                                        new object[] { objDatosUbicacion });
                                     }
                                     catch
                                     {
                                     }
-                                }) {IsBackground = true};
+                                }) { IsBackground = true };
             tr.Start();
         }
 

@@ -120,6 +120,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         private bool _blnBloqueaEventos;
 
+        //private bool _blnMapaActualizado;
+
         #region PARA PERSONA EXTRAVIADA
 
         /// <summary>
@@ -388,7 +390,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             vehiculo = VehiculoMapper.Instance().GetOne(vehiculoRobado.ClaveVehiculo);
                             ListaVehiculosRobados.Add(vehiculo);
                         }
-                        //Obtenemos los datos del propierario
+                        //Obtenemos los datos del propietario
                         objPropietarioVehiculo =
                             PropietarioVehiculoMapper.Instance().GetOne(VehiculosXIncidencia[0].ClavePropietario.Value);
 
@@ -622,11 +624,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 //Checamos si no son bromas o insultos.
                 if (cmbTipoIncidencia.SelectedItem != null && (
-                                                                  (cmbTipoIncidencia.SelectedItem as TipoIncidencia).
-                                                                      Clave == 254
+                                                                  Convert.ToInt32(cmbTipoIncidencia.SelectedValue) == 254
                                                                   ||
-                                                                  (cmbTipoIncidencia.SelectedItem as TipoIncidencia).
-                                                                      Clave == 256
+                                                                  Convert.ToInt32(cmbTipoIncidencia.SelectedValue) == 256
                                                               ))
                 {
                     txtDireccion.Text = "SIN REGISTRO";
@@ -638,7 +638,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                 //Checamos si existen Vehiculos con accesorios robados.
                 if (ListaVehiculosInvolucrados != null && ListaAccesoriosRobados != null && DatosRoboAccesorios != null &&
-                    (cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave == 130)
+                    Convert.ToInt32(cmbTipoIncidencia.SelectedValue) == 130)
                 {
                     try
                     {
@@ -663,7 +663,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                 //Checamos si existen Vehiculos robados.
                 if (this.ListaVehiculosRobados != null && this.objPropietarioVehiculo != null &&
-                    (cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave == 131)
+                    Convert.ToInt32(cmbTipoIncidencia.SelectedValue) == 131)
                 {
                     //Guardamos el propietarios
                     if (PropietarioVehiculoMapper.Instance().GetOne(objPropietarioVehiculo.Clave) == null)
@@ -723,8 +723,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                 //Checamos si existen personas extraviadas
                 if (this.ListaPersonasExtraviadas != null && this.ListaPersonasExtraviadas.Count > 0 &&
-                    ((cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave == 103 |
-                     (cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave == 235))
+                    (Convert.ToInt32(cmbTipoIncidencia.SelectedValue) == 103 |
+                     Convert.ToInt32(cmbTipoIncidencia.SelectedValue) == 235))
                 {
                     foreach (PersonaExtraviada persona in this.ListaPersonasExtraviadas)
                     {
@@ -766,7 +766,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 IncidenciaMapper.Instance().Save(entIncidencia);
                 this.LiberarNoTelefono(this.txtTelefono.Text.Trim());
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 throw new SAIExcepcion(ex.Message, this);
             }
@@ -823,7 +823,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                 //Obtenemos el tipo de incidencia.
                 if (cmbTipoIncidencia.SelectedIndex != -1 && cmbTipoIncidencia.Text.Trim() != string.Empty)
                 {
-                    entIncidencia.ClaveTipo = (cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave;
+                    entIncidencia.ClaveTipo = Convert.ToInt32(cmbTipoIncidencia.SelectedValue);
                 }
                 else
                 {
@@ -896,10 +896,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         /// </summary>
         private void CargarTiposIncidencias()
         {
-            TipoIncidenciaList lstTipoIncidencias;
-            lstTipoIncidencias = Aplicacion.UsuarioPersistencia.strSistemaActual == "066"
-                                     ? TipoIncidenciaMapper.Instance().GetBySistema(2)
-                                     : TipoIncidenciaMapper.Instance().GetBySistema(1);
+            TipoIncidenciaList lstTipoIncidencias = Aplicacion.UsuarioPersistencia.strSistemaActual == "066"
+                                                        ? TipoIncidenciaMapper.Instance().GetBySistema(2)
+                                                        : TipoIncidenciaMapper.Instance().GetBySistema(1);
 
             foreach (var objTipoIncidencia in lstTipoIncidencias)
             {
@@ -1029,7 +1028,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
             else
             {
-                _objUbicacion.IdCodigoPostal = (cmbCP.SelectedItem as CodigoPostal).Clave;
+                _objUbicacion.IdCodigoPostal = Convert.ToInt32(cmbCP.SelectedValue);
             }
 
             if (cmbColonia.SelectedIndex == -1 || cmbColonia.Text.Trim() == string.Empty)
@@ -1038,7 +1037,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
             else
             {
-                _objUbicacion.IdColonia = (cmbColonia.SelectedItem as Colonia).Clave;
+                _objUbicacion.IdColonia = Convert.ToInt32(cmbColonia.SelectedValue);
             }
 
             if (cmbLocalidad.SelectedIndex == -1 || cmbLocalidad.Text.Trim() == string.Empty)
@@ -1047,7 +1046,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
             else
             {
-                _objUbicacion.IdLocalidad = (cmbLocalidad.SelectedItem as Localidad).Clave;
+                _objUbicacion.IdLocalidad = Convert.ToInt32(cmbLocalidad.SelectedValue);
             }
 
             if (cmbMunicipio.SelectedIndex == -1 || cmbMunicipio.Text.Trim() == string.Empty)
@@ -1056,7 +1055,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             }
             else
             {
-                _objUbicacion.IdMunicipio = int.Parse((cmbMunicipio.SelectedItem as Municipio).Clave.ToString());
+                _objUbicacion.IdMunicipio = Convert.ToInt32(cmbMunicipio.SelectedValue);
             }
 
             Controlador.MuestraMapa(_objUbicacion, this);
@@ -1156,7 +1155,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         }
                     }
                 }
-                catch (System.Exception ex)
+                catch (Exception ex)
                 {
                     throw new SAIExcepcion(ex.Message, this);
                 }
@@ -1588,14 +1587,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
 
                     //Checamos si es Broma o Insulto.
                     if (cmbTipoIncidencia.SelectedItem != null && (
-                                                                      (cmbTipoIncidencia.SelectedItem as TipoIncidencia)
-                                                                          .Clave == 254
+                                                                      Convert.ToInt32(cmbTipoIncidencia.SelectedValue) == 254
                                                                       ||
-                                                                      (cmbTipoIncidencia.SelectedItem as TipoIncidencia)
-                                                                          .Clave == 256
-                                                                  )
-                        && txtTelefono.Text.Trim() == string.Empty
-                        )
+                                                                      Convert.ToInt32(cmbTipoIncidencia.SelectedValue) == 256
+                                                                  ) && txtTelefono.Text.Trim() == string.Empty)
                     {
                         e.Cancel = true;
                         throw new SAIExcepcion("Debe de indicar el número de teléfono de la incidencia", this);
@@ -1607,9 +1602,9 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.GuardarTitularLinea();
 
 
-                    Mapa.Controlador.RevisaInstancias(this);
+                    Controlador.RevisaInstancias(this);
                 }
-                catch (System.Exception ex)
+                catch (Exception ex)
                 {
                     throw new SAIExcepcion(ex.Message, this);
                 }
@@ -1913,7 +1908,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                             this._blnBloqueaEventos = false;
 
                             //var idLoc = Convert.ToInt32(this.cmbLocalidad.SelectedValue);
-                            var esUbi = new EstructuraUbicacion() {IdLocalidad = localidad.Clave };
+                            var esUbi = new EstructuraUbicacion() { IdLocalidad = localidad.Clave };
                             Controlador.MuestraMapa(esUbi);
                         }
                     }
@@ -1954,7 +1949,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             if (cmbTipoIncidencia.SelectedIndex != -1 && cmbTipoIncidencia.Text.Trim() != string.Empty)
             {
-                entIncidencia.ClaveTipo = (cmbTipoIncidencia.SelectedItem as TipoIncidencia).Clave;
+                entIncidencia.ClaveTipo = Convert.ToInt32(cmbTipoIncidencia.SelectedValue);
             }
             else
             {
