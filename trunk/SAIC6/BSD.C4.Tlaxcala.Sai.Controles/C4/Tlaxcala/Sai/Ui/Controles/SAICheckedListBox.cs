@@ -5,6 +5,8 @@ using System.Windows.Forms;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 {
+    ///<summary>
+    ///</summary>
     public partial class SAICheckedListBox : CheckedListBox
     {
         #region Campos
@@ -66,11 +68,16 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 
         #endregion
 
+        ///<summary>
+        ///</summary>
         public SAICheckedListBox()
         {
             InitializeComponent();
         }
 
+        ///<summary>
+        ///</summary>
+        ///<param name="container"></param>
         public SAICheckedListBox(IContainer container)
         {
             container.Add(this);

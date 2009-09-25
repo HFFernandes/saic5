@@ -3,10 +3,14 @@ using System.Windows.Forms;
 
 namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 {
+    ///<summary>
+    ///</summary>
     public partial class SAILogoControl : UserControl
     {
         #region Propiedades
 
+        ///<summary>
+        ///</summary>
         public int VelocidadAnimacion
         {
             get { return this.spinnerPicture.Velocidad; }
@@ -15,6 +19,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
 
         #endregion
 
+        ///<summary>
+        ///</summary>
         public SAILogoControl()
         {
             InitializeComponent();
@@ -22,11 +28,15 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             this.logoPicture.SizeChanged += this.VerificarTamaño;
         }
 
+        ///<summary>
+        ///</summary>
         public void DetenerAnimacion()
         {
             this.spinnerPicture.Desactivar();
         }
 
+        ///<summary>
+        ///</summary>
         public void IniciarAnimacion()
         {
             if (this.spinnerPicture.Velocidad < 0)
@@ -36,6 +46,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Controles
             this.spinnerPicture.Activar();
         }
 
+        ///<summary>
+        ///</summary>
         public void RevertirAnimacion()
         {
             if (this.VelocidadAnimacion > 0)

@@ -146,20 +146,15 @@ namespace BSD.C4.Tlaxcala.Sai
         public const string STR_ESTATUSLLEGADA = "Llegada";
         public const string STR_ESTATUSDESPACHADA = "Despachada";
         public const string STR_SINPRIVILEGIOS = "No cuenta con los privilegios suficientes para realizar esta acción.";
-
         public const string STR_ERROROBTENERREGISTROS =
             "Ocurrio un error al tratar de obtener los registros. Solicite al administrador revisar los catálogos.";
-
         public const string STR_NOSELOCALIZOARCHIVO =
             "No se localizo el archivo de configuracion para los filtros de busqueda.";
-
         public const string STR_ERRORFILTRO = "Ha ocurrido un error al tratar de generar el filtro.";
         public const string STR_NUEVOCOMENTARIO = "Inserte aquí su nuevo comentario";
         public const string STR_UNIDADVIRTUAL = "Virtual";
-
         public const string STR_CORPORACIONESVIRTUALES =
             "La corporación a la cual pertenece no está configurada para manejar unidades fisicas, solo virtuales.";
-
         public const string STR_CONFIRMARSALIDA = "¿Está seguro de querer salir del aplicativo?";
 
         #endregion
