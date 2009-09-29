@@ -1601,8 +1601,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                     this.GuardaCorporaciones();
                     this.GuardarTitularLinea();
 
-
-                    Controlador.RevisaInstancias(this);
+                    //Controlador.RevisaInstancias(this);
                 }
                 catch (Exception ex)
                 {
