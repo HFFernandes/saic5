@@ -616,7 +616,8 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             {
                 txtDireccion.Text = "SIN REGISTRO";
                 this._Incidencia089.ClaveEstatus = 5;
-                this.ActualizarIncidencia();
+                //this.ActualizarIncidencia();
+                this.Close();
             }
         }
 
@@ -1048,7 +1049,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
                         return;
                     }
 
-                    Mapa.Controlador.RevisaInstancias(this);
+                    //Mapa.Controlador.RevisaInstancias(this);
                 }
                 catch (System.Exception ex)
                 {
