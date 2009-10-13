@@ -80,6 +80,7 @@
             this.btnEliminarRegistro});
             this.tbComandos.Location = new System.Drawing.Point(3, 16);
             this.tbComandos.Name = "tbComandos";
+            this.tbComandos.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.tbComandos.Size = new System.Drawing.Size(759, 25);
             this.tbComandos.TabIndex = 0;
             this.tbComandos.Text = "toolStrip1";

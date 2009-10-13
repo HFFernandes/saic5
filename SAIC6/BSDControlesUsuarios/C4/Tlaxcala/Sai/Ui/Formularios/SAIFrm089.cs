@@ -104,6 +104,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void SAIFrm089_Load(object sender, EventArgs e)
         {
             this.Bloquear(Aplicacion.UsuarioPersistencia.blnPuedeEscribir(ID.CMD_NI));
+            saiOrtografia.MainDictionary.FileName = string.Format(@"{0}\{1}", Environment.CurrentDirectory, "C1Spell_es-MX.dct");
         }
 
         /// <summary>

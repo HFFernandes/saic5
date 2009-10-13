@@ -60,6 +60,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Recursos Externos\ActualMap.dll</HintPath>
     </Reference>
+    <Reference Include="C1.Win.C1SpellChecker.2, Version=2.0.20092.52, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Recursos Externos\C1.Win.C1SpellChecker.2.dll</HintPath>
+    </Reference>
     <Reference Include="Cooperator.Framework.Core, Version=1.3.2.0, Culture=neutral, PublicKeyToken=8f7f403e20325116, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Recursos Externos\Cooperator.Framework.Core.dll</HintPath>
@@ -310,6 +314,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="C1Spell_es-MX.dct">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="LazyLoad.config" />
   </ItemGroup>
   <ItemGroup>
