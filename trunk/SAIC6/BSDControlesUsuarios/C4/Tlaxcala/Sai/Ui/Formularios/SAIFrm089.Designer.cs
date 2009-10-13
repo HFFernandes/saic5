@@ -59,8 +59,10 @@
             this.btnDependencias = new System.Windows.Forms.Button();
             this.lblTitulo = new System.Windows.Forms.Label();
             this.cbxCP = new System.Windows.Forms.ComboBox();
+            this.saiOrtografia = new C1.Win.C1SpellChecker.C1SpellChecker(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.saiOrtografia)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -375,6 +377,10 @@
             this.cbxCP.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cbxCP_KeyUp);
             this.cbxCP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbxCP_KeyDown);
             // 
+            // saiOrtografia
+            // 
+            this.saiOrtografia.Options.DialogLanguage = C1.Win.C1SpellChecker.DialogLanguage.Spanish;
+            // 
             // SAIFrm089
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -443,6 +449,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.saiOrtografia)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -479,5 +486,6 @@
         private System.Windows.Forms.Button btnDependencias;
         protected System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.ComboBox cbxCP;
+        private C1.Win.C1SpellChecker.C1SpellChecker saiOrtografia;
     }
 }

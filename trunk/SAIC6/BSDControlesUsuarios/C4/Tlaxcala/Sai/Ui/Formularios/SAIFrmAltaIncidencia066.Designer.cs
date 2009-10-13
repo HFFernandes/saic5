@@ -67,9 +67,11 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.label4 = new System.Windows.Forms.Label();
             this.btnVerDatos = new System.Windows.Forms.Button();
             this.cmbCP = new System.Windows.Forms.ComboBox();
+            this.saiOrtografia = new C1.Win.C1SpellChecker.C1SpellChecker(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.gbDenunciante.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.saiOrtografia)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -163,6 +165,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.txtReferencias.Name = "txtReferencias";
             this.txtReferencias.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtReferencias.Size = new System.Drawing.Size(528, 44);
+            this.saiOrtografia.SetSpellChecking(this.txtReferencias, true);
             this.txtReferencias.StrMensajeCampoRequerido = "El campo es requerido.";
             this.txtReferencias.TabIndex = 17;
             this.txtReferencias.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
@@ -228,6 +231,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtDescripcion.Size = new System.Drawing.Size(529, 44);
+            this.saiOrtografia.SetSpellChecking(this.txtDescripcion, true);
             this.txtDescripcion.StrMensajeCampoRequerido = "El campo es requerido.";
             this.txtDescripcion.TabIndex = 19;
             this.txtDescripcion.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Controls_KeyDown);
@@ -462,6 +466,10 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.cmbCP.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbCP_KeyUp);
             this.cmbCP.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbCP_KeyDown);
             // 
+            // saiOrtografia
+            // 
+            this.saiOrtografia.Options.DialogLanguage = C1.Win.C1SpellChecker.DialogLanguage.Spanish;
+            // 
             // SAIFrmAltaIncidencia066
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -534,6 +542,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.groupBox1.PerformLayout();
             this.gbDenunciante.ResumeLayout(false);
             this.gbDenunciante.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.saiOrtografia)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -577,5 +586,6 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private BSD.C4.Tlaxcala.Sai.Ui.Controles.SAITextBox txtNombreDenunciante;
         private System.Windows.Forms.Button btnVerDatos;
         private ComboBox cmbCP;
+        private C1.Win.C1SpellChecker.C1SpellChecker saiOrtografia;
     }
 }

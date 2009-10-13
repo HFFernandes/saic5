@@ -1646,6 +1646,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         private void SAIFrmAltaIncidencia066_Load(object sender, EventArgs e)
         {
             //this.ActualizaMapaUbicacion(true);
+            saiOrtografia.MainDictionary.FileName = string.Format(@"{0}\{1}", Environment.CurrentDirectory, "C1Spell_es-MX.dct");
         }
 
         #region EVENTOS GENÉRICOS

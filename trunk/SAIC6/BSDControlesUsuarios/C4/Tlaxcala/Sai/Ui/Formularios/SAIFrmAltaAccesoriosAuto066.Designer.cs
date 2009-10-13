@@ -89,6 +89,7 @@
             this.btnEliminarAccesorio});
             this.brComandosAccesorios.Location = new System.Drawing.Point(3, 16);
             this.brComandosAccesorios.Name = "brComandosAccesorios";
+            this.brComandosAccesorios.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.brComandosAccesorios.Size = new System.Drawing.Size(615, 25);
             this.brComandosAccesorios.TabIndex = 0;
             this.brComandosAccesorios.Text = "toolStrip2";
