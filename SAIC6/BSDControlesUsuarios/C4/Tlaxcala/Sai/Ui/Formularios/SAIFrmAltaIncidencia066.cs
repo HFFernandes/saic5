@@ -40,7 +40,7 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
             this.CargarCoorporaciones();
 
             //Buscamos los datos del titular de la linea
-            //this.ObtenerTitularLinea(noTelefono);
+            this.ObtenerTitularLinea(noTelefono);
 
             this._blnBloqueaEventos = false;
             base.Activated += SAIFrmAltaIncidencia066_Activated;
@@ -1241,23 +1241,31 @@ namespace BSD.C4.Tlaxcala.Sai.Ui.Formularios
         {
             if (!string.IsNullOrEmpty(noTelefono))
             {
-                DatosTitular = TelefonoTelmexMapper.Instance()
-                    .GetOneBySQLQuery(string.Format(ID.SQL_OBTENERINFOTITULARLINEA, noTelefono));
                 this.txtTelefono.Text = noTelefono;
-                if (DatosTitular != null)
+
+                try
                 {
-                    this.txtNombreDenunciante.Text = DatosTitular.Nombre;
-                    this.txtApellidosDenunciante.Text = string.Format("{0} {1}", DatosTitular.ApellidoPaterno,
-                                                                      DatosTitular.ApellidoMaterno);
-                    this.txtDireccionDenunciante.Text = DatosTitular.Direccion;
-                    CodigoPostal CodigoTitular =
-                        CodigoPostalMapper.Instance().GetOneBySQLQuery(string.Format(ID.SQL_OBTENERCODIGOPOSTAL,
-                                                                                     DatosTitular.ClaveCodigoPostal));
-                    if (CodigoTitular != null)
+                    DatosTitular = TelefonoTelmexMapper.Instance()
+                                .GetOneBySQLQuery(string.Format(ID.SQL_OBTENERINFOTITULARLINEA, noTelefono));
+                    //this.txtTelefono.Text = noTelefono;
+                    if (DatosTitular != null)
                     {
-                        this.cmbCP.Text = CodigoTitular.Valor;
-                        this.CargarCascadaPorCp(CodigoTitular.Valor);
+                        this.txtNombreDenunciante.Text = DatosTitular.Nombre;
+                        this.txtApellidosDenunciante.Text = string.Format("{0} {1}", DatosTitular.ApellidoPaterno,
+                                                                          DatosTitular.ApellidoMaterno);
+                        this.txtDireccionDenunciante.Text = DatosTitular.Direccion;
+                        CodigoPostal CodigoTitular =
+                            CodigoPostalMapper.Instance().GetOneBySQLQuery(string.Format(ID.SQL_OBTENERCODIGOPOSTAL,
+                                                                                         DatosTitular.ClaveCodigoPostal));
+                        if (CodigoTitular != null)
+                        {
+                            this.cmbCP.Text = CodigoTitular.Valor;
+                            this.CargarCascadaPorCp(CodigoTitular.Valor);
+                        }
                     }
+                }
+                catch (Exception ex)
+                {
                 }
             }
         }

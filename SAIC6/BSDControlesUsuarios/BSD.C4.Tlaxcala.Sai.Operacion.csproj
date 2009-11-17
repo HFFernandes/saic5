@@ -80,10 +80,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Recursos Externos\CPw.dll</HintPath>
     </Reference>
-    <Reference Include="ExceptionMessageBox, Version=9.0.242.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Recursos Externos\ExceptionMessageBox.dll</HintPath>
-    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=028265cbccdfa80d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Recursos Externos\ICSharpCode.SharpZipLib.dll</HintPath>
@@ -99,6 +95,10 @@
     <Reference Include="Korzh.WinControls.CLR20, Version=2.5.0.29, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Recursos Externos\Korzh.WinControls.CLR20.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.NetEnterpriseServers.Express.ExceptionMessageBox, Version=9.0.242.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Recursos Externos\Microsoft.NetEnterpriseServers.Express.ExceptionMessageBox.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualC" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
