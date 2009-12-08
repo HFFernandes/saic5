@@ -247,12 +247,6 @@
     <None Include="C4\Tlaxcala\Sai\Reportes\imagenes\zoomOut.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\QueryBuilder\CodeEngine.Framework.QueryBuilder.csproj">
-      <Project>{9281D89A-C56F-4620-B036-1258CDB9B28E}</Project>
-      <Name>CodeEngine.Framework.QueryBuilder</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="C4\Tlaxcala\Sai\Reportes\datos\" />
     <Folder Include="C4\Tlaxcala\Sai\Reportes\symbols\" />
   </ItemGroup>
